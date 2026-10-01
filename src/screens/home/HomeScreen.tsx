@@ -147,16 +147,6 @@ export default function HomeScreen() {
               다양한 놀이와 배움!
             </HeroDescription>
           </HeroTextArea>
-
-          {/* 로켓 */}
-          {/* <Rocket>
-            <RocketText>🚀</RocketText>
-          </Rocket> */}
-
-          {/* 행성 */}
-          {/* <HeroPlanet>
-            <HeroPlanetText>🪐</HeroPlanetText>
-          </HeroPlanet> */}
         </HeroCard>
         {/* Game filter */}
         <FilterRow>
@@ -233,10 +223,7 @@ export default function HomeScreen() {
               bgColor={COLORS.softBlue}
               onPress={() => showLockedAlert("패턴 놀이")}
             >
-              <CardIllustration>
-                <IllustrationText>🌈</IllustrationText>
-                <IllustrationSmallText>⭐ 🔵 ⭐</IllustrationSmallText>
-              </CardIllustration>
+              <CardImage source={ASSETS.cardPattern} />
 
               <CardBottom>
                 <View>
@@ -260,10 +247,7 @@ export default function HomeScreen() {
               bgColor={COLORS.softYellow}
               onPress={() => showLockedAlert("퍼즐 맞추기")}
             >
-              <CardIllustration>
-                <IllustrationText>🧩</IllustrationText>
-                <IllustrationSmallText>⭐ ✨</IllustrationSmallText>
-              </CardIllustration>
+              <CardImage source={ASSETS.cardPuzzle} />
 
               <CardBottom>
                 <View>
@@ -283,10 +267,7 @@ export default function HomeScreen() {
               bgColor={COLORS.softMint}
               onPress={() => showLockedAlert("미로 찾기")}
             >
-              <CardIllustration>
-                <IllustrationText>🛸</IllustrationText>
-                <IllustrationSmallText>✨ 🪐 ✨</IllustrationSmallText>
-              </CardIllustration>
+              <CardImage source={ASSETS.cardMaze} />
 
               <CardBottom>
                 <View>
@@ -302,10 +283,10 @@ export default function HomeScreen() {
           </GameGrid>
 
           {/* Coming soon */}
-          <ComingSoon>
+          {/* <ComingSoon>
             <ComingSoonEmoji>✨ 👽 ✨</ComingSoonEmoji>
             <ComingSoonText>새로운 놀이가 기다리고 있어요!</ComingSoonText>
-          </ComingSoon>
+          </ComingSoon> */}
 
           {/* Footer */}
         </ScrollView>
@@ -363,7 +344,7 @@ const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 40px;
   margin-left: 18px;
   margin-right: 18px;
   margin-bottom: 18px;
@@ -444,7 +425,7 @@ const HeroDescription = styled.Text`
 const FilterRow = styled.View`
   flex-direction: row;
   gap: 8px;
-
+  margin-top: 40px;
   margin-left: 18px;
   margin-right: 18px;
 `;
