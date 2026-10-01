@@ -11,6 +11,7 @@ export type RootStackParamList = {
     gameType: "classification";
     level: number;
   };
+  SettingScreen: undefined;
 };
 
 // PatternPlayScreen: {

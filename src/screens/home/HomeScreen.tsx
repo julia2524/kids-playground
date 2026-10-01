@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import styled from "styled-components/native";
 
 import { useNavigation } from "@react-navigation/native";
@@ -15,6 +21,9 @@ import GuardianNoticeModal from "../../components/GuardianNotice/GuardianNoticeM
 import { useLanguage } from "../../context/LangaugeContext";
 import { getGuardianNoticeEnabled } from "../../components/GuardianNotice/getGuardianNoticeEnabled";
 import { GameType } from "../../types/game";
+import { LinearGradient } from "expo-linear-gradient";
+import { ASSETS } from "../../assets/assets";
+import Mascot from "../../design-system/components/Mascot";
 
 type HomeNavigationProp = NativeStackNavigationProp<RootStackParamList, "Home">;
 
@@ -99,49 +108,34 @@ export default function HomeScreen() {
   // ==================================================
 
   return (
-    <Container>
-      {/* 우주 장식 */}
-      <Star starType="star1" />
-      <Star starType="star2" />
-      <Star starType="star3" />
-
-      <DecorationPlanet planetType="planet1" />
-      <DecorationPlanet planetType="planet2" />
-
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingHorizontal: 18,
-          paddingTop: 24,
-          paddingBottom: 30,
-        }}
-      >
+    <ImageBackground
+      source={ASSETS.homeBackground}
+      resizeMode="cover"
+      style={{ flex: 1 }}
+    >
+      <Container>
         {/* Header */}
         <Header>
           <HeaderTitleGroup>
             <LogoRow>
-              <LogoStar>
-                <LogoStarText>★</LogoStarText>
-              </LogoStar>
-
               <LogoText>Kids{"\n"}Playground</LogoText>
             </LogoRow>
 
             <HeaderSubText>{i18n.t("subtitle")}</HeaderSubText>
           </HeaderTitleGroup>
 
-          <IconButton
+          {/* <IconButton
             activeOpacity={0.8}
             onPress={() => navigation.navigate("SettingScreen" as never)}
           >
-            <Ionicons name="settings-outline" size={23} color={COLORS.purple} />
-          </IconButton>
+            <Mascot size={50} />
+          </IconButton> */}
         </Header>
 
         {/* Hero */}
         <HeroCard>
           <HeroTextArea>
-            <HeroSmall>✨ 오늘은 어떤 놀이를 해볼까?</HeroSmall>
+            {/* <HeroSmall>✨ 오늘은 어떤 놀이를 해볼까?</HeroSmall> */}
 
             <HeroTitle>
               즐겁게 놀면서{"\n"}
@@ -150,21 +144,20 @@ export default function HomeScreen() {
 
             <HeroDescription>
               우주 놀이동산에서 만나는{"\n"}
-              다양한 놀이와 배움
+              다양한 놀이와 배움!
             </HeroDescription>
           </HeroTextArea>
 
           {/* 로켓 */}
-          <Rocket>
+          {/* <Rocket>
             <RocketText>🚀</RocketText>
-          </Rocket>
+          </Rocket> */}
 
           {/* 행성 */}
-          <HeroPlanet>
+          {/* <HeroPlanet>
             <HeroPlanetText>🪐</HeroPlanetText>
-          </HeroPlanet>
+          </HeroPlanet> */}
         </HeroCard>
-
         {/* Game filter */}
         <FilterRow>
           <FilterButton active>
@@ -200,154 +193,159 @@ export default function HomeScreen() {
           </FilterButton>
         </FilterRow>
 
-        {/* Game Cards */}
-        <GameGrid>
-          {/* 분류 */}
-          <GameCard
-            activeOpacity={0.9}
-            bgColor={COLORS.softPink}
-            onPress={() => goToStageMap("classification")}
-          >
-            <CardIllustration>
-              <IllustrationText>🍎</IllustrationText>
-              <IllustrationText isSmall>🐶</IllustrationText>
-              <IllustrationText isSmall>🚗</IllustrationText>
-            </CardIllustration>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingHorizontal: 18,
+            paddingTop: 24,
+            paddingBottom: 100,
+          }}
+        >
+          {/* Game Cards */}
+          <GameGrid>
+            {/* 분류 */}
+            <GameCard
+              activeOpacity={0.9}
+              bgColor={COLORS.softPink}
+              onPress={() => goToStageMap("classification")}
+            >
+              <CardImage source={ASSETS.cardClassification} />
 
-            <CardBottom>
-              <View>
-                <CardTitle>분류 놀이</CardTitle>
-                <CardDescription>같은 것을 찾아볼까요?</CardDescription>
-              </View>
+              <CardBottom>
+                <View>
+                  <CardTitle>분류 놀이</CardTitle>
+                  <CardDescription>같은 것을 찾아볼까요?</CardDescription>
+                </View>
 
-              <ArrowCircle>
-                <Ionicons name="arrow-forward" size={19} color={COLORS.pink} />
-              </ArrowCircle>
-            </CardBottom>
-          </GameCard>
+                <ArrowCircle>
+                  <Ionicons
+                    name="arrow-forward"
+                    size={19}
+                    color={COLORS.pink}
+                  />
+                </ArrowCircle>
+              </CardBottom>
+            </GameCard>
 
-          {/* 패턴 */}
-          <GameCard
-            activeOpacity={0.9}
-            bgColor={COLORS.softBlue}
-            onPress={() => showLockedAlert("패턴 놀이")}
-          >
-            <CardIllustration>
-              <IllustrationText>🌈</IllustrationText>
-              <IllustrationSmallText>⭐ 🔵 ⭐</IllustrationSmallText>
-            </CardIllustration>
+            {/* 패턴 */}
+            <GameCard
+              activeOpacity={0.9}
+              bgColor={COLORS.softBlue}
+              onPress={() => showLockedAlert("패턴 놀이")}
+            >
+              <CardIllustration>
+                <IllustrationText>🌈</IllustrationText>
+                <IllustrationSmallText>⭐ 🔵 ⭐</IllustrationSmallText>
+              </CardIllustration>
 
-            <CardBottom>
-              <View>
-                <CardTitle>패턴 놀이</CardTitle>
-                <CardDescription>규칙을 찾아볼까요?</CardDescription>
-              </View>
+              <CardBottom>
+                <View>
+                  <CardTitle>패턴 놀이</CardTitle>
+                  <CardDescription>규칙을 찾아볼까요?</CardDescription>
+                </View>
 
-              <ArrowCircle>
-                <Ionicons name="arrow-forward" size={19} color={COLORS.blue} />
-              </ArrowCircle>
-            </CardBottom>
-          </GameCard>
+                <ArrowCircle>
+                  <Ionicons
+                    name="arrow-forward"
+                    size={19}
+                    color={COLORS.blue}
+                  />
+                </ArrowCircle>
+              </CardBottom>
+            </GameCard>
 
-          {/* 퍼즐 */}
-          <GameCard
-            activeOpacity={0.9}
-            bgColor={COLORS.softYellow}
-            onPress={() => showLockedAlert("퍼즐 맞추기")}
-          >
-            <CardIllustration>
-              <IllustrationText>🧩</IllustrationText>
-              <IllustrationSmallText>⭐ ✨</IllustrationSmallText>
-            </CardIllustration>
+            {/* 퍼즐 */}
+            <GameCard
+              activeOpacity={0.9}
+              bgColor={COLORS.softYellow}
+              onPress={() => showLockedAlert("퍼즐 맞추기")}
+            >
+              <CardIllustration>
+                <IllustrationText>🧩</IllustrationText>
+                <IllustrationSmallText>⭐ ✨</IllustrationSmallText>
+              </CardIllustration>
 
-            <CardBottom>
-              <View>
-                <CardTitle>퍼즐 맞추기</CardTitle>
-                <CardDescription>조각을 맞춰볼까요?</CardDescription>
-              </View>
+              <CardBottom>
+                <View>
+                  <CardTitle>퍼즐 맞추기</CardTitle>
+                  <CardDescription>조각을 맞춰볼까요?</CardDescription>
+                </View>
 
-              <ArrowCircle>
-                <Ionicons name="arrow-forward" size={19} color="#E8A900" />
-              </ArrowCircle>
-            </CardBottom>
-          </GameCard>
+                <ArrowCircle>
+                  <Ionicons name="arrow-forward" size={19} color="#E8A900" />
+                </ArrowCircle>
+              </CardBottom>
+            </GameCard>
 
-          {/* 미로 */}
-          <GameCard
-            activeOpacity={0.9}
-            bgColor={COLORS.softMint}
-            onPress={() => showLockedAlert("미로 찾기")}
-          >
-            <CardIllustration>
-              <IllustrationText>🛸</IllustrationText>
-              <IllustrationSmallText>✨ 🪐 ✨</IllustrationSmallText>
-            </CardIllustration>
+            {/* 미로 */}
+            <GameCard
+              activeOpacity={0.9}
+              bgColor={COLORS.softMint}
+              onPress={() => showLockedAlert("미로 찾기")}
+            >
+              <CardIllustration>
+                <IllustrationText>🛸</IllustrationText>
+                <IllustrationSmallText>✨ 🪐 ✨</IllustrationSmallText>
+              </CardIllustration>
 
-            <CardBottom>
-              <View>
-                <CardTitle>미로 찾기</CardTitle>
-                <CardDescription>길을 찾아갈까요?</CardDescription>
-              </View>
+              <CardBottom>
+                <View>
+                  <CardTitle>미로 찾기</CardTitle>
+                  <CardDescription>길을 찾아갈까요?</CardDescription>
+                </View>
 
-              <ArrowCircle>
-                <Ionicons name="arrow-forward" size={19} color="#16A58D" />
-              </ArrowCircle>
-            </CardBottom>
-          </GameCard>
-        </GameGrid>
+                <ArrowCircle>
+                  <Ionicons name="arrow-forward" size={19} color="#16A58D" />
+                </ArrowCircle>
+              </CardBottom>
+            </GameCard>
+          </GameGrid>
 
-        {/* Coming soon */}
-        <ComingSoon>
-          <ComingSoonEmoji>✨ 👽 ✨</ComingSoonEmoji>
-          <ComingSoonText>새로운 놀이가 기다리고 있어요!</ComingSoonText>
-        </ComingSoon>
+          {/* Coming soon */}
+          <ComingSoon>
+            <ComingSoonEmoji>✨ 👽 ✨</ComingSoonEmoji>
+            <ComingSoonText>새로운 놀이가 기다리고 있어요!</ComingSoonText>
+          </ComingSoon>
 
-        {/* Footer */}
-        <Footer>
-          <FooterItem
-            activeOpacity={0.8}
-            onPress={
-              () => console.log("스티커북")
-              //   navigation.navigate("IntegratedStickerGalleryScreen", {
-              //     initialTab: "category",
-              //   })
-            }
-          >
-            <Ionicons name="star-outline" size={25} color={COLORS.muted} />
-            <FooterText>도감</FooterText>
-          </FooterItem>
+          {/* Footer */}
+        </ScrollView>
+        {/* Bottom Navigation */}
+        <BottomTab>
+          <TabItem active>
+            <Ionicons name="home" size={24} color={COLORS.purple} />
+            <TabLabel active>{i18n.t("nav_home")}</TabLabel>
+          </TabItem>
 
-          <FooterItem>
-            <Ionicons name="home" size={27} color={COLORS.purple} />
-            <FooterText active>홈</FooterText>
-          </FooterItem>
+          <TabItem onPress={() => console.log("도감")}>
+            <Ionicons name="star-outline" size={24} color={COLORS.muted} />
+            <TabLabel>{i18n.t("nav_book")}</TabLabel>
+          </TabItem>
 
-          <FooterItem
-            activeOpacity={0.8}
+          <TabItem
             onPress={() => navigation.navigate("SettingScreen" as never)}
           >
-            <Ionicons name="settings-outline" size={25} color={COLORS.muted} />
-            <FooterText>설정</FooterText>
-          </FooterItem>
-        </Footer>
-      </ScrollView>
+            <Ionicons name="settings-outline" size={24} color={COLORS.muted} />
+            <TabLabel>{i18n.t("nav_settings")}</TabLabel>
+          </TabItem>
+        </BottomTab>
 
-      {/* 보호자 안내 */}
-      {guardianNoticeLoaded && (
-        <GuardianNoticeModal
-          visible={guardianNoticeVisible}
-          onClose={() => setGuardianNoticeVisible(false)}
+        {/* 보호자 안내 */}
+        {guardianNoticeLoaded && (
+          <GuardianNoticeModal
+            visible={guardianNoticeVisible}
+            onClose={() => setGuardianNoticeVisible(false)}
+          />
+        )}
+
+        {/* 잠금 알림 */}
+        <CustomAlert
+          visible={alertVisible}
+          title={alertTitle}
+          message={alertMessage}
+          onClose={() => setAlertVisible(false)}
         />
-      )}
-
-      {/* 잠금 알림 */}
-      <CustomAlert
-        visible={alertVisible}
-        title={alertTitle}
-        message={alertMessage}
-        onClose={() => setAlertVisible(false)}
-      />
-    </Container>
+      </Container>
+    </ImageBackground>
   );
 }
 
@@ -357,7 +355,7 @@ export default function HomeScreen() {
 
 const Container = styled.View`
   flex: 1;
-  background-color: ${COLORS.background};
+  /* background-color: ${COLORS.background}; */
 `;
 
 // --- Header ---
@@ -365,6 +363,9 @@ const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: 30px;
+  margin-left: 18px;
+  margin-right: 18px;
   margin-bottom: 18px;
 `;
 
@@ -398,16 +399,15 @@ const LogoText = styled.Text`
 `;
 
 const HeaderSubText = styled.Text`
-  margin-top: 6px;
   font-size: 13px;
-  color: ${COLORS.secondaryText};
+  color: ${COLORS.purple};
 `;
 
 const IconButton = styled.TouchableOpacity`
   width: 48px;
   height: 48px;
   border-radius: 24px;
-  background-color: ${COLORS.white};
+  background-color: ${COLORS.purple};
   align-items: center;
   justify-content: center;
   shadow-color: #000;
@@ -419,31 +419,12 @@ const IconButton = styled.TouchableOpacity`
 
 // --- Hero ---
 const HeroCard = styled.View`
-  min-height: 185px;
-  border-radius: 28px;
-  background-color: ${COLORS.white};
-  padding: 22px;
-  margin-bottom: 16px;
-  overflow: hidden;
-  border-width: 2px;
-  border-color: #e7e0ff;
-  shadow-color: ${COLORS.purple};
-  shadow-opacity: 0.12;
-  shadow-radius: 12px;
-  shadow-offset: 0px 5px;
-  elevation: 4;
+  margin: 0px 18px 20px;
 `;
 
 const HeroTextArea = styled.View`
   width: 68%;
   z-index: 2;
-`;
-
-const HeroSmall = styled.Text`
-  font-size: 14px;
-  font-weight: 800;
-  color: ${COLORS.purple};
-  margin-bottom: 9px;
 `;
 
 const HeroTitle = styled.Text`
@@ -454,37 +435,18 @@ const HeroTitle = styled.Text`
 `;
 
 const HeroDescription = styled.Text`
-  margin-top: 10px;
   font-size: 14px;
   line-height: 20px;
   color: ${COLORS.secondaryText};
-`;
-
-const Rocket = styled.View`
-  position: absolute;
-  right: 13px;
-  top: 24px;
-`;
-
-const RocketText = styled.Text`
-  font-size: 70px;
-`;
-
-const HeroPlanet = styled.View`
-  position: absolute;
-  right: 13px;
-  bottom: -12px;
-`;
-
-const HeroPlanetText = styled.Text`
-  font-size: 62px;
 `;
 
 // --- Filter ---
 const FilterRow = styled.View`
   flex-direction: row;
   gap: 8px;
-  margin-bottom: 16px;
+
+  margin-left: 18px;
+  margin-right: 18px;
 `;
 
 const FilterButton = styled.TouchableOpacity<{ active?: boolean }>`
@@ -541,7 +503,7 @@ const CardIllustration = styled.View`
 
 const IllustrationText = styled.Text<{ isSmall?: boolean }>`
   font-size: ${(props) => (props.isSmall ? "16px" : "57px")};
-  ${(props) => props.isSmall && "margin-top: -6px;"}
+  margin-top: ${(props) => (props.isSmall ? "-6px" : "0px")};
 `;
 
 const IllustrationSmallText = styled.Text`
@@ -642,28 +604,31 @@ const Star = styled.View<{ starType: "star1" | "star2" | "star3" }>`
   opacity: 0.8;
 
   ${(props) =>
-    props.starType === "star1" &&
-    `
-      top: 110px;
-      right: 26px;
-      background-color: ${COLORS.yellow};
-    `}
+    props.starType === "star1"
+      ? `
+        top: 110px;
+        right: 26px;
+        background-color: ${COLORS.yellow};
+      `
+      : ""}
 
   ${(props) =>
-    props.starType === "star2" &&
-    `
-      top: 290px;
-      left: 13px;
-      background-color: ${COLORS.pink};
-    `}
+    props.starType === "star2"
+      ? `
+        top: 290px;
+        left: 13px;
+        background-color: ${COLORS.pink};
+      `
+      : ""}
 
   ${(props) =>
-    props.starType === "star3" &&
-    `
-      top: 540px;
-      right: 12px;
-      background-color: ${COLORS.mint};
-    `}
+    props.starType === "star3"
+      ? `
+        top: 540px;
+        right: 12px;
+        background-color: ${COLORS.mint};
+      `
+      : ""}
 `;
 
 const DecorationPlanet = styled.View<{ planetType: "planet1" | "planet2" }>`
@@ -672,22 +637,59 @@ const DecorationPlanet = styled.View<{ planetType: "planet1" | "planet2" }>`
   opacity: 0.25;
 
   ${(props) =>
-    props.planetType === "planet1" &&
-    `
-      width: 100px;
-      height: 100px;
-      right: -48px;
-      top: 170px;
-      background-color: ${COLORS.blue};
-    `}
+    props.planetType === "planet1"
+      ? `
+        width: 100px;
+        height: 100px;
+        right: -48px;
+        top: 170px;
+        background-color: ${COLORS.blue};
+      `
+      : ""}
 
   ${(props) =>
-    props.planetType === "planet2" &&
-    `
-      width: 70px;
-      height: 70px;
-      left: -35px;
-      top: 630px;
-      background-color: ${COLORS.pink};
-    `}
+    props.planetType === "planet2"
+      ? `
+        width: 70px;
+        height: 70px;
+        left: -35px;
+        top: 630px;
+        background-color: ${COLORS.pink};
+      `
+      : ""}
+`;
+
+const BottomTab = styled.View`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background-color: ${COLORS.white};
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  shadow-color: #000;
+  shadow-opacity: 0.08;
+  shadow-radius: 10px;
+  elevation: 8;
+`;
+
+const TabItem = styled.TouchableOpacity<{ active?: boolean }>`
+  align-items: center;
+  justify-content: center;
+`;
+
+const TabLabel = styled.Text<{ active?: boolean }>`
+  font-size: 11px;
+  font-weight: 800;
+  color: ${(props) => (props.active ? COLORS.purple : COLORS.muted)};
+  margin-top: 3px;
+`;
+
+const CardImage = styled(Image)`
+  flex: 1;
+  width: 100%;
 `;

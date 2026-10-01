@@ -7,19 +7,28 @@ interface LanguageContextType {
   setLanguage: (lang: "ko" | "en" | "zh") => Promise<void>;
 }
 
+// i18n.locale 이 undefined 일 수 있으므로 안전하게 디폴트값 "ko" 보장
+const initialLocale = i18n?.locale || "ko";
+
 const LanguageContext = createContext<LanguageContextType>({
-  locale: i18n.locale,
+  locale: initialLocale,
   setLanguage: async () => {},
 });
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [locale, setLocale] = useState(i18n.locale || "en");
+  const [locale, setLocale] = useState<string>(initialLocale);
 
   const setLanguage = async (lang: "ko" | "en" | "zh") => {
-    await changeLanguage(lang);
-    setLocale(lang); // 💡 전역 상태 변경 -> App 하위 모든 화면 자동 리렌더링!
+    try {
+      if (typeof changeLanguage === "function") {
+        await changeLanguage(lang);
+      }
+      setLocale(lang);
+    } catch (error) {
+      console.warn("Language change failed:", error);
+    }
   };
 
   return (

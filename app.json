@@ -23,7 +23,7 @@
     },
     "plugins": [
       "expo-localization",
-      "react-native-google-mobile-ads"
+      "expo-image"
     ]
   }
 }

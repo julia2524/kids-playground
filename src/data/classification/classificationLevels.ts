@@ -142,15 +142,6 @@ export interface LevelConfig {
     | "mixed" // 핵심 오답 + 완전 오답 섞기
     | "category_swap" // 범주 교체 (L3) //추가
     | "negation_filter"; // NOT 조건을 고려한 오답 (L24) //추가
-
-  //     distractorStrategy:
-  //   | "same_item_diff_color"       // 같은 아이템, 다른 색상 (L1, L22, L23)
-  //   | "same_shape_diff_category"   // 같은 모양, 다른 카테고리 (L2)
-  //   | "same_category_diff_size"    // 같은 카테고리, 다른 크기 (L4, L5, L13, L14)
-  //   | "same_color_diff_item"       // 같은 색상, 다른 아이템
-  //   | "position_swap"              // 위치 반전/교체 (L8, L9)
-  //   | "quantity_swap"              // 수량 변주 (L6, L7)
-  //   | "mixed";                     // 핵심 오답(매력적 오답) + 완전 오답 혼합
 }
 
 // ============================================================
