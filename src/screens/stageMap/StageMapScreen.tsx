@@ -253,6 +253,7 @@ import { LEVEL_CONFIGS } from "../../data/classification/classificationLevels";
 import MapTrail from "./components/MapTrail";
 import StageNode from "./components/StageNode";
 import Mascot from "../../design-system/components/Mascot";
+import AppHeader from "../../components/AppHeader";
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -320,7 +321,7 @@ export default function StageMapScreen() {
 
   const handleStagePress = (level: number) => {
     if (gameType !== "classification") return;
-    navigation.navigate("ClassificationPlayScreen", {
+    navigation.navigate("ColorSortingPlayScreen", {
       gameType,
       level,
     });
@@ -335,7 +336,13 @@ export default function StageMapScreen() {
     <SafeAreaContainer edges={["top"]}>
       <Container>
         {/* Header - ClassificationPlayScreen과 동일한 높이 및 구조 */}
-        <Header>
+        <AppHeader
+          title={title}
+          subtitle={subtitle}
+          onBackPress={() => navigation.navigate("Home")}
+          onMascotPress={() => navigation.navigate("SettingScreen")}
+        />
+        {/* <Header>
           <HeaderButton onPress={() => navigation.navigate("Home")}>
             <Ionicons name="chevron-back" size={22} color="#7C5CFF" />
           </HeaderButton>
@@ -348,7 +355,7 @@ export default function StageMapScreen() {
           <HeaderButton onPress={() => navigation.navigate("SettingScreen")}>
             <Mascot size={38} />
           </HeaderButton>
-        </Header>
+        </Header> */}
 
         {/* Map View Area */}
         <MapContainer
@@ -403,7 +410,7 @@ export default function StageMapScreen() {
 
           <FloatingStickerButton
             activeOpacity={0.85}
-            onPress={() => console.log("스티커북 이동")}
+            onPress={() => navigation.navigate("StickerGalleryScreen")}
           >
             <Ionicons name="book" size={26} color="#7C5CFF" />
           </FloatingStickerButton>
@@ -428,7 +435,7 @@ const Header = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: transparent;
+  background-color: #f5f2ff;
 `;
 
 const HeaderButton = styled.TouchableOpacity`
@@ -466,7 +473,7 @@ const MapContainer = styled.View`
 const FloatingStickerButton = styled.TouchableOpacity`
   position: absolute;
   right: 20px;
-  bottom: 30px;
+  bottom: 55px;
   width: 56px;
   height: 56px;
   border-radius: 28px;

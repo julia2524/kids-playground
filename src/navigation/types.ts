@@ -12,6 +12,11 @@ export type RootStackParamList = {
     level: number;
   };
   SettingScreen: undefined;
+  StickerGalleryScreen: undefined;
+  ColorSortingPlayScreen: {
+    gameType: "classification";
+    level: number;
+  };
 };
 
 // PatternPlayScreen: {

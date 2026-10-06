@@ -8,6 +8,11 @@ import {
 } from "react-native";
 import styled from "styled-components/native";
 
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
+
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -52,6 +57,7 @@ const COLORS = {
 
 export default function HomeScreen() {
   const navigation = useNavigation<HomeNavigationProp>();
+  const insets = useSafeAreaInsets(); // ⭐ 하단 안전 영역 값 가져오기
 
   useLanguage();
 
@@ -113,7 +119,7 @@ export default function HomeScreen() {
       resizeMode="cover"
       style={{ flex: 1 }}
     >
-      <Container>
+      <Container edges={["top"]}>
         {/* Header */}
         <Header>
           <HeaderTitleGroup>
@@ -188,7 +194,7 @@ export default function HomeScreen() {
           contentContainerStyle={{
             paddingHorizontal: 18,
             paddingTop: 24,
-            paddingBottom: 100,
+            paddingBottom: 200,
           }}
         >
           {/* Game Cards */}
@@ -291,13 +297,13 @@ export default function HomeScreen() {
           {/* Footer */}
         </ScrollView>
         {/* Bottom Navigation */}
-        <BottomTab>
+        <BottomTab bottomInset={insets.bottom}>
           <TabItem active>
             <Ionicons name="home" size={24} color={COLORS.purple} />
             <TabLabel active>{i18n.t("nav_home")}</TabLabel>
           </TabItem>
 
-          <TabItem onPress={() => console.log("도감")}>
+          <TabItem onPress={() => navigation.navigate("StickerGalleryScreen")}>
             <Ionicons name="star-outline" size={24} color={COLORS.muted} />
             <TabLabel>{i18n.t("nav_book")}</TabLabel>
           </TabItem>
@@ -334,7 +340,7 @@ export default function HomeScreen() {
 // Styled Components
 // ==================================================
 
-const Container = styled.View`
+const Container = styled(SafeAreaView)`
   flex: 1;
   /* background-color: ${COLORS.background}; */
 `;
@@ -344,7 +350,7 @@ const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 20px;
   margin-left: 18px;
   margin-right: 18px;
   margin-bottom: 18px;
@@ -640,24 +646,48 @@ const DecorationPlanet = styled.View<{ planetType: "planet1" | "planet2" }>`
       : ""}
 `;
 
-const BottomTab = styled.View`
+// const BottomTab = styled.View`
+//   position: absolute;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   height: 70px;
+//   background-color: ${COLORS.white};
+//   flex-direction: row;
+//   justify-content: space-around;
+//   align-items: center;
+//   border-top-left-radius: 24px;
+//   border-top-right-radius: 24px;
+//   shadow-color: #000;
+//   shadow-opacity: 0.08;
+//   shadow-radius: 10px;
+//   elevation: 8;
+// `;
+// Styled Components
+const BottomTab = styled.View<{ bottomInset: number }>`
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 70px;
+  /* ⭐ 바닥에서 떠 있게 지정 (안드로이드 내장키 높이 + 여유 8px) */
+  bottom: ${(props) => Math.max(props.bottomInset, 12) + 8}px;
+  left: 16px;
+  right: 16px;
+
+  height: 64px;
   background-color: ${COLORS.white};
+
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  border-top-left-radius: 24px;
-  border-top-right-radius: 24px;
-  shadow-color: #000;
-  shadow-opacity: 0.08;
-  shadow-radius: 10px;
-  elevation: 8;
-`;
 
+  /* ⭐ 동글동글한 알약/캡슐 형태 */
+  border-radius: 32px;
+
+  /* 부드러운 그림자 효과 */
+  shadow-color: #5d5193;
+  shadow-opacity: 0.12;
+  shadow-radius: 12px;
+  shadow-offset: 0px 4px;
+  elevation: 6;
+`;
 const TabItem = styled.TouchableOpacity<{ active?: boolean }>`
   align-items: center;
   justify-content: center;

@@ -8,6 +8,9 @@ import Svg, {
   Line,
   G,
 } from "react-native-svg";
+import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
+import { ColorSortingObject } from "../../types/colorSotringTypes";
+import { ClassificationColorId } from "../../types/game";
 
 /**
  * ===============================================
@@ -24,7 +27,7 @@ export const OUTLINE = "#333";
 export const DARK = "#222";
 export const WHITE = "#fff";
 
-const DEFAULT_COLOR = "#FFD166";
+export const DEFAULT_COLOR = "#FFD166";
 
 export interface ItemSvgProps {
   colorHex?: string;
@@ -2316,7 +2319,7 @@ export const Broccoli = ({
       {/* 줄기 */}
       <Path
         d="M40 55 L35 84 C34 88 66 88 65 84 L60 55 Z"
-        fill={stemColor}
+        fill={mainColor}
         stroke={OUTLINE}
         strokeWidth="4"
         strokeLinejoin="round"
@@ -2539,7 +2542,7 @@ export const Pizza = ({
     <Svg width={size} height={size} viewBox="0 0 100 100">
       <Path
         d="M50 12 L90 82 Q50 96 10 82 Z"
-        fill={cheeseColor}
+        fill={doughColor}
         stroke={OUTLINE}
         strokeWidth="4"
         strokeLinejoin="round"
@@ -2547,7 +2550,7 @@ export const Pizza = ({
 
       <Path
         d="M14 78 Q50 90 86 78 L90 82 Q50 96 10 82 Z"
-        fill={doughColor}
+        fill={toppingColor}
         stroke={OUTLINE}
         strokeWidth="3"
         strokeLinejoin="round"
@@ -2740,7 +2743,7 @@ export const IceCream = ({
     <Svg width={size} height={size} viewBox="0 0 100 100">
       <Polygon
         points="38,51 62,51 50,85"
-        fill="#E0B87A"
+        fill={swirlColor}
         stroke={OUTLINE}
         strokeWidth="4"
         strokeLinejoin="round"
@@ -2793,7 +2796,7 @@ export const IceCream = ({
       />
       <Polygon
         points="38,52 62,52 50,86"
-        fill="#E0B87A"
+        fill={swirlColor}
         stroke={OUTLINE}
         strokeWidth="4"
         strokeLinejoin="round"
@@ -2828,7 +2831,7 @@ export const Car = ({
 
       <Path
         d="M32 46 L36 32 Q38 30 42 30 L58 30 Q62 30 64 33 L69 46 Z"
-        fill="#BBDEFB"
+        fill={stripeColor}
         stroke={OUTLINE}
         strokeWidth="2.5"
         strokeLinejoin="round"
@@ -2907,7 +2910,7 @@ export const Bus = ({
         width="16"
         height="14"
         rx="2"
-        fill="#BBDEFB"
+        fill={stripeColor}
         stroke={OUTLINE}
         strokeWidth="2"
       />
@@ -2918,7 +2921,7 @@ export const Bus = ({
         width="16"
         height="14"
         rx="2"
-        fill="#BBDEFB"
+        fill={stripeColor}
         stroke={OUTLINE}
         strokeWidth="2"
       />
@@ -2929,7 +2932,7 @@ export const Bus = ({
         width="16"
         height="14"
         rx="2"
-        fill="#BBDEFB"
+        fill={stripeColor}
         stroke={OUTLINE}
         strokeWidth="2"
       />
@@ -2996,7 +2999,7 @@ export const Train = ({
         cx="34"
         cy="42"
         r="10"
-        fill="#F5F5F5"
+        fill={stripeColor}
         stroke={OUTLINE}
         strokeWidth="3"
       />
@@ -3005,7 +3008,7 @@ export const Train = ({
         cx="66"
         cy="42"
         r="10"
-        fill="#F5F5F5"
+        fill={stripeColor}
         stroke={OUTLINE}
         strokeWidth="3"
       />
@@ -3024,7 +3027,7 @@ export const Train = ({
         cx="26"
         cy="80"
         r="7"
-        fill={trimColor}
+        fill={stripeColor}
         stroke={OUTLINE}
         strokeWidth="2.5"
       />
@@ -3033,7 +3036,7 @@ export const Train = ({
         cx="44"
         cy="80"
         r="7"
-        fill={trimColor}
+        fill={stripeColor}
         stroke={OUTLINE}
         strokeWidth="2.5"
       />
@@ -3042,7 +3045,7 @@ export const Train = ({
         cx="62"
         cy="80"
         r="7"
-        fill={trimColor}
+        fill={stripeColor}
         stroke={OUTLINE}
         strokeWidth="2.5"
       />
@@ -3051,7 +3054,7 @@ export const Train = ({
         cx="78"
         cy="80"
         r="7"
-        fill={trimColor}
+        fill={stripeColor}
         stroke={OUTLINE}
         strokeWidth="2.5"
       />
@@ -3302,7 +3305,7 @@ export const Bicycle = ({
         cy="68"
         r="17"
         fill="none"
-        stroke={OUTLINE}
+        stroke={accentColor}
         strokeWidth="4"
       />
       <Circle
@@ -3310,7 +3313,7 @@ export const Bicycle = ({
         cy="68"
         r="17"
         fill="none"
-        stroke={OUTLINE}
+        stroke={accentColor}
         strokeWidth="4"
       />
 
@@ -3322,7 +3325,7 @@ export const Bicycle = ({
       <Path
         d="M25 68 L42 40 L57 68 L25 68 M42 40 L68 40 L57 68 M42 40 L35 68"
         fill="none"
-        stroke={frameColor}
+        stroke={accentColor}
         strokeWidth="4"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -3689,7 +3692,7 @@ export const Rocket = ({
       {/* 왼쪽 날개 */}
       <Path
         d="M34 64 L20 78 L36 75 Z"
-        fill={accentColor}
+        fill={bodyColor}
         stroke={OUTLINE}
         strokeWidth="3"
         strokeLinejoin="round"
@@ -3698,7 +3701,7 @@ export const Rocket = ({
       {/* 오른쪽 날개 */}
       <Path
         d="M66 64 L80 78 L64 75 Z"
-        fill={accentColor}
+        fill={bodyColor}
         stroke={OUTLINE}
         strokeWidth="3"
         strokeLinejoin="round"
@@ -3779,7 +3782,7 @@ export const Rocket = ({
            Q50 88 50 78
            Q54 88 59 94
            Q64 86 60 77 Z"
-        fill="#FFB300"
+        fill={noseColor}
         stroke={OUTLINE}
         strokeWidth="3"
       />
@@ -3823,7 +3826,7 @@ export const HotAirBalloon = ({
       <Path
         d="M35 13 Q28 36 37 60"
         fill="none"
-        stroke={accentColor}
+        stroke={stripeColor}
         strokeWidth="7"
         opacity="0.8"
       />
@@ -3831,7 +3834,7 @@ export const HotAirBalloon = ({
       <Path
         d="M65 13 Q72 36 63 60"
         fill="none"
-        stroke={accentColor}
+        stroke={stripeColor}
         strokeWidth="7"
         opacity="0.8"
       />
@@ -6061,7 +6064,7 @@ export const Peach = ({
   primary,
   secondary,
   accent,
-  size = 95,
+  size = 85,
 }: ItemSvgProps) => {
   const fruitColor = primary ?? colorHex;
   const highlightColor = secondary ?? "#FBE9E7";
@@ -7025,7 +7028,7 @@ export const Corn = ({
       {/* 뒤쪽 껍질 */}
       <Path
         d="M28 78 C15 60 18 35 32 20 C22 45 28 70 36 82 Z"
-        fill={huskColor}
+        fill={kernelShade}
         stroke={OUTLINE}
         strokeWidth="3"
         strokeLinejoin="round"
@@ -7056,14 +7059,14 @@ export const Corn = ({
       {/* 앞쪽 감싸는 껍질 (좌/우) */}
       <Path
         d="M20 84 C25 65 22 48 18 40 C30 52 35 70 45 88 Z"
-        fill={huskColor}
+        fill={kernelShade}
         stroke={OUTLINE}
         strokeWidth="3.5"
         strokeLinejoin="round"
       />
       <Path
         d="M80 84 C75 65 78 48 82 40 C70 52 65 70 55 88 Z"
-        fill={huskColor}
+        fill={kernelShade}
         stroke={OUTLINE}
         strokeWidth="3.5"
         strokeLinejoin="round"
@@ -7072,7 +7075,7 @@ export const Corn = ({
       {/* 하단 줄기 단면 */}
       <Path
         d="M45 87 L46 93 C46 95 54 95 54 93 L55 87 Z"
-        fill={huskColor}
+        fill={kernelShade}
         stroke={OUTLINE}
         strokeWidth="3"
         strokeLinejoin="round"
@@ -7080,7 +7083,4895 @@ export const Corn = ({
     </Svg>
   );
 };
+export const Ball = ({
+  colorHex = DEFAULT_COLOR,
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const patternColor = secondary ?? shade(mainColor, -0.35);
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Circle
+        cx="50"
+        cy="53"
+        r="30"
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 공 무늬 */}
+      <Path
+        d="M38 29 Q50 40 62 29"
+        fill="none"
+        stroke={patternColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      <Path
+        d="M25 52 Q38 58 38 72"
+        fill="none"
+        stroke={patternColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      <Path
+        d="M62 72 Q62 58 75 52"
+        fill="none"
+        stroke={patternColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      {/* 반짝임 */}
+      <Circle cx="40" cy="42" r="5" fill={highlightColor} opacity={0.55} />
+    </Svg>
+  );
+};
+export const Donut1 = ({
+  colorHex = "#602F22",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const donutColor = primary ?? colorHex;
+  const sprinkle1 = secondary ?? "#FF6B6B";
+  const sprinkle2 = accent ?? "#4CC9F0";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Circle
+        cx="50"
+        cy="51"
+        r="32"
+        fill={donutColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Circle
+        cx="50"
+        cy="51"
+        r="12"
+        fill={WHITE}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+
+      <Rect x="32" y="32" width="6" height="3" rx="1.5" fill={sprinkle1} />
+      <Rect x="60" y="38" width="6" height="3" rx="1.5" fill={sprinkle2} />
+      <Rect x="42" y="66" width="6" height="3" rx="1.5" fill="#FFD166" />
+      <Rect x="62" y="71" width="6" height="3" rx="1.5" fill={sprinkle1} />
+      <Rect x="25" y="54" width="6" height="3" rx="1.5" fill={sprinkle2} />
+      <Rect x="70" y="51" width="6" height="3" rx="1.5" fill="#FFD166" />
+    </Svg>
+  );
+};
+export const Sunglasses = ({
+  colorHex = "#FF6B8A",
+  primary,
+  size = 95,
+}: ItemSvgProps) => {
+  const lensColor = primary ?? colorHex;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 왼쪽 렌즈 */}
+      <Circle
+        cx="34"
+        cy="54"
+        r="13"
+        fill={lensColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+
+      {/* 오른쪽 렌즈 */}
+      <Circle
+        cx="66"
+        cy="54"
+        r="13"
+        fill={lensColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+
+      {/* 코 다리 */}
+      <Path
+        d="M47 54 Q50 58 53 54"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        fill="none"
+        strokeLinecap="round"
+      />
+
+      {/* 안경다리 */}
+      <Line
+        x1="21"
+        y1="53"
+        x2="12"
+        y2="48"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      <Line
+        x1="79"
+        y1="53"
+        x2="88"
+        y2="48"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      {/* 렌즈 하이라이트 */}
+      <Line
+        x1="27"
+        y1="54"
+        x2="33"
+        y2="57"
+        stroke={WHITE}
+        strokeWidth="2"
+        opacity={0.45}
+      />
+      <Line
+        x1="69"
+        y1="54"
+        x2="75"
+        y2="57"
+        stroke={WHITE}
+        strokeWidth="2"
+        opacity={0.45}
+      />
+    </Svg>
+  );
+};
+export const Button1 = ({
+  colorHex = DEFAULT_COLOR,
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Circle
+        cx="50"
+        cy="51"
+        r="30"
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 안쪽 테두리 */}
+      <Circle
+        cx="50"
+        cy="51"
+        r="21"
+        fill="none"
+        stroke={WHITE}
+        strokeWidth="3"
+        opacity={0.7}
+      />
+
+      {/* 구멍 */}
+      <Circle cx="42" cy="44" r="3.5" fill={OUTLINE} />
+      <Circle cx="58" cy="44" r="3.5" fill={OUTLINE} />
+      <Circle cx="42" cy="59" r="3.5" fill={OUTLINE} />
+      <Circle cx="58" cy="59" r="3.5" fill={OUTLINE} />
+
+      <Circle cx="40" cy="34" r="5" fill={highlightColor} opacity={0.45} />
+    </Svg>
+  );
+};
+export const Button2 = ({
+  colorHex = "#4D96FF",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Circle
+        cx="50"
+        cy="50"
+        r="31"
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Circle
+        cx="50"
+        cy="50"
+        r="25"
+        fill="none"
+        stroke={WHITE}
+        strokeWidth="2"
+        opacity={0.3}
+      />
+
+      <Circle cx="39" cy="39" r="5" fill={highlightColor} />
+      <Circle cx="61" cy="39" r="5" fill={highlightColor} />
+      <Circle cx="39" cy="61" r="5" fill={highlightColor} />
+      <Circle cx="61" cy="61" r="5" fill={highlightColor} />
+    </Svg>
+  );
+};
+export const CircleClock = ({
+  colorHex = "#F25C54",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const handColor = secondary ?? DARK;
+  const centerColor = accent ?? "#FF9F43";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Circle
+        cx="50"
+        cy="50"
+        r="32"
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Circle cx="50" cy="50" r="26" fill={handColor} />
+
+      <Line
+        x1="50"
+        y1="50"
+        x2="50"
+        y2="34"
+        stroke={mainColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="50"
+        y1="50"
+        x2="64"
+        y2="42"
+        stroke={mainColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+
+      <Circle cx="50" cy="50" r="4" fill={centerColor} />
+    </Svg>
+  );
+};
+
+export const Wheel = ({
+  colorHex = "#343A40",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const outerColor = primary ?? colorHex;
+  const innerColor = secondary ?? "#AEB6BC";
+  const spokeColor = accent ?? "#687178";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Circle
+        cx="50"
+        cy="50"
+        r="32"
+        fill={outerColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Circle cx="50" cy="50" r="23" fill={innerColor} />
+
+      <Line
+        x1="50"
+        y1="29"
+        x2="50"
+        y2="71"
+        stroke={spokeColor}
+        strokeWidth="6"
+      />
+
+      <Line
+        x1="29"
+        y1="50"
+        x2="71"
+        y2="50"
+        stroke={spokeColor}
+        strokeWidth="6"
+      />
+
+      <Circle
+        cx="50"
+        cy="50"
+        r="7"
+        fill="#E9ECEF"
+        stroke={spokeColor}
+        strokeWidth="3"
+      />
+    </Svg>
+  );
+};
+export const Lollipop = ({
+  colorHex = "#FF6B8A",
+  primary,
+  secondary,
+  size = 95,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const swirlColor = secondary ?? "#FFD7E2";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 사탕 */}
+      <Circle
+        cx="50"
+        cy="36"
+        r="27"
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 소용돌이 */}
+      <Path
+        d="
+          M50 17
+          C34 17 27 29 32 40
+          C37 51 54 53 61 43
+          C67 34 59 25 50 26
+          C42 27 39 34 43 39
+          C47 44 55 42 56 37
+        "
+        fill="none"
+        stroke={swirlColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+
+      {/* 막대 */}
+      <Line
+        x1="50"
+        y1="63"
+        x2="50"
+        y2="89"
+        stroke={OUTLINE}
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
+
+      {/* 반짝임 */}
+      <Ellipse
+        cx="37"
+        cy="27"
+        rx="6"
+        ry="3"
+        fill={WHITE}
+        opacity={0.35}
+        transform="rotate(-35 37 27)"
+      />
+    </Svg>
+  );
+};
+export const Basketball = ({
+  colorHex = "#F0813C",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const lineColor = secondary ?? "#3A2A20";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 공 */}
+      <Circle
+        cx="50"
+        cy="53"
+        r="31"
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 세로 중앙선 */}
+      <Line
+        x1="50"
+        y1="22"
+        x2="50"
+        y2="84"
+        stroke={lineColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      {/* 가로 중앙선 */}
+      <Path
+        d="M19 53 Q50 46 81 53"
+        fill="none"
+        stroke={lineColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      {/* 왼쪽 곡선 */}
+      <Path
+        d="M29 32 Q40 53 29 74"
+        fill="none"
+        stroke={lineColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      {/* 오른쪽 곡선 */}
+      <Path
+        d="M71 32 Q60 53 71 74"
+        fill="none"
+        stroke={lineColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      {/* 반짝임 */}
+      <Ellipse
+        cx="38"
+        cy="38"
+        rx="6"
+        ry="3"
+        fill={highlightColor}
+        opacity={0.4}
+        transform="rotate(-30 38 38)"
+      />
+    </Svg>
+  );
+};
+
+export const Baseball = ({
+  colorHex = "#FFF8EC",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const stitchColor = accent ?? "#E4463D";
+  const highlightColor = secondary ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 야구공 */}
+      <Circle
+        cx="50"
+        cy="55"
+        r="24"
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 왼쪽 실밥 */}
+      <Path
+        d="M31 37 Q42 55 31 73"
+        fill="none"
+        stroke={stitchColor}
+        strokeWidth="2.5"
+      />
+
+      {/* 오른쪽 실밥 */}
+      <Path
+        d="M69 37 Q58 55 69 73"
+        fill="none"
+        stroke={stitchColor}
+        strokeWidth="2.5"
+      />
+
+      {/* 왼쪽 실밥 */}
+      <Line
+        x1="29"
+        y1="41"
+        x2="35"
+        y2="39"
+        stroke={stitchColor}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="34"
+        y1="49"
+        x2="40"
+        y2="47"
+        stroke={stitchColor}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="36"
+        y1="55"
+        x2="42"
+        y2="55"
+        stroke={stitchColor}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="34"
+        y1="61"
+        x2="40"
+        y2="63"
+        stroke={stitchColor}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="29"
+        y1="69"
+        x2="35"
+        y2="71"
+        stroke={stitchColor}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+
+      {/* 오른쪽 실밥 */}
+      <Line
+        x1="71"
+        y1="41"
+        x2="65"
+        y2="39"
+        stroke={stitchColor}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="66"
+        y1="49"
+        x2="60"
+        y2="47"
+        stroke={stitchColor}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="64"
+        y1="55"
+        x2="58"
+        y2="55"
+        stroke={stitchColor}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="66"
+        y1="61"
+        x2="60"
+        y2="63"
+        stroke={stitchColor}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="71"
+        y1="69"
+        x2="65"
+        y2="71"
+        stroke={stitchColor}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+
+      {/* 반짝임 */}
+      <Ellipse
+        cx="41"
+        cy="43"
+        rx="5"
+        ry="2.5"
+        fill={highlightColor}
+        opacity={0.5}
+        transform="rotate(-30 41 43)"
+      />
+    </Svg>
+  );
+};
+export const TennisBall = ({
+  colorHex = "#D4E157",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const highlightColor = accent ?? shade(mainColor, 0.35);
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 공 */}
+      <Circle
+        cx="50"
+        cy="55"
+        r="23"
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 왼쪽 흰 곡선 */}
+      <Path
+        d="M31 43 Q45 55 31 67"
+        fill="none"
+        stroke={WHITE}
+        strokeWidth="3.5"
+        strokeLinecap="round"
+      />
+
+      {/* 오른쪽 흰 곡선 */}
+      <Path
+        d="M69 43 Q55 55 69 67"
+        fill="none"
+        stroke={WHITE}
+        strokeWidth="3.5"
+        strokeLinecap="round"
+      />
+
+      {/* 반짝임 */}
+      <Ellipse
+        cx="40"
+        cy="43"
+        rx="5"
+        ry="2.5"
+        fill={highlightColor}
+        opacity={0.7}
+        transform="rotate(-30 40 43)"
+      />
+    </Svg>
+  );
+};
+export const Plate = ({
+  colorHex = DEFAULT_COLOR,
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 접시 */}
+      <Circle
+        cx="50"
+        cy="52"
+        r="32"
+        fill={WHITE}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Circle cx="50" cy="52" r="24" fill={mainColor} opacity={0.85} />
+
+      <Circle cx="50" cy="52" r="18" fill={WHITE} opacity={0.8} />
+
+      {/* 반짝임 */}
+      <Path
+        d="M30 38 Q36 31 44 31"
+        fill="none"
+        stroke={WHITE}
+        strokeWidth="4"
+        strokeLinecap="round"
+        opacity={0.8}
+      />
+    </Svg>
+  );
+};
+export const RoundBalloon = ({
+  colorHex = "#9B5DE5",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const balloonColor = primary ?? colorHex;
+  const knotColor = secondary ?? balloonColor;
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Circle
+        cx="50"
+        cy="45"
+        r="30"
+        fill={balloonColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Polygon
+        points="47,73 53,73 50,82"
+        fill={knotColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+
+      <Path
+        d="M50 82 Q54 88 50 92"
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        fill="none"
+      />
+
+      <Path
+        d="M34 30 Q40 24 47 26"
+        stroke={highlightColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+        fill="none"
+        opacity={0.6}
+      />
+    </Svg>
+  );
+};
+export const FullMoon = ({
+  colorHex = DEFAULT_COLOR,
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const moonColor = primary ?? colorHex;
+  const craterColor = secondary ?? WHITE;
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Circle
+        cx="50"
+        cy="50"
+        r="31"
+        fill={moonColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Circle cx="37" cy="40" r="6" fill={craterColor} opacity={0.18} />
+      <Circle cx="61" cy="37" r="4" fill={craterColor} opacity={0.18} />
+      <Circle cx="63" cy="60" r="7" fill={craterColor} opacity={0.15} />
+      <Circle cx="40" cy="65" r="4" fill={craterColor} opacity={0.18} />
+
+      <Path
+        d="M30 30 Q37 23 46 21"
+        fill="none"
+        stroke={highlightColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+        opacity={0.7}
+      />
+    </Svg>
+  );
+};
+export const Sun = ({
+  colorHex = "#FFD166",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const sunColor = primary ?? colorHex;
+  const highlightColor = accent ?? sunColor;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
+        <Line
+          key={deg}
+          x1="50"
+          y1="50"
+          x2="50"
+          y2="12"
+          stroke={sunColor}
+          strokeWidth="5"
+          strokeLinecap="round"
+          transform={`rotate(${deg} 50 50)`}
+        />
+      ))}
+
+      <Circle
+        cx="50"
+        cy="50"
+        r="22"
+        fill={sunColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Circle cx="43" cy="47" r="2.5" fill={OUTLINE} />
+      <Circle cx="57" cy="47" r="2.5" fill={OUTLINE} />
+
+      <Path
+        d="M43 56 Q50 61 57 56"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinecap="round"
+        fill="none"
+      />
+    </Svg>
+  );
+};
+export const Envelop = ({
+  colorHex = "#FFD6E8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const flapColor = secondary ?? "#FFE8F1";
+  const sealColor = accent ?? "#F45B69";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 봉투 몸체 */}
+      <Rect
+        x="18"
+        y="34"
+        width="64"
+        height="46"
+        rx="6"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 접히는 뚜껑 */}
+      <Rect
+        x="18"
+        y="20"
+        width="64"
+        height="24"
+        rx="5"
+        fill={flapColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 뚜껑 접힘선 */}
+      <Line
+        x1="22"
+        y1="44"
+        x2="78"
+        y2="44"
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        opacity={0.4}
+      />
+
+      {/* 봉투 스티커/씰 */}
+      <Rect
+        x="43"
+        y="34"
+        width="16"
+        height="16"
+        rx="3"
+        fill={sealColor}
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+      />
+
+      {/* 하이라이트 */}
+      <Ellipse
+        cx="30"
+        cy="50"
+        rx="5"
+        ry="2"
+        fill={WHITE}
+        opacity={0.4}
+        transform="rotate(-20 30 50)"
+      />
+    </Svg>
+  );
+};
+export const ChocolateBar = ({
+  colorHex = "#7F4F24",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const chocolateColor = primary ?? colorHex;
+  const lineColor = secondary ?? "#5A3418";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Rect
+        x="20"
+        y="24"
+        width="60"
+        height="52"
+        rx="6"
+        fill={chocolateColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Line
+        x1="20"
+        y1="50"
+        x2="80"
+        y2="50"
+        stroke={lineColor}
+        strokeWidth="3"
+      />
+      <Line
+        x1="40"
+        y1="24"
+        x2="40"
+        y2="76"
+        stroke={lineColor}
+        strokeWidth="3"
+      />
+      <Line
+        x1="60"
+        y1="24"
+        x2="60"
+        y2="76"
+        stroke={lineColor}
+        strokeWidth="3"
+      />
+
+      <Path
+        d="M27 32 L35 32"
+        stroke={highlightColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+        opacity={0.5}
+      />
+    </Svg>
+  );
+};
+export const Box = ({
+  colorHex = DEFAULT_COLOR,
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const boxColor = primary ?? colorHex;
+  const lidColor = secondary ?? WHITE;
+  const ribbonColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="
+          M24 35
+          L50 22
+          L76 35
+          L76 68
+          L50 81
+          L24 68
+          Z
+        "
+        fill={boxColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="
+          M24 35
+          L50 48
+          L76 35
+          L50 22
+          Z
+        "
+        fill={lidColor}
+        opacity={0.28}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M50 48 L50 78"
+        stroke={ribbonColor}
+        strokeWidth="6"
+        opacity={0.7}
+      />
+
+      <Path
+        d="M24 35 L50 48 L76 35"
+        fill="none"
+        stroke={ribbonColor}
+        strokeWidth="4"
+        opacity={0.7}
+      />
+    </Svg>
+  );
+};
+export const Book = ({
+  colorHex = "#F45B55",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const pageColor = secondary ?? "#E3D3B0";
+  const ribbonColor = accent ?? "#FFD166";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 페이지 옆면 */}
+      <Line
+        x1="78"
+        y1="20"
+        x2="78"
+        y2="80"
+        stroke={pageColor}
+        strokeWidth="1.5"
+      />
+      <Line
+        x1="76"
+        y1="18"
+        x2="76"
+        y2="82"
+        stroke={pageColor}
+        strokeWidth="1.5"
+      />
+      <Line
+        x1="74"
+        y1="16"
+        x2="74"
+        y2="84"
+        stroke={pageColor}
+        strokeWidth="1.5"
+      />
+
+      {/* 표지 */}
+      <Rect
+        x="20"
+        y="14"
+        width="54"
+        height="72"
+        rx="5"
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 책등 라인 */}
+      <Line
+        x1="30"
+        y1="14"
+        x2="30"
+        y2="86"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        opacity={0.35}
+      />
+
+      {/* 제목/텍스트 라인 */}
+      <Rect
+        x="38"
+        y="30"
+        width="26"
+        height="6"
+        rx="3"
+        fill={WHITE}
+        opacity={0.9}
+      />
+
+      <Line
+        x1="38"
+        y1="48"
+        x2="66"
+        y2="48"
+        stroke={WHITE}
+        strokeWidth="3"
+        opacity={0.8}
+      />
+
+      <Line
+        x1="38"
+        y1="56"
+        x2="58"
+        y2="56"
+        stroke={WHITE}
+        strokeWidth="3"
+        opacity={0.8}
+      />
+
+      {/* 책갈피 리본 */}
+      <Path
+        d="M41 14 L41 36 L35 30 L29 36 L29 14 Z"
+        fill={ribbonColor}
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
+export const Window = ({
+  colorHex = "#A8733E",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const frameColor = primary ?? colorHex;
+  const glassColor = secondary ?? "#9EDCFF";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 창틀 */}
+      <Rect
+        x="18"
+        y="18"
+        width="64"
+        height="64"
+        rx="4"
+        fill={frameColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 유리 */}
+      <Rect x="26" y="26" width="48" height="48" fill={glassColor} />
+
+      {/* 창살 */}
+      <Line
+        x1="50"
+        y1="26"
+        x2="50"
+        y2="74"
+        stroke={highlightColor}
+        strokeWidth="5"
+      />
+
+      <Line
+        x1="26"
+        y1="50"
+        x2="74"
+        y2="50"
+        stroke={highlightColor}
+        strokeWidth="5"
+      />
+    </Svg>
+  );
+};
+export const Window1 = ({
+  colorHex = DEFAULT_COLOR,
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const frameColor = primary ?? colorHex;
+  const glassColor = secondary ?? "#BFE3FF";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Rect
+        x="20"
+        y="22"
+        width="60"
+        height="58"
+        rx="7"
+        fill={frameColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Rect
+        x="29"
+        y="31"
+        width="42"
+        height="40"
+        rx="3"
+        fill={glassColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+
+      <Line x1="50" y1="31" x2="50" y2="71" stroke={OUTLINE} strokeWidth="3" />
+      <Line x1="29" y1="51" x2="71" y2="51" stroke={OUTLINE} strokeWidth="3" />
+
+      <Path
+        d="M35 37 L43 37"
+        stroke={highlightColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+        opacity={0.7}
+      />
+    </Svg>
+  );
+};
+export const Calendar = ({
+  colorHex = "#FF665E",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const headerColor = primary ?? colorHex;
+  const dotColor = secondary ?? "#D8CEC3";
+  const bindingColor = accent ?? OUTLINE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 달력 본체 */}
+      <Rect
+        x="18"
+        y="20"
+        width="64"
+        height="62"
+        rx="7"
+        fill={dotColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 상단 */}
+      {/* <Rect x="18" y="20" width="64" height="18" rx="7" fill={headerColor} /> */}
+
+      {/* 고리 */}
+      <Line
+        x1="34"
+        y1="14"
+        x2="34"
+        y2="28"
+        stroke={bindingColor}
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="66"
+        y1="14"
+        x2="66"
+        y2="28"
+        stroke={bindingColor}
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
+
+      {/* 날짜 */}
+      <Circle cx="31" cy="36" r="3" fill={bindingColor} />
+      <Circle cx="50" cy="36" r="3" fill={bindingColor} />
+      <Circle cx="69" cy="36" r="3" fill={bindingColor} />
+
+      <Circle cx="31" cy="49" r="3" fill={bindingColor} />
+      <Circle cx="50" cy="49" r="3" fill={bindingColor} />
+      <Circle cx="69" cy="49" r="3" fill={bindingColor} />
+
+      <Circle cx="31" cy="62" r="3" fill={bindingColor} />
+      <Circle cx="50" cy="62" r="3" fill={bindingColor} />
+      <Circle cx="69" cy="62" r="3" fill={bindingColor} />
+
+      <Circle cx="31" cy="75" r="3" fill={bindingColor} />
+      <Circle cx="50" cy="75" r="3" fill={bindingColor} />
+      <Circle cx="69" cy="75" r="3" fill={bindingColor} />
+    </Svg>
+  );
+};
+export const Bread = ({
+  colorHex = DEFAULT_COLOR,
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const breadColor = primary ?? colorHex;
+  const insideColor = secondary ?? "#FFF3BF";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="
+          M27 77
+          Q22 73 22 64
+          V42
+          Q22 27 35 24
+          Q50 19 65 24
+          Q78 27 78 42
+          V64
+          Q78 74 73 77
+          Z
+        "
+        fill={breadColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Path
+        d="
+          M31 68
+          V43
+          Q31 32 42 31
+          Q50 29 58 31
+          Q69 32 69 43
+          V68
+          Q69 72 65 72
+          H35
+          Q31 72 31 68
+          Z
+        "
+        fill={insideColor}
+        opacity={0.85}
+      />
+
+      <Path
+        d="M34 39 Q39 33 45 33"
+        fill="none"
+        stroke={highlightColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+        opacity={0.8}
+      />
+    </Svg>
+  );
+};
+export const Microwave = ({
+  colorHex = "#C9D0D5",
+  primary,
+  secondary,
+  accent,
+  size = 85,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const screenColor = secondary ?? "#46515A";
+  const controlColor = accent ?? "#707A82";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 본체 */}
+      <Rect
+        x="12"
+        y="25"
+        width="76"
+        height="52"
+        rx="7"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 화면 */}
+      <Rect x="20" y="34" width="45" height="34" rx="3" fill={screenColor} />
+
+      {/* 화면 반사 */}
+      <Path d="M25 59 L48 37" stroke={WHITE} strokeWidth="5" opacity={0.12} />
+
+      {/* 버튼 */}
+      <Circle cx="76" cy="42" r="5" fill={controlColor} />
+      <Circle cx="76" cy="57" r="5" fill={controlColor} />
+    </Svg>
+  );
+};
+export const Pillow = ({
+  colorHex = "#8CC8FF",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const seamColor = secondary ?? WHITE;
+  const buttonColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 베개 */}
+      <Rect
+        x="20"
+        y="20"
+        width="60"
+        height="60"
+        rx="16"
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 코너 주름 */}
+      <Path
+        d="M20 30 Q28 30 28 20"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinecap="round"
+        opacity={0.5}
+      />
+
+      <Path
+        d="M80 30 Q72 30 72 20"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinecap="round"
+        opacity={0.5}
+      />
+
+      <Path
+        d="M20 70 Q28 70 28 80"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinecap="round"
+        opacity={0.5}
+      />
+
+      <Path
+        d="M80 70 Q72 70 72 80"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinecap="round"
+        opacity={0.5}
+      />
+
+      {/* 안쪽 시접선 */}
+      <Rect
+        x="30"
+        y="30"
+        width="40"
+        height="40"
+        rx="10"
+        fill="none"
+        stroke={seamColor}
+        strokeWidth="2.5"
+        strokeDasharray="4 4"
+        opacity={0.6}
+      />
+
+      {/* 가운데 단추 */}
+      <Path
+        d="M46 46 H54 V54 H46 Z"
+        fill={buttonColor}
+        opacity={0.85}
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+export const Tv = ({
+  colorHex = "#555E68",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const screenColor = secondary ?? "#303941";
+  const baseColor = accent ?? OUTLINE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* TV 본체 */}
+      <Rect
+        x="13"
+        y="20"
+        width="74"
+        height="51"
+        rx="5"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 화면 */}
+      <Rect x="20" y="27" width="60" height="37" rx="2" fill={screenColor} />
+
+      {/* 받침대 */}
+      <Line
+        x1="50"
+        y1="71"
+        x2="50"
+        y2="80"
+        stroke={baseColor}
+        strokeWidth="5"
+      />
+
+      <Line
+        x1="35"
+        y1="82"
+        x2="65"
+        y2="82"
+        stroke={baseColor}
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+export const GiftBox1 = ({
+  colorHex = DEFAULT_COLOR,
+  primary,
+  secondary,
+  accent,
+  size = 85,
+}: ItemSvgProps) => {
+  const boxColor = primary ?? colorHex;
+  const ribbonColor = secondary ?? WHITE;
+  const bowColor = accent ?? boxColor;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Rect
+        x="23"
+        y="38"
+        width="54"
+        height="39"
+        rx="5"
+        fill={boxColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Rect
+        x="20"
+        y="30"
+        width="60"
+        height="13"
+        rx="5"
+        fill={boxColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Rect
+        x="46"
+        y="30"
+        width="8"
+        height="47"
+        fill={ribbonColor}
+        opacity={0.75}
+      />
+
+      <Rect
+        x="20"
+        y="34"
+        width="60"
+        height="7"
+        fill={ribbonColor}
+        opacity={0.75}
+      />
+
+      <Path
+        d="M50 30
+           Q38 18 34 26
+           Q32 32 50 35"
+        fill={boxColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+
+      <Path
+        d="M50 30
+           Q62 18 66 26
+           Q68 32 50 35"
+        fill={boxColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+    </Svg>
+  );
+};
+export const GiftBox = ({
+  colorHex = "#FFD43B",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const boxColor = primary ?? colorHex;
+  const ribbonColor = secondary ?? "#F04F5F";
+  const ribbonHighlight = accent ?? ribbonColor;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 상자 */}
+      <Rect
+        x="20"
+        y="35"
+        width="60"
+        height="48"
+        rx="4"
+        fill={boxColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 뚜껑 */}
+      <Rect
+        x="15"
+        y="28"
+        width="70"
+        height="16"
+        rx="4"
+        fill={boxColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 리본 세로 */}
+      <Rect x="45" y="29" width="10" height="54" fill={ribbonHighlight} />
+
+      {/* 리본 왼쪽 */}
+      <Path
+        d="M50 28 C38 18 29 20 31 28 C33 35 43 33 50 28"
+        fill={ribbonHighlight}
+      />
+
+      {/* 리본 오른쪽 */}
+      <Path
+        d="M50 28 C62 18 71 20 69 28 C67 35 57 33 50 28"
+        fill={ribbonHighlight}
+      />
+    </Svg>
+  );
+};
+export const SquareClock = ({
+  colorHex = "#4D96FF",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const frameColor = primary ?? colorHex;
+  const handColor = secondary ?? DARK;
+  const centerColor = accent ?? "#FF9F43";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Rect
+        x="17"
+        y="17"
+        width="66"
+        height="66"
+        rx="9"
+        fill={frameColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Rect x="25" y="25" width="50" height="50" rx="6" fill={handColor} />
+
+      <Line
+        x1="50"
+        y1="50"
+        x2="50"
+        y2="34"
+        stroke={frameColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="50"
+        y1="50"
+        x2="63"
+        y2="58"
+        stroke={frameColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+
+      <Circle cx="50" cy="50" r="4" fill={centerColor} />
+    </Svg>
+  );
+};
+export const Door = ({
+  colorHex = "#B97845",
+  primary,
+  secondary,
+  accent,
+  size = 85,
+}: ItemSvgProps) => {
+  const doorColor = primary ?? colorHex;
+  const panelColor = secondary ?? "#D99A63";
+  const handleColor = accent ?? "#FFD166";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 문 */}
+      <Rect
+        x="25"
+        y="12"
+        width="50"
+        height="76"
+        rx="4"
+        fill={doorColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 문 패널 */}
+      <Rect
+        x="34"
+        y="22"
+        width="32"
+        height="25"
+        rx="3"
+        fill={panelColor}
+        stroke="#8D5A32"
+        strokeWidth="3"
+      />
+
+      <Rect
+        x="34"
+        y="53"
+        width="32"
+        height="25"
+        rx="3"
+        fill={panelColor}
+        stroke="#8D5A32"
+        strokeWidth="3"
+      />
+
+      {/* 손잡이 */}
+      <Circle
+        cx="62"
+        cy="51"
+        r="4"
+        fill={handleColor}
+        stroke={OUTLINE}
+        strokeWidth="2"
+      />
+    </Svg>
+  );
+};
+export const Bookshelf = ({
+  colorHex = "#A8733E",
+  primary,
+  size = 75,
+}: ItemSvgProps) => {
+  const shelfColor = primary ?? colorHex;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 책장 */}
+      <Rect
+        x="18"
+        y="13"
+        width="64"
+        height="75"
+        rx="4"
+        fill={shelfColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 선반 */}
+      <Line x1="20" y1="38" x2="80" y2="38" stroke={OUTLINE} strokeWidth="4" />
+      <Line x1="20" y1="63" x2="80" y2="63" stroke={OUTLINE} strokeWidth="4" />
+
+      {/* 책 */}
+      <Rect x="25" y="19" width="9" height="18" rx="1" fill="#F45B69" />
+      <Rect x="35" y="22" width="10" height="15" rx="1" fill="#4D96FF" />
+      <Rect x="47" y="17" width="9" height="20" rx="1" fill="#FFD166" />
+      <Rect x="58" y="21" width="11" height="16" rx="1" fill="#65B95B" />
+
+      <Rect x="25" y="44" width="11" height="18" rx="1" fill="#9C6ADE" />
+      <Rect x="38" y="42" width="9" height="20" rx="1" fill="#FF8A65" />
+      <Rect x="49" y="46" width="12" height="16" rx="1" fill="#4D96FF" />
+      <Rect x="63" y="43" width="9" height="19" rx="1" fill="#FFD166" />
+
+      {/* 바닥 */}
+      <Rect x="14" y="85" width="72" height="7" rx="3" fill={shelfColor} />
+    </Svg>
+  );
+};
+export const Refrigerator = ({
+  colorHex = "#C9DDE8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const dividerColor = secondary ?? "#AABFCB";
+  const coldColor = accent ?? "#8AC6E8";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 냉장고 */}
+      <Rect
+        x="22"
+        y="10"
+        width="56"
+        height="80"
+        rx="7"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 문 구분 */}
+      <Line
+        x1="24"
+        y1="48"
+        x2="76"
+        y2="48"
+        stroke={dividerColor}
+        strokeWidth="3"
+      />
+
+      {/* 손잡이 */}
+      <Line
+        x1="66"
+        y1="25"
+        x2="66"
+        y2="40"
+        stroke="#687780"
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
+      <Line
+        x1="66"
+        y1="56"
+        x2="66"
+        y2="75"
+        stroke="#687780"
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
+
+      {/* 냉기 표시 */}
+      <Path
+        d="M35 25 L35 36 M30 30 L40 30"
+        stroke={coldColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      <Ellipse
+        cx="39"
+        cy="20"
+        rx="6"
+        ry="3"
+        fill={WHITE}
+        opacity={0.4}
+        transform="rotate(-30 39 20)"
+      />
+    </Svg>
+  );
+};
+export const Laptop = ({
+  colorHex = "#78909C",
+  primary,
+  secondary,
+  size = 75,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const screenColor = secondary ?? "#C8EEFF";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 화면 본체 */}
+      <Rect
+        x="18"
+        y="17"
+        width="64"
+        height="48"
+        rx="5"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 화면 */}
+      <Rect x="25" y="24" width="50" height="34" rx="2" fill={screenColor} />
+
+      <Path
+        d="M30 49 L44 32"
+        stroke={WHITE}
+        strokeWidth="5"
+        opacity={0.35}
+        strokeLinecap="round"
+      />
+
+      {/* 키보드 받침 */}
+      <Path
+        d="M14 66 L86 66 L82 77 Q81 80 78 80 L22 80 Q19 80 18 77 Z"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Line
+        x1="24"
+        y1="80"
+        x2="76"
+        y2="80"
+        stroke="#8B959B"
+        strokeWidth="2"
+        opacity={0.6}
+      />
+
+      <Rect x="43" y="70" width="14" height="6" rx="2" fill="#DDE3E7" />
+
+      <Line x1="27" y1="70" x2="39" y2="70" stroke="#7B858B" strokeWidth="2" />
+
+      <Line x1="61" y1="70" x2="73" y2="70" stroke="#7B858B" strokeWidth="2" />
+    </Svg>
+  );
+};
+export const Calculator = ({
+  colorHex = "#6C7A89",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const screenColor = secondary ?? "#C7F0D8";
+  const accentColor = accent ?? "#FFB74D";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 몸체 */}
+      <Rect
+        x="24"
+        y="12"
+        width="52"
+        height="76"
+        rx="8"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 화면 */}
+      <Rect
+        x="31"
+        y="20"
+        width="38"
+        height="16"
+        rx="3"
+        fill={screenColor}
+        stroke={OUTLINE}
+        strokeWidth="2"
+      />
+
+      <Line
+        x1="35"
+        y1="29"
+        x2="55"
+        y2="29"
+        stroke="#3F8F5F"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+
+      {/* 버튼 */}
+      <Rect
+        x="31"
+        y="42"
+        width="9"
+        height="8"
+        rx="2"
+        fill={WHITE}
+        opacity={0.9}
+      />
+      <Rect
+        x="45"
+        y="42"
+        width="9"
+        height="8"
+        rx="2"
+        fill={WHITE}
+        opacity={0.9}
+      />
+      <Rect x="59" y="42" width="9" height="8" rx="2" fill={accentColor} />
+
+      <Rect
+        x="31"
+        y="54"
+        width="9"
+        height="8"
+        rx="2"
+        fill={WHITE}
+        opacity={0.9}
+      />
+      <Rect
+        x="45"
+        y="54"
+        width="9"
+        height="8"
+        rx="2"
+        fill={WHITE}
+        opacity={0.9}
+      />
+      <Rect x="59" y="54" width="9" height="8" rx="2" fill={accentColor} />
+
+      <Rect
+        x="31"
+        y="66"
+        width="9"
+        height="8"
+        rx="2"
+        fill={WHITE}
+        opacity={0.9}
+      />
+      <Rect
+        x="45"
+        y="66"
+        width="9"
+        height="8"
+        rx="2"
+        fill={WHITE}
+        opacity={0.9}
+      />
+      <Rect x="59" y="66" width="9" height="8" rx="2" fill="#F45B69" />
+    </Svg>
+  );
+};
+export const SquareCakeSlice = ({
+  colorHex = "#FFD6E0",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const cakeColor = primary ?? colorHex;
+  const sideColor = secondary ?? "#F7B6C8";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 케이크 본체 */}
+      <Path
+        d="M20 43 L50 25 L80 43 L80 68 L50 84 L20 68 Z"
+        fill={cakeColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 케이크 단면 */}
+      <Path
+        d="M20 43 L50 59 L80 43 L80 68 L50 84 L20 68 Z"
+        fill={cakeColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 크림층 */}
+      <Path
+        d="M22 52 L50 67 L78 52"
+        fill="none"
+        stroke={highlightColor}
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+
+      {/* 위쪽 크림 */}
+      <Path
+        d="M20 43 L50 25 L80 43 L50 59 Z"
+        fill={cakeColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 딸기 */}
+      <Path
+        d="M46 30 C46 25 54 25 54 30 C54 35 50 38 50 38 C50 38 46 35 46 30 Z"
+        fill="#F44336"
+        stroke="#B83B3B"
+        strokeWidth="2"
+      />
+
+      {/* 딸기 잎 */}
+      <Path d="M50 29 L47 25 L50 27 L53 25 L50 31 Z" fill="#4CAF50" />
+
+      {/* 반짝임 */}
+      <Ellipse
+        cx="36"
+        cy="38"
+        rx="5"
+        ry="2"
+        fill={highlightColor}
+        opacity={0.5}
+        transform="rotate(-30 36 38)"
+      />
+    </Svg>
+  );
+};
+export const SquareSunglasses = ({
+  colorHex = "#FF6B8A",
+  primary,
+  size = 95,
+}: ItemSvgProps) => {
+  const lensColor = primary ?? colorHex;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 왼쪽 렌즈 */}
+      <Path
+        d="M21 41 H47 V67 H21 Z"
+        fill={lensColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 오른쪽 렌즈 */}
+      <Path
+        d="M53 41 H79 V67 H53 Z"
+        fill={lensColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 코 다리 */}
+      <Path
+        d="M47 54 Q50 58 53 54"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        fill="none"
+        strokeLinecap="round"
+      />
+
+      {/* 안경다리 */}
+      <Line
+        x1="21"
+        y1="53"
+        x2="12"
+        y2="48"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      <Line
+        x1="79"
+        y1="53"
+        x2="88"
+        y2="48"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      {/* 하이라이트 */}
+      <Line
+        x1="27"
+        y1="54"
+        x2="33"
+        y2="57"
+        stroke={WHITE}
+        strokeWidth="2"
+        opacity={0.45}
+      />
+      <Line
+        x1="69"
+        y1="54"
+        x2="75"
+        y2="57"
+        stroke={WHITE}
+        strokeWidth="2"
+        opacity={0.45}
+      />
+    </Svg>
+  );
+};
+export const Phone = ({
+  colorHex = "#7C8CFF",
+  primary,
+  secondary,
+  size = 75,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const screenColor = secondary ?? "#E8ECFF";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 몸체 */}
+      <Rect
+        x="27"
+        y="8"
+        width="46"
+        height="84"
+        rx="10"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 화면 */}
+      <Rect
+        x="32"
+        y="18"
+        width="36"
+        height="58"
+        rx="3"
+        fill={screenColor}
+        stroke={OUTLINE}
+        strokeWidth="2"
+      />
+
+      {/* 상단 스피커 */}
+      <Rect
+        x="43"
+        y="12"
+        width="14"
+        height="3"
+        rx="1.5"
+        fill="#3A3F55"
+        opacity={0.5}
+      />
+
+      {/* 화면 아이콘 */}
+      <Circle cx="41" cy="30" r="4" fill="#FFB74D" />
+
+      <Rect
+        x="48"
+        y="27"
+        width="12"
+        height="6"
+        rx="2"
+        fill={WHITE}
+        opacity={0.85}
+      />
+
+      <Line
+        x1="37"
+        y1="44"
+        x2="63"
+        y2="44"
+        stroke={WHITE}
+        strokeWidth="3"
+        opacity={0.85}
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="37"
+        y1="52"
+        x2="55"
+        y2="52"
+        stroke={WHITE}
+        strokeWidth="3"
+        opacity={0.85}
+        strokeLinecap="round"
+      />
+
+      {/* 홈버튼 */}
+      <Circle cx="50" cy="84" r="4.5" fill="#3A3F55" opacity={0.4} />
+
+      {/* 반짝임 */}
+      <Ellipse
+        cx="37"
+        cy="22"
+        rx="4"
+        ry="2"
+        fill={WHITE}
+        opacity={0.5}
+        transform="rotate(-30 37 22)"
+      />
+    </Svg>
+  );
+};
+export const RemoteControl = ({
+  colorHex = "#4A4E5A",
+  primary,
+  secondary,
+  size = 95,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const greenButton = secondary ?? "#6FCF97";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 몸체 */}
+      <Rect
+        x="34"
+        y="21"
+        width="32"
+        height="64"
+        rx="6"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* IR 표시등 */}
+      <Rect
+        x="41"
+        y="28"
+        width="7"
+        height="6"
+        rx="1.5"
+        fill="#F45B69"
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+      />
+
+      {/* 상단 버튼 */}
+      <Rect
+        x="39"
+        y="36"
+        width="9"
+        height="12"
+        rx="3"
+        fill="#FFB74D"
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+      />
+
+      <Rect
+        x="52"
+        y="36"
+        width="9"
+        height="12"
+        rx="3"
+        fill={greenButton}
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+      />
+
+      {/* 하단 버튼 */}
+      <Rect
+        x="39"
+        y="58"
+        width="9"
+        height="8"
+        rx="2"
+        fill={WHITE}
+        opacity={0.9}
+      />
+      <Rect
+        x="52"
+        y="58"
+        width="9"
+        height="8"
+        rx="2"
+        fill={WHITE}
+        opacity={0.9}
+      />
+
+      <Rect x="39" y="70" width="9" height="8" rx="2" fill="#F45B69" />
+      <Rect x="52" y="70" width="9" height="8" rx="2" fill={greenButton} />
+    </Svg>
+  );
+};
+export const Switch = ({
+  colorHex = "#F5F0E6",
+  primary,
+  secondary,
+  size = 75,
+}: ItemSvgProps) => {
+  const panelColor = primary ?? colorHex;
+  const onColor = secondary ?? "#FFD166";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 벽판 */}
+      <Rect
+        x="18"
+        y="18"
+        width="64"
+        height="64"
+        rx="10"
+        fill={panelColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* ON */}
+      <Rect
+        x="36"
+        y="30"
+        width="28"
+        height="17"
+        rx="4"
+        fill={onColor}
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+      />
+
+      {/* OFF */}
+      <Rect
+        x="36"
+        y="54"
+        width="28"
+        height="17"
+        rx="4"
+        fill={onColor}
+        stroke={OUTLINE}
+        strokeWidth="2"
+      />
+
+      {/* 고정 나사 */}
+      <Circle cx="23" cy="23" r="2.5" fill="#9A9484" />
+      <Circle cx="77" cy="23" r="2.5" fill="#9A9484" />
+      <Circle cx="23" cy="77" r="2.5" fill="#9A9484" />
+      <Circle cx="77" cy="77" r="2.5" fill="#9A9484" />
+
+      {/* 반짝임 */}
+      <Ellipse
+        cx="44"
+        cy="38"
+        rx="5"
+        ry="2"
+        fill={WHITE}
+        opacity={0.5}
+        transform="rotate(-20 44 38)"
+      />
+    </Svg>
+  );
+};
+export const Frame = ({
+  colorHex = DEFAULT_COLOR,
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const frameColor = primary ?? colorHex;
+  const pictureColor = secondary ?? WHITE;
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Rect
+        x="19"
+        y="20"
+        width="62"
+        height="62"
+        rx="6"
+        fill={frameColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Rect
+        x="29"
+        y="30"
+        width="42"
+        height="42"
+        rx="3"
+        fill={pictureColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+
+      <Path
+        d="M27 28 L36 28"
+        stroke={highlightColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+        opacity={0.6}
+      />
+    </Svg>
+  );
+};
+export const TriangleRuller = ({
+  colorHex = "#FF8B8B",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const rulerColor = primary ?? colorHex;
+  const innerColor = secondary ?? WHITE;
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Polygon
+        points="50,15 90,75 10,75"
+        fill={rulerColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Polygon
+        points="50,27 78,67 22,67"
+        fill={innerColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      <Line
+        x1="30"
+        y1="75"
+        x2="30"
+        y2="71"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <Line
+        x1="40"
+        y1="75"
+        x2="40"
+        y2="72"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <Line
+        x1="50"
+        y1="75"
+        x2="50"
+        y2="70"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <Line
+        x1="60"
+        y1="75"
+        x2="60"
+        y2="72"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <Line
+        x1="70"
+        y1="75"
+        x2="70"
+        y2="71"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+
+      <Path
+        d="M35 30 L50 20"
+        stroke={highlightColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+        opacity={0.6}
+      />
+    </Svg>
+  );
+};
+export const TriangleInstrument = ({
+  colorHex = "#B8C0C8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const instrumentColor = primary ?? colorHex;
+  const handleColor = secondary ?? "#E5A13B";
+  const topColor = accent ?? "#FFD166";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Polygon
+        points="50,16 18,76 82,76"
+        fill="none"
+        stroke={instrumentColor}
+        strokeWidth="8"
+        strokeLinejoin="round"
+      />
+
+      <Line
+        x1="50"
+        y1="65"
+        x2="61"
+        y2="85"
+        stroke={handleColor}
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
+
+      <Circle cx="50" cy="16" r="5" fill={topColor} />
+    </Svg>
+  );
+};
+export const PartyHat = ({
+  colorHex = "#4D96FF",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const hatColor = primary ?? colorHex;
+  const decorationColor = secondary ?? "#FFD166";
+  const topColor = accent ?? "#FFD166";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Polygon
+        points="50,14 20,78 80,78"
+        fill={hatColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 꼭대기 장식 */}
+      <Polygon points="50,6 42,20 58,20" fill={topColor} />
+
+      {/* 장식 1 */}
+      <Polygon points="42,37 37,47 47,47" fill={WHITE} />
+
+      {/* 장식 2 */}
+      <Polygon points="59,50 54,60 64,60" fill={decorationColor} />
+
+      {/* 장식 3 */}
+      <Polygon points="37,59 32,69 42,69" fill={decorationColor} />
+
+      {/* 아래 리본 */}
+      <Path
+        d="M25 78 Q50 120 75 78"
+        fill="none"
+        stroke={hatColor}
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+export const ChristmasTree = ({
+  colorHex = "#38A852",
+  primary,
+  secondary,
+  accent,
+  size = 85,
+}: ItemSvgProps) => {
+  const treeColor = primary ?? colorHex;
+  const trunkColor = secondary ?? "#8D5A32";
+  const starColor = accent ?? "#FFD166";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 나무 기둥 */}
+      <Rect x="44" y="69" width="12" height="18" fill={trunkColor} />
+
+      {/* 아래 나뭇가지 */}
+      <Polygon
+        points="50,31 19,73 81,73"
+        fill={treeColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+
+      {/* 위 나뭇가지 */}
+      <Polygon
+        points="50,16 28,52 72,52"
+        fill={treeColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+
+      {/* 장식 */}
+      <Polygon points="37,44 32,53 42,53" fill="#FF5B5B" />
+
+      <Polygon points="62,38 57,47 67,47" fill={starColor} />
+
+      <Polygon points="47,57 42,66 52,66" fill="#4D96FF" />
+
+      <Polygon points="67,58 62,67 72,67" fill="#FF6B8A" />
+    </Svg>
+  );
+};
+export const Flag = ({
+  colorHex = "#F44336",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const flagColor = primary ?? colorHex;
+  const poleColor = secondary ?? "#8D5A32";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Line
+        x1="27"
+        y1="14"
+        x2="27"
+        y2="87"
+        stroke={OUTLINE}
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+
+      <Polygon
+        points="30,18 79,34 30,51"
+        fill={flagColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+export const TriangleSandwich = ({
+  colorHex = "#F4C27A",
+  primary,
+  secondary,
+  accent,
+  size = 85,
+}: ItemSvgProps) => {
+  const breadColor = primary ?? colorHex;
+  const bottomBreadColor = secondary ?? "#D99A4E";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 아래 빵 */}
+      <Path
+        d="M18 68 L50 27 L82 68 Z"
+        fill={bottomBreadColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 치즈 */}
+      <Path
+        d="M23 60 L50 37 L77 60 L72 66 L50 49 L28 66 Z"
+        fill="#FFD166"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 양상추 */}
+      <Path
+        d="
+          M25 56
+          L50 35
+          L75 56
+          L70 62
+          C65 58 61 64 56 60
+          C51 57 48 63 43 59
+          C38 55 34 62 29 60
+          Z
+        "
+        fill="#72C968"
+        stroke="#4F9148"
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 토마토 */}
+      <Polygon
+        points="50,38 76,58 24,55"
+        fill="#F05A47"
+        stroke="#B83B3B"
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 위쪽 빵 */}
+      <Polygon
+        points="50,18 82,54 18,54"
+        fill={breadColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 빵 하이라이트 */}
+      <Path
+        d="M38 36 L43 29"
+        stroke={highlightColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+        opacity={0.45}
+      />
+    </Svg>
+  );
+};
+export const TriangleKimbap = ({
+  colorHex = "#22272B",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const seaweedColor = primary ?? colorHex;
+  const riceColor = secondary ?? "#FFF9F0";
+  const fillingColor = accent ?? "#FFD166";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 김 */}
+      <Polygon
+        points="50,15 17,80 83,80"
+        fill={seaweedColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 밥 */}
+      <Polygon
+        points="50,26 26,73 74,73"
+        fill={riceColor}
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+
+      {/* 속재료 */}
+      <Path
+        d="M50 47 L56 59 L44 59 Z"
+        fill={fillingColor}
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M41 55.5 L45.5 65.5 L36.5 65.5 Z"
+        fill="#F15B5B"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M59 55.5 L63.5 65.5 L54.5 65.5 Z"
+        fill="#65B95B"
+        strokeLinejoin="round"
+      />
+
+      {/* 김 결 느낌 */}
+      <Line
+        x1="24"
+        y1="80"
+        x2="30"
+        y2="68"
+        stroke="#000000"
+        strokeOpacity={0.15}
+        strokeWidth="2"
+      />
+
+      <Line
+        x1="76"
+        y1="80"
+        x2="70"
+        y2="68"
+        stroke="#000000"
+        strokeOpacity={0.15}
+        strokeWidth="2"
+      />
+    </Svg>
+  );
+};
+export const Pyramid = ({
+  colorHex = "#E6C594",
+  primary,
+  secondary,
+  accent,
+  size = 85,
+}: ItemSvgProps) => {
+  const pyramidColor = primary ?? colorHex;
+  const baseColor = secondary ?? "#B07D4F";
+  const highlightColor = accent ?? "#FFE082";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 피라미드 전체 */}
+      <Polygon
+        points="50,18 84,74 16,74"
+        fill={pyramidColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 돌 블록 층 1 */}
+      <Polygon
+        points="37,40 63,40 66,46 34,46"
+        fill={baseColor}
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+
+      {/* 돌 블록 층 2 */}
+      <Polygon
+        points="32,48 68,48 72,54 28,54"
+        fill={baseColor}
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+
+      {/* 돌 블록 층 3 */}
+      <Polygon
+        points="27,56 73,56 78,64 22,64"
+        fill={baseColor}
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+
+      {/* 기반암 */}
+      <Polygon
+        points="21,66 79,66 84,74 16,74"
+        fill={baseColor}
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+
+      {/* 능선 */}
+      <Path
+        d="M50 18 L50 74"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        opacity={0.3}
+        strokeLinecap="round"
+      />
+
+      {/* 꼭짓점 하이라이트 */}
+      <Ellipse cx="50" cy="25" rx="3" ry="1.5" fill={baseColor} opacity={0.7} />
+    </Svg>
+  );
+};
+export const Tent = ({
+  colorHex = "#118AB2",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const tentColor = primary ?? colorHex;
+  const doorColor = secondary ?? WHITE;
+  const flagColor = accent ?? "#FFD166";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 텐트 */}
+      <Polygon
+        points="50,18 85,80 15,80"
+        fill={tentColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 텐트 문 */}
+      <Path
+        d="M50 48 L65 80 L35 80 Z"
+        fill={doorColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 깃발 */}
+      <Path
+        d="M50 18 L50 10 L62 14 L50 18 Z"
+        fill={flagColor}
+        stroke={OUTLINE}
+        strokeWidth="2"
+      />
+    </Svg>
+  );
+};
+export const Mountain = ({
+  colorHex = "#72B86A",
+  primary,
+  size = 75,
+}: ItemSvgProps) => {
+  const mountainColor = primary ?? colorHex;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 큰 산 */}
+      <Polygon
+        points="50,12 12,82 88,82"
+        fill={mountainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 눈 */}
+      <Polygon points="50,12 38,35 50,31 61,36" fill={WHITE} />
+
+      {/* 작은 산 */}
+      <Polygon
+        points="73,38 50,82 94,82"
+        fill={mountainColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 작은 눈 */}
+      <Polygon points="73,38 66,52 73,49 80,53" fill={WHITE} />
+    </Svg>
+  );
+};
+export const Sailboat = ({
+  colorHex = "#4D96FF",
+  primary,
+  secondary,
+  accent,
+  size = 85,
+}: ItemSvgProps) => {
+  const sailColor = primary ?? colorHex;
+  const hullColor = secondary ?? "#A8733E";
+  const waveColor = accent ?? "#63C5E8";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 돛대 */}
+      <Line
+        x1="50"
+        y1="13"
+        x2="50"
+        y2="67"
+        stroke="#8D5A32"
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+
+      {/* 왼쪽 돛 */}
+      <Polygon
+        points="48,18 22,57 48,57"
+        fill={sailColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 오른쪽 돛 */}
+      <Polygon
+        points="53,23 53,57 78,57"
+        fill={sailColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 배 */}
+      <Path
+        d="M18 63 L82 63 L70 79 Q50 87 30 79 Z"
+        fill={hullColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 파도 */}
+      <Path
+        d="M20 86 Q30 80 40 86 Q50 92 60 86 Q70 80 80 86"
+        fill="none"
+        stroke={waveColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+export const TriangleCookie = ({
+  colorHex = "#D99A52",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const cookieColor = primary ?? colorHex;
+  const chipColor = secondary ?? "#754421";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M46.4 20.1 Q50 13 53.6 20.1 L80.4 72.9 Q84 80 76 80 L24 80 Q16 80 19.6 72.9 Z"
+        fill={cookieColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M44 33 L49 43 L39 43 Z"
+        fill={chipColor}
+        stroke={OUTLINE}
+        strokeWidth="1"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M60 41 L65 51 L55 51 Z"
+        fill={chipColor}
+        stroke={OUTLINE}
+        strokeWidth="1"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M36 51 L41 61 L31 61 Z"
+        fill={chipColor}
+        stroke={OUTLINE}
+        strokeWidth="1"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M52 58 L57 68 L47 68 Z"
+        fill={chipColor}
+        stroke={OUTLINE}
+        strokeWidth="1"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M66 60 L71 70 L61 70 Z"
+        fill={chipColor}
+        stroke={OUTLINE}
+        strokeWidth="1"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M47 67.5 L51.5 76.5 L42.5 76.5 Z"
+        fill={chipColor}
+        stroke={OUTLINE}
+        strokeWidth="1"
+        strokeLinejoin="round"
+      />
+
+      <Ellipse
+        cx="43"
+        cy="29"
+        rx="7"
+        ry="3"
+        fill={highlightColor}
+        opacity={0.25}
+        transform="rotate(-30 43 29)"
+      />
+    </Svg>
+  );
+};
+export const WatermelonSlice = ({
+  colorHex = "#EF476F",
+  primary,
+  secondary,
+  accent,
+  size = 85,
+}: ItemSvgProps) => {
+  const fleshColor = primary ?? colorHex;
+  const rindColor = secondary ?? "#06D6A0";
+  const seedColor = accent ?? OUTLINE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 수박 껍질 */}
+      <Rect
+        x="19.5"
+        y="70"
+        width="60"
+        height="12"
+        fill={rindColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        rx="5"
+      />
+
+      {/* 수박 과육 */}
+      <Polygon
+        points="50,24 82,76 18,76"
+        fill={fleshColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 수박 씨앗 */}
+      <Circle cx="50" cy="48" r="3" fill={seedColor} />
+      <Circle cx="40" cy="62" r="3" fill={seedColor} />
+      <Circle cx="60" cy="62" r="3" fill={seedColor} />
+    </Svg>
+  );
+};
+export const PizzaSlice = ({
+  colorHex = "#FFC93C",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const cheeseColor = primary ?? colorHex;
+  const crustColor = secondary ?? "#E8A857";
+  const highlightColor = accent ?? "#FFE380";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 크러스트 */}
+      <Path
+        d="M17 68 Q19 79 24 80 L76 80 Q81 79 83 68 Q50 74 17 68 Z"
+        fill={crustColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 크러스트 기포 */}
+      <Circle cx="30" cy="73" r="2" fill="#C98A3E" opacity={0.6} />
+
+      <Circle cx="45" cy="76" r="2" fill="#C98A3E" opacity={0.6} />
+
+      <Circle cx="60" cy="75" r="2" fill="#C98A3E" opacity={0.6} />
+
+      <Circle cx="72" cy="72" r="2" fill="#C98A3E" opacity={0.6} />
+
+      {/* 피자 몸통 */}
+      <Polygon
+        points="50,20 81,70 19,70"
+        fill={cheeseColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 치즈 광택 */}
+      <Path d="M50 26 L74 66 L26 66 Z" fill={highlightColor} opacity={0.4} />
+
+      {/* 페퍼로니 질감 점 */}
+      <Polygon
+        points="48,38 53,44 43,44"
+        fill="#B8342C"
+        strokeLinejoin="round"
+      />
+
+      <Polygon
+        points="52,42 57,48 47,48"
+        fill="#B8342C"
+        strokeLinejoin="round"
+      />
+
+      <Polygon
+        points="36,51 41,57 31,57"
+        fill="#B8342C"
+        strokeLinejoin="round"
+      />
+
+      <Polygon
+        points="64,55 69,61 59,61"
+        fill="#B8342C"
+        strokeLinejoin="round"
+      />
+
+      {/* 피망 */}
+      <Path d="M42 60 Q45 56 48 60 Q45 63 42 60 Z" fill="#4CAF50" />
+
+      <Path d="M58 48 Q61 44 64 48 Q61 51 58 48 Z" fill="#4CAF50" />
+
+      {/* 반짝임 */}
+      <Ellipse
+        cx="42"
+        cy="33"
+        rx="5"
+        ry="2.5"
+        fill={WHITE}
+        opacity={0.5}
+        transform="rotate(-25 42 33)"
+      />
+    </Svg>
+  );
+};
+export const HeartCookie = ({
+  colorHex = "#E09F3E",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const cookieColor = primary ?? colorHex;
+  const chipColor = secondary ?? "#754421";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M50 82 C50 82 20 60 20 38 C20 25 30 18 40 18 C47 18 50 24 50 24 C50 24 53 18 60 18 C70 18 80 25 80 38 C80 60 50 82 50 82 Z"
+        fill={cookieColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 설탕 데코 */}
+      <Path
+        d="M40 35 Q50 30 60 35"
+        stroke={highlightColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+        fill="none"
+        opacity={0.7}
+      />
+
+      {/* 초코칩 */}
+      <Circle cx="35" cy="39" r="3" fill={chipColor} />
+      <Circle cx="61" cy="39" r="3" fill={chipColor} />
+      <Circle cx="48" cy="56" r="3" fill={chipColor} />
+      <Circle cx="64" cy="57" r="3" fill={chipColor} />
+    </Svg>
+  );
+};
+export const HeartBalloon = ({
+  colorHex = "#FF4F6D",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const balloonColor = primary ?? colorHex;
+  const stringColor = secondary ?? "#777777";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 풍선 */}
+      <Path
+        d="
+          M50 72
+          C43 64 19 50 19 31
+          C19 17 37 12 50 28
+          C63 12 81 17 81 31
+          C81 50 57 64 50 72
+          Z
+        "
+        fill={balloonColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 매듭 */}
+      <Polygon points="45,72 55,72 50,80" fill={balloonColor} />
+
+      {/* 줄 */}
+      <Path
+        d="M50 80 C43 87 57 91 50 97"
+        fill="none"
+        stroke={stringColor}
+        strokeWidth="3"
+      />
+
+      {/* 반짝임 */}
+      <Ellipse
+        cx="35"
+        cy="29"
+        rx="5"
+        ry="9"
+        fill={highlightColor}
+        opacity={0.3}
+      />
+    </Svg>
+  );
+};
+export const HeartLollipop = ({
+  colorHex = "#F72585",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const candyColor = primary ?? colorHex;
+  const stickColor = secondary ?? "#C9A66B";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 막대 */}
+      <Line
+        x1="50"
+        y1="60"
+        x2="50"
+        y2="88"
+        stroke={OUTLINE}
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
+
+      {/* 하트 사탕 */}
+      <Path
+        d="M50 62 C50 62 22 42 22 24 C22 13 30 8 38 8 C44 8 50 13 50 13 C50 13 56 8 62 8 C70 8 78 13 78 24 C78 42 50 62 50 62 Z"
+        fill={candyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 반짝임 */}
+      <Path
+        d="M34 22 L40 28"
+        stroke={highlightColor}
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        opacity={0.6}
+      />
+    </Svg>
+  );
+};
+export const HeartPillow = ({
+  colorHex = "#B897E8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const pillowColor = primary ?? colorHex;
+  const seamColor = secondary ?? WHITE;
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 하트 베개 */}
+      <Path
+        d="
+          M50 83
+          C41 75 18 59 19 37
+          C20 22 37 17 50 32
+          C63 17 80 22 81 37
+          C82 59 59 75 50 83
+          Z
+        "
+        fill={pillowColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 안쪽 시접 */}
+      <Path
+        d="
+          M50 73
+          C43 67 29 56 29 43
+          C30 34 40 31 50 42
+          C60 31 70 34 71 43
+          C71 56 57 67 50 73
+        "
+        fill="none"
+        stroke={seamColor}
+        strokeWidth="3"
+        opacity={0.35}
+      />
+
+      {/* 작은 반짝임 */}
+      <Ellipse
+        cx="35"
+        cy="35"
+        rx="5"
+        ry="2"
+        fill={highlightColor}
+        opacity={0.25}
+        transform="rotate(-25 35 35)"
+      />
+    </Svg>
+  );
+};
+export const HeartCake = ({
+  colorHex = "#FFB6C1",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const frostingColor = primary ?? colorHex;
+  const sideColor = secondary ?? "#E8879E";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 케이크 옆면 */}
+      <Path
+        d="M50 90 C41 81 16 63 16 42 C16 25 36 21 50 37 C64 21 84 25 84 42 C84 63 59 81 50 90 Z"
+        fill={sideColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 케이크 윗면 */}
+      <Path
+        d="M50 83 C42 75 18 59 18 39 C18 23 36 19 50 34 C64 19 82 23 82 39 C82 59 58 75 50 83 Z"
+        fill={frostingColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 층 구분 크림 */}
+      <Path
+        d="M25 50 Q33 46 41 50 Q50 54 59 50 Q67 46 75 50"
+        fill="none"
+        stroke={WHITE}
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
+
+      {/* 하단 크림 */}
+      <Path
+        d="M30 64 Q40 60 50 64 Q60 68 70 64"
+        fill="none"
+        stroke="#FFF0F3"
+        strokeWidth="4"
+        strokeLinecap="round"
+        opacity={0.8}
+      />
+
+      {/* 체리 토핑 */}
+      <Path
+        d="M50 40 C50 40 40 31 40 25 C40 20 45 18 50 24 C55 18 60 20 60 25 C60 31 50 40 50 40 Z"
+        fill="#F44355"
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+
+      {/* 체리 잎 */}
+      <Path
+        d="M50 21 Q55 12 60 14"
+        stroke="#4CAF50"
+        strokeWidth="2.5"
+        fill="none"
+        strokeLinecap="round"
+      />
+
+      {/* 반짝임 */}
+      <Ellipse
+        cx="34"
+        cy="46"
+        rx="6"
+        ry="2.5"
+        fill={highlightColor}
+        opacity={0.45}
+        transform="rotate(-30 34 46)"
+      />
+    </Svg>
+  );
+};
+export const HeartButton = ({
+  colorHex = "#FF6B8A",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="
+          M50 82
+          C42 74 19 59 19 38
+          C19 22 37 18 50 33
+          C63 18 81 22 81 38
+          C81 59 58 74 50 82
+          Z
+        "
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Circle cx="40" cy="42" r="5" fill={WHITE} />
+      <Circle cx="60" cy="42" r="5" fill={WHITE} />
+      <Circle cx="40" cy="60" r="5" fill={WHITE} />
+      <Circle cx="60" cy="60" r="5" fill={WHITE} />
+
+      <Ellipse
+        cx="37"
+        cy="30"
+        rx="6"
+        ry="3"
+        fill={highlightColor}
+        opacity={0.4}
+        transform="rotate(-30 37 30)"
+      />
+    </Svg>
+  );
+};
+export const HeartClock = ({
+  colorHex = "#FF8FAB",
+  primary,
+  secondary,
+  accent,
+  size = 80,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const handColor = secondary ?? DARK;
+  const centerColor = accent ?? "#FF9F43";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="
+          M50 84
+          C42 76 18 60 18 37
+          C18 20 37 16 50 32
+          C63 16 82 20 82 37
+          C82 60 58 76 50 84
+          Z
+        "
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Path
+        d="M50 66 C50 66 32 53 32 41 C32 33 40 29 45 35 C50 41 50 41 50 41 C50 41 50 41 55 35 C60 29 68 33 68 41 C68 53 50 66 50 66 Z"
+        fill={handColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      <Line
+        x1="50"
+        y1="49"
+        x2="50"
+        y2="38"
+        stroke={mainColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="50"
+        y1="49"
+        x2="59"
+        y2="54"
+        stroke={mainColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      <Circle cx="50" cy="49" r="3" fill={centerColor} />
+    </Svg>
+  );
+};
+export const HeartSunglasses = ({
+  colorHex = "#9B5DE5",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const frameColor = primary ?? colorHex;
+  const lensColor = secondary ?? "#353B43";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M34 72 C34 72 21 63 21 54 C21 47 28 44 34 51 C40 44 47 47 47 54 C47 63 34 72 34 72 Z"
+        fill={lensColor}
+        stroke={frameColor}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M66 72 C66 72 53 63 53 54 C53 47 60 44 66 51 C72 44 79 47 79 54 C79 63 66 72 66 72 Z"
+        fill={lensColor}
+        stroke={frameColor}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M47 54 Q50 58 53 54"
+        stroke={frameColor}
+        strokeWidth="3"
+        fill="none"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="21"
+        y1="53"
+        x2="12"
+        y2="48"
+        stroke={frameColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="79"
+        y1="53"
+        x2="88"
+        y2="48"
+        stroke={frameColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="27"
+        y1="54"
+        x2="33"
+        y2="57"
+        stroke={highlightColor}
+        strokeWidth="2"
+        opacity={0.45}
+      />
+
+      <Line
+        x1="69"
+        y1="54"
+        x2="75"
+        y2="57"
+        stroke={highlightColor}
+        strokeWidth="2"
+        opacity={0.45}
+      />
+    </Svg>
+  );
+};
+export const HeartGem = ({
+  colorHex = "#B388FF",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const gemColor = primary ?? colorHex;
+  const cutColor = secondary ?? WHITE;
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="
+          M50 82
+          L23 53
+          C10 39 18 19 34 19
+          C42 19 48 24 50 31
+          C52 24 58 19 66 19
+          C82 19 90 39 77 53
+          Z
+        "
+        fill={gemColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M25 30 L39 25 L50 32 L61 25 L75 30 L67 43 L50 37 L33 43 Z"
+        fill={cutColor}
+        opacity={0.28}
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M33 43 L50 37 L67 43 L58 64 L50 76 L42 64 Z"
+        fill={cutColor}
+        opacity={0.18}
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M29 32 L37 28 L42 31 L35 39 Z"
+        fill={highlightColor}
+        opacity={0.55}
+      />
+    </Svg>
+  );
+};
+export const HeartNecklace = ({
+  colorHex = "#F48FB1",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const pendantColor = primary ?? colorHex;
+  const chainColor = secondary ?? "#D9A441";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="
+          M22 18
+          C25 34 32 45 50 50
+          C68 45 75 34 78 18
+        "
+        fill="none"
+        stroke={chainColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      <Path
+        d="
+          M50 78
+          C47 75 29 63 29 52
+          C29 43 39 39 46 46
+          L50 50
+          L54 46
+          C61 39 71 43 71 52
+          C71 63 53 75 50 78
+          Z
+        "
+        fill={pendantColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="
+          M39 50
+          C40 47 43 46 46 49
+        "
+        fill="none"
+        stroke={highlightColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+        opacity={0.55}
+      />
+
+      <Circle cx="61" cy="63" r="2.2" fill={highlightColor} opacity={0.45} />
+    </Svg>
+  );
+};
+export const StarCookie = ({
+  colorHex = "#E5A64D",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const cookieColor = primary ?? colorHex;
+  const chipColor = secondary ?? "#754421";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Polygon
+        points="
+          50,10
+          61,34
+          87,37
+          67,54
+          73,81
+          50,67
+          27,81
+          33,54
+          13,37
+          39,34
+        "
+        fill={cookieColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Circle cx="43" cy="37" r="3" fill={chipColor} />
+      <Circle cx="61" cy="46" r="3" fill={chipColor} />
+      <Circle cx="38" cy="57" r="3" fill={chipColor} />
+      <Circle cx="54" cy="62" r="3" fill={chipColor} />
+
+      {/* 작은 반짝임 */}
+      <Ellipse
+        cx="35"
+        cy="29"
+        rx="4"
+        ry="2"
+        fill={highlightColor}
+        opacity={0.25}
+        transform="rotate(-20 35 29)"
+      />
+    </Svg>
+  );
+};
+export const StarBalloon = ({
+  colorHex = "#FFD43B",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const balloonColor = primary ?? colorHex;
+  const stringColor = secondary ?? "#777777";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 풍선 */}
+      <Polygon
+        points="
+          50,10
+          61,34
+          87,37
+          67,54
+          73,80
+          50,67
+          27,80
+          33,54
+          13,37
+          39,34
+        "
+        fill={balloonColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 매듭 */}
+      <Path
+        d="M45 72 Q50 79 55 72"
+        fill={balloonColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 풍선 줄 */}
+      <Path
+        d="
+          M50 78
+          C46 86 54 94 49 101
+          C45 107 53 113 50 120
+        "
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+
+      {/* 반짝임 */}
+      <Ellipse
+        cx="38"
+        cy="30"
+        rx="5"
+        ry="9"
+        fill={highlightColor}
+        opacity={0.3}
+      />
+    </Svg>
+  );
+};
+export const StarBalloon1 = ({
+  colorHex = "#9B5DE5",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const balloonColor = primary ?? colorHex;
+  const stringColor = secondary ?? OUTLINE;
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 줄 */}
+      <Line
+        x1="50"
+        y1="70"
+        x2="50"
+        y2="88"
+        stroke={stringColor}
+        strokeWidth="2"
+        opacity={0.7}
+      />
+
+      {/* 별 풍선 */}
+      <Path
+        d="M50 10 L60 34 L86 36 L66 53 L72 78 L50 65 L28 78 L34 53 L14 36 L40 34 Z"
+        fill={balloonColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 반짝임 */}
+      <Path
+        d="M38 28 L44 34"
+        stroke={highlightColor}
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        opacity={0.6}
+      />
+    </Svg>
+  );
+};
+export const StarWand = ({
+  colorHex = "#FFD43B",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const starColor = primary ?? colorHex;
+  const wandColor = secondary ?? "#F278A1";
+  const sparkleColor = accent ?? "#FFD166";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 막대 */}
+      <Line
+        x1="43"
+        y1="57"
+        x2="25"
+        y2="88"
+        stroke={starColor}
+        strokeWidth="8"
+        strokeLinecap="round"
+      />
+
+      {/* 별 */}
+      <Polygon
+        points="
+          55,10
+          63,28
+          83,30
+          68,43
+          73,63
+          55,52
+          37,63
+          42,43
+          27,30
+          47,28
+        "
+        fill={starColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 반짝이 */}
+      <Circle cx="83" cy="20" r="3" fill={sparkleColor} />
+      <Circle cx="87" cy="38" r="3" fill={sparkleColor} />
+      <Circle cx="71" cy="14" r="3" fill={sparkleColor} />
+    </Svg>
+  );
+};
+export const StarPillow = ({
+  colorHex = "#74C8FF",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const pillowColor = primary ?? colorHex;
+  const seamColor = secondary ?? WHITE;
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 별 모양 베개 */}
+      <Polygon
+        points="
+          50,11
+          62,34
+          87,38
+          68,55
+          73,81
+          50,68
+          27,81
+          32,55
+          13,38
+          38,34
+        "
+        fill={pillowColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 안쪽 시접 */}
+      <Polygon
+        points="
+          50,22
+          59,40
+          78,43
+          64,56
+          67,70
+          50,61
+          33,70
+          36,56
+          22,43
+          41,40
+        "
+        fill="none"
+        stroke={seamColor}
+        strokeWidth="3"
+        opacity={0.35}
+      />
+
+      {/* 반짝임 */}
+      <Ellipse
+        cx="36"
+        cy="30"
+        rx="5"
+        ry="2"
+        fill={highlightColor}
+        opacity={0.25}
+        transform="rotate(-20 36 30)"
+      />
+    </Svg>
+  );
+};
+export const Starfish = ({
+  colorHex = "#FF7F45",
+  primary,
+  secondary,
+  size = 75,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const spotColor = secondary ?? "#FFB078";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="
+          M50 10
+          C57 24 59 32 64 35
+          C70 38 78 32 88 31
+          C81 43 70 49 69 55
+          C68 62 76 72 78 84
+          C65 78 57 68 50 69
+          C43 68 35 78 22 84
+          C24 72 32 62 31 55
+          C30 49 19 43 12 31
+          C22 32 30 38 36 35
+          C41 32 43 24 50 10
+          Z
+        "
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Circle cx="42" cy="39" r="3" fill={spotColor} />
+      <Circle cx="60" cy="44" r="3" fill={spotColor} />
+      <Circle cx="49" cy="56" r="3" fill={spotColor} />
+      <Circle cx="35" cy="57" r="3" fill={spotColor} />
+      <Circle cx="63" cy="61" r="3" fill={spotColor} />
+    </Svg>
+  );
+};
+export const StarButton = ({
+  colorHex = "#FFD43B",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Polygon
+        points="
+          50,10
+          61,34
+          87,37
+          67,54
+          73,81
+          50,67
+          27,81
+          33,54
+          13,37
+          39,34
+        "
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Circle cx="42" cy="40" r="4" fill={WHITE} />
+      <Circle cx="58" cy="40" r="4" fill={WHITE} />
+      <Circle cx="42" cy="56" r="4" fill={WHITE} />
+      <Circle cx="58" cy="56" r="4" fill={WHITE} />
+
+      <Ellipse
+        cx="38"
+        cy="29"
+        rx="6"
+        ry="3"
+        fill={highlightColor}
+        opacity={0.4}
+        transform="rotate(-30 38 29)"
+      />
+    </Svg>
+  );
+};
+export const StarClock = ({
+  colorHex = "#FFD43B",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const handColor = secondary ?? DARK;
+  const centerColor = accent ?? "#FF6B6B";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Polygon
+        points="
+          50,9
+          61,33
+          87,37
+          67,54
+          73,81
+          50,67
+          27,81
+          33,54
+          13,37
+          39,33
+        "
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M50 30 L55.5 40.5 L68 42.4 L59 51.4 L61.2 64 L50 58 L38.8 64 L41 51.4 L32 42.4 L44.5 40.5 Z"
+        fill={WHITE}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      <Line
+        x1="50"
+        y1="49"
+        x2="50"
+        y2="38"
+        stroke={handColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="50"
+        y1="49"
+        x2="59"
+        y2="54"
+        stroke={handColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      <Circle cx="50" cy="49" r="3" fill={centerColor} />
+    </Svg>
+  );
+};
+export const StarCake = ({
+  colorHex = "#FF9EB5",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const cakeColor = primary ?? colorHex;
+  const fruitColor = secondary ?? "#F44336";
+  const berryColor = accent ?? "#4D96FF";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Polygon
+        points="50,10 61,34 87,37 67,54 73,81 50,67 27,81 33,54 13,37 39,34"
+        fill={cakeColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M50 13 L51.2 15.5 L54 15.9 L52 17.9 L52.5 20.7 L50 19.4 L47.5 20.7 L48 17.9 L46 15.9 L48.8 15.5 Z"
+        fill={WHITE}
+        opacity={0.85}
+      />
+
+      <Path
+        d="M70 33 L71.2 35.5 L74 35.9 L72 37.9 L72.5 40.7 L70 39.4 L67.5 40.7 L68 37.9 L66 35.9 L68.8 35.5 Z"
+        fill={WHITE}
+        opacity={0.85}
+      />
+
+      <Path
+        d="M63 58 L64.2 60.5 L67 60.9 L65 62.9 L65.5 65.7 L63 64.4 L60.5 65.7 L61 62.9 L59 60.9 L61.8 60.5 Z"
+        fill={WHITE}
+        opacity={0.85}
+      />
+
+      <Path
+        d="M37 58 L38.2 60.5 L41 60.9 L39 62.9 L39.5 65.7 L37 64.4 L34.5 65.7 L35 62.9 L33 60.9 L35.8 60.5 Z"
+        fill={WHITE}
+        opacity={0.85}
+      />
+
+      <Path
+        d="M30 33 L31.2 35.5 L34 35.9 L32 37.9 L32.5 40.7 L30 39.4 L27.5 40.7 L28 37.9 L26 35.9 L28.8 35.5 Z"
+        fill={WHITE}
+        opacity={0.85}
+      />
+
+      <Path
+        d="M50 33 L52.5 38 L58 38.8 L54 42.7 L55 48.2 L50 45.6 L45 48.2 L46 42.7 L42 38.8 L47.5 38 Z"
+        fill={fruitColor}
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M50 35 L47 31 M50 35 L53 31"
+        stroke="#4CAF50"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+
+      <Path
+        d="M40 47 L41.2 49.5 L44 49.9 L42 51.9 L42.5 54.7 L40 53.4 L37.5 54.7 L38 51.9 L36 49.9 L38.8 49.5 Z"
+        fill={berryColor}
+      />
+
+      <Path
+        d="M60 47 L61.2 49.5 L64 49.9 L62 51.9 L62.5 54.7 L60 53.4 L57.5 54.7 L58 51.9 L56 49.9 L58.8 49.5 Z"
+        fill={berryColor}
+      />
+    </Svg>
+  );
+};
+export const StarOrnament = ({
+  colorHex = "#FF5C6C",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const mainColor = primary ?? colorHex;
+  const decoration1 = secondary ?? "#FFD166";
+  const decoration2 = accent ?? "#4D96FF";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Line
+        x1="50"
+        y1="8"
+        x2="50"
+        y2="17"
+        stroke="#8D5A32"
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+
+      <Polygon
+        points="
+          50,15
+          61,36
+          85,39
+          67,54
+          72,78
+          50,66
+          28,78
+          33,54
+          15,39
+          39,36
+        "
+        fill={mainColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M40 38 L41.8 41.5 L45.5 42 L42.8 44.7 L43.5 48.5 L40 46.7 L36.5 48.5 L37.2 44.7 L34.5 42 L38.2 41.5 Z"
+        fill={decoration1}
+      />
+
+      <Path
+        d="M61 43 L62.8 46.5 L66.5 47 L63.8 49.7 L64.5 53.5 L61 51.7 L57.5 53.5 L58.2 49.7 L55.5 47 L59.2 46.5 Z"
+        fill={decoration2}
+      />
+
+      <Path
+        d="M49 55 L50.8 58.5 L54.5 59 L51.8 61.7 L52.5 65.5 L49 63.7 L45.5 65.5 L46.2 61.7 L43.5 59 L47.2 58.5 Z"
+        fill="#65B95B"
+      />
+
+      <Ellipse
+        cx="39"
+        cy="30"
+        rx="6"
+        ry="3"
+        fill={WHITE}
+        opacity={0.4}
+        transform="rotate(-30 39 30)"
+      />
+    </Svg>
+  );
+};
+export const StarSunglasses = ({
+  colorHex = "#FF6B8A",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const lensColor = primary ?? colorHex;
+  const frameColor = secondary ?? OUTLINE;
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Polygon
+        points="34,43 38,53 48,54 40,61 43,72 34,66 25,72 28,61 20,54 30,53"
+        fill={frameColor}
+        stroke={lensColor}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      <Polygon
+        points="66,43 70,53 80,54 72,61 75,72 66,66 57,72 60,61 52,54 62,53"
+        fill={frameColor}
+        stroke={lensColor}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M47 55 Q50 58 53 55"
+        stroke={lensColor}
+        strokeWidth="3"
+        fill="none"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="20"
+        y1="54"
+        x2="12"
+        y2="50"
+        stroke={lensColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="80"
+        y1="54"
+        x2="88"
+        y2="50"
+        stroke={lensColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      <Line
+        x1="27"
+        y1="59"
+        x2="33"
+        y2="62"
+        stroke={highlightColor}
+        strokeWidth="2"
+        opacity={0.45}
+      />
+
+      <Line
+        x1="69"
+        y1="59"
+        x2="75"
+        y2="62"
+        stroke={highlightColor}
+        strokeWidth="2"
+        opacity={0.45}
+      />
+    </Svg>
+  );
+};
+export const StarNecklace = ({
+  colorHex = "#FFD166",
+  primary,
+  secondary,
+  accent,
+  size = 80,
+}: ItemSvgProps) => {
+  const pendantColor = primary ?? colorHex;
+  const chainColor = secondary ?? "#D9A441";
+  const sparkleColor = accent ?? "#FFD166";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="
+          M22 21
+          C25 37 32 48 50 53
+          C68 48 75 37 78 21
+        "
+        fill="none"
+        stroke={sparkleColor}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      <Polygon
+        points="
+          50,55
+          56,65
+          68,67
+          59,76
+          61,88
+          50,82
+          39,88
+          41,76
+          32,67
+          44,65
+        "
+        fill={pendantColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Circle cx="50" cy="70" r="4" fill={WHITE} opacity={0.35} />
+
+      <Path
+        d="M28 48 L29.5 52 L33 53.5 L29.5 55 L28 59 L26.5 55 L23 53.5 L26.5 52 Z"
+        fill={sparkleColor}
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M73 48 L74.5 52 L78 53.5 L74.5 55 L73 59 L71.5 55 L68 53.5 L71.5 52 Z"
+        fill={sparkleColor}
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+export const Medal = ({
+  colorHex = "#FFD166",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const medalColor = primary ?? colorHex;
+  const ribbonColor = secondary ?? "#EF476F";
+  const highlightColor = accent ?? WHITE;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M35 15 L50 42 L65 15"
+        fill="none"
+        stroke={medalColor}
+        strokeWidth="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M35 15 L50 42 L65 15"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M50 35 L58 52 L78 54 L63 68 L67 87 L50 78 L33 87 L37 68 L22 54 L42 52 Z"
+        fill={medalColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Circle cx="50" cy="57" r="5" fill={highlightColor} opacity={0.35} />
+    </Svg>
+  );
+};
+
+export const BasicCircle = ({
+  colorHex = DEFAULT_COLOR,
+  size = 95,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    <Circle
+      cx="50"
+      cy="50"
+      r="32"
+      fill={colorHex}
+      stroke={OUTLINE}
+      strokeWidth="4"
+    />
+  </Svg>
+);
+export const BasicSquare = ({
+  colorHex = DEFAULT_COLOR,
+  size = 95,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    <Rect
+      x="18"
+      y="18"
+      width="64"
+      height="64"
+      rx="5"
+      fill={colorHex}
+      stroke={OUTLINE}
+      strokeWidth="4"
+    />
+  </Svg>
+);
+export const BasicTriangle = ({
+  colorHex = DEFAULT_COLOR,
+  size = 95,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    <Polygon
+      points="50,14 17,82 83,82"
+      fill={colorHex}
+      stroke={OUTLINE}
+      strokeWidth="4"
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+export const BasicHeart = ({
+  colorHex = DEFAULT_COLOR,
+  size = 95,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    <Path
+      d="
+        M50 84
+        C42 76 18 60 18 37
+        C18 20 37 16 50 32
+        C63 16 82 20 82 37
+        C82 60 58 76 50 84
+        Z
+      "
+      fill={colorHex}
+      stroke={OUTLINE}
+      strokeWidth="4"
+    />
+  </Svg>
+);
+export const BasicStar = ({
+  colorHex = DEFAULT_COLOR,
+  size = 95,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    <Polygon
+      points="
+        50,10
+        61,34
+        87,37
+        67,54
+        73,81
+        50,67
+        27,81
+        33,54
+        13,37
+        39,34
+      "
+      fill={colorHex}
+      stroke={OUTLINE}
+      strokeWidth="4"
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+// ============================================================
+// BASIC SHAPE REGISTRY
+// ============================================================
+
+export const BASIC_SHAPE_SVGS = {
+  basiccircle: BasicCircle,
+  basicsquare: BasicSquare,
+  basictriangle: BasicTriangle,
+  basicheart: BasicHeart,
+  basicstar: BasicStar,
+} as const;
+
+// ============================================================
+// COLOR RESOLVER
+// ============================================================
+
+const resolveColor = (colorId?: ClassificationColorId) => {
+  if (!colorId) {
+    return undefined;
+  }
+
+  return COLOR_SORTING_COLORS[colorId];
+};
+
+// ============================================================
+// RENDER BASIC SHAPE
+// ============================================================
+
+export const RenderBasicShapeSvg = ({
+  shapeId,
+  colorHex,
+  size,
+}: ItemSvgProps & { shapeId?: string }) => {
+  const renderId = shapeId ? `basic${shapeId}` : undefined;
+
+  const ShapeComponent = renderId
+    ? BASIC_SHAPE_SVGS[renderId as keyof typeof BASIC_SHAPE_SVGS]
+    : undefined;
+
+  if (!ShapeComponent) {
+    return null;
+  }
+
+  return <ShapeComponent colorHex={colorHex} size={size} />;
+};
+
+// ============================================================
+// CLASSIFICATION ITEM SVG REGISTRY
+// ============================================================
+
 export const CATEGORY_ITEM_SVGS = {
+  medal: Medal,
+  starNecklace: StarNecklace,
+  starSunglasses: StarSunglasses,
+  starOrnament: StarOrnament,
+  starCake: StarCake,
+  starClock: StarClock,
+  starButton: StarButton,
+  starfish: Starfish,
+  starPillow: StarPillow,
+  starWand: StarWand,
+  starBalloon1: StarBalloon1,
+  starBalloon: StarBalloon,
+  starCookie: StarCookie,
+
+  heartNecklace: HeartNecklace,
+  heartGem: HeartGem,
+  heartSunglasses: HeartSunglasses,
+  heartClock: HeartClock,
+  heartButton: HeartButton,
+  heartCake: HeartCake,
+  heartPillow: HeartPillow,
+  heartLollipop: HeartLollipop,
+  heartBalloon: HeartBalloon,
+  heartCookie: HeartCookie,
+
+  pizzaSlice: PizzaSlice,
+  watermelonSlice: WatermelonSlice,
+  triangleCookie: TriangleCookie,
+  sailboat: Sailboat,
+  mountain: Mountain,
+  tent: Tent,
+  pyramid: Pyramid,
+  triangleKimbap: TriangleKimbap,
+  triangleSandwich: TriangleSandwich,
+  flag: Flag,
+  christmasTree: ChristmasTree,
+  partyHat: PartyHat,
+  triangleInstrument: TriangleInstrument,
+  triangleRuller: TriangleRuller,
+
+  frame: Frame,
+  switch: Switch,
+  remoteControl: RemoteControl,
+  phone: Phone,
+  squareSunglasses: SquareSunglasses,
+  squareCakeSlice: SquareCakeSlice,
+  calculator: Calculator,
+  laptop: Laptop,
+  refrigerator: Refrigerator,
+  bookshelf: Bookshelf,
+  door: Door,
+  squareClock: SquareClock,
+  giftBox1: GiftBox1,
+  giftBox: GiftBox,
+  tv: Tv,
+  pillow: Pillow,
+  microwave: Microwave,
+
+  bread: Bread,
+  calendar: Calendar,
+  window1: Window1,
+  window: Window,
+  book: Book,
+  box: Box,
+  chocolateBar: ChocolateBar,
+
+  envelop: Envelop,
+  sun: Sun,
+  roundBalloon: RoundBalloon,
+  fullMoon: FullMoon,
+  plate: Plate,
+  tennisBall: TennisBall,
+  baseball: Baseball,
+  basketball: Basketball,
+  sunglasses: Sunglasses,
+  lollipop: Lollipop,
+  wheel: Wheel,
+  circleClock: CircleClock,
+  donut1: Donut1,
+  button1: Button1,
+  button2: Button2,
+
   dog: Dog,
   cat: Cat,
   rabbit: Rabbit,
@@ -7117,7 +12008,6 @@ export const CATEGORY_ITEM_SVGS = {
   airplane: Airplane,
   ship: Ship,
 
-  // 🆕 추가
   bicycle: Bicycle,
   helicopter: Helicopter,
   boat: Boat,
@@ -7157,7 +12047,12 @@ export const CATEGORY_ITEM_SVGS = {
   excavator: Excavator,
   subway: Subway,
   cementMixer: CementMixer,
+  ball: Ball,
 } as const;
+
+// ============================================================
+// RENDER CLASSIFICATION ITEM
+// ============================================================
 
 export const RenderClassificationItemSvg = ({
   itemId,
@@ -7174,7 +12069,7 @@ export const RenderClassificationItemSvg = ({
 
   if (!ItemComponent) {
     return (
-      <Svg width="100" height="100" viewBox="0 0 100 100">
+      <Svg width={size ?? 100} height={size ?? 100} viewBox="0 0 100 100">
         <Circle
           cx="50"
           cy="50"
@@ -7199,11 +12094,56 @@ export const RenderClassificationItemSvg = ({
   );
 };
 
-/* =========================================================
- * 사용 예시 — 기존 RenderCategoryItemSvg 그대로 사용 가능
- * ---------------------------------------------------------
- * import { Dog, Apple, Pizza } from "./ItemSvgIcons";
- *
- * // CATEGORY_ITEM_SVGS, RenderCategoryItemSvg 는 기존 코드 그대로 두면 됩니다.
- * // <ItemComponent colorHex={finalColor} /> 호출부가 바뀔 필요 없어요.
- * ======================================================= */
+// ============================================================
+// RENDER COLOR SORTING OBJECT
+// ============================================================
+//
+// L1
+// → 기본 도형 SVG
+//
+// L2 ~ L8
+// → 실제 ClassificationItem SVG
+//
+// ============================================================
+
+export const RenderColorSortingObjectSvg = ({
+  object,
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: {
+  object: ColorSortingObject;
+  primary?: string;
+  secondary?: string;
+  accent?: string;
+  size?: number;
+}) => {
+  // ----------------------------------------------------------
+  // L1 기본 도형
+  // ----------------------------------------------------------
+
+  if (object.itemId.startsWith("simple-")) {
+    return (
+      <RenderBasicShapeSvg
+        shapeId={object.shape}
+        colorHex={primary}
+        size={size}
+      />
+    );
+  }
+
+  // ----------------------------------------------------------
+  // L2 ~ L8 실제 ClassificationItem
+  // ----------------------------------------------------------
+
+  return (
+    <RenderClassificationItemSvg
+      itemId={object.itemId}
+      primary={primary}
+      secondary={secondary}
+      accent={accent}
+      size={size}
+    />
+  );
+};
