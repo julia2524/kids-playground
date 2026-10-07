@@ -33,6 +33,7 @@ import { colorSortingLevels } from "../../types/colorSortingLevels";
 import { generateColorSortingProblem } from "../../generators/generateColorSortingProblem";
 
 import AppHeader from "../../components/AppHeader";
+import ColorSortingObjectComponent from "../../components/ColorSorting/ColorSortingObject";
 
 // ============================================================
 // Types
@@ -59,7 +60,7 @@ const SHOW_TEST_CONTROLS = true;
 const getGridColumns = (count: number) => {
   if (count <= 4) return 2; // 4개  → 2행 2열
   if (count <= 6) return 3; // 6개  → 2행 3열
-  if (count <= 8) return 4; // 8개  → 2행 4열
+  if (count <= 8) return 3; // 8개  → 2행 4열
   if (count === 9) return 3; // 9개  → 3행 3열
   if (count === 10) return 5; // 10개 → 2행 5열
   return 4; // 12개 → 3행 4열
@@ -407,26 +408,14 @@ export default function ColorSortingPlayScreen() {
                 const isPlaced = allPlacedIds.includes(object.id);
 
                 return (
-                  <ObjectCell
+                  <ColorSortingObjectComponent
                     key={object.id}
-                    activeOpacity={0.8}
-                    disabled={isPlaced}
+                    object={object}
+                    objectSize={objectSize}
+                    isSelected={selectedObjectId === object.id}
+                    isPlaced={allPlacedIds.includes(object.id)}
                     onPress={() => handleSelectObject(object.id)}
-                    style={{ opacity: isPlaced ? 0 : 1 }}
-                  >
-                    <ObjectBubble
-                      size={objectSize + 12}
-                      isSelected={isSelected}
-                    >
-                      <RenderColorSortingObjectSvg
-                        object={object}
-                        primary={variant?.primary ?? basicColor}
-                        secondary={variant?.secondary}
-                        accent={variant?.accent}
-                        size={objectSize}
-                      />
-                    </ObjectBubble>
-                  </ObjectCell>
+                  />
                 );
               })}
             </ObjectRow>
@@ -743,36 +732,8 @@ const ObjectRow = styled.View`
   justify-content: space-around;
 `;
 
-const ObjectCell = styled.TouchableOpacity`
-  flex: 1;
-
-  align-items: center;
-  justify-content: center;
-`;
-
 const EmptyCell = styled.View`
   flex: 1;
-`;
-
-const ObjectBubble = styled.View<{
-  size: number;
-  isSelected?: boolean;
-}>`
-  width: ${(p) => p.size}px;
-  height: ${(p) => p.size}px;
-
-  align-items: center;
-  justify-content: center;
-
-  border-radius: ${(p) => p.size / 2}px;
-
-  border-width: 3px;
-  border-color: ${(p) => (p.isSelected ? "#7c5cff" : "transparent")};
-
-  background-color: ${(p) =>
-    p.isSelected ? "rgba(124, 92, 255, 0.08)" : "transparent"};
-
-  transform: ${(p) => (p.isSelected ? "scale(1.06)" : "scale(1)")};
 `;
 
 // ============================================================
