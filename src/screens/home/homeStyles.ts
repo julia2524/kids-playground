@@ -78,7 +78,6 @@ export const HeroCard = styled.View`
 `;
 
 export const HeroTextArea = styled.View`
-  width: 68%;
   z-index: 2;
 `;
 
@@ -129,6 +128,9 @@ export const FilterText = styled(AppText)<{ active?: boolean }>`
 
 // --- Game Grid & Cards ---
 export const GameGrid = styled.View`
+  width: 95%;
+
+  align-self: center;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -137,7 +139,7 @@ export const GameGrid = styled.View`
 
 export const GameCard = styled.TouchableOpacity<{ bgColor: string }>`
   width: 48.2%;
-  height: 190px;
+  aspect-ratio: 0.88;
   border-radius: 25px;
   overflow: hidden;
   padding: 13px;

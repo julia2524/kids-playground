@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, ScrollView, View } from "react-native";
+import {
+  ImageBackground,
+  ScrollView,
+  useWindowDimensions,
+  View,
+} from "react-native";
 
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -53,8 +58,23 @@ let hasShownGuardianNoticeThisSession = false;
 export default function HomeScreen() {
   const navigation = useNavigation<HomeNavigationProp>();
   const insets = useSafeAreaInsets(); // ⭐ 하단 안전 영역 값 가져오기
+  const { width, height } = useWindowDimensions();
 
   useLanguage();
+  // ==================================================
+  // Responsive
+  // ==================================================
+
+  // 기준 화면: 일반적인 휴대폰
+  const BASE_WIDTH = 360;
+  const BASE_HEIGHT = 800;
+
+  // 화면이 작아졌을 때만 공간을 살짝 압축
+  // 큰 화면에서는 절대 확대하지 않음
+  const compactScale = Math.max(
+    0.9,
+    Math.min(1, width / BASE_WIDTH, height / BASE_HEIGHT),
+  );
 
   const [guardianNoticeVisible, setGuardianNoticeVisible] = useState(false);
   const [guardianNoticeLoaded, setGuardianNoticeLoaded] = useState(false);
@@ -187,9 +207,9 @@ export default function HomeScreen() {
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
-            paddingHorizontal: 18,
-            paddingTop: 24,
-            paddingBottom: 200,
+            paddingHorizontal: 18 * compactScale,
+            paddingTop: 5 * compactScale,
+            paddingBottom: 200 * compactScale,
           }}
         >
           {/* Game Cards */}
@@ -200,7 +220,10 @@ export default function HomeScreen() {
               bgColor={COLORS.softPink}
               onPress={() => goToStageMap("classification")}
             >
-              <CardImage source={ASSETS.cardClassification} />
+              <CardImage
+                source={ASSETS.cardClassification}
+                resizeMode="contain"
+              />
 
               <CardBottom>
                 <View>
@@ -224,7 +247,7 @@ export default function HomeScreen() {
               bgColor={COLORS.softBlue}
               onPress={() => showLockedAlert("패턴 놀이")}
             >
-              <CardImage source={ASSETS.cardPattern} />
+              <CardImage source={ASSETS.cardPattern} resizeMode="contain" />
 
               <CardBottom>
                 <View>
@@ -248,7 +271,7 @@ export default function HomeScreen() {
               bgColor={COLORS.softYellow}
               onPress={() => showLockedAlert("퍼즐 맞추기")}
             >
-              <CardImage source={ASSETS.cardPuzzle} />
+              <CardImage source={ASSETS.cardPuzzle} resizeMode="contain" />
 
               <CardBottom>
                 <View>
@@ -268,7 +291,7 @@ export default function HomeScreen() {
               bgColor={COLORS.softMint}
               onPress={() => showLockedAlert("미로 찾기")}
             >
-              <CardImage source={ASSETS.cardMaze} />
+              <CardImage source={ASSETS.cardMaze} resizeMode="contain" />
 
               <CardBottom>
                 <View>

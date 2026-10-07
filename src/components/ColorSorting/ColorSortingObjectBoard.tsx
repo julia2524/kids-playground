@@ -8,6 +8,7 @@ import { ColorSortingObject } from "../../types/colorSotringTypes";
 
 import ColorSortingObjectComponent, {
   DragBounds,
+  TargetRects,
 } from "./ColorSortingObjectComponent";
 
 type ColorSortingObjectBoardProps = {
@@ -19,6 +20,9 @@ type ColorSortingObjectBoardProps = {
 
   onObjectPress: (objectId: string) => void;
   footerRef: React.RefObject<View | null>;
+  getTargetRects: (callback: (rects: TargetRects) => void) => void;
+  onCorrectDrop: (objectId: string, targetColorId: string) => void;
+  onWrongDrop?: (objectId: string) => void;
 };
 
 // ============================================================
@@ -104,6 +108,9 @@ export default function ColorSortingObjectBoard({
   placedObjectIds,
   onObjectPress,
   footerRef,
+  getTargetRects,
+  onCorrectDrop,
+  onWrongDrop,
 }: ColorSortingObjectBoardProps) {
   // ==========================================================
   // Board 실제 크기
@@ -191,7 +198,13 @@ export default function ColorSortingObjectBoard({
         const hasDragging = row.some((o) => o.id === draggingObjectId);
 
         return (
-          <ObjectRow key={rowIndex} style={{ zIndex: hasDragging ? 20 : 0 }}>
+          <ObjectRow
+            key={rowIndex}
+            style={{
+              zIndex: hasDragging ? 20 : 0,
+              elevation: hasDragging ? 20 : 0,
+            }}
+          >
             {missing > 0 && <RowSpacer weight={missing / 2} />}
 
             {row.map((object) => (
@@ -201,11 +214,14 @@ export default function ColorSortingObjectBoard({
                 objectSize={objectSize}
                 isSelected={selectedObjectId === object.id}
                 isPlaced={placedObjectIds.includes(object.id)}
-                isDragging={draggingObjectId === object.id}
                 onPress={() => onObjectPress(object.id)}
                 getDragBounds={getDragBounds}
+                getTargetRects={getTargetRects}
                 onDragStart={() => setDraggingObjectId(object.id)}
                 onDragEnd={() => setDraggingObjectId(null)}
+                onCorrectDrop={onCorrectDrop}
+                onWrongDrop={onWrongDrop}
+                isDragging={draggingObjectId === object.id} // 추가
               />
             ))}
 

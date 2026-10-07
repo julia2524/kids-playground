@@ -87,12 +87,55 @@ export default function useColorSortingGame({
   // Target 선택
   // ==========================================================
 
-  const handleTargetPress = (targetColorId: string) => {
-    if (!problem) {
-      return;
-    }
+  // const handleTargetPress = (targetColorId: string) => {
+  //   if (!problem) {
+  //     return;
+  //   }
 
-    if (!selectedObjectId || roundResult) {
+  //   if (!selectedObjectId || roundResult) {
+  //     return;
+  //   }
+
+  //   const next: Record<string, string[]> = {
+  //     ...placedObjects,
+  //   };
+
+  //   // 기존 Target에서 선택된 Object 제거
+  //   Object.keys(next).forEach((color) => {
+  //     next[color] = next[color].filter((id) => id !== selectedObjectId);
+  //   });
+
+  //   // 새로운 Target에 Object 추가
+  //   next[targetColorId] = [...(next[targetColorId] ?? []), selectedObjectId];
+
+  //   setPlacedObjects(next);
+  //   setSelectedObjectId(null);
+
+  //   // 모든 Object가 들어갔는지 확인
+  //   const nextPlacedIds = Object.values(next).flat();
+
+  //   const allObjectsPlaced = nextPlacedIds.length === problem.objects.length;
+
+  //   // 모든 Object가 들어갔다면 정답 판정
+  //   if (allObjectsPlaced) {
+  //     const isCorrect = problem.objects.every((object) => {
+  //       const basket = next[object.colorId] ?? [];
+
+  //       return basket.includes(object.id);
+  //     });
+
+  //     setTimeout(() => {
+  //       setRoundResult(isCorrect ? "correct" : "wrong");
+  //     }, 180);
+  //   }
+  // };
+
+  // ==========================================================
+  // Object를 Target에 배치 (탭 / 드래그 공통)
+  // ==========================================================
+
+  const placeObject = (objectId: string, targetColorId: string) => {
+    if (!problem || roundResult) {
       return;
     }
 
@@ -100,23 +143,21 @@ export default function useColorSortingGame({
       ...placedObjects,
     };
 
-    // 기존 Target에서 선택된 Object 제거
+    // 기존 Target에서 해당 Object 제거
     Object.keys(next).forEach((color) => {
-      next[color] = next[color].filter((id) => id !== selectedObjectId);
+      next[color] = next[color].filter((id) => id !== objectId);
     });
 
     // 새로운 Target에 Object 추가
-    next[targetColorId] = [...(next[targetColorId] ?? []), selectedObjectId];
+    next[targetColorId] = [...(next[targetColorId] ?? []), objectId];
 
     setPlacedObjects(next);
     setSelectedObjectId(null);
 
     // 모든 Object가 들어갔는지 확인
     const nextPlacedIds = Object.values(next).flat();
-
     const allObjectsPlaced = nextPlacedIds.length === problem.objects.length;
 
-    // 모든 Object가 들어갔다면 정답 판정
     if (allObjectsPlaced) {
       const isCorrect = problem.objects.every((object) => {
         const basket = next[object.colorId] ?? [];
@@ -130,6 +171,34 @@ export default function useColorSortingGame({
     }
   };
 
+  // ==========================================================
+  // Target 선택 (탭 방식)
+  // ==========================================================
+
+  const handleTargetPress = (targetColorId: string) => {
+    if (!selectedObjectId) {
+      return;
+    }
+
+    placeObject(selectedObjectId, targetColorId);
+  };
+
+  // ==========================================================
+  // 드래그 앤 드롭: 정답 바구니에 놓았을 때
+  // ==========================================================
+
+  const handleDropObject = (objectId: string, targetColorId: string) => {
+    placeObject(objectId, targetColorId);
+  };
+
+  // ==========================================================
+  // 드래그 앤 드롭: 오답 바구니에 놓았을 때
+  // ==========================================================
+
+  const handleWrongDrop = (objectId: string) => {
+    setSelectedObjectId(null);
+    // 나중에 여기서 오답 횟수 집계, 별 감소, 효과음 등을 처리하면 됩니다.
+  };
   // ==========================================================
   // Target 안의 Object 꺼내기
   // ==========================================================
@@ -247,6 +316,8 @@ export default function useColorSortingGame({
     // Actions
     handleSelectObject,
     handleTargetPress,
+    handleDropObject, // 추가
+    handleWrongDrop, // 추가
     handleRemoveFromTarget,
 
     handleNextRound,
