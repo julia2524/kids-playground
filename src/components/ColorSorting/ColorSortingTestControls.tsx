@@ -60,7 +60,7 @@ export default function ColorSortingTestControls({
         <TestLabel>ROUND</TestLabel>
 
         <TestSmallButton disabled={roundIndex === 0} onPress={onPreviousRound}>
-          <Text>이전</Text>
+          <AppText>이전</AppText>
         </TestSmallButton>
 
         <TestValue>
@@ -71,7 +71,7 @@ export default function ColorSortingTestControls({
           disabled={roundIndex === totalRounds - 1}
           onPress={onNextRound}
         >
-          <Text>다음</Text>
+          <AppText>다음</AppText>
         </TestSmallButton>
       </TestGroup>
     </TestControlBar>

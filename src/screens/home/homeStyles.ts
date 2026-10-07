@@ -99,9 +99,10 @@ export const HeroDescription = styled(AppText)`
 export const FilterRow = styled.View`
   flex-direction: row;
   gap: 8px;
-  margin-top: 40px;
+  margin-top: 18px;
   margin-left: 18px;
   margin-right: 18px;
+  margin-bottom: 18px;
 `;
 
 export const FilterButton = styled.TouchableOpacity<{ active?: boolean }>`

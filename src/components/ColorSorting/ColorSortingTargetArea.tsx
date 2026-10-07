@@ -39,10 +39,10 @@ export default function ColorSortingTargetArea({
 }
 
 const TargetGridContainer = styled.View`
+  flex: 0.8;
   flex-direction: row;
   align-items: stretch;
   justify-content: center;
   gap: 8px;
-  height: 250px;
   margin-bottom: 10px;
 `;

@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { StyleSheet, Text } from "react-native";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -48,6 +48,7 @@ export default function ColorSortingPlayScreen() {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProps>();
   const { level: initialLevel = 1 } = route.params ?? {};
+  const footerRef = useRef<View>(null);
 
   const {
     problem,
@@ -123,6 +124,7 @@ export default function ColorSortingPlayScreen() {
           selectedObjectId={selectedObjectId}
           placedObjectIds={allPlacedIds}
           onObjectPress={handleSelectObject}
+          footerRef={footerRef}
         />
 
         <ColorSortingTargetArea
@@ -132,11 +134,12 @@ export default function ColorSortingPlayScreen() {
           onTargetPress={handleTargetPress}
           onRemoveObject={handleRemoveFromTarget}
         />
-
-        <ColorSortingFooter
-          totalRounds={TOTAL_ROUNDS}
-          roundIndex={roundIndex}
-        />
+        <View ref={footerRef} collapsable={false}>
+          <ColorSortingFooter
+            totalRounds={TOTAL_ROUNDS}
+            roundIndex={roundIndex}
+          />
+        </View>
 
         {/* ================================================== */}
         {/* 개발용 Level / Round 컨트롤 */}

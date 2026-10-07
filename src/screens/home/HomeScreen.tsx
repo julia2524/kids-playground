@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, ImageBackground, ScrollView, View } from "react-native";
+import { ImageBackground, ScrollView, View } from "react-native";
 
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
