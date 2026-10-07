@@ -29,6 +29,7 @@ import { GameType } from "../../types/game";
 import { LinearGradient } from "expo-linear-gradient";
 import { ASSETS } from "../../assets/assets";
 import Mascot from "../../design-system/components/Mascot";
+import { AppText } from "../../utils/AppText";
 
 type HomeNavigationProp = NativeStackNavigationProp<RootStackParamList, "Home">;
 
@@ -373,19 +374,19 @@ const LogoStar = styled.View`
   margin-right: 9px;
 `;
 
-const LogoStarText = styled.Text`
+const LogoStarText = styled(AppText)`
   font-size: 22px;
   color: ${COLORS.white};
 `;
 
-const LogoText = styled.Text`
+const LogoText = styled(AppText)`
   font-size: 20px;
   line-height: 19px;
   font-weight: 900;
   color: ${COLORS.purple};
 `;
 
-const HeaderSubText = styled.Text`
+const HeaderSubText = styled(AppText)`
   font-size: 13px;
   color: ${COLORS.purple};
 `;
@@ -414,14 +415,14 @@ const HeroTextArea = styled.View`
   z-index: 2;
 `;
 
-const HeroTitle = styled.Text`
+const HeroTitle = styled(AppText)`
   font-size: 25px;
   line-height: 32px;
   font-weight: 900;
   color: ${COLORS.text};
 `;
 
-const HeroDescription = styled.Text`
+const HeroDescription = styled(AppText)`
   font-size: 14px;
   line-height: 20px;
   color: ${COLORS.secondaryText};
@@ -451,7 +452,7 @@ const FilterButton = styled.TouchableOpacity<{ active?: boolean }>`
   elevation: 2;
 `;
 
-const FilterText = styled.Text<{ active?: boolean }>`
+const FilterText = styled(AppText)<{ active?: boolean }>`
   margin-top: 3px;
   font-size: 11px;
   font-weight: 800;
@@ -488,12 +489,12 @@ const CardIllustration = styled.View`
   justify-content: center;
 `;
 
-const IllustrationText = styled.Text<{ isSmall?: boolean }>`
+const IllustrationText = styled(AppText)<{ isSmall?: boolean }>`
   font-size: ${(props) => (props.isSmall ? "16px" : "57px")};
   margin-top: ${(props) => (props.isSmall ? "-6px" : "0px")};
 `;
 
-const IllustrationSmallText = styled.Text`
+const IllustrationSmallText = styled(AppText)`
   margin-top: -6px;
   font-size: 16px;
 `;
@@ -509,13 +510,13 @@ const CardBottom = styled.View`
   justify-content: space-between;
 `;
 
-const CardTitle = styled.Text`
+const CardTitle = styled(AppText)`
   font-size: 15px;
   font-weight: 900;
   color: ${COLORS.text};
 `;
 
-const CardDescription = styled.Text`
+const CardDescription = styled(AppText)`
   margin-top: 2px;
   font-size: 11px;
   color: ${COLORS.secondaryText};
@@ -542,12 +543,12 @@ const ComingSoon = styled.View`
   border-color: #e8e4f5;
 `;
 
-const ComingSoonEmoji = styled.Text`
+const ComingSoonEmoji = styled(AppText)`
   font-size: 16px;
   margin-bottom: 3px;
 `;
 
-const ComingSoonText = styled.Text`
+const ComingSoonText = styled(AppText)`
   font-size: 13px;
   font-weight: 800;
   color: ${COLORS.secondaryText};
@@ -575,7 +576,7 @@ const FooterItem = styled.TouchableOpacity`
   min-width: 60px;
 `;
 
-const FooterText = styled.Text<{ active?: boolean }>`
+const FooterText = styled(AppText)<{ active?: boolean }>`
   margin-top: 2px;
   font-size: 11px;
   font-weight: 700;
@@ -693,7 +694,7 @@ const TabItem = styled.TouchableOpacity<{ active?: boolean }>`
   justify-content: center;
 `;
 
-const TabLabel = styled.Text<{ active?: boolean }>`
+const TabLabel = styled(AppText)<{ active?: boolean }>`
   font-size: 11px;
   font-weight: 800;
   color: ${(props) => (props.active ? COLORS.purple : COLORS.muted)};

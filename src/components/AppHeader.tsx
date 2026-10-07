@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import styled from "styled-components/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Mascot from "../design-system/components/Mascot";
+import { AppText } from "../utils/AppText";
 
 interface HeaderProps {
   onBackPress?: () => void;
@@ -80,19 +81,19 @@ const CenterArea = styled.View`
   justify-content: center;
 `;
 
-const HeaderTitle = styled.Text`
+const HeaderTitle = styled(AppText)`
   font-size: 17px;
   font-weight: 900;
   color: #29263d;
 `;
 
-const HeaderSubtitle = styled.Text`
+const HeaderSubtitle = styled(AppText)`
   font-size: 12px;
   color: #7c5cff;
   margin-top: 2px;
 `;
 
-const HeaderTitleText = styled.Text`
+const HeaderTitleText = styled(AppText)`
   font-size: 17px;
   font-weight: 900;
   color: #29263d;
@@ -103,7 +104,7 @@ const TitleContainer = styled.View`
   justify-content: center;
 `;
 
-const HeaderSubtitleText = styled.Text`
+const HeaderSubtitleText = styled(AppText)`
   font-size: 12px;
   color: #7c5cff;
   margin-top: 2px;

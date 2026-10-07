@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 import { NODE_SIZE } from "./StageMapScreen";
+import { AppText } from "../../utils/AppText";
 
 // --- Screen Container ---
 export const ScreenContainer = styled.View`
@@ -41,13 +42,13 @@ export const HeaderTitleArea = styled.View`
   align-items: center;
 `;
 
-export const HeaderTitle = styled.Text`
+export const HeaderTitle = styled(AppText)`
   font-size: ${({ theme }) => theme.typography.h3.fontSize}px;
   font-weight: ${({ theme }) => theme.typography.h3.fontWeight};
   color: ${({ theme }) => theme.colors.text.primary};
 `;
 
-export const HeaderSubtitle = styled.Text`
+export const HeaderSubtitle = styled(AppText)`
   margin-top: 3px;
   font-size: ${({ theme }) => theme.typography.caption.fontSize}px;
   color: ${({ theme }) => theme.colors.text.secondary};
@@ -112,7 +113,7 @@ export const StageNode = styled.TouchableOpacity<StageNodeProps>`
   elevation: ${({ theme }) => theme.shadows.card.elevation};
 `;
 
-export const StageNumber = styled.Text`
+export const StageNumber = styled(AppText)`
   font-size: ${({ theme }) => theme.typography.h2.fontSize}px;
   font-weight: ${({ theme }) => theme.typography.h2.fontWeight};
   color: ${({ theme }) => theme.colors.text.inverse};
@@ -123,7 +124,7 @@ export const StarRow = styled.View`
   margin-top: ${({ theme }) => theme.spacing.xs}px;
 `;
 
-export const SmallStar = styled.Text<{ isStarOn: boolean }>`
+export const SmallStar = styled(AppText)<{ isStarOn: boolean }>`
   font-size: ${({ theme }) => theme.typography.caption.fontSize}px;
   margin-horizontal: 1px;
   color: ${({ isStarOn, theme }) =>
@@ -147,7 +148,7 @@ export const CurrentBadge = styled.View`
   elevation: ${({ theme }) => theme.shadows.soft.elevation};
 `;
 
-export const CurrentBadgeText = styled.Text`
+export const CurrentBadgeText = styled(AppText)`
   font-size: 10px;
   font-weight: ${({ theme }) => theme.typography.h1.fontWeight};
   color: ${({ theme }) => theme.colors.brand.pink};
@@ -159,7 +160,7 @@ export const MapPlanet = styled.View`
   opacity: 0.85;
 `;
 
-export const PlanetEmoji = styled.Text`
+export const PlanetEmoji = styled(AppText)`
   font-size: 52px;
 `;
 
@@ -171,12 +172,12 @@ export const FinishDecoration = styled.View`
   align-items: center;
 `;
 
-export const FinishEmoji = styled.Text`
+export const FinishEmoji = styled(AppText)`
   font-size: 30px;
   margin-bottom: ${({ theme }) => theme.spacing.xs}px;
 `;
 
-export const FinishText = styled.Text`
+export const FinishText = styled(AppText)`
   font-size: ${({ theme }) => theme.typography.bodySmall.fontSize}px;
   font-weight: ${({ theme }) => theme.typography.h1.fontWeight};
   color: ${({ theme }) => theme.colors.text.secondary};

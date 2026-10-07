@@ -208,13 +208,13 @@
 //   align-items: center;
 // `;
 
-// const HeaderTitle = styled.Text`
+// const HeaderTitle = styled(AppText)`
 //   font-size: 20px;
 //   font-weight: 900;
 //   color: #29263d;
 // `;
 
-// const HeaderSubtitle = styled.Text`
+// const HeaderSubtitle = styled(AppText)`
 //   font-size: 12px;
 //   color: #68657a;
 //   margin-top: 2px;
@@ -254,6 +254,7 @@ import MapTrail from "./components/MapTrail";
 import StageNode from "./components/StageNode";
 import Mascot from "../../design-system/components/Mascot";
 import AppHeader from "../../components/AppHeader";
+import { AppText } from "../../utils/AppText";
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -264,7 +265,7 @@ type StageMapRouteProp = RouteProp<RootStackParamList, "StageMapScreen">;
 const NODE_STEP_Y = 150;
 const TOP_PADDING = 120;
 const BOTTOM_PADDING = 140;
-const NODE_SIZE = 120;
+export const NODE_SIZE = 120;
 const HORIZONTAL_SAFE_PADDING = 70;
 
 export default function StageMapScreen() {
@@ -453,13 +454,13 @@ const HeaderTitleArea = styled.View`
   align-items: center;
 `;
 
-const HeaderTitle = styled.Text`
+const HeaderTitle = styled(AppText)`
   font-size: 17px;
   font-weight: 900;
   color: #29263d;
 `;
 
-const HeaderSubtitle = styled.Text`
+const HeaderSubtitle = styled(AppText)`
   font-size: 11px;
   color: #68657a;
   margin-top: 1px;

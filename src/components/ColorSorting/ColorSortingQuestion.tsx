@@ -1,6 +1,7 @@
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import styled from "styled-components/native";
+import { AppText } from "../../utils/AppText";
 
 type ColorSortingQuestionProps = {
   text?: string;
@@ -48,7 +49,7 @@ const SpeakerCircle = styled.View`
   justify-content: center;
 `;
 
-const QuestionText = styled.Text`
+const QuestionText = styled(AppText)`
   font-size: 15px;
   font-weight: 800;
   color: #29263d;

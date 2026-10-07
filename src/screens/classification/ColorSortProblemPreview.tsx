@@ -13,6 +13,7 @@ import { ColorSortingProblem } from "../../types/colorSotringTypes";
 
 import { classificationItems } from "../../data/classification/classificationItems";
 import { RenderColorSortingObjectSvg } from "../../assets/Classification/classificationItemSvgs";
+import { AppText } from "../../utils/AppText";
 
 // ============================================================
 // COLOR LABELS
@@ -185,18 +186,18 @@ const Header = styled.View`
   margin-bottom: 20px;
 `;
 
-const Title = styled.Text`
+const Title = styled(AppText)`
   font-size: 24px;
   font-weight: 700;
 `;
 
-const Meta = styled.Text`
+const Meta = styled(AppText)`
   margin-top: 6px;
   font-size: 14px;
   color: #666;
 `;
 
-const SectionTitle = styled.Text`
+const SectionTitle = styled(AppText)`
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 18px;
@@ -225,20 +226,20 @@ const SvgArea = styled.View`
   justify-content: center;
 `;
 
-const ObjectLabel = styled.Text`
+const ObjectLabel = styled(AppText)`
   margin-top: 6px;
   font-size: 15px;
   font-weight: 600;
   text-align: center;
 `;
 
-const ObjectId = styled.Text`
+const ObjectId = styled(AppText)`
   margin-top: 4px;
   font-size: 11px;
   color: #777;
 `;
 
-const DebugText = styled.Text`
+const DebugText = styled(AppText)`
   margin-top: 2px;
   font-size: 10px;
   color: #999;
@@ -266,7 +267,7 @@ const TargetDot = styled.View`
   margin-right: 8px;
 `;
 
-const TargetLabel = styled.Text`
+const TargetLabel = styled(AppText)`
   font-size: 16px;
   font-weight: 600;
 `;
@@ -281,13 +282,13 @@ const AnswerGroup = styled.View`
   background-color: #f5f5f5;
 `;
 
-const AnswerTitle = styled.Text`
+const AnswerTitle = styled(AppText)`
   margin-bottom: 6px;
   font-size: 16px;
   font-weight: 700;
 `;
 
-const AnswerObject = styled.Text`
+const AnswerObject = styled(AppText)`
   font-size: 13px;
   color: #666;
 `;

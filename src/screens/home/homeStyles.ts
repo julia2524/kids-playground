@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { AppText } from "../../utils/AppText";
 
 // --- Container ---
 export const Container = styled.View`
@@ -31,19 +32,19 @@ export const LogoStar = styled.View`
   margin-right: ${({ theme }) => theme.spacing.sm}px;
 `;
 
-export const LogoStarText = styled.Text`
+export const LogoStarText = styled(AppText)`
   font-size: ${({ theme }) => theme.typography.h3.fontSize}px;
   color: ${({ theme }) => theme.colors.text.inverse};
 `;
 
-export const LogoText = styled.Text`
+export const LogoText = styled(AppText)`
   font-size: ${({ theme }) => theme.typography.h3.fontSize}px;
   line-height: ${({ theme }) => theme.typography.h3.lineHeight}px;
   font-weight: ${({ theme }) => theme.typography.h3.fontWeight};
   color: ${({ theme }) => theme.colors.brand.primary};
 `;
 
-export const HeaderSubText = styled.Text`
+export const HeaderSubText = styled(AppText)`
   margin-top: ${({ theme }) => theme.spacing.xs}px;
   font-size: ${({ theme }) => theme.typography.caption.fontSize}px;
   color: ${({ theme }) => theme.colors.text.secondary};
@@ -91,21 +92,21 @@ export const HeroTextArea = styled.View`
   z-index: 2;
 `;
 
-export const HeroSmall = styled.Text`
+export const HeroSmall = styled(AppText)`
   font-size: ${({ theme }) => theme.typography.bodySmall.fontSize}px;
   font-weight: ${({ theme }) => theme.typography.h1.fontWeight};
   color: ${({ theme }) => theme.colors.brand.primary};
   margin-bottom: ${({ theme }) => theme.spacing.sm}px;
 `;
 
-export const HeroTitle = styled.Text`
+export const HeroTitle = styled(AppText)`
   font-size: ${({ theme }) => theme.typography.gameQuestion.fontSize}px;
   line-height: ${({ theme }) => theme.typography.gameQuestion.lineHeight}px;
   font-weight: ${({ theme }) => theme.typography.gameQuestion.fontWeight};
   color: ${({ theme }) => theme.colors.text.primary};
 `;
 
-export const HeroDescription = styled.Text`
+export const HeroDescription = styled(AppText)`
   margin-top: ${({ theme }) => theme.spacing.sm}px;
   font-size: ${({ theme }) => theme.typography.bodySmall.fontSize}px;
   line-height: ${({ theme }) => theme.typography.bodySmall.lineHeight}px;
@@ -118,7 +119,7 @@ export const Rocket = styled.View`
   top: 24px;
 `;
 
-export const RocketText = styled.Text`
+export const RocketText = styled(AppText)`
   font-size: 70px;
 `;
 
@@ -128,7 +129,7 @@ export const HeroPlanet = styled.View`
   bottom: -12px;
 `;
 
-export const HeroPlanetText = styled.Text`
+export const HeroPlanetText = styled(AppText)`
   font-size: 62px;
 `;
 
@@ -158,7 +159,7 @@ export const FilterButton = styled.TouchableOpacity<{ active?: boolean }>`
   elevation: ${({ theme }) => theme.shadows.soft.elevation};
 `;
 
-export const FilterText = styled.Text<{ active?: boolean }>`
+export const FilterText = styled(AppText)<{ active?: boolean }>`
   margin-top: 3px;
   font-size: ${({ theme }) => theme.typography.caption.fontSize}px;
   font-weight: ${({ theme }) => theme.typography.button.fontWeight};
@@ -199,12 +200,12 @@ export const CardIllustration = styled.View`
   justify-content: center;
 `;
 
-export const IllustrationText = styled.Text<{ isSmall?: boolean }>`
+export const IllustrationText = styled(AppText)<{ isSmall?: boolean }>`
   font-size: ${(props) => (props.isSmall ? "16px" : "57px")};
   ${(props) => props.isSmall && "margin-top: -6px;"}
 `;
 
-export const IllustrationSmallText = styled.Text`
+export const IllustrationSmallText = styled(AppText)`
   margin-top: -6px;
   font-size: ${({ theme }) => theme.typography.body.fontSize}px;
 `;
@@ -220,13 +221,13 @@ export const CardBottom = styled.View`
   justify-content: space-between;
 `;
 
-export const CardTitle = styled.Text`
+export const CardTitle = styled(AppText)`
   font-size: ${({ theme }) => theme.typography.body.fontSize}px;
   font-weight: ${({ theme }) => theme.typography.h1.fontWeight};
   color: ${({ theme }) => theme.colors.text.primary};
 `;
 
-export const CardDescription = styled.Text`
+export const CardDescription = styled(AppText)`
   margin-top: 2px;
   font-size: ${({ theme }) => theme.typography.caption.fontSize}px;
   color: ${({ theme }) => theme.colors.text.secondary};
@@ -253,12 +254,12 @@ export const ComingSoon = styled.View`
   border-color: ${({ theme }) => theme.colors.border.default};
 `;
 
-export const ComingSoonEmoji = styled.Text`
+export const ComingSoonEmoji = styled(AppText)`
   font-size: ${({ theme }) => theme.typography.body.fontSize}px;
   margin-bottom: 3px;
 `;
 
-export const ComingSoonText = styled.Text`
+export const ComingSoonText = styled(AppText)`
   font-size: ${({ theme }) => theme.typography.caption.fontSize}px;
   font-weight: ${({ theme }) => theme.typography.h3.fontWeight};
   color: ${({ theme }) => theme.colors.text.secondary};
@@ -289,7 +290,7 @@ export const FooterItem = styled.TouchableOpacity`
   min-width: 60px;
 `;
 
-export const FooterText = styled.Text<{ active?: boolean }>`
+export const FooterText = styled(AppText)<{ active?: boolean }>`
   margin-top: 2px;
   font-size: ${({ theme }) => theme.typography.caption.fontSize}px;
   font-weight: ${({ theme }) => theme.typography.bodyLarge.fontWeight};

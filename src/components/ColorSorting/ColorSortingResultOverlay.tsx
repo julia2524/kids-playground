@@ -1,6 +1,7 @@
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import styled from "styled-components/native";
+import { AppText } from "../../utils/AppText";
 
 type RoundResult = "correct" | "wrong";
 
@@ -90,19 +91,19 @@ const ResultCard = styled.View`
   shadow-radius: 14px;
 `;
 
-const ResultEmoji = styled.Text`
+const ResultEmoji = styled(AppText)`
   font-size: 48px;
   margin-bottom: 8px;
 `;
 
-const ResultTitle = styled.Text`
+const ResultTitle = styled(AppText)`
   font-size: 22px;
   font-weight: 900;
   color: #332c58;
   text-align: center;
 `;
 
-const ResultDescription = styled.Text`
+const ResultDescription = styled(AppText)`
   margin-top: 8px;
   font-size: 14px;
   font-weight: 600;
@@ -111,7 +112,7 @@ const ResultDescription = styled.Text`
   line-height: 21px;
 `;
 
-const ResultStrong = styled.Text`
+const ResultStrong = styled(AppText)`
   font-weight: 900;
   color: #6657b8;
 `;
@@ -133,7 +134,7 @@ const ResultButton = styled.TouchableOpacity`
   shadow-radius: 6px;
 `;
 
-const ResultButtonText = styled.Text`
+const ResultButtonText = styled(AppText)`
   font-size: 16px;
   font-weight: 900;
   color: #ffffff;

@@ -20,6 +20,7 @@ import ColorSortingFooter from "../../components/ColorSorting/ColorSortingFooter
 import ColorSortingTestControls from "../../components/ColorSorting/ColorSortingTestControls";
 import ColorSortingResultOverlay from "../../components/ColorSorting/ColorSortingResultOverlay";
 import useColorSortingGame from "../../hooks/ColorSorting/useColorSortingGame";
+import { AppText } from "../../utils/AppText";
 
 // ============================================================
 // Types
@@ -185,7 +186,7 @@ const Container = styled.View`
   padding-bottom: 8px;
 `;
 
-const ErrorText = styled.Text`
+const ErrorText = styled(AppText)`
   font-size: 15px;
   font-weight: 800;
 

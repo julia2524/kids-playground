@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
+import { AppText } from "../../utils/AppText";
 
 type ColorSortingFooterProps = {
   totalRounds: number;
@@ -70,7 +71,7 @@ const RoundBadge = styled.View`
   justify-content: center;
 `;
 
-const RoundBadgeText = styled.Text`
+const RoundBadgeText = styled(AppText)`
   font-size: 11px;
   font-weight: 800;
   color: #64748b;

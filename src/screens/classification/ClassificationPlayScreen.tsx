@@ -308,7 +308,7 @@ import { Text, View } from "react-native";
 //   elevation: 2;
 // `;
 
-// const TitleText = styled.Text`
+// const TitleText = styled(AppText)`
 //   font-size: 20px;
 //   font-weight: 800;
 //   color: #29263d;
@@ -342,7 +342,7 @@ import { Text, View } from "react-native";
 //   justify-content: center;
 // `;
 
-// const QuestionText = styled.Text`
+// const QuestionText = styled(AppText)`
 //   flex: 1;
 //   font-size: 19px;
 //   font-weight: 900;
@@ -378,7 +378,7 @@ import { Text, View } from "react-native";
 //   opacity: ${(props) => (props.isSelected ? 0.25 : 1)};
 // `;
 
-// const QuantityText = styled.Text`
+// const QuantityText = styled(AppText)`
 //   margin-top: 2px;
 //   font-size: 12px;
 //   font-weight: 800;
@@ -408,7 +408,7 @@ import { Text, View } from "react-native";
 //   opacity: 0.8;
 // `;
 
-// const EmptyText = styled.Text`
+// const EmptyText = styled(AppText)`
 //   font-size: 14px;
 //   font-weight: 700;
 //   color: #9d96ca;
@@ -435,7 +435,7 @@ import { Text, View } from "react-native";
 //   elevation: 2;
 // `;
 
-// const MessageText = styled.Text`
+// const MessageText = styled(AppText)`
 //   margin-top: 6px;
 //   text-align: center;
 //   font-size: 15px;
@@ -476,7 +476,7 @@ import { Text, View } from "react-native";
 //   border-radius: 20px;
 // `;
 
-// const RoundBadgeText = styled.Text`
+// const RoundBadgeText = styled(AppText)`
 //   font-size: 14px;
 //   font-weight: 900;
 //   color: #29263d;

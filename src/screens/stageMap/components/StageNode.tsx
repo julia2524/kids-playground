@@ -6,6 +6,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import ProgressStar from "../../../components/stageMap/ProgressStar";
 import ProgressSun from "../../../components/stageMap/ProgressSun";
 import ProgressRainbow from "../../../components/stageMap/ProgressRainbow";
+import { AppText } from "../../../utils/AppText";
 
 interface StageNodeProps {
   gameType: string;
@@ -137,7 +138,7 @@ const LockOverlay = styled.View`
   align-items: center;
 `;
 
-const StageNumber = styled.Text`
+const StageNumber = styled(AppText)`
   position: absolute;
   font-size: 28px;
   font-weight: 900;

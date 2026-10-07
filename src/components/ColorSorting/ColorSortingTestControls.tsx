@@ -2,6 +2,7 @@ import React from "react";
 import { Text } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import styled from "styled-components/native";
+import { AppText } from "../../utils/AppText";
 
 type ColorSortingTestControlsProps = {
   level: number;
@@ -94,7 +95,7 @@ const TestGroup = styled.View`
   gap: 5px;
 `;
 
-const TestLabel = styled.Text`
+const TestLabel = styled(AppText)`
   font-size: 8px;
   font-weight: 900;
   color: #aaa3c2;
@@ -120,7 +121,7 @@ const TestSmallButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-const TestValue = styled.Text`
+const TestValue = styled(AppText)`
   min-width: 30px;
   text-align: center;
   font-size: 10px;

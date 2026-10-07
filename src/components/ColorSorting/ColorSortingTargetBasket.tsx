@@ -10,6 +10,7 @@ import {
   ColorSortingObject,
   ColorSortingTarget,
 } from "../../types/colorSotringTypes";
+import { AppText } from "../../utils/AppText";
 
 type ColorSortingTargetBasketProps = {
   target: ColorSortingTarget;
@@ -136,7 +137,7 @@ const BasketHeader = styled.View`
   padding-right: 6px;
 `;
 
-const BasketTitle = styled.Text<{
+const BasketTitle = styled(AppText)<{
   textColor: string;
 }>`
   font-size: 13px;
