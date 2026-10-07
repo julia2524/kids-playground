@@ -57,6 +57,7 @@ export default function ColorSortingPlayScreen() {
     earnedStars,
     selectedObjectId,
     placedObjects,
+    wrongObjectIds, // 추가
     roundResult,
 
     allPlacedIds,
@@ -145,7 +146,7 @@ export default function ColorSortingPlayScreen() {
         <ColorSortingObjectBoard
           objects={problem.objects}
           selectedObjectId={selectedObjectId}
-          placedObjectIds={allPlacedIds}
+          placedObjectIds={[...allPlacedIds, ...wrongObjectIds]} // 변경
           onObjectPress={handleSelectObject}
           footerRef={footerRef}
           getTargetRects={getTargetRects}
