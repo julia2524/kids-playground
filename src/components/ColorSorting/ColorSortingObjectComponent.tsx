@@ -115,6 +115,8 @@ export default function ColorSortingObjectComponent({
   // 정답 폭죽 (0 → 1)
   const burst = useRef(new Animated.Value(0)).current;
 
+  const rotateAnim = useRef(new Animated.Value(0)).current;
+
   // ==========================================================
   // Refs
   // ==========================================================
@@ -261,31 +263,61 @@ export default function ColorSortingObjectComponent({
   };
 
   // ==========================================================
-  // 오답: 정답이 아니라는 느낌으로 옅어지며 사라짐
+  // 오답: 톡! 펑! 비눗방울 터지듯 순식간에 팝업 삭제
   // ==========================================================
-
+  // ==========================================================
+  // 오답: 화면 밖으로 팅~! 튕겨 나가며 떨어지기
+  // ==========================================================
   const fadeAway = () => {
     busyRef.current = true;
+    rotateAnim.setValue(0);
 
-    Animated.parallel([
-      Animated.timing(fade, {
-        toValue: 0,
-        duration: 550,
-        easing: Easing.inOut(Easing.quad),
+    const currentX = posRef.current.x;
+    const currentY = posRef.current.y;
+
+    // 1. 회전 애니메이션 동시 진행 (살짝 갸우뚱하며 튕김)
+    Animated.timing(rotateAnim, {
+      toValue: 1,
+      duration: 450,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start();
+
+    // 2. 통~ 튀었다가 화면 밑으로 떨어지기
+    Animated.sequence([
+      // [1단계] 살짝 위로 튀어 오름 (Bounce Up)
+      Animated.timing(pan, {
+        toValue: {
+          x: currentX,
+          y: currentY - 40, // 현재 위치보다 40px 위로 팅!
+        },
+        duration: 120,
+        easing: Easing.out(Easing.quad),
         useNativeDriver: true,
       }),
-
-      Animated.timing(scale, {
-        toValue: 0.85,
-        duration: 550,
-        easing: Easing.inOut(Easing.quad),
-        useNativeDriver: true,
-      }),
+      // [2단계] 화면 아래로 빠르게 하강 (Drop Down)
+      Animated.parallel([
+        Animated.timing(pan, {
+          toValue: {
+            x: currentX, // 필요 시 약간 옆으로 비스듬히(currentX + 30) 튕기게 할 수도 있습니다.
+            y: currentY + 700, // 화면 밑으로 완전히 튕겨 나감
+          },
+          duration: 350,
+          easing: Easing.in(Easing.quad), // 가속도 붙으며 떨어짐
+          useNativeDriver: true,
+        }),
+        // 떨어진 후 스르륵 페이드
+        Animated.timing(fade, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]),
     ]).start(() => {
-      // fade는 0으로 유지 (isPlaced가 true가 되면 숨김 상태가 유지되고,
-      // 다음 라운드에서 isPlaced가 false로 돌아오면 위 useEffect가 복구)
+      // 애니메이션 완료 후 원상복구 및 오답 콜백 실행
       pan.setValue({ x: 0, y: 0 });
       scale.setValue(1);
+      rotateAnim.setValue(0);
 
       latest.current.onWrongDrop?.(latest.current.objectId);
 
@@ -293,10 +325,40 @@ export default function ColorSortingObjectComponent({
       latest.current.onDragEnd();
     });
   };
+  // const fadeAway = () => {
+  //   busyRef.current = true;
+  //   Animated.sequence([
+  //     // 1. 깜짝 놀라듯 아주 짧게 살짝 커짐 (약 0.08초)
+  //     Animated.timing(scale, {
+  //       toValue: 1.2,
+  //       duration: 90,
+  //       easing: Easing.out(Easing.ease),
+  //       useNativeDriver: true,
+  //     }),
+  //     // 2. 쏙 오므라들며 삭제
+  //     Animated.parallel([
+  //       Animated.timing(scale, {
+  //         toValue: 0.1,
+  //         duration: 110,
+  //         useNativeDriver: true,
+  //       }),
+  //       Animated.timing(fade, {
+  //         toValue: 0,
+  //         duration: 100,
+  //         useNativeDriver: true,
+  //       }),
+  //     ]),
+  //   ]).start(() => {
+  //     // 애니메이션 종료 후 상태값 초기화 및 콜백
+  //     pan.setValue({ x: 0, y: 0 });
+  //     scale.setValue(1);
 
-  // ==========================================================
-  // Drop 판정
-  // ==========================================================
+  //     latest.current.onWrongDrop?.(latest.current.objectId);
+
+  //     busyRef.current = false;
+  //     latest.current.onDragEnd();
+  //   });
+  // };
 
   const handleRelease = () => {
     const origin = originRectRef.current;
@@ -466,6 +528,12 @@ export default function ColorSortingObjectComponent({
     );
   });
 
+  // rotate interpolate 설정
+  const spin = rotateAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0deg", "-35deg"], // 왼쪽으로 살짝 돌면서 튕겨나감
+  });
+
   // ==========================================================
   // Render
   // ==========================================================
@@ -476,7 +544,7 @@ export default function ColorSortingObjectComponent({
       style={[
         {
           flex: 1,
-          transform: pan.getTranslateTransform(),
+          transform: [...pan.getTranslateTransform(), { rotate: spin }],
         },
 
         // 드래그 중인 오브젝트만 zIndex + elevation을 "같이" 올린다
