@@ -1,17 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  Image,
-  ImageBackground,
-  ScrollView,
-  StyleSheet,
-  View,
-} from "react-native";
-import styled from "styled-components/native";
+import { Image, ImageBackground, ScrollView, View } from "react-native";
 
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -26,35 +16,39 @@ import GuardianNoticeModal from "../../components/GuardianNotice/GuardianNoticeM
 import { useLanguage } from "../../context/LangaugeContext";
 import { getGuardianNoticeEnabled } from "../../components/GuardianNotice/getGuardianNoticeEnabled";
 import { GameType } from "../../types/game";
-import { LinearGradient } from "expo-linear-gradient";
 import { ASSETS } from "../../assets/assets";
-import Mascot from "../../design-system/components/Mascot";
-import { AppText } from "../../utils/AppText";
+import {
+  ArrowCircle,
+  BottomTab,
+  CardBottom,
+  CardDescription,
+  CardImage,
+  CardTitle,
+  Container,
+  FilterButton,
+  FilterRow,
+  FilterText,
+  GameCard,
+  GameGrid,
+  Header,
+  HeaderSubText,
+  HeaderTitleGroup,
+  HeroCard,
+  HeroDescription,
+  HeroTextArea,
+  HeroTitle,
+  LogoRow,
+  LogoText,
+  TabItem,
+  TabLabel,
+} from "./homeStyles";
+import { COLORS } from "../../design-system/tokens/colors";
+// ⭐ 단일 통합 색상 테마 import
 
 type HomeNavigationProp = NativeStackNavigationProp<RootStackParamList, "Home">;
 
 // 앱 실행 중 한 번만 보호자 안내
 let hasShownGuardianNoticeThisSession = false;
-
-const COLORS = {
-  purple: "#7C5CFF",
-  blue: "#4D8DFF",
-  pink: "#FF6FAE",
-  yellow: "#FFD95A",
-  mint: "#55D6BE",
-
-  background: "#F5F2FF",
-  white: "#FFFFFF",
-
-  text: "#29263D",
-  secondaryText: "#68657A",
-  muted: "#9C99AA",
-
-  softBlue: "#EEF6FF",
-  softPink: "#FFF1F7",
-  softYellow: "#FFF8DD",
-  softMint: "#E9FBF6",
-};
 
 export default function HomeScreen() {
   const navigation = useNavigation<HomeNavigationProp>();
@@ -336,372 +330,3 @@ export default function HomeScreen() {
     </ImageBackground>
   );
 }
-
-// ==================================================
-// Styled Components
-// ==================================================
-
-const Container = styled(SafeAreaView)`
-  flex: 1;
-  /* background-color: ${COLORS.background}; */
-`;
-
-// --- Header ---
-const Header = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-  margin-left: 18px;
-  margin-right: 18px;
-  margin-bottom: 18px;
-`;
-
-const HeaderTitleGroup = styled.View``;
-
-const LogoRow = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
-
-const LogoStar = styled.View`
-  width: 38px;
-  height: 38px;
-  border-radius: 14px;
-  background-color: ${COLORS.yellow};
-  justify-content: center;
-  align-items: center;
-  margin-right: 9px;
-`;
-
-const LogoStarText = styled(AppText)`
-  font-size: 22px;
-  color: ${COLORS.white};
-`;
-
-const LogoText = styled(AppText)`
-  font-size: 20px;
-  line-height: 19px;
-  font-weight: 900;
-  color: ${COLORS.purple};
-`;
-
-const HeaderSubText = styled(AppText)`
-  font-size: 13px;
-  color: ${COLORS.purple};
-`;
-
-const IconButton = styled.TouchableOpacity`
-  width: 48px;
-  height: 48px;
-  border-radius: 24px;
-  background-color: ${COLORS.purple};
-  align-items: center;
-  justify-content: center;
-  shadow-color: #000;
-  shadow-opacity: 0.08;
-  shadow-radius: 8px;
-  shadow-offset: 0px 3px;
-  elevation: 3;
-`;
-
-// --- Hero ---
-const HeroCard = styled.View`
-  margin: 0px 18px 20px;
-`;
-
-const HeroTextArea = styled.View`
-  width: 68%;
-  z-index: 2;
-`;
-
-const HeroTitle = styled(AppText)`
-  font-size: 25px;
-  line-height: 32px;
-  font-weight: 900;
-  color: ${COLORS.text};
-`;
-
-const HeroDescription = styled(AppText)`
-  font-size: 14px;
-  line-height: 20px;
-  color: ${COLORS.secondaryText};
-`;
-
-// --- Filter ---
-const FilterRow = styled.View`
-  flex-direction: row;
-  gap: 8px;
-  margin-top: 40px;
-  margin-left: 18px;
-  margin-right: 18px;
-`;
-
-const FilterButton = styled.TouchableOpacity<{ active?: boolean }>`
-  flex: 1;
-  min-height: 52px;
-  border-radius: 18px;
-  background-color: ${(props) => (props.active ? COLORS.purple : COLORS.white)};
-  align-items: center;
-  justify-content: center;
-  padding-horizontal: 4px;
-  shadow-color: #000;
-  shadow-opacity: 0.06;
-  shadow-radius: 6px;
-  shadow-offset: 0px 2px;
-  elevation: 2;
-`;
-
-const FilterText = styled(AppText)<{ active?: boolean }>`
-  margin-top: 3px;
-  font-size: 11px;
-  font-weight: 800;
-  color: ${(props) => (props.active ? COLORS.white : COLORS.secondaryText)};
-`;
-
-// --- Game Grid & Cards ---
-const GameGrid = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  row-gap: 14px;
-`;
-
-const GameCard = styled.TouchableOpacity<{ bgColor: string }>`
-  width: 48.2%;
-  height: 190px;
-  border-radius: 25px;
-  overflow: hidden;
-  padding: 13px;
-  background-color: ${(props) => props.bgColor};
-  border-width: 2px;
-  border-color: ${COLORS.white};
-  shadow-color: #000;
-  shadow-opacity: 0.09;
-  shadow-radius: 9px;
-  shadow-offset: 0px 4px;
-  elevation: 3;
-`;
-
-const CardIllustration = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
-
-const IllustrationText = styled(AppText)<{ isSmall?: boolean }>`
-  font-size: ${(props) => (props.isSmall ? "16px" : "57px")};
-  margin-top: ${(props) => (props.isSmall ? "-6px" : "0px")};
-`;
-
-const IllustrationSmallText = styled(AppText)`
-  margin-top: -6px;
-  font-size: 16px;
-`;
-
-const CardBottom = styled.View`
-  min-height: 58px;
-  border-radius: 17px;
-  background-color: ${COLORS.white};
-  padding-horizontal: 11px;
-  padding-vertical: 8px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const CardTitle = styled(AppText)`
-  font-size: 15px;
-  font-weight: 900;
-  color: ${COLORS.text};
-`;
-
-const CardDescription = styled(AppText)`
-  margin-top: 2px;
-  font-size: 11px;
-  color: ${COLORS.secondaryText};
-`;
-
-const ArrowCircle = styled.View`
-  width: 31px;
-  height: 31px;
-  border-radius: 16px;
-  background-color: #f7f7fb;
-  justify-content: center;
-  align-items: center;
-`;
-
-// --- Coming Soon ---
-const ComingSoon = styled.View`
-  margin-top: 18px;
-  min-height: 58px;
-  border-radius: 22px;
-  background-color: ${COLORS.white};
-  align-items: center;
-  justify-content: center;
-  border-width: 1px;
-  border-color: #e8e4f5;
-`;
-
-const ComingSoonEmoji = styled(AppText)`
-  font-size: 16px;
-  margin-bottom: 3px;
-`;
-
-const ComingSoonText = styled(AppText)`
-  font-size: 13px;
-  font-weight: 800;
-  color: ${COLORS.secondaryText};
-`;
-
-// --- Footer ---
-const Footer = styled.View`
-  margin-top: 20px;
-  height: 68px;
-  border-radius: 25px;
-  background-color: ${COLORS.white};
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  shadow-color: #000;
-  shadow-opacity: 0.07;
-  shadow-radius: 8px;
-  shadow-offset: 0px 3px;
-  elevation: 3;
-`;
-
-const FooterItem = styled.TouchableOpacity`
-  align-items: center;
-  justify-content: center;
-  min-width: 60px;
-`;
-
-const FooterText = styled(AppText)<{ active?: boolean }>`
-  margin-top: 2px;
-  font-size: 11px;
-  font-weight: 700;
-  color: ${(props) => (props.active ? COLORS.purple : COLORS.muted)};
-`;
-
-// --- Decoration Elements ---
-const Star = styled.View<{ starType: "star1" | "star2" | "star3" }>`
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  border-radius: 4px;
-  opacity: 0.8;
-
-  ${(props) =>
-    props.starType === "star1"
-      ? `
-        top: 110px;
-        right: 26px;
-        background-color: ${COLORS.yellow};
-      `
-      : ""}
-
-  ${(props) =>
-    props.starType === "star2"
-      ? `
-        top: 290px;
-        left: 13px;
-        background-color: ${COLORS.pink};
-      `
-      : ""}
-
-  ${(props) =>
-    props.starType === "star3"
-      ? `
-        top: 540px;
-        right: 12px;
-        background-color: ${COLORS.mint};
-      `
-      : ""}
-`;
-
-const DecorationPlanet = styled.View<{ planetType: "planet1" | "planet2" }>`
-  position: absolute;
-  border-radius: 999px;
-  opacity: 0.25;
-
-  ${(props) =>
-    props.planetType === "planet1"
-      ? `
-        width: 100px;
-        height: 100px;
-        right: -48px;
-        top: 170px;
-        background-color: ${COLORS.blue};
-      `
-      : ""}
-
-  ${(props) =>
-    props.planetType === "planet2"
-      ? `
-        width: 70px;
-        height: 70px;
-        left: -35px;
-        top: 630px;
-        background-color: ${COLORS.pink};
-      `
-      : ""}
-`;
-
-// const BottomTab = styled.View`
-//   position: absolute;
-//   bottom: 0;
-//   left: 0;
-//   right: 0;
-//   height: 70px;
-//   background-color: ${COLORS.white};
-//   flex-direction: row;
-//   justify-content: space-around;
-//   align-items: center;
-//   border-top-left-radius: 24px;
-//   border-top-right-radius: 24px;
-//   shadow-color: #000;
-//   shadow-opacity: 0.08;
-//   shadow-radius: 10px;
-//   elevation: 8;
-// `;
-// Styled Components
-const BottomTab = styled.View<{ bottomInset: number }>`
-  position: absolute;
-  /* ⭐ 바닥에서 떠 있게 지정 (안드로이드 내장키 높이 + 여유 8px) */
-  bottom: ${(props) => Math.max(props.bottomInset, 12) + 8}px;
-  left: 16px;
-  right: 16px;
-
-  height: 64px;
-  background-color: ${COLORS.white};
-
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-
-  /* ⭐ 동글동글한 알약/캡슐 형태 */
-  border-radius: 32px;
-
-  /* 부드러운 그림자 효과 */
-  shadow-color: #5d5193;
-  shadow-opacity: 0.12;
-  shadow-radius: 12px;
-  shadow-offset: 0px 4px;
-  elevation: 6;
-`;
-const TabItem = styled.TouchableOpacity<{ active?: boolean }>`
-  align-items: center;
-  justify-content: center;
-`;
-
-const TabLabel = styled(AppText)<{ active?: boolean }>`
-  font-size: 11px;
-  font-weight: 800;
-  color: ${(props) => (props.active ? COLORS.purple : COLORS.muted)};
-  margin-top: 3px;
-`;
-
-const CardImage = styled(Image)`
-  flex: 1;
-  width: 100%;
-`;

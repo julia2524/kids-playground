@@ -1,10 +1,16 @@
-import styled from "styled-components/native";
-import { AppText } from "../../utils/AppText";
+// ==================================================
+// Styled Components
+// ==================================================
 
-// --- Container ---
-export const Container = styled.View`
+import { SafeAreaView } from "react-native-safe-area-context";
+import styled from "styled-components/native";
+
+import { AppText } from "../../utils/AppText";
+import { Image } from "react-native";
+import { COLORS } from "../../design-system/tokens/colors";
+
+export const Container = styled(SafeAreaView)`
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.background.primary};
 `;
 
 // --- Header ---
@@ -12,7 +18,10 @@ export const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: ${({ theme }) => theme.spacing.lg}px;
+  margin-top: 20px;
+  margin-left: 18px;
+  margin-right: 18px;
+  margin-bottom: 18px;
 `;
 
 export const HeaderTitleGroup = styled.View``;
@@ -25,66 +34,47 @@ export const LogoRow = styled.View`
 export const LogoStar = styled.View`
   width: 38px;
   height: 38px;
-  border-radius: ${({ theme }) => theme.radius.md}px;
-  background-color: ${({ theme }) => theme.colors.brand.yellow};
+  border-radius: 14px;
+  background-color: ${COLORS.yellow};
   justify-content: center;
   align-items: center;
-  margin-right: ${({ theme }) => theme.spacing.sm}px;
+  margin-right: 9px;
 `;
 
 export const LogoStarText = styled(AppText)`
-  font-size: ${({ theme }) => theme.typography.h3.fontSize}px;
-  color: ${({ theme }) => theme.colors.text.inverse};
+  font-size: 22px;
+  color: ${COLORS.white};
 `;
 
 export const LogoText = styled(AppText)`
-  font-size: ${({ theme }) => theme.typography.h3.fontSize}px;
-  line-height: ${({ theme }) => theme.typography.h3.lineHeight}px;
-  font-weight: ${({ theme }) => theme.typography.h3.fontWeight};
-  color: ${({ theme }) => theme.colors.brand.primary};
+  font-size: 20px;
+  line-height: 19px;
+  font-weight: 900;
+  color: ${COLORS.purple};
 `;
 
 export const HeaderSubText = styled(AppText)`
-  margin-top: ${({ theme }) => theme.spacing.xs}px;
-  font-size: ${({ theme }) => theme.typography.caption.fontSize}px;
-  color: ${({ theme }) => theme.colors.text.secondary};
+  font-size: 13px;
+  color: ${COLORS.purple};
 `;
 
 export const IconButton = styled.TouchableOpacity`
   width: 48px;
   height: 48px;
-  border-radius: ${({ theme }) => theme.radius.pill}px;
-  background-color: ${({ theme }) => theme.colors.background.surface};
+  border-radius: 24px;
+  background-color: ${COLORS.purple};
   align-items: center;
   justify-content: center;
-
-  /* Soft Shadow */
-  shadow-color: ${({ theme }) => theme.shadows.soft.shadowColor};
-  shadow-offset: ${({ theme }) => theme.shadows.soft.shadowOffset.width}px
-    ${({ theme }) => theme.shadows.soft.shadowOffset.height}px;
-  shadow-opacity: ${({ theme }) => theme.shadows.soft.shadowOpacity};
-  shadow-radius: ${({ theme }) => theme.shadows.soft.shadowRadius}px;
-  elevation: ${({ theme }) => theme.shadows.soft.elevation};
+  shadow-color: #000;
+  shadow-opacity: 0.08;
+  shadow-radius: 8px;
+  shadow-offset: 0px 3px;
+  elevation: 3;
 `;
 
 // --- Hero ---
 export const HeroCard = styled.View`
-  min-height: 185px;
-  border-radius: ${({ theme }) => theme.radius.xxl}px;
-  background-color: ${({ theme }) => theme.colors.background.surface};
-  padding: ${({ theme }) => theme.spacing.xl}px;
-  margin-bottom: ${({ theme }) => theme.spacing.lg}px;
-  overflow: hidden;
-  border-width: 2px;
-  border-color: ${({ theme }) => theme.colors.border.dashed};
-
-  /* Card Shadow */
-  shadow-color: ${({ theme }) => theme.colors.brand.primary};
-  shadow-offset: ${({ theme }) => theme.shadows.card.shadowOffset.width}px
-    ${({ theme }) => theme.shadows.card.shadowOffset.height}px;
-  shadow-opacity: 0.12; /* Hero 특화 커스텀 투명도 유지 */
-  shadow-radius: ${({ theme }) => theme.shadows.card.shadowRadius}px;
-  elevation: ${({ theme }) => theme.shadows.card.elevation};
+  margin: 0px 18px 20px;
 `;
 
 export const HeroTextArea = styled.View`
@@ -92,79 +82,48 @@ export const HeroTextArea = styled.View`
   z-index: 2;
 `;
 
-export const HeroSmall = styled(AppText)`
-  font-size: ${({ theme }) => theme.typography.bodySmall.fontSize}px;
-  font-weight: ${({ theme }) => theme.typography.h1.fontWeight};
-  color: ${({ theme }) => theme.colors.brand.primary};
-  margin-bottom: ${({ theme }) => theme.spacing.sm}px;
-`;
-
 export const HeroTitle = styled(AppText)`
-  font-size: ${({ theme }) => theme.typography.gameQuestion.fontSize}px;
-  line-height: ${({ theme }) => theme.typography.gameQuestion.lineHeight}px;
-  font-weight: ${({ theme }) => theme.typography.gameQuestion.fontWeight};
-  color: ${({ theme }) => theme.colors.text.primary};
+  font-size: 25px;
+  line-height: 32px;
+  font-weight: 900;
+  color: ${COLORS.text};
 `;
 
 export const HeroDescription = styled(AppText)`
-  margin-top: ${({ theme }) => theme.spacing.sm}px;
-  font-size: ${({ theme }) => theme.typography.bodySmall.fontSize}px;
-  line-height: ${({ theme }) => theme.typography.bodySmall.lineHeight}px;
-  color: ${({ theme }) => theme.colors.text.secondary};
-`;
-
-export const Rocket = styled.View`
-  position: absolute;
-  right: 13px;
-  top: 24px;
-`;
-
-export const RocketText = styled(AppText)`
-  font-size: 70px;
-`;
-
-export const HeroPlanet = styled.View`
-  position: absolute;
-  right: 13px;
-  bottom: -12px;
-`;
-
-export const HeroPlanetText = styled(AppText)`
-  font-size: 62px;
+  font-size: 14px;
+  line-height: 20px;
+  color: ${COLORS.secondaryText};
 `;
 
 // --- Filter ---
 export const FilterRow = styled.View`
   flex-direction: row;
-  gap: ${({ theme }) => theme.spacing.sm}px;
-  margin-bottom: ${({ theme }) => theme.spacing.lg}px;
+  gap: 8px;
+  margin-top: 40px;
+  margin-left: 18px;
+  margin-right: 18px;
 `;
 
 export const FilterButton = styled.TouchableOpacity<{ active?: boolean }>`
   flex: 1;
   min-height: 52px;
-  border-radius: ${({ theme }) => theme.radius.xl}px;
-  background-color: ${({ active, theme }) =>
-    active ? theme.colors.button.primary : theme.colors.background.surface};
+  border-radius: 18px;
+  background-color: ${(props) => (props.active ? COLORS.purple : COLORS.white)};
   align-items: center;
   justify-content: center;
-  padding-horizontal: ${({ theme }) => theme.spacing.xs}px;
-
-  /* Soft Shadow */
-  shadow-color: ${({ theme }) => theme.shadows.soft.shadowColor};
-  shadow-offset: ${({ theme }) => theme.shadows.soft.shadowOffset.width}px
-    ${({ theme }) => theme.shadows.soft.shadowOffset.height}px;
-  shadow-opacity: ${({ theme }) => theme.shadows.soft.shadowOpacity};
-  shadow-radius: ${({ theme }) => theme.shadows.soft.shadowRadius}px;
-  elevation: ${({ theme }) => theme.shadows.soft.elevation};
+  padding-horizontal: 4px;
+  shadow-color: #000;
+  shadow-opacity: 0.06;
+  shadow-radius: 6px;
+  shadow-offset: 0px 2px;
+  elevation: 2;
 `;
 
 export const FilterText = styled(AppText)<{ active?: boolean }>`
   margin-top: 3px;
-  font-size: ${({ theme }) => theme.typography.caption.fontSize}px;
-  font-weight: ${({ theme }) => theme.typography.button.fontWeight};
-  color: ${({ active, theme }) =>
-    active ? theme.colors.text.inverse : theme.colors.text.secondary};
+  font-size: 11px;
+  font-weight: 800;
+  color: ${(props) => (props.active ? COLORS.white : COLORS.secondaryText)};
 `;
 
 // --- Game Grid & Cards ---
@@ -172,26 +131,23 @@ export const GameGrid = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  row-gap: ${({ theme }) => theme.spacing.md}px;
+  row-gap: 14px;
 `;
 
 export const GameCard = styled.TouchableOpacity<{ bgColor: string }>`
   width: 48.2%;
   height: 190px;
-  border-radius: ${({ theme }) => theme.radius.xxl}px;
+  border-radius: 25px;
   overflow: hidden;
-  padding: ${({ theme }) => theme.spacing.md}px;
+  padding: 13px;
   background-color: ${(props) => props.bgColor};
   border-width: 2px;
-  border-color: ${({ theme }) => theme.colors.background.surface};
-
-  /* Card Shadow */
-  shadow-color: ${({ theme }) => theme.shadows.card.shadowColor};
-  shadow-offset: ${({ theme }) => theme.shadows.card.shadowOffset.width}px
-    ${({ theme }) => theme.shadows.card.shadowOffset.height}px;
-  shadow-opacity: ${({ theme }) => theme.shadows.card.shadowOpacity};
-  shadow-radius: ${({ theme }) => theme.shadows.card.shadowRadius}px;
-  elevation: ${({ theme }) => theme.shadows.card.elevation};
+  border-color: ${COLORS.white};
+  shadow-color: #000;
+  shadow-opacity: 0.09;
+  shadow-radius: 9px;
+  shadow-offset: 0px 4px;
+  elevation: 3;
 `;
 
 export const CardIllustration = styled.View`
@@ -202,86 +158,83 @@ export const CardIllustration = styled.View`
 
 export const IllustrationText = styled(AppText)<{ isSmall?: boolean }>`
   font-size: ${(props) => (props.isSmall ? "16px" : "57px")};
-  ${(props) => props.isSmall && "margin-top: -6px;"}
+  margin-top: ${(props) => (props.isSmall ? "-6px" : "0px")};
 `;
 
 export const IllustrationSmallText = styled(AppText)`
   margin-top: -6px;
-  font-size: ${({ theme }) => theme.typography.body.fontSize}px;
+  font-size: 16px;
 `;
 
 export const CardBottom = styled.View`
   min-height: 58px;
-  border-radius: ${({ theme }) => theme.radius.lg}px;
-  background-color: ${({ theme }) => theme.colors.background.surface};
-  padding-horizontal: ${({ theme }) => theme.spacing.md}px;
-  padding-vertical: ${({ theme }) => theme.spacing.sm}px;
+  border-radius: 17px;
+  background-color: ${COLORS.white};
+  padding-horizontal: 11px;
+  padding-vertical: 8px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 `;
 
 export const CardTitle = styled(AppText)`
-  font-size: ${({ theme }) => theme.typography.body.fontSize}px;
-  font-weight: ${({ theme }) => theme.typography.h1.fontWeight};
-  color: ${({ theme }) => theme.colors.text.primary};
+  font-size: 15px;
+  font-weight: 900;
+  color: ${COLORS.text};
 `;
 
 export const CardDescription = styled(AppText)`
   margin-top: 2px;
-  font-size: ${({ theme }) => theme.typography.caption.fontSize}px;
-  color: ${({ theme }) => theme.colors.text.secondary};
+  font-size: 11px;
+  color: ${COLORS.secondaryText};
 `;
 
 export const ArrowCircle = styled.View`
   width: 31px;
   height: 31px;
-  border-radius: ${({ theme }) => theme.radius.lg}px;
-  background-color: ${({ theme }) => theme.colors.background.secondary};
+  border-radius: 16px;
+  background-color: #f7f7fb;
   justify-content: center;
   align-items: center;
 `;
 
 // --- Coming Soon ---
 export const ComingSoon = styled.View`
-  margin-top: ${({ theme }) => theme.spacing.lg}px;
+  margin-top: 18px;
   min-height: 58px;
-  border-radius: ${({ theme }) => theme.radius.xl}px;
-  background-color: ${({ theme }) => theme.colors.background.surface};
+  border-radius: 22px;
+  background-color: ${COLORS.white};
   align-items: center;
   justify-content: center;
   border-width: 1px;
-  border-color: ${({ theme }) => theme.colors.border.default};
+  border-color: #e8e4f5;
 `;
 
 export const ComingSoonEmoji = styled(AppText)`
-  font-size: ${({ theme }) => theme.typography.body.fontSize}px;
+  font-size: 16px;
   margin-bottom: 3px;
 `;
 
 export const ComingSoonText = styled(AppText)`
-  font-size: ${({ theme }) => theme.typography.caption.fontSize}px;
-  font-weight: ${({ theme }) => theme.typography.h3.fontWeight};
-  color: ${({ theme }) => theme.colors.text.secondary};
+  font-size: 13px;
+  font-weight: 800;
+  color: ${COLORS.secondaryText};
 `;
 
 // --- Footer ---
 export const Footer = styled.View`
-  margin-top: ${({ theme }) => theme.spacing.xl}px;
+  margin-top: 20px;
   height: 68px;
-  border-radius: ${({ theme }) => theme.radius.xxl}px;
-  background-color: ${({ theme }) => theme.colors.background.surface};
+  border-radius: 25px;
+  background-color: ${COLORS.white};
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-
-  /* Floating Shadow */
-  shadow-color: ${({ theme }) => theme.shadows.floating.shadowColor};
-  shadow-offset: ${({ theme }) => theme.shadows.floating.shadowOffset.width}px
-    ${({ theme }) => theme.shadows.floating.shadowOffset.height}px;
-  shadow-opacity: ${({ theme }) => theme.shadows.floating.shadowOpacity};
-  shadow-radius: ${({ theme }) => theme.shadows.floating.shadowRadius}px;
-  elevation: ${({ theme }) => theme.shadows.floating.elevation};
+  shadow-color: #000;
+  shadow-opacity: 0.07;
+  shadow-radius: 8px;
+  shadow-offset: 0px 3px;
+  elevation: 3;
 `;
 
 export const FooterItem = styled.TouchableOpacity`
@@ -292,10 +245,9 @@ export const FooterItem = styled.TouchableOpacity`
 
 export const FooterText = styled(AppText)<{ active?: boolean }>`
   margin-top: 2px;
-  font-size: ${({ theme }) => theme.typography.caption.fontSize}px;
-  font-weight: ${({ theme }) => theme.typography.bodyLarge.fontWeight};
-  color: ${({ active, theme }) =>
-    active ? theme.colors.brand.primary : theme.colors.text.muted};
+  font-size: 11px;
+  font-weight: 700;
+  color: ${(props) => (props.active ? COLORS.purple : COLORS.muted)};
 `;
 
 // --- Decoration Elements ---
@@ -306,55 +258,101 @@ export const Star = styled.View<{ starType: "star1" | "star2" | "star3" }>`
   border-radius: 4px;
   opacity: 0.8;
 
-  ${({ starType, theme }) =>
-    starType === "star1" &&
-    `
-      top: 110px;
-      right: 26px;
-      background-color: ${theme.colors.brand.yellow};
-    `}
+  ${(props) =>
+    props.starType === "star1"
+      ? `
+        top: 110px;
+        right: 26px;
+        background-color: ${COLORS.yellow};
+      `
+      : ""}
 
-  ${({ starType, theme }) =>
-    starType === "star2" &&
-    `
-      top: 290px;
-      left: 13px;
-      background-color: ${theme.colors.brand.pink};
-    `}
+  ${(props) =>
+    props.starType === "star2"
+      ? `
+        top: 290px;
+        left: 13px;
+        background-color: ${COLORS.pink};
+      `
+      : ""}
 
-  ${({ starType, theme }) =>
-    starType === "star3" &&
-    `
-      top: 540px;
-      right: 12px;
-      background-color: ${theme.colors.brand.mint};
-    `}
+  ${(props) =>
+    props.starType === "star3"
+      ? `
+        top: 540px;
+        right: 12px;
+        background-color: ${COLORS.mint};
+      `
+      : ""}
 `;
 
 export const DecorationPlanet = styled.View<{
   planetType: "planet1" | "planet2";
 }>`
   position: absolute;
-  border-radius: ${({ theme }) => theme.radius.pill}px;
+  border-radius: 999px;
   opacity: 0.25;
 
-  ${({ planetType, theme }) =>
-    planetType === "planet1" &&
-    `
-      width: 100px;
-      height: 100px;
-      right: -48px;
-      top: 170px;
-      background-color: ${theme.colors.brand.blue};
-    `}
+  ${(props) =>
+    props.planetType === "planet1"
+      ? `
+        width: 100px;
+        height: 100px;
+        right: -48px;
+        top: 170px;
+        background-color: ${COLORS.blue};
+      `
+      : ""}
 
-  ${({ planetType, theme }) =>
-    planetType === "planet2" &&
-    `
-      width: 70px;
-      height: 70px;
-      left: -35px;
-      top: 630px;
-      background-color: ${theme.colors.brand.pink};
-    `}
+  ${(props) =>
+    props.planetType === "planet2"
+      ? `
+        width: 70px;
+        height: 70px;
+        left: -35px;
+        top: 630px;
+        background-color: ${COLORS.pink};
+      `
+      : ""}
+`;
+
+export const BottomTab = styled.View<{ bottomInset: number }>`
+  position: absolute;
+  /* ⭐ 바닥에서 떠 있게 지정 (안드로이드 내장키 높이 + 여유 8px) */
+  bottom: ${(props) => Math.max(props.bottomInset, 12) + 8}px;
+  left: 16px;
+  right: 16px;
+
+  height: 64px;
+  background-color: ${COLORS.white};
+
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  /* ⭐ 동글동글한 알약/캡슐 형태 */
+  border-radius: 32px;
+
+  /* 부드러운 그림자 효과 */
+  shadow-color: #5d5193;
+  shadow-opacity: 0.12;
+  shadow-radius: 12px;
+  shadow-offset: 0px 4px;
+  elevation: 6;
+`;
+export const TabItem = styled.TouchableOpacity<{ active?: boolean }>`
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TabLabel = styled(AppText)<{ active?: boolean }>`
+  font-size: 11px;
+  font-weight: 800;
+  color: ${(props) => (props.active ? COLORS.purple : COLORS.muted)};
+  margin-top: 3px;
+`;
+
+export const CardImage = styled(Image)`
+  flex: 1;
+  width: 100%;
 `;
