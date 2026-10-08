@@ -2,6 +2,13 @@
 
 //분류(Classification)뿐만 아니라 패턴, 미로, 퍼즐 등 다른 게임 모드나 렌더러 컴포넌트에서도 원본 아이템 데이터 모델을 공유할 수 있습니다.
 export type GameType = "classification" | "pattern" | "puzzle" | "maze";
+export type ClassificationGameType = "color" | "shape" | "size" | "category";
+export type StageMapGameType =
+  | ClassificationGameType
+  | "pattern"
+  | "puzzle"
+  | "maze";
+
 export type ClassificationTopCategory =
   | "animal"
   | "food"

@@ -1,24 +1,28 @@
-import { GameType } from "../types/game";
+import { GameType, StageMapGameType } from "../types/game";
 
 export type RootStackParamList = {
   Home: undefined;
 
+  ClassificationMenuScreen: undefined;
+
   StageMapScreen: {
-    gameType: GameType;
+    gameType: StageMapGameType;
   };
 
   ClassificationPlayScreen: {
     gameType: "classification";
     level: number;
   };
+
   SettingScreen: undefined;
+
   StickerGalleryScreen: undefined;
+
   ColorSortingPlayScreen: {
-    gameType: "classification";
+    gameType: "color";
     level: number;
   };
 };
-
 // PatternPlayScreen: {
 //   gameType: "pattern";
 //   level: number;

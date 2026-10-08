@@ -5,6 +5,7 @@ import ClassificationPlayScreen from "../screens/classification/ClassificationPl
 import SettingScreen from "../screens/settings/SettingScreen";
 import StickerGalleryScreen from "../screens/sticker/StickerGalleryScreen";
 import ColorSortingPlayScreen from "../screens/classification/ColorSortingPlayScreen";
+import ClassificationMenuScreen from "../screens/classification/ClassificationMenuScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,13 @@ export default function AppNavigator() {
       }}
     >
       <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        name="ClassificationMenuScreen"
+        component={ClassificationMenuScreen}
+        options={{
+          animation: "fade",
+        }}
+      />
       <Stack.Screen
         name="StageMapScreen"
         component={StageMapScreen}

@@ -111,6 +111,10 @@ export default function HomeScreen() {
   // Navigation
   // ==================================================
   const goToStageMap = (gameType: GameType) => {
+    if (gameType === "classification") {
+      navigation.navigate("ClassificationMenuScreen");
+      return;
+    }
     navigation.navigate("StageMapScreen", { gameType });
   };
 

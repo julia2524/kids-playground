@@ -157,6 +157,7 @@ import { AppText } from "../../utils/AppText";
 import UfoLevelBadge from "../UfoLevelBadge";
 import { colors } from "../../design-system/tokens/colors";
 import StarBadge from "../../design-system/ui/StarBadge";
+import { StageMapGameType } from "../../types/game";
 
 // ============================================================
 // Theme / Color Definitions
@@ -171,6 +172,7 @@ type ColorSortingResultOverlayProps = {
   onHome: () => void;
   onRestart: () => void;
   onNextLevel: () => void;
+  onGoRoadmap: () => void;
 };
 
 export default function ColorSortingResultOverlay({
@@ -180,6 +182,7 @@ export default function ColorSortingResultOverlay({
   onHome,
   onRestart,
   onNextLevel,
+  onGoRoadmap,
 }: ColorSortingResultOverlayProps) {
   // ⭐ 별 5개를 표시
   const starOffsets = [18, 6, 0, 6, 18];
@@ -191,7 +194,7 @@ export default function ColorSortingResultOverlay({
           {/* ================================================= */}
           {/* 닫기 */}
           {/* ================================================= */}
-          <CloseButton onPress={onHome} activeOpacity={0.7}>
+          <CloseButton onPress={onGoRoadmap} activeOpacity={0.7}>
             <Ionicons name="close" size={24} color={colors.brand.primary} />
           </CloseButton>
 
