@@ -18,6 +18,7 @@ import ClassificationPlanet from "../../components/illustrations/ClassificationP
 import SpaceUFO from "../../components/illustrations/SpaceUFO";
 import ShootingStar from "../../components/illustrations/ShootingStar";
 import { ASSETS } from "../../assets/assets";
+import AppHeader from "../../components/AppHeader";
 
 // ============================================================
 // 메인 화면과 통일된 몽환 파스텔 컬러 팔레트
@@ -134,17 +135,14 @@ export default function ClassificationMenuScreen() {
     >
       <Screen edges={["top", "bottom"]}>
         {/* 고정 헤더 */}
-        <Header>
-          <BackButton
-            onPress={() => navigation.navigate("Home")}
-            activeOpacity={0.8}
-          >
-            <Ionicons name="chevron-back" size={22} color="#7C5CFF" />
-          </BackButton>
-          <HeaderText>분류 우주</HeaderText>
-          <HeaderSpacer />
-        </Header>
 
+        <AppHeader
+          title="분류 우주"
+          onBackPress={() => {
+            navigation.navigate("Home");
+          }}
+          onMascotPress={() => navigation.navigate("SettingScreen")}
+        />
         <MainContainer>
           <CarouselArea>
             <TitleArea>
