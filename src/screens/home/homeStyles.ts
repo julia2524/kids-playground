@@ -173,9 +173,10 @@ export const CardBottom = styled.View`
   min-height: 58px;
   border-radius: 17px;
   background-color: ${COLORS.white};
-  padding-horizontal: 11px;
-  padding-vertical: 8px;
-  flex-direction: row;
+  padding-left: 11px;
+  padding-right: 11px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   align-items: center;
   justify-content: space-between;
 `;
@@ -187,7 +188,6 @@ export const CardTitle = styled(AppText)`
 `;
 
 export const CardDescription = styled(AppText)`
-  margin-top: 2px;
   font-size: 11px;
   color: ${COLORS.secondaryText};
 `;

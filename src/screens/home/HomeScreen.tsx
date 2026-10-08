@@ -230,18 +230,8 @@ export default function HomeScreen() {
               />
 
               <CardBottom>
-                <View>
-                  <CardTitle>분류 놀이</CardTitle>
-                  <CardDescription>같은 것을 찾아볼까요?</CardDescription>
-                </View>
-
-                <ArrowCircle>
-                  <Ionicons
-                    name="arrow-forward"
-                    size={19}
-                    color={COLORS.pink}
-                  />
-                </ArrowCircle>
+                <CardTitle>분류 놀이</CardTitle>
+                <CardDescription>같은 것을 찾아볼까요?</CardDescription>
               </CardBottom>
             </GameCard>
 
@@ -254,18 +244,8 @@ export default function HomeScreen() {
               <CardImage source={ASSETS.cardPattern} resizeMode="contain" />
 
               <CardBottom>
-                <View>
-                  <CardTitle>패턴 놀이</CardTitle>
-                  <CardDescription>규칙을 찾아볼까요?</CardDescription>
-                </View>
-
-                <ArrowCircle>
-                  <Ionicons
-                    name="arrow-forward"
-                    size={19}
-                    color={COLORS.blue}
-                  />
-                </ArrowCircle>
+                <CardTitle>패턴 놀이</CardTitle>
+                <CardDescription>규칙을 찾아볼까요?</CardDescription>
               </CardBottom>
             </GameCard>
 
@@ -278,14 +258,8 @@ export default function HomeScreen() {
               <CardImage source={ASSETS.cardPuzzle} resizeMode="contain" />
 
               <CardBottom>
-                <View>
-                  <CardTitle>퍼즐 맞추기</CardTitle>
-                  <CardDescription>조각을 맞춰볼까요?</CardDescription>
-                </View>
-
-                <ArrowCircle>
-                  <Ionicons name="arrow-forward" size={19} color="#E8A900" />
-                </ArrowCircle>
+                <CardTitle>퍼즐 맞추기</CardTitle>
+                <CardDescription>조각을 맞춰볼까요?</CardDescription>
               </CardBottom>
             </GameCard>
 
@@ -298,14 +272,8 @@ export default function HomeScreen() {
               <CardImage source={ASSETS.cardMaze} resizeMode="contain" />
 
               <CardBottom>
-                <View>
-                  <CardTitle>미로 찾기</CardTitle>
-                  <CardDescription>길을 찾아갈까요?</CardDescription>
-                </View>
-
-                <ArrowCircle>
-                  <Ionicons name="arrow-forward" size={19} color="#16A58D" />
-                </ArrowCircle>
+                <CardTitle>미로 찾기</CardTitle>
+                <CardDescription>길을 찾아갈까요?</CardDescription>
               </CardBottom>
             </GameCard>
           </GameGrid>
