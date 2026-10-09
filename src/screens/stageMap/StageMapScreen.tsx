@@ -53,7 +53,7 @@ export default function StageMapScreen() {
   const levelConfigs = (() => {
     switch (gameType) {
       case "color":
-        return LEVEL_CONFIGS;
+        return colorSortingLevels;
       default:
         return [];
     }

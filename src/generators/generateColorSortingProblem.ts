@@ -30,60 +30,16 @@ const COLOR_LABELS: Record<ClassificationColorId, string> = {
 };
 
 // ============================================================
-// Level별 색상 Pool
+// 단순 도형 목록 (L1~L3 공용)
 // ============================================================
 
-const COLOR_POOL_BY_LEVEL: Record<number, ClassificationColorId[]> = {
-  1: ["red", "blue", "yellow", "green", "black", "white"],
-
-  2: ["red", "blue", "yellow", "green", "black", "white"],
-
-  3: ["red", "blue", "yellow", "green", "black", "white"],
-
-  4: [
-    "red",
-    "orange",
-    "yellow",
-    "green",
-    "blue",
-    "purple",
-    "pink",
-    "brown",
-    "black",
-    "white",
-  ],
-
-  5: ["red", "blue", "yellow", "green", "black", "white"],
-
-  6: [
-    "red",
-    "orange",
-    "yellow",
-    "green",
-    "blue",
-    "purple",
-    "pink",
-    "brown",
-    "black",
-    "white",
-  ],
-
-  7: ["red", "blue", "yellow", "green", "black", "white"],
-
-  8: [
-    "red",
-    "orange",
-    "yellow",
-    "green",
-    "blue",
-    "purple",
-    "pink",
-    "brown",
-    "black",
-    "white",
-  ],
-};
-
+const SIMPLE_SHAPES = [
+  { shape: "circle", label: "원", svgKey: "circle" },
+  { shape: "square", label: "네모", svgKey: "square" },
+  { shape: "triangle", label: "세모", svgKey: "triangle" },
+  { shape: "star", label: "별", svgKey: "star" },
+  { shape: "heart", label: "하트", svgKey: "heart" },
+];
 // ============================================================
 // Random
 // ============================================================
@@ -130,7 +86,7 @@ function generateColors(
   config: ColorSortingLevelConfig,
   items: ClassificationItem[],
 ): ClassificationColorId[] {
-  const levelColors = COLOR_POOL_BY_LEVEL[config.level];
+  const levelColors = config.colorPool;
 
   if (!levelColors) {
     throw new Error(`Level ${config.level}의 COLOR_POOL이 없습니다.`);
@@ -196,6 +152,41 @@ function generateTargets(
 }
 
 // ============================================================
+// L1 ~ L2
+//
+// 도형을 먼저 N종류만 뽑고(2개),
+// 뽑은 도형을 "모든 색깔"로 각각 만든다.
+//
+// 예) 색 = blue + yellow, 도형 = circle + heart
+//   → 파랑 원, 노랑 원, 파랑 하트, 노랑 하트
+// ============================================================
+
+function generateSimpleSameShapeObjects(
+  config: ColorSortingLevelConfig,
+  colors: ClassificationColorId[],
+): ColorSortingObject[] {
+  // 도형은 색깔과 무관하게 한 번만 선택
+  const selectedShapes = pickRandom(SIMPLE_SHAPES, config.objectsPerTarget);
+
+  const objects: ColorSortingObject[] = [];
+
+  colors.forEach((colorId, colorIndex) => {
+    selectedShapes.forEach((shape, shapeIndex) => {
+      objects.push({
+        id: `object-${colorIndex}-${shapeIndex}`,
+        itemId: `simple-${shape.shape}`,
+        label: `${COLOR_LABELS[colorId]} ${shape.label}`,
+        colorId,
+        svgKey: shape.svgKey,
+        shape: shape.shape,
+      });
+    });
+  });
+
+  return shuffle(objects);
+}
+
+// ============================================================
 // L1
 //
 // 단순 도형
@@ -207,38 +198,10 @@ function generateSimpleObjects(
   config: ColorSortingLevelConfig,
   colors: ClassificationColorId[],
 ): ColorSortingObject[] {
-  const shapes = [
-    {
-      shape: "circle",
-      label: "원",
-      svgKey: "circle",
-    },
-    {
-      shape: "square",
-      label: "네모",
-      svgKey: "square",
-    },
-    {
-      shape: "triangle",
-      label: "세모",
-      svgKey: "triangle",
-    },
-    {
-      shape: "star",
-      label: "별",
-      svgKey: "star",
-    },
-    {
-      shape: "heart",
-      label: "하트",
-      svgKey: "heart",
-    },
-  ];
-
   const objects: ColorSortingObject[] = [];
 
   colors.forEach((colorId, colorIndex) => {
-    const selectedShapes = pickRandom(shapes, config.objectsPerTarget);
+    const selectedShapes = pickRandom(SIMPLE_SHAPES, config.objectsPerTarget);
 
     selectedShapes.forEach((shape, shapeIndex) => {
       objects.push({
@@ -383,6 +346,8 @@ function generateObjects(
   items: ClassificationItem[],
 ): ColorSortingObject[] {
   switch (config.objectMode) {
+    case "simple_same_shape":
+      return generateSimpleSameShapeObjects(config, colors);
     case "simple":
       return generateSimpleObjects(config, colors);
 

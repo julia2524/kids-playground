@@ -9837,7 +9837,7 @@ export const Flag = ({
         y1="14"
         x2="27"
         y2="87"
-        stroke={OUTLINE}
+        stroke={poleColor}
         strokeWidth="6"
         strokeLinecap="round"
       />

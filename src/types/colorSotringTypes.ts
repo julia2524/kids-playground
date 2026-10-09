@@ -1,6 +1,10 @@
 import { ClassificationColorId } from "./game";
 
-export type ColorSortingObjectMode = "simple" | "same_type" | "different";
+export type ColorSortingObjectMode =
+  | "simple"
+  | "simple_same_shape"
+  | "same_type"
+  | "different";
 
 export type ColorSortingLevelConfig = {
   level: number;
@@ -13,6 +17,7 @@ export type ColorSortingLevelConfig = {
   objectMode: ColorSortingObjectMode;
 
   colorCount: number;
+  colorPool: ClassificationColorId[]; // ✨ 추가: 각 레벨이 사용할 색상 Pool
 
   showHint?: boolean;
   completionEffect?: "none" | "color_king";

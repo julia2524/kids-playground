@@ -1,8 +1,65 @@
 import { ColorSortingLevelConfig } from "./colorSotringTypes";
+import { ClassificationColorId } from "./game";
+
+// 프리셋 정의
+const BASIC_COLORS: ClassificationColorId[] = [
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "black",
+  "white",
+];
+
+const ALL_COLORS: ClassificationColorId[] = [
+  "red",
+  "orange",
+  "yellow",
+  "green",
+  "blue",
+  "purple",
+  "pink",
+  "brown",
+  "black",
+  "white",
+];
 
 export const colorSortingLevels: ColorSortingLevelConfig[] = [
   // ==================================================
   // LEVEL 1
+  // 단순도형 2가지 / 기본 6색 중 2개 선택
+  // ==================================================
+  {
+    level: 1,
+    rule: "color",
+    targetCount: 2,
+    objectCount: 4,
+    objectsPerTarget: 2,
+    objectMode: "simple_same_shape",
+    colorCount: 2,
+    showHint: true,
+    colorPool: BASIC_COLORS,
+    completionEffect: "none",
+  },
+
+  // ==================================================
+  // LEVEL 2
+  // 단순도형 2가지 / 확장 10색 중 2개 선택
+  // ==================================================
+  {
+    level: 2,
+    rule: "color",
+    targetCount: 2,
+    objectCount: 4,
+    objectsPerTarget: 2,
+    objectMode: "simple_same_shape",
+    colorCount: 2,
+    showHint: true,
+    colorPool: ALL_COLORS,
+    completionEffect: "none",
+  },
+  // ==================================================
+  // LEVEL 3
   // 2색 입문
   //
   // 목표:
@@ -16,7 +73,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
   // ==================================================
 
   {
-    level: 1,
+    level: 3,
 
     rule: "color",
 
@@ -31,12 +88,33 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     colorCount: 2,
 
     showHint: true,
+    colorPool: BASIC_COLORS,
+
+    completionEffect: "none",
+  },
+  {
+    level: 4,
+
+    rule: "color",
+
+    targetCount: 2,
+
+    objectCount: 4,
+
+    objectsPerTarget: 2,
+
+    objectMode: "simple",
+
+    colorCount: 2,
+
+    showHint: true,
+    colorPool: ALL_COLORS,
 
     completionEffect: "none",
   },
 
   // ==================================================
-  // LEVEL 2
+  // LEVEL 4
   // 같은 종류, 다른 색
   //
   // 목표:
@@ -50,7 +128,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
   // ==================================================
 
   {
-    level: 2,
+    level: 5,
 
     rule: "color",
 
@@ -65,12 +143,33 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     colorCount: 2,
 
     showHint: false,
+    colorPool: BASIC_COLORS,
 
     completionEffect: "none",
   },
 
+  {
+    level: 6,
+
+    rule: "color",
+
+    targetCount: 2,
+
+    objectCount: 4,
+
+    objectsPerTarget: 2,
+
+    objectMode: "same_type",
+
+    colorCount: 2,
+
+    showHint: false,
+    colorPool: ALL_COLORS,
+
+    completionEffect: "none",
+  },
   // ==================================================
-  // LEVEL 3
+  // LEVEL 5
   // 서로 다른 종류, 같은 색
   //
   // 목표:
@@ -84,7 +183,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
   // ==================================================
 
   {
-    level: 3,
+    level: 7,
 
     rule: "color",
 
@@ -99,12 +198,33 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     colorCount: 2,
 
     showHint: false,
+    colorPool: BASIC_COLORS,
+
+    completionEffect: "none",
+  },
+  {
+    level: 8,
+
+    rule: "color",
+
+    targetCount: 2,
+
+    objectCount: 4,
+
+    objectsPerTarget: 2,
+
+    objectMode: "different",
+
+    colorCount: 2,
+
+    showHint: false,
+    colorPool: ALL_COLORS,
 
     completionEffect: "none",
   },
 
   // ==================================================
-  // LEVEL 4
+  // LEVEL 6
   // 서로 다른 종류 + 6개
   //
   // 목표:
@@ -119,7 +239,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
   // ==================================================
 
   {
-    level: 4,
+    level: 9,
 
     rule: "color",
 
@@ -134,12 +254,33 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     colorCount: 2,
 
     showHint: false,
+    colorPool: BASIC_COLORS,
+
+    completionEffect: "none",
+  },
+  {
+    level: 10,
+
+    rule: "color",
+
+    targetCount: 2,
+
+    objectCount: 6,
+
+    objectsPerTarget: 3,
+
+    objectMode: "different",
+
+    colorCount: 2,
+
+    showHint: false,
+    colorPool: ALL_COLORS,
 
     completionEffect: "none",
   },
 
   // ==================================================
-  // LEVEL 5
+  // LEVEL 7
   // 3색 분류
   //
   // 목표:
@@ -153,7 +294,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
   // ==================================================
 
   {
-    level: 5,
+    level: 11,
 
     rule: "color",
 
@@ -168,12 +309,13 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     colorCount: 3,
 
     showHint: false,
+    colorPool: BASIC_COLORS,
 
     completionEffect: "none",
   },
 
   // ==================================================
-  // LEVEL 6
+  // LEVEL 8
   // 3색 + 색상 조합 변화
   //
   // 목표:
@@ -191,7 +333,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
   // ==================================================
 
   {
-    level: 6,
+    level: 12,
 
     rule: "color",
 
@@ -206,12 +348,13 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     colorCount: 3,
 
     showHint: false,
+    colorPool: ALL_COLORS,
 
     completionEffect: "none",
   },
 
   // ==================================================
-  // LEVEL 7
+  // LEVEL 9
   // 4색 종합
   //
   // 목표:
@@ -226,7 +369,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
   // ==================================================
 
   {
-    level: 7,
+    level: 13,
 
     rule: "color",
 
@@ -241,12 +384,33 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     colorCount: 4,
 
     showHint: false,
+    colorPool: BASIC_COLORS,
+
+    completionEffect: "color_king",
+  },
+  {
+    level: 14,
+
+    rule: "color",
+
+    targetCount: 4,
+
+    objectCount: 8,
+
+    objectsPerTarget: 2,
+
+    objectMode: "different",
+
+    colorCount: 4,
+
+    showHint: false,
+    colorPool: ALL_COLORS,
 
     completionEffect: "color_king",
   },
 
   // ==================================================
-  // LEVEL 8
+  // LEVEL 10
   // 4색 + 다양한 색상 조합
   //
   // 목표:
@@ -258,13 +422,12 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
   //
   // 4 colors
   // 4 targets
-  // 8 objects
-  // 2 objects per color
+  // 12 objects
+  // 3 objects per color
   // different types
   // ==================================================
-
   {
-    level: 8,
+    level: 15,
 
     rule: "color",
 
@@ -279,6 +442,28 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     colorCount: 4,
 
     showHint: false,
+    colorPool: BASIC_COLORS,
+
+    completionEffect: "color_king",
+  },
+
+  {
+    level: 16,
+
+    rule: "color",
+
+    targetCount: 4,
+
+    objectCount: 12,
+
+    objectsPerTarget: 3,
+
+    objectMode: "different",
+
+    colorCount: 4,
+
+    showHint: false,
+    colorPool: ALL_COLORS,
 
     completionEffect: "color_king",
   },
