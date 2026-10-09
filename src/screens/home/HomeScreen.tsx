@@ -29,6 +29,9 @@ import {
   CardDescription,
   CardImage,
   CardTitle,
+  ComingSoon,
+  ComingSoonEmoji,
+  ComingSoonText,
   Container,
   FilterButton,
   FilterRow,
@@ -279,11 +282,11 @@ export default function HomeScreen() {
             </GameCard>
           </GameGrid>
 
-          {/* Coming soon */}
-          {/* <ComingSoon>
-            <ComingSoonEmoji>✨ 👽 ✨</ComingSoonEmoji>
-            <ComingSoonText>새로운 놀이가 기다리고 있어요!</ComingSoonText>
-          </ComingSoon> */}
+          {/* 번역 검증! */}
+          <ComingSoon onPress={() => navigation.navigate("LanguageScreen")}>
+            {/* <ComingSoonEmoji>🌐</ComingSoonEmoji> */}
+            <ComingSoonText>🌐 번역 검증하기</ComingSoonText>
+          </ComingSoon>
 
           {/* Footer */}
         </ScrollView>

@@ -24,7 +24,8 @@
     },
     "plugins": [
       "expo-localization",
-      "expo-image"
+      "expo-image",
+      "expo-font"
     ]
   }
 }

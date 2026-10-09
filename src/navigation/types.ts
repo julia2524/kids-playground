@@ -22,6 +22,7 @@ export type RootStackParamList = {
     gameType: "color";
     level: number;
   };
+  LanguageScreen: undefined;
 };
 // PatternPlayScreen: {
 //   gameType: "pattern";

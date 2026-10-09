@@ -34,5 +34,6 @@
   "guardian_notice_section": "Parental Guide",
   "guardian_notice_setting_title": "Parental Guide Pop-up",
   "guardian_notice_setting_desc": "Show the parental guide when starting the app.",
-  "confirm": "OK"
+  "confirm": "OK",
+  "close": "Close"
 }

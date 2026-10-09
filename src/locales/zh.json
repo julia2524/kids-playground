@@ -34,5 +34,6 @@
   "guardian_notice_section": "家长须知",
   "guardian_notice_setting_title": "家长须知弹窗",
   "guardian_notice_setting_desc": "启动应用时显示家长须知。",
-  "confirm": "确认"
+  "confirm": "确认",
+  "close": "关闭"
 }

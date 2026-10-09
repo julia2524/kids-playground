@@ -6,6 +6,7 @@ import SettingScreen from "../screens/settings/SettingScreen";
 import StickerGalleryScreen from "../screens/sticker/StickerGalleryScreen";
 import ColorSortingPlayScreen from "../screens/classification/ColorSortingPlayScreen";
 import ClassificationMenuScreen from "../screens/classification/ClassificationMenuScreen";
+import LanguageScreen from "../screens/LanguageScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -60,6 +61,7 @@ export default function AppNavigator() {
           animation: "fade",
         }}
       />
+      <Stack.Screen name="LanguageScreen" component={LanguageScreen} />
     </Stack.Navigator>
   );
 }

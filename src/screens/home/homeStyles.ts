@@ -202,7 +202,7 @@ export const ArrowCircle = styled.View`
 `;
 
 // --- Coming Soon ---
-export const ComingSoon = styled.View`
+export const ComingSoon = styled.TouchableOpacity`
   margin-top: 18px;
   min-height: 58px;
   border-radius: 22px;

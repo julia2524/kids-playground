@@ -71,6 +71,8 @@ export default function GuardianNoticeModal({
       visible={visible}
       transparent
       animationType="fade"
+      statusBarTranslucent
+      navigationBarTranslucent
       onRequestClose={onClose}
     >
       <Overlay>
@@ -88,7 +90,7 @@ export default function GuardianNoticeModal({
               size={closeButtonSize}
               onPress={onClose}
               accessibilityRole="button"
-              accessibilityLabel="닫기"
+              accessibilityLabel={i18n.t("close") || "Close"} // 👈 다국어 키 연결
             >
               <Ionicons name="close" size={26 * modalScale} color="#90A4AE" />
             </CloseButton>

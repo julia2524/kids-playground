@@ -34,5 +34,6 @@
   "guardian_notice_section": "보호자 안내",
   "guardian_notice_setting_title": "보호자 안내 팝업",
   "guardian_notice_setting_desc": "앱을 시작할 때 보호자 안내를 표시합니다.",
-  "confirm": "확인"
+  "confirm": "확인",
+  "close": "닫기"
 }
