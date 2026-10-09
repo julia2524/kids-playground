@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
@@ -20,6 +20,8 @@ import ColorSortingResultOverlay from "../../components/ColorSorting/ColorSortin
 import useColorSortingGame from "../../hooks/ColorSorting/useColorSortingGame";
 import { AppText } from "../../utils/AppText";
 import { TargetRects } from "../../components/ColorSorting/ColorSortingObjectComponent";
+
+import { saveLevelClear } from "../../utils/progressStorage";
 
 // ============================================================
 // Types
@@ -102,6 +104,10 @@ export default function ColorSortingPlayScreen() {
     [],
   );
 
+  useEffect(() => {
+    if (!roundResult || !gameType) return;
+    saveLevelClear(gameType, testLevel, earnedStars);
+  }, [roundResult]);
   // ==========================================================
   // Problem 없음
   // ==========================================================

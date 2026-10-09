@@ -8,7 +8,7 @@ import {
 
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -61,6 +61,7 @@ export default function HomeScreen() {
   const { width, height } = useWindowDimensions();
 
   useLanguage();
+
   // ==================================================
   // Responsive
   // ==================================================
@@ -78,34 +79,34 @@ export default function HomeScreen() {
 
   const [guardianNoticeVisible, setGuardianNoticeVisible] = useState(false);
   const [guardianNoticeLoaded, setGuardianNoticeLoaded] = useState(false);
+  // ==================================================
+  // 보호자 안내 (화면이 포커스될 때마다 상태 확인)
+  // ==================================================
+  useFocusEffect(
+    React.useCallback(() => {
+      let isMounted = true;
+
+      const checkGuardianNotice = async () => {
+        const enabled = await getGuardianNoticeEnabled();
+
+        if (isMounted) {
+          // 사용자가 설정에서 ON(true)으로 해두었을 때만 팝업 띄움
+          setGuardianNoticeVisible(enabled);
+          setGuardianNoticeLoaded(true);
+        }
+      };
+
+      checkGuardianNotice();
+
+      return () => {
+        isMounted = false;
+      };
+    }, []),
+  );
 
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertTitle, setAlertTitle] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
-
-  // ==================================================
-  // 보호자 안내
-  // ==================================================
-
-  useEffect(() => {
-    if (hasShownGuardianNoticeThisSession) {
-      setGuardianNoticeLoaded(true);
-      return;
-    }
-
-    const load = async () => {
-      const enabled = await getGuardianNoticeEnabled();
-
-      if (enabled) {
-        setGuardianNoticeVisible(true);
-      }
-
-      hasShownGuardianNoticeThisSession = true;
-      setGuardianNoticeLoaded(true);
-    };
-
-    load();
-  }, []);
 
   // ==================================================
   // Navigation

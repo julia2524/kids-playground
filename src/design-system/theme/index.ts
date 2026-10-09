@@ -6,6 +6,7 @@ import { shadows } from "../tokens/shadows";
 import { motion } from "../tokens/motion";
 
 export const theme = {
+  fontFamily: "Pretendard-Bold", // 👈 사용하는 기본 폰트명 추가
   colors,
   typography,
   spacing,
@@ -15,3 +16,8 @@ export const theme = {
 };
 
 export type AppTheme = typeof theme;
+
+// styled-components 모듈 확장
+declare module "styled-components/native" {
+  export interface DefaultTheme extends AppTheme {}
+}

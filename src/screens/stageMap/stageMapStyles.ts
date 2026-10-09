@@ -5,36 +5,33 @@ import { AppText } from "../../utils/AppText";
 // --- Screen Container ---
 export const ScreenContainer = styled.View`
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.background.primary};
+  background-color: ${({ theme }) => theme.colors.background || "#F5F2FF"};
 `;
 
 // --- Header ---
 export const Header = styled.View`
   height: 92px;
-  padding-horizontal: ${({ theme }) => theme.spacing.lg}px;
+  padding-horizontal: ${({ theme }) => theme.spacing?.lg || 20}px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   background-color: rgba(255, 255, 255, 0.92);
-  border-bottom-width: 1px;
-  border-bottom-color: ${({ theme }) => theme.colors.border.default};
+  border-bottom-width: 1.5px;
+  border-bottom-color: ${({ theme }) =>
+    theme.colors.border?.default || "#E6E1F4"};
 `;
 
 export const HeaderButton = styled.TouchableOpacity`
   width: 46px;
   height: 46px;
-  border-radius: ${({ theme }) => theme.radius.pill}px;
-  background-color: ${({ theme }) => theme.colors.background.surface};
+  border-radius: ${({ theme }) => theme.radius?.pill || 23}px;
+  background-color: ${({ theme }) => theme.colors.white || "#FFFFFF"};
   justify-content: center;
   align-items: center;
-
-  /* Soft Shadow */
-  shadow-color: ${({ theme }) => theme.shadows.soft.shadowColor};
-  shadow-offset: ${({ theme }) => theme.shadows.soft.shadowOffset.width}px
-    ${({ theme }) => theme.shadows.soft.shadowOffset.height}px;
-  shadow-opacity: ${({ theme }) => theme.shadows.soft.shadowOpacity};
-  shadow-radius: ${({ theme }) => theme.shadows.soft.shadowRadius}px;
-  elevation: ${({ theme }) => theme.shadows.soft.elevation};
+  border-width: 1.5px;
+  border-color: ${({ theme }) => theme.colors.border?.default || "#E6E1F4"};
+  elevation: 3;
+  box-shadow: 0px 4px 10px rgba(124, 92, 255, 0.08);
 `;
 
 export const HeaderTitleArea = styled.View`
@@ -43,15 +40,20 @@ export const HeaderTitleArea = styled.View`
 `;
 
 export const HeaderTitle = styled(AppText)`
-  font-size: ${({ theme }) => theme.typography.h3.fontSize}px;
-  font-weight: ${({ theme }) => theme.typography.h3.fontWeight};
-  color: ${({ theme }) => theme.colors.text.primary};
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: ${({ theme }) => theme.typography?.h3?.fontSize || 20}px;
+  line-height: ${({ theme }) => theme.typography?.h3?.lineHeight || 28}px;
+  font-weight: ${({ theme }) => theme.typography?.h3?.fontWeight || "800"};
+  color: ${({ theme }) => theme.colors.textGroup?.primary || "#29263D"};
 `;
 
 export const HeaderSubtitle = styled(AppText)`
-  margin-top: 3px;
-  font-size: ${({ theme }) => theme.typography.caption.fontSize}px;
-  color: ${({ theme }) => theme.colors.text.secondary};
+  margin-top: 2px;
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: ${({ theme }) => theme.typography?.caption?.fontSize || 13}px;
+  line-height: ${({ theme }) => theme.typography?.caption?.lineHeight || 18}px;
+  font-weight: ${({ theme }) => theme.typography?.caption?.fontWeight || "600"};
+  color: ${({ theme }) => theme.colors.textGroup?.secondary || "#68657A"};
 `;
 
 // --- Map ---
@@ -63,12 +65,11 @@ export const MapContainer = styled.View`
 export const PathLine = styled.View`
   position: absolute;
   height: 8px;
-  border-radius: ${({ theme }) => theme.radius.sm}px;
-  background-color: ${({ theme }) => theme.colors.border.strong};
+  border-radius: ${({ theme }) => theme.radius?.sm || 8}px;
+  background-color: ${({ theme }) => theme.colors.border?.strong || "#B7B0DD"};
   border-style: dashed;
   border-width: 1px;
-  border-color: ${({ theme }) => theme.colors.border.dashed};
-  transform-origin: center;
+  border-color: ${({ theme }) => theme.colors.border?.dashed || "#D8D2F1"};
 `;
 
 export const NodeWrapper = styled.View`
@@ -94,64 +95,61 @@ export const StageNode = styled.TouchableOpacity<StageNodeProps>`
 
   background-color: ${({ unlocked, completed, isCurrent, theme }) =>
     completed
-      ? theme.colors.brand.mint
+      ? theme.colors.brand?.mint || "#55D6BE"
       : isCurrent
-        ? theme.colors.brand.pink
+        ? theme.colors.brand?.pink || "#FF6FAE"
         : unlocked
-          ? theme.colors.brand.primary
-          : theme.colors.button.disabled};
+          ? theme.colors.brand?.primary || "#7C5CFF"
+          : theme.colors.button?.disabled || "#E6E1F4"};
 
   border-width: ${({ unlocked }) => (unlocked ? "5px" : "4px")};
-  border-color: ${({ theme }) => theme.colors.background.surface};
+  border-color: ${({ theme }) => theme.colors.white || "#FFFFFF"};
 
-  /* Card Shadow */
-  shadow-color: ${({ theme }) => theme.shadows.card.shadowColor};
-  shadow-offset: ${({ theme }) => theme.shadows.card.shadowOffset.width}px
-    ${({ theme }) => theme.shadows.card.shadowOffset.height}px;
-  shadow-opacity: ${({ theme }) => theme.shadows.card.shadowOpacity};
-  shadow-radius: ${({ theme }) => theme.shadows.card.shadowRadius}px;
-  elevation: ${({ theme }) => theme.shadows.card.elevation};
+  elevation: 4;
+  box-shadow: 0px 6px 14px rgba(124, 92, 255, 0.15);
 `;
 
 export const StageNumber = styled(AppText)`
-  font-size: ${({ theme }) => theme.typography.h2.fontSize}px;
-  font-weight: ${({ theme }) => theme.typography.h2.fontWeight};
-  color: ${({ theme }) => theme.colors.text.inverse};
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: ${({ theme }) => theme.typography?.h2?.fontSize || 24}px;
+  line-height: ${({ theme }) => theme.typography?.h2?.lineHeight || 32}px;
+  font-weight: ${({ theme }) => theme.typography?.h2?.fontWeight || "800"};
+  color: ${({ theme }) => theme.colors.textGroup?.inverse || "#FFFFFF"};
 `;
 
 export const StarRow = styled.View`
   flex-direction: row;
-  margin-top: ${({ theme }) => theme.spacing.xs}px;
+  margin-top: ${({ theme }) => theme.spacing?.xs || 4}px;
 `;
 
 export const SmallStar = styled(AppText)<{ isStarOn: boolean }>`
-  font-size: ${({ theme }) => theme.typography.caption.fontSize}px;
+  font-size: ${({ theme }) => theme.typography?.caption?.fontSize || 13}px;
   margin-horizontal: 1px;
   color: ${({ isStarOn, theme }) =>
-    isStarOn ? theme.colors.brand.yellow : theme.colors.text.muted};
+    isStarOn
+      ? theme.colors.brand?.yellow || "#FFD95A"
+      : theme.colors.textGroup?.muted || "#9C99AA"};
 `;
 
 export const CurrentBadge = styled.View`
   position: absolute;
   top: 75px;
-  background-color: ${({ theme }) => theme.colors.background.surface};
-  padding-horizontal: ${({ theme }) => theme.spacing.sm}px;
-  padding-vertical: ${({ theme }) => theme.spacing.xs}px;
-  border-radius: ${({ theme }) => theme.radius.md}px;
+  background-color: ${({ theme }) => theme.colors.white || "#FFFFFF"};
+  padding-horizontal: ${({ theme }) => theme.spacing?.sm || 8}px;
+  padding-vertical: ${({ theme }) => theme.spacing?.xs || 4}px;
+  border-radius: ${({ theme }) => theme.radius?.md || 12}px;
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.border?.default || "#E6E1F4"};
 
-  /* Soft Shadow */
-  shadow-color: ${({ theme }) => theme.shadows.soft.shadowColor};
-  shadow-offset: ${({ theme }) => theme.shadows.soft.shadowOffset.width}px
-    ${({ theme }) => theme.shadows.soft.shadowOffset.height}px;
-  shadow-opacity: ${({ theme }) => theme.shadows.soft.shadowOpacity};
-  shadow-radius: ${({ theme }) => theme.shadows.soft.shadowRadius}px;
-  elevation: ${({ theme }) => theme.shadows.soft.elevation};
+  elevation: 2;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.06);
 `;
 
 export const CurrentBadgeText = styled(AppText)`
+  font-family: ${({ theme }) => theme.fontFamily};
   font-size: 10px;
-  font-weight: ${({ theme }) => theme.typography.h1.fontWeight};
-  color: ${({ theme }) => theme.colors.brand.pink};
+  font-weight: ${({ theme }) => theme.typography?.h1?.fontWeight || "900"};
+  color: ${({ theme }) => theme.colors.brand?.pink || "#FF6FAE"};
 `;
 
 // --- Decorations ---
@@ -174,13 +172,14 @@ export const FinishDecoration = styled.View`
 
 export const FinishEmoji = styled(AppText)`
   font-size: 30px;
-  margin-bottom: ${({ theme }) => theme.spacing.xs}px;
+  margin-bottom: ${({ theme }) => theme.spacing?.xs || 4}px;
 `;
 
 export const FinishText = styled(AppText)`
-  font-size: ${({ theme }) => theme.typography.bodySmall.fontSize}px;
-  font-weight: ${({ theme }) => theme.typography.h1.fontWeight};
-  color: ${({ theme }) => theme.colors.text.secondary};
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: ${({ theme }) => theme.typography?.bodySmall?.fontSize || 14}px;
+  font-weight: ${({ theme }) => theme.typography?.h1?.fontWeight || "900"};
+  color: ${({ theme }) => theme.colors.textGroup?.secondary || "#68657A"};
 `;
 
 // --- Floating UI & Ad ---
@@ -190,18 +189,15 @@ export const FloatingStickerButton = styled.TouchableOpacity`
   bottom: 76px;
   width: 56px;
   height: 56px;
-  border-radius: ${({ theme }) => theme.radius.pill}px;
-  background-color: ${({ theme }) => theme.colors.background.surface};
+  border-radius: 28px;
+  background-color: ${({ theme }) => theme.colors.white || "#FFFFFF"};
   align-items: center;
   justify-content: center;
+  border-width: 1.5px;
+  border-color: ${({ theme }) => theme.colors.border?.default || "#E6E1F4"};
 
-  /* Floating Shadow */
-  shadow-color: ${({ theme }) => theme.shadows.floating.shadowColor};
-  shadow-offset: ${({ theme }) => theme.shadows.floating.shadowOffset.width}px
-    ${({ theme }) => theme.shadows.floating.shadowOffset.height}px;
-  shadow-opacity: ${({ theme }) => theme.shadows.floating.shadowOpacity};
-  shadow-radius: ${({ theme }) => theme.shadows.floating.shadowRadius}px;
-  elevation: ${({ theme }) => theme.shadows.floating.elevation};
+  elevation: 5;
+  box-shadow: 0px 6px 16px rgba(124, 92, 255, 0.18);
 `;
 
 export const AdContainer = styled.View`
@@ -213,6 +209,8 @@ export const AdContainer = styled.View`
   align-items: center;
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.94);
+  border-top-width: 1px;
+  border-top-color: ${({ theme }) => theme.colors.border?.default || "#E6E1F4"};
 `;
 
 // --- Background Stars ---
@@ -220,6 +218,7 @@ export const Star = styled.View`
   position: absolute;
   width: 7px;
   height: 7px;
-  border-radius: ${({ theme }) => theme.radius.sm}px;
+  border-radius: 3.5px;
+  background-color: ${({ theme }) => theme.colors.brand?.yellow || "#FFD95A"};
   z-index: 2;
 `;

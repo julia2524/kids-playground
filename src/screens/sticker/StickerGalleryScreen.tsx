@@ -1,417 +1,20 @@
-// import React, { useState, useCallback } from "react";
-// import { ScrollView, Text, TouchableOpacity } from "react-native";
-// import styled from "styled-components/native";
-// import { useNavigation } from "@react-navigation/native";
-
-// import { AppText } from "../../utils/AppText";
-// import AppHeader from "../../components/AppHeader";
-// import { ClassificationItem } from "../../types/game";
-// import { classificationItems } from "../../data/classification/classificationItems";
-// import { RenderClassificationItemSvg } from "../../assets/Classification/classificationItemSvgs";
-
-// // ---------- 실제 데이터 기반 색상 계열 ----------
-// const COLOR_FAMILIES = [
-//   "natural",
-//   "red",
-//   "orange",
-//   "yellow",
-//   "green",
-//   "blue",
-//   "purple",
-//   "pink",
-//   "brown",
-
-//   "white",
-//   "black",
-// ] as const;
-// const COLOR_PALETTE: {
-//   id: ColorFamily;
-//   hex: string;
-// }[] = [
-//   { id: "natural", hex: "#FFFFFF" },
-
-//   { id: "red", hex: "#E53935" },
-//   { id: "orange", hex: "#FB8C00" },
-//   { id: "yellow", hex: "#FDD835" },
-//   { id: "green", hex: "#43A047" },
-//   { id: "blue", hex: "#42A5F5" },
-//   { id: "purple", hex: "#8E24AA" },
-//   { id: "pink", hex: "#F06292" },
-//   { id: "brown", hex: "#8D6E63" },
-
-//   { id: "white", hex: "#FAFAFA" },
-//   { id: "black", hex: "#424242" },
-// ];
-
-// type ColorFamily = (typeof COLOR_FAMILIES)[number];
-
-// const categoryStickerKeys1 = [
-//   "medal",
-//   "starNecklace",
-//   "starSunglasses",
-//   "starOrnament",
-//   "starCake",
-//   "starClock",
-//   "starButton",
-//   "starfish",
-//   "starPillow",
-//   "starWand",
-//   "starBalloon1",
-//   "starBalloon",
-//   "starCookie",
-//   "heartNecklace",
-//   "heartGem",
-//   "heartSunglasses",
-//   "heartClock",
-//   "heartButton",
-//   "heartCake",
-//   "heartPillow",
-//   "heartLollipop",
-//   "heartBalloon",
-//   "heartCookie",
-//   "pizzaSlice",
-//   "watermelonSlice",
-//   "triangleCookie",
-//   "sailboat",
-//   "mountain",
-//   "tent",
-//   "pyramid",
-//   "triangleKimbap",
-//   "triangleSandwich",
-//   "flag",
-//   "christmasTree",
-//   "partyHat",
-//   "triangleInstrument",
-//   "triangleRuller",
-//   "frame",
-//   "switch",
-//   "remoteControl",
-//   "phone",
-//   "squareSunglasses",
-//   "squareCakeSlice",
-//   "calculator",
-//   "laptop",
-//   "refrigerator",
-//   "bookshelf",
-//   "door",
-//   "squareClock",
-//   "giftBox1",
-//   "giftBox",
-//   "tv",
-//   "pillow",
-//   "microwave",
-//   "bread",
-//   "calendar",
-//   "window1",
-//   "window",
-//   "book",
-//   "box",
-//   "chocolateBar",
-//   "envelop",
-//   "sun",
-//   "roundBalloon",
-//   "fullMoon",
-//   "plate",
-//   "tennisBall",
-//   "baseball",
-//   "basketball",
-//   "sunglasses",
-//   "lollipop",
-//   "wheel",
-//   "circleClock",
-//   "donut1",
-//   "button1",
-//   "button2",
-//   "dog",
-//   "cat",
-//   "rabbit",
-//   "chicken",
-//   "duck",
-//   "penguin",
-//   "whale",
-//   "shark",
-//   "octopus",
-//   "squid",
-//   "apple",
-//   "banana",
-//   "strawberry",
-//   "watermelon",
-//   "carrot",
-//   "cucumber",
-//   "mushroom",
-//   "tomato",
-//   "broccoli",
-//   "corn",
-//   "rice",
-//   "gimbap",
-//   "pizza",
-//   "hamburger",
-//   "cake",
-//   "cookie",
-//   "iceCream",
-//   "car",
-//   "bus",
-//   "train",
-//   "airplane",
-//   "ship",
-//   "bicycle",
-//   "helicopter",
-//   "boat",
-//   "candy",
-//   "donut",
-//   "chocolate",
-//   "pig",
-//   "bear",
-//   "cow",
-//   "owl",
-//   "parrot",
-//   "sparrow",
-//   "jellyfish",
-//   "crab",
-//   "stingray",
-//   "grape",
-//   "tangerine",
-//   "peach",
-//   "eggplant",
-//   "chili",
-//   "pumpkin",
-//   "soup",
-//   "sandwich",
-//   "dumpling",
-//   "submarine",
-//   "rocket",
-//   "hotAirBalloon",
-//   "truck",
-//   "excavator",
-//   "subway",
-//   "cementMixer",
-//   "ball",
-// ];
-
-// function resolveVariant(obj: ClassificationItem, familyId: ColorFamily) {
-//   return obj.variants.find((v) => v.colorId === familyId);
-// }
-
-// export default function StickerGalleryScreen() {
-//   const navigation = useNavigation<any>();
-//   const [selectedFamily, setSelectedFamily] = useState<ColorFamily>("natural");
-//   const [unlockedStickers, setUnlockedStickers] = useState<string[]>([]);
-
-//   return (
-//     <Container>
-//       <AppHeader
-//         onBackPress={() => navigation.goBack()}
-//         title={`통합 스티커북 (${unlockedStickers.length}/ ${categoryStickerKeys1.length})`}
-//         onMascotPress={() => navigation.navigate("SettingScreen")}
-//       />
-
-//       {/* 2. 색상 선택 바 */}
-//       <ColorPickerBar>
-//         {COLOR_PALETTE.map(({ id, hex }) => (
-//           <ColorButton
-//             key={id}
-//             color={hex}
-//             isSelected={selectedFamily === id}
-//             onPress={() => setSelectedFamily(id)}
-//           />
-//         ))}
-//       </ColorPickerBar>
-
-//       {/* 3. 스티커 그리드 목록 */}
-//       <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 300 }}>
-//         <GridContainer>
-//           {categoryStickerKeys1.map((key) => {
-//             const obj = classificationItems.find((o) => o.id === key);
-//             const isUnlocked = unlockedStickers.includes(key);
-//             const variant = obj
-//               ? resolveVariant(obj, selectedFamily)
-//               : undefined;
-
-//             return (
-//               <StickerCard key={key} isUnlocked={isUnlocked}>
-//                 <RenderClassificationItemSvg
-//                   itemId={key}
-//                   primary={variant?.primary}
-//                   secondary={variant?.secondary}
-//                   accent={variant?.accent}
-//                 />
-
-//                 <StickerName>{obj?.name ?? key}</StickerName>
-
-//                 {/* {isUnlocked ? (
-//                   <>
-//                     <RenderClassificationItemSvg
-//                       primary={variant?.primary}
-//                       secondary={variant?.secondary}
-//                       accent={variant?.accent}
-//                     />
-//                     <StickerName>{obj?.name ?? key}</StickerName>
-//                   </>
-//                 ) : (
-//                   <LockedContainer>
-//                     <RenderClassificationItemSvg
-//                       primary={variant?.primary}
-//                       secondary={variant?.secondary}
-//                       accent={variant?.accent}
-//                     />
-//                     <LockBadge>🔒</LockBadge>
-//                     <StickerName style={{ color: "#94A3B8" }}>???</StickerName>
-//                   </LockedContainer>
-//                 )} */}
-//               </StickerCard>
-//             );
-//           })}
-//         </GridContainer>
-//       </ScrollView>
-//     </Container>
-//   );
-// }
-
-// // ---------- Styled Components ----------
-
-// const Container = styled.View`
-//   flex: 1;
-//   background-color: #f8fafc;
-//   padding-bottom: 10px;
-// `;
-
-// const HeaderTitle = styled(AppText)`
-//   font-size: 18px;
-//   font-weight: bold;
-//   color: #334155;
-// `;
-
-// const TabContainer = styled.View`
-//   flex-direction: row;
-//   padding: 12px 16px 4px 16px;
-//   justify-content: space-between;
-// `;
-
-// const ModeTabButton = styled(TouchableOpacity)<{ isSelected: boolean }>`
-//   flex: 1;
-//   align-items: center;
-//   justify-content: center;
-//   padding: 10px 0;
-//   margin: 0 4px;
-//   border-radius: 14px;
-//   background-color: ${(props) => (props.isSelected ? "#3B82F6" : "#E2E8F0")};
-// `;
-
-// const ModeTabText = styled(AppText)<{ isSelected: boolean }>`
-//   font-size: 13px;
-//   font-weight: bold;
-//   color: ${(props) => (props.isSelected ? "#FFFFFF" : "#64748B")};
-// `;
-
-// const ColorPickerBar = styled.View`
-//   flex-direction: row;
-//   align-items: center;
-//   background-color: rgba(255, 255, 255, 0.9);
-//   padding: 10px 16px;
-//   margin: 10px 16px 0 16px;
-//   border-radius: 16px;
-//   justify-content: space-between;
-// `;
-
-// const ColorButton = styled(TouchableOpacity)<{
-//   color: string;
-//   isSelected: boolean;
-// }>`
-//   width: 24px;
-//   height: 24px;
-//   border-radius: 12px;
-//   background-color: ${(props) => props.color};
-//   border-width: ${(props) => (props.isSelected ? "2.5px" : "1px")};
-//   border-color: ${(props) => (props.isSelected ? "#1E293B" : "#CBD5E1")};
-// `;
-
-// const GridContainer = styled.View`
-//   flex-direction: row;
-//   flex-wrap: wrap;
-//   justify-content: space-between;
-// `;
-
-// const StickerCard = styled.View<{ isUnlocked: boolean }>`
-//   width: 30%;
-//   aspect-ratio: 1;
-//   background-color: ${(props) =>
-//     props.isUnlocked ? "#FFFFFF" : "rgba(241, 245, 249, 0.7)"};
-//   border-radius: 20px;
-//   align-items: center;
-//   justify-content: center;
-//   margin-bottom: 15px;
-//   padding: 8px;
-//   elevation: ${(props) => (props.isUnlocked ? 3 : 0)};
-//   shadow-color: #000;
-//   shadow-offset: 0px 2px;
-//   shadow-opacity: ${(props) => (props.isUnlocked ? 0.05 : 0)};
-//   shadow-radius: 4px;
-// `;
-
-// const LockedContainer = styled.View`
-//   align-items: center;
-//   justify-content: center;
-//   opacity: 0.5;
-// `;
-
-// const LockBadge = styled(AppText)`
-//   position: absolute;
-//   font-size: 18px;
-// `;
-
-// const StickerName = styled(AppText)`
-//   font-size: 11px;
-//   color: #64748b;
-//   margin-top: 6px;
-//   font-weight: bold;
-// `;
-
-import React, { useState, useMemo } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import React, { useState, useMemo, useCallback } from "react";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { AppText } from "../../utils/AppText";
 import AppHeader from "../../components/AppHeader";
-import { ClassificationItem } from "../../types/game";
+import CustomAlert from "../../components/CustomAlert";
 import { classificationItems } from "../../data/classification/classificationItems";
 import { RenderClassificationItemSvg } from "../../assets/Classification/classificationItemSvgs";
 
-// ---------- 실제 데이터 기반 색상 계열 ----------
-const COLOR_FAMILIES = [
-  "natural",
-  "red",
-  "orange",
-  "yellow",
-  "green",
-  "blue",
-  "purple",
-  "pink",
-  "brown",
-  "white",
-  "black",
-] as const;
+const UNLOCKED_STICKERS_KEY = "@unlocked_stickers";
 
-const COLOR_PALETTE: {
-  id: ColorFamily;
-  hex: string;
-}[] = [
-  { id: "natural", hex: "#FFFFFF" },
-  { id: "red", hex: "#E53935" },
-  { id: "orange", hex: "#FB8C00" },
-  { id: "yellow", hex: "#FDD835" },
-  { id: "green", hex: "#43A047" },
-  { id: "blue", hex: "#42A5F5" },
-  { id: "purple", hex: "#8E24AA" },
-  { id: "pink", hex: "#F06292" },
-  { id: "brown", hex: "#8D6E63" },
-  { id: "white", hex: "#FAFAFA" },
-  { id: "black", hex: "#424242" },
-];
-
-type ColorFamily = (typeof COLOR_FAMILIES)[number];
-
-const categoryStickerKeys1 = [
+// 전체 스티커 키 리스트
+const ALL_STICKER_KEYS = [
   "medal",
   "starNecklace",
   "starSunglasses",
@@ -554,134 +157,195 @@ const categoryStickerKeys1 = [
   "ball",
 ];
 
-function resolveVariant(obj: ClassificationItem, familyId: ColorFamily) {
-  return obj.variants.find((v) => v.colorId === familyId);
-}
-
 export default function StickerGalleryScreen() {
   const navigation = useNavigation<any>();
-  const [selectedFamily, setSelectedFamily] = useState<ColorFamily>("natural");
   const [unlockedStickers, setUnlockedStickers] = useState<string[]>([]);
 
-  // 선택된 색상(selectedFamily)의 variant가 존재하는 스티커만 필터링
-  const filteredStickerKeys = useMemo(() => {
-    return categoryStickerKeys1.filter((key) => {
-      const obj = classificationItems.find((o) => o.id === key);
-      if (!obj) return false;
-      return !!resolveVariant(obj, selectedFamily);
-    });
-  }, [selectedFamily]);
+  // 이스터에그 카운터
+  const [easterEggCount, setEasterEggCount] = useState(0);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
+  // AsyncStorage에서 해금 스티커 목록 불러오기
+  useFocusEffect(
+    useCallback(() => {
+      let isMounted = true;
+      const loadUnlockedStickers = async () => {
+        try {
+          const stored = await AsyncStorage.getItem(UNLOCKED_STICKERS_KEY);
+          if (isMounted) {
+            setUnlockedStickers(stored ? JSON.parse(stored) : []);
+          }
+        } catch (e) {
+          console.error("스티커 데이터 로딩 실패", e);
+        }
+      };
+
+      loadUnlockedStickers();
+      return () => {
+        isMounted = false;
+      };
+    }, []),
+  );
+
+  // 헤더 5연타 이스터에그 발동
+  // const handleEasterEggTap = async () => {
+  //   const nextCount = easterEggCount + 1;
+  //   setEasterEggCount(nextCount);
+
+  //   if (nextCount >= 5) {
+  //     setEasterEggCount(0);
+  //     if (!unlockedStickers.includes("medal")) {
+  //       const updated = [...unlockedStickers, "medal"];
+  //       setUnlockedStickers(updated);
+  //       await AsyncStorage.setItem(
+  //         UNLOCKED_STICKERS_KEY,
+  //         JSON.stringify(updated),
+  //       );
+  //       setAlertMessage(
+  //         "🎉 이스터에그 발견! 비밀 메달 스티커가 해금되었습니다!",
+  //       );
+  //     } else {
+  //       setAlertMessage("✨ 이미 이스터에그 스티커를 획득했어요!");
+  //     }
+  //     setAlertVisible(true);
+  //   }
+  // };
+
+  // 수집률 계산
+  const totalCount = ALL_STICKER_KEYS.length;
+  const unlockedCount = unlockedStickers.filter((id) =>
+    ALL_STICKER_KEYS.includes(id),
+  ).length;
+  const progressPercent =
+    totalCount > 0 ? Math.round((unlockedCount / totalCount) * 100) : 0;
 
   return (
     <Container>
       <AppHeader
         onBackPress={() => navigation.goBack()}
-        title={`통합 스티커북 (${unlockedStickers.length}/ ${categoryStickerKeys1.length})`}
+        title={`스티커북 (${unlockedCount}/${totalCount})`}
         onMascotPress={() => navigation.navigate("SettingScreen")}
       />
 
-      {/* 2. 색상 선택 바 */}
-      <ColorPickerBar>
-        {COLOR_PALETTE.map(({ id, hex }) => (
-          <ColorButton
-            key={id}
-            color={hex}
-            isSelected={selectedFamily === id}
-            onPress={() => setSelectedFamily(id)}
-          />
-        ))}
-      </ColorPickerBar>
+      {/* 1. 수집 진행률 카드 */}
+      <ProgressCard>
+        <ProgressInfoRow>
+          <ProgressTitle>스티커 수집률</ProgressTitle>
+          <ProgressCount>
+            {unlockedCount} / {totalCount} ({progressPercent}%)
+          </ProgressCount>
+        </ProgressInfoRow>
+        <ProgressBarBackground>
+          <ProgressBarFill percent={progressPercent} />
+        </ProgressBarBackground>
+      </ProgressCard>
 
-      {/* 3. 스티커 그리드 목록 */}
-      <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 300 }}>
-        {filteredStickerKeys.length > 0 ? (
-          <GridContainer>
-            {filteredStickerKeys.map((key) => {
-              const obj = classificationItems.find((o) => o.id === key);
-              const isUnlocked = unlockedStickers.includes(key);
-              const variant = obj
-                ? resolveVariant(obj, selectedFamily)
-                : undefined;
+      {/* 2. 스티커 그리드 (실루엣 없이 물음표 + ???) */}
+      <ScrollView
+        contentContainerStyle={{
+          paddingHorizontal: 16,
+          paddingTop: 8,
+          paddingBottom: 100,
+        }}
+        showsVerticalScrollIndicator={false}
+      >
+        <GridContainer>
+          {ALL_STICKER_KEYS.map((key) => {
+            const obj = classificationItems.find((o) => o.id === key);
+            const isUnlocked = unlockedStickers.includes(key);
 
-              return (
-                <StickerCard key={key} isUnlocked={isUnlocked}>
-                  <RenderClassificationItemSvg
-                    itemId={key}
-                    primary={variant?.primary}
-                    secondary={variant?.secondary}
-                    accent={variant?.accent}
-                  />
-                  <StickerName>{obj?.name ?? key}</StickerName>
-                </StickerCard>
-              );
-            })}
-          </GridContainer>
-        ) : (
-          <EmptyContainer>
-            <EmptyText>해당 색상의 스티커가 없습니다.</EmptyText>
-          </EmptyContainer>
-        )}
+            return (
+              <StickerCard
+                key={key}
+                isUnlocked={isUnlocked}
+                activeOpacity={isUnlocked ? 0.8 : 1}
+              >
+                {isUnlocked ? (
+                  <>
+                    {/* 🔓 해금 상태: 문자열 itemId 기반 SVG + 스티커 이름 */}
+                    <StickerImageArea>
+                      <RenderClassificationItemSvg itemId={key} size={55} />
+                    </StickerImageArea>
+                    <StickerName numberOfLines={1}>
+                      {obj?.name ?? key}
+                    </StickerName>
+                  </>
+                ) : (
+                  <>
+                    {/* 🔒 미해금 상태: 실루엣 없이 ❓ + ??? */}
+                    <StickerImageArea>
+                      <QuestionMark>❓</QuestionMark>
+                    </StickerImageArea>
+                    <LockedName>???</LockedName>
+                  </>
+                )}
+              </StickerCard>
+            );
+          })}
+        </GridContainer>
       </ScrollView>
+
+      {/* 이스터에그 알럿 */}
+      <CustomAlert
+        visible={alertVisible}
+        title="이스터에그!"
+        message={alertMessage}
+        onClose={() => setAlertVisible(false)}
+      />
     </Container>
   );
 }
 
-// ---------- Styled Components ----------
+/* ================================================================
+   Styled Components
+================================================================ */
 
 const Container = styled.View`
   flex: 1;
   background-color: #f8fafc;
-  padding-bottom: 10px;
 `;
 
-const HeaderTitle = styled(AppText)`
-  font-size: 18px;
-  font-weight: bold;
-  color: #334155;
+const ProgressCard = styled.View`
+  margin: 12px 20px 8px 20px;
+  padding: 14px 16px;
+  background-color: #ffffff;
+  border-radius: 18px;
+  elevation: 2;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
 `;
 
-const TabContainer = styled.View`
+const ProgressInfoRow = styled.View`
   flex-direction: row;
-  padding: 12px 16px 4px 16px;
   justify-content: space-between;
-`;
-
-const ModeTabButton = styled(TouchableOpacity)<{ isSelected: boolean }>`
-  flex: 1;
   align-items: center;
-  justify-content: center;
-  padding: 10px 0;
-  margin: 0 4px;
-  border-radius: 14px;
-  background-color: ${(props) => (props.isSelected ? "#3B82F6" : "#E2E8F0")};
+  margin-bottom: 8px;
 `;
 
-const ModeTabText = styled(AppText)<{ isSelected: boolean }>`
+const ProgressTitle = styled(AppText)`
   font-size: 13px;
-  font-weight: bold;
-  color: ${(props) => (props.isSelected ? "#FFFFFF" : "#64748B")};
+  font-weight: 700;
+  color: #475569;
 `;
 
-const ColorPickerBar = styled.View`
-  flex-direction: row;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 10px 16px;
-  margin: 10px 16px 0 16px;
-  border-radius: 16px;
-  justify-content: space-between;
+const ProgressCount = styled(AppText)`
+  font-size: 13px;
+  font-weight: 800;
+  color: #7c5cff;
 `;
 
-const ColorButton = styled(TouchableOpacity)<{
-  color: string;
-  isSelected: boolean;
-}>`
-  width: 24px;
-  height: 24px;
-  border-radius: 12px;
-  background-color: ${(props) => props.color};
-  border-width: ${(props) => (props.isSelected ? "2.5px" : "1px")};
-  border-color: ${(props) => (props.isSelected ? "#1E293B" : "#CBD5E1")};
+const ProgressBarBackground = styled.View`
+  height: 10px;
+  background-color: #f1f5f9;
+  border-radius: 5px;
+  overflow: hidden;
+`;
+
+const ProgressBarFill = styled.View<{ percent: number }>`
+  height: 100%;
+  width: ${(props) => props.percent}%;
+  background-color: #7c5cff;
+  border-radius: 5px;
 `;
 
 const GridContainer = styled.View`
@@ -690,48 +354,46 @@ const GridContainer = styled.View`
   justify-content: space-between;
 `;
 
-const StickerCard = styled.View<{ isUnlocked: boolean }>`
+const StickerCard = styled(TouchableOpacity)<{ isUnlocked: boolean }>`
   width: 30%;
-  aspect-ratio: 1;
-  background-color: ${(props) =>
-    props.isUnlocked ? "#FFFFFF" : "rgba(241, 245, 249, 0.7)"};
-  border-radius: 20px;
+  height: 110px;
+  background-color: ${(props) => (props.isUnlocked ? "#FFFFFF" : "#F1F5F9")};
+  border-radius: 18px;
   align-items: center;
   justify-content: center;
-  margin-bottom: 15px;
-  padding: 8px;
+  margin-bottom: 12px;
+  padding: 6px;
   elevation: ${(props) => (props.isUnlocked ? 3 : 0)};
-  shadow-color: #000;
-  shadow-offset: 0px 2px;
-  shadow-opacity: ${(props) => (props.isUnlocked ? 0.05 : 0)};
-  shadow-radius: 4px;
+  box-shadow: 0px 2px 6px
+    ${(props) => (props.isUnlocked ? "rgba(0, 0, 0, 0.06)" : "transparent")};
+  border-width: ${(props) => (props.isUnlocked ? 1.5 : 1)}px;
+  border-color: ${(props) => (props.isUnlocked ? "#CBD5E1" : "#E2E8F0")};
+  border-style: ${(props) => (props.isUnlocked ? "solid" : "dashed")};
 `;
 
-const LockedContainer = styled.View`
+const StickerImageArea = styled.View`
+  height: 68px;
+  width: 100%;
   align-items: center;
   justify-content: center;
-  opacity: 0.5;
 `;
 
-const LockBadge = styled(AppText)`
-  position: absolute;
-  font-size: 18px;
+const QuestionMark = styled(AppText)`
+  font-size: 32px;
+  opacity: 0.5;
 `;
 
 const StickerName = styled(AppText)`
   font-size: 11px;
-  color: #64748b;
-  margin-top: 6px;
-  font-weight: bold;
+  color: #334155;
+  margin-top: 4px;
+  font-weight: 700;
+  text-align: center;
 `;
 
-const EmptyContainer = styled.View`
-  padding: 40px 0;
-  align-items: center;
-  justify-content: center;
-`;
-
-const EmptyText = styled(AppText)`
-  font-size: 14px;
+const LockedName = styled(AppText)`
+  font-size: 11px;
   color: #94a3b8;
+  margin-top: 4px;
+  font-weight: 700;
 `;

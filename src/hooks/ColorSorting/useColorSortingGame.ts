@@ -4,6 +4,7 @@ import { classificationItems } from "../../data/classification/classificationIte
 import { colorSortingLevels } from "../../types/colorSortingLevels";
 import { generateColorSortingProblem } from "../../generators/generateColorSortingProblem";
 import { ColorSortingProblem } from "../../types/colorSotringTypes";
+import { unlockStickers } from "../../utils/stickerStorage";
 
 export type RoundResult = "correct" | "wrong" | null;
 
@@ -15,6 +16,10 @@ type UseColorSortingGameProps = {
 const STAR_PER_ROUND = 0.5; // 10라운드 × 0.5 = 별 5개
 const MAX_MISTAKES = 2; // 오답 드롭은 2번까지 허용
 const AUTO_NEXT_DELAY = 400; // 라운드 완료 후 다음 라운드까지 대기(ms)
+const STICKER_START_LEVEL = 5; // 레벨 1~4는 기본도형이라 스티커 없음
+// 문제 object → 스티커 id (classificationItems의 id와 같아야 함)
+const getStickerId = (object: { id: string; itemId?: string }) =>
+  object.itemId ?? object.id;
 export default function useColorSortingGame({
   initialLevel = 1,
   totalRounds,
@@ -92,15 +97,18 @@ export default function useColorSortingGame({
       .filter((id) => objectIds.has(id));
     const wrongIds = wrongObjectIds.filter((id) => objectIds.has(id));
 
-    // 모든 svg가 처리(바구니에 들어감 + 오답으로 사라짐)되기 전엔 대기
     if (placedIds.length + wrongIds.length !== problem.objects.length) return;
 
-    // 별 획득 조건: 오답 드롭이 MAX_MISTAKES 이하 + 바구니에 들어간 건 모두 정답
+    // 맞는 바구니에 들어간 object만 추림 (스티커 해금 + 별 판정에 공통 사용)
+    const correctObjects = problem.objects.filter((object) =>
+      (placedObjects[object.colorId] ?? []).includes(object.id),
+    );
+
     const allPlacedCorrect = problem.objects.every((object) => {
       const inAnyBasket = Object.values(placedObjects)
         .flat()
         .includes(object.id);
-      if (!inAnyBasket) return true; // 오답으로 사라진 건 횟수로만 판단
+      if (!inAnyBasket) return true;
       return (placedObjects[object.colorId] ?? []).includes(object.id);
     });
     const earnedStar = wrongIds.length <= MAX_MISTAKES && allPlacedCorrect;
@@ -113,13 +121,16 @@ export default function useColorSortingGame({
           setEarnedStars((prev) => prev + STAR_PER_ROUND);
         }
 
+        // ✅ 정답 맞춘 스티커만 해금 (레벨 5부터)
+        if (testLevel >= STICKER_START_LEVEL && correctObjects.length > 0) {
+          unlockStickers(correctObjects.map(getStickerId));
+        }
+
         if (isLastRound) {
-          // 레벨 마지막 라운드에서만 모달 표시
           setRoundResult("correct");
           return;
         }
 
-        // 일반 라운드: 모달 없이 자동으로 다음 라운드
         setSelectedObjectId(null);
         setPlacedObjects({});
         setWrongObjectIds([]);
@@ -136,6 +147,7 @@ export default function useColorSortingGame({
     roundResult,
     roundIndex,
     totalRounds,
+    testLevel,
   ]);
   // ==========================================================
   // Object 선택

@@ -1,54 +1,26 @@
-// import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+// import React, { useState } from "react";
+// import { Switch } from "react-native";
 // import { useFocusEffect, useNavigation } from "@react-navigation/native";
-
-import { Text, View } from "react-native";
-
-// import AppHeader from "../../components/common/AppHeader";
-// import ResetProgressButton from "../../components/common/ResetProgressButton";
+// import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+// import Ionicons from "@expo/vector-icons/Ionicons";
+// import styled from "styled-components/native";
 
 // import { RootStackParamList } from "../../navigation/types";
-
-// import GradientBackground from "../../design-system/backgrounds/GradientBackground";
-
-// import { clearGameProgress } from "../classification/progress/progressStorage";
-// import React, { useState } from "react";
-// import {
-//   Container,
-//   Content,
-//   Divider,
-//   HeaderCenter,
-//   Section,
-//   SectionTitle,
-//   SettingCard,
-//   SettingDescription,
-//   SettingIcon,
-//   SettingInfo,
-//   SettingRow,
-//   SettingTextWrapper,
-//   SettingTitle,
-//   StyledSwitch,
-//   Title,
-// } from "./SettingScreenStyles";
-// import CustomAlert from "../../components/common/CustomAlert";
-// import {
-//   getCorrectEffectEnabled,
-//   getSoundEnabled,
-//   setCorrectEffectEnabled,
-//   setSoundEnabled,
-// } from "../audio/audioSettingsStorage";
-// import { useBackgroundMusic } from "../audio/BackgroundMusicContext";
-// import { GAME_INFO } from "../../constants/GameInfo";
-// import Ionicons from "@expo/vector-icons/Ionicons";
-// import { BASIC_COLORS } from "../../design-system/tokens/colors";
-// import { clearUnlockedStickers } from "../sticker/utils/stickerStorage";
-// import ResetStickerButton from "../../components/common/ResetStickerButton";
 // import i18n from "../../i18n";
-// import LanguageSwitcher from "../../components/common/LanguageSwitcher";
+// import { AppText } from "../../utils/AppText";
+
+// import AppHeader from "../../components/AppHeader";
+// import CustomAlert from "../../components/CustomAlert";
+// import ResetProgressButton from "../../components/Setting/ResetProgresButton";
+// import GradientBackground from "../../design-system/components/GradientBackground";
+// import { colors } from "../../design-system/tokens/colors";
+
+// import { SETTING_LEVEL_CLEAR_INFO } from "../../constants/game";
+// import { resetProgress } from "../../utils/progressStorage";
 // import {
 //   getGuardianNoticeEnabled,
 //   setGuardianNoticeEnabled,
-// } from "../../components/GuardianNotice/guardianNoticeStorage";
-// import { useLanguage } from "../../context/LanguageContext";
+// } from "../../components/GuardianNotice/getGuardianNoticeEnabled";
 
 // type NavigationProp = NativeStackNavigationProp<
 //   RootStackParamList,
@@ -57,15 +29,9 @@ import { Text, View } from "react-native";
 
 // export default function SettingScreen() {
 //   const navigation = useNavigation<NavigationProp>();
-//   // 💡 언어 변경 시 SettingScreen 전체를 리렌더링하기 위한 State
-//   //const [, setLangState] = useState(i18n.locale);
-//   useLanguage();
-//   // const handleLanguageChange = () => {
-//   //   //  setLangState(i18n.locale); // State 변경으로 화면 갱신
-//   // };
 
 //   // =========================
-//   // 게임 진행 상황 초기화
+//   // 알럿 State
 //   // =========================
 //   const [alertVisible, setAlertVisible] = useState(false);
 //   const [alertTitle, setAlertTitle] = useState("");
@@ -74,7 +40,8 @@ import { Text, View } from "react-native";
 //     (() => void) | undefined
 //   >();
 //   const [alertShowCancel, setAlertShowCancel] = useState(false);
-//   const [alertConfirmText, setAlertConfirmText] = useState(i18n.t("confirm")); // 알럿 띄우는 헬퍼 함수
+//   const [alertConfirmText, setAlertConfirmText] = useState("확인");
+
 //   const showAlert = (
 //     title: string,
 //     message: string,
@@ -85,65 +52,56 @@ import { Text, View } from "react-native";
 //     setAlertMessage(message);
 //     setAlertConfirmAction(() => onConfirm);
 //     setAlertShowCancel(options?.showCancel ?? false);
-//     setAlertConfirmText(options?.confirmText ?? i18n.t("confirm"));
+//     setAlertConfirmText(options?.confirmText ?? "확인");
 //     setAlertVisible(true);
 //   };
-//   // 알럿 확인 버튼
+
 //   const handleAlertConfirm = () => {
 //     setAlertVisible(false);
 //     alertConfirmAction?.();
 //   };
-//   // 알럿 취소 버튼
+
 //   const handleAlertCancel = () => {
 //     setAlertVisible(false);
 //   };
-//   // 공통 초기화 함수
-//   const handleResetGame = (mode: keyof typeof GAME_INFO) => {
-//     const { title } = GAME_INFO[mode];
+
+//   // =========================
+//   // 진행 상황 초기화
+//   // =========================
+//   const handleResetGame = (mode: keyof typeof SETTING_LEVEL_CLEAR_INFO) => {
+//     const info = SETTING_LEVEL_CLEAR_INFO[mode] ?? { title: "색상 분류" };
+//     const gameTitle = info.title;
 
 //     showAlert(
-//       i18n.t("reset_progress_alert_title"),
-//       i18n.t("reset_progress_alert_msg", { gameTitle: title }),
+//       "진행 상황 초기화",
+//       `${gameTitle} 게임의 진행 기록을 정말 초기화하시겠어요?`,
 //       async () => {
-//         await clearGameProgress(mode);
-//         showAlert(
-//           i18n.t("reset_complete_title"),
-//           i18n.t("reset_progress_done_msg", { gameTitle: title }),
-//         );
+//         await resetProgress(mode);
+//         showAlert("초기화 완료", `${gameTitle} 게임 기록이 초기화되었습니다.`);
 //       },
-//       { showCancel: true, confirmText: i18n.t("restart") },
+//       { showCancel: true, confirmText: "초기화" },
 //     );
 //   };
 
-//   // 기존 핸들러
 //   const handleResetColor = () => handleResetGame("color");
 //   const handleResetShape = () => handleResetGame("shape");
 //   const handleResetCategory = () => handleResetGame("category");
 
 //   // =========================
-//   // 임시 소리 설정
+//   // 보호자 안내 설정 연동
 //   // =========================
-
-//   const [soundEffect, setSoundEffect] = useState(true);
-//   // const [backgroundMusic, setBackgroundMusic] = useState(true);
-//   const [correctEffect, setCorrectEffect] = useState(true);
 //   const [guardianNoticeEnabled, setGuardianNoticeEnabledState] = useState(true);
-//   const { backgroundMusic, setBackgroundMusic } = useBackgroundMusic();
 
+//   // 화면에 진입할 때마다 저장된 설정 불러오기
 //   useFocusEffect(
 //     React.useCallback(() => {
 //       let isMounted = true;
 
 //       const loadSettings = async () => {
-//         const enabled = await getSoundEnabled();
-//         const correctEnabled = await getCorrectEffectEnabled();
-//         const guardianEnabled = await getGuardianNoticeEnabled();
-
-//         if (!isMounted) return;
-
-//         setSoundEffect(enabled);
-//         setCorrectEffect(correctEnabled);
-//         setGuardianNoticeEnabledState(guardianEnabled);
+//         const enabled = await getGuardianNoticeEnabled();
+//         if (isMounted) {
+//           setGuardianNoticeEnabledState(enabled);
+//         }
 //       };
 
 //       loadSettings();
@@ -154,191 +112,50 @@ import { Text, View } from "react-native";
 //     }, []),
 //   );
 
-//   const handleSoundToggle = async (value: boolean) => {
-//     setSoundEffect(value);
-//     await setSoundEnabled(value);
-//   };
-//   const handleCorrectToggle = async (value: boolean) => {
-//     setCorrectEffect(value);
-//     await setCorrectEffectEnabled(value);
-//   };
+//   // 스위치 변경 시 AsyncStorage에 즉시 저장
 //   const handleGuardianNoticeToggle = async (value: boolean) => {
 //     setGuardianNoticeEnabledState(value);
 //     await setGuardianNoticeEnabled(value);
 //   };
 
-//   // =========================
-//   // 스티커 초기화
-//   // =========================
-
-//   const handleResetSticker = (mode: keyof typeof GAME_INFO) => {
-//     const { title } = GAME_INFO[mode];
-
-//     showAlert(
-//       i18n.t("reset_sticker_alert_title"),
-//       i18n.t("reset_sticker_alert_msg", { gameTitle: title }),
-//       async () => {
-//         const success = await clearUnlockedStickers(mode);
-
-//         if (success) {
-//           showAlert(
-//             i18n.t("reset_complete_title"),
-//             i18n.t("reset_sticker_done_msg", { gameTitle: title }),
-//           );
-//         }
-//       },
-//       {
-//         showCancel: true,
-//         confirmText: i18n.t("reset"),
-//       },
-//     );
-//   };
-
-//   const handleResetColorStickers = () => handleResetSticker("color");
-
-//   const handleResetShapeStickers = () => handleResetSticker("shape");
-
-//   const handleResetCategoryStickers = () => handleResetSticker("category");
 //   return (
 //     <Container>
 //       <GradientBackground />
 
-//       <AppHeader
-//         onBack={() => navigation.goBack()}
-//         center={
-//           <HeaderCenter>
-//             <Title>{i18n.t("setting_title")}</Title>
-//           </HeaderCenter>
-//         }
-//       />
+//       <AppHeader title="설정" onBackPress={() => navigation.goBack()} />
 
 //       <Content>
-//         {/* =========================
-//             💡 언어 설정 (새로 추가)
-//            ========================= */}
+//         {/* 🛡️ 보호자 안내 설정 */}
 //         <Section>
-//           <SectionTitle>
-//             {i18n.t("language_section") || "언어 설정"}
-//           </SectionTitle>
-//           <SettingCard>
-//             <LanguageSwitcher />
-//           </SettingCard>
-//         </Section>
-//         {/* =========================
-//     보호자 안내 설정
-//    ========================= */}
-
-//         <Section>
-//           <SectionTitle>{i18n.t("guardian_notice_section")}</SectionTitle>
-
+//           <SectionTitle>보호자 안내</SectionTitle>
 //           <SettingCard>
 //             <SettingRow>
 //               <SettingInfo>
-//                 <SettingIcon>
+//                 <IconBadge>
 //                   <Ionicons
 //                     name="information-circle"
-//                     size={24}
-//                     color={BASIC_COLORS.SECONDARY}
+//                     size={22}
+//                     color={colors.blue}
 //                   />
-//                 </SettingIcon>
-
+//                 </IconBadge>
 //                 <SettingTextWrapper>
-//                   <SettingTitle>
-//                     {i18n.t("guardian_notice_setting_title")}
-//                   </SettingTitle>
-
+//                   <SettingTitle>보호자 안내문 팝업</SettingTitle>
 //                   <SettingDescription>
-//                     {i18n.t("guardian_notice_setting_desc")}
+//                     앱 시작 시 보호자 안내를 표시합니다.
 //                   </SettingDescription>
 //                 </SettingTextWrapper>
 //               </SettingInfo>
-
 //               <StyledSwitch
 //                 value={guardianNoticeEnabled}
-//                 onValueChange={handleGuardianNoticeToggle}
-//               />
-//             </SettingRow>
-//           </SettingCard>
-//         </Section>
-//         {/* =========================
-//             소리 설정
-//            ========================= */}
-
-//         <Section>
-//           <SectionTitle>{i18n.t("sound_section")}</SectionTitle>
-
-//           <SettingCard>
-//             <SettingRow>
-//               <SettingInfo>
-//                 <SettingIcon>
-//                   <Ionicons
-//                     name="volume-high"
-//                     size={24}
-//                     color={BASIC_COLORS.SECONDARY}
-//                   />
-//                 </SettingIcon>
-
-//                 <SettingTextWrapper>
-//                   <SettingTitle>{i18n.t("sfx_title")}</SettingTitle>
-//                   <SettingDescription>{i18n.t("sfx_desc")}</SettingDescription>
-//                 </SettingTextWrapper>
-//               </SettingInfo>
-
-//               <StyledSwitch
-//                 value={soundEffect}
-//                 onValueChange={handleSoundToggle}
-//               />
-//             </SettingRow>
-
-//             <Divider />
-
-//             <SettingRow>
-//               <SettingInfo>
-//                 <SettingIcon>
-//                   <Ionicons name="musical-notes" size={24} color="#FB7185" />
-//                 </SettingIcon>
-
-//                 <SettingTextWrapper>
-//                   <SettingTitle>{i18n.t("bgm_title")}</SettingTitle>
-//                   <SettingDescription>{i18n.t("bgm_desc")}</SettingDescription>
-//                 </SettingTextWrapper>
-//               </SettingInfo>
-//               <StyledSwitch
-//                 value={backgroundMusic}
-//                 onValueChange={setBackgroundMusic}
-//               />
-//             </SettingRow>
-
-//             <Divider />
-
-//             <SettingRow>
-//               <SettingInfo>
-//                 <SettingIcon>
-//                   <Ionicons name="sparkles" size={24} color="#FBBF24" />
-//                 </SettingIcon>
-
-//                 <SettingTextWrapper>
-//                   <SettingTitle>{i18n.t("correct_sfx_title")}</SettingTitle>
-//                   <SettingDescription>
-//                     {i18n.t("correct_sfx_desc")}
-//                   </SettingDescription>
-//                 </SettingTextWrapper>
-//               </SettingInfo>
-
-//               <StyledSwitch
-//                 value={correctEffect}
-//                 onValueChange={handleCorrectToggle}
+//                 onValueChange={handleGuardianNoticeToggle} // 👈 변경 핸들러 연결
 //               />
 //             </SettingRow>
 //           </SettingCard>
 //         </Section>
 
-//         {/* =========================
-//             진행 상황 초기화
-//            ========================= */}
-
+//         {/* 🔄 진행 상황 초기화 */}
 //         <Section>
-//           <SectionTitle>{i18n.t("reset_progress_section")}</SectionTitle>
+//           <SectionTitle>게임 기록 초기화</SectionTitle>
 //           <SettingCard>
 //             <ResetProgressButton gameType="color" onPress={handleResetColor} />
 //             <ResetProgressButton gameType="shape" onPress={handleResetShape} />
@@ -347,49 +164,446 @@ import { Text, View } from "react-native";
 //               onPress={handleResetCategory}
 //             />
 //           </SettingCard>
-//           <CustomAlert
-//             visible={alertVisible}
-//             title={alertTitle}
-//             message={alertMessage}
-//             onClose={handleAlertConfirm}
-//             showCancel={alertShowCancel}
-//             onCancel={handleAlertCancel}
-//             confirmText={alertConfirmText}
-//           />
-//         </Section>
-//         {/* =========================
-//     스티커 초기화
-//    ========================= */}
-
-//         <Section>
-//           <SectionTitle>{i18n.t("reset_sticker_section")}</SectionTitle>
-
-//           <SettingCard>
-//             <ResetStickerButton
-//               gameType="color"
-//               onPress={handleResetColorStickers}
-//             />
-
-//             <ResetStickerButton
-//               gameType="shape"
-//               onPress={handleResetShapeStickers}
-//             />
-
-//             <ResetStickerButton
-//               gameType="category"
-//               onPress={handleResetCategoryStickers}
-//             />
-//           </SettingCard>
 //         </Section>
 //       </Content>
+
+//       <CustomAlert
+//         visible={alertVisible}
+//         title={alertTitle}
+//         message={alertMessage}
+//         onClose={handleAlertConfirm}
+//         showCancel={alertShowCancel}
+//         onCancel={handleAlertCancel}
+//         confirmText={alertConfirmText}
+//       />
 //     </Container>
 //   );
 // }
 
+// /* ================================================================
+//    Styled Components (Kids Playground Design System)
+// ================================================================ */
+
+// export const Container = styled.View`
+//   flex: 1;
+// `;
+
+// export const Content = styled.ScrollView.attrs({
+//   contentContainerStyle: {
+//     paddingHorizontal: 20,
+//     paddingTop: 12,
+//     paddingBottom: 48,
+//   },
+//   showsVerticalScrollIndicator: false,
+// })`
+//   flex: 1;
+// `;
+
+// export const Section = styled.View`
+//   margin-bottom: 24px;
+// `;
+
+// export const SectionTitle = styled(AppText)`
+//   margin-bottom: 10px;
+//   padding-left: 8px;
+//   font-family: ${(props) => props.theme.fontFamily};
+//   font-size: 20px;
+//   font-weight: 800;
+//   color: ${colors.textGroup.primary};
+// `;
+
+// export const SettingCard = styled.View`
+//   padding: 16px;
+//   background-color: rgba(255, 255, 255, 0.88);
+//   border-radius: 24px;
+//   border-width: 1.5px;
+//   border-color: ${colors.border.default};
+//   gap: 12px;
+//   elevation: 2;
+//   box-shadow: 0px 4px 12px rgba(124, 92, 255, 0.06);
+// `;
+
+// export const SettingRow = styled.View`
+//   min-height: 68px;
+//   flex-direction: row;
+//   align-items: center;
+//   justify-content: space-between;
+// `;
+
+// export const SettingInfo = styled.View`
+//   flex: 1;
+//   flex-direction: row;
+//   align-items: center;
+// `;
+
+// export const IconBadge = styled.View`
+//   width: 42px;
+//   height: 42px;
+//   border-radius: 21px;
+
+//   align-items: center;
+//   justify-content: center;
+//   margin-right: 12px;
+// `;
+
+// export const SettingTextWrapper = styled.View`
+//   flex: 1;
+//   padding-right: 12px;
+// `;
+
+// export const SettingTitle = styled(AppText)`
+//   font-family: ${(props) => props.theme.fontFamily};
+//   font-size: 16px;
+//   font-weight: 700;
+//   color: ${colors.textGroup.primary};
+// `;
+
+// export const SettingDescription = styled(AppText)`
+//   margin-top: 2px;
+//   font-family: ${(props) => props.theme.fontFamily};
+//   font-size: 14px;
+//   color: ${colors.textGroup.secondary};
+// `;
+
+// export const Divider = styled.View`
+//   height: 1.5px;
+//   background-color: ${colors.border.default};
+//   opacity: 0.5;
+//   margin-vertical: 4px;
+// `;
+
+// export const StyledSwitch = styled(Switch).attrs({
+//   trackColor: {
+//     false: "#E6E1F4",
+//     true: colors.mint,
+//   },
+//   thumbColor: "#FFFFFF",
+//   ios_backgroundColor: "#E6E1F4",
+// })``;
+
+import React, { useState } from "react";
+import { Switch } from "react-native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import styled from "styled-components/native";
+
+import { RootStackParamList } from "../../navigation/types";
+import i18n from "../../i18n";
+import { AppText } from "../../utils/AppText";
+
+import AppHeader from "../../components/AppHeader";
+import CustomAlert from "../../components/CustomAlert";
+import ResetProgressButton from "../../components/Setting/ResetProgresButton";
+import GradientBackground from "../../design-system/components/GradientBackground";
+import { colors } from "../../design-system/tokens/colors";
+
+import { SETTING_LEVEL_CLEAR_INFO } from "../../constants/game";
+import { resetProgress } from "../../utils/progressStorage";
+import {
+  getGuardianNoticeEnabled,
+  setGuardianNoticeEnabled,
+} from "../../components/GuardianNotice/getGuardianNoticeEnabled";
+import { resetUnlockedStickers } from "../../utils/stickerStorage";
+
+type NavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "SettingScreen"
+>;
+
 export default function SettingScreen() {
+  const navigation = useNavigation<NavigationProp>();
+
+  // =========================
+  // 알럿 State
+  // =========================
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertConfirmAction, setAlertConfirmAction] = useState<
+    (() => void) | undefined
+  >();
+  const [alertShowCancel, setAlertShowCancel] = useState(false);
+  const [alertConfirmText, setAlertConfirmText] = useState("확인");
+
+  const showAlert = (
+    title: string,
+    message: string,
+    onConfirm?: () => void,
+    options?: { showCancel?: boolean; confirmText?: string },
+  ) => {
+    setAlertTitle(title);
+    setAlertMessage(message);
+    setAlertConfirmAction(() => onConfirm);
+    setAlertShowCancel(options?.showCancel ?? false);
+    setAlertConfirmText(options?.confirmText ?? "확인");
+    setAlertVisible(true);
+  };
+
+  const handleAlertConfirm = () => {
+    setAlertVisible(false);
+    alertConfirmAction?.();
+  };
+
+  const handleAlertCancel = () => {
+    setAlertVisible(false);
+  };
+
+  // =========================
+  // 진행 상황 및 스티커 초기화
+  // =========================
+  const handleResetGame = (mode: keyof typeof SETTING_LEVEL_CLEAR_INFO) => {
+    const info = SETTING_LEVEL_CLEAR_INFO[mode] ?? { title: "색상 분류" };
+    const gameTitle = info.title;
+
+    showAlert(
+      "진행 상황 초기화",
+      `${gameTitle} 게임의 진행 기록을 정말 초기화하시겠어요?`,
+      async () => {
+        await resetProgress(mode);
+        showAlert("초기화 완료", `${gameTitle} 게임 기록이 초기화되었습니다.`);
+      },
+      { showCancel: true, confirmText: "초기화" },
+    );
+  };
+
+  const handleResetColor = () => handleResetGame("color");
+  const handleResetShape = () => handleResetGame("shape");
+  const handleResetCategory = () => handleResetGame("category");
+
+  // 🎁 스티커 수집 기록 전체 초기화
+  const handleResetStickers = () => {
+    showAlert(
+      "스티커 초기화",
+      "모은 스티커가 모두 잠금 상태로 돌아가요. 계속할까요?",
+      async () => {
+        const ok = await resetUnlockedStickers();
+        showAlert(
+          ok ? "초기화 완료" : "초기화 실패",
+          ok
+            ? "스티커가 모두 초기화되었습니다."
+            : "초기화 중 문제가 발생했습니다. 다시 시도해 주세요.",
+        );
+      },
+      { showCancel: true, confirmText: "초기화" },
+    );
+  };
+
+  // =========================
+  // 보호자 안내 설정 연동
+  // =========================
+  const [guardianNoticeEnabled, setGuardianNoticeEnabledState] = useState(true);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      let isMounted = true;
+
+      const loadSettings = async () => {
+        const enabled = await getGuardianNoticeEnabled();
+        if (isMounted) {
+          setGuardianNoticeEnabledState(enabled);
+        }
+      };
+
+      loadSettings();
+
+      return () => {
+        isMounted = false;
+      };
+    }, []),
+  );
+
+  const handleGuardianNoticeToggle = async (value: boolean) => {
+    setGuardianNoticeEnabledState(value);
+    await setGuardianNoticeEnabled(value);
+  };
+
   return (
-    <View>
-      <Text>Setting SCreen</Text>
-    </View>
+    <Container>
+      <GradientBackground />
+
+      <AppHeader title="설정" onBackPress={() => navigation.goBack()} />
+
+      <Content>
+        {/* 🛡️ 보호자 안내 설정 */}
+        <Section>
+          <SectionTitle>보호자 안내</SectionTitle>
+          <SettingCard>
+            <SettingRow>
+              <SettingInfo>
+                <IconBadge>
+                  <Ionicons
+                    name="information-circle"
+                    size={22}
+                    color={colors.blue}
+                  />
+                </IconBadge>
+                <SettingTextWrapper>
+                  <SettingTitle>보호자 안내문 팝업</SettingTitle>
+                  <SettingDescription>
+                    앱 시작 시 보호자 안내를 표시합니다.
+                  </SettingDescription>
+                </SettingTextWrapper>
+              </SettingInfo>
+              <StyledSwitch
+                value={guardianNoticeEnabled}
+                onValueChange={handleGuardianNoticeToggle}
+              />
+            </SettingRow>
+          </SettingCard>
+        </Section>
+
+        {/* 🔄 진행 상황 초기화 */}
+        <Section>
+          <SectionTitle>게임 및 수집 기록 초기화</SectionTitle>
+          <SettingCard>
+            <ResetProgressButton gameType="color" onPress={handleResetColor} />
+            <Divider />
+            <ResetProgressButton gameType="shape" onPress={handleResetShape} />
+            <Divider />
+            <ResetProgressButton
+              gameType="category"
+              onPress={handleResetCategory}
+            />
+            <Divider />
+            {/* 🎁 스티커 전용 초기화 버튼 */}
+            <ResetStickerButtonRow onPress={handleResetStickers}>
+              <SettingInfo>
+                <IconBadge style={{ backgroundColor: "#FFF0F0" }}>
+                  <Ionicons name="trash-outline" size={20} color="#FF6F6F" />
+                </IconBadge>
+                <SettingTextWrapper>
+                  <SettingTitle style={{ color: "#FF5252" }}>
+                    스티커북 초기화
+                  </SettingTitle>
+                  <SettingDescription>
+                    수집한 모든 스티커를 초기 상태로 돌립니다.
+                  </SettingDescription>
+                </SettingTextWrapper>
+              </SettingInfo>
+              <Ionicons name="chevron-forward" size={18} color="#9C99AA" />
+            </ResetStickerButtonRow>
+          </SettingCard>
+        </Section>
+      </Content>
+
+      <CustomAlert
+        visible={alertVisible}
+        title={alertTitle}
+        message={alertMessage}
+        onClose={handleAlertConfirm}
+        showCancel={alertShowCancel}
+        onCancel={handleAlertCancel}
+        confirmText={alertConfirmText}
+      />
+    </Container>
   );
 }
+
+/* ================================================================
+   Styled Components (Kids Playground Design System)
+================================================================ */
+
+export const Container = styled.View`
+  flex: 1;
+`;
+
+export const Content = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    paddingHorizontal: 20,
+    paddingTop: 12,
+    paddingBottom: 48,
+  },
+  showsVerticalScrollIndicator: false,
+})`
+  flex: 1;
+`;
+
+export const Section = styled.View`
+  margin-bottom: 24px;
+`;
+
+export const SectionTitle = styled(AppText)`
+  margin-bottom: 10px;
+  padding-left: 8px;
+  font-family: ${(props) => props.theme.fontFamily};
+  font-size: 20px;
+  font-weight: 800;
+  color: ${colors.textGroup.primary};
+`;
+
+export const SettingCard = styled.View`
+  padding: 16px;
+  background-color: rgba(255, 255, 255, 0.88);
+  border-radius: 24px;
+  border-width: 1.5px;
+  border-color: ${colors.border.default};
+  gap: 8px;
+  elevation: 2;
+  box-shadow: 0px 4px 12px rgba(124, 92, 255, 0.06);
+`;
+
+export const SettingRow = styled.View`
+  min-height: 56px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const ResetStickerButtonRow = styled.TouchableOpacity`
+  min-height: 56px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const SettingInfo = styled.View`
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const IconBadge = styled.View`
+  width: 42px;
+  height: 42px;
+  border-radius: 21px;
+  background-color: ${colors.button.secondary};
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+`;
+
+export const SettingTextWrapper = styled.View`
+  flex: 1;
+  padding-right: 12px;
+`;
+
+export const SettingTitle = styled(AppText)`
+  font-family: ${(props) => props.theme.fontFamily};
+  font-size: 16px;
+  font-weight: 700;
+  color: ${colors.textGroup.primary};
+`;
+
+export const SettingDescription = styled(AppText)`
+  margin-top: 2px;
+  font-family: ${(props) => props.theme.fontFamily};
+  font-size: 13px;
+  color: ${colors.textGroup.secondary};
+`;
+
+export const Divider = styled.View`
+  height: 1px;
+  background-color: ${colors.border.default};
+  opacity: 0.6;
+  margin-vertical: 4px;
+`;
+
+export const StyledSwitch = styled(Switch).attrs({
+  trackColor: {
+    false: "#E6E1F4",
+    true: colors.mint,
+  },
+  thumbColor: "#FFFFFF",
+  ios_backgroundColor: "#E6E1F4",
+})``;
