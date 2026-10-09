@@ -177,10 +177,15 @@ export default function CustomAlert({
   onClose,
   showCancel = false,
   onCancel,
-  confirmText = "확인",
+  confirmText = "Confirm",
 }: CustomAlertProps) {
   return (
-    <Modal transparent visible={visible} animationType="fade">
+    <Modal
+      transparent
+      visible={visible}
+      animationType="fade"
+      statusBarTranslucent
+    >
       <Overlay>
         <AlertBox>
           <AlertTitle>{title}</AlertTitle>
@@ -195,7 +200,9 @@ export default function CustomAlert({
             )}
 
             <ConfirmButton onPress={onClose} activeOpacity={0.8}>
-              <ConfirmButtonText>{confirmText}</ConfirmButtonText>
+              <ConfirmButtonText>
+                {i18n.t("confirm") || confirmText}
+              </ConfirmButtonText>
             </ConfirmButton>
           </ButtonContainer>
         </AlertBox>
@@ -225,7 +232,7 @@ const AlertTitle = styled(AppText)`
   font-family: ${(props) => props.theme.fontFamily};
   font-size: ${(props) => props.theme.typography.h2.fontSize}px;
   line-height: ${(props) => props.theme.typography.h2.lineHeight}px;
-  font-weight: ${(props) => props.theme.typography.h2.fontWeight};
+
   color: ${colors.textGroup.primary};
   margin-bottom: 8px;
   text-align: center;
@@ -235,7 +242,7 @@ const AlertMessage = styled(AppText)`
   font-family: ${(props) => props.theme.fontFamily};
   font-size: ${(props) => props.theme.typography.body.fontSize}px;
   line-height: ${(props) => props.theme.typography.body.lineHeight}px;
-  font-weight: ${(props) => props.theme.typography.body.fontWeight};
+
   color: ${colors.textGroup.secondary};
   margin-bottom: 24px;
   text-align: center;
@@ -265,7 +272,7 @@ const ConfirmButtonText = styled(AppText)`
   font-family: ${(props) => props.theme.fontFamily};
   font-size: ${(props) => props.theme.typography.button.fontSize}px;
   line-height: ${(props) => props.theme.typography.button.lineHeight}px;
-  font-weight: ${(props) => props.theme.typography.button.fontWeight};
+
   color: ${colors.white};
 `;
 
@@ -283,6 +290,6 @@ const CancelButtonText = styled(AppText)`
   font-family: ${(props) => props.theme.fontFamily};
   font-size: ${(props) => props.theme.typography.button.fontSize}px;
   line-height: ${(props) => props.theme.typography.button.lineHeight}px;
-  font-weight: ${(props) => props.theme.typography.button.fontWeight};
+
   color: ${colors.textGroup.secondary};
 `;

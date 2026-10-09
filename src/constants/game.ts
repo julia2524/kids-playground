@@ -1,5 +1,39 @@
 import { StageMapGameType } from "../types/game";
 
+// 💡 상단 필터 카테고리 데이터
+export const CATEGORY_FILTERS = [
+  {
+    id: "all",
+    labelKey: "filter_all",
+    icon: "sparkles",
+    iconColor: COLORS.white,
+  },
+  {
+    id: "classification",
+    labelKey: "filter_classification",
+    icon: "grid-outline",
+    iconColor: COLORS.purple,
+  },
+  {
+    id: "pattern",
+    labelKey: "filter_pattern",
+    icon: "repeat-outline",
+    iconColor: COLORS.blue,
+  },
+  {
+    id: "puzzle",
+    labelKey: "filter_puzzle",
+    icon: "extension-puzzle-outline",
+    iconColor: COLORS.pink,
+  },
+  {
+    id: "maze",
+    labelKey: "filter_maze",
+    icon: "magnet-outline",
+    iconColor: COLORS.mint,
+  },
+] as const;
+
 export const GAME_INFO = {
   classification: {
     title: "분류 놀이",
@@ -29,7 +63,46 @@ export const GAME_INFO = {
     icon: "magnet-outline",
   },
 } as const;
+
+// 💡 게임 카드 데이터
+export const GAME_CARDS = [
+  {
+    id: "classification",
+    titleKey: "game_classification_title",
+    descKey: "game_classification_desc",
+    bgColor: COLORS.softPink,
+    image: ASSETS.cardClassification,
+    isUnlocked: true,
+  },
+  {
+    id: "pattern",
+    titleKey: "game_pattern_title",
+    descKey: "game_pattern_desc",
+    bgColor: COLORS.softBlue,
+    image: ASSETS.cardPattern,
+    isUnlocked: false,
+  },
+  {
+    id: "puzzle",
+    titleKey: "game_puzzle_title",
+    descKey: "game_puzzle_desc",
+    bgColor: COLORS.softYellow,
+    image: ASSETS.cardPuzzle,
+    isUnlocked: false,
+  },
+  {
+    id: "maze",
+    titleKey: "game_maze_title",
+    descKey: "game_maze_desc",
+    bgColor: COLORS.softMint,
+    image: ASSETS.cardMaze,
+    isUnlocked: false,
+  },
+] as const;
+
 import i18n from "../i18n";
+import { COLORS } from "../design-system/tokens/colors";
+import { ASSETS } from "../assets/assets";
 
 // export const SETTING_LEVEL_CLEAR_INFO = {
 //   maze: {

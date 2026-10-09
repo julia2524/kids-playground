@@ -51,6 +51,7 @@ import {
   TabLabel,
 } from "./homeStyles";
 import { COLORS } from "../../design-system/tokens/colors";
+import { CATEGORY_FILTERS, GAME_CARDS } from "../../constants/game";
 // ⭐ 단일 통합 색상 테마 import
 
 type HomeNavigationProp = NativeStackNavigationProp<RootStackParamList, "Home">;
@@ -83,29 +84,27 @@ export default function HomeScreen() {
   const [guardianNoticeVisible, setGuardianNoticeVisible] = useState(false);
   const [guardianNoticeLoaded, setGuardianNoticeLoaded] = useState(false);
   // ==================================================
-  // 보호자 안내 (화면이 포커스될 때마다 상태 확인)
+  // 보호자 안내
   // ==================================================
-  useFocusEffect(
-    React.useCallback(() => {
-      let isMounted = true;
 
-      const checkGuardianNotice = async () => {
-        const enabled = await getGuardianNoticeEnabled();
+  useEffect(() => {
+    // 이미 이번 세션에서 한 번 보여줬으면 더 이상 안 띄움
+    if (hasShownGuardianNoticeThisSession) {
+      setGuardianNoticeLoaded(true);
+      return;
+    }
+    const loadGuardianNoticeSetting = async () => {
+      const enabled = await getGuardianNoticeEnabled();
 
-        if (isMounted) {
-          // 사용자가 설정에서 ON(true)으로 해두었을 때만 팝업 띄움
-          setGuardianNoticeVisible(enabled);
-          setGuardianNoticeLoaded(true);
-        }
-      };
+      if (enabled) {
+        setGuardianNoticeVisible(true);
+      }
+      hasShownGuardianNoticeThisSession = true; // 이번 앱 실행에서는 더 이상 안 보여줌
+      setGuardianNoticeLoaded(true);
+    };
 
-      checkGuardianNotice();
-
-      return () => {
-        isMounted = false;
-      };
-    }, []),
-  );
+    loadGuardianNoticeSetting();
+  }, []);
 
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertTitle, setAlertTitle] = useState("");
@@ -152,66 +151,43 @@ export default function HomeScreen() {
 
             <HeaderSubText>{i18n.t("subtitle")}</HeaderSubText>
           </HeaderTitleGroup>
-
-          {/* <IconButton
-            activeOpacity={0.8}
-            onPress={() => navigation.navigate("SettingScreen" as never)}
-          >
-            <Mascot size={50} />
-          </IconButton> */}
         </Header>
 
         {/* Hero */}
         <HeroCard>
           <HeroTextArea>
-            {/* <HeroSmall>✨ 오늘은 어떤 놀이를 해볼까?</HeroSmall> */}
+            <HeroTitle>{i18n.t("hero_title")}</HeroTitle>
 
-            <HeroTitle>
-              즐겁게 놀면서{"\n"}
-              똑똑하게 배워봐요!
-            </HeroTitle>
-
-            <HeroDescription>
-              우주 놀이동산에서 만나는{"\n"}
-              다양한 놀이와 배움!
-            </HeroDescription>
+            <HeroDescription>{i18n.t("hero_desc")}</HeroDescription>
           </HeroTextArea>
         </HeroCard>
-        {/* Game filter */}
+
+        {/* 1. 카테고리 필터 바 */}
         <FilterRow>
-          <FilterButton active>
-            <Ionicons name="sparkles" size={19} color={COLORS.white} />
-            <FilterText active>전체</FilterText>
-          </FilterButton>
-
-          <FilterButton
-            activeOpacity={0.8}
-            onPress={() => goToStageMap("classification")}
-          >
-            <Ionicons name="grid-outline" size={19} color={COLORS.purple} />
-            <FilterText>분류</FilterText>
-          </FilterButton>
-
-          <FilterButton>
-            <Ionicons name="repeat-outline" size={19} color={COLORS.blue} />
-            <FilterText>패턴</FilterText>
-          </FilterButton>
-
-          <FilterButton>
-            <Ionicons
-              name="extension-puzzle-outline"
-              size={19}
-              color={COLORS.pink}
-            />
-            <FilterText>퍼즐</FilterText>
-          </FilterButton>
-
-          <FilterButton>
-            <Ionicons name="magnet-outline" size={19} color={COLORS.mint} />
-            <FilterText>미로</FilterText>
-          </FilterButton>
+          {CATEGORY_FILTERS.map((filter) => {
+            const isActive = filter.id === "all"; // 필터 선택 상태 관리 시 활성화
+            return (
+              <FilterButton
+                key={filter.id}
+                active={isActive}
+                activeOpacity={0.8}
+                onPress={() => {
+                  if (filter.id === "classification")
+                    goToStageMap("classification");
+                }}
+              >
+                <Ionicons
+                  name={filter.icon as any}
+                  size={19}
+                  color={isActive ? COLORS.white : filter.iconColor}
+                />
+                <FilterText active={isActive}>
+                  {i18n.t(filter.labelKey)}
+                </FilterText>
+              </FilterButton>
+            );
+          })}
         </FilterRow>
-
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
@@ -220,66 +196,32 @@ export default function HomeScreen() {
             paddingBottom: 200 * compactScale,
           }}
         >
-          {/* Game Cards */}
           <GameGrid>
-            {/* 분류 */}
-            <GameCard
-              activeOpacity={0.9}
-              bgColor={COLORS.softPink}
-              onPress={() => goToStageMap("classification")}
-            >
-              <CardImage
-                source={ASSETS.cardClassification}
-                resizeMode="contain"
-              />
+            {GAME_CARDS.map((card) => {
+              const cardTitle = i18n.t(card.titleKey);
 
-              <CardBottom>
-                <CardTitle>분류 놀이</CardTitle>
-                <CardDescription>같은 것을 찾아볼까요?</CardDescription>
-              </CardBottom>
-            </GameCard>
+              return (
+                <GameCard
+                  key={card.id}
+                  activeOpacity={0.9}
+                  bgColor={card.bgColor}
+                  onPress={() => {
+                    if (card.isUnlocked) {
+                      goToStageMap(card.id as any);
+                    } else {
+                      showLockedAlert(cardTitle);
+                    }
+                  }}
+                >
+                  <CardImage source={card.image} resizeMode="contain" />
 
-            {/* 패턴 */}
-            <GameCard
-              activeOpacity={0.9}
-              bgColor={COLORS.softBlue}
-              onPress={() => showLockedAlert("패턴 놀이")}
-            >
-              <CardImage source={ASSETS.cardPattern} resizeMode="contain" />
-
-              <CardBottom>
-                <CardTitle>패턴 놀이</CardTitle>
-                <CardDescription>규칙을 찾아볼까요?</CardDescription>
-              </CardBottom>
-            </GameCard>
-
-            {/* 퍼즐 */}
-            <GameCard
-              activeOpacity={0.9}
-              bgColor={COLORS.softYellow}
-              onPress={() => showLockedAlert("퍼즐 맞추기")}
-            >
-              <CardImage source={ASSETS.cardPuzzle} resizeMode="contain" />
-
-              <CardBottom>
-                <CardTitle>퍼즐 맞추기</CardTitle>
-                <CardDescription>조각을 맞춰볼까요?</CardDescription>
-              </CardBottom>
-            </GameCard>
-
-            {/* 미로 */}
-            <GameCard
-              activeOpacity={0.9}
-              bgColor={COLORS.softMint}
-              onPress={() => showLockedAlert("미로 찾기")}
-            >
-              <CardImage source={ASSETS.cardMaze} resizeMode="contain" />
-
-              <CardBottom>
-                <CardTitle>미로 찾기</CardTitle>
-                <CardDescription>길을 찾아갈까요?</CardDescription>
-              </CardBottom>
-            </GameCard>
+                  <CardBottom>
+                    <CardTitle>{cardTitle}</CardTitle>
+                    <CardDescription>{i18n.t(card.descKey)}</CardDescription>
+                  </CardBottom>
+                </GameCard>
+              );
+            })}
           </GameGrid>
 
           {/* 번역 검증! */}
@@ -287,8 +229,6 @@ export default function HomeScreen() {
             {/* <ComingSoonEmoji>🌐</ComingSoonEmoji> */}
             <ComingSoonText>🌐 번역 검증하기</ComingSoonText>
           </ComingSoon>
-
-          {/* Footer */}
         </ScrollView>
         {/* Bottom Navigation */}
         <BottomTab bottomInset={insets.bottom}>
