@@ -24,7 +24,7 @@
   "alert_locked_message": "{{gameName}} 即将开放！",
 
   "guardian_notice_title": "家长须知",
-  "guardian_notice_p1": "本应用 program 专为 2~3 岁幼儿设计，包含简单的分类与认知游戏。",
+  "guardian_notice_p1": "这是一款为3至6岁幼儿设计的\n简单分类与认知游戏。",
   "guardian_notice_p2": "孩子使用本应用时，请家长在旁陪同与指导。",
   "guardian_notice_p3": "为了幼儿的健康成长，请避免过度使用电子设备，并合理控制使用时间和频率。",
   "guardian_notice_guide": "本应用不用于任何教育或医疗诊断与治疗目的。",
@@ -35,5 +35,99 @@
   "guardian_notice_setting_title": "家长须知弹窗",
   "guardian_notice_setting_desc": "启动应用时显示家长须知。",
   "confirm": "确认",
-  "close": "关闭"
+  "close": "关闭",
+
+  "classification_space_title": "分类宇宙",
+  "classification_hero_title": "探索哪个星球呢？",
+  "classification_hero_desc": "选择喜欢的星球开始冒险吧！",
+
+  "classification_start": "开始探索",
+
+  "planet_color_title": "颜色探险队",
+  "planet_color_subtitle": "颜色星球",
+  "planet_color_desc": "找到一样的颜色！",
+
+  "planet_shape_title": "形状探险队",
+  "planet_shape_subtitle": "形状星球",
+  "planet_shape_desc": "找到一样的形状！",
+
+  "planet_size_title": "大小探险队",
+  "planet_size_subtitle": "大小星球",
+  "planet_size_desc": "找到大和小！",
+
+  "planet_category_title": "朋友探险队",
+  "planet_category_subtitle": "朋友星球",
+  "planet_category_desc": "找到同一类朋友！",
+
+  "question_sort_by_color": "按颜色分一分吧！",
+
+  "stage_default_title": "分类游戏",
+  "stage_default_subtitle": "寻找匹配的物品！",
+
+  "stage_color_title": "颜色分类",
+  "stage_color_subtitle": "寻找相同的颜色！",
+  "stage_shape_title": "形状分类",
+  "stage_shape_subtitle": "寻找相同的形状！",
+  "stage_size_title": "大小分类",
+  "stage_size_subtitle": "区分大和小的物品！",
+  "stage_category_title": "种类分类",
+  "stage_category_subtitle": "寻找同类物品！",
+  "stage_pattern_title": "模式游戏",
+  "stage_pattern_subtitle": "寻找规律！",
+  "stage_puzzle_title": "拼图游戏",
+  "stage_puzzle_subtitle": "拼合碎片完成拼图！",
+  "stage_maze_title": "迷宫探索",
+  "stage_maze_subtitle": "寻找路线出发吧！",
+
+  "color_natural": "自然色",
+  "color_red": "红色",
+  "color_orange": "橙色",
+  "color_yellow": "黄色",
+  "color_green": "绿色",
+  "color_blue": "蓝色",
+  "color_purple": "紫色",
+  "color_pink": "粉色",
+  "color_brown": "棕色",
+  "color_black": "黑色",
+  "color_white": "白色",
+
+  "language_setting": "语言设置",
+
+  "guardian_section": "家长须知",
+  "guardian_popup_title": "显示家长须知",
+  "guardian_popup_desc": "启动应用时显示家长须知。",
+
+  "reset_progress_section": "重置游戏记录",
+
+  "reset_stickerbook_section": "重置贴纸册",
+  "reset_stickerbook_title": "重置贴纸册",
+  "reset_stickerbook_desc": "将所有收集的贴纸恢复到初始状态。",
+
+  "setting_game_maze_title": "迷宫探险",
+  "setting_game_maze_desc": "重置迷宫游戏的进度记录。",
+  "setting_game_maze_sticker_desc": "重置已获得的迷宫贴纸。",
+
+  "setting_game_puzzle_title": "拼图游戏",
+  "setting_game_puzzle_desc": "重置拼图游戏的进度记录。",
+  "setting_game_puzzle_sticker_desc": "重置已获得的拼图贴纸。",
+
+  "setting_game_pattern_title": "图案游戏",
+  "setting_game_pattern_desc": "重置图案游戏的进度记录。",
+  "setting_game_pattern_sticker_desc": "重置已获得的图案贴纸。",
+
+  "setting_game_color_title_full": "颜色分类",
+  "setting_game_color_desc_full": "重置颜色分类游戏的进度记录。",
+  "setting_game_color_sticker_desc_full": "重置已获得的颜色贴纸。",
+
+  "setting_game_shape_title_full": "形状分类",
+  "setting_game_shape_desc_full": "重置形状分类游戏的进度记录。",
+  "setting_game_shape_sticker_desc_full": "重置已获得的形状贴纸。",
+
+  "setting_game_size_title": "大小比较",
+  "setting_game_size_desc": "重置大小比较游戏的进度记录。",
+  "setting_game_size_sticker_desc": "重置已获得的大小贴纸。",
+
+  "setting_game_category_title_full": "种类分类",
+  "setting_game_category_desc_full": "重置种类分类游戏的进度记录。",
+  "setting_game_category_sticker_desc_full": "重置已获得的种类贴纸。"
 }

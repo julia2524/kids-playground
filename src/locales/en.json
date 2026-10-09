@@ -24,7 +24,7 @@
   "alert_locked_message": "{{gameName}} will be available soon!",
 
   "guardian_notice_title": "Parental Guide",
-  "guardian_notice_p1": "This app provides simple sorting and cognitive play for toddlers aged 2–3.",
+  "guardian_notice_p1": "This app provides simple sorting and cognitive play for toddlers aged 3–6.",
   "guardian_notice_p2": "Please supervise your child while they are using the app.",
   "guardian_notice_p3": "For healthy child development, please avoid excessive screen time and manage usage duration appropriately.",
   "guardian_notice_guide": "This app is not intended for educational or medical diagnosis or treatment.",
@@ -35,5 +35,98 @@
   "guardian_notice_setting_title": "Parental Guide Pop-up",
   "guardian_notice_setting_desc": "Show the parental guide when starting the app.",
   "confirm": "OK",
-  "close": "Close"
+  "close": "Close",
+
+  "classification_space_title": "Sorting Space",
+  "classification_hero_title": "Which planet shall we explore?",
+  "classification_hero_desc": "Pick a planet and start your adventure!",
+
+  "classification_start": "Start",
+
+  "planet_color_title": "Color Explorers",
+  "planet_color_subtitle": "Color Planet",
+  "planet_color_desc": "Find the same color!",
+
+  "planet_shape_title": "Shape Explorers",
+  "planet_shape_subtitle": "Shape Planet",
+  "planet_shape_desc": "Find the same shape!",
+
+  "planet_size_title": "Size Explorers",
+  "planet_size_subtitle": "Size Planet",
+  "planet_size_desc": "Find big and small!",
+
+  "planet_category_title": "Friend Explorers",
+  "planet_category_subtitle": "Friend Planet",
+  "planet_category_desc": "Find the same kind!",
+  "question_sort_by_color": "Let's sort by color!",
+
+  "stage_default_title": "Sorting Play",
+  "stage_default_subtitle": "Find the matching items!",
+
+  "stage_color_title": "Color Sorting",
+  "stage_color_subtitle": "Find the same color!",
+  "stage_shape_title": "Shape Sorting",
+  "stage_shape_subtitle": "Find the same shape!",
+  "stage_size_title": "Size Sorting",
+  "stage_size_subtitle": "Find big and small items!",
+  "stage_category_title": "Category Sorting",
+  "stage_category_subtitle": "Find the same category!",
+  "stage_pattern_title": "Pattern Play",
+  "stage_pattern_subtitle": "Find the rule!",
+  "stage_puzzle_title": "Puzzle Matching",
+  "stage_puzzle_subtitle": "Fit the pieces together!",
+  "stage_maze_title": "Maze Search",
+  "stage_maze_subtitle": "Find the path and go!",
+
+  "color_natural": "Natural",
+  "color_red": "Red",
+  "color_orange": "Orange",
+  "color_yellow": "Yellow",
+  "color_green": "Green",
+  "color_blue": "Blue",
+  "color_purple": "Purple",
+  "color_pink": "Pink",
+  "color_brown": "Brown",
+  "color_black": "Black",
+  "color_white": "White",
+
+  "language_setting": "Language",
+
+  "guardian_section": "Parent Guide",
+  "guardian_popup_title": "Show Parent Guide",
+  "guardian_popup_desc": "Show the parent guide when the app starts.",
+
+  "reset_progress_section": "Reset Game Progress",
+
+  "reset_stickerbook_section": "Reset Sticker Book",
+  "reset_stickerbook_title": "Reset Sticker Book",
+  "reset_stickerbook_desc": "Reset all collected stickers to their original state.",
+
+  "setting_game_maze_title": "Maze Adventure",
+  "setting_game_maze_desc": "Reset the progress of the maze game.",
+  "setting_game_maze_sticker_desc": "Reset all maze stickers.",
+
+  "setting_game_puzzle_title": "Puzzle Time",
+  "setting_game_puzzle_desc": "Reset the progress of the puzzle game.",
+  "setting_game_puzzle_sticker_desc": "Reset all puzzle stickers.",
+
+  "setting_game_pattern_title": "Pattern Play",
+  "setting_game_pattern_desc": "Reset the progress of the pattern game.",
+  "setting_game_pattern_sticker_desc": "Reset all pattern stickers.",
+
+  "setting_game_color_title_full": "Color Sorting",
+  "setting_game_color_desc_full": "Reset the progress of the color sorting game.",
+  "setting_game_color_sticker_desc_full": "Reset all color stickers.",
+
+  "setting_game_shape_title_full": "Shape Sorting",
+  "setting_game_shape_desc_full": "Reset the progress of the shape sorting game.",
+  "setting_game_shape_sticker_desc_full": "Reset all shape stickers.",
+
+  "setting_game_size_title": "Size Match",
+  "setting_game_size_desc": "Reset the progress of the size game.",
+  "setting_game_size_sticker_desc": "Reset all size stickers.",
+
+  "setting_game_category_title_full": "Category Sorting",
+  "setting_game_category_desc_full": "Reset the progress of the category game.",
+  "setting_game_category_sticker_desc_full": "Reset all category stickers."
 }

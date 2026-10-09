@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import {
   Dimensions,
   FlatList,
@@ -19,6 +19,8 @@ import SpaceUFO from "../../components/illustrations/SpaceUFO";
 import ShootingStar from "../../components/illustrations/ShootingStar";
 import { ASSETS } from "../../assets/assets";
 import AppHeader from "../../components/AppHeader";
+import i18n from "../../i18n";
+import { useLanguage } from "../../context/LangaugeContext";
 
 // ============================================================
 // 메인 화면과 통일된 몽환 파스텔 컬러 팔레트
@@ -65,43 +67,53 @@ type ClassificationGame = {
   accentColor: string;
   cardBg: string;
 };
-
-const GAMES: ClassificationGame[] = [
+const MENU_GAME_CONFIGS = [
   {
     id: "color",
-    title: "색깔 탐험대",
-    subtitle: "색깔 행성",
-    description: "같은 색을 찾아요!",
+    titleKey: "planet_color_title",
+    subtitleKey: "planet_color_subtitle",
+    descKey: "planet_color_desc",
     accentColor: colors.accent.color,
     cardBg: colors.cardBg.color,
   },
   {
     id: "shape",
-    title: "모양 탐험대",
-    subtitle: "모양 행성",
-    description: "같은 모양을 찾아요!",
+    titleKey: "planet_shape_title",
+    subtitleKey: "planet_shape_subtitle",
+    descKey: "planet_shape_desc",
     accentColor: colors.accent.shape,
     cardBg: colors.cardBg.shape,
   },
   {
     id: "size",
-    title: "크기 탐험대",
-    subtitle: "크기 행성",
-    description: "크고 작은 것을 찾아요!",
+    titleKey: "planet_size_title",
+    subtitleKey: "planet_size_subtitle",
+    descKey: "planet_size_desc",
     accentColor: colors.accent.size,
     cardBg: colors.cardBg.size,
   },
   {
     id: "category",
-    title: "종류 탐험대",
-    subtitle: "종류 행성",
-    description: "같은 종류를 찾아요!",
+    titleKey: "planet_category_title",
+    subtitleKey: "planet_category_subtitle",
+    descKey: "planet_category_desc",
     accentColor: colors.accent.category,
     cardBg: colors.cardBg.category,
   },
-];
+] as const;
 
 export default function ClassificationMenuScreen() {
+  const { locale } = useLanguage(); // 👈 언어 변경 상태를 감지
+
+  // locale이 변경될 때마다 GAMES의 i18n.t 번역 갱신!
+  const GAMES = useMemo(() => {
+    return MENU_GAME_CONFIGS.map((item) => ({
+      ...item,
+      title: i18n.t(item.titleKey),
+      subtitle: i18n.t(item.subtitleKey),
+      description: i18n.t(item.descKey),
+    }));
+  }, [locale]);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -137,7 +149,7 @@ export default function ClassificationMenuScreen() {
         {/* 고정 헤더 */}
 
         <AppHeader
-          title="분류 우주"
+          title={i18n.t("classification_space_title")}
           onBackPress={() => {
             navigation.navigate("Home");
           }}
@@ -146,10 +158,8 @@ export default function ClassificationMenuScreen() {
         <MainContainer>
           <CarouselArea>
             <TitleArea>
-              <Title>어떤 행성을 탐험할까요?</Title>
-              <Description>
-                원하는 행성을 골라서 탐험을 시작해 보세요!
-              </Description>
+              <Title>{i18n.t("classification_hero_title")}</Title>
+              <Description>{i18n.t("classification_hero_desc")}</Description>
             </TitleArea>
             <FlatList
               ref={flatListRef}
@@ -201,7 +211,9 @@ export default function ClassificationMenuScreen() {
                       <StartButton
                         style={{ backgroundColor: item.accentColor }}
                       >
-                        <StartButtonText>탐험 시작</StartButtonText>
+                        <StartButtonText>
+                          {i18n.t("classification_start")}
+                        </StartButtonText>
                       </StartButton>
                     </GameCard>
                   </GameCardWrapper>
@@ -250,26 +262,23 @@ export default function ClassificationMenuScreen() {
   );
 }
 
-// ============================================================
-// 메인 화면과 일관된 스타일링
-// ============================================================
-const Screen = styled(SafeAreaView)`
+export const Screen = styled(SafeAreaView)`
   flex: 1;
   justify-content: space-between;
 `;
 
-const MainContainer = styled.View`
+export const MainContainer = styled.View`
   flex: 1;
 `;
 
-const Header = styled.View`
+export const Header = styled.View`
   height: 56px;
   flex-direction: row;
   align-items: center;
   padding-horizontal: 20px;
 `;
 
-const BackButton = styled.TouchableOpacity`
+export const BackButton = styled.TouchableOpacity`
   width: 40px;
   height: 40px;
   border-radius: 20px;
@@ -283,50 +292,53 @@ const BackButton = styled.TouchableOpacity`
   elevation: 3;
 `;
 
-const HeaderText = styled(AppText)`
+export const HeaderText = styled(AppText)`
   flex: 1;
   text-align: center;
   color: #29263d;
-  font-size: 18px;
-  font-weight: 900;
+  font-size: ${(props) => props.theme.typography.button.fontSize}px;
 `;
 
-const HeaderSpacer = styled.View`
+export const HeaderSpacer = styled.View`
   width: 40px;
 `;
-const TitleArea = styled.View`
+
+export const TitleArea = styled.View`
   align-items: center;
   padding-right: 24px;
   padding-left: 24px;
   margin-bottom: 35px;
 `;
 
-const Title = styled(AppText)`
+export const Title = styled(AppText)`
   color: #29263d;
-  font-size: 22px;
-  font-weight: 900;
+  font-size: ${(props) => props.theme.typography.h2.fontSize}px;
+  font-family: ${(props) => props.theme.fontFamily};
   text-align: center;
 `;
 
-const Description = styled(AppText)`
+export const Description = styled(AppText)`
   color: ${colors.secondaryText};
-  font-size: 13px;
+  font-size: ${(props) => props.theme.typography.caption.fontSize}px;
   margin-top: 4px;
   text-align: center;
 `;
 
-const CarouselArea = styled.View`
+export const CarouselArea = styled.View`
   flex: 1;
   justify-content: center;
 `;
 
-const GameCardWrapper = styled.View`
+export const GameCardWrapper = styled.View`
   width: ${CARD_WIDTH}px;
   margin-right: ${ITEM_SPACING}px;
 `;
 
 // 메인 화면의 말랑말랑한 둥근 카드 느낌
-const GameCard = styled.TouchableOpacity<{ active: boolean; bgColor: string }>`
+export const GameCard = styled.TouchableOpacity<{
+  active: boolean;
+  bgColor: string;
+}>`
   background-color: ${({ bgColor }) => bgColor};
   border-radius: 32px;
   padding: 16px;
@@ -344,14 +356,14 @@ const GameCard = styled.TouchableOpacity<{ active: boolean; bgColor: string }>`
   opacity: ${({ active }) => (active ? 1 : 0.65)};
 `;
 
-const PlanetArea = styled.View`
+export const PlanetArea = styled.View`
   height: 180px;
   align-items: center;
   justify-content: center;
   position: relative;
 `;
 
-const PlanetScene = styled.View`
+export const PlanetScene = styled.View`
   width: 180px;
   height: 150px;
   align-items: center;
@@ -359,7 +371,7 @@ const PlanetScene = styled.View`
   position: relative;
 `;
 
-const Orbit = styled.View`
+export const Orbit = styled.View`
   position: absolute;
   width: 180px;
   height: 80px;
@@ -369,7 +381,7 @@ const Orbit = styled.View`
   justify-content: center;
 `;
 
-const OrbitLine = styled.View`
+export const OrbitLine = styled.View`
   position: absolute;
   width: 180px;
   height: 80px;
@@ -379,43 +391,41 @@ const OrbitLine = styled.View`
   border-style: dashed;
 `;
 
-const UFO = styled.View`
+export const UFO = styled.View`
   position: absolute;
   right: -10px;
   bottom: -10px;
 `;
 
-const ShootingStarArea = styled.View`
+export const ShootingStarArea = styled.View`
   position: absolute;
   z-index: 1;
 `;
 
-const GameInfo = styled.View`
+export const GameInfo = styled.View`
   align-items: center;
-
   margin-bottom: 12px;
 `;
 
-const GameTitle = styled(AppText)`
+export const GameTitle = styled(AppText)`
   color: #29263d;
-  font-size: 20px;
-  font-weight: 900;
+  font-size: ${(props) => props.theme.typography.h3.fontSize}px;
+  font-family: ${(props) => props.theme.fontFamily};
 `;
 
-const GameDescription = styled(AppText)`
+export const GameDescription = styled(AppText)`
   color: ${colors.secondaryText};
-  font-size: 13px;
+  font-size: ${(props) => props.theme.typography.caption.fontSize}px;
   margin-top: 2px;
 `;
 
 // 메인 카드의 버튼처럼 동그라미 화살표 아이콘이 들어간 둥글둥글한 버튼
-const StartButton = styled.View`
+export const StartButton = styled.View`
   height: 50px;
   border-radius: 25px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-
   gap: 10px;
 
   shadow-color: #000;
@@ -425,15 +435,15 @@ const StartButton = styled.View`
   elevation: 3;
 `;
 
-const StartButtonText = styled(AppText)`
+export const StartButtonText = styled(AppText)`
   color: #ffffff;
-  font-size: 16px;
-  font-weight: 900;
+  font-size: ${(props) => props.theme.typography.body.fontSize}px;
+
   flex: 1;
   text-align: center;
 `;
 
-const ArrowCircle = styled.View`
+export const ArrowCircle = styled.View`
   width: 34px;
   height: 34px;
   border-radius: 17px;
@@ -442,7 +452,7 @@ const ArrowCircle = styled.View`
   justify-content: center;
 `;
 
-const BottomArea = styled.View`
+export const BottomArea = styled.View`
   height: 60px;
   flex-direction: row;
   align-items: center;
@@ -451,7 +461,7 @@ const BottomArea = styled.View`
   margin-bottom: 10px;
 `;
 
-const ArrowButton = styled.TouchableOpacity`
+export const ArrowButton = styled.TouchableOpacity`
   width: 40px;
   height: 40px;
   border-radius: 20px;
@@ -465,13 +475,13 @@ const ArrowButton = styled.TouchableOpacity`
   elevation: 2;
 `;
 
-const Dots = styled.View`
+export const Dots = styled.View`
   flex-direction: row;
   align-items: center;
   gap: 8px;
 `;
 
-const Dot = styled.View<{ active: boolean }>`
+export const Dot = styled.View<{ active: boolean }>`
   width: ${({ active }) => (active ? "20px" : "8px")};
   height: 8px;
   border-radius: 4px;

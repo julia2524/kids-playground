@@ -2,6 +2,8 @@ import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import styled from "styled-components/native";
 import { AppText } from "../../utils/AppText";
+import i18n from "../../i18n";
+import { useLanguage } from "../../context/LangaugeContext";
 
 type ColorSortingQuestionProps = {
   text?: string;
@@ -10,13 +12,14 @@ type ColorSortingQuestionProps = {
 export default function ColorSortingQuestion({
   text = "색깔에 맞춰 모아볼까요?",
 }: ColorSortingQuestionProps) {
+  useLanguage();
   return (
     <QuestionCard>
       <SpeakerCircle>
         <Ionicons name="volume-medium" size={15} color="#7C5CFF" />
       </SpeakerCircle>
 
-      <QuestionText>{text}</QuestionText>
+      <QuestionText>{i18n.t("question_sort_by_color") || text}</QuestionText>
     </QuestionCard>
   );
 }

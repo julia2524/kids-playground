@@ -23,6 +23,7 @@ import {
 } from "../../components/GuardianNotice/getGuardianNoticeEnabled";
 import { resetUnlockedStickers } from "../../utils/stickerStorage";
 import LanguageSwitcher from "../../components/common/LanguageSwitcher";
+import { useLanguage } from "../../context/LangaugeContext";
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -30,6 +31,7 @@ type NavigationProp = NativeStackNavigationProp<
 >;
 
 export default function SettingScreen() {
+  useLanguage();
   const navigation = useNavigation<NavigationProp>();
 
   // =========================
@@ -141,25 +143,28 @@ export default function SettingScreen() {
     <Container>
       <GradientBackground />
 
-      <AppHeader title="설정" onBackPress={() => navigation.goBack()} />
+      <AppHeader
+        title={i18n.t("nav_settings")}
+        onBackPress={() => navigation.goBack()}
+      />
 
       <Content>
         {/* =========================
             💡 언어 설정 (새로 추가)
            ========================= */}
         <Section>
-          <SectionTitle>언어 설정</SectionTitle>
+          <SectionTitle>{i18n.t("language_setting")}</SectionTitle>
           <SettingCard>
             <LanguageSwitcher />
           </SettingCard>
         </Section>
         {/* 🛡️ 보호자 안내 설정 */}
         <Section>
-          <SectionTitle>보호자 안내</SectionTitle>
+          <SectionTitle>{i18n.t("guardian_section")}</SectionTitle>
           <SettingCard>
             <SettingRow>
               <SettingInfo>
-                <IconBadge>
+                <IconBadge style={{ backgroundColor: colors.softBlue }}>
                   <Ionicons
                     name="information-circle"
                     size={22}
@@ -167,9 +172,9 @@ export default function SettingScreen() {
                   />
                 </IconBadge>
                 <SettingTextWrapper>
-                  <SettingTitle>보호자 안내문 팝업</SettingTitle>
+                  <SettingTitle>{i18n.t("guardian_popup_title")}</SettingTitle>
                   <SettingDescription>
-                    앱 시작 시 보호자 안내를 표시합니다.
+                    {i18n.t("guardian_popup_desc")}
                   </SettingDescription>
                 </SettingTextWrapper>
               </SettingInfo>
@@ -182,7 +187,7 @@ export default function SettingScreen() {
         </Section>
         {/* 🔄 진행 상황 초기화 */}
         <Section>
-          <SectionTitle>게임 기록 초기화</SectionTitle>
+          <SectionTitle>{i18n.t("reset_progress_section")}</SectionTitle>
           <SettingCard>
             <ResetProgressButton gameType="color" onPress={handleResetColor} />
             <ResetProgressButton gameType="shape" onPress={handleResetShape} />
@@ -193,7 +198,7 @@ export default function SettingScreen() {
           </SettingCard>
         </Section>
         <Section>
-          <SectionTitle>스티커북 초기화</SectionTitle>
+          <SectionTitle>{i18n.t("reset_stickerbook_section")}</SectionTitle>
           <SettingCard>
             <ResetStickerButtonRow onPress={handleResetStickers}>
               <SettingInfo>
@@ -203,11 +208,11 @@ export default function SettingScreen() {
 
                 <SettingTextWrapper>
                   <SettingTitle style={{ color: "#FF5252" }}>
-                    스티커북 초기화
+                    {i18n.t("reset_stickerbook_title")}
                   </SettingTitle>
 
                   <SettingDescription>
-                    수집한 모든 스티커를 초기 상태로 돌립니다.
+                    {i18n.t("reset_stickerbook_desc")}
                   </SettingDescription>
                 </SettingTextWrapper>
               </SettingInfo>

@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Mascot from "../design-system/components/Mascot";
 import { AppText } from "../utils/AppText";
+import { colors } from "../design-system/tokens/colors";
 
 interface HeaderProps {
   onBackPress?: () => void;
@@ -54,7 +55,57 @@ export default function AppHeader({
 
 // --- Styled Components ---
 
-const Container = styled.View`
+// const Container = styled.View`
+//   height: 64px;
+//   padding-horizontal: 20px;
+//   flex-direction: row;
+//   align-items: center;
+//   justify-content: space-between;
+//   background-color: transparent;
+// `;
+
+// const HeaderButton = styled.TouchableOpacity`
+//   width: 44px;
+//   height: 44px;
+//   border-radius: 22px;
+//   background-color: #ffffff;
+//   justify-content: center;
+//   align-items: center;
+//   border-width: 1.5px;
+//   border-color: #e6e1f4;
+//   elevation: 2;
+//   shadow-color: #7c5cff;
+//   shadow-offset: 0px 2px;
+//   shadow-opacity: 0.1;
+//   shadow-radius: 4px;
+// `;
+
+// const CenterArea = styled.View`
+//   flex: 1;
+//   align-items: center;
+//   justify-content: center;
+// `;
+
+// const HeaderTitleText = styled(AppText)`
+//   font-size: 18px;
+//   font-weight: 900;
+//   color: #29263d;
+//   text-align: center;
+// `;
+
+// const TitleContainer = styled.View`
+//   align-items: center;
+//   justify-content: center;
+// `;
+
+// const HeaderSubtitleText = styled(AppText)`
+//   font-size: 12px;
+//   color: #7c5cff;
+//   margin-top: 1px;
+//   text-align: center;
+// `;
+
+export const Container = styled.View`
   height: 64px;
   padding-horizontal: 20px;
   flex-direction: row;
@@ -63,15 +114,15 @@ const Container = styled.View`
   background-color: transparent;
 `;
 
-const HeaderButton = styled.TouchableOpacity`
+export const HeaderButton = styled.TouchableOpacity`
   width: 44px;
   height: 44px;
   border-radius: 22px;
-  background-color: #ffffff;
+  background-color: ${colors.white};
   justify-content: center;
   align-items: center;
   border-width: 1.5px;
-  border-color: #e6e1f4;
+  border-color: ${colors.border.default};
   elevation: 2;
   shadow-color: #7c5cff;
   shadow-offset: 0px 2px;
@@ -79,27 +130,26 @@ const HeaderButton = styled.TouchableOpacity`
   shadow-radius: 4px;
 `;
 
-const CenterArea = styled.View`
+export const CenterArea = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
 `;
 
-const HeaderTitleText = styled(AppText)`
-  font-size: 18px;
-  font-weight: 900;
-  color: #29263d;
+export const HeaderTitleText = styled(AppText)`
+  font-size: ${(props) => props.theme.typography.button.fontSize}px;
+  color: ${(props) => props.theme.colors.textGroup.primary};
   text-align: center;
 `;
 
-const TitleContainer = styled.View`
+export const TitleContainer = styled.View`
   align-items: center;
   justify-content: center;
 `;
 
-const HeaderSubtitleText = styled(AppText)`
-  font-size: 12px;
-  color: #7c5cff;
+export const HeaderSubtitleText = styled(AppText)`
+  font-size: ${(props) => props.theme.typography.caption.fontSize}px;
+  color: ${colors.purple};
   margin-top: 1px;
   text-align: center;
 `;

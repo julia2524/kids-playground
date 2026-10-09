@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { ThemeProvider } from "styled-components/native";
 import { useFonts } from "expo-font";
 
@@ -8,6 +8,7 @@ import { LanguageProvider } from "./src/context/LangaugeContext";
 import AppNavigator from "./src/navigation/AppNavigator";
 import { theme } from "./src/design-system/theme";
 import i18n, { loadSavedLanguage } from "./src/i18n";
+import { colors } from "./src/design-system/tokens/colors";
 
 export default function App() {
   // 1. 커스텀 폰트 로드
@@ -42,7 +43,15 @@ export default function App() {
   return (
     <LanguageProvider>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
+        <NavigationContainer
+          theme={{
+            ...DefaultTheme,
+            colors: {
+              ...DefaultTheme.colors,
+              background: colors.background,
+            },
+          }}
+        >
           <StatusBar
             barStyle="dark-content"
             backgroundColor="transparent"

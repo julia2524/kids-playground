@@ -9,11 +9,6 @@ export type RootStackParamList = {
     gameType: StageMapGameType;
   };
 
-  ClassificationPlayScreen: {
-    gameType: "classification";
-    level: number;
-  };
-
   SettingScreen: undefined;
 
   StickerGalleryScreen: undefined;

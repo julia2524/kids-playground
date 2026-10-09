@@ -15,18 +15,31 @@ import { ClassificationColorId, ClassificationItem } from "../types/game";
 // 색상 이름
 // ============================================================
 
-const COLOR_LABELS: Record<ClassificationColorId, string> = {
-  natural: "자연색",
-  red: "빨강",
-  orange: "주황",
-  yellow: "노랑",
-  green: "초록",
-  blue: "파랑",
-  purple: "보라",
-  pink: "분홍",
-  brown: "갈색",
-  black: "검정",
-  white: "하양",
+// const COLOR_LABELS: Record<ClassificationColorId, string> = {
+//   natural: "자연색",
+//   red: "빨강",
+//   orange: "주황",
+//   yellow: "노랑",
+//   green: "초록",
+//   blue: "파랑",
+//   purple: "보라",
+//   pink: "분홍",
+//   brown: "갈색",
+//   black: "검정",
+//   white: "하양",
+// };
+export const COLOR_LABELS: Record<ClassificationColorId, string> = {
+  natural: "color_natural",
+  red: "color_red",
+  orange: "color_orange",
+  yellow: "color_yellow",
+  green: "color_green",
+  blue: "color_blue",
+  purple: "color_purple",
+  pink: "color_pink",
+  brown: "color_brown",
+  black: "color_black",
+  white: "color_white",
 };
 
 // ============================================================

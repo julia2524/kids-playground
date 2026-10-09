@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/home/HomeScreen";
 import StageMapScreen from "../screens/stageMap/StageMapScreen";
-import ClassificationPlayScreen from "../screens/classification/ClassificationPlayScreen";
+
 import SettingScreen from "../screens/settings/SettingScreen";
 import StickerGalleryScreen from "../screens/sticker/StickerGalleryScreen";
 import ColorSortingPlayScreen from "../screens/classification/ColorSortingPlayScreen";
@@ -33,13 +33,7 @@ export default function AppNavigator() {
           animation: "fade",
         }}
       />
-      <Stack.Screen
-        name="ClassificationPlayScreen"
-        component={ClassificationPlayScreen}
-        options={{
-          animation: "fade",
-        }}
-      />
+
       <Stack.Screen
         name="ColorSortingPlayScreen"
         component={ColorSortingPlayScreen}
