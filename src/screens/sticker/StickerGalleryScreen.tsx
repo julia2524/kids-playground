@@ -10,6 +10,8 @@ import AppHeader from "../../components/AppHeader";
 import CustomAlert from "../../components/CustomAlert";
 import { classificationItems } from "../../data/classification/classificationItems";
 import { RenderClassificationItemSvg } from "../../assets/Classification/classificationItemSvgs";
+import { useLanguage } from "../../context/LangaugeContext";
+import i18n from "../../i18n";
 
 const UNLOCKED_STICKERS_KEY = "@unlocked_stickers";
 
@@ -158,6 +160,7 @@ const ALL_STICKER_KEYS = [
 ];
 
 export default function StickerGalleryScreen() {
+  const { locale } = useLanguage(); // 👈 언어 변경 리렌더링 감지
   const navigation = useNavigation<any>();
   const [unlockedStickers, setUnlockedStickers] = useState<string[]>([]);
 
@@ -224,14 +227,17 @@ export default function StickerGalleryScreen() {
     <Container>
       <AppHeader
         onBackPress={() => navigation.goBack()}
-        title={`스티커북 (${unlockedCount}/${totalCount})`}
+        title={i18n.t("sticker_book_title", {
+          unlockedCount,
+          totalCount,
+        })}
         onMascotPress={() => navigation.navigate("SettingScreen")}
       />
 
       {/* 1. 수집 진행률 카드 */}
       <ProgressCard>
         <ProgressInfoRow>
-          <ProgressTitle>스티커 수집률</ProgressTitle>
+          <ProgressTitle>{i18n.t("stikcer_collection_subtitle")}</ProgressTitle>
           <ProgressCount>
             {unlockedCount} / {totalCount} ({progressPercent}%)
           </ProgressCount>
@@ -268,7 +274,10 @@ export default function StickerGalleryScreen() {
                       <RenderClassificationItemSvg itemId={key} size={55} />
                     </StickerImageArea>
                     <StickerName numberOfLines={1}>
-                      {obj?.name ?? key}
+                      {/* 💡 i18n 키로 먼저 조회하고, 누락 시 obj.name(한국어) -> key 순으로 fallback */}
+                      {i18n.t(`item_${key}`, {
+                        defaultValue: obj?.name ?? key,
+                      })}
                     </StickerName>
                   </>
                 ) : (
