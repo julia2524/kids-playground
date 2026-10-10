@@ -12120,7 +12120,7 @@ export const RenderColorSortingObjectSvg = ({
   size?: number;
 }) => {
   // ----------------------------------------------------------
-  // L1 기본 도형
+  // L1 ~ L4 기본 도형
   // ----------------------------------------------------------
 
   if (object.itemId.startsWith("simple-")) {
@@ -12134,7 +12134,7 @@ export const RenderColorSortingObjectSvg = ({
   }
 
   // ----------------------------------------------------------
-  // L2 ~ L8 실제 ClassificationItem
+  // L5~ L15 실제 ClassificationItem
   // ----------------------------------------------------------
 
   return (

@@ -23,6 +23,8 @@ type ColorSortingObjectBoardProps = {
   getTargetRects: (callback: (rects: TargetRects) => void) => void;
   onCorrectDrop: (objectId: string, targetColorId: string) => void;
   onWrongDrop?: (objectId: string) => void;
+  tutorialRef?: (objectId: string, node: View | null) => void;
+  onObjectGrab?: (objectId: string) => void;
 };
 
 // ============================================================
@@ -111,6 +113,8 @@ export default function ColorSortingObjectBoard({
   getTargetRects,
   onCorrectDrop,
   onWrongDrop,
+  tutorialRef,
+  onObjectGrab,
 }: ColorSortingObjectBoardProps) {
   // ==========================================================
   // Board 실제 크기
@@ -217,11 +221,15 @@ export default function ColorSortingObjectBoard({
                 onPress={() => onObjectPress(object.id)}
                 getDragBounds={getDragBounds}
                 getTargetRects={getTargetRects}
-                onDragStart={() => setDraggingObjectId(object.id)}
+                onDragStart={() => {
+                  setDraggingObjectId(object.id);
+                  onObjectGrab?.(object.id);
+                }}
                 onDragEnd={() => setDraggingObjectId(null)}
                 onCorrectDrop={onCorrectDrop}
                 onWrongDrop={onWrongDrop}
                 isDragging={draggingObjectId === object.id} // 추가
+                tutorialRef={tutorialRef}
               />
             ))}
 

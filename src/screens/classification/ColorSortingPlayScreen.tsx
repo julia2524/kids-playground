@@ -22,6 +22,7 @@ import { AppText } from "../../utils/AppText";
 import { TargetRects } from "../../components/ColorSorting/ColorSortingObjectComponent";
 
 import { saveLevelClear } from "../../utils/progressStorage";
+import TutorialOverlay from "../../components/Tutorial/TutorialOverlay";
 
 // ============================================================
 // Types
@@ -50,6 +51,12 @@ export default function ColorSortingPlayScreen() {
   const route = useRoute<RouteProps>();
   const { gameType, level: initialLevel = 1 } = route.params ?? {};
   const footerRef = useRef<View>(null);
+
+  const tutorialObjectRefs = useRef<Record<string, View | null>>({});
+  const tutorialVisibleRef = useRef(false);
+  const [tutorialVisible, setTutorialVisible] = React.useState(false);
+  const [tutorialObject, setTutorialObject] =
+    React.useState<ProblemObject | null>(null);
 
   const {
     problem,
@@ -108,6 +115,42 @@ export default function ColorSortingPlayScreen() {
     if (!roundResult || !gameType) return;
     saveLevelClear(gameType, testLevel, earnedStars);
   }, [roundResult]);
+
+  useEffect(() => {
+    console.log("[튜토리얼 확인]", {
+      testLevel,
+      roundIndex,
+      hasProblem: !!problem,
+      objectCount: problem?.objects.length,
+    });
+    // 현재는 Level 1에서만 튜토리얼 실행
+    if (testLevel !== 1 || !problem) {
+      tutorialVisibleRef.current = false;
+      setTutorialVisible(false);
+      setTutorialObject(null);
+      return;
+    }
+
+    // 해당 라운드의 첫 오브젝트를 튜토리얼 대상으로 선택
+    const firstObject = problem.objects[0];
+
+    if (!firstObject) {
+      return;
+    }
+
+    // 정답 색상의 바구니가 실제로 존재하는지 확인
+    const matchingTarget = problem.targets.find(
+      (target) => target.colorId === firstObject.colorId,
+    );
+
+    if (!matchingTarget) {
+      return;
+    }
+
+    tutorialVisibleRef.current = true;
+    setTutorialObject(firstObject);
+    setTutorialVisible(true);
+  }, [testLevel, roundIndex, problem]);
   // ==========================================================
   // Problem 없음
   // ==========================================================
@@ -158,6 +201,13 @@ export default function ColorSortingPlayScreen() {
           getTargetRects={getTargetRects}
           onCorrectDrop={handleDropObject}
           onWrongDrop={handleWrongDrop}
+          tutorialRef={(objectId, node) => {
+            tutorialObjectRefs.current[objectId] = node;
+          }}
+          onObjectGrab={() => {
+            tutorialVisibleRef.current = false;
+            setTutorialVisible(false);
+          }}
         />
 
         <ColorSortingTargetArea
@@ -190,6 +240,31 @@ export default function ColorSortingPlayScreen() {
           />
         )}
       </Container>
+
+      {tutorialVisible && tutorialObject && (
+        <TutorialOverlay
+          visible={tutorialVisible}
+          object={tutorialObject}
+          fromRef={{
+            get current() {
+              return tutorialObjectRefs.current[tutorialObject.id] ?? null;
+            },
+          }}
+          toRef={{
+            get current() {
+              return basketRefs.current[tutorialObject.colorId] ?? null;
+            },
+          }}
+          onComplete={() => {
+            tutorialVisibleRef.current = false;
+            setTutorialVisible(false);
+          }}
+          onGrab={() => {
+            tutorialVisibleRef.current = false;
+            setTutorialVisible(false);
+          }}
+        />
+      )}
 
       {/* ==================================================== */}
       {/* Result Overlay */}

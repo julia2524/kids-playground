@@ -45,6 +45,7 @@ type ColorSortingObjectProps = {
 
   onCorrectDrop: (objectId: string, targetColorId: string) => void;
   onWrongDrop?: (objectId: string) => void;
+  tutorialRef?: (objectId: string, node: View | null) => void;
 };
 
 // ============================================================
@@ -89,6 +90,7 @@ export default function ColorSortingObjectComponent({
 
   onCorrectDrop,
   onWrongDrop,
+  tutorialRef,
 }: ColorSortingObjectProps) {
   // ==========================================================
   // Item / Color
@@ -565,7 +567,10 @@ export default function ColorSortingObjectComponent({
           style={{ opacity: isPlaced ? 0 : 1 }}
         >
           <ObjectBubble
-            ref={bubbleRef}
+            ref={(node: View | null) => {
+              bubbleRef.current = node;
+              tutorialRef?.(object.id, node);
+            }}
             collapsable={false}
             size={bubbleSize}
             isSelected={isSelected}
