@@ -25,7 +25,8 @@
     "plugins": [
       "expo-localization",
       "expo-image",
-      "expo-font"
+      "expo-font",
+      "expo-audio"
     ]
   }
 }

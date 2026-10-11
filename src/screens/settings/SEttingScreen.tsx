@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Switch } from "react-native";
+import { Switch, TouchableOpacity } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -16,14 +16,22 @@ import GradientBackground from "../../design-system/components/GradientBackgroun
 import { colors } from "../../design-system/tokens/colors";
 
 import { SETTING_LEVEL_CLEAR_INFO } from "../../constants/game";
-import { resetProgress } from "../../utils/progressStorage";
+import { resetProgress } from "../../utils/asyncStorage/progressStorage";
 import {
   getGuardianNoticeEnabled,
   setGuardianNoticeEnabled,
 } from "../../components/GuardianNotice/getGuardianNoticeEnabled";
-import { resetUnlockedStickers } from "../../utils/stickerStorage";
+import { resetUnlockedStickers } from "../../utils/asyncStorage/stickerStorage";
 import LanguageSwitcher from "../../components/common/LanguageSwitcher";
 import { useLanguage } from "../../context/LangaugeContext";
+import { useBackgroundMusic } from "../../utils/BackgroundMusicContext";
+import {
+  getCorrectEffectEnabled,
+  getSoundEnabled,
+  setCorrectEffectEnabled,
+  setSoundEnabled,
+} from "../../utils/asyncStorage/audioSettingsStorage";
+import { triggerHaptic } from "../../utils/haptic";
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -77,19 +85,31 @@ export default function SettingScreen() {
     const gameTitle = info.title;
 
     showAlert(
-      "진행 상황 초기화",
-      `${gameTitle} 게임의 진행 기록을 정말 초기화하시겠어요?`,
+      i18n.t("alert_reset_progress_title"),
+      i18n.t("alert_reset_progress_msg", { gameTitle }),
       async () => {
         await resetProgress(mode);
-        showAlert("초기화 완료", `${gameTitle} 게임 기록이 초기화되었습니다.`);
+        showAlert(
+          i18n.t("alert_reset_success_title"),
+          i18n.t("alert_reset_success_msg", { gameTitle }),
+        );
       },
-      { showCancel: true, confirmText: "초기화" },
+      { showCancel: true, confirmText: i18n.t("btn_reset") },
     );
   };
 
-  const handleResetColor = () => handleResetGame("color");
-  const handleResetShape = () => handleResetGame("shape");
-  const handleResetCategory = () => handleResetGame("category");
+  const handleResetColor = () => {
+    triggerHaptic("light");
+    handleResetGame("color");
+  };
+  const handleResetShape = () => {
+    triggerHaptic("light");
+    handleResetGame("shape");
+  };
+  const handleResetCategory = () => {
+    triggerHaptic("light");
+    handleResetGame("category");
+  };
 
   // =========================
   // 보호자 안내 설정 연동
@@ -118,24 +138,80 @@ export default function SettingScreen() {
 
   // 스위치 변경 시 AsyncStorage에 즉시 저장
   const handleGuardianNoticeToggle = async (value: boolean) => {
+    triggerHaptic("light");
     setGuardianNoticeEnabledState(value);
     await setGuardianNoticeEnabled(value);
   };
+
+  // =========================
+  // 임시 소리 설정
+  // =========================
+
+  const [soundEffect, setSoundEffect] = useState(true);
+  // const [backgroundMusic, setBackgroundMusic] = useState(true);
+  const [correctEffect, setCorrectEffect] = useState(true);
+
+  const { backgroundMusic, setBackgroundMusic, nextTrack, currentTrackIndex } =
+    useBackgroundMusic();
+  // 💡 BGM 스위치 토글 핸들러
+  const handleBgmToggle = async (value: boolean) => {
+    triggerHaptic("light"); // 터치 햅틱 피드백 실행
+    await setBackgroundMusic(value);
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      let isMounted = true;
+
+      const loadSettings = async () => {
+        const enabled = await getSoundEnabled();
+        const correctEnabled = await getCorrectEffectEnabled();
+        const guardianEnabled = await getGuardianNoticeEnabled();
+
+        if (!isMounted) return;
+
+        setSoundEffect(enabled);
+        setCorrectEffect(correctEnabled);
+        setGuardianNoticeEnabledState(guardianEnabled);
+      };
+
+      loadSettings();
+
+      return () => {
+        isMounted = false;
+      };
+    }, []),
+  );
+
+  const handleSoundToggle = async (value: boolean) => {
+    triggerHaptic("light");
+    setSoundEffect(value);
+    await setSoundEnabled(value);
+  };
+  const handleCorrectToggle = async (value: boolean) => {
+    triggerHaptic("light");
+    setCorrectEffect(value);
+    await setCorrectEffectEnabled(value);
+  };
+
   //   // 🎁 스티커 수집 기록 전체 초기화
   const handleResetStickers = () => {
+    triggerHaptic("light");
     showAlert(
-      "스티커 초기화",
-      "모은 스티커가 모두 잠금 상태로 돌아가요. 계속할까요?",
+      i18n.t("alert_reset_stickers_title"),
+      i18n.t("alert_reset_stickers_msg"),
       async () => {
         const ok = await resetUnlockedStickers();
         showAlert(
-          ok ? "초기화 완료" : "초기화 실패",
           ok
-            ? "스티커가 모두 초기화되었습니다."
-            : "초기화 중 문제가 발생했습니다. 다시 시도해 주세요.",
+            ? i18n.t("alert_reset_stickers_success_title")
+            : i18n.t("alert_reset_stickers_fail_title"),
+          ok
+            ? i18n.t("alert_reset_stickers_success_msg")
+            : i18n.t("alert_reset_stickers_fail_msg"),
         );
       },
-      { showCancel: true, confirmText: "초기화" },
+      { showCancel: true, confirmText: i18n.t("btn_reset") },
     );
   };
 
@@ -185,6 +261,98 @@ export default function SettingScreen() {
             </SettingRow>
           </SettingCard>
         </Section>
+        <Section>
+          <SectionTitle>BGM 테스트 (개발용)</SectionTitle>
+          <SettingCard>
+            <TouchableOpacity
+              onPress={() => {
+                nextTrack();
+              }}
+              style={{
+                padding: 12,
+                backgroundColor: "#E6E1F4",
+                borderRadius: 16,
+                alignItems: "center",
+              }}
+            >
+              <SettingTitle style={{ color: "#7C5CFF" }}>
+                ⏭️ 다음 곡으로 넘기기 (현재: {currentTrackIndex + 1}번 트랙)
+              </SettingTitle>
+            </TouchableOpacity>
+          </SettingCard>
+        </Section>
+        {/* =========================
+            소리 설정
+           ========================= */}
+
+        <Section>
+          <SectionTitle>{i18n.t("sound_section")}</SectionTitle>
+
+          <SettingCard>
+            <SettingRow>
+              <SettingInfo>
+                <IconBadge style={{ backgroundColor: colors.softMint }}>
+                  <Ionicons name="volume-high" size={24} color={colors.mint} />
+                </IconBadge>
+
+                <SettingTextWrapper>
+                  <SettingTitle>{i18n.t("sfx_title")}</SettingTitle>
+                  <SettingDescription>{i18n.t("sfx_desc")}</SettingDescription>
+                </SettingTextWrapper>
+              </SettingInfo>
+
+              <StyledSwitch
+                value={soundEffect}
+                onValueChange={handleSoundToggle}
+              />
+            </SettingRow>
+
+            <Divider />
+
+            <SettingRow>
+              <SettingInfo>
+                <IconBadge style={{ backgroundColor: colors.softPink }}>
+                  <Ionicons
+                    name="musical-notes"
+                    size={24}
+                    color={colors.pink}
+                  />
+                </IconBadge>
+
+                <SettingTextWrapper>
+                  <SettingTitle>{i18n.t("bgm_title")}</SettingTitle>
+                  <SettingDescription>{i18n.t("bgm_desc")}</SettingDescription>
+                </SettingTextWrapper>
+              </SettingInfo>
+              <StyledSwitch
+                value={backgroundMusic}
+                onValueChange={handleBgmToggle}
+              />
+            </SettingRow>
+
+            <Divider />
+
+            <SettingRow>
+              <SettingInfo>
+                <IconBadge style={{ backgroundColor: colors.softYellow }}>
+                  <Ionicons name="sparkles" size={24} color="#FBBF24" />
+                </IconBadge>
+
+                <SettingTextWrapper>
+                  <SettingTitle>{i18n.t("correct_sfx_title")}</SettingTitle>
+                  <SettingDescription>
+                    {i18n.t("correct_sfx_desc")}
+                  </SettingDescription>
+                </SettingTextWrapper>
+              </SettingInfo>
+
+              <StyledSwitch
+                value={correctEffect}
+                onValueChange={handleCorrectToggle}
+              />
+            </SettingRow>
+          </SettingCard>
+        </Section>
         {/* 🔄 진행 상황 초기화 */}
         <Section>
           <SectionTitle>{i18n.t("reset_progress_section")}</SectionTitle>
@@ -197,17 +365,24 @@ export default function SettingScreen() {
             />
           </SettingCard>
         </Section>
+
         <Section>
           <SectionTitle>{i18n.t("reset_stickerbook_section")}</SectionTitle>
           <SettingCard>
             <ResetStickerButtonRow onPress={handleResetStickers}>
               <SettingInfo>
-                <IconBadge style={{ backgroundColor: "#FFF0F0" }}>
-                  <Ionicons name="trash-outline" size={20} color="#FF6F6F" />
+                <IconBadge
+                  style={{ backgroundColor: colors.feedback.errorSoft }}
+                >
+                  <Ionicons
+                    name="trash-outline"
+                    size={20}
+                    color={colors.feedback.error}
+                  />
                 </IconBadge>
 
                 <SettingTextWrapper>
-                  <SettingTitle style={{ color: "#FF5252" }}>
+                  <SettingTitle style={{ color: colors.feedback.error }}>
                     {i18n.t("reset_stickerbook_title")}
                   </SettingTitle>
 
@@ -216,7 +391,6 @@ export default function SettingScreen() {
                   </SettingDescription>
                 </SettingTextWrapper>
               </SettingInfo>
-              <Ionicons name="chevron-forward" size={18} color="#9C99AA" />
             </ResetStickerButtonRow>
           </SettingCard>
         </Section>

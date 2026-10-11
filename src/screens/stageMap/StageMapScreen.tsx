@@ -21,6 +21,7 @@ import { LEVEL_CONFIGS } from "../../data/classification/classificationLevels";
 import useGameProgress from "../../hooks/useGameProgress";
 import { useLanguage } from "../../context/LangaugeContext";
 import i18n from "../../i18n";
+import { triggerHaptic } from "../../utils/haptic";
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -305,7 +306,10 @@ export default function StageMapScreen() {
                       isCurrent={stage.level === currentLevel}
                       stars={Math.min(progress.stars[stage.level] ?? 0, 3)}
                       maxStars={3}
-                      onPress={() => handleStagePress(stage.level)}
+                      onPress={() => {
+                        triggerHaptic("light");
+                        handleStagePress(stage.level);
+                      }}
                       style={{
                         left: pos.x - NODE_SIZE / 2,
                         top: pos.y - NODE_SIZE / 2,
@@ -319,7 +323,10 @@ export default function StageMapScreen() {
             {/* Sticker Gallery */}
             <FloatingStickerButton
               activeOpacity={0.85}
-              onPress={() => navigation.navigate("StickerGalleryScreen")}
+              onPress={() => {
+                triggerHaptic("light");
+                navigation.navigate("StickerGalleryScreen");
+              }}
             >
               <Ionicons name="book" size={26} color="#7C5CFF" />
             </FloatingStickerButton>

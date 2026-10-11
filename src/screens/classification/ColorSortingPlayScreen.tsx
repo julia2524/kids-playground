@@ -21,7 +21,7 @@ import useColorSortingGame from "../../hooks/ColorSorting/useColorSortingGame";
 import { AppText } from "../../utils/AppText";
 import { TargetRects } from "../../components/ColorSorting/ColorSortingObjectComponent";
 
-import { saveLevelClear } from "../../utils/progressStorage";
+import { saveLevelClear } from "../../utils/asyncStorage/progressStorage";
 import TutorialOverlay from "../../components/Tutorial/TutorialOverlay";
 
 // ============================================================

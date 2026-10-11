@@ -9,6 +9,8 @@ import AppNavigator from "./src/navigation/AppNavigator";
 import { theme } from "./src/design-system/theme";
 import i18n, { loadSavedLanguage } from "./src/i18n";
 import { colors } from "./src/design-system/tokens/colors";
+import { BackgroundMusicProvider } from "./src/utils/BackgroundMusicContext";
+import { preloadSounds } from "./src/utils/sound";
 
 export default function App() {
   // 1. 커스텀 폰트 로드
@@ -24,43 +26,46 @@ export default function App() {
   useEffect(() => {
     const initApp = async () => {
       try {
-        await loadSavedLanguage();
+        // 앱 초기화 시 언어 로드와 사운드 프리로드를 같이 실행
+        await Promise.all([loadSavedLanguage(), preloadSounds()]);
       } catch (e) {
-        console.warn("언어 설정 로드 실패:", e);
+        console.warn("앱 초기화 실패:", e);
       } finally {
         setIsLangLoaded(true);
       }
     };
 
     initApp();
-  }, []);
+  }, []); // 최상단에 고정된 single useEffect
 
-  // 3. 폰트나 언어가 아직 로드되지 않았으면 렌더링 대기 (깜빡임 방지)
+  // 3. 폰트나 언어가 아직 로드되지 않았으면 렌더링 대기
   if (!fontsLoaded || !isLangLoaded) {
-    return null; // 또는 CustomSplashScreen 컴포넌트
+    return null;
   }
 
   return (
     <LanguageProvider>
-      <ThemeProvider theme={theme}>
-        <NavigationContainer
-          theme={{
-            ...DefaultTheme,
-            colors: {
-              ...DefaultTheme.colors,
-              background: colors.background,
-            },
-          }}
-        >
-          <StatusBar
-            barStyle="dark-content"
-            backgroundColor="transparent"
-            translucent
-            hidden={true}
-          />
-          <AppNavigator />
-        </NavigationContainer>
-      </ThemeProvider>
+      <BackgroundMusicProvider>
+        <ThemeProvider theme={theme}>
+          <NavigationContainer
+            theme={{
+              ...DefaultTheme,
+              colors: {
+                ...DefaultTheme.colors,
+                background: colors.background,
+              },
+            }}
+          >
+            <StatusBar
+              barStyle="dark-content"
+              backgroundColor="transparent"
+              translucent
+              hidden={true}
+            />
+            <AppNavigator />
+          </NavigationContainer>
+        </ThemeProvider>
+      </BackgroundMusicProvider>
     </LanguageProvider>
   );
 }

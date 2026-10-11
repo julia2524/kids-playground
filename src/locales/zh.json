@@ -37,6 +37,31 @@
   "confirm": "确认",
   "close": "关闭",
 
+  "sound_section": "声音设置",
+  "sfx_title": "音效",
+  "sfx_desc": "点击按钮或玩游戏时的声音",
+  "bgm_title": "背景音乐",
+  "bgm_desc": "游戏过程中播放音乐",
+  "correct_sfx_title": "答对音效",
+  "correct_sfx_desc": "答对问题时播放音效",
+
+  "alert_reset_progress_title": "重置游戏进度",
+  "alert_reset_progress_msg": "确定要重置 {{gameTitle}} 游戏的记录吗？",
+  "alert_reset_success_title": "重置完成",
+  "alert_reset_success_msg": "{{gameTitle}} 游戏的记录已重置。",
+
+  "alert_reset_stickers_title": "重置贴纸",
+  "alert_reset_stickers_msg": "已收集的贴纸将全部重新锁定。要继续吗？",
+  "alert_reset_stickers_success_title": "重置完成",
+  "alert_reset_stickers_success_msg": "所有贴纸已重置。",
+  "alert_reset_stickers_fail_title": "重置失败",
+  "alert_reset_stickers_fail_msg": "重置过程中出现问题，请重试。",
+
+  "btn_confirm": "确定",
+  "btn_cancel": "取消",
+  "btn_reset": "重置",
+  "cancel": "取消",
+
   "classification_space_title": "分类宇宙",
   "classification_hero_title": "探索哪个星球呢？",
   "classification_hero_desc": "选择喜欢的星球开始冒险吧！",

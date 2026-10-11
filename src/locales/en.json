@@ -37,6 +37,31 @@
   "confirm": "OK",
   "close": "Close",
 
+  "sound_section": "Sound Settings",
+  "sfx_title": "Sound Effects",
+  "sfx_desc": "Sounds played when pressing buttons or playing",
+  "bgm_title": "Background Music",
+  "bgm_desc": "Play music while playing the game",
+  "correct_sfx_title": "Correct Answer Sound",
+  "correct_sfx_desc": "Play sound effect when you get the correct answer",
+
+  "alert_reset_progress_title": "Reset Progress",
+  "alert_reset_progress_msg": "Are you sure you want to reset the progress for {{gameTitle}}?",
+  "alert_reset_success_title": "Reset Complete",
+  "alert_reset_success_msg": "Progress for {{gameTitle}} has been reset.",
+
+  "alert_reset_stickers_title": "Reset Stickers",
+  "alert_reset_stickers_msg": "All collected stickers will be locked again. Do you want to continue?",
+  "alert_reset_stickers_success_title": "Reset Complete",
+  "alert_reset_stickers_success_msg": "All stickers have been reset.",
+  "alert_reset_stickers_fail_title": "Reset Failed",
+  "alert_reset_stickers_fail_msg": "An error occurred during reset. Please try again.",
+
+  "btn_confirm": "OK",
+  "btn_cancel": "Cancel",
+  "btn_reset": "Reset",
+  "cancel": "Cancel",
+
   "classification_space_title": "Sorting Space",
   "classification_hero_title": "Which planet shall we explore?",
   "classification_hero_desc": "Pick a planet and start your adventure!",

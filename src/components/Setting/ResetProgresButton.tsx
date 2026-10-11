@@ -34,8 +34,6 @@ export default function ResetProgressButton({
         <GameTitle>{title}</GameTitle>
         <GameDescription>{description}</GameDescription>
       </GameInfo>
-
-      <Arrow>›</Arrow>
     </ResetButtonContainer>
   );
 }
@@ -84,11 +82,4 @@ const GameDescription = styled(AppText)`
   line-height: ${(props) => props.theme.typography.bodySmall.lineHeight}px;
   font-weight: ${(props) => props.theme.typography.bodySmall.fontWeight};
   color: ${colors.textGroup.secondary};
-`;
-
-const Arrow = styled(AppText)`
-  margin-left: 8px;
-  font-size: 24px;
-  font-weight: 400;
-  color: ${colors.textGroup.muted};
 `;

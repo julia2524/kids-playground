@@ -52,6 +52,7 @@ import {
 } from "./homeStyles";
 import { COLORS } from "../../design-system/tokens/colors";
 import { CATEGORY_FILTERS, GAME_CARDS } from "../../constants/game";
+import { triggerHaptic } from "../../utils/haptic";
 // ⭐ 단일 통합 색상 테마 import
 
 type HomeNavigationProp = NativeStackNavigationProp<RootStackParamList, "Home">;
@@ -172,6 +173,7 @@ export default function HomeScreen() {
                 active={isActive}
                 activeOpacity={0.8}
                 onPress={() => {
+                  triggerHaptic("light");
                   if (filter.id === "classification")
                     goToStageMap("classification");
                 }}
@@ -206,6 +208,7 @@ export default function HomeScreen() {
                   activeOpacity={0.9}
                   bgColor={card.bgColor}
                   onPress={() => {
+                    triggerHaptic("light");
                     if (card.isUnlocked) {
                       goToStageMap(card.id as any);
                     } else {
@@ -237,13 +240,21 @@ export default function HomeScreen() {
             <TabLabel active>{i18n.t("nav_home")}</TabLabel>
           </TabItem>
 
-          <TabItem onPress={() => navigation.navigate("StickerGalleryScreen")}>
+          <TabItem
+            onPress={() => {
+              triggerHaptic("light");
+              navigation.navigate("StickerGalleryScreen");
+            }}
+          >
             <Ionicons name="star-outline" size={24} color={COLORS.muted} />
             <TabLabel>{i18n.t("nav_book")}</TabLabel>
           </TabItem>
 
           <TabItem
-            onPress={() => navigation.navigate("SettingScreen" as never)}
+            onPress={() => {
+              triggerHaptic("light");
+              navigation.navigate("SettingScreen" as never);
+            }}
           >
             <Ionicons name="settings-outline" size={24} color={COLORS.muted} />
             <TabLabel>{i18n.t("nav_settings")}</TabLabel>

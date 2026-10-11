@@ -21,6 +21,7 @@ import { ASSETS } from "../../assets/assets";
 import AppHeader from "../../components/AppHeader";
 import i18n from "../../i18n";
 import { useLanguage } from "../../context/LangaugeContext";
+import { triggerHaptic } from "../../utils/haptic";
 
 // ============================================================
 // 메인 화면과 통일된 몽환 파스텔 컬러 팔레트
@@ -184,7 +185,10 @@ export default function ClassificationMenuScreen() {
                       active={isActive}
                       bgColor={item.cardBg}
                       activeOpacity={0.95}
-                      onPress={() => handleSelectGame(item)}
+                      onPress={() => {
+                        triggerHaptic("light");
+                        handleSelectGame(item);
+                      }}
                     >
                       <PlanetArea>
                         <ShootingStarArea style={{ top: 10, left: 12 }}>
@@ -225,7 +229,10 @@ export default function ClassificationMenuScreen() {
           {/* 하단 인디케이터 & 화살표 */}
           <BottomArea>
             <ArrowButton
-              onPress={() => scrollToIndex(currentIndex - 1)}
+              onPress={() => {
+                triggerHaptic("light");
+                scrollToIndex(currentIndex - 1);
+              }}
               disabled={currentIndex === 0}
               activeOpacity={0.8}
             >
@@ -243,7 +250,10 @@ export default function ClassificationMenuScreen() {
             </Dots>
 
             <ArrowButton
-              onPress={() => scrollToIndex(currentIndex + 1)}
+              onPress={() => {
+                triggerHaptic("light");
+                scrollToIndex(currentIndex + 1);
+              }}
               disabled={currentIndex === GAMES.length - 1}
               activeOpacity={0.8}
             >

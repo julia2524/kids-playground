@@ -5,6 +5,7 @@ import styled from "styled-components/native";
 
 import { AppText } from "../../utils/AppText";
 import { useLanguage } from "../../context/LangaugeContext";
+import { triggerHaptic } from "../../utils/haptic";
 
 interface LanguageSwitcherProps {
   onLanguageChange?: () => void;
@@ -24,21 +25,30 @@ export default function LanguageSwitcher({
     <Container>
       <LangButton
         isActive={locale.startsWith("zh")}
-        onPress={() => handleSelectLanguage("zh")}
+        onPress={() => {
+          triggerHaptic("light");
+          handleSelectLanguage("zh");
+        }}
         activeOpacity={0.8}
       >
         <LangText isActive={locale.startsWith("zh")}>🇨🇳 中文</LangText>
       </LangButton>
       <LangButton
         isActive={locale.startsWith("en")}
-        onPress={() => handleSelectLanguage("en")}
+        onPress={() => {
+          triggerHaptic("light");
+          handleSelectLanguage("en");
+        }}
         activeOpacity={0.8}
       >
         <LangText isActive={locale.startsWith("en")}>🇺🇸 English</LangText>
       </LangButton>
       <LangButton
         isActive={locale.startsWith("ko")}
-        onPress={() => handleSelectLanguage("ko")}
+        onPress={() => {
+          triggerHaptic("light");
+          handleSelectLanguage("ko");
+        }}
         activeOpacity={0.8}
       >
         <LangText isActive={locale.startsWith("ko")}>🇰🇷 한국어</LangText>

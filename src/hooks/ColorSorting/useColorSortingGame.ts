@@ -4,7 +4,7 @@ import { classificationItems } from "../../data/classification/classificationIte
 import { colorSortingLevels } from "../../types/colorSortingLevels";
 import { generateColorSortingProblem } from "../../generators/generateColorSortingProblem";
 import { ColorSortingProblem } from "../../types/colorSotringTypes";
-import { unlockStickers } from "../../utils/stickerStorage";
+import { unlockStickers } from "../../utils/asyncStorage/stickerStorage";
 
 export type RoundResult = "correct" | "wrong" | null;
 

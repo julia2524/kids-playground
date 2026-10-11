@@ -4,7 +4,7 @@ import {
   DEFAULT_PROGRESS,
   GameProgress,
   loadProgress,
-} from "../utils/progressStorage";
+} from "../utils/asyncStorage/progressStorage";
 
 export default function useGameProgress(gameType: string, totalLevels: number) {
   const [progress, setProgress] = useState<GameProgress>(DEFAULT_PROGRESS);
