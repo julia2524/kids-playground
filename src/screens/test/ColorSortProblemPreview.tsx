@@ -5,15 +5,11 @@ import { ClassificationColorId, ClassificationItem } from "../../types/game";
 
 import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
 
-import { ColorSortingProblem } from "../../types/colorSotringTypes";
+import { ColorSortingProblem } from "../../types/Classification/Color/colorSotringTypes";
 
-// ⚠️ 이 import 경로는 네 ClassificationItem 데이터가 실제로 있는 곳으로 맞춰줘.
-// 예:
-// import { classificationItems } from "../../data/classification/classificationItems";
-
-import { classificationItems } from "../../data/classification/classificationItems";
 import { RenderColorSortingObjectSvg } from "../../assets/Classification/classificationItemSvgs";
 import { AppText } from "../../utils/AppText";
+import { classificationItems } from "../../data/classification/classificationItems";
 
 // ============================================================
 // COLOR LABELS

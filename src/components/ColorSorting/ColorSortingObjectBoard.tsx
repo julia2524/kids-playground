@@ -4,7 +4,7 @@ import { LayoutChangeEvent, View } from "react-native";
 
 import styled from "styled-components/native";
 
-import { ColorSortingObject } from "../../types/colorSotringTypes";
+import { ColorSortingObject } from "../../types/Classification/Color/colorSotringTypes";
 
 import ColorSortingObjectComponent, {
   DragBounds,

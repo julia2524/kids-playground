@@ -17,7 +17,14 @@ export type RootStackParamList = {
     gameType: "color";
     level: number;
   };
+  ShapeSortingPlayScreen: {
+    gameType: "shape";
+    level: number;
+  };
   LanguageScreen: undefined;
+  ShapeSortingTestScreen: undefined;
+  ShapeStickerScreen: undefined;
+  ShapeBasketPreviewScreen: undefined;
 };
 // PatternPlayScreen: {
 //   gameType: "pattern";

@@ -65,17 +65,31 @@ export async function preloadSounds() {
       createAudioPlayer(require("../../assets/sounds/grab.wav")),
       createAudioPlayer(require("../../assets/sounds/grab.wav")),
     ];
+    // 💡 정답 효과음 (correct_1, correct_2) 개별 볼륨 설정
+    const correct1 = createAudioPlayer(
+      require("../../assets/sounds/correct_1.wav"),
+    );
+    const correct2 = createAudioPlayer(
+      require("../../assets/sounds/correct_2.wav"),
+    );
+    correct1.volume = 0.4; // 원하는 정답 소리 크기 (0.0 ~ 1.0)
+    correct2.volume = 1;
+    players.correct_sound = [correct1, correct2];
 
-    players.correct_sound = [
-      createAudioPlayer(require("../../assets/sounds/correct_1.wav")),
-      createAudioPlayer(require("../../assets/sounds/correct_2.wav")),
-    ];
-
-    players.wrong_sound = [
-      createAudioPlayer(require("../../assets/sounds/wrong_1.wav")),
-      createAudioPlayer(require("../../assets/sounds/wrong_2.wav")),
-      createAudioPlayer(require("../../assets/sounds/wrong_3.wav")),
-    ];
+    // 💡 오답 효과음 (wrong_1, wrong_2, wrong_3) 개별 볼륨 설정
+    const wrong1 = createAudioPlayer(
+      require("../../assets/sounds/wrong_1.wav"),
+    );
+    const wrong2 = createAudioPlayer(
+      require("../../assets/sounds/wrong_2.wav"),
+    );
+    const wrong3 = createAudioPlayer(
+      require("../../assets/sounds/wrong_3.wav"),
+    );
+    wrong1.volume = 0.5; // 오답 소리가 너무 크다면 더 작게 조절 (예: 0.2)
+    wrong2.volume = 0.8;
+    wrong3.volume = 0.8;
+    players.wrong_sound = [wrong1, wrong2, wrong3];
 
     // ⭐ 음계 10개 미리 로드
     players.notes = [
@@ -234,6 +248,6 @@ export async function playEarnedNotes(earnedStars: number) {
       if (player) {
         await playPlayerSafely(player);
       }
-    }, i * 150);
+    }, i * 220);
   }
 }

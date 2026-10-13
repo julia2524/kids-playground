@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from "react";
 
 import { Button, Text, View } from "react-native";
-import { colorSortingLevels } from "../../types/colorSortingLevels";
-import { generateColorSortingProblem } from "../../generators/generateColorSortingProblem";
+import { colorSortingLevels } from "../../types/Classification/Color/colorSortingLevels";
 import { classificationItems } from "../../data/classification/classificationItems";
 import ColorSortingProblemPreview from "./ColorSortProblemPreview";
+import { generateColorSortingProblem } from "../../generators/classification/generateColorSortingProblem";
 
 export default function ColorSortingPreviewScreen() {
   const [level, setLevel] = useState(1);

@@ -372,7 +372,7 @@ import styled from "styled-components/native";
 import React, { useEffect, useRef, useState } from "react";
 import { Animated, Easing, StyleSheet, View } from "react-native";
 
-import { ColorSortingObject } from "../../types/colorSotringTypes";
+import { ColorSortingObject } from "../../types/Classification/Color/colorSotringTypes";
 import { classificationItems } from "../../data/classification/classificationItems";
 import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
 import { RenderColorSortingObjectSvg } from "../../assets/Classification/classificationItemSvgs";

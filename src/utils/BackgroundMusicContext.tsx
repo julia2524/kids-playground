@@ -13,37 +13,41 @@ import {
   setBGMEnabled,
 } from "./asyncStorage/audioSettingsStorage";
 
-// 💡 곡별로 source, 이름, 개별 볼륨 설정 가능
-const BGM_LIST = [
-  {
-    source: require("../../assets/sounds/bgm_1.mp3"),
-    name: "bgm_1.mp3",
+// 💡 용도별 BGM 정의 (메인, 게임, 스티커북 등)
+const BGM_THEMES = {
+  main: {
+    source: require("../../assets/sounds/bgm_main_1.mp3"),
+    name: "bgm_main_1.mp3",
     volume: 0.2,
+    loop: true, // 👈 메인은 무한 반복!
   },
-
-  {
+  game: {
     source: require("../../assets/sounds/bgm_3.mp3"),
-    name: "bgm_3.mp3",
+    name: "bgm_3.mp3 (Game)",
     volume: 0.5,
+    loop: true,
   },
-  {
-    source: require("../../assets/sounds/bgm_4.mp3"),
-    name: "bgm_4.mp3",
+  sticker: {
+    source: require("../../assets/sounds/bgm_sticker_1.mp3"),
+    name: "bgm_sticker_1",
     volume: 0.4,
+    loop: true,
   },
-  {
+  fun: {
     source: require("../../assets/sounds/bgm_5.mp3"),
-    name: "bgm_5.mp3",
+    name: "bgm_5.mp3 (Extra)",
     volume: 0.4,
+    loop: true,
   },
-];
+};
+
+export type BGMThemeKey = keyof typeof BGM_THEMES;
 
 interface BackgroundMusicContextType {
   backgroundMusic: boolean;
   setBackgroundMusic: (enabled: boolean) => Promise<void>;
-  changeTrack: (index: number) => void;
-  currentTrackIndex: number;
-  nextTrack: () => void; // 👈 추가
+  playThemeBGM: (themeKey: BGMThemeKey) => void; // 👈 테마별 BGM 재생 함수
+  currentTheme: BGMThemeKey;
 }
 
 const BackgroundMusicContext = createContext<BackgroundMusicContextType | null>(
@@ -56,43 +60,18 @@ export function BackgroundMusicProvider({
   children: React.ReactNode;
 }) {
   const [backgroundMusic, setBackgroundMusicState] = useState(true);
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-
-  // 현재 트랙 인덱스 참조 (이벤트 리스너 내 최신값 참조용)
-  const trackIndexRef = useRef(0);
-  trackIndexRef.current = currentTrackIndex;
+  const [currentTheme, setCurrentTheme] = useState<BGMThemeKey>("main");
 
   const bgmEnabledRef = useRef(true);
   bgmEnabledRef.current = backgroundMusic;
 
-  // 1️⃣ 첫 번째 트랙으로 플레이어 초기화 (loop = false 지정)
-  const player = useAudioPlayer(BGM_LIST[0].source);
+  const currentThemeRef = useRef<BGMThemeKey>("main");
+  currentThemeRef.current = currentTheme;
 
-  // 🎵 다음 트랙으로 넘어가기 (순환)
-  const playNextTrack = () => {
-    const nextIndex = (trackIndexRef.current + 1) % BGM_LIST.length;
-    changeTrack(nextIndex);
-  };
+  // 1️⃣ 기본 메인 BGM으로 플레이어 초기화
+  const player = useAudioPlayer(BGM_THEMES.main.source);
 
-  // 💡 음원 재생 완료 상태 감지 및 다음 곡 자동 재생
-  useEffect(() => {
-    // player의 재생 상태 변화 리스너 등록
-    const subscription = player.addListener(
-      "playbackStatusUpdate",
-      (status) => {
-        // 재생이 완료되었을 때(didJustFinish / isEnded)
-        if (status.isLoaded && status.didJustFinish && bgmEnabledRef.current) {
-          playNextTrack();
-        }
-      },
-    );
-
-    return () => {
-      subscription?.remove();
-    };
-  }, [player]);
-
-  // 2️⃣ 앱 시작 시 BGM 설정 및 첫 곡 재생
+  // 2️⃣ 앱 시작 시 BGM 설정 불러오기 및 메인 BGM 재생
   useEffect(() => {
     let cancelled = false;
 
@@ -103,9 +82,10 @@ export function BackgroundMusicProvider({
       setBackgroundMusicState(enabled);
 
       if (enabled) {
-        player.loop = false; // 👈 단일 곡 루프 OFF (다음 곡으로 넘어가기 위함)
-        player.volume = BGM_LIST[0].volume; // 💡 첫 곡 개별 볼륨 적용
+        player.loop = BGM_THEMES.main.loop;
+        player.volume = BGM_THEMES.main.volume;
         player.play();
+        console.log(`▶️ [BGM] 앱 시작 - Main BGM 재생`);
       }
     };
 
@@ -144,8 +124,9 @@ export function BackgroundMusicProvider({
     await setBGMEnabled(enabled);
 
     if (enabled) {
-      player.loop = false;
-      player.volume = BGM_LIST[currentTrackIndex].volume; // 💡 첫 곡 개별 볼륨 적용
+      const activeTheme = BGM_THEMES[currentThemeRef.current];
+      player.loop = activeTheme.loop;
+      player.volume = activeTheme.volume;
       player.play();
     } else {
       try {
@@ -154,29 +135,22 @@ export function BackgroundMusicProvider({
     }
   };
 
-  // 5️⃣ 특정 트랙 교체 함수
-  const changeTrack = (index: number) => {
-    const trackItem = BGM_LIST[index]; // 👈 객체 전체를 담기
-    if (!trackItem) return;
+  // 5️⃣ 💡 화면에 따라 원하는 테마 BGM으로 전환하는 함수
+  const playThemeBGM = (themeKey: BGMThemeKey) => {
+    const theme = BGM_THEMES[themeKey];
+    if (!theme) return;
 
-    setCurrentTrackIndex(index);
-    player.replace(trackItem.source);
-    player.loop = false;
-    player.volume = trackItem.volume; // 👈 이제 개별 볼륨(0.2, 0.4 등)이 정확히 적용됩니다!
+    setCurrentTheme(themeKey);
+    player.replace(theme.source);
+    player.loop = theme.loop;
+    player.volume = theme.volume;
 
     if (bgmEnabledRef.current) {
       player.play();
       console.log(
-        `▶️ [BGM] 재생 시작: ${trackItem.name} (Volume: ${trackItem.volume})`,
+        `🎵 [BGM Switch] 테마 변경 -> ${theme.name} (Vol: ${theme.volume})`,
       );
     }
-  }; // ⏭️ 외부에서 강제로 다음 곡으로 넘길 수 있는 테스트용 함수
-  const nextTrack = () => {
-    const nextIndex = (trackIndexRef.current + 1) % BGM_LIST.length;
-    console.log(
-      `⏭️ [BGM Test] 수동 스킵! 다음 곡으로 이동: Index ${nextIndex} (${BGM_LIST[nextIndex].name})`,
-    );
-    changeTrack(nextIndex);
   };
 
   return (
@@ -184,9 +158,8 @@ export function BackgroundMusicProvider({
       value={{
         backgroundMusic,
         setBackgroundMusic,
-        changeTrack,
-        nextTrack,
-        currentTrackIndex,
+        playThemeBGM,
+        currentTheme,
       }}
     >
       {children}

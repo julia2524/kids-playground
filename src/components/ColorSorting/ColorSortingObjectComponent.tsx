@@ -5,7 +5,9 @@ import styled from "styled-components/native";
 import { classificationItems } from "../../data/classification/classificationItems";
 import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
 import { RenderColorSortingObjectSvg } from "../../assets/Classification/classificationItemSvgs";
-import { ColorSortingObject } from "../../types/colorSotringTypes";
+import { ColorSortingObject } from "../../types/Classification/Color/colorSotringTypes";
+import { triggerHaptic } from "../../utils/haptic";
+import { playSound } from "../../utils/sound";
 
 // ============================================================
 // Types
@@ -225,6 +227,9 @@ export default function ColorSortingObjectComponent({
 
   const settleIntoBasket = () => {
     busyRef.current = true;
+    triggerHaptic("success");
+    playSound("correct_sound");
+
     burst.setValue(0);
     Animated.sequence([
       Animated.timing(scale, {
@@ -272,6 +277,8 @@ export default function ColorSortingObjectComponent({
   // ==========================================================
   const fadeAway = () => {
     busyRef.current = true;
+    triggerHaptic("error");
+    playSound("wrong_sound");
     rotateAnim.setValue(0);
 
     const currentX = posRef.current.x;
@@ -426,6 +433,8 @@ export default function ColorSortingObjectComponent({
       onPanResponderTerminationRequest: () => false,
 
       onPanResponderGrant: () => {
+        triggerHaptic("light");
+        // playSound("grab");
         pan.stopAnimation();
 
         dragRef.current = {

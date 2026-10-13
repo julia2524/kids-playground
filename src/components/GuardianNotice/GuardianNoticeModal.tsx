@@ -11,6 +11,7 @@ import i18n from "../../i18n";
 import { AppText } from "../../utils/AppText";
 
 import { useLanguage } from "../../context/LangaugeContext";
+import { triggerHaptic } from "../../utils/haptic";
 
 interface GuardianNoticeModalProps {
   visible: boolean;
@@ -22,6 +23,12 @@ export default function GuardianNoticeModal({
   onClose,
 }: GuardianNoticeModalProps) {
   useLanguage();
+
+  const handleClosePress = () => {
+    triggerHaptic("light");
+    // playSound("grab");
+    onClose?.();
+  };
 
   // ==========================================================
   // 현재 화면 크기
@@ -73,7 +80,7 @@ export default function GuardianNoticeModal({
       animationType="fade"
       statusBarTranslucent
       navigationBarTranslucent
-      onRequestClose={onClose}
+      onRequestClose={handleClosePress}
     >
       <Overlay>
         <NoticeCard padding={cardPadding} scale={modalScale}>
@@ -88,7 +95,7 @@ export default function GuardianNoticeModal({
 
             <CloseButton
               size={closeButtonSize}
-              onPress={onClose}
+              onPress={handleClosePress}
               accessibilityRole="button"
               accessibilityLabel={i18n.t("close") || "Close"} // 👈 다국어 키 연결
             >
@@ -158,7 +165,7 @@ export default function GuardianNoticeModal({
           <ConfirmButton
             height={confirmHeight}
             borderRadius={16 * modalScale}
-            onPress={onClose}
+            onPress={handleClosePress}
             accessibilityRole="button"
           >
             <ConfirmText fontSize={confirmFontSize}>

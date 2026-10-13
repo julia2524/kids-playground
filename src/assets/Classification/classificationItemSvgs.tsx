@@ -9,7 +9,7 @@ import Svg, {
   G,
 } from "react-native-svg";
 import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
-import { ColorSortingObject } from "../../types/colorSotringTypes";
+import { ColorSortingObject } from "../../types/Classification/Color/colorSotringTypes";
 import { ClassificationColorId } from "../../types/game";
 
 /**
@@ -11189,10 +11189,69 @@ export const StarWand = ({
         strokeLinejoin="round"
       />
 
+      {/* 반짝이 1 */}
+      <Line
+        x1="90"
+        y1="15"
+        x2="90"
+        y2="25"
+        stroke={sparkleColor}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <Line
+        x1="85"
+        y1="20"
+        x2="95"
+        y2="20"
+        stroke={sparkleColor}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+
+      {/* 반짝이 2 */}
+      <Line
+        x1="87"
+        y1="33"
+        x2="87"
+        y2="43"
+        stroke={sparkleColor}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <Line
+        x1="82"
+        y1="38"
+        x2="92"
+        y2="38"
+        stroke={sparkleColor}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+
+      {/* 반짝이 3 */}
+      <Line
+        x1="71"
+        y1="11"
+        x2="71"
+        y2="21"
+        stroke={sparkleColor}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <Line
+        x1="66"
+        y1="16"
+        x2="76"
+        y2="16"
+        stroke={sparkleColor}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
       {/* 반짝이 */}
-      <Circle cx="83" cy="20" r="3" fill={sparkleColor} />
+      {/* <Circle cx="83" cy="20" r="3" fill={sparkleColor} />
       <Circle cx="87" cy="38" r="3" fill={sparkleColor} />
-      <Circle cx="71" cy="14" r="3" fill={sparkleColor} />
+      <Circle cx="71" cy="14" r="3" fill={sparkleColor} /> */}
     </Svg>
   );
 };
@@ -11885,11 +11944,483 @@ export const RenderBasicShapeSvg = ({
   return <ShapeComponent colorHex={colorHex} size={size} />;
 };
 
+// 기존 프로젝트의 OUTLINE과 ItemSvgProps를 사용해 줘.
+
+// ==================================================
+// 공통 하트 경로
+// ==================================================
+const HEART_PATH =
+  "M50 84 C43 77 13 57 13 35 C13 21 23 14 35 14 C43 14 48 19 50 26 C53 19 59 14 67 14 C79 14 87 23 87 35 C87 57 58 77 50 84 Z";
+
+// ==================================================
+// 1. 하트 초콜릿
+// ==================================================
+export const HeartChocolate = ({
+  primary = "#795548",
+  secondary = "#A1887F",
+  accent = "#F5D6A7",
+  size = 85,
+}: ItemSvgProps) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d={HEART_PATH}
+        fill={primary}
+        stroke={OUTLINE}
+        strokeWidth={4}
+        strokeLinejoin="round"
+      />
+
+      {/* 초콜릿 표면 */}
+      <Path
+        d="M28 34 Q31 24 42 29"
+        fill="none"
+        stroke={secondary}
+        strokeWidth={5}
+        strokeLinecap="round"
+      />
+
+      {/* 초콜릿 장식 */}
+      <Circle cx="38" cy="43" r="4" fill={accent} />
+      <Circle cx="61" cy="36" r="3" fill={accent} />
+      <Circle cx="66" cy="53" r="4" fill={secondary} />
+      <Circle cx="47" cy="61" r="3" fill={accent} />
+    </Svg>
+  );
+};
+
+// ==================================================
+// 2. 하트 비누
+// ==================================================
+export const HeartSoap = ({
+  primary = "#F8BBD0",
+  secondary = "#FCE4EC",
+  accent = "#C2185B",
+  size = 85,
+}: ItemSvgProps) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 비누의 입체적인 옆면 */}
+      <Path
+        d="M15 37 Q15 25 29 20 Q50 7 71 20 Q85 25 85 37 L85 48 Q85 64 50 88 Q15 64 15 48 Z"
+        fill={accent}
+        stroke={OUTLINE}
+        strokeWidth={4}
+        strokeLinejoin="round"
+      />
+
+      {/* 비누의 앞면 */}
+      <Path
+        d={HEART_PATH}
+        fill={primary}
+        stroke={OUTLINE}
+        strokeWidth={4}
+        strokeLinejoin="round"
+      />
+
+      {/* 비누의 반짝임 */}
+      <Path
+        d="M30 35 Q32 29 40 30"
+        fill="none"
+        stroke={secondary}
+        strokeWidth={5}
+        strokeLinecap="round"
+      />
+
+      <Circle cx="68" cy="40" r="3" fill={secondary} />
+    </Svg>
+  );
+};
+
+// ==================================================
+// 3. 하트 액자
+// ==================================================
+export const HeartFrame = ({
+  primary = "#A1887F",
+  secondary = "#FFF3E0",
+  accent = "#6D4C41",
+  size = 85,
+}: ItemSvgProps) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 하트 프레임 외곽 */}
+      <Path
+        d={HEART_PATH}
+        fill={primary}
+        stroke={OUTLINE}
+        strokeWidth={4}
+        strokeLinejoin="round"
+      />
+
+      {/* 사진이 들어가는 안쪽 공간 */}
+      <Path
+        d="M50 73 C43 67 25 52 25 38 C25 29 31 24 39 24 C44 24 48 28 50 33 C53 28 57 24 63 24 C71 24 76 30 76 38 C76 52 58 67 50 73 Z"
+        fill={secondary}
+        stroke={accent}
+        strokeWidth={2.5}
+        strokeLinejoin="round"
+      />
+
+      {/* 사진 속 작은 산과 해 */}
+      <Circle cx="61" cy="36" r="5" fill={primary} />
+
+      <Path
+        d="M31 56 L43 43 L51 51 L58 45 L71 59 L71 64 L36 64 Z"
+        fill={secondary}
+        stroke={accent}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
+// ==================================================
+// 공통 별 경로
+// ==================================================
+const STAR_PATH =
+  "M50 9 L61 36 L90 38 L68 57 L75 86 L50 70 L25 86 L32 57 L10 38 L39 36 Z";
+
+// ==================================================
+// 4. 별 스티커
+// ==================================================
+export const ShootingStar = ({
+  primary = "#FFD54F",
+  secondary = "#FFF9C4",
+  accent = "#F9A825",
+  size = 85,
+}: ItemSvgProps) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 별똥별 꼬리 */}
+      {/* 메인 꼬리 */}
+      <Path
+        d="M12 12 C18 18 28 25 40 30 C50 35 58 38 65 42"
+        stroke={accent}
+        strokeWidth={7}
+        strokeLinecap="round"
+        fill="none"
+      />
+
+      <Path
+        d="M7 8 C15 15 25 22 37 28 C47 33 55 36 61 40"
+        stroke={secondary}
+        strokeWidth={3}
+        strokeLinecap="round"
+        fill="none"
+      />
+
+      <Path
+        d="M12 26 C18 32 28 39 40 44 C50 49 58 52 65 56"
+        stroke={accent}
+        strokeWidth={7}
+        strokeLinecap="round"
+        fill="none"
+      />
+
+      <Path
+        d="M7 22 C15 29 25 36 37 42 C47 51 55 50 61 54"
+        stroke={secondary}
+        strokeWidth={3}
+        strokeLinecap="round"
+        fill="none"
+      />
+
+      {/* 별 */}
+      <G transform="translate(35, 22) scale(0.45)">
+        <Path
+          d={STAR_PATH}
+          fill={primary}
+          stroke={OUTLINE}
+          strokeWidth={4}
+          strokeLinejoin="round"
+        />
+
+        {/* 하이라이트 */}
+        <Path d="M43 23 L48 38 L39 38 Z" fill={secondary} />
+      </G>
+    </Svg>
+  );
+};
+
+// ==================================================
+// 6. 별 머리핀
+// ==================================================
+export const StarHairpin = ({
+  primary = "#FFD54F",
+  secondary = "#FFF9C4",
+  accent = "#D7A62A",
+  size = 85,
+}: ItemSvgProps) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <G transform="rotate(70 50 50) ">
+        {/* 머리핀 집게 */}
+        <Path
+          d="M48 56 L34 87 Q32 92 37 94 L42 95 L57 63"
+          fill={accent}
+          stroke={OUTLINE}
+          strokeWidth={3}
+          strokeLinejoin="round"
+        />
+
+        <Path
+          d="M54 59 L48 87 Q47 92 52 93 L57 93 L64 63"
+          fill={secondary}
+          stroke={OUTLINE}
+          strokeWidth={3}
+          strokeLinejoin="round"
+        />
+
+        {/* 별 장식 */}
+        <G transform="translate(18, 17) scale(0.68) rotate(10 50 50)">
+          <Path
+            d={STAR_PATH}
+            fill={primary}
+            stroke={OUTLINE}
+            strokeWidth={4}
+            strokeLinejoin="round"
+          />
+
+          <Path d="M42 25 L47 38 L39 38 Z" fill={secondary} />
+        </G>
+      </G>
+    </Svg>
+  );
+};
+// ==================================================
+// 8. 삼각 치즈
+// ==================================================
+export const TriangleCheese = ({
+  primary = "#FFD54F",
+  secondary = "#FFF0A8",
+  accent = "#E6A817",
+  size = 85,
+}: ItemSvgProps) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 치즈의 삼각형 외곽 */}
+      <Path
+        d="M50 10 L91 83 Q95 90 85 90 L15 90 Q5 90 9 83 Z"
+        fill={primary}
+        stroke={OUTLINE}
+        strokeWidth={4}
+        strokeLinejoin="round"
+      />
+
+      {/* 치즈의 밝은 면 */}
+      <Path
+        d="M50 20 L77 75 L23 75 Z"
+        fill={secondary}
+        stroke={accent}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {/* 치즈 구멍 */}
+      {/* 위쪽 */}
+      <Polygon points="49,38 54,48 44,48" fill={accent} />
+
+      {/* 왼쪽 아래 */}
+      <Polygon points="34,60 42,58 38,67" fill={accent} />
+
+      {/* 오른쪽 아래 */}
+      <Polygon points="62,58 69,67 57,69" fill={accent} />
+    </Svg>
+  );
+};
+
+// ==================================================
+// 9. 삼각 표지판
+// ==================================================
+export const TriangleSign = ({
+  primary = "#FFD54F",
+  secondary = "#FFFFFF",
+  accent = "#D32F2F",
+  size = 85,
+}: ItemSvgProps) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 표지판 기둥 */}
+      <Rect
+        x="44"
+        y="70"
+        width="12"
+        height="24"
+        rx="2"
+        fill="#9E9E9E"
+        stroke={OUTLINE}
+        strokeWidth={3}
+      />
+
+      {/* 삼각 표지판의 테두리 */}
+      <Path
+        d="M50 8 L91 77 Q94 83 86 83 L14 83 Q6 83 9 77 Z"
+        fill={accent}
+        stroke={OUTLINE}
+        strokeWidth={4}
+        strokeLinejoin="round"
+      />
+
+      {/* 표지판 안쪽 */}
+      <Path
+        d="M50 22 L78 72 L22 72 Z"
+        fill={primary}
+        stroke={secondary}
+        strokeWidth={3}
+        strokeLinejoin="round"
+      />
+
+      {/* 가운데 느낌표 */}
+      <Path
+        d="M47 38 Q47 35 50 35 Q53 35 53 38 L52 53 L48 53 Z"
+        fill={secondary}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+
+      <Circle
+        cx="50"
+        cy="61"
+        r="3"
+        fill={secondary}
+        stroke={OUTLINE}
+        strokeWidth={1}
+      />
+    </Svg>
+  );
+};
+
+// ==================================================
+// 하트 열쇠고리
+// ==================================================
+export const HeartKeychain = ({
+  primary = "#F48FB1",
+  secondary = "#FCE4EC",
+  accent = "#B0BEC5",
+  size = 85,
+}: ItemSvgProps) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 금속 고리 */}
+      <Circle
+        cx="50"
+        cy="13"
+        r="9"
+        fill="none"
+        stroke={accent}
+        strokeWidth={4}
+      />
+
+      {/* 연결 고리 */}
+      <Path
+        d="M50 22 L50 28"
+        stroke={accent}
+        strokeWidth={5}
+        strokeLinecap="round"
+      />
+
+      {/* 하트 장식 */}
+      <Path
+        d={HEART_PATH}
+        fill={primary}
+        stroke={OUTLINE}
+        strokeWidth={4}
+        strokeLinejoin="round"
+      />
+
+      {/* 하트 광택 */}
+      <Path
+        d="M32 35 Q34 28 41 30"
+        fill="none"
+        stroke={secondary}
+        strokeWidth={4}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+
+// ==================================================
+// 하트 모양 잎사귀
+// ==================================================
+
+export const HeartLeaf = ({
+  primary = "#66BB6A",
+  secondary = "#A5D6A7",
+  accent = "#2E7D32",
+  size = 85,
+}: ItemSvgProps) => {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 잎자루: 하트 위쪽의 움푹 들어간 부분에서 위로 */}
+      <Path
+        d="M50 29 Q48 19 43 11"
+        fill="none"
+        stroke={accent}
+        strokeWidth={4}
+        strokeLinecap="round"
+      />
+
+      {/* 하트 모양 잎사귀 */}
+      <Path
+        d="M50 76
+          C43 67 20 51 20 35
+          C20 23 29 17 39 20
+          C45 21 49 25 50 30
+          C54 22 62 18 70 21
+          C83 25 85 39 78 51
+          C72 62 58 71 50 76 Z"
+        fill={primary}
+        stroke={OUTLINE}
+        strokeWidth={3.5}
+        strokeLinejoin="round"
+      />
+
+      {/* 중앙 잎맥 */}
+      <Path
+        d="M50 32 Q51 51 50 71"
+        fill="none"
+        stroke={accent}
+        strokeWidth={2.5}
+        strokeLinecap="round"
+      />
+
+      {/* 위쪽을 향해 뻗는 잎맥 가지 */}
+      <Path
+        d="M50 43 Q41 35 33 32
+           M51 40 Q59 32 68 31
+           M50 53 Q41 46 29 44
+           M50 51 Q61 43 74 41
+           M50 63 Q41 57 37 54
+           M50 62 Q59 55 65 51"
+        fill="none"
+        stroke={secondary}
+        strokeWidth={2.5}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+
 // ============================================================
 // CLASSIFICATION ITEM SVG REGISTRY
 // ============================================================
 
 export const CATEGORY_ITEM_SVGS = {
+  heartKeychain: HeartKeychain,
+  heartLeaf: HeartLeaf,
+  heartChocolate: HeartChocolate,
+  heartSoap: HeartSoap,
+  heartFrame: HeartFrame,
+  shootingStar: ShootingStar,
+
+  starHairpin: StarHairpin,
+
+  triangleCheese: TriangleCheese,
+  triangleSign: TriangleSign,
+
   medal: Medal,
   starNecklace: StarNecklace,
   starSunglasses: StarSunglasses,

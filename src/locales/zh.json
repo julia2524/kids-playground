@@ -62,6 +62,10 @@
   "btn_reset": "重置",
   "cancel": "取消",
 
+  "haptic_section": "振动设置",
+  "haptic_title": "触觉反馈",
+  "haptic_desc": "点击按钮时会有轻柔的振动反馈。",
+
   "classification_space_title": "分类宇宙",
   "classification_hero_title": "探索哪个星球呢？",
   "classification_hero_desc": "选择喜欢的星球开始冒险吧！",

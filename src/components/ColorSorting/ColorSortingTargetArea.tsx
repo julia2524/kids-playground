@@ -5,13 +5,14 @@ import styled from "styled-components/native";
 import i18n from "../../i18n"; // 상대 경로 확인 필요
 
 import ColorSortingTargetBasket from "./ColorSortingTargetBasket";
-import { ColorSortingProblem } from "../../types/colorSotringTypes";
-import { COLOR_LABELS } from "../../generators/generateColorSortingProblem";
+
 import { useLanguage } from "../../context/LangaugeContext";
+import { COLOR_LABELS } from "../../generators/classification/generateColorSortingProblem";
+import { ClassificationProblem } from "../../types/Classification/Color/colorSotringTypes";
 
 type ColorSortingTargetAreaProps = {
-  targets: ColorSortingProblem["targets"];
-  objects: ColorSortingProblem["objects"];
+  targets: ClassificationProblem["targets"];
+  objects: ClassificationProblem["objects"];
   placedObjects: Record<string, string[]>;
   basketRefs: React.RefObject<Record<string, View | null>>; // 추가
 

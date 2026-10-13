@@ -12,16 +12,13 @@ import { STAGE_MAP_INFO } from "../../constants/game";
 import MapTrail from "./components/MapTrail";
 import StageNode from "./components/StageNode";
 import AppHeader from "../../components/AppHeader";
-// Mascot import 경로가 없어 임시 주석 처리 (원래 파일에 맞춰 유지하세요)
-// import Mascot from "../design-system/components/Mascot";
-import { AppText } from "../../utils/AppText";
-import { colorSortingLevels } from "../../types/colorSortingLevels";
+import { colorSortingLevels } from "../../types/Classification/Color/colorSortingLevels";
 import { ASSETS } from "../../assets/assets";
-import { LEVEL_CONFIGS } from "../../data/classification/classificationLevels";
 import useGameProgress from "../../hooks/useGameProgress";
 import { useLanguage } from "../../context/LangaugeContext";
 import i18n from "../../i18n";
 import { triggerHaptic } from "../../utils/haptic";
+import { ShapeSortingLevels } from "../../types/Classification/Shape/shapeSortingLevels";
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -59,6 +56,8 @@ export default function StageMapScreen() {
     switch (gameType) {
       case "color":
         return colorSortingLevels;
+      case "shape": // 👈 모양 분류 레벨 설정 추가
+        return ShapeSortingLevels;
       default:
         return [];
     }
@@ -138,6 +137,13 @@ export default function StageMapScreen() {
     switch (gameType) {
       case "color":
         navigation.navigate("ColorSortingPlayScreen", {
+          gameType,
+          level,
+        });
+        break;
+      case "shape": // 👈 모양 분류 플레이 화면으로 이동 연결
+        navigation.navigate("ShapeSortingPlayScreen", {
+          // 실제 사용하시는 플레이 화면 이름으로 맞춰주세요!
           gameType,
           level,
         });

@@ -7,7 +7,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
   // ===================== CHAPTER 1 =====================
   1: {
     level: 1,
-    chapter: 1,
+
     name: "색상을 찾아요",
     educationalGoal: "색상을 기준으로 대상을 구별한다.",
     choiceCount: 4,
@@ -25,7 +25,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   2: {
     level: 2,
-    chapter: 1,
+
     name: "모양을 찾아요",
     educationalGoal: "형태의 특징을 관찰하고 지정된 모양을 분류한다.",
     choiceCount: 4,
@@ -43,7 +43,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   3: {
     level: 3,
-    chapter: 1,
+
     name: "종류를 찾아요",
     educationalGoal: "대상을 상위 범주에 따라 분류한다.",
     choiceCount: 4,
@@ -60,7 +60,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   4: {
     level: 4,
-    chapter: 1,
+
     name: "크기를 찾아요",
     educationalGoal: "동일 대상에서 크기 차이를 직관적으로 구별한다.",
     choiceCount: 2,
@@ -76,7 +76,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
   // ===================== CHAPTER 2 =====================
   5: {
     level: 5,
-    chapter: 2,
+
     name: "가장 큰 것을 찾아요",
     educationalGoal: "동일 대상 3개의 크기를 비교하여 최상위 값을 찾는다.",
     choiceCount: 3,
@@ -91,7 +91,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   6: {
     level: 6,
-    chapter: 2,
+
     name: "수량을 비교해요",
     educationalGoal: "동일 대상의 수량(많은/적은)을 직관적으로 비교한다.",
     choiceCount: 2,
@@ -111,7 +111,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   7: {
     level: 7,
-    chapter: 2,
+
     name: "가장 수량이 많은 것을 찾아요",
     educationalGoal: "3개 그룹의 수량을 비교하여 최상위 수량을 찾는다.",
     choiceCount: 3,
@@ -131,7 +131,6 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   8: {
     level: 8,
-    chapter: 2,
     name: "위치를 찾아요",
     educationalGoal: "좌/우 공간 개념을 이해하고 조건에 맞는 위치를 찾는다.",
     choiceCount: 2,
@@ -146,7 +145,6 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   9: {
     level: 9,
-    chapter: 2,
     name: "위치를 확장해서 찾아요",
     educationalGoal: "좌/우/위 등 확장된 공간 위치를 구분한다.",
     choiceCount: 3,
@@ -162,7 +160,6 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
   // ===================== CHAPTER 3 =====================
   10: {
     level: 10,
-    chapter: 3,
     name: "색상 + 종류",
     educationalGoal:
       "색상과 종류 두 가지 조건을 동시에 만족하는 대상을 찾는다.",
@@ -180,7 +177,6 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   11: {
     level: 11,
-    chapter: 3,
     name: "모양 + 종류",
     educationalGoal:
       "모양과 종류 두 가지 조건을 동시에 만족하는 대상을 찾는다.",
@@ -198,7 +194,6 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   12: {
     level: 12,
-    chapter: 3,
     name: "색상 + 크기",
     educationalGoal: "색상과 크기 두 가지 감각 속성을 동시에 판단한다.",
     choiceCount: 4,
@@ -218,7 +213,6 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
   // ===================== CHAPTER 4 =====================
   13: {
     level: 13,
-    chapter: 4,
     name: "종류 + 크기 (같은 sub)",
     educationalGoal: "같은 소범주 내 서로 다른 사물의 크기를 비교한다.",
     choiceCount: 2,
@@ -233,7 +227,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   14: {
     level: 14,
-    chapter: 4,
+
     name: "종류 + 크기 비교 (같은 sub)",
     educationalGoal: "같은 소범주 내 3가지 대상 중 가장 큰 대상을 판별한다.",
     choiceCount: 3,
@@ -248,7 +242,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   15: {
     level: 15,
-    chapter: 4,
+
     name: "종류 + 크기 (독립 조합)",
     educationalGoal:
       "종류와 크기 조건이 교차하는 4개 선택지 중 정답을 추출한다.",
@@ -268,7 +262,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
   // ===================== CHAPTER 5 =====================
   16: {
     level: 16,
-    chapter: 5,
+
     name: "위치 + 색상",
     educationalGoal: "공간 위치와 색상 조건의 조합을 처리한다.",
     choiceCount: 4,
@@ -287,7 +281,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   17: {
     level: 17,
-    chapter: 5,
+
     name: "위치 + 종류",
     educationalGoal: "공간 위치와 범주 정보를 동시에 판단한다.",
     choiceCount: 4,
@@ -305,7 +299,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   18: {
     level: 18,
-    chapter: 5,
+
     name: "수량 비교 (같은 sub)",
     educationalGoal:
       "같은 종류 안에서 수량만 비교하여 조건에 맞는 수량을 찾는다.",
@@ -321,7 +315,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   19: {
     level: 19,
-    chapter: 5,
+
     name: "종류와 수량을 함께 봐요",
     educationalGoal: "같은 종류인지 확인하고, 수량까지 비교해요.",
     choiceCount: 3,
@@ -341,7 +335,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   20: {
     level: 20,
-    chapter: 5,
+
     name: "종류와 수량을 꼼꼼히 살펴봐요",
     educationalGoal:
       "종류와 수량을 각각 확인하고 두 조건을 모두 만족하는 것을 찾아요.",
@@ -365,7 +359,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   21: {
     level: 21,
-    chapter: 5,
+
     name: "크기 + 색상 + 종류",
     educationalGoal: "3가지 속성을 동시에 비교/검증한다.",
     choiceCount: 4,
@@ -387,7 +381,7 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   22: {
     level: 22,
-    chapter: 5,
+
     name: "위치 + 수량 + 종류",
     educationalGoal: "화면 격자 영역 내 그룹 단위 3가지 속성을 판단한다.",
     choiceCount: 4,
@@ -412,7 +406,6 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
   // ===================== CHAPTER 6 (NOT) =====================
   23: {
     level: 23,
-    chapter: 6,
     name: "단순 NOT (같은 사물)",
     educationalGoal: "부정 조건을 이해하고 해당하지 않는 것을 찾는다.",
     choiceCount: 2,
@@ -427,7 +420,6 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   24: {
     level: 24,
-    chapter: 6,
     name: "단순 NOT (같은 sub)",
     educationalGoal: "같은 소범주 안에서 부정 조건을 적용한다.",
     choiceCount: 2,
@@ -442,7 +434,6 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   25: {
     level: 25,
-    chapter: 6,
     name: "단순 NOT (같은 top)",
     educationalGoal: "같은 대범주 안에서 부정 조건을 적용한다.",
     choiceCount: 2,
@@ -457,7 +448,6 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   26: {
     level: 26,
-    chapter: 6,
     name: "단순 NOT 복수 정답",
     educationalGoal:
       "부정 조건을 만족하는 답이 2개 이상일 때 다중 선택을 학습한다.",
@@ -473,7 +463,6 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   27: {
     level: 27,
-    chapter: 6,
     name: "단순 NOT 복수 (sub 확장)",
     educationalGoal: "같은 소범주에서 부정 조건 복수 정답을 찾는다.",
     choiceCount: 3,
@@ -488,7 +477,6 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   28: {
     level: 28,
-    chapter: 6,
     name: "NOT 색상 + 종류 (쉬운)",
     educationalGoal: "종류를 먼저 맞추고 그 중 부정 색상을 고른다.",
     choiceCount: 3,
@@ -505,7 +493,6 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   29: {
     level: 29,
-    chapter: 6,
     name: "NOT 색상 + 종류 (교차)",
     educationalGoal:
       "부정 색상과 종류 조건이 촘촘하게 교차된 선택지를 구분한다.",
@@ -520,7 +507,6 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   30: {
     level: 30,
-    chapter: 6,
     name: "NOT 색상 + 크기",
     educationalGoal: "부정 색상 조건과 크기 조건을 결합하여 판단한다.",
     choiceCount: 4,
@@ -540,7 +526,6 @@ export const LEVEL_CONFIGS: Record<number, LevelConfig> = {
 
   31: {
     level: 31,
-    chapter: 6,
     name: "NOT 종류 + 색상",
     educationalGoal: "특정 종류를 제외한 상태에서 특정 색상을 선택한다.",
     choiceCount: 4,

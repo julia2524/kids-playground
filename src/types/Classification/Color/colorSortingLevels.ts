@@ -1,5 +1,5 @@
 import { ColorSortingLevelConfig } from "./colorSotringTypes";
-import { ClassificationColorId } from "./game";
+import { ClassificationColorId } from "../../game";
 
 // 프리셋 정의
 const BASIC_COLORS: ClassificationColorId[] = [
@@ -39,7 +39,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     colorCount: 2,
     showHint: true,
     colorPool: BASIC_COLORS,
-    completionEffect: "none",
+    // //completionEffect: "none",
   },
 
   // ==================================================
@@ -56,7 +56,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     colorCount: 2,
     showHint: true,
     colorPool: ALL_COLORS,
-    completionEffect: "none",
+    //completionEffect: "none",
   },
   // ==================================================
   // LEVEL 3
@@ -90,7 +90,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     showHint: true,
     colorPool: BASIC_COLORS,
 
-    completionEffect: "none",
+    //completionEffect: "none",
   },
   {
     level: 4,
@@ -110,7 +110,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     showHint: true,
     colorPool: ALL_COLORS,
 
-    completionEffect: "none",
+    //completionEffect: "none",
   },
 
   // ==================================================
@@ -145,7 +145,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     showHint: false,
     colorPool: BASIC_COLORS,
 
-    completionEffect: "none",
+    //completionEffect: "none",
   },
 
   {
@@ -166,7 +166,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     showHint: false,
     colorPool: ALL_COLORS,
 
-    completionEffect: "none",
+    //completionEffect: "none",
   },
   // ==================================================
   // LEVEL 5
@@ -200,7 +200,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     showHint: false,
     colorPool: BASIC_COLORS,
 
-    completionEffect: "none",
+    //completionEffect: "none",
   },
   {
     level: 8,
@@ -220,7 +220,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     showHint: false,
     colorPool: ALL_COLORS,
 
-    completionEffect: "none",
+    //completionEffect: "none",
   },
 
   // ==================================================
@@ -256,7 +256,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     showHint: false,
     colorPool: BASIC_COLORS,
 
-    completionEffect: "none",
+    //completionEffect: "none",
   },
   {
     level: 10,
@@ -276,7 +276,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     showHint: false,
     colorPool: ALL_COLORS,
 
-    completionEffect: "none",
+    //completionEffect: "none",
   },
 
   // ==================================================
@@ -311,7 +311,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     showHint: false,
     colorPool: BASIC_COLORS,
 
-    completionEffect: "none",
+    //completionEffect: "none",
   },
 
   // ==================================================
@@ -350,7 +350,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     showHint: false,
     colorPool: ALL_COLORS,
 
-    completionEffect: "none",
+    //completionEffect: "none",
   },
 
   // ==================================================
@@ -386,7 +386,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     showHint: false,
     colorPool: BASIC_COLORS,
 
-    completionEffect: "color_king",
+    //completionEffect: "color_king",
   },
   {
     level: 14,
@@ -406,7 +406,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     showHint: false,
     colorPool: ALL_COLORS,
 
-    completionEffect: "color_king",
+    //completionEffect: "color_king",
   },
 
   // ==================================================
@@ -444,7 +444,7 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     showHint: false,
     colorPool: BASIC_COLORS,
 
-    completionEffect: "color_king",
+    //completionEffect: "color_king",
   },
 
   {
@@ -465,6 +465,6 @@ export const colorSortingLevels: ColorSortingLevelConfig[] = [
     showHint: false,
     colorPool: ALL_COLORS,
 
-    completionEffect: "color_king",
+    //completionEffect: "color_king",
   },
 ];

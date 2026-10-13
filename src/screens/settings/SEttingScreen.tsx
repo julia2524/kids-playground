@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, TouchableOpacity } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -31,7 +31,11 @@ import {
   setCorrectEffectEnabled,
   setSoundEnabled,
 } from "../../utils/asyncStorage/audioSettingsStorage";
-import { triggerHaptic } from "../../utils/haptic";
+import { syncHapticGlobalState, triggerHaptic } from "../../utils/haptic";
+import {
+  getHapticEnabled,
+  setHapticEnabled,
+} from "../../utils/asyncStorage/hapticSettingsStorage";
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -151,8 +155,7 @@ export default function SettingScreen() {
   // const [backgroundMusic, setBackgroundMusic] = useState(true);
   const [correctEffect, setCorrectEffect] = useState(true);
 
-  const { backgroundMusic, setBackgroundMusic, nextTrack, currentTrackIndex } =
-    useBackgroundMusic();
+  const { backgroundMusic, setBackgroundMusic } = useBackgroundMusic();
   // 💡 BGM 스위치 토글 핸들러
   const handleBgmToggle = async (value: boolean) => {
     triggerHaptic("light"); // 터치 햅틱 피드백 실행
@@ -214,6 +217,23 @@ export default function SettingScreen() {
       { showCancel: true, confirmText: i18n.t("btn_reset") },
     );
   };
+  const [hapticEnabled, setHapticEnabledState] = useState(true);
+
+  // 설정 불러오기 (useEffect 내부)
+  useEffect(() => {
+    getHapticEnabled().then(setHapticEnabledState);
+  }, []);
+
+  // 토글 핸들러
+  const handleHapticToggle = async (value: boolean) => {
+    setHapticEnabledState(value);
+    await setHapticEnabled(value);
+    await syncHapticGlobalState(); // 전역 캐시 동기화
+
+    if (value) {
+      triggerHaptic("light"); // 켜질 때 가볍게 테스트 진동 울려주기!
+    }
+  };
 
   return (
     <Container>
@@ -261,26 +281,7 @@ export default function SettingScreen() {
             </SettingRow>
           </SettingCard>
         </Section>
-        <Section>
-          <SectionTitle>BGM 테스트 (개발용)</SectionTitle>
-          <SettingCard>
-            <TouchableOpacity
-              onPress={() => {
-                nextTrack();
-              }}
-              style={{
-                padding: 12,
-                backgroundColor: "#E6E1F4",
-                borderRadius: 16,
-                alignItems: "center",
-              }}
-            >
-              <SettingTitle style={{ color: "#7C5CFF" }}>
-                ⏭️ 다음 곡으로 넘기기 (현재: {currentTrackIndex + 1}번 트랙)
-              </SettingTitle>
-            </TouchableOpacity>
-          </SettingCard>
-        </Section>
+
         {/* =========================
             소리 설정
            ========================= */}
@@ -349,6 +350,30 @@ export default function SettingScreen() {
               <StyledSwitch
                 value={correctEffect}
                 onValueChange={handleCorrectToggle}
+              />
+            </SettingRow>
+          </SettingCard>
+        </Section>
+
+        {/* 🛡️ 햅틱 설정 */}
+        <Section>
+          <SectionTitle>{i18n.t("haptic_section")}</SectionTitle>
+          <SettingCard>
+            <SettingRow>
+              <SettingInfo>
+                <IconBadge style={{ backgroundColor: colors.softPink }}>
+                  <Ionicons name="finger-print" size={22} color={colors.pink} />
+                </IconBadge>
+                <SettingTextWrapper>
+                  <SettingTitle>{i18n.t("haptic_title")}</SettingTitle>
+                  <SettingDescription>
+                    {i18n.t("haptic_desc")}
+                  </SettingDescription>
+                </SettingTextWrapper>
+              </SettingInfo>
+              <StyledSwitch
+                value={hapticEnabled}
+                onValueChange={handleHapticToggle} // 👈 변경 핸들러 연결
               />
             </SettingRow>
           </SettingCard>

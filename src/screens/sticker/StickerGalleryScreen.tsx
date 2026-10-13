@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
@@ -8,15 +8,24 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { AppText } from "../../utils/AppText";
 import AppHeader from "../../components/AppHeader";
 import CustomAlert from "../../components/CustomAlert";
-import { classificationItems } from "../../data/classification/classificationItems";
 import { RenderClassificationItemSvg } from "../../assets/Classification/classificationItemSvgs";
 import { useLanguage } from "../../context/LangaugeContext";
 import i18n from "../../i18n";
+import { useBackgroundMusic } from "../../utils/BackgroundMusicContext";
+import { classificationItems } from "../../data/classification/classificationItems";
 
 const UNLOCKED_STICKERS_KEY = "@unlocked_stickers";
 
 // 전체 스티커 키 리스트
 const ALL_STICKER_KEYS = [
+  "heartKeychain",
+  "triangleSign",
+  "heartLeaf",
+  "starHairpin",
+  "shootingStar",
+  "heartFrame",
+  "heartSoap",
+  "heartChocolate",
   "medal",
   "starNecklace",
   "starSunglasses",
@@ -160,6 +169,17 @@ const ALL_STICKER_KEYS = [
 ];
 
 export default function StickerGalleryScreen() {
+  const { playThemeBGM } = useBackgroundMusic();
+
+  useEffect(() => {
+    // 🎮 게임 화면에 들어올 때 게임용 BGM으로 전환!
+    playThemeBGM("sticker");
+
+    return () => {
+      // (선택) 다시 메인 화면으로 돌아갈 때 메인 BGM으로 원복하고 싶다면 cleanup에서 호출 가능
+      playThemeBGM("main");
+    };
+  }, []);
   const { locale } = useLanguage(); // 👈 언어 변경 리렌더링 감지
   const navigation = useNavigation<any>();
   const [unlockedStickers, setUnlockedStickers] = useState<string[]>([]);

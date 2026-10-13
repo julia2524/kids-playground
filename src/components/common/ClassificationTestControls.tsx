@@ -15,7 +15,7 @@ type ColorSortingTestControlsProps = {
   onNextRound: () => void;
 };
 
-export default function ColorSortingTestControls({
+export default function ClassificationTestControls({
   level,
   totalLevels,
   roundIndex,

@@ -62,6 +62,10 @@
   "btn_reset": "초기화",
   "cancel": "취소",
 
+  "haptic_section": "진동 설정",
+  "haptic_title": "터치 진동",
+  "haptic_desc": "버튼을 누를 때 은은한 햅틱 진동을 느껴요.",
+
   "classification_space_title": "분류 우주",
   "classification_hero_title": "어떤 행성을 탐험할까요?",
   "classification_hero_desc": "원하는 행성을 골라서 탐험을 시작해 보세요!",

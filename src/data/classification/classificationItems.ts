@@ -2,6 +2,405 @@ import { ClassificationItem } from "../../types/game";
 
 export const classificationItems: ClassificationItem[] = [
   {
+    id: "heartKeychain",
+    name: "하트 열쇠고리",
+    topCategory: "living",
+    subCategory: "daily",
+    svgKey: "heartKeychain",
+    shapes: ["heart"],
+    description: "하트 장식이 달린 열쇠고리예요! 가방에 달아볼까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#F48FB1",
+        secondary: "#FCE4EC",
+        accent: "#B0BEC5",
+      },
+      {
+        colorId: "red",
+        primary: "#EF5350",
+        secondary: "#FFCDD2",
+        accent: "#B0BEC5",
+      },
+      {
+        colorId: "pink",
+        primary: "#F8BBD0",
+        secondary: "#FFF1F5",
+        accent: "#90A4AE",
+      },
+      {
+        colorId: "yellow",
+        primary: "#FFD54F",
+        secondary: "#FFF9C4",
+        accent: "#B0BEC5",
+      },
+      {
+        colorId: "purple",
+        primary: "#BA68C8",
+        secondary: "#F3E5F5",
+        accent: "#90A4AE",
+      },
+    ],
+  },
+  {
+    id: "heartLeaf",
+    name: "하트 모양 잎사귀",
+    topCategory: "living",
+    subCategory: "daily",
+    svgKey: "heartLeaf",
+    shapes: ["heart"],
+    description: "잎사귀가 꼭 하트처럼 생겼어요! 초록 잎맥도 찾아볼까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#66BB6A",
+        secondary: "#A5D6A7",
+        accent: "#2E7D32",
+      },
+      {
+        colorId: "green",
+        primary: "#66BB6A",
+        secondary: "#C8E6C9",
+        accent: "#2E7D32",
+      },
+      {
+        colorId: "yellow",
+        primary: "#DCE775",
+        secondary: "#F0F4C3",
+        accent: "#7CB342",
+      },
+      {
+        colorId: "brown",
+        primary: "#A1887F",
+        secondary: "#D7CCC8",
+        accent: "#5D4037",
+      },
+    ],
+  },
+  // ==================================================
+  // 1. 하트 초콜릿
+  // ==================================================
+  {
+    id: "heartChocolate",
+    name: "하트 초콜릿",
+    topCategory: "food",
+    subCategory: "snack",
+    svgKey: "heartChocolate",
+    shapes: ["heart"],
+    description:
+      "달콤한 초콜릿이 하트 모양으로 만들어졌어요! 한 입 먹어볼까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#795548",
+        secondary: "#A1887F",
+        accent: "#F5D6A7",
+      },
+      {
+        colorId: "brown",
+        primary: "#6D4C41",
+        secondary: "#A1887F",
+        accent: "#D7CCC8",
+      },
+      {
+        colorId: "white",
+        primary: "#FFF3E0",
+        secondary: "#D7CCC8",
+        accent: "#BCAAA4",
+      },
+      {
+        colorId: "pink",
+        primary: "#F8BBD0",
+        secondary: "#F48FB1",
+        accent: "#AD1457",
+      },
+    ],
+  },
+
+  // ==================================================
+  // 2. 하트 비누
+  // ==================================================
+  {
+    id: "heartSoap",
+    name: "하트 비누",
+    topCategory: "living",
+    subCategory: "daily",
+    svgKey: "heartSoap",
+    shapes: ["heart"],
+    description: "하트 모양 비누로 손을 깨끗하게 씻어요! 향긋한 거품이 나요.",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#F8BBD0",
+        secondary: "#FCE4EC",
+        accent: "#C2185B",
+      },
+      {
+        colorId: "red",
+        primary: "#EF5350",
+        secondary: "#FFCDD2",
+        accent: "#B71C1C",
+      },
+      {
+        colorId: "yellow",
+        primary: "#FFD54F",
+        secondary: "#FFF9C4",
+        accent: "#F9A825",
+      },
+      {
+        colorId: "blue",
+        primary: "#90CAF9",
+        secondary: "#E3F2FD",
+        accent: "#1565C0",
+      },
+      {
+        colorId: "purple",
+        primary: "#CE93D8",
+        secondary: "#F3E5F5",
+        accent: "#7B1FA2",
+      },
+      {
+        colorId: "green",
+        primary: "#A5D6A7",
+        secondary: "#E8F5E9",
+        accent: "#2E7D32",
+      },
+    ],
+  },
+
+  // ==================================================
+  // 3. 하트 액자
+  // ==================================================
+  {
+    id: "heartFrame",
+    name: "하트 액자",
+    topCategory: "living",
+    subCategory: "daily",
+    svgKey: "heartFrame",
+    shapes: ["heart"],
+    description:
+      "소중한 사진을 넣어두는 하트 모양 액자예요! 누구의 사진을 넣을까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#A1887F",
+        secondary: "#FFF3E0",
+        accent: "#6D4C41",
+      },
+      {
+        colorId: "red",
+        primary: "#EF5350",
+        secondary: "#FFEBEE",
+        accent: "#B71C1C",
+      },
+      {
+        colorId: "pink",
+        primary: "#F8BBD0",
+        secondary: "#FFF1F5",
+        accent: "#C2185B",
+      },
+      {
+        colorId: "yellow",
+        primary: "#FFD54F",
+        secondary: "#FFF9C4",
+        accent: "#F9A825",
+      },
+      {
+        colorId: "white",
+        primary: "#FAFAFA",
+        secondary: "#e7eaed",
+        accent: "#90A4AE",
+      },
+      {
+        colorId: "brown",
+        primary: "#8D6E63",
+        secondary: "#D7CCC8",
+        accent: "#4E342E",
+      },
+    ],
+  },
+
+  // ==================================================
+  // 4. 별 스티커
+  // ==================================================
+  {
+    id: "shootingStar",
+    name: "별똥별",
+    topCategory: "living",
+    subCategory: "daily",
+    svgKey: "shootingStar",
+    shapes: ["star"],
+    description: "별똥별이 떨어져요! 우리 같이 소원을 빌어볼까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#FFD54F",
+        secondary: "#FFF9C4",
+        accent: "#F9A825",
+      },
+      {
+        colorId: "red",
+        primary: "#EF5350",
+        secondary: "#FFCDD2",
+        accent: "#B71C1C",
+      },
+      {
+        colorId: "orange",
+        primary: "#FFB74D",
+        secondary: "#FFF3E0",
+        accent: "#E65100",
+      },
+      {
+        colorId: "green",
+        primary: "#81C784",
+        secondary: "#E8F5E9",
+        accent: "#2E7D32",
+      },
+      {
+        colorId: "blue",
+        primary: "#64B5F6",
+        secondary: "#E3F2FD",
+        accent: "#1565C0",
+      },
+      {
+        colorId: "purple",
+        primary: "#BA68C8",
+        secondary: "#F3E5F5",
+        accent: "#6A1B9A",
+      },
+      {
+        colorId: "pink",
+        primary: "#F48FB1",
+        secondary: "#FCE4EC",
+        accent: "#AD1457",
+      },
+    ],
+  },
+
+  // ==================================================
+  // 6. 별 머리핀
+  // ==================================================
+  {
+    id: "starHairpin",
+    name: "별 머리핀",
+    topCategory: "living",
+    subCategory: "daily",
+    svgKey: "starHairpin",
+    shapes: ["star"],
+    description: "별 장식이 달린 머리핀이에요! 머리에 예쁘게 꽂아볼까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#FFD54F",
+        secondary: "#FFF9C4",
+        accent: "#D7A62A",
+      },
+      {
+        colorId: "pink",
+        primary: "#F48FB1",
+        secondary: "#FCE4EC",
+        accent: "#C2185B",
+      },
+      {
+        colorId: "purple",
+        primary: "#BA68C8",
+        secondary: "#F3E5F5",
+        accent: "#6A1B9A",
+      },
+      {
+        colorId: "blue",
+        primary: "#64B5F6",
+        secondary: "#E3F2FD",
+        accent: "#1565C0",
+      },
+      {
+        colorId: "white",
+        primary: "#FAFAFA",
+        secondary: "#ECEFF1",
+        accent: "#78909C",
+      },
+    ],
+  },
+
+  // ==================================================
+  // 8. 삼각 치즈
+  // ==================================================
+  {
+    id: "triangleCheese",
+    name: "삼각 치즈",
+    topCategory: "food",
+    subCategory: "snack",
+    svgKey: "triangleCheese",
+    shapes: ["triangle"],
+    description: "노랗고 고소한 삼각 치즈예요! 맛있는 간식을 만들어볼까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#FFD54F",
+        secondary: "#FFF0A8",
+        accent: "#E6A817",
+      },
+      {
+        colorId: "yellow",
+        primary: "#FFCA28",
+        secondary: "#FFF59D",
+        accent: "#F9A825",
+      },
+      {
+        colorId: "orange",
+        primary: "#FFB74D",
+        secondary: "#FFE0B2",
+        accent: "#E65100",
+      },
+      {
+        colorId: "white",
+        primary: "#FFF8E1",
+        secondary: "#FFFFFF",
+        accent: "#D7CCC8",
+      },
+    ],
+  },
+
+  // ==================================================
+  // 9. 삼각 표지판
+  // ==================================================
+  {
+    id: "triangleSign",
+    name: "삼각 표지판",
+    topCategory: "living",
+    subCategory: "daily",
+    svgKey: "triangleSign",
+    shapes: ["triangle"],
+    description: "세모 모양 표지판이에요! 길을 지날 때 표지판을 잘 살펴봐요.",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#FFD54F",
+        secondary: "#FFFFFF",
+        accent: "#D32F2F",
+      },
+      {
+        colorId: "red",
+        primary: "#EF5350",
+        secondary: "#FFFFFF",
+        accent: "#B71C1C",
+      },
+      {
+        colorId: "yellow",
+        primary: "#FFD54F",
+        secondary: "#FFFDE7",
+        accent: "#D32F2F",
+      },
+      {
+        colorId: "blue",
+        primary: "#64B5F6",
+        secondary: "#FFFFFF",
+        accent: "#1565C0",
+      },
+    ],
+  },
+
+  {
     id: "wheel",
     name: "바퀴",
     topCategory: "living",
@@ -663,7 +1062,7 @@ export const classificationItems: ClassificationItem[] = [
     topCategory: "vehicle",
     subCategory: "air_vehicle",
     svgKey: "rocket",
-    shapes: ["triangle"],
+    shapes: [],
     description: "슈우웅! 로켓이 우주를 향해 출발해요. 어디까지 날아갈까요?",
     variants: [
       {
@@ -1249,7 +1648,7 @@ export const classificationItems: ClassificationItem[] = [
     topCategory: "food",
     subCategory: "snack",
     svgKey: "cake",
-    shapes: ["circle"],
+    shapes: [],
     description: "달콤한 케이크가 짠! 촛불을 후~ 불어볼까요?",
     variants: [
       {
@@ -2052,7 +2451,7 @@ export const classificationItems: ClassificationItem[] = [
     topCategory: "animal",
     subCategory: "sea_animal",
     svgKey: "shark",
-    shapes: ["triangle"], // TODO: shapesPool 연결 단계에서 채움
+    shapes: [], // TODO: shapesPool 연결 단계에서 채움
     description: "슝! 바닷속을 빠르게 헤엄치는 상어가 지나가요.",
     variants: [
       {
@@ -2140,7 +2539,7 @@ export const classificationItems: ClassificationItem[] = [
     topCategory: "animal",
     subCategory: "sea_animal",
     svgKey: "squid",
-    shapes: ["triangle"], // TODO: shapesPool 연결 단계에서 채움
+    shapes: [], // TODO: shapesPool 연결 단계에서 채움
     description: "오징어가 물속을 쏙쏙 헤엄쳐요. 어디로 가고 있을까요?",
     variants: [
       {
@@ -2378,7 +2777,7 @@ export const classificationItems: ClassificationItem[] = [
     topCategory: "food",
     subCategory: "fruit",
     svgKey: "strawberry",
-    shapes: ["triangle"], // TODO: shapesPool 연결 단계에서 채움
+    shapes: [], // TODO: shapesPool 연결 단계에서 채움
     description: "새콤달콤 딸기가 톡! 작은 씨앗이 콕콕 박혀 있어요.",
     variants: [
       {
@@ -2407,7 +2806,7 @@ export const classificationItems: ClassificationItem[] = [
     topCategory: "food",
     subCategory: "fruit",
     svgKey: "watermelon",
-    shapes: ["triangle"], // TODO: shapesPool 연결 단계에서 채움
+    shapes: [], // TODO: shapesPool 연결 단계에서 채움
     description: "아삭아삭 시원한 수박이에요! 한 조각 먹어볼까요?",
     variants: [
       {
@@ -2567,7 +2966,7 @@ export const classificationItems: ClassificationItem[] = [
     topCategory: "food",
     subCategory: "vegetable",
     svgKey: "carrot",
-    shapes: ["triangle"], // TODO: shapesPool 연결 단계에서 채움
+    shapes: [], // TODO: shapesPool 연결 단계에서 채움
     description: "쑥쑥 자란 주황색 당근이에요! 토끼가 좋아하는 채소랍니다.",
     variants: [
       {
@@ -3037,7 +3436,7 @@ export const classificationItems: ClassificationItem[] = [
     topCategory: "food",
     subCategory: "meal",
     svgKey: "hamburger",
-    shapes: ["circle"], // TODO: shapesPool 연결 단계에서 채움
+    shapes: [], // TODO: shapesPool 연결 단계에서 채움
     description: "빵 사이에 맛있는 재료가 차곡차곡! 햄버거가 완성됐어요.",
     variants: [
       {

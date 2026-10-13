@@ -7,22 +7,24 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/types";
 import StarRow from "../../design-system/components/StarRow";
-import { ColorSortingProblem } from "../../types/colorSotringTypes";
-import { colorSortingLevels } from "../../types/colorSortingLevels";
+import { colorSortingLevels } from "../../types/Classification/Color/colorSortingLevels";
 import AppHeader from "../../components/AppHeader";
 import ColorSortingObjectBoard from "../../components/ColorSorting/ColorSortingObjectBoard";
 
 import ColorSortingTargetArea from "../../components/ColorSorting/ColorSortingTargetArea";
 import ColorSortingQuestion from "../../components/ColorSorting/ColorSortingQuestion";
 import ColorSortingFooter from "../../components/ColorSorting/ColorSortingFooter";
-import ColorSortingTestControls from "../../components/ColorSorting/ColorSortingTestControls";
+import ClassificationTestControls from "../../components/common/ClassificationTestControls";
 import ColorSortingResultOverlay from "../../components/ColorSorting/ColorSortingResultOverlay";
-import useColorSortingGame from "../../hooks/ColorSorting/useColorSortingGame";
+
 import { AppText } from "../../utils/AppText";
 import { TargetRects } from "../../components/ColorSorting/ColorSortingObjectComponent";
 
 import { saveLevelClear } from "../../utils/asyncStorage/progressStorage";
 import TutorialOverlay from "../../components/Tutorial/TutorialOverlay";
+import { playEarnedNotes } from "../../utils/sound";
+import useColorSortingGame from "../../hooks/Classification/useColorSortingGame";
+import { ClassificationProblem } from "../../types/Classification/Color/colorSotringTypes";
 
 // ============================================================
 // Types
@@ -31,7 +33,7 @@ import TutorialOverlay from "../../components/Tutorial/TutorialOverlay";
 type RouteProps = RouteProp<RootStackParamList, "ColorSortingPlayScreen">;
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
-export type ProblemObject = ColorSortingProblem["objects"][number];
+export type ProblemObject = ClassificationProblem["objects"][number];
 
 // ============================================================
 // Constants
@@ -164,7 +166,11 @@ export default function ColorSortingPlayScreen() {
       </SafeAreaContainer>
     );
   }
-
+  useEffect(() => {
+    if (!roundResult) return;
+    // earnedStars는 라운드당 0.5 → 별 획득한 라운드 수 = earnedStars / 0.5
+    playEarnedNotes(Math.round(earnedStars / 0.5));
+  }, [roundResult]);
   return (
     <SafeAreaContainer edges={["top", "bottom"]}>
       {/* ================================================== */}
@@ -229,7 +235,7 @@ export default function ColorSortingPlayScreen() {
         {/* 개발용 Level / Round 컨트롤 */}
         {/* ================================================== */}
         {SHOW_TEST_CONTROLS && (
-          <ColorSortingTestControls
+          <ClassificationTestControls
             level={testLevel}
             totalLevels={colorSortingLevels.length}
             roundIndex={roundIndex}

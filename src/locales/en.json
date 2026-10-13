@@ -62,6 +62,10 @@
   "btn_reset": "Reset",
   "cancel": "Cancel",
 
+  "haptic_section": "Haptics",
+  "haptic_title": "Touch Haptics",
+  "haptic_desc": "Feel soft haptic feedback when tapping buttons.",
+
   "classification_space_title": "Sorting Space",
   "classification_hero_title": "Which planet shall we explore?",
   "classification_hero_desc": "Pick a planet and start your adventure!",

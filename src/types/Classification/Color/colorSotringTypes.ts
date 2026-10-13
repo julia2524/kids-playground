@@ -1,4 +1,4 @@
-import { ClassificationColorId } from "./game";
+import { ClassificationColorId } from "../../game";
 
 export type ColorSortingObjectMode =
   | "simple"
@@ -20,20 +20,15 @@ export type ColorSortingLevelConfig = {
   colorPool: ClassificationColorId[]; // ✨ 추가: 각 레벨이 사용할 색상 Pool
 
   showHint?: boolean;
-  completionEffect?: "none" | "color_king";
+  // completionEffect?: "none" | "color_king";
 };
 
 export type ColorSortingObject = {
   id: string;
-
   itemId: string;
-
   label: string;
-
   colorId: ClassificationColorId;
-
   svgKey: string;
-
   shape: string;
 };
 
@@ -51,7 +46,7 @@ export type ColorSortingAnswer = {
   objectIds: string[];
 };
 
-export type ColorSortingProblem = {
+export type ClassificationProblem = {
   level: number;
 
   round: number;

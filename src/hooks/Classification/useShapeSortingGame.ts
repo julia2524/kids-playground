@@ -1,65 +1,68 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-import { classificationItems } from "../../data/classification/classificationItems";
-import { colorSortingLevels } from "../../types/colorSortingLevels";
-import { generateColorSortingProblem } from "../../generators/generateColorSortingProblem";
-import { ColorSortingProblem } from "../../types/colorSotringTypes";
 import { unlockStickers } from "../../utils/asyncStorage/stickerStorage";
+import { playStreakNote } from "../../utils/sound";
+import { classificationItems } from "../../data/classification/classificationItems";
+import {
+  generateShapeSortingProblem,
+  ShapeSortingObject,
+  ShapeSortingRound,
+} from "../../generators/classification/generateShapeSortingProblem";
+import { ShapeSortingLevels } from "../../types/Classification/Shape/shapeSortingLevels";
 
-export type RoundResult = "correct" | "wrong" | null;
+export type ShapeRoundResult = "correct" | "wrong" | null;
 
-type UseColorSortingGameProps = {
+type UseShapeSortingGameProps = {
   initialLevel?: number;
   totalRounds: number;
 };
 
-const STAR_PER_ROUND = 0.5; // 10라운드 × 0.5 = 별 5개
-const MAX_MISTAKES = 2; // 오답 드롭은 2번까지 허용
-const AUTO_NEXT_DELAY = 400; // 라운드 완료 후 다음 라운드까지 대기(ms)
-const STICKER_START_LEVEL = 5; // 레벨 1~4는 기본도형이라 스티커 없음
-// 문제 object → 스티커 id (classificationItems의 id와 같아야 함)
-const getStickerId = (object: { id: string; itemId?: string }) =>
-  object.itemId ?? object.id;
-export default function useColorSortingGame({
+const STAR_PER_ROUND = 0.5;
+const MAX_MISTAKES = 2;
+const AUTO_NEXT_DELAY = 400;
+const STICKER_START_LEVEL = 10;
+
+const getStickerId = (object: ShapeSortingObject) =>
+  object.kind === "item" ? object.itemId : object.id;
+
+export default function useShapeSortingGame({
   initialLevel = 1,
   totalRounds,
-}: UseColorSortingGameProps) {
+}: UseShapeSortingGameProps) {
   // ==========================================================
   // Game State
   // ==========================================================
 
+  const starRoundCountRef = useRef(0);
+
   const [testLevel, setTestLevel] = useState(initialLevel);
   const [roundIndex, setRoundIndex] = useState(0);
-
   const [earnedStars, setEarnedStars] = useState(0);
 
   const [selectedObjectId, setSelectedObjectId] = useState<string | null>(null);
 
+  // target.id를 키로 사용
   const [placedObjects, setPlacedObjects] = useState<Record<string, string[]>>(
     {},
   );
 
-  // 드래그로 오답 바구니에 놓아서 사라진 Object id
   const [wrongObjectIds, setWrongObjectIds] = useState<string[]>([]);
-
-  const [roundResult, setRoundResult] = useState<RoundResult>(null);
+  const [roundResult, setRoundResult] = useState<ShapeRoundResult>(null);
 
   // ==========================================================
   // Problem 생성
   // ==========================================================
 
-  const problem: ColorSortingProblem | null = useMemo(() => {
-    const config = colorSortingLevels.find((item) => item.level === testLevel);
+  const problem: ShapeSortingRound | null = useMemo(() => {
+    const config = ShapeSortingLevels.find((item) => item.level === testLevel);
 
     if (!config) {
       return null;
     }
 
-    return generateColorSortingProblem(
-      config,
-      roundIndex + 1,
-      classificationItems,
-    );
+    // Generator는 roundIndex를 받지 않으므로
+    // 라운드가 바뀌어 새로 호출될 때마다 문제를 생성
+    return generateShapeSortingProblem(config, classificationItems);
   }, [testLevel, roundIndex]);
 
   // ==========================================================
@@ -67,14 +70,12 @@ export default function useColorSortingGame({
   // ==========================================================
 
   useEffect(() => {
-    if (!problem) {
-      return;
-    }
+    if (!problem) return;
 
     const initialPlaced: Record<string, string[]> = {};
 
     problem.targets.forEach((target) => {
-      initialPlaced[target.colorId] = [];
+      initialPlaced[target.id] = [];
     });
 
     setPlacedObjects(initialPlaced);
@@ -85,32 +86,36 @@ export default function useColorSortingGame({
 
   // ==========================================================
   // 라운드 종료 판정
-  // (바구니에 들어간 개수 + 오답으로 사라진 개수 === 전체 개수)
   // ==========================================================
 
   useEffect(() => {
     if (!problem || roundResult) return;
 
-    const objectIds = new Set(problem.objects.map((o) => o.id));
+    const objectIds = new Set(problem.objects.map((object) => object.id));
+
     const placedIds = Object.values(placedObjects)
       .flat()
       .filter((id) => objectIds.has(id));
+
     const wrongIds = wrongObjectIds.filter((id) => objectIds.has(id));
 
-    if (placedIds.length + wrongIds.length !== problem.objects.length) return;
+    // 모든 오브젝트가 배치되거나 오답으로 처리되어야 종료
+    if (placedIds.length + wrongIds.length !== problem.objects.length) {
+      return;
+    }
 
-    // 맞는 바구니에 들어간 object만 추림 (스티커 해금 + 별 판정에 공통 사용)
+    // answer[object.id] = 정답 target.id
     const correctObjects = problem.objects.filter((object) =>
-      (placedObjects[object.colorId] ?? []).includes(object.id),
+      (placedObjects[problem.answer[object.id]] ?? []).includes(object.id),
     );
 
-    const allPlacedCorrect = problem.objects.every((object) => {
-      const inAnyBasket = Object.values(placedObjects)
-        .flat()
-        .includes(object.id);
-      if (!inAnyBasket) return true;
-      return (placedObjects[object.colorId] ?? []).includes(object.id);
+    // 바구니에 배치한 모든 오브젝트가 정답 위치에 있는지 확인
+    const allPlacedCorrect = placedIds.every((objectId) => {
+      const correctTargetId = problem.answer[objectId];
+
+      return (placedObjects[correctTargetId] ?? []).includes(objectId);
     });
+
     const earnedStar = wrongIds.length <= MAX_MISTAKES && allPlacedCorrect;
 
     const isLastRound = roundIndex >= totalRounds - 1;
@@ -119,9 +124,14 @@ export default function useColorSortingGame({
       () => {
         if (earnedStar) {
           setEarnedStars((prev) => prev + STAR_PER_ROUND);
+          starRoundCountRef.current += 1;
+
+          if (!isLastRound) {
+            playStreakNote(starRoundCountRef.current);
+          }
         }
 
-        // ✅ 정답 맞춘 스티커만 해금 (레벨 5부터)
+        // 레벨 5부터 정답으로 배치한 실제 사물의 스티커 해금
         if (testLevel >= STICKER_START_LEVEL && correctObjects.length > 0) {
           unlockStickers(correctObjects.map(getStickerId));
         }
@@ -149,37 +159,84 @@ export default function useColorSortingGame({
     totalRounds,
     testLevel,
   ]);
+
   // ==========================================================
   // Object 선택
   // ==========================================================
 
   const handleSelectObject = (objectId: string) => {
-    if (roundResult) {
-      return;
-    }
+    if (roundResult) return;
 
     setSelectedObjectId((prev) => (prev === objectId ? null : objectId));
   };
 
   // ==========================================================
-  // Object를 Target에 배치 (탭 / 드래그 공통)
+  // Object를 Target에 배치
+  // 탭 / 드래그 공통
   // ==========================================================
 
-  const placeObject = (objectId: string, targetColorId: string) => {
-    if (!problem || roundResult) {
-      return;
-    }
+  const placeObject = (objectId: string, targetId: string) => {
+    if (!problem || roundResult) return;
+
+    // 유효한 Object와 Target인지 확인
+    if (!problem.objects.some((object) => object.id === objectId)) return;
+    if (!problem.targets.some((target) => target.id === targetId)) return;
 
     setPlacedObjects((prev) => {
       const next: Record<string, string[]> = { ...prev };
 
-      // 기존 Target에서 해당 Object 제거
-      Object.keys(next).forEach((color) => {
-        next[color] = next[color].filter((id) => id !== objectId);
+      // 다른 바구니에 이미 있다면 제거
+      Object.keys(next).forEach((id) => {
+        next[id] = next[id].filter((placedId) => placedId !== objectId);
       });
 
-      // 새로운 Target에 Object 추가
-      next[targetColorId] = [...(next[targetColorId] ?? []), objectId];
+      // 선택한 바구니에 추가
+      next[targetId] = [...(next[targetId] ?? []), objectId];
+
+      return next;
+    });
+
+    // 바구니에 넣었다면 오답으로 사라진 목록에서도 제거
+    setWrongObjectIds((prev) => prev.filter((id) => id !== objectId));
+    setSelectedObjectId(null);
+  };
+
+  // ==========================================================
+  // Target 선택 (탭 방식)
+  // ==========================================================
+
+  const handleTargetPress = (targetId: string) => {
+    if (!selectedObjectId) return;
+
+    placeObject(selectedObjectId, targetId);
+  };
+
+  // ==========================================================
+  // 드래그 앤 드롭: Target에 놓기
+  // ==========================================================
+
+  const handleDropObject = (objectId: string, targetId: string) => {
+    placeObject(objectId, targetId);
+  };
+
+  // ==========================================================
+  // 드래그 앤 드롭: 오답으로 사라짐
+  // ==========================================================
+
+  const handleWrongDrop = (objectId: string) => {
+    if (roundResult) return;
+
+    setWrongObjectIds((prev) =>
+      prev.includes(objectId) ? prev : [...prev, objectId],
+    );
+
+    // 이미 바구니에 있던 오브젝트라면 제거
+    setPlacedObjects((prev) => {
+      const next: Record<string, string[]> = {};
+
+      Object.entries(prev).forEach(([targetId, ids]) => {
+        next[targetId] = ids.filter((id) => id !== objectId);
+      });
 
       return next;
     });
@@ -188,89 +245,39 @@ export default function useColorSortingGame({
   };
 
   // ==========================================================
-  // Target 선택 (탭 방식)
-  // ==========================================================
-
-  const handleTargetPress = (targetColorId: string) => {
-    if (!selectedObjectId) {
-      return;
-    }
-
-    placeObject(selectedObjectId, targetColorId);
-  };
-
-  // ==========================================================
-  // 드래그 앤 드롭: 정답 바구니에 놓았을 때
-  // ==========================================================
-
-  const handleDropObject = (objectId: string, targetColorId: string) => {
-    placeObject(objectId, targetColorId);
-  };
-
-  // ==========================================================
-  // 드래그 앤 드롭: 오답 바구니에 놓았을 때
-  // ==========================================================
-
-  const handleWrongDrop = (objectId: string) => {
-    if (roundResult) {
-      return;
-    }
-
-    setWrongObjectIds((prev) =>
-      prev.includes(objectId) ? prev : [...prev, objectId],
-    );
-
-    setSelectedObjectId(null);
-  };
-
-  // ==========================================================
   // Target 안의 Object 꺼내기
   // ==========================================================
 
-  const handleRemoveFromTarget = (targetColorId: string, objectId: string) => {
-    if (roundResult) {
-      return;
-    }
+  const handleRemoveFromTarget = (targetId: string, objectId: string) => {
+    if (roundResult) return;
 
     setPlacedObjects((prev) => ({
       ...prev,
-      [targetColorId]: (prev[targetColorId] ?? []).filter(
-        (id) => id !== objectId,
-      ),
+      [targetId]: (prev[targetId] ?? []).filter((id) => id !== objectId),
     }));
   };
 
   // ==========================================================
-  // 다음 Round
+  // 다음 / 이전 Round
   // ==========================================================
 
   const handleNextRound = () => {
-    if (roundIndex >= totalRounds - 1) {
-      return;
-    }
+    if (roundIndex >= totalRounds - 1) return;
 
     setRoundResult(null);
     setSelectedObjectId(null);
     setPlacedObjects({});
     setWrongObjectIds([]);
-
     setRoundIndex((prev) => prev + 1);
   };
 
-  // ==========================================================
-  // 이전 Round
-  // ==========================================================
-
   const handlePreviousRound = () => {
-    if (roundIndex <= 0) {
-      return;
-    }
+    if (roundIndex <= 0) return;
 
     setRoundResult(null);
     setSelectedObjectId(null);
     setPlacedObjects({});
     setWrongObjectIds([]);
-
     setRoundIndex((prev) => prev - 1);
   };
 
@@ -279,19 +286,16 @@ export default function useColorSortingGame({
   // ==========================================================
 
   const handleChangeLevel = (nextLevel: number) => {
-    if (nextLevel < 1 || nextLevel > colorSortingLevels.length) {
-      return;
-    }
+    if (nextLevel < 1 || nextLevel > ShapeSortingLevels.length) return;
 
     setTestLevel(nextLevel);
-
-    // Level 변경 → Round 1
     setRoundIndex(0);
     setSelectedObjectId(null);
     setPlacedObjects({});
     setWrongObjectIds([]);
     setRoundResult(null);
     setEarnedStars(0);
+    starRoundCountRef.current = 0;
   };
 
   // ==========================================================
@@ -299,24 +303,21 @@ export default function useColorSortingGame({
   // ==========================================================
 
   const handleNextAfterResult = () => {
-    // 아직 Round가 남아있다면 → 다음 Round
     if (roundIndex < totalRounds - 1) {
       handleNextRound();
       return;
     }
 
-    // 모든 Round 완료 → 다음 Level
-    if (testLevel < colorSortingLevels.length) {
+    if (testLevel < ShapeSortingLevels.length) {
       handleChangeLevel(testLevel + 1);
       return;
     }
 
-    // 마지막 Level까지 완료
     setRoundResult(null);
   };
 
   // ==========================================================
-  // 이미 처리된 Object id (바구니에 들어감)
+  // 이미 바구니에 배치된 Object ID
   // ==========================================================
 
   const allPlacedIds = Object.values(placedObjects).flat();
@@ -326,10 +327,8 @@ export default function useColorSortingGame({
   // ==========================================================
 
   return {
-    // Problem
     problem,
 
-    // State
     testLevel,
     roundIndex,
     earnedStars,
@@ -337,11 +336,8 @@ export default function useColorSortingGame({
     placedObjects,
     wrongObjectIds,
     roundResult,
-
-    // Derived
     allPlacedIds,
 
-    // Actions
     handleSelectObject,
     handleTargetPress,
     handleDropObject,
@@ -350,11 +346,9 @@ export default function useColorSortingGame({
 
     handleNextRound,
     handlePreviousRound,
-
     handleChangeLevel,
     handleNextAfterResult,
 
-    // Constants
-    totalLevels: colorSortingLevels.length,
+    totalLevels: ShapeSortingLevels.length,
   };
 }

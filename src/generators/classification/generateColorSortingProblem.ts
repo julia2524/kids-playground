@@ -7,7 +7,7 @@ import {
   ColorSortingObject,
   ColorSortingProblem,
   ColorSortingTarget,
-} from "../types/colorSotringTypes";
+} from "../types/Classification/Color/colorSotringTypes";
 
 import { ClassificationColorId, ClassificationItem } from "../types/game";
 
@@ -15,19 +15,6 @@ import { ClassificationColorId, ClassificationItem } from "../types/game";
 // 색상 이름
 // ============================================================
 
-// const COLOR_LABELS: Record<ClassificationColorId, string> = {
-//   natural: "자연색",
-//   red: "빨강",
-//   orange: "주황",
-//   yellow: "노랑",
-//   green: "초록",
-//   blue: "파랑",
-//   purple: "보라",
-//   pink: "분홍",
-//   brown: "갈색",
-//   black: "검정",
-//   white: "하양",
-// };
 export const COLOR_LABELS: Record<ClassificationColorId, string> = {
   natural: "color_natural",
   red: "color_red",

@@ -8,6 +8,7 @@ import UfoLevelBadge from "../UfoLevelBadge";
 import { colors } from "../../design-system/tokens/colors";
 import StarBadge from "../../design-system/ui/StarBadge";
 import { StageMapGameType } from "../../types/game";
+import { triggerHaptic } from "../../utils/haptic";
 
 // ============================================================
 // Theme / Color Definitions
@@ -34,6 +35,26 @@ export default function ColorSortingResultOverlay({
   onNextLevel,
   onGoRoadmap,
 }: ColorSortingResultOverlayProps) {
+  const handleGoRoadPress = () => {
+    triggerHaptic("light");
+    // playSound("grab");
+    onGoRoadmap?.();
+  };
+  const handleRestartPress = () => {
+    triggerHaptic("light");
+    // playSound("grab");
+    onRestart?.();
+  };
+  const handleNextLevelPress = () => {
+    triggerHaptic("light");
+    // playSound("grab");
+    onNextLevel?.();
+  };
+  const handleHomePress = () => {
+    triggerHaptic("light");
+    // playSound("grab");
+    onHome?.();
+  };
   // ⭐ 별 5개를 표시
   const starOffsets = [18, 6, 0, 6, 18];
 
@@ -44,7 +65,7 @@ export default function ColorSortingResultOverlay({
           {/* ================================================= */}
           {/* 닫기 */}
           {/* ================================================= */}
-          <CloseButton onPress={onGoRoadmap} activeOpacity={0.7}>
+          <CloseButton onPress={handleGoRoadPress} activeOpacity={0.7}>
             <Ionicons name="close" size={24} color={colors.brand.primary} />
           </CloseButton>
 
@@ -102,7 +123,7 @@ export default function ColorSortingResultOverlay({
             {/* 다시하기 */}
             <ActionButton
               variant="secondary"
-              onPress={onRestart}
+              onPress={handleRestartPress}
               activeOpacity={0.85}
             >
               <Ionicons name="refresh" size={26} color={colors.white} />
@@ -112,7 +133,7 @@ export default function ColorSortingResultOverlay({
             {!isLastLevel && (
               <ActionButton
                 variant="primary"
-                onPress={onNextLevel}
+                onPress={handleNextLevelPress}
                 activeOpacity={0.85}
               >
                 <Ionicons name="arrow-forward" size={26} color={colors.white} />
@@ -123,7 +144,7 @@ export default function ColorSortingResultOverlay({
           {/* ================================================= */}
           {/* 홈 */}
           {/* ================================================= */}
-          <HomeButton onPress={onHome} activeOpacity={0.85}>
+          <HomeButton onPress={handleHomePress} activeOpacity={0.85}>
             <Ionicons name="home" size={20} color={colors.white} />
           </HomeButton>
         </Inner>

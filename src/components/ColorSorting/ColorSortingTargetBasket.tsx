@@ -9,7 +9,7 @@ import { RenderColorSortingObjectSvg } from "../../assets/Classification/classif
 import {
   ColorSortingObject,
   ColorSortingTarget,
-} from "../../types/colorSotringTypes";
+} from "../../types/Classification/Color/colorSotringTypes";
 import { AppText } from "../../utils/AppText";
 
 type ColorSortingTargetBasketProps = {
