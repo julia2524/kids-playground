@@ -27,6 +27,7 @@ import useShapeSortingGame from "../../hooks/Classification/useShapeSortingGame"
 import ShapeSortingObjectBoard from "../../components/ShapeSorting/ShapeSortingObjectBoard";
 import { ShapeSortingObject } from "../../generators/classification/generateShapeSortingProblem";
 import { ShapeSortingLevels } from "../../types/Classification/Shape/shapeSortingLevels";
+import { useBackgroundMusic } from "../../utils/BackgroundMusicContext";
 
 // ============================================================
 // Types
@@ -51,6 +52,17 @@ const SHOW_TEST_CONTROLS = true;
 // ============================================================
 
 export default function ShapeSortingPlayScreen() {
+  const { playThemeBGM } = useBackgroundMusic();
+
+  useEffect(() => {
+    // 🎮 게임 화면에 들어올 때 게임용 BGM으로 전환!
+    playThemeBGM("game");
+
+    return () => {
+      // (선택) 다시 메인 화면으로 돌아갈 때 메인 BGM으로 원복하고 싶다면 cleanup에서 호출 가능
+      playThemeBGM("main");
+    };
+  }, []);
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProps>();
   const { gameType, level: initialLevel = 1 } = route.params ?? {};

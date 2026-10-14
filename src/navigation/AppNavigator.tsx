@@ -11,6 +11,8 @@ import ShapeSortingTestScreen from "../screens/test/ShapeSortingTestScreen";
 import ShapeStickerScreen from "../screens/test/shapeStickerScreen";
 import ShapeBasketPreviewScreen from "../screens/test/ShapeBasketPreviewScreen";
 import ShapeSortingPlayScreen from "../screens/classification/ShapeSortingPlayScreen";
+import ShapeStickerPreviewScreen from "../screens/test/shapeStickerScreen";
+import CategoryStickerPreviewScreen from "../screens/test/CategoryStickerPreviewScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -76,6 +78,10 @@ export default function AppNavigator() {
       <Stack.Screen
         name="ShapeBasketPreviewScreen"
         component={ShapeBasketPreviewScreen}
+      />
+      <Stack.Screen
+        name="CategoryStickerPreviewScreen"
+        component={CategoryStickerPreviewScreen}
       />
     </Stack.Navigator>
   );

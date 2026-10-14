@@ -22,7 +22,7 @@ const BGM_THEMES = {
     loop: true, // 👈 메인은 무한 반복!
   },
   game: {
-    source: require("../../assets/sounds/bgm_3.mp3"),
+    source: require("../../assets/sounds/bgm_game_1.mp3"),
     name: "bgm_3.mp3 (Game)",
     volume: 0.5,
     loop: true,

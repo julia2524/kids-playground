@@ -25,6 +25,7 @@ export type RootStackParamList = {
   ShapeSortingTestScreen: undefined;
   ShapeStickerScreen: undefined;
   ShapeBasketPreviewScreen: undefined;
+  CategoryStickerPreviewScreen: undefined;
 };
 // PatternPlayScreen: {
 //   gameType: "pattern";

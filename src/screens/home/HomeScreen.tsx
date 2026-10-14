@@ -232,19 +232,11 @@ export default function HomeScreen() {
             {/* <ComingSoonEmoji>🌐</ComingSoonEmoji> */}
             <ComingSoonText>🌐 번역 검증하기</ComingSoonText>
           </ComingSoon>
-          <ComingSoon
-            onPress={() => navigation.navigate("ShapeBasketPreviewScreen")}
-          >
-            <ComingSoonText>🔶 모양 바구니</ComingSoonText>
-          </ComingSoon>
 
           <ComingSoon
-            onPress={() => navigation.navigate("ShapeSortingTestScreen")}
+            onPress={() => navigation.navigate("CategoryStickerPreviewScreen")}
           >
-            <ComingSoonText>🔶 모양 테스트 창</ComingSoonText>
-          </ComingSoon>
-          <ComingSoon onPress={() => navigation.navigate("ShapeStickerScreen")}>
-            <ComingSoonText>🔶 모양 스티커</ComingSoonText>
+            <ComingSoonText>🔶 종류 스티커</ComingSoonText>
           </ComingSoon>
         </ScrollView>
         {/* Bottom Navigation */}

@@ -12143,6 +12143,65 @@ export const ShootingStar = ({
   );
 };
 
+export const HeartHairpin = ({
+  primary = "#FFD54F",
+  secondary = "#FFF9C4",
+  accent = "#D7A62A",
+  size = 85,
+}: ItemSvgProps) => {
+  const HEART_PATH = `
+    M50 88
+    C43 81 10 58 10 34
+    C10 17 29 8 42 20
+    L50 28
+    L58 20
+    C71 8 90 17 90 34
+    C90 58 57 81 50 88
+    Z
+  `;
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <G transform="rotate(70 50 50)">
+        {/* 머리핀 집게 */}
+        <Path
+          d="M48 56 L34 87 Q32 92 37 94 L42 95 L57 63"
+          fill={accent}
+          stroke={OUTLINE}
+          strokeWidth={3}
+          strokeLinejoin="round"
+        />
+
+        <Path
+          d="M54 59 L48 87 Q47 92 52 93 L57 93 L64 63"
+          fill={secondary}
+          stroke={OUTLINE}
+          strokeWidth={3}
+          strokeLinejoin="round"
+        />
+
+        {/* 하트 장식 */}
+        <G transform="translate(18, 17) scale(0.62) rotate(-60 50 50)">
+          <Path
+            d={HEART_PATH}
+            fill={primary}
+            stroke={OUTLINE}
+            strokeWidth={4}
+            strokeLinejoin="round"
+          />
+
+          <Path d="M29 27 Q34 24 37 31 L41 39 L33 35 Z" fill={secondary} />
+
+          <Path
+            d="M61 43 L64 49 L70 52 L64 55 L61 61 L58 55 L52 52 L58 49 Z"
+            fill={secondary}
+          />
+        </G>
+      </G>
+    </Svg>
+  );
+};
+
 // ==================================================
 // 6. 별 머리핀
 // ==================================================
@@ -12404,11 +12463,207 @@ export const HeartLeaf = ({
   );
 };
 
+export const HeartOwl = ({
+  colorHex = "#B99A7A",
+  primary,
+  secondary,
+  accent,
+  size = 85,
+}: ItemSvgProps) => {
+  const featherColor = primary ?? colorHex;
+  const faceColor = secondary ?? "#FFF2D9";
+  const detailColor = accent ?? "#49372D";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 몸통 */}
+      <Path
+        d="
+          M20 48
+          C20 33 31 23 50 23
+          C69 23 80 33 80 48
+          L85 79
+          C85 88 74 92 50 92
+          C26 92 15 88 15 79
+          Z
+        "
+        fill={featherColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+
+      {/* 배의 깃털 */}
+      <Path
+        d="
+          M31 57
+          C35 48 43 45 50 45
+          C57 45 65 48 69 57
+          L72 80
+          C65 85 58 87 50 87
+          C42 87 35 85 28 80
+          Z
+        "
+        fill={faceColor}
+        stroke={OUTLINE}
+        strokeWidth="2"
+      />
+
+      {/* 하트 모양 얼굴 */}
+      <Path
+        d="
+          M50 70
+          C44 64 25 49 25 37
+          C25 26 38 20 46 29
+          L50 34
+          L54 29
+          C62 20 75 26 75 37
+          C75 49 56 64 50 70
+          Z
+        "
+        fill={faceColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 왼쪽 눈 테두리 */}
+      <Circle
+        cx="39"
+        cy="43"
+        r="10"
+        fill="#FFFFFF"
+        stroke={detailColor}
+        strokeWidth="2.5"
+      />
+
+      {/* 오른쪽 눈 테두리 */}
+      <Circle
+        cx="61"
+        cy="43"
+        r="10"
+        fill="#FFFFFF"
+        stroke={detailColor}
+        strokeWidth="2.5"
+      />
+
+      {/* 눈동자 */}
+      <Circle cx="40" cy="44" r="5.5" fill={detailColor} />
+
+      <Circle cx="60" cy="44" r="5.5" fill={detailColor} />
+
+      {/* 눈 반짝임 */}
+      <Circle cx="42" cy="41" r="2" fill="#FFFFFF" />
+
+      <Circle cx="62" cy="41" r="2" fill="#FFFFFF" />
+
+      {/* 부리 */}
+      <Path
+        d="M45 52 L55 52 L50 61 Z"
+        fill="#F4B942"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+
+      {/* 날개 */}
+      <Path
+        d="M21 59 Q12 66 20 78 Q27 77 31 68"
+        fill={featherColor}
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M79 59 Q88 66 80 78 Q73 77 69 68"
+        fill={featherColor}
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+
+      {/* 발 */}
+      <Path
+        d="M38 89 L35 95 M38 89 L42 95 M62 89 L58 95 M62 89 L66 95"
+        fill="none"
+        stroke="#F4B942"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+export const StarFlower = ({
+  colorHex = "#F49AB5",
+  primary,
+  secondary,
+  accent,
+  size = 85,
+}: ItemSvgProps) => {
+  const petalColor = primary ?? colorHex;
+  const innerColor = secondary ?? "#FFF0F5";
+  const centerColor = accent ?? "#AD365D";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 🌿 하단 줄기 및 잎사귀 (별꽃 아래 연결) */}
+      <Path
+        d="M50 65 Q48 80 45 92"
+        stroke="#55B879"
+        strokeWidth="4"
+        strokeLinecap="round"
+        fill="none"
+      />
+      {/* 왼쪽 작은 잎 */}
+      <Path
+        d="M48 75 Q38 72 40 82 Q46 82 48 75 Z"
+        fill="#55B879"
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+
+      {/* ⭐ 바깥쪽에 딱 하나 더 얹어주는 진하고 선명한 별 레이어 */}
+      <Polygon
+        points="
+          50,9 61,35 87,35 68,53 73,79 
+          50,66 27,79 32,53 13,35 39,31
+        "
+        fill={petalColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+
+      {/* 🌸 기존 안쪽 별 (방사형 음영) */}
+      <Path
+        d="
+          M50 25
+          L56 38
+          L70 41
+          L59 51
+          L63 65
+          L50 57
+          L37 65
+          L41 51
+          L30 41
+          L44 38
+          Z
+        "
+        fill={innerColor}
+        opacity={0.6}
+      />
+    </Svg>
+  );
+};
 // ============================================================
 // CLASSIFICATION ITEM SVG REGISTRY
 // ============================================================
 
 export const CATEGORY_ITEM_SVGS = {
+  star_flower: StarFlower,
+  heart_owl: HeartOwl,
   heartKeychain: HeartKeychain,
   heartLeaf: HeartLeaf,
   heartChocolate: HeartChocolate,
@@ -12579,6 +12834,7 @@ export const CATEGORY_ITEM_SVGS = {
   subway: Subway,
   cementMixer: CementMixer,
   ball: Ball,
+  heartHairpin: HeartHairpin,
 } as const;
 
 // ============================================================

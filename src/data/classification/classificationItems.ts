@@ -2,6 +2,192 @@ import { ClassificationItem } from "../../types/game";
 
 export const classificationItems: ClassificationItem[] = [
   {
+    id: "heartHairpin",
+    name: "하트 머리핀",
+    topCategory: "clothing",
+    subCategory: "accessories",
+    svgKey: "heartHairpin",
+    shapes: ["heart"],
+    description: "하트 장식이 달린 머리핀이에요! 머리에 예쁘게 꽂아볼까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#FFD54F",
+        secondary: "#FFF9C4",
+        accent: "#D7A62A",
+      },
+      {
+        colorId: "pink",
+        primary: "#F48FB1",
+        secondary: "#FCE4EC",
+        accent: "#C2185B",
+      },
+      {
+        colorId: "purple",
+        primary: "#BA68C8",
+        secondary: "#F3E5F5",
+        accent: "#6A1B9A",
+      },
+      {
+        colorId: "blue",
+        primary: "#64B5F6",
+        secondary: "#E3F2FD",
+        accent: "#1565C0",
+      },
+      {
+        colorId: "white",
+        primary: "#FAFAFA",
+        secondary: "#ECEFF1",
+        accent: "#78909C",
+      },
+    ],
+  },
+
+  {
+    id: "star_flower",
+    name: "별모양꽃",
+    topCategory: "living",
+    subCategory: "daily",
+    svgKey: "star_flower",
+    shapes: ["star"],
+    description:
+      "별처럼 생긴 꽃잎이 활짝 피었어요! 꽃 가운데에는 어떤 색이 숨어 있을까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#F6D6D0",
+        secondary: "#FFF3E8",
+        accent: "#B83D55",
+      },
+      {
+        colorId: "red",
+        primary: "#E53955",
+        secondary: "#FFB6C1",
+        accent: "#8E1838",
+      },
+      {
+        colorId: "orange",
+        primary: "#FFAD66",
+        secondary: "#FFE1B8",
+        accent: "#C65D24",
+      },
+      {
+        colorId: "yellow",
+        primary: "#FFD95A",
+        secondary: "#FFF1A8",
+        accent: "#C98B22",
+      },
+      {
+        colorId: "green",
+        primary: "#78B96D",
+        secondary: "#C9E8A9",
+        accent: "#397344",
+      },
+      {
+        colorId: "blue",
+        primary: "#77BDEB",
+        secondary: "#D7F0FF",
+        accent: "#315EAD",
+      },
+      {
+        colorId: "purple",
+        primary: "#AB83D9",
+        secondary: "#E9D9FA",
+        accent: "#68419A",
+      },
+      {
+        colorId: "white",
+        primary: "#FFFDF5",
+        secondary: "#F4EDE4",
+        accent: "#D98B9D",
+      },
+      {
+        colorId: "pink",
+        primary: "#F49AB5",
+        secondary: "#FFD9E4",
+        accent: "#AD365D",
+      },
+    ],
+  },
+  {
+    id: "heart_owl",
+    name: "하트올빼미",
+    topCategory: "animal",
+    subCategory: "bird",
+    svgKey: "heart_owl",
+    shapes: [],
+    description:
+      "얼굴이 하트처럼 생긴 올빼미예요! 동그란 눈으로 주변을 살펴보고 있어요.",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#B99A7A",
+        secondary: "#FFF2D9",
+        accent: "#49372D",
+      },
+      {
+        colorId: "red",
+        primary: "#D96B72",
+        secondary: "#FFE0D9",
+        accent: "#792F3D",
+      },
+      {
+        colorId: "orange",
+        primary: "#E89A51",
+        secondary: "#FFE4B8",
+        accent: "#8C4D2C",
+      },
+      {
+        colorId: "yellow",
+        primary: "#E9CB67",
+        secondary: "#FFF5C8",
+        accent: "#8B713A",
+      },
+      {
+        colorId: "green",
+        primary: "#8BAA79",
+        secondary: "#E0EACD",
+        accent: "#405B3B",
+      },
+      {
+        colorId: "blue",
+        primary: "#83B8D8",
+        secondary: "#E0F1F9",
+        accent: "#365B78",
+      },
+      {
+        colorId: "purple",
+        primary: "#A995C7",
+        secondary: "#EDE3F6",
+        accent: "#5D477B",
+      },
+      {
+        colorId: "black",
+        primary: "#55545A",
+        secondary: "#E6E1E8",
+        accent: "#25242B",
+      },
+      {
+        colorId: "white",
+        primary: "#E8E6DF",
+        secondary: "#FFFCF4",
+        accent: "#8A776A",
+      },
+      {
+        colorId: "pink",
+        primary: "#DDA0AD",
+        secondary: "#FFE5E9",
+        accent: "#754451",
+      },
+      {
+        colorId: "brown",
+        primary: "#8B6248",
+        secondary: "#E8D2B8",
+        accent: "#422D24",
+      },
+    ],
+  },
+  {
     id: "heartKeychain",
     name: "하트 열쇠고리",
     topCategory: "living",
@@ -283,8 +469,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "starHairpin",
     name: "별 머리핀",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "clothing",
+    subCategory: "accessories",
     svgKey: "starHairpin",
     shapes: ["star"],
     description: "별 장식이 달린 머리핀이에요! 머리에 예쁘게 꽂아볼까요?",
@@ -7158,7 +7344,7 @@ export const classificationItems: ClassificationItem[] = [
 
     topCategory: "clothing",
 
-    subCategory: "clothes",
+    subCategory: "accessories",
 
     svgKey: "heartNecklace",
 
@@ -7878,7 +8064,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "starNecklace",
     name: "별 목걸이",
     topCategory: "clothing",
-    subCategory: "clothes",
+    subCategory: "accessories",
     svgKey: "starNecklace",
     shapes: ["star"],
     description: "반짝이는 별 목걸이예요! 목에 걸면 멋진 별처럼 변신!",

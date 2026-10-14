@@ -10,14 +10,19 @@ export type StageMapGameType =
   | "maze";
 
 export type ClassificationTopCategory =
-  | "animal"
-  | "food"
-  | "drink"
-  | "clothing"
-  | "living"
-  | "vehicle";
+  | "animal" //동물
+  | "food" //음식
+  | "drink" //음료
+  | "clothing" //의류
+  | "vehicle" //탈 것
+  | "plant" //식물
+  | "living"; //생활
 
 export type ClassificationSubCategory =
+  | "clothes" //옷
+  | "shoes" //신발
+  | "hat" //모자
+  | "accessories" //악세사리
   | "land_animal"
   | "insect"
   | "bird"
@@ -27,9 +32,6 @@ export type ClassificationSubCategory =
   | "meal"
   | "snack"
   | "beverage"
-  | "clothes"
-  | "shoes"
-  | "hat"
   | "furniture"
   | "electronics"
   | "stationery"
@@ -40,8 +42,28 @@ export type ClassificationSubCategory =
   | "road_vehicle"
   | "rail_special"
   | "air_vehicle"
-  | "water_vehicle";
+  | "water_vehicle"
+  | "flower"
+  | "tree"
+  | "nature_etc";
 
+const SUB_CATEGORY_MAP: Record<string, string[]> = {
+  animal: ["land_animal", "insect", "bird", "sea_animal"],
+  food: ["fruit", "vegetable", "meal", "snack"],
+  drink: ["beverage"],
+  clothing: ["clothes", "shoes", "hat"],
+  living: [
+    "furniture",
+    "electronics",
+    "stationery",
+    "daily",
+    "cleaning",
+    "bathroom",
+    "kitchen",
+  ],
+  vehicle: ["road_vehicle", "rail_special", "air_vehicle", "water_vehicle"],
+  plant: ["flower", "tree", "nature_etc"],
+};
 export type ClassificationColorId =
   | "natural"
   | "red"
