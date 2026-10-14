@@ -8,7 +8,7 @@
 
 // import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
 
-// import { RenderColorSortingObjectSvg } from "../../assets/Classification/classificationItemSvgs";
+// import { RenderClassificationObjectSvg } from "../../assets/Classification/classificationItemSvgs";
 
 // import HandPointer from "../../design-system/ui/HandPointer";
 
@@ -288,7 +288,7 @@
 //             }}
 //           >
 //             <ObjectContainer size={objectSize}>
-//               <RenderColorSortingObjectSvg
+//               <RenderClassificationObjectSvg
 //                 object={object}
 //                 primary={primaryColor!}
 //                 secondary={variant?.secondary}
@@ -375,7 +375,7 @@ import { Animated, Easing, StyleSheet, View } from "react-native";
 import { ColorSortingObject } from "../../types/Classification/Color/colorSotringTypes";
 import { classificationItems } from "../../data/classification/classificationItems";
 import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
-import { RenderColorSortingObjectSvg } from "../../assets/Classification/classificationItemSvgs";
+import { RenderClassificationObjectSvg } from "../../assets/Classification/classificationItemSvgs";
 import HandPointer from "../../design-system/ui/HandPointer";
 
 type Point = {
@@ -555,7 +555,7 @@ export default function TutorialOverlay({
               height: objectSize,
             }}
           >
-            <RenderColorSortingObjectSvg
+            <RenderClassificationObjectSvg
               object={object}
               primary={primaryColor!}
               secondary={variant?.secondary}

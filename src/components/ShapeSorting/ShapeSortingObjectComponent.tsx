@@ -1,624 +1,10 @@
-// import React, { useEffect, useRef } from "react";
-// import { Animated, Easing, PanResponder, View } from "react-native";
-// import styled from "styled-components/native";
-
-// import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
-// import { RenderColorSortingObjectSvg } from "../../assets/Classification/classificationItemSvgs";
-// import { triggerHaptic } from "../../utils/haptic";
-// import { playSound } from "../../utils/sound";
-
-// import Svg, { Circle, Path, Polygon, Rect } from "react-native-svg";
-// import {
-//   ShapeItemObject,
-//   ShapeSortingObject,
-//   SimpleShapeObject,
-// } from "../../generators/classification/generateShapeSortingProblem";
-
-// export type DragBounds = {
-//   left: number;
-//   right: number;
-//   top: number;
-//   bottom: number;
-// };
-
-// export type DragOrigin = {
-//   x: number;
-//   y: number;
-//   width: number;
-//   height: number;
-// };
-
-// export type TargetRects = Record<string, DragOrigin>;
-
-// type Props = {
-//   object: ShapeSortingObject;
-//   objectSize: number;
-//   isSelected: boolean;
-//   isPlaced: boolean;
-//   isDragging: boolean;
-//   onPress: () => void;
-//   getDragBounds: (callback: (bounds: DragBounds) => void) => void;
-//   getTargetRects: (callback: (rects: TargetRects) => void) => void;
-//   onDragStart: () => void;
-//   onDragEnd: () => void;
-//   onCorrectDrop: (objectId: string, targetId: string) => void;
-//   onWrongDrop?: (objectId: string) => void;
-//   tutorialRef?: (objectId: string, node: View | null) => void;
-// };
-
-// const DRAG_THRESHOLD = 4;
-// const TARGET_HIT_PADDING = 8;
-// const BUBBLE_EXTRA_SIZE = 12;
-
-// const clamp = (value: number, min: number, max: number) =>
-//   Math.min(Math.max(value, min), max);
-
-// function ShapeSvg({
-//   object,
-//   size,
-// }: {
-//   object: SimpleShapeObject;
-//   size: number;
-// }) {
-//   const color = COLOR_SORTING_COLORS[object.colorId];
-
-//   return (
-//     <Svg width={size} height={size} viewBox="0 0 100 100">
-//       {object.shapeId === "circle" && (
-//         <Circle cx="50" cy="50" r="43" fill={color} />
-//       )}
-//       {object.shapeId === "square" && (
-//         <Rect x="8" y="8" width="84" height="84" rx="10" fill={color} />
-//       )}
-//       {object.shapeId === "triangle" && (
-//         <Polygon points="50,7 94,90 6,90" fill={color} />
-//       )}
-//       {object.shapeId === "heart" && (
-//         <Path
-//           d="M50 90 C40 80 7 57 7 32 C7 12 30 5 43 18 L50 25 L57 18 C70 5 93 12 93 32 C93 57 60 80 50 90Z"
-//           fill={color}
-//         />
-//       )}
-//       {object.shapeId === "star" && (
-//         <Polygon
-//           points="50,5 62,35 94,37 69,58 77,90 50,73 23,90 31,58 6,37 38,35"
-//           fill={color}
-//         />
-//       )}
-//     </Svg>
-//   );
-// }
-
-// function ShapeItemSvg({
-//   object,
-//   size,
-// }: {
-//   object: ShapeItemObject;
-//   size: number;
-// }) {
-//   // 기존 SVG 렌더러는 ColorSortingObject 형태를 받으므로
-//   // ShapeItemObject의 실제 Variant를 기존 입력 형태로 변환한다.
-//   const colorObject = {
-//     id: object.id,
-//     itemId: object.itemId,
-//     label: object.name,
-//     colorId: object.variant.colorId,
-//     svgKey: object.svgKey,
-//     shape: object.shapeId,
-//   };
-
-//   return (
-//     <RenderColorSortingObjectSvg
-//       object={colorObject}
-//       primary={object.variant.primary}
-//       secondary={object.variant.secondary}
-//       accent={object.variant.accent}
-//       size={size}
-//     />
-//   );
-// }
-
-// function ObjectArtwork({
-//   object,
-//   size,
-// }: {
-//   object: ShapeSortingObject;
-//   size: number;
-// }) {
-//   return object.kind === "simple_shape" ? (
-//     <ShapeSvg object={object} size={size} />
-//   ) : (
-//     <ShapeItemSvg object={object} size={size} />
-//   );
-// }
-
-// export default function ShapeSortingObjectComponent({
-//   object,
-//   objectSize,
-//   isSelected,
-//   isPlaced,
-//   isDragging,
-//   onPress,
-//   getDragBounds,
-//   getTargetRects,
-//   onDragStart,
-//   onDragEnd,
-//   onCorrectDrop,
-//   onWrongDrop,
-//   tutorialRef,
-// }: Props) {
-//   const pan = useRef(new Animated.ValueXY()).current;
-//   const position = useRef({ x: 0, y: 0 });
-
-//   const scale = useRef(new Animated.Value(1)).current;
-//   const fade = useRef(new Animated.Value(1)).current;
-//   const burst = useRef(new Animated.Value(0)).current;
-
-//   const bubbleRef = useRef<View>(null);
-//   const originRef = useRef<DragOrigin | null>(null);
-//   const busyRef = useRef(false);
-
-//   const latest = useRef({
-//     objectId: object.id,
-//     targetId: object.targetId,
-//     isPlaced,
-//     getDragBounds,
-//     getTargetRects,
-//     onDragStart,
-//     onDragEnd,
-//     onCorrectDrop,
-//     onWrongDrop,
-//   });
-
-//   latest.current = {
-//     objectId: object.id,
-//     targetId: object.targetId,
-//     isPlaced,
-//     getDragBounds,
-//     getTargetRects,
-//     onDragStart,
-//     onDragEnd,
-//     onCorrectDrop,
-//     onWrongDrop,
-//   };
-
-//   useEffect(() => {
-//     const listenerId = pan.addListener((value) => {
-//       position.current = value;
-//     });
-
-//     return () => pan.removeListener(listenerId);
-//   }, [pan]);
-
-//   useEffect(() => {
-//     if (!isPlaced) {
-//       pan.stopAnimation();
-//       pan.setValue({ x: 0, y: 0 });
-
-//       scale.stopAnimation();
-//       scale.setValue(1);
-
-//       fade.stopAnimation();
-//       fade.setValue(1);
-
-//       burst.stopAnimation();
-//       burst.setValue(0);
-
-//       busyRef.current = false;
-//     }
-//   }, [isPlaced, object.id, pan, scale, fade, burst]);
-
-//   const returnToOrigin = () => {
-//     Animated.spring(pan, {
-//       toValue: { x: 0, y: 0 },
-//       friction: 6,
-//       tension: 80,
-//       useNativeDriver: true,
-//     }).start(() => latest.current.onDragEnd());
-//   };
-
-//   const settleIntoBasket = (targetId: string) => {
-//     if (busyRef.current) return;
-
-//     busyRef.current = true;
-
-//     triggerHaptic("success");
-//     playSound("correct_sound");
-
-//     // 애니메이션 시작값 초기화
-//     scale.setValue(1);
-//     fade.setValue(1);
-//     burst.setValue(0);
-
-//     // 1단계: 팡! 살짝 커지기
-//     Animated.sequence([
-//       Animated.timing(scale, {
-//         toValue: 1.3,
-//         duration: 110,
-//         easing: Easing.out(Easing.quad),
-//         useNativeDriver: true,
-//       }),
-
-//       // 2단계: 작아지면서 사라지기
-//       Animated.parallel([
-//         Animated.timing(scale, {
-//           toValue: 0.4,
-//           duration: 220,
-//           easing: Easing.in(Easing.quad),
-//           useNativeDriver: true,
-//         }),
-//         Animated.timing(fade, {
-//           toValue: 0,
-//           duration: 220,
-//           useNativeDriver: true,
-//         }),
-//       ]),
-//     ]).start(({ finished }) => {
-//       if (finished) {
-//         latest.current.onCorrectDrop(latest.current.objectId, targetId);
-//       }
-
-//       busyRef.current = false;
-//       latest.current.onDragEnd();
-//     });
-
-//     // 폭죽은 본체 애니메이션과 동시에 진행
-//     Animated.timing(burst, {
-//       toValue: 1,
-//       duration: 520,
-//       easing: Easing.out(Easing.cubic),
-//       useNativeDriver: true,
-//     }).start();
-//   };
-
-//   const handleRelease = () => {
-//     const origin = originRef.current;
-
-//     if (!origin) {
-//       returnToOrigin();
-//       return;
-//     }
-
-//     latest.current.getTargetRects((rects) => {
-//       const centerX = origin.x + position.current.x + origin.width / 2;
-//       const centerY = origin.y + position.current.y + origin.height / 2;
-
-//       let hitTargetId: string | null = null;
-
-//       for (const [targetId, rect] of Object.entries(rects)) {
-//         if (
-//           centerX >= rect.x - TARGET_HIT_PADDING &&
-//           centerX <= rect.x + rect.width + TARGET_HIT_PADDING &&
-//           centerY >= rect.y - TARGET_HIT_PADDING &&
-//           centerY <= rect.y + rect.height + TARGET_HIT_PADDING
-//         ) {
-//           hitTargetId = targetId;
-//           break;
-//         }
-//       }
-
-//       if (!hitTargetId) {
-//         returnToOrigin();
-//         return;
-//       }
-
-//       if (hitTargetId === latest.current.targetId) {
-//         // busyRef.current = true;
-//         // triggerHaptic("success");
-//         // playSound("correct_sound");
-
-//         // Animated.sequence([
-//         //   Animated.spring(pan, {
-//         //     toValue: { x: 0, y: 0 },
-//         //     friction: 7,
-//         //     tension: 90,
-//         //     useNativeDriver: true,
-//         //   }),
-//         // ]).start(() => {
-//         //   latest.current.onCorrectDrop(latest.current.objectId, hitTargetId!);
-//         //   busyRef.current = false;
-//         //   latest.current.onDragEnd();
-//         // });
-//         settleIntoBasket(hitTargetId);
-//       } else {
-//         busyRef.current = true;
-//         triggerHaptic("error");
-//         playSound("wrong_sound");
-
-//         Animated.sequence([
-//           Animated.timing(pan, {
-//             toValue: {
-//               x: position.current.x,
-//               y: position.current.y - 25,
-//             },
-//             duration: 100,
-//             useNativeDriver: true,
-//           }),
-//           Animated.spring(pan, {
-//             toValue: { x: 0, y: 0 },
-//             friction: 5,
-//             tension: 80,
-//             useNativeDriver: true,
-//           }),
-//         ]).start(() => {
-//           latest.current.onWrongDrop?.(latest.current.objectId);
-//           busyRef.current = false;
-//           latest.current.onDragEnd();
-//         });
-//       }
-//     });
-//   };
-
-//   const panResponder = useRef(
-//     PanResponder.create({
-//       onStartShouldSetPanResponder: () => false,
-
-//       onMoveShouldSetPanResponderCapture: (_, gesture) =>
-//         !latest.current.isPlaced &&
-//         !busyRef.current &&
-//         (Math.abs(gesture.dx) > DRAG_THRESHOLD ||
-//           Math.abs(gesture.dy) > DRAG_THRESHOLD),
-
-//       onPanResponderTerminationRequest: () => false,
-
-//       onPanResponderGrant: () => {
-//         triggerHaptic("light");
-//         pan.stopAnimation();
-
-//         bubbleRef.current?.measureInWindow((x, y, width, height) => {
-//           originRef.current = {
-//             x: x - position.current.x,
-//             y: y - position.current.y,
-//             width,
-//             height,
-//           };
-
-//           latest.current.getDragBounds((bounds) => {
-//             const origin = originRef.current;
-//             if (!origin) return;
-
-//             dragRange.current = {
-//               minX: bounds.left - origin.x,
-//               maxX: bounds.right - (origin.x + width),
-//               minY: bounds.top - origin.y,
-//               maxY: bounds.bottom - (origin.y + height),
-//             };
-//           });
-//         });
-
-//         latest.current.onDragStart();
-//       },
-
-//       onPanResponderMove: (_, gesture) => {
-//         const range = dragRange.current;
-
-//         const x = range
-//           ? clamp(gesture.dx, range.minX, range.maxX)
-//           : gesture.dx;
-//         const y = range
-//           ? clamp(gesture.dy, range.minY, range.maxY)
-//           : gesture.dy;
-
-//         pan.setValue({ x, y });
-//       },
-
-//       onPanResponderRelease: handleRelease,
-//       onPanResponderTerminate: returnToOrigin,
-//     }),
-//   ).current;
-
-//   const dragRange = useRef<{
-//     minX: number;
-//     maxX: number;
-//     minY: number;
-//     maxY: number;
-//   } | null>(null);
-
-//   const bubbleSize = objectSize + BUBBLE_EXTRA_SIZE;
-
-//   const primaryColor =
-//     object.kind === "simple_shape"
-//       ? COLOR_SORTING_COLORS[object.colorId]
-//       : object.variant.primary;
-
-//   const PARTICLE_COUNT = 10;
-//   const PARTICLE_COLORS = ["#FFC93C", "#7C5CFF", "#FF7AA8"];
-
-//   return (
-//     <Animated.View
-//       {...panResponder.panHandlers}
-//       style={[
-//         {
-//           flex: 1,
-//           transform: pan.getTranslateTransform(),
-//         },
-//         isDragging ? { zIndex: 30, elevation: 30 } : null,
-//       ]}
-//     >
-//       <Animated.View
-//         style={{
-//           flex: 1,
-//           opacity: fade,
-//           transform: [{ scale }],
-//         }}
-//       >
-//         <ObjectCell
-//           activeOpacity={0.8}
-//           disabled={isPlaced}
-//           onPress={onPress}
-//           style={{ opacity: isPlaced ? 0 : 1 }}
-//         >
-//           <ObjectBubble
-//             ref={(node: View | null) => {
-//               bubbleRef.current = node;
-//               tutorialRef?.(object.id, node);
-//             }}
-//             collapsable={false}
-//             size={bubbleSize}
-//             isSelected={isSelected}
-//           >
-//             <ObjectArtwork object={object} size={objectSize} />
-//           </ObjectBubble>
-//         </ObjectCell>
-//       </Animated.View>
-
-//       <BurstLayer pointerEvents="none">
-//         <Ring
-//           size={bubbleSize}
-//           color={primaryColor}
-//           style={{
-//             opacity: burst.interpolate({
-//               inputRange: [0, 0.1, 1],
-//               outputRange: [0, 0.8, 0],
-//             }),
-//             transform: [
-//               {
-//                 scale: burst.interpolate({
-//                   inputRange: [0, 1],
-//                   outputRange: [0.6, 1.9],
-//                 }),
-//               },
-//             ],
-//           }}
-//         />
-
-//         {Array.from({ length: PARTICLE_COUNT }, (_, index) => {
-//           const angle = (index / PARTICLE_COUNT) * Math.PI * 2;
-//           const distance = bubbleSize * (index % 2 === 0 ? 0.95 : 0.7);
-//           const size = index % 2 === 0 ? 9 : 6;
-
-//           const particleColor =
-//             index % 3 === 0
-//               ? primaryColor
-//               : PARTICLE_COLORS[index % PARTICLE_COLORS.length];
-
-//           return (
-//             <Particle
-//               key={index}
-//               color={particleColor}
-//               style={{
-//                 width: size,
-//                 height: size,
-//                 borderRadius: size / 2,
-//                 opacity: burst.interpolate({
-//                   inputRange: [0, 0.1, 0.65, 1],
-//                   outputRange: [0, 1, 1, 0],
-//                 }),
-//                 transform: [
-//                   {
-//                     translateX: burst.interpolate({
-//                       inputRange: [0, 1],
-//                       outputRange: [0, Math.cos(angle) * distance],
-//                     }),
-//                   },
-//                   {
-//                     translateY: burst.interpolate({
-//                       inputRange: [0, 1],
-//                       outputRange: [0, Math.sin(angle) * distance],
-//                     }),
-//                   },
-//                   {
-//                     scale: burst.interpolate({
-//                       inputRange: [0, 1],
-//                       outputRange: [1, 0.3],
-//                     }),
-//                   },
-//                 ],
-//               }}
-//             />
-//           );
-//         })}
-//       </BurstLayer>
-//     </Animated.View>
-//   );
-
-//   //   return (
-//   //     <Animated.View
-//   //       {...panResponder.panHandlers}
-//   //       style={[
-//   //         { flex: 1, transform: pan.getTranslateTransform() },
-//   //         isDragging ? { zIndex: 30, elevation: 30 } : null,
-//   //       ]}
-//   //     >
-//   //       <ObjectCell
-//   //         activeOpacity={0.8}
-//   //         disabled={isPlaced}
-//   //         onPress={onPress}
-//   //         style={{ opacity: isPlaced ? 0 : 1 }}
-//   //       >
-//   //         <ObjectBubble
-//   //           ref={(node: View | null) => {
-//   //             bubbleRef.current = node;
-//   //             tutorialRef?.(object.id, node);
-//   //           }}
-//   //           collapsable={false}
-//   //           size={bubbleSize}
-//   //           isSelected={isSelected}
-//   //         >
-//   //           <ObjectArtwork object={object} size={objectSize} />
-//   //         </ObjectBubble>
-//   //       </ObjectCell>
-//   //     </Animated.View>
-//   //   );
-// }
-
-// const ObjectCell = styled.TouchableOpacity`
-//   flex: 1;
-//   align-items: center;
-//   justify-content: center;
-// `;
-
-// const ObjectBubble = styled.View<{
-//   size: number;
-//   isSelected: boolean;
-// }>`
-//   width: ${(p) => p.size}px;
-//   height: ${(p) => p.size}px;
-//   align-items: center;
-//   justify-content: center;
-//   border-radius: ${(p) => p.size / 2}px;
-//   border-width: 3px;
-//   border-color: ${(p) => (p.isSelected ? "#7C5CFF" : "transparent")};
-//   background-color: ${(p) =>
-//     p.isSelected ? "rgba(124,92,255,0.08)" : "transparent"};
-// `;
-
-// const BurstLayer = styled.View`
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   align-items: center;
-//   justify-content: center;
-// `;
-
-// const Ring = styled(Animated.View)<{
-//   size: number;
-//   color: string;
-// }>`
-//   position: absolute;
-//   width: ${(p) => p.size}px;
-//   height: ${(p) => p.size}px;
-//   border-radius: ${(p) => p.size / 2}px;
-//   border-width: 3px;
-//   border-color: ${(p) => p.color};
-// `;
-
-// const Particle = styled(Animated.View)<{
-//   color: string;
-// }>`
-//   position: absolute;
-//   background-color: ${(p) => p.color};
-// `;
-
 import React, { useEffect, useRef } from "react";
 import { Animated, Easing, PanResponder, View } from "react-native";
 import styled from "styled-components/native";
 import Svg, { Circle, Path, Polygon, Rect } from "react-native-svg";
 
 import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
-import { RenderColorSortingObjectSvg } from "../../assets/Classification/classificationItemSvgs";
+import { RenderClassificationObjectSvg } from "../../assets/Classification/classificationItemSvgs";
 import { triggerHaptic } from "../../utils/haptic";
 import { playSound } from "../../utils/sound";
 
@@ -692,6 +78,49 @@ const clamp = (value: number, min: number, max: number) =>
 // Simple shape SVG
 // ============================================================
 
+// function ShapeSvg({
+//   object,
+//   size,
+// }: {
+//   object: SimpleShapeObject;
+//   size: number;
+// }) {
+//   const color = COLOR_SORTING_COLORS[object.colorId];
+
+//   return (
+//     <Svg width={size} height={size} viewBox="0 0 100 100">
+//       {object.shapeId === "circle" && (
+//         <Circle cx="50" cy="50" r="43" fill={color} />
+//       )}
+
+//       {object.shapeId === "square" && (
+//         <Rect x="8" y="8" width="84" height="84" rx="10" fill={color} />
+//       )}
+
+//       {object.shapeId === "triangle" && (
+//         <Polygon points="50,7 94,90 6,90" fill={color} />
+//       )}
+
+//       {object.shapeId === "heart" && (
+//         <Path
+//           d="M50 90 C40 80 7 57 7 32 C7 12 30 5 43 18 L50 25 L57 18 C70 5 93 12 93 32 C93 57 60 80 50 90Z"
+//           fill={color}
+//         />
+//       )}
+
+//       {object.shapeId === "star" && (
+//         <Polygon
+//           points="50,5 62,35 94,37 69,58 77,90 50,73 23,90 31,58 6,37 38,35"
+//           fill={color}
+//         />
+//       )}
+//     </Svg>
+//   );
+// }
+// ============================================================
+// Simple shape SVG
+// ============================================================
+
 function ShapeSvg({
   object,
   size,
@@ -701,24 +130,59 @@ function ShapeSvg({
 }) {
   const color = COLOR_SORTING_COLORS[object.colorId];
 
+  // 💡 하얀색이나 밝은 색상일 때 테두리가 선명하게 보이도록 진한 테두리 색상 지정
+  const isLightColor =
+    object.colorId === "white" ||
+    object.colorId === "yellow" ||
+    color?.toLowerCase() === "#ffffff" ||
+    color?.toLowerCase() === "#f6c94a";
+
+  const strokeColor = isLightColor ? "#6E6687" : "#29263D"; // 어두운 남색/회보라 계열 테두리
+
   return (
     <Svg width={size} height={size} viewBox="0 0 100 100">
       {object.shapeId === "circle" && (
-        <Circle cx="50" cy="50" r="43" fill={color} />
+        <Circle
+          cx="50"
+          cy="50"
+          r="41"
+          fill={color}
+          stroke={strokeColor}
+          strokeWidth="5"
+        />
       )}
 
       {object.shapeId === "square" && (
-        <Rect x="8" y="8" width="84" height="84" rx="10" fill={color} />
+        <Rect
+          x="8"
+          y="8"
+          width="84"
+          height="84"
+          rx="10"
+          fill={color}
+          stroke={strokeColor}
+          strokeWidth="5"
+          strokeLinejoin="round"
+        />
       )}
 
       {object.shapeId === "triangle" && (
-        <Polygon points="50,7 94,90 6,90" fill={color} />
+        <Polygon
+          points="50,7 94,90 6,90"
+          fill={color}
+          stroke={strokeColor}
+          strokeWidth="5"
+          strokeLinejoin="round"
+        />
       )}
 
       {object.shapeId === "heart" && (
         <Path
           d="M50 90 C40 80 7 57 7 32 C7 12 30 5 43 18 L50 25 L57 18 C70 5 93 12 93 32 C93 57 60 80 50 90Z"
           fill={color}
+          stroke={strokeColor}
+          strokeWidth="5"
+          strokeLinejoin="round"
         />
       )}
 
@@ -726,6 +190,9 @@ function ShapeSvg({
         <Polygon
           points="50,5 62,35 94,37 69,58 77,90 50,73 23,90 31,58 6,37 38,35"
           fill={color}
+          stroke={strokeColor}
+          strokeWidth="5"
+          strokeLinejoin="round"
         />
       )}
     </Svg>
@@ -753,7 +220,7 @@ function ShapeItemSvg({
   };
 
   return (
-    <RenderColorSortingObjectSvg
+    <RenderClassificationObjectSvg
       object={colorObject}
       primary={object.variant.primary}
       secondary={object.variant.secondary}

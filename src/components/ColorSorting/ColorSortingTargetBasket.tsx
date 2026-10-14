@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 
 import { classificationItems } from "../../data/classification/classificationItems";
 import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
-import { RenderColorSortingObjectSvg } from "../../assets/Classification/classificationItemSvgs";
+import { RenderClassificationObjectSvg } from "../../assets/Classification/classificationItemSvgs";
 
 import {
   ColorSortingObject,
@@ -88,7 +88,7 @@ export default function ColorSortingTargetBasket({
                     key={objectId}
                     onPress={() => onRemoveObject(objectId)}
                   >
-                    <RenderColorSortingObjectSvg
+                    <RenderClassificationObjectSvg
                       object={object}
                       primary={variant?.primary ?? basicColor}
                       secondary={variant?.secondary}

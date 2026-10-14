@@ -7,7 +7,7 @@ import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColo
 
 import { ColorSortingProblem } from "../../types/Classification/Color/colorSotringTypes";
 
-import { RenderColorSortingObjectSvg } from "../../assets/Classification/classificationItemSvgs";
+import { RenderClassificationObjectSvg } from "../../assets/Classification/classificationItemSvgs";
 import { AppText } from "../../utils/AppText";
 import { classificationItems } from "../../data/classification/classificationItems";
 
@@ -94,7 +94,7 @@ export default function ColorSortingProblemPreview({ problem }: Props) {
               {/* SVG */}
 
               <SvgArea>
-                <RenderColorSortingObjectSvg
+                <RenderClassificationObjectSvg
                   object={object}
                   primary={variant?.primary ?? basicColor}
                   secondary={variant?.secondary}

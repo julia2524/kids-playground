@@ -27,41 +27,44 @@ export default function ShapeSortingTargetArea({
   onRemoveObject,
 }: ShapeSortingTargetAreaProps) {
   return (
-    <TargetGridContainer>
-      {targets.map((target) => (
-        <BasketSlot
-          key={target.id}
-          collapsable={false}
-          ref={(node: View | null) => {
-            basketRefs.current[target.id] = node;
-          }}
-        >
-          <ShapeSortingTargetBasket
-            target={target}
-            objects={objects}
-            placedObjectIds={placedObjects[target.id] ?? []}
-            onPress={() => onTargetPress(target.id)}
-            onRemoveObject={(objectId) => onRemoveObject(target.id, objectId)}
-          />
-        </BasketSlot>
-      ))}
-    </TargetGridContainer>
+    <TargetAreaContainer>
+      <TargetRow>
+        {targets.map((target) => (
+          <BasketSlot
+            key={target.id}
+            collapsable={false}
+            ref={(node: View | null) => {
+              basketRefs.current[target.id] = node;
+            }}
+          >
+            <ShapeSortingTargetBasket
+              target={target}
+              objects={objects}
+              placedObjectIds={placedObjects[target.id] ?? []}
+              onPress={() => onTargetPress(target.id)}
+              onRemoveObject={(objectId) => onRemoveObject(target.id, objectId)}
+            />
+          </BasketSlot>
+        ))}
+      </TargetRow>
+    </TargetAreaContainer>
   );
 }
 
-const TargetGridContainer = styled.View`
+const TargetAreaContainer = styled.View`
   flex: 0.8;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: center;
-
-  gap: 4px;
+  justify-content: flex-start; /* 세로 중앙 */
   margin-bottom: 10px;
+  padding-top: 20px;
+`;
+
+const TargetRow = styled.View`
+  flex-direction: row;
+  gap: 4px;
 `;
 
 const BasketSlot = styled.View`
   flex: 1;
   min-width: 0;
-  align-items: stretch;
-  justify-content: center;
+  max-width: 200px;
 `;

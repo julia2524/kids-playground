@@ -12637,7 +12637,7 @@ export const RenderClassificationItemSvg = ({
 //
 // ============================================================
 
-export const RenderColorSortingObjectSvg = ({
+export const RenderClassificationObjectSvg = ({
   object,
   primary,
   secondary,

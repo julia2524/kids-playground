@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 
 import { classificationItems } from "../../data/classification/classificationItems";
 import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
-import { RenderColorSortingObjectSvg } from "../../assets/Classification/classificationItemSvgs";
+import { RenderClassificationObjectSvg } from "../../assets/Classification/classificationItemSvgs";
 import { ColorSortingObject } from "../../types/Classification/Color/colorSotringTypes";
 import { triggerHaptic } from "../../utils/haptic";
 import { playSound } from "../../utils/sound";
@@ -584,7 +584,7 @@ export default function ColorSortingObjectComponent({
             size={bubbleSize}
             isSelected={isSelected}
           >
-            <RenderColorSortingObjectSvg
+            <RenderClassificationObjectSvg
               object={object}
               primary={primaryColor}
               secondary={variant?.secondary}
