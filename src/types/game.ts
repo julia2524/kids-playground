@@ -12,13 +12,17 @@ export type StageMapGameType =
 export type ClassificationTopCategory =
   | "animal" //동물
   | "food" //음식
-  | "drink" //음료
   | "clothing" //의류
   | "vehicle" //탈 것
-  | "plant" //식물
-  | "living"; //생활
+  | "nature" //자연
+  | "living" //생활
+  | "unknown"; //알 수 없음
 
 export type ClassificationSubCategory =
+  | "musical_instrument"
+  | "toys_sports" //장난감
+  | "plant" //식물
+  | "sky" //하늘
   | "clothes" //옷
   | "shoes" //신발
   | "hat" //모자
@@ -31,7 +35,7 @@ export type ClassificationSubCategory =
   | "vegetable"
   | "meal"
   | "snack"
-  | "beverage"
+  | "drink"
   | "furniture"
   | "electronics"
   | "stationery"
@@ -45,25 +49,10 @@ export type ClassificationSubCategory =
   | "water_vehicle"
   | "flower"
   | "tree"
-  | "nature_etc";
+  | "nature_etc"
+  | "decoration_sign"
+  | "unknown";
 
-const SUB_CATEGORY_MAP: Record<string, string[]> = {
-  animal: ["land_animal", "insect", "bird", "sea_animal"],
-  food: ["fruit", "vegetable", "meal", "snack"],
-  drink: ["beverage"],
-  clothing: ["clothes", "shoes", "hat"],
-  living: [
-    "furniture",
-    "electronics",
-    "stationery",
-    "daily",
-    "cleaning",
-    "bathroom",
-    "kitchen",
-  ],
-  vehicle: ["road_vehicle", "rail_special", "air_vehicle", "water_vehicle"],
-  plant: ["flower", "tree", "nature_etc"],
-};
 export type ClassificationColorId =
   | "natural"
   | "red"

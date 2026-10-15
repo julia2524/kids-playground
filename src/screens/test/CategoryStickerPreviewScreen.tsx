@@ -13,11 +13,11 @@ import { RenderClassificationItemSvg } from "../../assets/Classification/classif
 const ALL_TOP_CATEGORIES = [
   "animal",
   "food",
-  "drink",
   "clothing",
   "living",
   "vehicle",
-  "plant",
+  "nature",
+  "unknown",
 ];
 
 // 카테고리 한국어 라벨 맵핑
@@ -25,20 +25,20 @@ const TOP_CATEGORY_LABELS: Record<string, string> = {
   all: "전체 대분류",
   animal: "동물",
   food: "음식",
-  drink: "음료",
   clothing: "의류",
   living: "생활",
   vehicle: "탈것",
-  plant: "식물 🌿",
+  nature: "자연",
+  unknown: "알 수 없음",
 };
 
 // 🌿 2. 전체 고정 중분류 리스트 정의 (대분류별 매핑 정보 포함)
 // 각 중분류가 어떤 대분류에 속하는지 명시해주면 연동하기 훨씬 깔끔합니다!
 const SUB_CATEGORY_MAP: Record<string, string[]> = {
   animal: ["land_animal", "insect", "bird", "sea_animal"],
-  food: ["fruit", "vegetable", "meal", "snack"],
-  drink: ["beverage"],
-  clothing: ["clothes", "shoes", "hat"],
+  food: ["fruit", "vegetable", "meal", "snack", "drink"],
+
+  clothing: ["clothes", "shoes", "hat", "accessories"],
   living: [
     "furniture",
     "electronics",
@@ -47,9 +47,12 @@ const SUB_CATEGORY_MAP: Record<string, string[]> = {
     "cleaning",
     "bathroom",
     "kitchen",
+
+    "musical_instrument",
   ],
   vehicle: ["road_vehicle", "rail_special", "air_vehicle", "water_vehicle"],
-  plant: ["flower", "tree", "nature_etc"],
+  nature: ["plant", "sky"],
+  unknown: ["unknown"],
 };
 
 export default function CategoryStickerPreviewScreen({

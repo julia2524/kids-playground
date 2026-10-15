@@ -2,6 +2,2796 @@ import { ClassificationItem } from "../../types/game";
 
 export const classificationItems: ClassificationItem[] = [
   {
+    id: "desk",
+    name: "책상",
+    topCategory: "living",
+    subCategory: "furniture",
+    svgKey: "desk",
+    shapes: [],
+    description: "공부를 하거나 그림을 그릴 수 있는 아늑한 책상이에요.",
+    variants: [
+      {
+        colorId: "natural", // 따뜻하고 포근한 원목 책상 본래의 모습
+        primary: "#DDA15E",
+        secondary: "#F2CC8F",
+        accent: "#8D5524",
+      },
+      {
+        colorId: "pink", // 아기자기한 파스텔 핑크 책상 테마
+        primary: "#F8BBD0",
+        secondary: "#FCE4EC",
+        accent: "#C5868B",
+      },
+      {
+        colorId: "blue", // 깔끔하고 시원한 스카이 블루 책상 테마
+        primary: "#B3E5FC",
+        secondary: "#E1F5FE",
+        accent: "#81D4FA",
+      },
+      {
+        colorId: "brown", // 차분하고 묵직한 다크 우드 책상 테마
+        primary: "#8D6E63",
+        secondary: "#D7CCC8",
+        accent: "#4E342E",
+      },
+    ],
+  },
+  {
+    id: "milk",
+    name: "우유 팩",
+    topCategory: "food",
+    subCategory: "drink",
+    svgKey: "milk",
+    shapes: [],
+    description: "고소하고 영양 만점인 신선한 우유가 담긴 팩이에요.",
+    variants: [
+      {
+        colorId: "natural", // 신선한 흰 우유 및 스카이 블루 라벨 본래의 모습
+        primary: "#FFFFFF",
+        secondary: "#83B8F7",
+        accent: "#90A4AE", // 시원한 블루빛이 감도는 블루그레이
+      },
+      {
+        colorId: "pink", // 달콤상큼한 딸기우유 테마
+        primary: "#FFCDD2",
+        secondary: "#E57373",
+        accent: "#C5868B", // 붉은 기(로즈빛)가 감도는 차분한 핑크그레이
+      },
+      {
+        colorId: "yellow", // 부드럽고 달콤한 바나나우유 테마
+        primary: "#FFF9C4",
+        secondary: "#FFEE58",
+        accent: "#B4A982", // 노란 기가 감도는 웜 그레이 (샌드 그레이)
+      },
+      {
+        colorId: "brown", // 진하고 달콤한 초코우유 테마
+        primary: "#D7CCC8",
+        secondary: "#8D6E63",
+        accent: "#8D7B73", // 갈색빛이 감도는 토프 그레이 (브라운 그레이)
+      },
+    ],
+  },
+  {
+    id: "juiceBox",
+    name: "주스 팩",
+    topCategory: "food",
+    subCategory: "drink",
+    svgKey: "juiceBox",
+    shapes: [],
+    description: "빨대를 꽂아 톡톡 마시는 상큼한 과일 주스 팩이에요.",
+    variants: [
+      {
+        colorId: "natural", // 상큼한 오렌지 주스 팩 본래의 모습
+        primary: "#F9A825",
+        secondary: "#FFF8E1",
+        accent: "#E53935",
+      },
+      {
+        colorId: "green", // 싱그러운 사과/키위 주스 팩 테마
+        primary: "#7CB342",
+        secondary: "#F1F8E9",
+        accent: "#FF7043",
+      },
+      {
+        colorId: "purple", // 달콤한 포도 주스 팩 테마
+        primary: "#8E24AA",
+        secondary: "#F3E5F5",
+        accent: "#FFCA28",
+      },
+      {
+        colorId: "pink", // 달콤새콤한 복숭아 주스 팩 테마
+        primary: "#EC407A",
+        secondary: "#FCE4EC",
+        accent: "#00ACC1",
+      },
+    ],
+  },
+  {
+    id: "sodaBottle",
+    name: "탄산음료 병",
+    topCategory: "food",
+    subCategory: "drink",
+    svgKey: "sodaBottle",
+    shapes: [],
+    description: "톡 쏘는 탄산음료가 가득 들어있는 시원한 병이에요.",
+    variants: [
+      {
+        colorId: "natural", // 클래식하고 짜릿한 레드 콜라 병 본래의 모습
+        primary: "#D32F2F",
+        secondary: "#EF4444",
+        accent: "#FFFFFF",
+      },
+      {
+        colorId: "blue", // 시원한 소다맛 블루 병 테마
+        primary: "#1E88E5",
+        secondary: "#42A5F5",
+        accent: "#FFFFFF",
+      },
+      {
+        colorId: "green", // 상큼한 라임/사이다 그린 병 테마
+        primary: "#43A047",
+        secondary: "#66BB6A",
+        accent: "#FFFFFF",
+      },
+      {
+        colorId: "orange", // 상큼달콤한 오렌지 탄산 병 테마
+        primary: "#FB8C00",
+        secondary: "#FFA726",
+        accent: "#FFFFFF",
+      },
+    ],
+  },
+  {
+    id: "milkBottle",
+    name: "우유 병",
+    topCategory: "food",
+    subCategory: "drink",
+    svgKey: "milkBottle",
+    shapes: [],
+    description: "신선하고 고소한 우유가 담긴 유리 병이에요.",
+    variants: [
+      {
+        colorId: "natural", // 신선한 화이트 계열 병과 파란색 뚜껑 본래의 모습
+        primary: "#FFFDF4",
+        secondary: "#FFFFFF",
+        accent: "#8CC8F4",
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크빛 딸기우유 병 테마
+        primary: "#FCE4EC",
+        secondary: "#FFCDD2",
+        accent: "#F48FB1",
+      },
+      {
+        colorId: "yellow", // 부드러운 바나나우유 병 테마
+        primary: "#FFFDE7",
+        secondary: "#FFF9C4",
+        accent: "#FFEE58",
+      },
+      {
+        colorId: "brown", // 달콤한 초코우유 병 테마
+        primary: "#EFEBE9",
+        secondary: "#D7CCC8",
+        accent: "#A1887F",
+      },
+    ],
+  },
+  {
+    id: "drinkingGlass",
+    name: "유리잔",
+    topCategory: "food",
+    subCategory: "drink",
+    svgKey: "drinkingGlass",
+    shapes: [],
+    description: "시원한 물이나 음료를 따라 마실 수 있는 투명한 유리잔이에요.",
+    variants: [
+      {
+        colorId: "natural", // 시원한 물이 담긴 투명한 유리잔 본래의 모습
+        primary: "#B8C0C8",
+        secondary: "#9ADBF5",
+        accent: "#FFFFFF",
+      },
+      {
+        colorId: "yellow", // 상큼한 레몬에이드/노란 주스 테마 (옐로우 계열 조화)
+        primary: "#FFE082",
+        secondary: "#FFCA28",
+        accent: "#FFF8E1",
+      },
+      {
+        colorId: "green", // 시원하고 청량한 민트소다 테마 (그린 계열 조화)
+        primary: "#A7FFEB",
+        secondary: "#64FFDA",
+        accent: "#E0F2F1",
+      },
+      {
+        colorId: "white", // 부드러운 우유가 담긴 테마 (화이트/라이트 그레이 계열 조화)
+        primary: "#ECEFF1",
+        secondary: "#FFFFFF",
+        accent: "#CFD8DC",
+      },
+    ],
+  },
+  {
+    id: "drinkCan",
+    name: "음료 캔",
+    topCategory: "food",
+    subCategory: "drink",
+    svgKey: "drinkCan",
+    shapes: [],
+    description: "시원하고 톡 쏘는 탄산음료가 담긴 알루미늄 캔이에요.",
+    variants: [
+      {
+        colorId: "natural", // 클래식하고 청량한 레드 캔 본래의 모습
+        primary: "#EF4444",
+        secondary: "#D5DCE3",
+        accent: "#FFFFFF",
+      },
+      {
+        colorId: "blue", // 시원한 소다맛/사이다 블루 캔 테마
+        primary: "#3B82F6",
+        secondary: "#D5DCE3",
+        accent: "#FFFFFF",
+      },
+      {
+        colorId: "green", // 상큼한 라임/그린 소다 캔 테마
+        primary: "#10B981",
+        secondary: "#D5DCE3",
+        accent: "#FFFFFF",
+      },
+      {
+        colorId: "orange", // 상큼달콤한 오렌지 탄산 캔 테마
+        primary: "#F97316",
+        secondary: "#D5DCE3",
+        accent: "#FFFFFF",
+      },
+    ],
+  },
+  {
+    id: "juice",
+    name: "주스 잔",
+    topCategory: "food",
+    subCategory: "drink",
+    svgKey: "juice",
+    shapes: [],
+    description: "상큼하고 시원한 과일 주스가 가득 담긴 유리잔이에요.",
+    variants: [
+      {
+        colorId: "natural", // 상큼하고 달콤한 오렌지 주스 본래의 모습
+        primary: "#FDD166",
+        secondary: "#FFFFFF",
+        accent: "#E58B27",
+      },
+      {
+        colorId: "orange", // 상큼하고 달콤한 오렌지 주스 본래의 모습
+        primary: "#FDD166",
+        secondary: "#FFFFFF",
+        accent: "#E58B27",
+      },
+      {
+        colorId: "pink", // 달콤새콤한 딸기 주스 테마
+        primary: "#F48FB1",
+        secondary: "#FFFFFF",
+        accent: "#C2185B",
+      },
+      {
+        colorId: "purple", // 진하고 향긋한 포도 주스 테마
+        primary: "#CE93D8",
+        secondary: "#FFFFFF",
+        accent: "#7B1FA2",
+      },
+      {
+        colorId: "green", // 싱그러운 사과 주스 테마
+        primary: "#C5E1A5",
+        secondary: "#FFFFFF",
+        accent: "#689F38",
+      },
+    ],
+  },
+
+  {
+    id: "waterBottle",
+    name: "물병",
+    topCategory: "food",
+    subCategory: "drink",
+    svgKey: "waterBottle",
+    shapes: [],
+    description: "목이 마를 때 시원한 물을 마실 수 있는 텀블러 물병이에요.",
+    variants: [
+      {
+        colorId: "natural", // 산뜻하고 청량한 물빛 블루 테마 본래의 모습
+        primary: "#BDE3F8",
+        secondary: "#78909C",
+        accent: "#FFFFFF",
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크빛 물병 테마
+        primary: "#F48FB1",
+        secondary: "#EC407A",
+        accent: "#FFFFFF",
+      },
+      {
+        colorId: "green", // 싱그러운 민트/그린 테마
+        primary: "#A7FFEB",
+        secondary: "#00BFA5",
+        accent: "#FFFFFF",
+      },
+      {
+        colorId: "yellow", // 밝고 화사한 노란빛 물병 테마
+        primary: "#FFF59D",
+        secondary: "#FBC02D",
+        accent: "#FFFFFF",
+      },
+    ],
+  },
+  {
+    id: "rainbow",
+    name: "무지개",
+    topCategory: "nature",
+    subCategory: "sky",
+    svgKey: "rainbow",
+    shapes: [],
+    description: "비가 그친 뒤 하늘에 예쁘게 떠오르는 알록달록한 무지개예요.",
+    variants: [
+      {
+        colorId: "natural", // 알록달록한 무지개 본래의 색상과 포근한 구름 테마
+        primary: "#E1F5FE", // 구름 색상
+        secondary: "#E53935", // 무지개 포인트 색상
+        accent: "#212121", // 외곽선 색상
+      },
+    ],
+  },
+  {
+    id: "flower1",
+    name: "꽃",
+    topCategory: "nature",
+    subCategory: "plant",
+    svgKey: "flower1",
+    shapes: [],
+    description: "알록달록 예쁘고 향기로운 꽃이에요.",
+    variants: [
+      {
+        colorId: "natural", // 따뜻하고 화사한 주황빛 테라코타 꽃 본래의 모습
+        primary: "#D85A38",
+        secondary: "#4A7C59",
+        accent: "#FFF176",
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크빛 꽃 테마
+        primary: "#F48FB1",
+        secondary: "#4A7C59",
+        accent: "#FFF59D",
+      },
+      {
+        colorId: "yellow", // 싱그러운 노란빛 꽃 테마
+        primary: "#FFD54F",
+        secondary: "#4A7C59",
+        accent: "#FF7043",
+      },
+      {
+        colorId: "purple", // 신비롭고 아기자기한 보라빛 꽃 테마
+        primary: "#CE93D8",
+        secondary: "#4A7C59",
+        accent: "#FFF176",
+      },
+    ],
+  },
+  {
+    id: "recorder",
+    name: "리코더",
+    topCategory: "living",
+    subCategory: "musical_instrument",
+    svgKey: "recorder",
+    shapes: [],
+    description: "학교 음악 시간에 즐겨 연주하는 맑은 소리의 리코더예요.",
+    variants: [
+      {
+        colorId: "natural", // 아이보리/베이지 브라운 바디 본래의 모습
+        primary: "#F5F5F5",
+        secondary: "#424242",
+        accent: "#FFFFFF",
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크빛 리코더 테마
+        primary: "#F48FB1",
+        secondary: "#880E4F",
+        accent: "#FCE4EC",
+      },
+      {
+        colorId: "blue", // 시원하고 청량한 블루 계열 리코더 테마
+        primary: "#90CAF9",
+        secondary: "#0D47A1",
+        accent: "#E3F2FD",
+      },
+      {
+        colorId: "purple", // 신비롭고 아기자기한 보라빛 리코더 테마
+        primary: "#CE93D8",
+        secondary: "#4A148C",
+        accent: "#F3E5F5",
+      },
+    ],
+  },
+  {
+    id: "maracas",
+    name: "마라카스",
+    topCategory: "living",
+    subCategory: "musical_instrument",
+    svgKey: "maracas",
+    shapes: [],
+    description: "흔들면 찰랑찰랑 신나는 소리가 나는 마라카스예요.",
+    variants: [
+      {
+        colorId: "natural", // 알록달록 자연스러운 헤드 및 우드 핸들 본래의 모습
+        primary: "#FFB74D",
+        secondary: "#8D6E63",
+        accent: "#424242",
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크빛 마라카스 테마
+        primary: "#F48FB1",
+        secondary: "#EC407A",
+        accent: "#880E4F",
+      },
+      {
+        colorId: "blue", // 시원하고 청량한 블루 계열 마라카스 테마
+        primary: "#90CAF9",
+        secondary: "#42A5F5",
+        accent: "#0D47A1",
+      },
+      {
+        colorId: "purple", // 신비롭고 아기자기한 보라빛 마라카스 테마
+        primary: "#CE93D8",
+        secondary: "#8E24AA",
+        accent: "#4A148C",
+      },
+    ],
+  },
+  {
+    id: "trumpet",
+    name: "트럼펫",
+    topCategory: "living",
+    subCategory: "musical_instrument",
+    svgKey: "trumpet",
+    shapes: [],
+    description: "화려하고 우렁찬 소리를 뽐내는 반짝이는 트럼펫이에요.",
+    variants: [
+      {
+        colorId: "natural", // 황동빛 골드 브라스 본래의 모습
+        primary: "#FFD54F",
+        secondary: "#FFA000",
+        accent: "#424242",
+      },
+      {
+        colorId: "white", // 세련되고 모던한 실버 브라스 테마
+        primary: "#B8C0C8",
+        secondary: "#90A4AE",
+        accent: "#263238",
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크빛 트럼펫 테마
+        primary: "#F48FB1",
+        secondary: "#EC407A",
+        accent: "#880E4F",
+      },
+      {
+        colorId: "blue", // 시원하고 청량한 블루 계열 트럼펫 테마
+        primary: "#90CAF9",
+        secondary: "#42A5F5",
+        accent: "#0D47A1",
+      },
+    ],
+  },
+  {
+    id: "harp",
+    name: "하프",
+    topCategory: "living",
+    subCategory: "musical_instrument",
+    svgKey: "harp",
+    shapes: [],
+    description: "우아하고 아름다운 선율을 연주하는 클래식한 하프예요.",
+    variants: [
+      {
+        colorId: "natural", // 클래식한 우드 브라운 프레임 본래의 모습
+        primary: "#8D6E63",
+        secondary: "#FFF8E1",
+        accent: "#424242",
+      },
+      {
+        colorId: "yellow", // 찬란하고 고급스러운 골드 브라스 하프 테마
+        primary: "#FFD54F",
+        secondary: "#FFFDE7",
+        accent: "#424242",
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크빛 하프 테마
+        primary: "#F48FB1",
+        secondary: "#FCE4EC",
+        accent: "#880E4F",
+      },
+      {
+        colorId: "blue", // 시원하고 청량한 블루 계열 하프 테마
+        primary: "#90CAF9",
+        secondary: "#E3F2FD",
+        accent: "#0D47A1",
+      },
+    ],
+  },
+  {
+    id: "guitar",
+    name: "기타",
+    topCategory: "living",
+    subCategory: "musical_instrument",
+    svgKey: "guitar",
+    shapes: [],
+    description: "아름다운 선율과 리듬을 연주하는 통기타예요.",
+    variants: [
+      {
+        colorId: "natural", // 클래식한 우드 브라운 바디 본래의 모습
+        primary: "#8D6E63",
+        secondary: "#5D4037",
+        accent: "#424242",
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크빛 기타 테마
+        primary: "#F48FB1",
+        secondary: "#C2185B",
+        accent: "#880E4F",
+      },
+      {
+        colorId: "blue", // 시원하고 청량한 블루 계열 기타 테마
+        primary: "#90CAF9",
+        secondary: "#1976D2",
+        accent: "#0D47A1",
+      },
+      {
+        colorId: "purple", // 신비롭고 아기자기한 보라빛 기타 테마
+        primary: "#CE93D8",
+        secondary: "#8E24AA",
+        accent: "#4A148C",
+      },
+    ],
+  },
+  {
+    id: "drumSet",
+    name: "드럼 세트",
+    topCategory: "living",
+    subCategory: "musical_instrument",
+    svgKey: "drumSet",
+    shapes: [],
+    description: "다양한 북과 심벌즈로 신나는 리듬을 연주하는 드럼 세트예요.",
+    variants: [
+      {
+        colorId: "natural", // 모던한 메탈 실버 바디 + 크림빛 북면 본래의 모습
+        primary: "#B8C0C8",
+        secondary: "#F4D6A0",
+        accent: "#424242",
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크빛 드럼 세트 테마
+        primary: "#F48FB1",
+        secondary: "#FCE4EC",
+        accent: "#880E4F",
+      },
+      {
+        colorId: "blue", // 시원하고 청량한 블루 계열 드럼 세트 테마
+        primary: "#90CAF9",
+        secondary: "#E3F2FD",
+        accent: "#0D47A1",
+      },
+      {
+        colorId: "purple", // 신비롭고 아기자기한 보라빛 드럼 세트 테마
+        primary: "#CE93D8",
+        secondary: "#F3E5F5",
+        accent: "#4A148C",
+      },
+    ],
+  },
+  {
+    id: "bongo",
+    name: "봉고",
+    topCategory: "living",
+    subCategory: "musical_instrument",
+    svgKey: "bongo",
+    shapes: [],
+    description: "두 개의 북을 손으로 쳐서 신나는 리듬을 연주하는 봉고예요.",
+    variants: [
+      {
+        colorId: "natural", // 따뜻한 우드 브라운 바디 및 가죽 북면 본래의 모습
+        primary: "#8D6E63",
+        secondary: "#F4D6A0",
+        accent: "#424242",
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크빛 봉고 테마
+        primary: "#F48FB1",
+        secondary: "#FCE4EC",
+        accent: "#880E4F",
+      },
+      {
+        colorId: "blue", // 시원하고 청량한 블루 계열 봉고 테마
+        primary: "#90CAF9",
+        secondary: "#E3F2FD",
+        accent: "#0D47A1",
+      },
+      {
+        colorId: "purple", // 신비롭고 아기자기한 보라빛 봉고 테마
+        primary: "#CE93D8",
+        secondary: "#F3E5F5",
+        accent: "#4A148C",
+      },
+    ],
+  },
+  {
+    id: "keyboard",
+    name: "키보드",
+    topCategory: "living",
+    subCategory: "musical_instrument",
+    svgKey: "keyboard",
+    shapes: [],
+    description: "다양한 리듬과 소리를 연주하는 전자 키보드예요.",
+    variants: [
+      {
+        colorId: "natural", // 모던한 실버 그레이 바디 + 화이트 건반 본래의 모습
+        primary: "#5f93c7",
+        secondary: "#FFFFFF",
+        accent: "#424242",
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크빛 키보드 테마
+        primary: "#F48FB1",
+        secondary: "#FCE4EC",
+        accent: "#880E4F",
+      },
+      {
+        colorId: "blue", // 시원하고 청량한 블루 계열 키보드 테마
+        primary: "#90CAF9",
+        secondary: "#E3F2FD",
+        accent: "#0D47A1",
+      },
+      {
+        colorId: "purple", // 신비롭고 아기자기한 보라빛 키보드 테마
+        primary: "#CE93D8",
+        secondary: "#F3E5F5",
+        accent: "#4A148C",
+      },
+    ],
+  },
+  {
+    id: "violin",
+    name: "바이올린",
+    topCategory: "living",
+    subCategory: "musical_instrument",
+    svgKey: "violin",
+    shapes: [],
+    description: "아름다운 선율을 연주하는 클래식한 바이올린이에요.",
+    variants: [
+      {
+        colorId: "natural", // 클래식한 우드 브라운 바디 본래의 모습
+        primary: "#8D6E63",
+        secondary: "#5D4037",
+        accent: "#212121",
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크빛 바이올린 테마
+        primary: "#F48FB1",
+        secondary: "#C2185B",
+        accent: "#880E4F",
+      },
+      {
+        colorId: "blue", // 청량하고 시원한 블루 계열 바이올린 테마
+        primary: "#90CAF9",
+        secondary: "#1976D2",
+        accent: "#0D47A1",
+      },
+      {
+        colorId: "purple", // 신비롭고 우아한 보라빛 바이올린 테마
+        primary: "#CE93D8",
+        secondary: "#8E24AA",
+        accent: "#4A148C",
+      },
+    ],
+  },
+  {
+    id: "piano",
+    name: "피아노",
+    topCategory: "living", // 혹은 해당 카테고리에 맞게 설정
+    subCategory: "musical_instrument",
+    svgKey: "piano",
+    shapes: [],
+    description: "아름다운 선율을 연주할 수 있는 멋진 피아노예요.",
+    variants: [
+      {
+        colorId: "natural", // 은은한 실버 그레이 바디 + 화이트 건반 본래의 모습
+        primary: "#B8C0C8",
+        secondary: "#FFFFFF",
+        accent: "#333333",
+      },
+      {
+        colorId: "brown", // 클래식한 우드/브라운 계열 피아노 테마
+        primary: "#8D6E63",
+        secondary: "#EFEBE9",
+        accent: "#3E2723",
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크빛 피아노 테마
+        primary: "#F48FB1",
+        secondary: "#FCE4EC",
+        accent: "#880E4F",
+      },
+      {
+        colorId: "blue", // 시원하고 청량한 블루 계열 피아노 테마
+        primary: "#90CAF9",
+        secondary: "#E3F2FD",
+        accent: "#0D47A1",
+      },
+    ],
+  },
+  {
+    id: "tree",
+    name: "나무",
+    topCategory: "nature",
+    subCategory: "plant",
+    svgKey: "tree",
+    shapes: [],
+    description: "초록빛 잎이 무성하게 자란 커다란 나무예요.",
+    variants: [
+      {
+        colorId: "natural", // 초록 잎 + 주황/갈색 기둥 본래의 자연스러운 모습[cite: 4]
+        primary: "#9CCC65",
+        secondary: "#FFA726",
+        accent: "#FFFFFF",
+      },
+      {
+        colorId: "green", // 싱그러운 올리브/진초록 계열 테마
+        primary: "#66BB6A",
+        secondary: "#388E3C",
+        accent: "#C8E6C9",
+      },
+      {
+        colorId: "yellow", // 노란빛 가을 단풍 테마
+        primary: "#FFEE58",
+        secondary: "#FBC02D",
+        accent: "#FFFDE7",
+      },
+      {
+        colorId: "pink", // 벚꽃이 피어난 핑크빛 나무 테마
+        primary: "#F48FB1",
+        secondary: "#E91E63",
+        accent: "#FCE4EC",
+      },
+    ],
+  },
+  {
+    id: "crescentMoon",
+    name: "초승달",
+    topCategory: "nature",
+    subCategory: "sky",
+    svgKey: "crescentMoon",
+    shapes: [],
+    description: "밤하늘에 예쁘게 떠 있는 노란 초승달이에요.",
+    variants: [
+      {
+        colorId: "natural", // 노란 빛의 본래 자연스러운 초승달
+        primary: "#FFEE58",
+        secondary: "#FFFDE7",
+        accent: "#FF8A80",
+      },
+      {
+        colorId: "yellow", // 선명하고 화사한 골드 옐로 테마
+        primary: "#FFD54F",
+        secondary: "#FFF9C4",
+        accent: "#FF7043",
+      },
+      {
+        colorId: "blue", // 밤하늘빛 블루/실버 톤 초승달 테마
+        primary: "#90CAF9",
+        secondary: "#E3F2FD",
+        accent: "#5C6BC0",
+      },
+      {
+        colorId: "purple", // 신비로운 보라빛 몽환 테마
+        primary: "#CE93D8",
+        secondary: "#F3E5F5",
+        accent: "#AB47BC",
+      },
+    ],
+  },
+  {
+    id: "cloud",
+    name: "구름",
+    topCategory: "nature",
+    subCategory: "sky",
+    svgKey: "cloud",
+    shapes: [],
+    description: "하늘에서 몽글몽글 피어나는 하얀 구름이에요.",
+    variants: [
+      {
+        colorId: "natural", // 기본 하늘빛 톤 구름
+        primary: "#E0F7FA",
+        secondary: "#FFFFFF",
+        accent: "#B2EBF2",
+      },
+      {
+        colorId: "white", // 순백색 솜사탕 같은 구름
+        primary: "#FFFFFF",
+        secondary: "#F5F5F5",
+        accent: "#E0E0E0",
+      },
+      {
+        colorId: "blue", // 푸른빛 하늘 구름 계열
+        primary: "#90CAF9",
+        secondary: "#E3F2FD",
+        accent: "#42A5F5",
+      },
+      {
+        colorId: "purple", // 노을빛이 감도는 보라/핑크 계열 구름
+        primary: "#CE93D8",
+        secondary: "#F3E5F5",
+        accent: "#AB47BC",
+      },
+    ],
+  },
+  {
+    id: "cactus",
+    name: "선인장",
+    topCategory: "nature",
+    subCategory: "plant",
+    svgKey: "cactus",
+    shapes: [],
+    description: "귀여운 얼굴을 하고 있는 방울선인장이에요.",
+    variants: [
+      {
+        colorId: "natural", // 본래의 초록 몸통 + 갈색 화분
+        primary: "#66BB6A",
+        secondary: "#8D6E63",
+        accent: "#E91E63",
+      },
+      {
+        colorId: "green", // 올리브/그린 계열 테마
+        primary: "#81C784",
+        secondary: "#558B2F",
+        accent: "#2E7D32",
+      },
+      {
+        colorId: "yellow", // 노랑 계열 테마 (몸통, 화분, 포인트 모두 골드/노랑 톤)
+        primary: "#FFEE58",
+        secondary: "#FBC02D",
+        accent: "#F57F17",
+      },
+      {
+        colorId: "blue", // 블루/스카이 계열 테마
+        primary: "#64B5F6",
+        secondary: "#1E88E5",
+        accent: "#1565C0",
+      },
+      {
+        colorId: "purple", // 보라 계열 테마
+        primary: "#BA68C8",
+        secondary: "#8E24AA",
+        accent: "#6A1B9A",
+      },
+    ],
+  },
+  {
+    id: "flower",
+    name: "꽃",
+    topCategory: "nature",
+    subCategory: "plant",
+    svgKey: "flower",
+    shapes: [],
+    description: "향기로운 예쁜 꽃이 아름답게 피어있어요.",
+    variants: [
+      {
+        colorId: "natural", // 보라빛 예쁜 꽃 본래의 모습 (보라 꽃잎 + 노란 중앙 포인트)
+        primary: "#AB47BC",
+        secondary: "#FFCA28",
+        accent: "#F57F17",
+      },
+      {
+        colorId: "pink", // 분홍 계열 테마 (꽃잎, 중앙, 포인트 모두 핑크 톤)
+        primary: "#EC407A",
+        secondary: "#D81B60",
+        accent: "#AD1457",
+      },
+      {
+        colorId: "red", // 레드 계열 테마 (꽃잎, 중앙, 포인트 모두 레드 톤)
+        primary: "#E53935",
+        secondary: "#C62828",
+        accent: "#B71C1C",
+      },
+      {
+        colorId: "yellow", // 노랑 계열 테마 (꽃잎, 중앙, 포인트 모두 노랑 톤)
+        primary: "#FFEE58",
+        secondary: "#FBC02D",
+        accent: "#F57F17",
+      },
+      {
+        colorId: "blue", // 블루 계열 테마 (꽃잎, 중앙, 포인트 모두 블루 톤)
+        primary: "#42A5F5",
+        secondary: "#1E88E5",
+        accent: "#1565C0",
+      },
+    ],
+  },
+  {
+    id: "sunflower",
+    name: "해바라기",
+    topCategory: "nature",
+    subCategory: "plant",
+    svgKey: "sunflower",
+    shapes: [],
+    description: "태양을 바라보며 활짝 피어나는 노란 해바라기에요.",
+    variants: [
+      {
+        colorId: "natural", // 해바라기 본래의 자연스러운 모습 (노란 꽃잎 + 갈색 씨앗 + 초록 줄기)
+        primary: "#FDD835",
+        secondary: "#4E342E",
+        accent: "#2E7D32",
+      },
+      {
+        colorId: "yellow", // 노랑 계열 테마 (꽃잎, 씨앗, 포인트 모두 노랑/골드 톤)
+        primary: "#FFEE58",
+        secondary: "#FBC02D",
+        accent: "#FDD835",
+      },
+      {
+        colorId: "orange", // 주황 계열 테마 (꽃잎, 씨앗, 포인트 모두 주황/브라운 톤)
+        primary: "#FFA726",
+        secondary: "#FB8C00",
+        accent: "#E65100",
+      },
+    ],
+  },
+  {
+    id: "cottonCandy",
+    name: "솜사탕",
+    topCategory: "food",
+    subCategory: "snack",
+    svgKey: "cottonCandy",
+    shapes: [],
+    description: "구름처럼 폭신폭신하고 달콤한 솜사탕이에요.",
+    variants: [
+      {
+        colorId: "natural", // 분홍빛 솜사탕 (대표 기본)
+        primary: "#F48FB1",
+        secondary: "#D7CCC8",
+        accent: "#AD1457",
+      },
+      {
+        colorId: "blue", // 하늘색 솜사탕 계열
+        primary: "#64B5F6",
+        secondary: "#D7CCC8",
+        accent: "#1565C0",
+      },
+      {
+        colorId: "yellow", // 쨍한 노란색 솜사탕 계열
+        primary: "#FFEE58",
+        secondary: "#D7CCC8",
+        accent: "#FBC02D",
+      },
+      {
+        colorId: "green", // 민트/연두색 솜사탕 계열
+        primary: "#81C784",
+        secondary: "#D7CCC8",
+        accent: "#2E7D32",
+      },
+      {
+        colorId: "purple", // 보라색 솜사탕 계열
+        primary: "#BA68C8",
+        secondary: "#D7CCC8",
+        accent: "#7B1FA2",
+      },
+    ],
+  },
+  {
+    id: "cupcake",
+    name: "컵케이크",
+    topCategory: "food",
+    subCategory: "snack",
+    svgKey: "cupcake",
+    shapes: [],
+    description: "달콤한 크림과 상큼한 토핑이 올라간 예쁜 컵케이크예요.",
+    variants: [
+      {
+        colorId: "natural", // 딸기 크림 계열
+        primary: "#F8BBD0",
+        secondary: "#8D6E63",
+        accent: "#C2185B",
+      },
+      {
+        colorId: "brown", // 초코 크림 계열
+        primary: "#8D6E63",
+        secondary: "#5D4037",
+        accent: "#3E2723",
+      },
+      {
+        colorId: "yellow", // 선명하고 쨍한 순수 노랑 크림 계열
+        primary: "#FFEE58",
+        secondary: "#FFD54F",
+        accent: "#FBC02D",
+      },
+      {
+        colorId: "green", // 말차 크림 계열
+        primary: "#C8E6C9",
+        secondary: "#558B2F",
+        accent: "#1B5E20",
+      },
+    ],
+  },
+  {
+    id: "sweetPotato",
+    name: "고구마",
+    topCategory: "food",
+    subCategory: "vegetable",
+    svgKey: "sweetPotato",
+    shapes: [],
+    description: "달콤하고 맛있는 영양 만점 군고구마예요.",
+    variants: [
+      {
+        colorId: "natural", // 고구마 본래의 자연스러운 자주빛 및 속살 색상
+        primary: "#7B2452",
+        secondary: "#FFCA28",
+        accent: "#4A148C",
+      },
+    ],
+  },
+  {
+    id: "blueberry",
+    name: "블루베리",
+    topCategory: "food",
+    subCategory: "fruit",
+    svgKey: "blueberry",
+    shapes: ["circle"],
+    description: "몸에 좋은 영양이 가득한 블루베리에요.",
+    variants: [
+      {
+        colorId: "natural", // 블루베리 본래의 진청색 자연스러운 모습
+        primary: "#3F51B5",
+        secondary: "#1A237E",
+        accent: "#5C6BC0",
+      },
+      {
+        colorId: "blue", // 블루베리 본래의 진청색 자연스러운 모습
+        primary: "#3F51B5",
+        secondary: "#1A237E",
+        accent: "#5C6BC0",
+      },
+    ],
+  },
+  {
+    id: "cherry",
+    name: "체리",
+    topCategory: "food",
+    subCategory: "fruit",
+    svgKey: "cherry",
+    shapes: ["circle"],
+    description: "새콤달콤 알콩달콩 매달려 있는 빨간 체리에요.",
+    variants: [
+      {
+        colorId: "natural", // 체리 본래의 붉은빛 자연스러운 모습
+        primary: "#E53935",
+        secondary: "#2E7D32",
+        accent: "#43A047",
+      },
+    ],
+  },
+  {
+    id: "fish",
+    name: "물고기",
+    topCategory: "animal",
+    subCategory: "sea_animal",
+    svgKey: "fish",
+    shapes: [],
+    description: "물속을 살랑살랑 헤엄치는 예쁜 물고기예요.",
+    variants: [
+      {
+        colorId: "natural", // 물고기 대표 주황색 계열 (흰동가리/니모)
+        primary: "#FF7043",
+        secondary: "#FFAB91",
+        accent: "#D84315",
+      },
+      {
+        colorId: "orange",
+        primary: "#FB8C00",
+        secondary: "#FFE0B2",
+        accent: "#EF6C00",
+      },
+      {
+        colorId: "blue", // 열대어 계열
+        primary: "#42A5F5",
+        secondary: "#BBDEFB",
+        accent: "#1565C0",
+      },
+      {
+        colorId: "yellow", // 금붕어/노랑열대어 계열
+        primary: "#FDD835",
+        secondary: "#FFF9C4",
+        accent: "#FBC02D",
+      },
+    ],
+  },
+  {
+    id: "koala",
+    name: "코알라",
+    topCategory: "animal",
+    subCategory: "land_animal",
+    svgKey: "koala",
+    shapes: [],
+    description: "동글동글한 귀와 커다란 코를 가진 귀여운 코알라예요.",
+    variants: [
+      {
+        colorId: "natural", // 코알라 본래의 회색빛 자연스러운 모습
+        primary: "#B0BEC5",
+        secondary: "#78909C",
+        accent: "#37474F",
+      },
+    ],
+  },
+  {
+    id: "fox",
+    name: "여우",
+    topCategory: "animal",
+    subCategory: "land_animal",
+    svgKey: "fox",
+    shapes: [],
+    description: "뾰족한 귀와 날렵한 주둥이를 가진 영리한 여우예요.",
+    variants: [
+      {
+        colorId: "natural", // 여우 본래의 주황빛 자연스러운 모습
+        primary: "#FF7043",
+        secondary: "#FFFFFF",
+        accent: "#D84315",
+      },
+      {
+        colorId: "brown", // 붉은 갈색 늑대/여우 계열
+        primary: "#8D6E63",
+        secondary: "#b98b75",
+        accent: "#4E342E",
+      },
+    ],
+  },
+  {
+    id: "snail",
+    name: "달팽이",
+    topCategory: "animal",
+    subCategory: "insect",
+    svgKey: "snail",
+    shapes: [],
+    description: "동글동글한 집을 짊어지고 영차영차 기어가는 달팽이에요.",
+    variants: [
+      {
+        colorId: "natural", // 달팽이 본래의 자연스러운 갈색 계열 모습
+        primary: "#A1887F",
+        secondary: "#D7CCC8",
+        accent: "#4E342E",
+      },
+    ],
+  },
+  {
+    id: "bee",
+    name: "벌",
+    topCategory: "animal",
+    subCategory: "insect",
+    svgKey: "bee",
+    shapes: [],
+    description: "노란색과 검은색 줄무늬가 매력적인 윙윙 꿀벌이에요.",
+    variants: [
+      {
+        colorId: "natural", // 벌 본래의 노란 줄무늬 모습
+        primary: "#FFEB3B",
+        secondary: "#E0F7FA",
+        accent: "#212121",
+      },
+    ],
+  },
+  {
+    id: "ladybug",
+    name: "무당벌레",
+    topCategory: "animal",
+    subCategory: "insect",
+    svgKey: "ladybug",
+    shapes: [],
+    description: "빨간 등딱지에 까만 점이 콕콕 박혀 있는 귀여운 무당벌레예요.",
+    variants: [
+      {
+        colorId: "natural", // 무당벌레 본래의 자연스러운 모습 (빨간 등딱지 + 검은 머리/점)
+        primary: "#E53935",
+        secondary: "#37474F",
+        accent: "#212121",
+      },
+    ],
+  },
+  {
+    id: "butterfly",
+    name: "나비",
+    topCategory: "animal", // 또는 알맞은 상위 카테고리
+    subCategory: "insect",
+    svgKey: "butterfly",
+    shapes: [],
+    description: "하늘하늘 날아다니며 예쁜 꽃을 찾아가는 알록달록 나비예요.",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#FAF4E8",
+        secondary: "#D6C7A8",
+        accent: "#8D7B68",
+      },
+      {
+        colorId: "brown",
+        primary: "#D7CCC8",
+        secondary: "#8D6E63",
+        accent: "#4E342E",
+      },
+      {
+        colorId: "red",
+        primary: "#FFCDD2",
+        secondary: "#EF5350",
+        accent: "#B71C1C",
+      },
+      {
+        colorId: "orange",
+        primary: "#FFE0B2",
+        secondary: "#FB8C00",
+        accent: "#E65100",
+      },
+      {
+        colorId: "yellow",
+        primary: "#FFF59D",
+        secondary: "#FBC02D",
+        accent: "#F57F17",
+      },
+      {
+        colorId: "green",
+        primary: "#C8E6C9",
+        secondary: "#66BB6A",
+        accent: "#2E7D32",
+      },
+      {
+        colorId: "blue",
+        primary: "#BBDEFB",
+        secondary: "#42A5F5",
+        accent: "#1565C0",
+      },
+      {
+        colorId: "purple",
+        primary: "#E1BEE7",
+        secondary: "#AB47BC",
+        accent: "#6A1B9A",
+      },
+      {
+        colorId: "black",
+        primary: "#757575",
+        secondary: "#424242",
+        accent: "#212121",
+      },
+      {
+        colorId: "white",
+        primary: "#FFFFFF",
+        secondary: "#ECEFF1",
+        accent: "#90A4AE",
+      },
+    ],
+  },
+  {
+    id: "cruise",
+    name: "유람선",
+    topCategory: "vehicle",
+    subCategory: "water_vehicle",
+    svgKey: "cruise",
+    shapes: [],
+    description:
+      "푸른 바다를 시원하게 가로지르며 항해하는 커다란 유람선이에요.",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#FAF8F2",
+        secondary: "#EFECE6",
+        accent: "#A7A19A",
+      },
+      {
+        colorId: "brown",
+        primary: "#795548",
+        secondary: "#D7CCC8",
+        accent: "#4E342E",
+      },
+      {
+        colorId: "red",
+        primary: "#FFCDD2",
+        secondary: "#E53935",
+        accent: "#B71C1C",
+      },
+      {
+        colorId: "orange",
+        primary: "#FFE0B2",
+        secondary: "#FB8C00",
+        accent: "#EF6C00",
+      },
+      {
+        colorId: "yellow",
+        primary: "#FFFDE7",
+        secondary: "#FDD835",
+        accent: "#FBC02D",
+      },
+      {
+        colorId: "green",
+        primary: "#C8E6C9",
+        secondary: "#4CAF50",
+        accent: "#2E7D32",
+      },
+      {
+        colorId: "blue", // 유람선 대표 톤
+        primary: "#E3F2FD",
+        secondary: "#29B6F6",
+        accent: "#1565C0",
+      },
+      {
+        colorId: "purple",
+        primary: "#E1BEE7",
+        secondary: "#9C27B0",
+        accent: "#6A1B9A",
+      },
+      {
+        colorId: "black",
+        primary: "#424242",
+        secondary: "#212121",
+        accent: "#000000",
+      },
+      {
+        colorId: "white",
+        primary: "#FFFFFF",
+        secondary: "#CFD8DC",
+        accent: "#BDBDBD",
+      },
+    ],
+  },
+  {
+    id: "drone",
+    name: "드론",
+    topCategory: "vehicle",
+    subCategory: "air_vehicle",
+    svgKey: "drone",
+    shapes: [],
+    description: "위잉위잉! 하늘 높이 날아올라 멋진 영상을 찍는 드론이에요.",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#FAF8F2",
+        secondary: "#EFECE6",
+        accent: "#A7A19A",
+      },
+      {
+        colorId: "brown",
+        primary: "#795548",
+        secondary: "#D7CCC8",
+        accent: "#4E342E",
+      },
+      {
+        colorId: "red",
+        primary: "#F44336",
+        secondary: "#FFCDD2",
+        accent: "#B71C1C",
+      },
+      {
+        colorId: "orange",
+        primary: "#FB8C00",
+        secondary: "#FFE0B2",
+        accent: "#EF6C00",
+      },
+      {
+        colorId: "yellow",
+        primary: "#FDD835",
+        secondary: "#FFFDE7",
+        accent: "#FBC02D",
+      },
+      {
+        colorId: "green",
+        primary: "#4CAF50",
+        secondary: "#C8E6C9",
+        accent: "#2E7D32",
+      },
+      {
+        colorId: "blue", // 드론 대표 톤
+        primary: "#42A5F5",
+        secondary: "#E3F2FD",
+        accent: "#1565C0",
+      },
+      {
+        colorId: "purple",
+        primary: "#9C27B0",
+        secondary: "#E1BEE7",
+        accent: "#6A1B9A",
+      },
+      {
+        colorId: "black",
+        primary: "#212121",
+        secondary: "#424242",
+        accent: "#000000",
+      },
+      {
+        colorId: "white",
+        primary: "#FFFFFF",
+        secondary: "#F5F5F5",
+        accent: "#BDBDBD",
+      },
+    ],
+  },
+  {
+    id: "ambulance",
+    name: "구급차",
+    topCategory: "vehicle",
+    subCategory: "road_vehicle",
+    svgKey: "ambulance",
+    shapes: [],
+    description: "삐뽀삐뽀! 아픈 사람을 태우고 빠르게 달려가는 구급차예요.",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#FAF8F2",
+        secondary: "#EFECE6",
+        accent: "#A7A19A",
+      },
+      {
+        colorId: "brown",
+        primary: "#795548",
+        secondary: "#D7CCC8",
+        accent: "#4E342E",
+      },
+      {
+        colorId: "red",
+        primary: "#E53935",
+        secondary: "#FFCDD2",
+        accent: "#B71C1C",
+      },
+      {
+        colorId: "orange",
+        primary: "#FB8C00",
+        secondary: "#FFE0B2",
+        accent: "#EF6C00",
+      },
+      {
+        colorId: "yellow",
+        primary: "#FDD835",
+        secondary: "#FFFDE7",
+        accent: "#FBC02D",
+      },
+      {
+        colorId: "green",
+        primary: "#4CAF50",
+        secondary: "#C8E6C9",
+        accent: "#2E7D32",
+      },
+      {
+        colorId: "blue",
+        primary: "#42A5F5",
+        secondary: "#E3F2FD",
+        accent: "#1565C0",
+      },
+      {
+        colorId: "purple",
+        primary: "#9C27B0",
+        secondary: "#E1BEE7",
+        accent: "#6A1B9A",
+      },
+      {
+        colorId: "black",
+        primary: "#212121",
+        secondary: "#424242",
+        accent: "#000000",
+      },
+      {
+        colorId: "white", // 구급차 기본 대표 톤
+        primary: "#FFFFFF",
+        secondary: "#FFCDD2",
+        accent: "#212121",
+      },
+    ],
+  },
+  {
+    id: "fireTruck",
+    name: "소방차",
+    topCategory: "vehicle",
+    subCategory: "road_vehicle",
+    svgKey: "fireTruck",
+    shapes: [],
+    description: "애앵! 애앵! 불이 나면 달려가는 씩씩한 소방차에요.",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#E53935",
+        secondary: "#FFCDD2",
+        accent: "#B71C1C",
+      },
+      {
+        colorId: "brown",
+        primary: "#795548",
+        secondary: "#D7CCC8",
+        accent: "#4E342E",
+      },
+      {
+        colorId: "red", // 소방차 대표 컬러
+        primary: "#E53935",
+        secondary: "#FFCDD2",
+        accent: "#B71C1C",
+      },
+      {
+        colorId: "orange",
+        primary: "#FB8C00",
+        secondary: "#FFE0B2",
+        accent: "#EF6C00",
+      },
+      {
+        colorId: "yellow",
+        primary: "#FDD835",
+        secondary: "#FFFDE7",
+        accent: "#FBC02D",
+      },
+      {
+        colorId: "green",
+        primary: "#4CAF50",
+        secondary: "#C8E6C9",
+        accent: "#2E7D32",
+      },
+      {
+        colorId: "blue",
+        primary: "#42A5F5",
+        secondary: "#E3F2FD",
+        accent: "#1565C0",
+      },
+      {
+        colorId: "purple",
+        primary: "#9C27B0",
+        secondary: "#E1BEE7",
+        accent: "#6A1B9A",
+      },
+      {
+        colorId: "black",
+        primary: "#212121",
+        secondary: "#424242",
+        accent: "#000000",
+      },
+      {
+        colorId: "white",
+        primary: "#FAF8F2",
+        secondary: "#EFECE6",
+        accent: "#A7A19A",
+      },
+    ],
+  },
+  {
+    id: "scooter",
+    name: "킥보드",
+    topCategory: "vehicle",
+    subCategory: "road_vehicle",
+    svgKey: "scooter",
+    shapes: [],
+    description: "쌩쌩! 바람을 가르며 신나게 달려요. 안전하게 타볼까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#FAF8F2",
+        secondary: "#EFECE6",
+        accent: "#A7A19A",
+      },
+      {
+        colorId: "brown",
+        primary: "#795548",
+        secondary: "#D7CCC8",
+        accent: "#4E342E",
+      },
+      {
+        colorId: "red",
+        primary: "#F44336",
+        secondary: "#FFCDD2",
+        accent: "#B71C1C",
+      },
+      {
+        colorId: "orange",
+        primary: "#FB8C00",
+        secondary: "#FFE0B2",
+        accent: "#EF6C00",
+      },
+      {
+        colorId: "yellow",
+        primary: "#FDD835",
+        secondary: "#FFFDE7",
+        accent: "#FBC02D",
+      },
+      {
+        colorId: "green",
+        primary: "#4CAF50",
+        secondary: "#C8E6C9",
+        accent: "#2E7D32",
+      },
+      {
+        colorId: "blue",
+        primary: "#42A5F5",
+        secondary: "#E3F2FD",
+        accent: "#1565C0",
+      },
+      {
+        colorId: "purple",
+        primary: "#9C27B0",
+        secondary: "#E1BEE7",
+        accent: "#6A1B9A",
+      },
+      {
+        colorId: "black",
+        primary: "#212121",
+        secondary: "#424242",
+        accent: "#000000",
+      },
+      {
+        colorId: "white",
+        primary: "#FFFFFF",
+        secondary: "#F5F5F5",
+        accent: "#BDBDBD",
+      },
+    ],
+  },
+  {
+    id: "taxi",
+    name: "택시",
+    topCategory: "vehicle",
+    subCategory: "road_vehicle",
+    svgKey: "taxi",
+    shapes: [],
+    description: "빵빵! 손님을 태우고 안전하게 달리는 노란색 택시에요.",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#FAFAFA",
+        secondary: "#EEEEEE",
+        accent: "#212121",
+      },
+      {
+        colorId: "brown",
+        primary: "#795548",
+        secondary: "#D7CCC8",
+        accent: "#4E342E",
+      },
+      {
+        colorId: "red",
+        primary: "#F44336",
+        secondary: "#FFEBEE",
+        accent: "#B71C1C",
+      },
+      {
+        colorId: "orange",
+        primary: "#FB8C00",
+        secondary: "#FFE0B2",
+        accent: "#EF6C00",
+      },
+      {
+        colorId: "yellow", // 택시 대표 컬러
+        primary: "#FFC107",
+        secondary: "#FFECB3",
+        accent: "#FFA000",
+      },
+      {
+        colorId: "green",
+        primary: "#4CAF50",
+        secondary: "#81C784",
+        accent: "#2E7D32",
+      },
+      {
+        colorId: "blue",
+        primary: "#2196F3",
+        secondary: "#64B5F6",
+        accent: "#1565C0",
+      },
+      {
+        colorId: "purple",
+        primary: "#9C27B0",
+        secondary: "#BA68C8",
+        accent: "#6A1B9A",
+      },
+      {
+        colorId: "black",
+        primary: "#212121",
+        secondary: "#616161",
+        accent: "#000000",
+      },
+      {
+        colorId: "white",
+        primary: "#FFFFFF",
+        secondary: "#EEEEEE",
+        accent: "#9E9E9E",
+      },
+    ],
+  },
+  // 1. 운동화
+  {
+    id: "sneakers",
+    name: "운동화",
+    topCategory: "clothing",
+    subCategory: "shoes",
+    svgKey: "sneakers",
+    shapes: [],
+    description: "끈을 묶고 신는 운동화예요! 힘차게 달려 볼까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#70A8D9",
+        secondary: "#FFFFFF",
+        accent: "#315F91",
+      },
+      {
+        colorId: "red",
+        primary: "#E57373",
+        secondary: "#FFCDD2",
+        accent: "#B8323A",
+      },
+      {
+        colorId: "yellow",
+        primary: "#F2D36B",
+        secondary: "#FFF1B8",
+        accent: "#A88327",
+      },
+      {
+        colorId: "green",
+        primary: "#75A981",
+        secondary: "#CDE5D0",
+        accent: "#3B6B46",
+      },
+      {
+        colorId: "pink",
+        primary: "#F0A4BB",
+        secondary: "#FCE2EA",
+        accent: "#A94D6B",
+      },
+      {
+        colorId: "black",
+        primary: "#4A4A50",
+        secondary: "#D9D9DE",
+        accent: "#25252A",
+      },
+    ],
+  },
+
+  // 2. 구두
+  {
+    id: "dressShoes",
+    name: "구두",
+    topCategory: "clothing",
+    subCategory: "shoes",
+    svgKey: "dressShoes",
+    shapes: [],
+    description: "반짝반짝 멋지게 차려 신는 구두예요!",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#956C4F",
+        secondary: "#DCC1A6",
+        accent: "#563A2B",
+      },
+      {
+        colorId: "black",
+        primary: "#34343A",
+        secondary: "#777780",
+        accent: "#1D1D22",
+      },
+      {
+        colorId: "red",
+        primary: "#ee091f",
+        secondary: "#E9A8AE",
+        accent: "#81343D",
+      },
+      {
+        colorId: "white",
+        primary: "#FAF8F2",
+        secondary: "#FFFFFF",
+        accent: "#A7A19A",
+      },
+    ],
+  },
+
+  // 4. 슬리퍼
+  {
+    id: "slippers",
+    name: "슬리퍼",
+    topCategory: "clothing",
+    subCategory: "shoes",
+    svgKey: "slippers",
+    shapes: [],
+    description: "발을 쏙 넣어 편하게 신는 슬리퍼예요!",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#75A981",
+        secondary: "#CDE5D0",
+        accent: "#3B6B46",
+      },
+      {
+        colorId: "blue",
+        primary: "#70A8D9",
+        secondary: "#D5E9FA",
+        accent: "#315F91",
+      },
+      {
+        colorId: "pink",
+        primary: "#F0A4BB",
+        secondary: "#FCE2EA",
+        accent: "#A94D6B",
+      },
+      {
+        colorId: "yellow",
+        primary: "#F2D36B",
+        secondary: "#FFF1B8",
+        accent: "#A88327",
+      },
+      {
+        colorId: "black",
+        primary: "#4A4A50",
+        secondary: "#888890",
+        accent: "#25252A",
+      },
+    ],
+  },
+
+  // 5. 조리
+  {
+    id: "flipFlops",
+    name: "조리",
+    topCategory: "clothing",
+    subCategory: "shoes",
+    svgKey: "flipFlops",
+    shapes: [],
+    description: "엄지발가락 사이에 끈을 끼워 신는 조리예요!",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#70A8D9",
+        secondary: "#D5E9FA",
+        accent: "#315F91",
+      },
+      {
+        colorId: "red",
+        primary: "#E57373",
+        secondary: "#FFCDD2",
+        accent: "#B8323A",
+      },
+      {
+        colorId: "yellow",
+        primary: "#F2D36B",
+        secondary: "#FFF1B8",
+        accent: "#A88327",
+      },
+      {
+        colorId: "green",
+        primary: "#75A981",
+        secondary: "#CDE5D0",
+        accent: "#3B6B46",
+      },
+      {
+        colorId: "pink",
+        primary: "#F0A4BB",
+        secondary: "#FCE2EA",
+        accent: "#A94D6B",
+      },
+    ],
+  },
+
+  // 6. 장화
+  {
+    id: "rainBoots",
+    name: "장화",
+    topCategory: "clothing",
+    subCategory: "shoes",
+    svgKey: "rainBoots",
+    shapes: [],
+    description: "비 오는 날 물웅덩이를 첨벙첨벙 건너는 장화예요!",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#F2D36B",
+        secondary: "#FFF1B8",
+        accent: "#A88327",
+      },
+      {
+        colorId: "red",
+        primary: "#E57373",
+        secondary: "#FFCDD2",
+        accent: "#B8323A",
+      },
+      {
+        colorId: "green",
+        primary: "#75A981",
+        secondary: "#CDE5D0",
+        accent: "#3B6B46",
+      },
+      {
+        colorId: "blue",
+        primary: "#70A8D9",
+        secondary: "#D5E9FA",
+        accent: "#315F91",
+      },
+      {
+        colorId: "pink",
+        primary: "#F0A4BB",
+        secondary: "#FCE2EA",
+        accent: "#A94D6B",
+      },
+    ],
+  },
+
+  // 7. 털장화
+  {
+    id: "furBoots",
+    name: "털장화",
+    topCategory: "clothing",
+    subCategory: "shoes",
+    svgKey: "furBoots",
+    shapes: [],
+    description: "안쪽에 따뜻한 털이 있는 털장화예요!",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#956C4F",
+        secondary: "#F5E7D2",
+        accent: "#563A2B",
+      },
+      {
+        colorId: "brown",
+        primary: "#956C4F",
+        secondary: "#DCC1A6",
+        accent: "#563A2B",
+      },
+      {
+        colorId: "black",
+        primary: "#4A4A50",
+        secondary: "#D9D9DE",
+        accent: "#25252A",
+      },
+      {
+        colorId: "pink",
+        primary: "#F0A4BB",
+        secondary: "#FCE2EA",
+        accent: "#A94D6B",
+      },
+      {
+        colorId: "white",
+        primary: "#FAF8F2",
+        secondary: "#FFFFFF",
+        accent: "#A7A19A",
+      },
+    ],
+  },
+
+  // 8. 부츠
+  {
+    id: "boots",
+    name: "부츠",
+    topCategory: "clothing",
+    subCategory: "shoes",
+    svgKey: "boots",
+    shapes: [],
+    description: "발목이나 종아리까지 올라오는 부츠예요!",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#956C4F",
+        secondary: "#DCC1A6",
+        accent: "#563A2B",
+      },
+      {
+        colorId: "black",
+        primary: "#4A4A50",
+        secondary: "#888890",
+        accent: "#25252A",
+      },
+      {
+        colorId: "brown",
+        primary: "#956C4F",
+        secondary: "#DCC1A6",
+        accent: "#563A2B",
+      },
+      {
+        colorId: "red",
+        primary: "#B85C65",
+        secondary: "#E9A8AE",
+        accent: "#81343D",
+      },
+      {
+        colorId: "white",
+        primary: "#FAF8F2",
+        secondary: "#FFFFFF",
+        accent: "#A7A19A",
+      },
+    ],
+  },
+
+  // 1. 티셔츠
+  {
+    id: "tShirt",
+    name: "티셔츠",
+    topCategory: "clothing",
+    subCategory: "clothes",
+    svgKey: "tShirt",
+    shapes: [],
+    description: "편하게 입는 티셔츠예요! 어떤 색이 좋을까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#70A8D9",
+        secondary: "#D5E9FA",
+        accent: "#315F91",
+      },
+      {
+        colorId: "red",
+        primary: "#E57373",
+        secondary: "#FFCDD2",
+        accent: "#B8323A",
+      },
+      {
+        colorId: "yellow",
+        primary: "#F2D36B",
+        secondary: "#FFF1B8",
+        accent: "#A88327",
+      },
+      {
+        colorId: "green",
+        primary: "#75A981",
+        secondary: "#CDE5D0",
+        accent: "#3B6B46",
+      },
+      {
+        colorId: "white",
+        primary: "#FAF8F2",
+        secondary: "#FFFFFF",
+        accent: "#A7A19A",
+      },
+      {
+        colorId: "black",
+        primary: "#4A4A50",
+        secondary: "#888890",
+        accent: "#25252A",
+      },
+      {
+        colorId: "pink",
+        primary: "#F0A4BB",
+        secondary: "#FCE2EA",
+        accent: "#A94D6B",
+      },
+    ],
+  },
+
+  // 2. 반팔 셔츠
+  {
+    id: "shortSleeveShirt",
+    name: "반팔 셔츠",
+    topCategory: "clothing",
+    subCategory: "clothes",
+    svgKey: "shortSleeveShirt",
+    shapes: [],
+    description: "팔이 짧은 반팔 셔츠예요! 단추도 찾아볼까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#FAF8F2",
+        secondary: "#FFFFFF",
+        accent: "#A7A19A",
+      },
+      {
+        colorId: "blue",
+        primary: "#70A8D9",
+        secondary: "#D5E9FA",
+        accent: "#315F91",
+      },
+      {
+        colorId: "yellow",
+        primary: "#F2D36B",
+        secondary: "#FFF1B8",
+        accent: "#A88327",
+      },
+      {
+        colorId: "green",
+        primary: "#75A981",
+        secondary: "#CDE5D0",
+        accent: "#3B6B46",
+      },
+      {
+        colorId: "pink",
+        primary: "#F0A4BB",
+        secondary: "#FCE2EA",
+        accent: "#A94D6B",
+      },
+    ],
+  },
+
+  // 3. 나시
+  {
+    id: "tankTop",
+    name: "나시",
+    topCategory: "clothing",
+    subCategory: "clothes",
+    svgKey: "tankTop",
+    shapes: [],
+    description: "어깨가 드러나는 나시예요! 소매가 없어요.",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#F0A4BB",
+        secondary: "#FCE2EA",
+        accent: "#A94D6B",
+      },
+      {
+        colorId: "white",
+        primary: "#FAF8F2",
+        secondary: "#FFFFFF",
+        accent: "#A7A19A",
+      },
+      {
+        colorId: "blue",
+        primary: "#70A8D9",
+        secondary: "#D5E9FA",
+        accent: "#315F91",
+      },
+      {
+        colorId: "black",
+        primary: "#4A4A50",
+        secondary: "#888890",
+        accent: "#25252A",
+      },
+      {
+        colorId: "yellow",
+        primary: "#F2D36B",
+        secondary: "#FFF1B8",
+        accent: "#A88327",
+      },
+    ],
+  },
+
+  // 4. 런닝
+  {
+    id: "shortSleeve",
+    name: "반팔티",
+    topCategory: "clothing",
+    subCategory: "clothes",
+    svgKey: "shortSleeve",
+    shapes: [],
+    description: "여름에 시원하게 입을 반팔티셔츠예요!",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#FAF8F2",
+        secondary: "#FFFFFF",
+        accent: "#A7A19A",
+      },
+      {
+        colorId: "blue",
+        primary: "#B5D8F0",
+        secondary: "#EAF6FF",
+        accent: "#6A9FC7",
+      },
+      {
+        colorId: "pink",
+        primary: "#F0A4BB",
+        secondary: "#FCE2EA",
+        accent: "#A94D6B",
+      },
+      {
+        colorId: "black",
+        primary: "#4A4A50",
+        secondary: "#888890",
+        accent: "#25252A",
+      },
+    ],
+  },
+
+  // 6. 반바지
+  {
+    id: "shorts",
+    name: "반바지",
+    topCategory: "clothing",
+    subCategory: "clothes",
+    svgKey: "shorts",
+    shapes: [],
+    description: "다리가 짧게 내려오는 반바지예요!",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#75A981",
+        secondary: "#CDE5D0",
+        accent: "#3B6B46",
+      },
+      {
+        colorId: "blue",
+        primary: "#70A8D9",
+        secondary: "#D5E9FA",
+        accent: "#315F91",
+      },
+      {
+        colorId: "red",
+        primary: "#E57373",
+        secondary: "#FFCDD2",
+        accent: "#B8323A",
+      },
+      {
+        colorId: "yellow",
+        primary: "#F2D36B",
+        secondary: "#FFF1B8",
+        accent: "#A88327",
+      },
+      {
+        colorId: "brown",
+        primary: "#956C4F",
+        secondary: "#DCC1A6",
+        accent: "#563A2B",
+      },
+    ],
+  },
+
+  // 7. 긴바지
+  {
+    id: "longPants",
+    name: "긴바지",
+    topCategory: "clothing",
+    subCategory: "clothes",
+    svgKey: "longPants",
+    shapes: [],
+    description: "다리를 길게 덮는 긴바지예요!",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#70A8D9",
+        secondary: "#D5E9FA",
+        accent: "#315F91",
+      },
+      {
+        colorId: "black",
+        primary: "#4A4A50",
+        secondary: "#888890",
+        accent: "#25252A",
+      },
+      {
+        colorId: "brown",
+        primary: "#956C4F",
+        secondary: "#DCC1A6",
+        accent: "#563A2B",
+      },
+      {
+        colorId: "green",
+        primary: "#75A981",
+        secondary: "#CDE5D0",
+        accent: "#3B6B46",
+      },
+      {
+        colorId: "white",
+        primary: "#FAF8F2",
+        secondary: "#FFFFFF",
+        accent: "#A7A19A",
+      },
+    ],
+  },
+
+  // 8. 치마
+  {
+    id: "skirt",
+    name: "치마",
+    topCategory: "clothing",
+    subCategory: "clothes",
+    svgKey: "skirt",
+    shapes: [],
+    description: "허리에서 아래로 펼쳐지는 치마예요!",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#F0A4BB",
+        secondary: "#FCE2EA",
+        accent: "#A94D6B",
+      },
+      {
+        colorId: "red",
+        primary: "#E57373",
+        secondary: "#FFCDD2",
+        accent: "#B8323A",
+      },
+      {
+        colorId: "yellow",
+        primary: "#F2D36B",
+        secondary: "#FFF1B8",
+        accent: "#A88327",
+      },
+      {
+        colorId: "blue",
+        primary: "#70A8D9",
+        secondary: "#D5E9FA",
+        accent: "#315F91",
+      },
+      {
+        colorId: "purple",
+        primary: "#B98AE0",
+        secondary: "#E9D8FA",
+        accent: "#70429E",
+      },
+    ],
+  },
+
+  // 9. 원피스
+  {
+    id: "dress",
+    name: "원피스",
+    topCategory: "clothing",
+    subCategory: "clothes",
+    svgKey: "dress",
+    shapes: [],
+    description: "상의와 치마가 하나로 이어진 원피스예요!",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#F0A4BB",
+        secondary: "#FCE2EA",
+        accent: "#A94D6B",
+      },
+      {
+        colorId: "red",
+        primary: "#E57373",
+        secondary: "#FFCDD2",
+        accent: "#B8323A",
+      },
+      {
+        colorId: "yellow",
+        primary: "#F2D36B",
+        secondary: "#FFF1B8",
+        accent: "#A88327",
+      },
+      {
+        colorId: "blue",
+        primary: "#70A8D9",
+        secondary: "#D5E9FA",
+        accent: "#315F91",
+      },
+      {
+        colorId: "purple",
+        primary: "#B98AE0",
+        secondary: "#E9D8FA",
+        accent: "#70429E",
+      },
+    ],
+  },
+
+  // 10. 한복
+  {
+    id: "hanbok",
+    name: "한복",
+    topCategory: "clothing",
+    subCategory: "clothes",
+    svgKey: "hanbok",
+    shapes: [],
+    description: "대한민국의 전통 옷인 한복이에요!",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#F0A4BB",
+        secondary: "#FAF8F2",
+        accent: "#C34F79",
+      },
+      {
+        colorId: "red",
+        primary: "#E57373",
+        secondary: "#FFF1B8",
+        accent: "#B8323A",
+      },
+      {
+        colorId: "blue",
+        primary: "#70A8D9",
+        secondary: "#FAF8F2",
+        accent: "#315F91",
+      },
+      {
+        colorId: "green",
+        primary: "#75A981",
+        secondary: "#FFF1B8",
+        accent: "#3B6B46",
+      },
+      {
+        colorId: "purple",
+        primary: "#B98AE0",
+        secondary: "#FAF8F2",
+        accent: "#70429E",
+      },
+    ],
+  },
+
+  // 11. 점퍼
+  {
+    id: "jumper",
+    name: "점퍼",
+    topCategory: "clothing",
+    subCategory: "clothes",
+    svgKey: "jumper",
+    shapes: [],
+    description: "가볍게 걸쳐 입는 점퍼예요! 지퍼도 찾아봐요.",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#75A981",
+        secondary: "#CDE5D0",
+        accent: "#3B6B46",
+      },
+      {
+        colorId: "red",
+        primary: "#E57373",
+        secondary: "#FFCDD2",
+        accent: "#B8323A",
+      },
+      {
+        colorId: "blue",
+        primary: "#70A8D9",
+        secondary: "#D5E9FA",
+        accent: "#315F91",
+      },
+      {
+        colorId: "black",
+        primary: "#4A4A50",
+        secondary: "#888890",
+        accent: "#25252A",
+      },
+      {
+        colorId: "yellow",
+        primary: "#F2D36B",
+        secondary: "#FFF1B8",
+        accent: "#A88327",
+      },
+    ],
+  },
+
+  // 12. 코트
+  {
+    id: "coat",
+    name: "코트",
+    topCategory: "clothing",
+    subCategory: "clothes",
+    svgKey: "coat",
+    shapes: [],
+    description: "추운 날 따뜻하게 입는 긴 코트예요!",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#956C4F",
+        secondary: "#DCC1A6",
+        accent: "#563A2B",
+      },
+      {
+        colorId: "brown",
+        primary: "#956C4F",
+        secondary: "#DCC1A6",
+        accent: "#563A2B",
+      },
+      {
+        colorId: "black",
+        primary: "#4A4A50",
+        secondary: "#888890",
+        accent: "#25252A",
+      },
+      {
+        colorId: "white",
+        primary: "#FAF8F2",
+        secondary: "#FFFFFF",
+        accent: "#A7A19A",
+      },
+      {
+        colorId: "red",
+        primary: "#B85C65",
+        secondary: "#E9A8AE",
+        accent: "#81343D",
+      },
+      {
+        colorId: "blue",
+        primary: "#70A8D9",
+        secondary: "#D5E9FA",
+        accent: "#315F91",
+      },
+    ],
+  },
+
+  {
+    id: "beret",
+    name: "베레모",
+    topCategory: "clothing",
+    subCategory: "hat",
+    svgKey: "beret",
+    shapes: [],
+    description: "동그랗고 납작한 베레모예요! 머리에 살짝 얹어 볼까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#B99A7A",
+        secondary: "#D9BDA0",
+        accent: "#795548",
+      },
+      {
+        colorId: "red",
+        primary: "#D94B57",
+        secondary: "#F6B7BE",
+        accent: "#8B2630",
+      },
+      {
+        colorId: "green",
+        primary: "#527C5A",
+        secondary: "#A9C9A9",
+        accent: "#294D32",
+      },
+      {
+        colorId: "blue",
+        primary: "#557FC2",
+        secondary: "#AFC8EE",
+        accent: "#294878",
+      },
+      {
+        colorId: "black",
+        primary: "#393941",
+        secondary: "#777782",
+        accent: "#202027",
+      },
+      {
+        colorId: "white",
+        primary: "#F5F0E8",
+        secondary: "#FFFFFF",
+        accent: "#AAA09A",
+      },
+      {
+        colorId: "pink",
+        primary: "#E99BB4",
+        secondary: "#FCE0E9",
+        accent: "#A84F6C",
+      },
+      {
+        colorId: "brown",
+        primary: "#80563F",
+        secondary: "#C9A58A",
+        accent: "#482D21",
+      },
+    ],
+  },
+  {
+    id: "bucketHat",
+    name: "버킷햇",
+    topCategory: "clothing",
+    subCategory: "hat",
+    svgKey: "bucketHat",
+    shapes: [],
+    description: "챙이 둥글게 내려오는 버킷햇이에요! 멋지게 써 볼까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#566977",
+        secondary: "#566977",
+        accent: "#1d3749",
+      },
+      {
+        colorId: "red",
+        primary: "#E57373",
+        secondary: "#FFCDD2",
+        accent: "#B8323A",
+      },
+      {
+        colorId: "yellow",
+        primary: "#F2D36B",
+        secondary: "#FFF1B8",
+        accent: "#A88327",
+      },
+      {
+        colorId: "green",
+        primary: "#75A981",
+        secondary: "#CDE5D0",
+        accent: "#3B6B46",
+      },
+      {
+        colorId: "blue",
+        primary: "#70A8D9",
+        secondary: "#D5E9FA",
+        accent: "#315F91",
+      },
+      {
+        colorId: "black",
+        primary: "#4A4A50",
+        secondary: "#888890",
+        accent: "#25252A",
+      },
+      {
+        colorId: "white",
+        primary: "#FAF8F2",
+        secondary: "#FFFFFF",
+        accent: "#A7A19A",
+      },
+      {
+        colorId: "pink",
+        primary: "#F0A4BB",
+        secondary: "#FCE2EA",
+        accent: "#A94D6B",
+      },
+      {
+        colorId: "brown",
+        primary: "#956C4F",
+        secondary: "#DCC1A6",
+        accent: "#563A2B",
+      },
+    ],
+  },
+  {
+    id: "winterHat",
+    name: "털모자",
+    topCategory: "clothing",
+    subCategory: "hat",
+    svgKey: "winterHat",
+    shapes: [],
+    description: "추운 날 머리를 따뜻하게 해 주는 털모자예요!",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#13305C",
+        secondary: "#D43E4E",
+        accent: "#A02437",
+      },
+      {
+        colorId: "red",
+        primary: "#D94F5C",
+        secondary: "#F5B6BC",
+        accent: "#8E2633",
+      },
+      {
+        colorId: "orange",
+        primary: "#E99B54",
+        secondary: "#F9D4A7",
+        accent: "#9C572A",
+      },
+      {
+        colorId: "yellow",
+        primary: "#E9CD66",
+        secondary: "#FFF1B5",
+        accent: "#A88428",
+      },
+      {
+        colorId: "green",
+        primary: "#6DAD83",
+        secondary: "#C8E6CF",
+        accent: "#356B4A",
+      },
+      {
+        colorId: "blue",
+        primary: "#6C9FD1",
+        secondary: "#C8E0F8",
+        accent: "#345C8A",
+      },
+      {
+        colorId: "purple",
+        primary: "#A78BC7",
+        secondary: "#E4D8F3",
+        accent: "#654A89",
+      },
+      {
+        colorId: "black",
+        primary: "#51515B",
+        secondary: "#A5A5B0",
+        accent: "#292932",
+      },
+      {
+        colorId: "white",
+        primary: "#F5F2ED",
+        secondary: "#FFFFFF",
+        accent: "#AAA3A0",
+      },
+      {
+        colorId: "pink",
+        primary: "#EBA1BB",
+        secondary: "#FCE0EA",
+        accent: "#A84F70",
+      },
+      {
+        colorId: "brown",
+        primary: "#8B6248",
+        secondary: "#D7B89A",
+        accent: "#503321",
+      },
+    ],
+  },
+  {
+    id: "strawHat",
+    name: "밀짚모자",
+    topCategory: "clothing",
+    subCategory: "hat",
+    svgKey: "strawHat",
+    shapes: [],
+    description: "볕을 가려 주는 밀짚모자예요! 여름 나들이에 써 볼까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#E7C783",
+        secondary: "#F8E7B5",
+        accent: "#A67C3D",
+      },
+      {
+        colorId: "yellow",
+        primary: "#F5D76E",
+        secondary: "#FFF0B5",
+        accent: "#B88732",
+      },
+      {
+        colorId: "brown",
+        primary: "#B88752",
+        secondary: "#E8C99A",
+        accent: "#704522",
+      },
+      {
+        colorId: "white",
+        primary: "#FFF9E9",
+        secondary: "#FFFFFF",
+        accent: "#B6A27E",
+      },
+      {
+        colorId: "pink",
+        primary: "#F3B2C4",
+        secondary: "#FFE5EC",
+        accent: "#B85A77",
+      },
+    ],
+  },
+  {
+    id: "baseballCap",
+    name: "캡모자",
+    topCategory: "clothing",
+    subCategory: "hat",
+    svgKey: "baseballCap",
+    shapes: [],
+    description: "앞에 챙이 달린 캡모자예요! 밖에 나갈 때 써 볼까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#4F78B8",
+        secondary: "#85A6D8",
+        accent: "#29466F",
+      },
+      {
+        colorId: "red",
+        primary: "#E53945",
+        secondary: "#FFB5B8",
+        accent: "#9D1725",
+      },
+      {
+        colorId: "orange",
+        primary: "#FF9B45",
+        secondary: "#FFD2A3",
+        accent: "#B95A20",
+      },
+      {
+        colorId: "yellow",
+        primary: "#FFD54F",
+        secondary: "#FFF0A6",
+        accent: "#B88720",
+      },
+      {
+        colorId: "green",
+        primary: "#66BB6A",
+        secondary: "#BDE5B7",
+        accent: "#2E7135",
+      },
+      {
+        colorId: "blue",
+        primary: "#64B5F6",
+        secondary: "#D9EEFF",
+        accent: "#245B9B",
+      },
+      {
+        colorId: "black",
+        primary: "#42454D",
+        secondary: "#777C86",
+        accent: "#202127",
+      },
+      {
+        colorId: "white",
+        primary: "#FAFAFA",
+        secondary: "#ECEFF1",
+        accent: "#78909C",
+      },
+      {
+        colorId: "pink",
+        primary: "#F48FB1",
+        secondary: "#FCE4EC",
+        accent: "#C2185B",
+      },
+    ],
+  },
+  {
     id: "heartHairpin",
     name: "하트 머리핀",
     topCategory: "clothing",
@@ -44,11 +2834,11 @@ export const classificationItems: ClassificationItem[] = [
   },
 
   {
-    id: "star_flower",
+    id: "starFlower",
     name: "별모양꽃",
-    topCategory: "living",
-    subCategory: "daily",
-    svgKey: "star_flower",
+    topCategory: "nature",
+    subCategory: "plant",
+    svgKey: "starFlower",
     shapes: ["star"],
     description:
       "별처럼 생긴 꽃잎이 활짝 피었어요! 꽃 가운데에는 어떤 색이 숨어 있을까요?",
@@ -110,11 +2900,11 @@ export const classificationItems: ClassificationItem[] = [
     ],
   },
   {
-    id: "heart_owl",
+    id: "heartOwl",
     name: "하트올빼미",
     topCategory: "animal",
     subCategory: "bird",
-    svgKey: "heart_owl",
+    svgKey: "heartOwl",
     shapes: [],
     description:
       "얼굴이 하트처럼 생긴 올빼미예요! 동그란 눈으로 주변을 살펴보고 있어요.",
@@ -190,8 +2980,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "heartKeychain",
     name: "하트 열쇠고리",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "heartKeychain",
     shapes: ["heart"],
     description: "하트 장식이 달린 열쇠고리예요! 가방에 달아볼까요?",
@@ -231,8 +3021,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "heartLeaf",
     name: "하트 모양 잎사귀",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "nature",
+    subCategory: "plant",
     svgKey: "heartLeaf",
     shapes: ["heart"],
     description: "잎사귀가 꼭 하트처럼 생겼어요! 초록 잎맥도 찾아볼까요?",
@@ -309,8 +3099,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "heartSoap",
     name: "하트 비누",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "heartSoap",
     shapes: ["heart"],
     description: "하트 모양 비누로 손을 깨끗하게 씻어요! 향긋한 거품이 나요.",
@@ -360,8 +3150,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "heartFrame",
     name: "하트 액자",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "heartFrame",
     shapes: ["heart"],
     description:
@@ -412,8 +3202,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "shootingStar",
     name: "별똥별",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "nature",
+    subCategory: "sky",
     svgKey: "shootingStar",
     shapes: ["star"],
     description: "별똥별이 떨어져요! 우리 같이 소원을 빌어볼까요?",
@@ -514,8 +3304,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "triangleCheese",
     name: "삼각 치즈",
-    topCategory: "food",
-    subCategory: "snack",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "triangleCheese",
     shapes: ["triangle"],
     description: "노랗고 고소한 삼각 치즈예요! 맛있는 간식을 만들어볼까요?",
@@ -553,8 +3343,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "triangleSign",
     name: "삼각 표지판",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "triangleSign",
     shapes: ["triangle"],
     description: "세모 모양 표지판이에요! 길을 지날 때 표지판을 잘 살펴봐요.",
@@ -589,8 +3379,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "wheel",
     name: "바퀴",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "wheel",
     shapes: ["circle"],
     description: "데굴데굴 굴러가는 바퀴예요! 이 바퀴는 어디에 달려 있을까요?",
@@ -1118,6 +3908,7 @@ export const classificationItems: ClassificationItem[] = [
       },
     ],
   },
+
   {
     id: "car",
     name: "승용차",
@@ -3378,7 +6169,7 @@ export const classificationItems: ClassificationItem[] = [
   // ========== 음식 ==========
   {
     id: "soup",
-    name: "국/스프",
+    name: "국",
     topCategory: "food",
     subCategory: "meal",
     svgKey: "soup",
@@ -3558,6 +6349,35 @@ export const classificationItems: ClassificationItem[] = [
     topCategory: "food",
     subCategory: "meal",
     svgKey: "gimbap",
+    shapes: [],
+    description: "돌돌 말린 김밥이에요! 안에는 어떤 재료가 들어 있을까요?",
+    variants: [
+      {
+        colorId: "natural",
+        primary: "#37474F", // 김(해조류)
+        secondary: "#FFF8E1", // 밥/계란
+        accent: "#E53935", // 당근/햄 포인트
+      },
+      {
+        colorId: "black",
+        primary: "#212121", // 진한 김
+        secondary: "#FFFDE7", // 밝은 밥
+        accent: "#43A047", // 오이/채소 포인트
+      },
+      {
+        colorId: "green",
+        primary: "#2E7D32", // 오이/채소
+        secondary: "#FFF8E1", // 밥/계란
+        accent: "#FB8C00", // 당근 포인트
+      },
+    ],
+  },
+  {
+    id: "gimbap1",
+    name: "김밥",
+    topCategory: "unknown",
+    subCategory: "unknown",
+    svgKey: "gimbap",
     shapes: ["circle"],
     description: "돌돌 말린 김밥이에요! 안에는 어떤 재료가 들어 있을까요?",
     variants: [
@@ -3587,32 +6407,26 @@ export const classificationItems: ClassificationItem[] = [
     topCategory: "food",
     subCategory: "meal",
     svgKey: "pizza",
-    shapes: ["triangle"], // TODO: shapesPool 연결 단계에서 채움
+    shapes: ["triangle"],
     description: "맛있는 피자가 짠! 한 조각 쏙 떼어 먹어볼까요?",
     variants: [
       {
-        colorId: "natural",
-        primary: "#37474F", // 김(해조류) 느낌
-        secondary: "#FFF8E1", // 밥/계란 느낌
-        accent: "#E53935", // 당근/햄 포인트
+        colorId: "natural", // 피자 본래의 모습 (노란 치즈 + 붉은 토마토 소스/페퍼로니 + 갈색 도우)
+        primary: "#FFB300", // 치즈/도우 기본 톤
+        secondary: "#E53935", // 토마토 소스 및 페퍼로니 포인트
+        accent: "#43A047", // 피망/바질 등 채소 토핑 포인트
       },
       {
-        colorId: "black",
-        primary: "#212121", // 김의 진한 색
-        secondary: "#FFFDE7", // 밥의 밝은 색
-        accent: "#43A047", // 오이/채소 포인트
+        colorId: "red", // 매콤한 페퍼로니/토마토 피자 계열
+        primary: "#EF6C00",
+        secondary: "#D32F2F",
+        accent: "#B71C1C",
       },
       {
-        colorId: "green",
-        primary: "#2E7D32", // 오이/채소
-        secondary: "#FFF8E1", // 밥/계란
-        accent: "#FB8C00", // 당근 포인트
-      },
-      {
-        colorId: "pink",
-        primary: "#EC407A", // 분홍 햄/맛살
-        secondary: "#F8BBD0", // 부드러운 속재료
-        accent: "#AD1457", // 진한 포인트
+        colorId: "yellow", // 치즈가 듬뿍 들어간 고소한 치즈피자 계열
+        primary: "#FFEE58",
+        secondary: "#FDD835",
+        accent: "#FBC02D",
       },
     ],
   },
@@ -3622,38 +6436,26 @@ export const classificationItems: ClassificationItem[] = [
     topCategory: "food",
     subCategory: "meal",
     svgKey: "hamburger",
-    shapes: [], // TODO: shapesPool 연결 단계에서 채움
+    shapes: [],
     description: "빵 사이에 맛있는 재료가 차곡차곡! 햄버거가 완성됐어요.",
     variants: [
       {
-        colorId: "natural",
-        primary: "#D4A574",
-        secondary: "#8D6E63",
-        accent: "#66BB6A",
+        colorId: "natural", // 햄버거 본래의 모습 (노릇한 빵 + 갈색 패티 + 초록 상추 등)
+        primary: "#D4A574", // 빵 번 색상
+        secondary: "#8D6E63", // 패티 및 고기 색상
+        accent: "#66BB6A", // 양상추 포인트 색상
       },
       {
-        colorId: "brown",
+        colorId: "brown", // 바삭하게 구워진 수제버거 계열
         primary: "#A1887F",
         secondary: "#6D4C41",
-        accent: "#43A047",
+        accent: "#5D4037",
       },
       {
-        colorId: "orange",
+        colorId: "orange", // 진한 체다 치즈와 소스가 어우러진 버거 계열
         primary: "#FFB74D",
-        secondary: "#8D6E63",
-        accent: "#66BB6A",
-      },
-      {
-        colorId: "yellow",
-        primary: "#FFCC80",
-        secondary: "#FFF3E0",
-        accent: "#66BB6A",
-      },
-      {
-        colorId: "green",
-        primary: "#81C784",
-        secondary: "#E8F5E9",
-        accent: "#A1887F",
+        secondary: "#E65100",
+        accent: "#F57C00",
       },
     ],
   },
@@ -3661,7 +6463,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "ball",
     name: "공",
     topCategory: "living",
-    subCategory: "daily",
+    subCategory: "toys_sports",
     svgKey: "ball",
     shapes: ["circle"],
     description: "데굴데굴 굴러가는 공이에요! 어떤 공을 만들어 볼까요?",
@@ -3790,8 +6592,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "sunglasses",
     name: "선글라스",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "clothing",
+    subCategory: "accessories",
     svgKey: "sunglasses",
     shapes: ["circle"],
     description: "햇빛을 쏙 가려주는 멋진 선글라스예요! 누가 써볼까요?",
@@ -3868,7 +6670,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "basketball",
     name: "농구공",
     topCategory: "living",
-    subCategory: "daily",
+    subCategory: "toys_sports",
     svgKey: "basketball",
     shapes: ["circle"],
     description: "통통 튀는 농구공이에요! 골대에 슛! 넣어볼까요?",
@@ -3909,7 +6711,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "baseball",
     name: "야구공",
     topCategory: "living",
-    subCategory: "daily",
+    subCategory: "toys_sports",
     svgKey: "baseball",
     shapes: ["circle"],
     description: "힘껏 휙! 날아가는 야구공이에요. 누가 멋지게 쳐볼까요?",
@@ -3932,7 +6734,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "tennisBall",
     name: "테니스공",
     topCategory: "living",
-    subCategory: "daily",
+    subCategory: "toys_sports",
     svgKey: "tennisBall",
     shapes: ["circle"],
     description: "통통! 튀어 오르는 테니스공이에요. 어디까지 날아갈까요?",
@@ -3960,8 +6762,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "fullMoon",
     name: "보름달",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "nature",
+    subCategory: "sky",
     svgKey: "fullMoon",
     shapes: ["circle"],
     description: "둥근 보름달이 밤하늘에 두둥실! 달님에게 인사해 볼까요?",
@@ -4008,7 +6810,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "roundBalloon",
     name: "풍선",
     topCategory: "living",
-    subCategory: "daily",
+    subCategory: "stationery",
     svgKey: "roundBalloon",
     shapes: ["circle"],
     description: "둥실둥실 동그란 풍선이 날아가요! 어디까지 올라갈까요?",
@@ -4078,8 +6880,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "sun",
     name: "해",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "nature",
+    subCategory: "sky",
     svgKey: "sun",
     shapes: ["circle"],
     description: "반짝반짝 빛나는 해가 떴어요! 오늘도 따뜻하게 비춰줄까요?",
@@ -4119,8 +6921,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "envelop",
     name: "편지봉투",
-    topCategory: "living",
-    subCategory: "stationery",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "envelop",
     shapes: ["square"],
     description:
@@ -4245,8 +7047,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "box",
     name: "상자",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "box",
     shapes: ["square"],
     description: "무엇이 들어 있을까요? 두근두근 상자를 열어볼까요?",
@@ -4322,8 +7124,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "book",
     name: "책",
-    topCategory: "living",
-    subCategory: "stationery",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "book",
     shapes: ["square"],
     description:
@@ -4400,8 +7202,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "window",
     name: "창문",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "window",
     shapes: ["square"],
     description: "창문 밖으로 무엇이 보이나요? 살짝 들여다볼까요?",
@@ -4477,8 +7279,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "window1",
     name: "창문",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "window1",
     shapes: ["square"],
     description: "네모난 창문이 활짝 열렸어요! 창밖에는 무엇이 있을까요?",
@@ -4555,7 +7357,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "calendar",
     name: "달력",
     topCategory: "living",
-    subCategory: "stationery",
+    subCategory: "daily",
     svgKey: "calendar",
     shapes: ["square"],
     description: "오늘은 며칠일까요? 달력에서 오늘 날짜를 찾아볼까요?",
@@ -4631,8 +7433,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "bread",
     name: "식빵",
-    topCategory: "food",
-    subCategory: "snack",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "bread",
     shapes: ["square"],
     description: "폭신폭신 고소한 식빵이에요! 한 조각 냠냠 먹어볼까요?",
@@ -4685,7 +7487,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "microwave",
     name: "전자레인지",
     topCategory: "living",
-    subCategory: "kitchen",
+    subCategory: "electronics",
     svgKey: "microwave",
     shapes: ["square"],
     description: "윙윙! 맛있는 음식을 따뜻하게 데워주는 전자레인지예요.",
@@ -4755,8 +7557,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "pillow",
     name: "쿠션",
-    topCategory: "living",
-    subCategory: "furniture",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "pillow",
     shapes: ["square"],
     description: "폭신폭신 편안한 쿠션이에요! 포근하게 안아볼까요?",
@@ -4913,7 +7715,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "giftBox",
     name: "선물상자",
     topCategory: "living",
-    subCategory: "daily",
+    subCategory: "stationery",
     svgKey: "giftBox",
     shapes: ["square"],
     description: "두근두근! 예쁜 선물상자 안에는 무엇이 들어 있을까요?",
@@ -4991,7 +7793,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "giftBox1",
     name: "선물상자",
     topCategory: "living",
-    subCategory: "daily",
+    subCategory: "stationery",
     svgKey: "giftBox1",
     shapes: ["square"],
     description: "짜잔! 선물상자가 도착했어요. 얼른 열어보고 싶지 않나요?",
@@ -5144,8 +7946,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "door",
     name: "문",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "door",
     shapes: ["square"],
     description: "문 뒤에는 무엇이 있을까요? 살짝 열어볼까요?",
@@ -5300,7 +8102,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "refrigerator",
     name: "냉장고",
     topCategory: "living",
-    subCategory: "kitchen",
+    subCategory: "electronics",
     svgKey: "refrigerator",
     shapes: ["square"],
     description: "시원한 음식들이 가득한 냉장고예요! 안에는 무엇이 있을까요?",
@@ -5584,8 +8386,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "squareSunglasses",
     name: "사각 선글라스",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "clothing",
+    subCategory: "accessories",
     svgKey: "squareSunglasses",
     shapes: ["square"],
     description: "네모난 선글라스를 쓰면 멋쟁이로 변신! 누가 써볼까요?",
@@ -5892,8 +8694,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "frame",
     name: "액자",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "frame",
     shapes: ["square"],
     description:
@@ -6041,7 +8843,7 @@ export const classificationItems: ClassificationItem[] = [
 
     topCategory: "living",
 
-    subCategory: "daily",
+    subCategory: "musical_instrument",
 
     svgKey: "triangleInstrument",
 
@@ -6164,9 +8966,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "크리스마스 트리",
 
-    topCategory: "living",
+    topCategory: "nature",
 
-    subCategory: "daily",
+    subCategory: "plant",
 
     svgKey: "christmasTree",
 
@@ -6224,9 +9026,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "삼각 깃발",
 
-    topCategory: "living",
+    topCategory: "unknown",
 
-    subCategory: "daily",
+    subCategory: "unknown",
 
     svgKey: "flag",
 
@@ -6331,9 +9133,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "삼각김밥",
 
-    topCategory: "food",
+    topCategory: "unknown",
 
-    subCategory: "meal",
+    subCategory: "unknown",
 
     svgKey: "triangleKimbap",
 
@@ -6348,20 +9150,6 @@ export const classificationItems: ClassificationItem[] = [
         secondary: "#FAFAFA",
         accent: "#E53935",
       },
-
-      {
-        colorId: "black",
-        primary: "#424242",
-        secondary: "#B0BEC5",
-        accent: "#212121",
-      },
-
-      {
-        colorId: "brown",
-        primary: "#5D4037",
-        secondary: "#EFEBE9",
-        accent: "#3E2723",
-      },
     ],
   },
   {
@@ -6369,9 +9157,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "피라미드",
 
-    topCategory: "living",
+    topCategory: "unknown",
 
-    subCategory: "daily",
+    subCategory: "unknown",
 
     svgKey: "pyramid",
 
@@ -6429,9 +9217,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "텐트",
 
-    topCategory: "living",
+    topCategory: "unknown",
 
-    subCategory: "daily",
+    subCategory: "unknown",
 
     svgKey: "tent",
 
@@ -6495,9 +9283,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "산",
 
-    topCategory: "living",
+    topCategory: "nature",
 
-    subCategory: "daily",
+    subCategory: "plant",
 
     svgKey: "mountain",
 
@@ -6627,9 +9415,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "세모 쿠키",
 
-    topCategory: "food",
+    topCategory: "unknown",
 
-    subCategory: "snack",
+    subCategory: "unknown",
 
     svgKey: "triangleCookie",
 
@@ -6785,9 +9573,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "하트 쿠키",
 
-    topCategory: "food",
+    topCategory: "unknown",
 
-    subCategory: "snack",
+    subCategory: "unknown",
 
     svgKey: "heartCookie",
 
@@ -6846,7 +9634,7 @@ export const classificationItems: ClassificationItem[] = [
 
     topCategory: "living",
 
-    subCategory: "daily",
+    subCategory: "stationery",
 
     svgKey: "heartBalloon",
 
@@ -6903,9 +9691,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "하트 사탕",
 
-    topCategory: "food",
+    topCategory: "unknown",
 
-    subCategory: "snack",
+    subCategory: "unknown",
 
     svgKey: "heartLollipop",
 
@@ -6962,9 +9750,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "하트 쿠션",
 
-    topCategory: "living",
+    topCategory: "unknown",
 
-    subCategory: "furniture",
+    subCategory: "unknown",
 
     svgKey: "heartPillow",
 
@@ -7080,9 +9868,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "하트 단추",
 
-    topCategory: "living",
+    topCategory: "clothing",
 
-    subCategory: "daily",
+    subCategory: "accessories",
 
     svgKey: "heartButton",
 
@@ -7224,9 +10012,8 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "하트 선글라스",
 
-    topCategory: "living",
-
-    subCategory: "daily",
+    topCategory: "clothing",
+    subCategory: "accessories",
 
     svgKey: "heartSunglasses",
 
@@ -7283,9 +10070,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "하트 보석",
 
-    topCategory: "living",
+    topCategory: "unknown",
 
-    subCategory: "daily",
+    subCategory: "unknown",
 
     svgKey: "heartGem",
 
@@ -7394,9 +10181,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "별 쿠키",
 
-    topCategory: "food",
+    topCategory: "unknown",
 
-    subCategory: "snack",
+    subCategory: "unknown",
 
     svgKey: "starCookie",
 
@@ -7448,7 +10235,7 @@ export const classificationItems: ClassificationItem[] = [
 
     topCategory: "living",
 
-    subCategory: "daily",
+    subCategory: "stationery",
 
     svgKey: "starBalloon",
 
@@ -7505,9 +10292,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "별 풍선",
 
-    topCategory: "living",
+    topCategory: "unknown",
 
-    subCategory: "daily",
+    subCategory: "unknown",
 
     svgKey: "starBalloon1",
 
@@ -7565,9 +10352,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "요술봉",
 
-    topCategory: "living",
+    topCategory: "unknown",
 
-    subCategory: "daily",
+    subCategory: "unknown",
 
     svgKey: "starWand",
 
@@ -7624,9 +10411,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "별 쿠션",
 
-    topCategory: "living",
+    topCategory: "unknown",
 
-    subCategory: "furniture",
+    subCategory: "unknown",
 
     svgKey: "starPillow",
 
@@ -7742,10 +10529,9 @@ export const classificationItems: ClassificationItem[] = [
     id: "starButton",
 
     name: "별 단추",
+    topCategory: "clothing",
 
-    topCategory: "living",
-
-    subCategory: "daily",
+    subCategory: "accessories",
 
     svgKey: "starButton",
 
@@ -7834,8 +10620,8 @@ export const classificationItems: ClassificationItem[] = [
       {
         colorId: "yellow",
         primary: "#FDD835",
-        secondary: "#FFFDE7",
-        accent: "#F57F17",
+        secondary: "#FFF59D",
+        accent: "#FFC107",
       },
       {
         colorId: "green",
@@ -7886,9 +10672,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "별 케이크",
 
-    topCategory: "food",
+    topCategory: "unknown",
 
-    subCategory: "snack",
+    subCategory: "unknown",
 
     svgKey: "starCake",
 
@@ -7946,9 +10732,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "별 장식",
 
-    topCategory: "living",
+    topCategory: "unknown",
 
-    subCategory: "daily",
+    subCategory: "unknown",
 
     svgKey: "starOrnament",
 
@@ -8004,10 +10790,8 @@ export const classificationItems: ClassificationItem[] = [
     id: "starSunglasses",
 
     name: "별 선글라스",
-
-    topCategory: "living",
-
-    subCategory: "daily",
+    topCategory: "clothing",
+    subCategory: "accessories",
 
     svgKey: "starSunglasses",
 
@@ -8098,8 +10882,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "medal",
     name: "메달",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "medal",
     shapes: ["star"],
     description: "짜잔! 멋진 메달을 받았어요. 오늘의 최고 주인공은 누구일까요?",
@@ -8139,8 +10923,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "button1",
     name: "단추",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "clothing",
+    subCategory: "accessories",
     svgKey: "button1",
     shapes: ["circle"],
     description:
@@ -8217,8 +11001,9 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "button2",
     name: "단추",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "clothing",
+
+    subCategory: "accessories",
     svgKey: "button2",
     shapes: ["circle"],
     description: "동글동글 귀여운 단추예요! 어떤 색 옷에 달아볼까요?",

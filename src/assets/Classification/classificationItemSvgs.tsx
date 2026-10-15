@@ -2492,7 +2492,7 @@ export const Rice = ({
     </Svg>
   );
 };
-export const Gimbap = ({
+export const Gimbap1 = ({
   colorHex = "#37474F",
   primary,
   secondary,
@@ -2526,6 +2526,135 @@ export const Gimbap = ({
   );
 };
 
+export const Gimbap = ({
+  colorHex = "#292321",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const seaweedColor = primary ?? colorHex;
+  const riceColor = secondary ?? "#FFFBE8";
+  const eggColor = accent ?? "#F9A12B";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 뒤쪽 김밥 몸통: 원통형 */}
+      <Path
+        d="
+          M 18 25
+          L 55 8
+          Q 73 0 87 15
+          Q 98 28 91 44
+          Q 88 52 79 58
+          L 43 80
+          Q 33 85 24 78
+          Z
+        "
+        fill={seaweedColor}
+        stroke={OUTLINE}
+        strokeWidth={2.5}
+        strokeLinejoin="round"
+      />
+
+      {/* 앞쪽 김밥 단면 */}
+      <Ellipse
+        cx={34}
+        cy={52}
+        rx={31}
+        ry={31}
+        fill={riceColor}
+        stroke={OUTLINE}
+        strokeWidth={2.5}
+      />
+
+      {/* 단면과 몸통이 만나는 부분 */}
+      <Path
+        d="M 56 20 Q 66 34 65 49 Q 64 68 51 78"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+      />
+
+      {/* 달걀 지단 */}
+      <Path
+        d="
+          M 21 43
+          Q 19 32 35 31
+          Q 49 30 53 39
+          Q 55 45 48 49
+          L 29 54
+          Q 19 54 21 43
+          Z
+        "
+        fill={eggColor}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {/* 노란 단무지 */}
+      <Path
+        d="
+          M 25 49
+          Q 18 53 22 61
+          Q 26 68 34 64
+          L 41 57
+          L 35 49
+          Z
+        "
+        fill="#F7D747"
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {/* 초록색 오이 */}
+      <Path
+        d="
+          M 38 49
+          Q 45 43 51 49
+          Q 58 56 51 63
+          Q 44 68 38 61
+          Q 34 55 38 49
+          Z
+        "
+        fill="#579B35"
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {/* 주황색 당근 */}
+      <Path
+        d="
+          M 18 41
+          Q 17 34 26 32
+          Q 39 28 49 34
+          Q 55 38 50 44
+          Q 46 48 39 45
+          L 29 47
+          Q 21 48 18 41
+          Z
+        "
+        fill="#F99A2E"
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {/* 속재료 경계선 */}
+      <Path
+        d="M 29 47 Q 34 43 39 45"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+
 // pizza : colorHex = 도우/치즈 색
 export const Pizza = ({
   colorHex = "#FFCC80",
@@ -2555,42 +2684,44 @@ export const Pizza = ({
         strokeWidth="3"
         strokeLinejoin="round"
       />
+      <Rect
+        x="45"
+        y="30"
+        width="8"
+        height="16"
+        rx="2"
+        fill={toppingColor}
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+        transform="rotate(-15, 46, 38)"
+      />
 
-      <Circle
-        cx="46"
-        cy="38"
-        r="6"
+      <Path
+        d="M 62,46 a 6,6 0 1,1 0,12 a 6,6 0 1,1 0,-12 z M 62,50 a 2,2 0 1,0 0,4 a 2,2 0 1,0 0,-4 z"
         fill={toppingColor}
         stroke={OUTLINE}
         strokeWidth="1.5"
       />
 
-      <Circle
-        cx="62"
-        cy="52"
-        r="6"
+      <Path
+        d="M 36,54 
+           L 44,54 
+           Q 46,60 44,66 
+           L 36,66 
+           Q 34,60 36,54 z"
         fill={toppingColor}
         stroke={OUTLINE}
         strokeWidth="1.5"
+        strokeLinejoin="round"
       />
-
-      <Circle
-        cx="40"
-        cy="60"
-        r="6"
-        fill={toppingColor}
-        stroke={OUTLINE}
-        strokeWidth="1.5"
-      />
-
-      <Circle
-        cx="55"
-        cy="70"
-        r="5"
-        fill={toppingColor}
-        stroke={OUTLINE}
-        strokeWidth="1.5"
-      />
+      <G transform="translate(5, 5) scale(0.9)">
+        <Path
+          d="M 55,65 a 5,5 0 0,1 5,5 a 5,5 0 0,1 -5,5 a 5,5 0 0,1 -5,-5 a 5,5 0 0,1 5,-5 z M 55,68.5 a 1.5,1.5 0 1,0 0,3 a 1.5,1.5 0 1,0 0,-3 z"
+          fill={toppingColor}
+          stroke={OUTLINE}
+          strokeWidth="1.5"
+        />
+      </G>
     </Svg>
   );
 };
@@ -2808,6 +2939,420 @@ export const IceCream = ({
 /* =========================================================
  * 🚗 VEHICLE
  * ======================================================= */
+export const FireTruck = ({
+  colorHex = "#E53935", // 소방차 기본 빨간색
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const stripeColor = secondary ?? "#FFCDD2"; // 흰색/연핑크 계열 띠
+  const wheelColor = accent ?? "#B71C1C"; // 짙은 버건디/레드 또는 그레이
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 1. 지붕 위 사다리 (Ladder) */}
+      {/* 사다리 받침대 */}
+      <Path
+        d="M20 34 L20 28 M48 34 L48 28"
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      {/* 사다리 가로 프레임 2줄 */}
+      <Path
+        d="M8 22 L60 22 M8 28 L60 28"
+        stroke={bodyColor}
+        strokeWidth="3.5"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M8 22 L60 22 M8 28 L60 28"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      {/* 사다리 세로 살 */}
+      <Path
+        d="M16 22 L16 28 M28 22 L28 28 M40 22 L40 28 M52 22 L52 28"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+
+      {/* 2. 운전석 위 경광등 (Siren) */}
+      <Path
+        d="M74 34 C74 28 82 28 82 34 Z"
+        fill="#FFD54F"
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+      {/* 사이렌 빛 연출 라인 */}
+      <Path
+        d="M71 25 L68 22 M78 23 L78 18 M85 25 L88 22"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+
+      {/* 3. 소방차 뒷몸통 (Body - 장비 수납칸) */}
+      <Rect
+        x="8"
+        y="34"
+        width="54"
+        height="38"
+        rx="4"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+      {/* 장비함 세로/가로 무늬 라인 */}
+      <Path
+        d="M18 42 L52 42 M18 48 L52 48"
+        stroke={stripeColor}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      {/* 측면 하단 하얀 띠 */}
+      <Path
+        d="M8 58 L62 58"
+        stroke={stripeColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+
+      {/* 4. 운전석 캐빈 (Cabin) */}
+      <Path
+        d="M62 34 
+           L80 34 
+           C86 34, 94 44, 94 54 
+           L94 72 
+           L62 72 Z"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+
+      {/* 5. 운전석 전면 창문 (Window) */}
+      <Path
+        d="M66 40 
+           L80 40 
+           C84 40, 88 48, 88 52 
+           L66 52 Z"
+        fill={stripeColor}
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+
+      {/* 6. 사이드 미러 / 헤드라이트 디테일 */}
+      <Rect
+        x="88"
+        y="56"
+        width="5"
+        height="7"
+        rx="1"
+        fill="#FFD54F"
+        stroke={OUTLINE}
+        strokeWidth="2"
+      />
+
+      {/* 7. 바퀴 3개 (뒤 2개 + 앞 1개) */}
+      {/* 뒷바퀴 1 */}
+      <Circle
+        cx="20"
+        cy="74"
+        r="10"
+        fill={wheelColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+      />
+      <Circle cx="20" cy="74" r="4" fill={stripeColor} />
+
+      {/* 뒷바퀴 2 */}
+      <Circle
+        cx="38"
+        cy="74"
+        r="10"
+        fill={wheelColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+      />
+      <Circle cx="38" cy="74" r="4" fill={stripeColor} />
+
+      {/* 앞바퀴 */}
+      <Circle
+        cx="78"
+        cy="74"
+        r="10"
+        fill={wheelColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+      />
+      <Circle cx="78" cy="74" r="4" fill={stripeColor} />
+    </Svg>
+  );
+};
+export const Scooter = ({
+  colorHex = "#42A5F5",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const frameColor = primary ?? colorHex;
+  const detailColor = secondary ?? "#FFEE58"; // 노란색 포인트
+  const accentColor = accent ?? "#1565C0";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 1. 뒷바퀴 및 펜더 */}
+      <Circle
+        cx="20"
+        cy="75"
+        r="9"
+        fill={accentColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+      <Circle cx="20" cy="75" r="4" fill={detailColor} />
+      <Path
+        d="M10 75 A10 10 0 0 1 30 75"
+        fill="none"
+        stroke={detailColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M10 75 A10 10 0 0 1 30 75"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      {/* 2. 앞바퀴 및 펜더 */}
+      <Circle
+        cx="80"
+        cy="75"
+        r="9"
+        fill={accentColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+      <Circle cx="80" cy="75" r="4" fill={detailColor} />
+      <Path
+        d="M70 75 A10 10 0 0 1 90 75"
+        fill="none"
+        stroke={detailColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M70 75 A10 10 0 0 1 90 75"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      {/* 3. 발판 데크 (Deck) */}
+      <Path
+        d="M20 78 L78 78 C81 78 82 72 78 72 L20 72 C17 72 17 78 20 78 Z"
+        fill={frameColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 4. 손잡이 기둥 (Stem - 사선형 이중 구조) */}
+      {/* 하단 고정 기둥 */}
+      <Path
+        d="M72 72 L78 48"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+      {/* 높이 조절부 (노란색 파이프) */}
+      <Path
+        d="M76 56 L81 36"
+        fill="none"
+        stroke={detailColor}
+        strokeWidth="4.5"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M76 56 L81 36"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      {/* 상단 기둥 */}
+      <Path
+        d="M79 44 L83 26"
+        fill="none"
+        stroke={detailColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+
+      {/* 5. 핸들바 (Handlebars) */}
+      <Path
+        d="M73 24 L91 24"
+        fill="none"
+        stroke={detailColor}
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M73 24 L91 24"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+export const Taxi = ({
+  colorHex = "#FFC107", // 택시 기본 노란색
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const stripeColor = secondary ?? shade(bodyColor, 0.3);
+  const wheelColor = accent ?? contrastAccent(bodyColor, "#212121", "#F5F5F5");
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 1. 지붕 위 TAXI 표시판 */}
+      <Rect
+        x="34"
+        y="12"
+        width="32"
+        height="14"
+        rx="2"
+        fill={wheelColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      {/* TAXI 텍스트 라인 심볼 */}
+      {/* <Path
+        d="M39 19 L43 19 M41 19 L41 23 M47 19 L47 23 M51 19 L55 19 M53 19 L53 23 M59 19 L63 19 M61 19 L61 23"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      /> */}
+
+      {/* 2. 하단 양옆 바퀴 (둥근 네모 형태) */}
+      <Rect
+        x="15"
+        y="70"
+        width="14"
+        height="16"
+        rx="6"
+        fill={wheelColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+      <Rect
+        x="70"
+        y="70"
+        width="14"
+        height="16"
+        rx="6"
+        fill={wheelColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 3. 자동차 차체 (정면 뷰) */}
+      <Path
+        d="M15 62 
+           L15 48 
+           C15 32, 28 26, 50 26 
+           C72 26, 85 32, 85 48 
+           L85 62 
+           C85 76, 75 78, 70 78 
+           L30 78 
+           C25 78, 15 76, 15 62 Z"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+
+      {/* 4. 좌우 사이드미러 */}
+      <Path
+        d="M15 46 L9 42 L13 39 Z"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M85 46 L91 42 L87 39 Z"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+
+      {/* 5. 전면 유리창 (Windshield) */}
+      <Path
+        d="M22 46 
+           C26 34, 36 30, 50 30 
+           C64 30, 74 34, 78 46 
+           Z"
+        fill={stripeColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 6. 양쪽 네모난 전조등 (Headlights) */}
+      <Rect
+        x="20"
+        y="58"
+        width="14"
+        height="10"
+        rx="2"
+        fill={stripeColor}
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+      />
+      <Rect
+        x="66"
+        y="58"
+        width="14"
+        height="10"
+        rx="2"
+        fill={stripeColor}
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+      />
+
+      {/* 7. 하단 범퍼 라인 */}
+      <Path
+        d="M22 72 L78 72"
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
 export const Car = ({
   colorHex = "#E53935",
   primary,
@@ -2995,73 +3540,221 @@ export const Train = ({
         strokeLinejoin="round"
       />
 
-      <Circle
-        cx="34"
-        cy="42"
-        r="10"
-        fill={stripeColor}
-        stroke={OUTLINE}
-        strokeWidth="3"
-      />
-
-      <Circle
-        cx="66"
-        cy="42"
-        r="10"
-        fill={stripeColor}
-        stroke={OUTLINE}
-        strokeWidth="3"
-      />
-
       <Rect
-        x="24"
-        y="58"
-        width="52"
-        height="8"
+        x="26"
+        y="33"
+        width="16"
+        height="18"
         rx="2"
+        fill="#fff"
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+      />
+      <Rect
+        x="58"
+        y="33"
+        width="16"
+        height="18"
+        rx="2"
+        fill="#fff"
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+      />
+
+      <Circle
+        cx="30"
+        cy="80"
+        r="7"
         fill={stripeColor}
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+      />
+
+      <Circle
+        cx="50"
+        cy="80"
+        r="7"
+        fill={stripeColor}
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+      />
+
+      <Circle
+        cx="70"
+        cy="80"
+        r="7"
+        fill={stripeColor}
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+      />
+      <Rect
+        x="26"
+        y="77"
+        width="48"
+        height="5"
+        rx="2"
+        fill={OUTLINE}
         opacity="0.9"
-      />
-
-      <Circle
-        cx="26"
-        cy="80"
-        r="7"
-        fill={stripeColor}
-        stroke={OUTLINE}
-        strokeWidth="2.5"
-      />
-
-      <Circle
-        cx="44"
-        cy="80"
-        r="7"
-        fill={stripeColor}
-        stroke={OUTLINE}
-        strokeWidth="2.5"
-      />
-
-      <Circle
-        cx="62"
-        cy="80"
-        r="7"
-        fill={stripeColor}
-        stroke={OUTLINE}
-        strokeWidth="2.5"
-      />
-
-      <Circle
-        cx="78"
-        cy="80"
-        r="7"
-        fill={stripeColor}
-        stroke={OUTLINE}
-        strokeWidth="2.5"
       />
     </Svg>
   );
 };
+// export const Train = ({
+//   colorHex = "#1E88E5",
+//   primary,
+//   secondary,
+//   accent,
+//   size = 70,
+// }: ItemSvgProps) => {
+//   const bodyColor = primary ?? colorHex;
+//   const stripeColor = secondary ?? shade(bodyColor, 0.25);
+//   const trimColor = accent ?? contrastAccent(bodyColor, "#5D4037", "#FFEE58");
 
+//   return (
+//     <Svg width={size} height={size} viewBox="0 0 100 100">
+//       {/* ===== 1. 기관차 (Locomotive) - 살짝 왼쪽으로 이동 ===== */}
+//       {/* 상단 굴뚝 */}
+//       <Rect x="8" y="14" width="8" height="12" rx="1.5" fill="#333" />
+//       <Rect x="6" y="8" width="12" height="6" rx="1.5" fill="#333" />
+
+//       {/* 기관차 본체 */}
+//       <Path
+//         d="M6 30 Q6 22 16 22 L52 22 Q60 22 60 34 L60 68 Q60 76 52 76 L14 76 Q6 76 6 68 Z"
+//         fill={bodyColor}
+//         stroke={OUTLINE}
+//         strokeWidth="4"
+//         strokeLinejoin="round"
+//       />
+
+//       {/* 전면 창문 (둥근 사각형 2개) */}
+//       <Rect
+//         x="10"
+//         y="28"
+//         width="16"
+//         height="18"
+//         rx="2"
+//         fill="#fff"
+//         stroke={OUTLINE}
+//         strokeWidth="2.5"
+//       />
+//       <Rect
+//         x="32"
+//         y="28"
+//         width="16"
+//         height="18"
+//         rx="2"
+//         fill="#fff"
+//         stroke={OUTLINE}
+//         strokeWidth="2.5"
+//       />
+
+//       {/* 전면 그릴 무늬 */}
+//       <Rect
+//         x="14"
+//         y="58"
+//         width="34"
+//         height="8"
+//         rx="2"
+//         fill={stripeColor}
+//         opacity="0.9"
+//       />
+
+//       {/* 기관차 바퀴 3개 */}
+//       <Circle
+//         cx="18"
+//         cy="80"
+//         r="6.5"
+//         fill={stripeColor}
+//         stroke={OUTLINE}
+//         strokeWidth="2.5"
+//       />
+//       <Circle
+//         cx="32"
+//         cy="80"
+//         r="6.5"
+//         fill={stripeColor}
+//         stroke={OUTLINE}
+//         strokeWidth="2.5"
+//       />
+//       <Circle
+//         cx="46"
+//         cy="80"
+//         r="6.5"
+//         fill={stripeColor}
+//         stroke={OUTLINE}
+//         strokeWidth="2.5"
+//       />
+
+//       {/* ===== 2. 연결부 및 기차칸 (Carriage) - 안쪽으로 당김 ===== */}
+//       {/* 연결 고리 */}
+//       <Rect x="60" y="50" width="10" height="6" fill={OUTLINE} />
+
+//       {/* 기차칸 본체 */}
+//       <Rect
+//         x="64"
+//         y="22"
+//         width="30"
+//         height="54"
+//         rx="4"
+//         fill={bodyColor}
+//         stroke={OUTLINE}
+//         strokeWidth="4"
+//         strokeLinejoin="round"
+//       />
+
+//       {/* 기차칸 창문 (작은 사각형 2개) */}
+//       <Rect
+//         x="70"
+//         y="28"
+//         width="8"
+//         height="12"
+//         rx="1"
+//         fill="#fff"
+//         stroke={OUTLINE}
+//         strokeWidth="2"
+//       />
+//       <Rect
+//         x="82"
+//         y="28"
+//         width="8"
+//         height="12"
+//         rx="1"
+//         fill="#fff"
+//         stroke={OUTLINE}
+//         strokeWidth="2"
+//       />
+
+//       {/* 기차칸 하단 띠 */}
+//       <Rect
+//         x="68"
+//         y="58"
+//         width="22"
+//         height="6"
+//         rx="1"
+//         fill={stripeColor}
+//         opacity="0.9"
+//       />
+
+//       {/* 기차칸 바퀴 2개 */}
+//       <Circle
+//         cx="72"
+//         cy="80"
+//         r="6.5"
+//         fill={stripeColor}
+//         stroke={OUTLINE}
+//         strokeWidth="2.5"
+//       />
+//       <Circle
+//         cx="88"
+//         cy="80"
+//         r="6.5"
+//         fill={stripeColor}
+//         stroke={OUTLINE}
+//         strokeWidth="2.5"
+//       />
+//     </Svg>
+//   );
+// };
 export const Airplane = ({
   colorHex = "#D6D9FA",
   primary,
@@ -3561,121 +4254,280 @@ export const Submarine = ({
   accent,
   size = 95,
 }: ItemSvgProps) => {
-  const bodyColor = primary ?? colorHex;
-  const windowColor = secondary ?? "#BBDEFB";
-  const detailColor = accent ?? "#1565C0";
+  const bodyColor = primary ?? "#B982C5";
+  const windowColor = secondary ?? "#9DDDF4";
+  const detailColor = accent ?? "#5D929D";
+  const outlineColor = OUTLINE;
 
   return (
     <Svg width={size} height={size} viewBox="0 0 100 100">
-      {/* 잠망경 */}
-      <Line
-        x1="57"
-        y1="34"
-        x2="57"
-        y2="21"
-        stroke={detailColor}
-        strokeWidth="4"
-        strokeLinecap="round"
-      />
-
+      {/* 물결 */}
       <Path
-        d="M57 21 Q57 16 64 16"
+        d="M8 25 Q13 20 18 25 T28 25"
         fill="none"
         stroke={detailColor}
-        strokeWidth="4"
+        strokeWidth={2.5}
         strokeLinecap="round"
       />
-
-      {/* 잠망경 받침 */}
-      <Rect
-        x="51"
-        y="31"
-        width="12"
-        height="8"
-        rx="2"
-        fill={detailColor}
-        stroke={OUTLINE}
-        strokeWidth="2.5"
-      />
-
-      {/* 몸체 */}
       <Path
-        d="M13 58
-           Q13 39 30 35
-           L70 35
-           Q87 39 87 58
-           Q87 76 70 80
-           L30 80
-           Q13 76 13 58 Z"
+        d="M68 18 Q73 13 78 18 T88 18"
+        fill="none"
+        stroke={detailColor}
+        strokeWidth={2.5}
+        strokeLinecap="round"
+      />
+      <Path
+        d="M75 29 Q80 24 85 29 T95 29"
+        fill="none"
+        stroke={detailColor}
+        strokeWidth={2}
+        strokeLinecap="round"
+        opacity={0.75}
+      />
+
+      {/* 잠망경 */}
+      <Path
+        d="M42 39 L42 24 Q42 21 46 21 L52 21 Q56 21 56 25 L56 39"
+        fill="none"
+        stroke={outlineColor}
+        strokeWidth={3.5}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M42 24 L42 15 Q42 10 47 10 Q52 10 52 15 L52 21"
         fill={bodyColor}
-        stroke={OUTLINE}
-        strokeWidth="4"
+        stroke={outlineColor}
+        strokeWidth={3.5}
+        strokeLinejoin="round"
       />
 
-      {/* 창문 */}
-      <Circle
-        cx="31"
-        cy="56"
-        r="7"
-        fill={windowColor}
-        stroke={OUTLINE}
-        strokeWidth="3"
+      {/* 잠망경 상단 */}
+      <Rect
+        x={39}
+        y={8}
+        width={10}
+        height={14}
+        rx={5}
+        fill="#FDD835"
+        stroke={outlineColor}
+        strokeWidth={2.5}
       />
 
-      <Circle
-        cx="50"
-        cy="56"
-        r="7"
-        fill={windowColor}
-        stroke={OUTLINE}
-        strokeWidth="3"
+      {/* 꼬리 지느러미 - 이미지처럼 뒤쪽으로 튀어나온 형태 */}
+      <Path
+        d="
+          M83 48
+          L94 48
+          Q97 48 96 52
+          L91 64
+          L96 76
+          Q97 80 93 80
+          L84 80
+          Q81 80 80 76
+          L77 65
+          L80 54
+          Q81 49 83 48
+          Z
+        "
+        fill={bodyColor}
+        stroke={outlineColor}
+        strokeWidth={3}
+        strokeLinejoin="round"
       />
 
-      <Circle
-        cx="69"
-        cy="56"
-        r="7"
-        fill={windowColor}
-        stroke={OUTLINE}
-        strokeWidth="3"
+      {/* 잠수함 몸체 */}
+      <Path
+        d="
+          M12 60
+          Q12 43 29 42
+          L68 42
+          Q84 43 87 58
+          Q90 74 72 79
+          L29 79
+          Q12 76 12 60
+          Z
+        "
+        fill={bodyColor}
+        stroke={outlineColor}
+        strokeWidth={3.5}
+        strokeLinejoin="round"
       />
+
+      {/* 몸체의 은은한 하이라이트 */}
+      <Path
+        d="M20 51 Q30 44 46 45 L68 45"
+        fill="none"
+        stroke="#FFFFFF"
+        strokeWidth={2}
+        strokeLinecap="round"
+        opacity={0.45}
+      />
+
+      {/* 창문 테두리 */}
+      {[30, 49, 68].map((x) => (
+        <Circle
+          key={x}
+          cx={x}
+          cy={60}
+          r={7}
+          fill="#FFF8E8"
+          stroke={outlineColor}
+          strokeWidth={2.5}
+        />
+      ))}
+
+      {/* 창문 안쪽 */}
+      {[30, 49, 68].map((x) => (
+        <Circle
+          key={x}
+          cx={x}
+          cy={60}
+          r={4.5}
+          fill={windowColor}
+          stroke={outlineColor}
+          strokeWidth={1.5}
+        />
+      ))}
 
       {/* 창문 반짝임 */}
-      <Circle cx="29" cy="54" r="2" fill={WHITE} />
-      <Circle cx="48" cy="54" r="2" fill={WHITE} />
-      <Circle cx="67" cy="54" r="2" fill={WHITE} />
+      {[30, 49, 68].map((x) => (
+        <Circle key={x} cx={x - 1.5} cy={58} r={1} fill="#FFFFFF" />
+      ))}
 
-      {/* 아래 지느러미 */}
+      {/* 아래쪽 작은 지느러미 */}
       <Path
-        d="M43 79 L39 87 L49 81 Z"
-        fill={detailColor}
-        stroke={OUTLINE}
-        strokeWidth="2.5"
-      />
-
-      {/* 뒤쪽 프로펠러 */}
-      <Line
-        x1="87"
-        y1="50"
-        x2="94"
-        y2="66"
-        stroke={detailColor}
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-
-      <Line
-        x1="94"
-        y1="50"
-        x2="87"
-        y2="66"
-        stroke={detailColor}
-        strokeWidth="3"
-        strokeLinecap="round"
+        d="M43 78 L40 84 L50 79"
+        fill={bodyColor}
+        stroke={outlineColor}
+        strokeWidth={2.5}
+        strokeLinejoin="round"
       />
     </Svg>
   );
 };
+
+// export const Submarine = ({
+//   colorHex = "#FDD835",
+//   primary,
+//   secondary,
+//   accent,
+//   size = 95,
+// }: ItemSvgProps) => {
+//   const bodyColor = primary ?? colorHex;
+//   const windowColor = secondary ?? "#BBDEFB";
+//   const detailColor = accent ?? "#1565C0";
+
+//   return (
+//     <Svg width={size} height={size} viewBox="0 0 100 100">
+//       {/* 잠망경 */}
+//       <Line
+//         x1="57"
+//         y1="34"
+//         x2="57"
+//         y2="21"
+//         stroke={detailColor}
+//         strokeWidth="4"
+//         strokeLinecap="round"
+//       />
+
+//       <Path
+//         d="M57 21 Q57 16 64 16"
+//         fill="none"
+//         stroke={detailColor}
+//         strokeWidth="4"
+//         strokeLinecap="round"
+//       />
+
+//       {/* 잠망경 받침 */}
+//       <Rect
+//         x="51"
+//         y="31"
+//         width="12"
+//         height="8"
+//         rx="2"
+//         fill={detailColor}
+//         stroke={OUTLINE}
+//         strokeWidth="2.5"
+//       />
+
+//       {/* 몸체 */}
+//       <Path
+//         d="M13 58
+//            Q13 39 30 35
+//            L70 35
+//            Q87 39 87 58
+//            Q87 76 70 80
+//            L30 80
+//            Q13 76 13 58 Z"
+//         fill={bodyColor}
+//         stroke={OUTLINE}
+//         strokeWidth="4"
+//       />
+
+//       {/* 창문 */}
+//       <Circle
+//         cx="31"
+//         cy="56"
+//         r="7"
+//         fill={windowColor}
+//         stroke={OUTLINE}
+//         strokeWidth="3"
+//       />
+
+//       <Circle
+//         cx="50"
+//         cy="56"
+//         r="7"
+//         fill={windowColor}
+//         stroke={OUTLINE}
+//         strokeWidth="3"
+//       />
+
+//       <Circle
+//         cx="69"
+//         cy="56"
+//         r="7"
+//         fill={windowColor}
+//         stroke={OUTLINE}
+//         strokeWidth="3"
+//       />
+
+//       {/* 창문 반짝임 */}
+//       <Circle cx="29" cy="54" r="2" fill={WHITE} />
+//       <Circle cx="48" cy="54" r="2" fill={WHITE} />
+//       <Circle cx="67" cy="54" r="2" fill={WHITE} />
+
+//       {/* 아래 지느러미 */}
+//       <Path
+//         d="M43 79 L39 87 L49 81 Z"
+//         fill={detailColor}
+//         stroke={OUTLINE}
+//         strokeWidth="2.5"
+//       />
+
+//       {/* 뒤쪽 프로펠러 */}
+//       <Line
+//         x1="87"
+//         y1="50"
+//         x2="94"
+//         y2="66"
+//         stroke={detailColor}
+//         strokeWidth="3"
+//         strokeLinecap="round"
+//       />
+
+//       <Line
+//         x1="94"
+//         y1="50"
+//         x2="87"
+//         y2="66"
+//         stroke={detailColor}
+//         strokeWidth="3"
+//         strokeLinecap="round"
+//       />
+//     </Svg>
+//   );
+// };
 export const Rocket = ({
   colorHex = "#ECEFF1",
   primary,
@@ -4103,14 +4955,14 @@ export const Subway = ({
 
   return (
     <Svg width={size} height={size} viewBox="0 0 100 100">
-      {/* 차량 몸체 */}
+      {/* 차량 몸체 (날씬하게 조정) */}
       <Path
-        d="M15 70
-           L15 37
-           Q15 28 25 28
-           L75 28
-           Q85 28 85 37
-           L85 70
+        d="M25 70 
+           L25 32 
+           Q25 24 35 24 
+           L65 24 
+           Q75 24 75 32 
+           L75 70 
            Z"
         fill={bodyColor}
         stroke={OUTLINE}
@@ -4118,15 +4970,15 @@ export const Subway = ({
         strokeLinejoin="round"
       />
 
-      {/* 넓은 전면 유리 */}
+      {/* 전면 유리 (몸체에 맞춰 날씬하게 조정) */}
       <Path
-        d="M25 35
-           L75 35
-           Q79 35 79 40
-           L79 52
-           L21 52
-           L21 40
-           Q21 35 25 35 Z"
+        d="M32 30 
+           L68 30 
+           Q72 30 72 35 
+           L72 47 
+           L28 47 
+           L28 35 
+           Q28 30 32 30 Z"
         fill={windowColor}
         stroke={OUTLINE}
         strokeWidth="3"
@@ -4135,38 +4987,38 @@ export const Subway = ({
       {/* 중앙 전면 구분 */}
       <Line
         x1="50"
-        y1="35"
+        y1="30"
         x2="50"
-        y2="52"
+        y2="47"
         stroke={detailColor}
         strokeWidth="2.5"
       />
 
       {/* 하단 띠 */}
-      <Rect x="16" y="55" width="68" height="8" fill={detailColor} />
+      <Rect x="26" y="50" width="48" height="8" fill={detailColor} />
 
       {/* 문 */}
       <Line
-        x1="34"
-        y1="63"
-        x2="34"
-        y2="72"
+        x1="40"
+        y1="58"
+        x2="40"
+        y2="66"
         stroke={secondary ?? "#FFFFFF"}
         strokeWidth="2"
       />
 
       <Line
-        x1="66"
-        y1="63"
-        x2="66"
-        y2="72"
+        x1="60"
+        y1="58"
+        x2="60"
+        y2="66"
         stroke={secondary ?? "#FFFFFF"}
         strokeWidth="2"
       />
 
       {/* 바퀴 */}
       <Circle
-        cx="29"
+        cx="35"
         cy="76"
         r="8"
         fill="#333"
@@ -4175,7 +5027,7 @@ export const Subway = ({
       />
 
       <Circle
-        cx="71"
+        cx="65"
         cy="76"
         r="8"
         fill="#333"
@@ -4185,8 +5037,8 @@ export const Subway = ({
 
       {/* 전조등 */}
       <Circle
-        cx="25"
-        cy="58"
+        cx="32"
+        cy="53"
         r="3"
         fill={secondary ?? "#FFF9C4"}
         stroke={OUTLINE}
@@ -4194,8 +5046,8 @@ export const Subway = ({
       />
 
       <Circle
-        cx="75"
-        cy="58"
+        cx="68"
+        cy="53"
         r="3"
         fill={secondary ?? "#FFF9C4"}
         stroke={OUTLINE}
@@ -4204,6 +5056,120 @@ export const Subway = ({
     </Svg>
   );
 };
+// export const Subway = ({
+//   colorHex = "#ECEFF1",
+//   primary,
+//   secondary,
+//   accent,
+//   size = 95,
+// }: ItemSvgProps) => {
+//   const bodyColor = primary ?? colorHex;
+//   const windowColor = secondary ?? "#90CAF9";
+//   const detailColor = accent ?? "#1565C0";
+
+//   return (
+//     <Svg width={size} height={size} viewBox="0 0 100 100">
+//       {/* 차량 몸체 */}
+//       <Path
+//         d="M15 70
+//            L15 37
+//            Q15 28 25 28
+//            L75 28
+//            Q85 28 85 37
+//            L85 70
+//            Z"
+//         fill={bodyColor}
+//         stroke={OUTLINE}
+//         strokeWidth="4"
+//         strokeLinejoin="round"
+//       />
+
+//       {/* 넓은 전면 유리 */}
+//       <Path
+//         d="M25 35
+//            L75 35
+//            Q79 35 79 40
+//            L79 52
+//            L21 52
+//            L21 40
+//            Q21 35 25 35 Z"
+//         fill={windowColor}
+//         stroke={OUTLINE}
+//         strokeWidth="3"
+//       />
+
+//       {/* 중앙 전면 구분 */}
+//       <Line
+//         x1="50"
+//         y1="35"
+//         x2="50"
+//         y2="52"
+//         stroke={detailColor}
+//         strokeWidth="2.5"
+//       />
+
+//       {/* 하단 띠 */}
+//       <Rect x="16" y="55" width="68" height="8" fill={detailColor} />
+
+//       {/* 문 */}
+//       <Line
+//         x1="34"
+//         y1="63"
+//         x2="34"
+//         y2="72"
+//         stroke={secondary ?? "#FFFFFF"}
+//         strokeWidth="2"
+//       />
+
+//       <Line
+//         x1="66"
+//         y1="63"
+//         x2="66"
+//         y2="72"
+//         stroke={secondary ?? "#FFFFFF"}
+//         strokeWidth="2"
+//       />
+
+//       {/* 바퀴 */}
+//       <Circle
+//         cx="29"
+//         cy="76"
+//         r="8"
+//         fill="#333"
+//         stroke={OUTLINE}
+//         strokeWidth="3"
+//       />
+
+//       <Circle
+//         cx="71"
+//         cy="76"
+//         r="8"
+//         fill="#333"
+//         stroke={OUTLINE}
+//         strokeWidth="3"
+//       />
+
+//       {/* 전조등 */}
+//       <Circle
+//         cx="25"
+//         cy="58"
+//         r="3"
+//         fill={secondary ?? "#FFF9C4"}
+//         stroke={OUTLINE}
+//         strokeWidth="1.5"
+//       />
+
+//       <Circle
+//         cx="75"
+//         cy="58"
+//         r="3"
+//         fill={secondary ?? "#FFF9C4"}
+//         stroke={OUTLINE}
+//         strokeWidth="1.5"
+//       />
+//     </Svg>
+//   );
+// };
 export const CementMixer = ({
   colorHex = "#FFA726",
   primary,
@@ -4867,6 +5833,13 @@ export const Owl = ({
         ry="9"
         fill={secondary ?? "#D7CCC8"}
         opacity="0.75"
+      />
+      <Path
+        d="M38 89 L35 95 M38 89 L42 95 M62 89 L58 95 M62 89 L66 95"
+        fill="none"
+        stroke={secondary}
+        strokeWidth="3.5"
+        strokeLinecap="round"
       />
     </Svg>
   );
@@ -6064,7 +7037,7 @@ export const Peach = ({
   primary,
   secondary,
   accent,
-  size = 85,
+  size = 70,
 }: ItemSvgProps) => {
   const fruitColor = primary ?? colorHex;
   const highlightColor = secondary ?? "#FBE9E7";
@@ -6073,8 +7046,9 @@ export const Peach = ({
   return (
     <Svg width={size} height={size} viewBox="0 0 100 100">
       {/* 🍑 1. 더 통통하고 뚱뚱해진 복숭아 몸통 */}
-      <Path
-        d="
+      <G transform="scale(0.7) translate(30,20)">
+        <Path
+          d="
           M 50 25
           C 36 17, 10 24, 10 52
           C 10 77, 32 88, 50 92
@@ -6082,40 +7056,41 @@ export const Peach = ({
           C 90 24, 64 17, 50 25
           Z
         "
-        fill={fruitColor}
-        stroke={OUTLINE}
-        strokeWidth="4"
-        strokeLinejoin="round"
-      />
+          fill={fruitColor}
+          stroke={OUTLINE}
+          strokeWidth="4"
+          strokeLinejoin="round"
+        />
 
-      {/* 🍑 2. 부드러운 곡선 형태의 중앙 골(groove) 선 */}
-      <Path
-        d="M 50 25 C 41 38, 43 55, 50 67"
-        fill="none"
-        stroke={shade(fruitColor, -0.18)}
-        strokeWidth="3.5"
-        strokeLinecap="round"
-        opacity="0.85"
-      />
+        {/* 🍑 2. 부드러운 곡선 형태의 중앙 골(groove) 선 */}
+        <Path
+          d="M 50 25 C 41 38, 43 55, 50 67"
+          fill="none"
+          stroke={shade(fruitColor, -0.18)}
+          strokeWidth="3.5"
+          strokeLinecap="round"
+          opacity="0.85"
+        />
 
-      {/* 🍃 3. 상단 잎사귀 */}
-      <Path
-        d="M 51 25 Q 64 13, 74 19 Q 67 31, 52 30"
-        fill={accentColor}
-        stroke={OUTLINE}
-        strokeWidth="3"
-        strokeLinejoin="round"
-      />
+        {/* 🍃 3. 상단 잎사귀 */}
+        <Path
+          d="M 51 25 Q 64 13, 74 19 Q 67 31, 52 30"
+          fill={accentColor}
+          stroke={OUTLINE}
+          strokeWidth="3"
+          strokeLinejoin="round"
+        />
 
-      {/* ✨ 4. 볼록한 볼륨감을 살려주는 은은한 광택 하이라이트 */}
-      <Path
-        d="M 28 38 Q 21 52 28 65"
-        fill="none"
-        stroke={highlightColor}
-        strokeWidth="4.5"
-        strokeLinecap="round"
-        opacity="0.75"
-      />
+        {/* ✨ 4. 볼록한 볼륨감을 살려주는 은은한 광택 하이라이트 */}
+        <Path
+          d="M 28 38 Q 21 52 28 65"
+          fill="none"
+          stroke={highlightColor}
+          strokeWidth="4.5"
+          strokeLinecap="round"
+          opacity="0.75"
+        />
+      </G>
     </Svg>
   );
 };
@@ -7364,7 +8339,7 @@ export const CircleClock = ({
         y1="50"
         x2="50"
         y2="34"
-        stroke={mainColor}
+        stroke={centerColor}
         strokeWidth="4"
         strokeLinecap="round"
       />
@@ -7374,12 +8349,12 @@ export const CircleClock = ({
         y1="50"
         x2="64"
         y2="42"
-        stroke={mainColor}
+        stroke={centerColor}
         strokeWidth="4"
         strokeLinecap="round"
       />
 
-      <Circle cx="50" cy="50" r="4" fill={centerColor} />
+      <Circle cx="50" cy="50" r="4" fill={mainColor} />
     </Svg>
   );
 };
@@ -7830,37 +8805,39 @@ export const RoundBalloon = ({
 
   return (
     <Svg width={size} height={size} viewBox="0 0 100 100">
-      <Circle
-        cx="50"
-        cy="45"
-        r="30"
-        fill={balloonColor}
-        stroke={OUTLINE}
-        strokeWidth="4"
-      />
+      <G transform="scale(0.8) translate(15, 0)">
+        <Circle
+          cx="50"
+          cy="45"
+          r="30"
+          fill={balloonColor}
+          stroke={OUTLINE}
+          strokeWidth="4"
+        />
 
-      <Polygon
-        points="47,73 53,73 50,82"
-        fill={knotColor}
-        stroke={OUTLINE}
-        strokeWidth="3"
-      />
+        <Polygon
+          points="47,73 53,73 50,82"
+          fill={knotColor}
+          stroke={OUTLINE}
+          strokeWidth="3"
+        />
+        <Path
+          d="M50 82 Q55 90 48 98 T52 115"
+          stroke={OUTLINE}
+          strokeWidth="2.5"
+          fill="none"
+          strokeLinecap="round"
+        />
 
-      <Path
-        d="M50 82 Q54 88 50 92"
-        stroke={OUTLINE}
-        strokeWidth="2.5"
-        fill="none"
-      />
-
-      <Path
-        d="M34 30 Q40 24 47 26"
-        stroke={highlightColor}
-        strokeWidth="4"
-        strokeLinecap="round"
-        fill="none"
-        opacity={0.6}
-      />
+        <Path
+          d="M34 30 Q40 24 47 26"
+          stroke={highlightColor}
+          strokeWidth="4"
+          strokeLinecap="round"
+          fill="none"
+          opacity={0.6}
+        />
+      </G>
     </Svg>
   );
 };
@@ -7877,6 +8854,7 @@ export const FullMoon = ({
 
   return (
     <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 보름달 본체 */}
       <Circle
         cx="50"
         cy="50"
@@ -7886,11 +8864,13 @@ export const FullMoon = ({
         strokeWidth="4"
       />
 
+      {/* 크레이터 (달 표면 무늬) */}
       <Circle cx="37" cy="40" r="6" fill={craterColor} opacity={0.18} />
       <Circle cx="61" cy="37" r="4" fill={craterColor} opacity={0.18} />
       <Circle cx="63" cy="60" r="7" fill={craterColor} opacity={0.15} />
       <Circle cx="40" cy="65" r="4" fill={craterColor} opacity={0.18} />
 
+      {/* 상단 입체 하이라이트 */}
       <Path
         d="M30 30 Q37 23 46 21"
         fill="none"
@@ -7899,6 +8879,39 @@ export const FullMoon = ({
         strokeLinecap="round"
         opacity={0.7}
       />
+
+      {/* 얼굴 그룹 (정중앙 50, 50 기준 대칭 정렬) */}
+      {/* 왼쪽 눈 */}
+      <Path
+        d="M 43 47 Q 45 44 47 47"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinecap="round"
+      />
+
+      {/* 오른쪽 눈 */}
+      <Path
+        d="M 53 47 Q 55 44 57 47"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinecap="round"
+      />
+
+      {/* 정중앙 작은 미소 */}
+      <Path
+        d="M 46 54 Q 50 58 54 54"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinecap="round"
+      />
+
+      {/* 왼쪽 볼터치 */}
+      <Circle cx="39" cy="51" r="2.5" fill={highlightColor} opacity={0.65} />
+      {/* 오른쪽 볼터치 */}
+      <Circle cx="61" cy="51" r="2.5" fill={highlightColor} opacity={0.65} />
     </Svg>
   );
 };
@@ -8805,7 +9818,7 @@ export const SquareClock = ({
         y1="50"
         x2="50"
         y2="34"
-        stroke={frameColor}
+        stroke={centerColor}
         strokeWidth="4"
         strokeLinecap="round"
       />
@@ -8815,12 +9828,12 @@ export const SquareClock = ({
         y1="50"
         x2="63"
         y2="58"
-        stroke={frameColor}
+        stroke={centerColor}
         strokeWidth="4"
         strokeLinecap="round"
       />
 
-      <Circle cx="50" cy="50" r="4" fill={centerColor} />
+      <Circle cx="50" cy="50" r="4" fill={frameColor} />
     </Svg>
   );
 };
@@ -10177,17 +11190,17 @@ export const Sailboat = ({
       />
 
       {/* 왼쪽 돛 */}
-      <Polygon
+      {/* <Polygon
         points="48,18 22,57 48,57"
         fill={sailColor}
         stroke={OUTLINE}
         strokeWidth="3"
         strokeLinejoin="round"
-      />
+      /> */}
 
       {/* 오른쪽 돛 */}
       <Polygon
-        points="53,23 53,57 78,57"
+        points="53,17 53,51 78,51"
         fill={sailColor}
         stroke={OUTLINE}
         strokeWidth="3"
@@ -10234,63 +11247,27 @@ export const TriangleCookie = ({
         strokeWidth="4"
         strokeLinejoin="round"
       />
+      {/* 초코칩 */}
 
-      <Path
-        d="M44 33 L49 43 L39 43 Z"
-        fill={chipColor}
-        stroke={OUTLINE}
-        strokeWidth="1"
-        strokeLinejoin="round"
-      />
+      <Circle cx="60" cy="45" r="3.5" fill={chipColor} />
 
-      <Path
-        d="M60 41 L65 51 L55 51 Z"
-        fill={chipColor}
-        stroke={OUTLINE}
-        strokeWidth="1"
-        strokeLinejoin="round"
-      />
+      <Circle cx="33" cy="58" r="2.8" fill={chipColor} />
 
-      <Path
-        d="M36 51 L41 61 L31 61 Z"
-        fill={chipColor}
-        stroke={OUTLINE}
-        strokeWidth="1"
-        strokeLinejoin="round"
-      />
+      <Circle cx="52" cy="63" r="3.2" fill={chipColor} />
 
-      <Path
-        d="M52 58 L57 68 L47 68 Z"
-        fill={chipColor}
-        stroke={OUTLINE}
-        strokeWidth="1"
-        strokeLinejoin="round"
-      />
+      <Circle cx="68" cy="60" r="3" fill={chipColor} />
 
-      <Path
-        d="M66 60 L71 70 L61 70 Z"
-        fill={chipColor}
-        stroke={OUTLINE}
-        strokeWidth="1"
-        strokeLinejoin="round"
-      />
-
-      <Path
-        d="M47 67.5 L51.5 76.5 L42.5 76.5 Z"
-        fill={chipColor}
-        stroke={OUTLINE}
-        strokeWidth="1"
-        strokeLinejoin="round"
-      />
-
+      <Circle cx="47" cy="75" r="2.8" fill={chipColor} />
+      <Circle cx="48" cy="33" r="2" fill={chipColor} />
+      <Circle cx="43" cy="52" r="1.8" fill={chipColor} />
       <Ellipse
-        cx="43"
-        cy="29"
-        rx="7"
-        ry="3"
+        cx="42"
+        cy="31"
+        rx="10"
+        ry="4"
         fill={highlightColor}
-        opacity={0.25}
-        transform="rotate(-30 43 29)"
+        opacity={0.22}
+        transform="rotate(-30 42 31)"
       />
     </Svg>
   );
@@ -10716,10 +11693,10 @@ export const HeartButton = ({
         strokeWidth="4"
       />
 
-      <Circle cx="40" cy="42" r="5" fill={WHITE} />
-      <Circle cx="60" cy="42" r="5" fill={WHITE} />
-      <Circle cx="40" cy="60" r="5" fill={WHITE} />
-      <Circle cx="60" cy="60" r="5" fill={WHITE} />
+      <Circle cx="40" cy="42" r="2.5" fill={WHITE} />
+      <Circle cx="60" cy="42" r="2.5" fill={WHITE} />
+      <Circle cx="40" cy="60" r="2.5" fill={WHITE} />
+      <Circle cx="60" cy="60" r="2.5" fill={WHITE} />
 
       <Ellipse
         cx="37"
@@ -10773,7 +11750,7 @@ export const HeartClock = ({
         y1="49"
         x2="50"
         y2="38"
-        stroke={mainColor}
+        stroke={centerColor}
         strokeWidth="3"
         strokeLinecap="round"
       />
@@ -10783,12 +11760,12 @@ export const HeartClock = ({
         y1="49"
         x2="59"
         y2="54"
-        stroke={mainColor}
+        stroke={centerColor}
         strokeWidth="3"
         strokeLinecap="round"
       />
 
-      <Circle cx="50" cy="49" r="3" fill={centerColor} />
+      <Circle cx="50" cy="49" r="3" fill={mainColor} />
     </Svg>
   );
 };
@@ -11392,10 +12369,10 @@ export const StarButton = ({
         strokeLinejoin="round"
       />
 
-      <Circle cx="42" cy="40" r="4" fill={WHITE} />
-      <Circle cx="58" cy="40" r="4" fill={WHITE} />
-      <Circle cx="42" cy="56" r="4" fill={WHITE} />
-      <Circle cx="58" cy="56" r="4" fill={WHITE} />
+      <Circle cx="42" cy="40" r="2.5" fill={WHITE} />
+      <Circle cx="58" cy="40" r="2.5" fill={WHITE} />
+      <Circle cx="42" cy="56" r="2.5" fill={WHITE} />
+      <Circle cx="58" cy="56" r="2.5" fill={WHITE} />
 
       <Ellipse
         cx="38"
@@ -11435,26 +12412,26 @@ export const StarClock = ({
           13,37
           39,33
         "
-        fill={mainColor}
+        fill={handColor}
         stroke={OUTLINE}
         strokeWidth="4"
         strokeLinejoin="round"
       />
 
-      <Path
+      {/* <Path
         d="M50 30 L55.5 40.5 L68 42.4 L59 51.4 L61.2 64 L50 58 L38.8 64 L41 51.4 L32 42.4 L44.5 40.5 Z"
-        fill={WHITE}
+        fill={handColor}
         stroke={OUTLINE}
         strokeWidth="3"
         strokeLinejoin="round"
-      />
+      /> */}
 
       <Line
         x1="50"
         y1="49"
         x2="50"
-        y2="38"
-        stroke={handColor}
+        y2="30"
+        stroke={centerColor}
         strokeWidth="3"
         strokeLinecap="round"
       />
@@ -11464,12 +12441,12 @@ export const StarClock = ({
         y1="49"
         x2="59"
         y2="54"
-        stroke={handColor}
+        stroke={centerColor}
         strokeWidth="3"
         strokeLinecap="round"
       />
 
-      <Circle cx="50" cy="49" r="3" fill={centerColor} />
+      <Circle cx="50" cy="49" r="3" fill={OUTLINE} />
     </Svg>
   );
 };
@@ -12354,53 +13331,137 @@ export const TriangleSign = ({
 // ==================================================
 // 하트 열쇠고리
 // ==================================================
+// export const HeartKeychain = ({
+//   primary = "#F48FB1",
+//   secondary = "#FCE4EC",
+//   accent = "#B0BEC5",
+//   size = 85,
+// }: ItemSvgProps) => {
+//   return (
+//     <Svg width={size} height={size} viewBox="0 0 100 100">
+//       {/* 금속 고리 */}
+//       <Circle
+//         cx="50"
+//         cy="13"
+//         r="9"
+//         fill="none"
+//         stroke={accent}
+//         strokeWidth={4}
+//       />
+
+//       {/* 연결 고리 */}
+//       <Path
+//         d="M50 22 L50 28"
+//         stroke={accent}
+//         strokeWidth={5}
+//         strokeLinecap="round"
+//       />
+
+//       {/* 하트 장식 */}
+//       <Path
+//         d={HEART_PATH}
+//         fill={primary}
+//         stroke={OUTLINE}
+//         strokeWidth={4}
+//         strokeLinejoin="round"
+//       />
+
+//       {/* 하트 광택 */}
+//       <Path
+//         d="M32 35 Q34 28 41 30"
+//         fill="none"
+//         stroke={secondary}
+//         strokeWidth={4}
+//         strokeLinecap="round"
+//       />
+//     </Svg>
+//   );
+// };
+
 export const HeartKeychain = ({
-  primary = "#F48FB1",
-  secondary = "#FCE4EC",
-  accent = "#B0BEC5",
+  colorHex = "#F48FB1",
+  primary,
+  secondary,
+  accent,
   size = 85,
 }: ItemSvgProps) => {
+  const heartColor = primary ?? colorHex;
+  const highlightColor = secondary ?? "#FCE4EC";
+  const ringColor = accent ?? "#B0BEC5";
+
   return (
     <Svg width={size} height={size} viewBox="0 0 100 100">
       {/* 금속 고리 */}
       <Circle
         cx="50"
-        cy="13"
-        r="9"
+        cy="15"
+        r="3"
         fill="none"
-        stroke={accent}
+        stroke={ringColor}
         strokeWidth={4}
       />
 
+      {/* 연결 체인 마디 추가 */}
+      <G>
+        <Path
+          d="M50 22 C52 26 48 30 50 34"
+          fill="none"
+          stroke={ringColor}
+          strokeWidth={4.5}
+          strokeLinecap="round"
+        />
+        <Path
+          d="M50 34 C52 38 48 42 50 46"
+          fill="none"
+          stroke={ringColor}
+          strokeWidth={4.5}
+          strokeLinecap="round"
+        />
+      </G>
+
       {/* 연결 고리 */}
       <Path
-        d="M50 22 L50 28"
-        stroke={accent}
+        d="M50 46 L50 51"
+        stroke={ringColor}
         strokeWidth={5}
         strokeLinecap="round"
       />
 
-      {/* 하트 장식 */}
-      <Path
-        d={HEART_PATH}
-        fill={primary}
-        stroke={OUTLINE}
-        strokeWidth={4}
-        strokeLinejoin="round"
-      />
+      {/* 하트 장식 (위치가 아래로 내려오고 얼굴이 포함된 버전) */}
+      <G transform="translate(10.5, 32) scale(0.8)">
+        <Path
+          d={HEART_PATH}
+          fill={heartColor}
+          stroke={OUTLINE}
+          strokeWidth={4}
+          strokeLinejoin="round"
+        />
 
-      {/* 하트 광택 */}
-      <Path
-        d="M32 35 Q34 28 41 30"
-        fill="none"
-        stroke={secondary}
-        strokeWidth={4}
-        strokeLinecap="round"
-      />
+        {/* 하트 광택 */}
+        <Path
+          d="M32 35 Q34 28 41 30"
+          fill="none"
+          stroke={highlightColor}
+          strokeWidth={4}
+          strokeLinecap="round"
+        />
+
+        {/* 귀여운 얼굴 (눈, 입, 볼터치) */}
+        <Circle cx="44" cy="46" r="2" fill={OUTLINE} />
+        <Circle cx="56" cy="46" r="2" fill={OUTLINE} />
+        <Path
+          d="M 47 51 Q 50 54 53 51"
+          fill="none"
+          stroke={OUTLINE}
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+        <Circle cx="39" cy="49" r="3" fill="#E91E63" opacity={0.5} />
+        <Circle cx="61" cy="49" r="3" fill="#E91E63" opacity={0.5} />
+      </G>
     </Svg>
   );
 };
-
 // ==================================================
 // 하트 모양 잎사귀
 // ==================================================
@@ -12462,7 +13523,202 @@ export const HeartLeaf = ({
     </Svg>
   );
 };
+// 3. 밀짚모자 (StrawHat)
+export const StrawHat = ({
+  primary = "#E7C783",
+  secondary = "#F8E7B5",
+  accent = "#A67C3D",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    {/* 1. 넓은 모자 챙 (Brim) */}
+    <Ellipse
+      cx={50}
+      cy={68}
+      rx={44}
+      ry={18}
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={4}
+    />
 
+    {/* 챙 안쪽 질감 표현을 위한 결 무늬 선들 */}
+    <Path
+      d="M18 68 Q50 84 82 68"
+      fill="none"
+      stroke={accent}
+      strokeWidth={2}
+      strokeLinecap="round"
+      opacity={0.6}
+    />
+    <Path
+      d="M26 73 Q50 89 74 73"
+      fill="none"
+      stroke={accent}
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      opacity={0.4}
+    />
+
+    {/* 2. 모자 크라운 (머리 윗부분 - y축 방향으로 아래로 내림) */}
+    <Path
+      d="M26 68 C24 45 34 30 50 30 C66 30 76 45 74 68 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={4}
+      strokeLinejoin="round"
+    />
+
+    {/* 크라운 윗면의 둥근 입체감 라인 */}
+    <Path
+      d="M34 37 Q50 32 66 37"
+      stroke={accent}
+      strokeWidth={2}
+      fill="none"
+      strokeLinecap="round"
+    />
+
+    {/* 크라운 중간 짜임새 결 무늬 */}
+    <Path
+      d="M28 50 Q50 55 72 50"
+      stroke={accent}
+      strokeWidth={1.5}
+      fill="none"
+      opacity={0.6}
+    />
+    <Path
+      d="M26 59 Q50 64 74 59"
+      stroke={accent}
+      strokeWidth={1.5}
+      fill="none"
+      opacity={0.6}
+    />
+
+    {/* 3. 모자 리본 밴드 (포인트 컬러) */}
+    <Path
+      d="M27 62 Q50 69 73 62 L75 72 Q50 79 25 72 Z"
+      fill={accent}
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+export const BaseballCap = ({
+  primary = "#4F78B8",
+  secondary = "#85A6D8",
+  accent = "#29466F",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    {/* 왼쪽으로 길게 뻗은 챙 */}
+    <Path
+      d="
+        M34 52
+        C25 54 13 58 5 62
+        C2 64 4 71 9 75
+        C17 82 31 81 43 77
+        C52 74 60 69 66 64
+        L61 53
+        Z
+      "
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={1.5}
+      strokeLinejoin="round"
+    />
+
+    {/* 모자 몸통의 왼쪽 패널 */}
+    <Path
+      d="
+        M25 56
+        C30 43 36 27 47 20
+        C55 15 65 14 75 17
+        C62 21 54 31 50 43
+        L43 62
+        C42 65 40 66 37 65
+        Z
+      "
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={1.5}
+      strokeLinejoin="round"
+    />
+
+    {/* 모자 몸통의 중앙 패널 */}
+    <Path
+      d="
+        M50 43
+        C54 31 62 21 75 17
+        C85 23 87 39 85 55
+        L83 72
+        C73 72 59 69 43 64
+        Z
+      "
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={1.5}
+      strokeLinejoin="round"
+    />
+
+    {/* 오른쪽 패널 */}
+    <Path
+      d="
+        M75 17
+        C88 22 96 38 97 53
+        C98 64 96 72 91 73
+        C89 74 86 73 83 72
+        L85 55
+        C87 39 85 23 75 17
+        Z
+      "
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={1.5}
+      strokeLinejoin="round"
+    />
+
+    {/* 패널을 나누는 곡선 */}
+    <Path
+      d="M75 17 C64 25 58 40 53 55 L49 66"
+      fill="none"
+      stroke={OUTLINE}
+      strokeWidth={1.1}
+      strokeLinecap="round"
+    />
+
+    <Path
+      d="M75 17 C87 30 87 45 85 55 L83 72"
+      fill="none"
+      stroke={OUTLINE}
+      strokeWidth={1.1}
+      strokeLinecap="round"
+    />
+
+    {/* 챙과 몸통의 연결선 */}
+    <Path
+      d="M25 56 C34 60 40 64 49 66"
+      fill="none"
+      stroke={OUTLINE}
+      strokeWidth={1.2}
+      strokeLinecap="round"
+    />
+
+    {/* 꼭대기의 작은 단추 */}
+    <Path
+      d="
+        M72 17
+        C72 14 74 13 76 14
+        C78 14 79 16 78 18
+        Z
+      "
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={1.2}
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
 export const HeartOwl = ({
   colorHex = "#B99A7A",
   primary,
@@ -12657,13 +13913,4608 @@ export const StarFlower = ({
     </Svg>
   );
 };
-// ============================================================
-// CLASSIFICATION ITEM SVG REGISTRY
-// ============================================================
+// 3. 털모자 / 방울비니 (WinterHat)
+export const WinterHat = ({
+  primary = "#B99A7A", // 모자 몸통 색상
+  secondary = "#E8D5BC", // 털방울 & 접힌 밑단 색상
+  accent = "#795548", // 골지 줄무늬 색상
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    {/* 1. 모자 윗부분 (부드러운 돔 형태) */}
+    <Path
+      d="M23 70 C20 38 35 24 50 24 C65 24 80 38 77 70 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={4}
+      strokeLinejoin="round"
+    />
+
+    {/* 2. 더 작고 동글동글해진 상단 털방울 (위치 위로 밀착 & 크기 축소) */}
+    <Path
+      d="M50 10 
+         C47 10, 44 13, 44 16 
+         C41 16, 40 20, 42 23 
+         C40 25, 42 29, 46 29 
+         C48 31, 52 31, 54 29 
+         C58 29, 60 25, 58 23 
+         C60 20, 59 16, 56 16 
+         C56 13, 53 10, 50 10 Z"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={3}
+      strokeLinejoin="round"
+    />
+
+    {/* 3. 접혀 올라간 아랫단 (Ribbed Cuff) */}
+    <Rect
+      x={18}
+      y={64}
+      width={64}
+      height={22}
+      rx={5}
+      ry={5}
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={4}
+    />
+
+    {/* 4. 접힌 아랫단 세로 골지 줄무늬 */}
+    <Path
+      d="M26 68 L26 82 
+         M34 68 L34 82 
+         M42 68 L42 82 
+         M50 68 L50 82 
+         M58 68 L58 82 
+         M66 68 L66 82 
+         M74 68 L74 82"
+      stroke={accent}
+      strokeWidth={2}
+      strokeLinecap="round"
+      opacity={0.6}
+    />
+  </Svg>
+);
+
+export const Beret = ({
+  primary = "#9C5DCB",
+  secondary = "#B98AE0",
+  accent = "#70429E",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    {/* 베레모 본체: 넓고 납작한 둥근 실루엣 */}
+    <Path
+      d="
+        M 9 69
+        C 10 49, 23 29, 42 23
+        C 56 18, 72 24, 84 35
+        C 92 43, 96 55, 94 66
+        C 93 73, 87 77, 80 75
+        C 61 70, 39 70, 20 76
+        C 14 78, 10 75, 9 69
+        Z
+      "
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+    />
+
+    {/* 베레모 윗부분의 부드러운 색상 영역 */}
+    <Path
+      d="
+        M 14 62
+        C 17 43, 30 29, 44 25
+        C 58 21, 72 27, 83 37
+        C 69 32, 52 31, 38 37
+        C 27 42, 19 52, 14 62
+        Z
+      "
+      fill={secondary}
+      opacity={0.7}
+    />
+
+    {/* 아래쪽 테두리: 본체와 자연스럽게 이어지는 밴드 */}
+    <Path
+      d="
+        M 10 67
+        C 15 59, 31 56, 49 57
+        C 66 58, 82 63, 89 68
+        C 92 70, 91 75, 87 77
+        C 83 79, 78 76, 73 75
+        C 55 71, 36 71, 21 77
+        C 15 79, 10 75, 10 67
+        Z
+      "
+      fill={accent}
+      stroke={OUTLINE}
+      strokeWidth={2}
+      strokeLinejoin="round"
+    />
+
+    {/* 밴드 안쪽의 밝은 곡선 */}
+    <Path
+      d="
+        M 15 68
+        C 31 61, 58 62, 83 71
+      "
+      fill="none"
+      stroke={secondary}
+      strokeWidth={2.5}
+      strokeLinecap="round"
+    />
+
+    {/* 오른쪽 위의 작은 꼭지 */}
+    <Path
+      d="
+        M 72 25
+        C 71 21, 74 18, 78 19
+        C 82 19, 84 22, 83 26
+        C 82 29, 77 30, 74 28
+        Z
+      "
+      fill={accent}
+      stroke={OUTLINE}
+      strokeWidth={1.8}
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+
+export const BucketHat = ({
+  primary = "#D4B58A", // 모자 크라운(몸통) 색상
+  secondary = "#F0DEC1", // 모자 챙(Brim) 색상
+  accent = "#8B6A43", // 봉제선/스티치 디테일 색상
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    {/* 1. 모자 크라운 (몸통 - 위는 완만한 평평 타원, 아래로 내려갈수록 약간 넓어지는 형태) */}
+    <Path
+      d="M32 24 
+         C38 20, 62 20, 68 24 
+         L76 52 
+         C60 58, 40 58, 24 52 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={4}
+      strokeLinejoin="round"
+    />
+
+    {/* 2. 모자 윗면 테두리 곡선 (입체감을 부여하는 윗면 타원 라인) */}
+    <Path
+      d="M32 24 C40 28, 60 28, 68 24"
+      fill="none"
+      stroke={OUTLINE}
+      strokeWidth={3.5}
+      strokeLinecap="round"
+    />
+
+    {/* 3. 모자 챙 (Brim - 크라운 아래로 자연스럽게 퍼져 내려오는 형태) */}
+    <Path
+      d="M24 52 
+         C40 58, 60 58, 76 52 
+         L88 70 
+         C62 80, 38 80, 12 70 Z"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={4}
+      strokeLinejoin="round"
+    />
+
+    {/* 4. 챙 중앙의 디테일 스티치 선 (버킷햇 특유의 누빔 라인 표현) */}
+    <Path
+      d="M18 61 C38 70, 62 70, 82 61"
+      fill="none"
+      stroke={accent}
+      strokeWidth={2}
+      strokeLinecap="round"
+      opacity={0.6}
+    />
+  </Svg>
+);
+
+// 1. 티셔츠
+export const TShirt = ({
+  primary = "#70A8D9",
+  secondary = "#D5E9FA",
+  accent = "#315F91",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    <Path
+      d="M35 20 L23 25 L10 37 L23 49 L31 41 L31 82 Q50 88 69 82 L69 41 L77 49 L90 37 L77 25 L65 20 Q50 29 35 20 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M35 20 Q50 34 65 20"
+      fill="none"
+      stroke={accent}
+      strokeWidth={2.5}
+    />
+    <Path
+      d="M32 77 Q50 82 68 77"
+      fill="none"
+      stroke={secondary}
+      strokeWidth={2}
+    />
+  </Svg>
+);
+
+// 2. 반팔 셔츠
+export const ShortSleeveShirt = ({
+  primary = "#FAF8F2",
+  secondary = "#70A8D9",
+  accent = "#315F91",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    <Path
+      d="M35 19 L22 25 L9 40 L23 49 L31 40 L31 83 L69 83 L69 40 L77 49 L91 40 L78 25 L65 19 Q50 25 35 19 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+    />
+    <Circle cx="50" cy="30" r="2.5" fill={accent} />
+    <Circle cx="50" cy="40" r="2.5" fill={accent} />
+    <Circle cx="50" cy="50" r="2.5" fill={accent} />
+    <Circle cx="50" cy="60" r="2.5" fill={accent} />
+    <Circle cx="50" cy="70" r="2.5" fill={accent} />
+  </Svg>
+);
+
+// 3. 나시
+// 나시 / 민소매 (TankTop)
+export const TankTop = ({
+  primary = "#F0A4BB", // 옷 바탕 색상
+  secondary = "#FCE2EA", // 뒷목 안쪽/포인트 색상
+  accent = "#A94D6B", // 목선/암홀 시보리 디테일 색상
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    {/* 1. 뒷목 안쪽 선 (목 파임 부분의 입체감 표현) */}
+    <Path
+      d="M36 20 C36 28, 64 28, 64 20"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={3}
+      strokeLinecap="round"
+    />
+
+    {/* 2. 나시 전체 외곽선 (어깨 끈 -> 파인 암홀 -> 몸통 일자 라인) */}
+    <Path
+      d="M28 18 
+         C38 16, 62 16, 72 18 
+         L78 28 
+         C68 30, 66 45, 78 48 
+         L78 86 
+         L22 86 
+         L22 48 
+         C34 45, 32 30, 22 28 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={4}
+      strokeLinejoin="round"
+    />
+
+    {/* 3. 앞목 U자형 라인 (이미지 속 U자 넥라인) */}
+    <Path
+      d="M36 17 C36 32, 64 32, 64 17"
+      fill="none"
+      stroke={OUTLINE}
+      strokeWidth={4}
+      strokeLinecap="round"
+    />
+  </Svg>
+);
+
+// 4. 런닝
+export const ShortSleeve = ({
+  primary = "#FAF8F2",
+  secondary = "#FFFFFF",
+  accent = "#A7A19A",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    <Path
+      d="M35 17 L43 17 L46 31 L54 31 L57 17 L65 17
+         L70 29 L76 43 L66 48 L64 40 L64 83
+         Q50 87 36 83 L36 40 L34 48 L24 43
+         L30 29 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M35 17 L39 34 L46 31 L50 37 L54 31 L61 34 L65 17"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={2}
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M37 76 Q50 80 63 76"
+      fill="none"
+      stroke={accent}
+      strokeWidth={1.5}
+    />
+  </Svg>
+);
+
+// 6. 반바지
+export const Shorts = ({
+  primary = "#75A981",
+  secondary = "#CDE5D0",
+  accent = "#3B6B46",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    <Path
+      d="M24 20 L76 20 L82 76
+         L58 80 L50 57 L42 80 L18 76 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M24 20 L76 20 L77 32 L23 32 Z"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={2}
+      strokeLinejoin="round"
+    />
+    <Path d="M50 32 L50 57" fill="none" stroke={accent} strokeWidth={2} />
+    <Path
+      d="M22 69 L42 72 M58 72 L78 69"
+      fill="none"
+      stroke={secondary}
+      strokeWidth={2}
+    />
+    <Circle cx="50" cy="26" r="2" fill={accent} />
+  </Svg>
+);
+
+// 7. 긴바지
+export const LongPants = ({
+  primary = "#70A8D9",
+  secondary = "#D5E9FA",
+  accent = "#315F91",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    <Path
+      d="M25 16 L75 16 L79 86 L55 86 L50 49
+         L45 86 L21 86 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M25 16 L75 16 L76 28 L24 28 Z"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={2}
+      strokeLinejoin="round"
+    />
+    <Path d="M50 28 L50 49" fill="none" stroke={accent} strokeWidth={2} />
+    <Path
+      d="M24 78 L43 78 M57 78 L77 78"
+      fill="none"
+      stroke={secondary}
+      strokeWidth={2}
+    />
+    <Circle cx="50" cy="22" r="2" fill={accent} />
+  </Svg>
+);
+
+// 8. 치마
+export const Skirt = ({
+  primary = "#F0A4BB",
+  secondary = "#FCE2EA",
+  accent = "#A94D6B",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    <Path
+      d="M33 19 L67 19 L83 82
+         Q50 91 17 82 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M33 19 L67 19 L69 31 L31 31 Z"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={2}
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M31 42 L25 76 M43 44 L40 81 M57 44 L60 81 M69 42 L75 76"
+      fill="none"
+      stroke={accent}
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      opacity={0.75}
+    />
+    <Path
+      d="M19 78 Q50 86 81 78"
+      fill="none"
+      stroke={secondary}
+      strokeWidth={2.5}
+    />
+  </Svg>
+);
+
+// 9. 원피스
+export const Dress = ({
+  primary = "#F0A4BB",
+  secondary = "#FCE2EA",
+  accent = "#A94D6B",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    <Path
+      d="M36 17 L44 17 L50 25 L56 17 L64 17
+         L72 35 L64 41 L60 33 L63 49
+         L83 84 Q50 92 17 84 L37 49
+         L40 33 L36 41 L28 35 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M36 17 L44 17 L50 25 L56 17 L64 17
+         L60 33 L50 39 L40 33 Z"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={2}
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M37 49 Q50 54 63 49"
+      fill="none"
+      stroke={accent}
+      strokeWidth={2.5}
+    />
+    <Path
+      d="M25 77 Q50 84 75 77"
+      fill="none"
+      stroke={secondary}
+      strokeWidth={2}
+    />
+    <Circle cx="50" cy="45" r="3" fill={accent} />
+  </Svg>
+);
+
+// 10. 한복
+export const Hanbok = ({
+  primary = "#F0A4BB",
+  secondary = "#FAF8F2",
+  accent = "#C34F79",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    {/* 치마 */}
+    <Path
+      d="M36 45 L64 45 L81 84 Q50 92 19 84 L36 45 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M36 45 L64 45 L68 56 L32 56 Z"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={2}
+      strokeLinejoin="round"
+    />
+    {/* 저고리 */}
+    <Path
+      d="M35 16 L44 16 L50 25 L56 16 L65 16
+         L76 30 L67 39 L62 33 L62 51
+         L38 51 L38 33 L33 39 L24 30 Z"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+    />
+    {/* 고름과 깃 */}
+    <Path
+      d="M44 16 L50 29 L56 16 L52 36 L48 36 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={1.8}
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M43 37 L57 37 L54 44 L46 44 Z"
+      fill={accent}
+      stroke={OUTLINE}
+      strokeWidth={1.5}
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M50 44 L50 57 L44 62 L48 65"
+      fill="none"
+      stroke={accent}
+      strokeWidth={2.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M24 80 Q50 87 76 80"
+      fill="none"
+      stroke={secondary}
+      strokeWidth={2}
+    />
+  </Svg>
+);
+
+// 11. 점퍼
+export const Jumper = ({
+  primary = "#75A981",
+  secondary = "#CDE5D0",
+  accent = "#3B6B46",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    <Path
+      d="M35 17 L44 17 L50 25 L56 17 L65 17
+         L78 29 L88 48 L76 54 L69 41
+         L69 83 L31 83 L31 41 L24 54
+         L12 48 L22 29 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M35 17 L44 17 L50 25 L56 17 L65 17
+         L60 34 L50 42 L40 34 Z"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={2}
+      strokeLinejoin="round"
+    />
+    <Path d="M50 42 L50 80" fill="none" stroke={accent} strokeWidth={2.5} />
+    <Rect x="45" y="53" width="10" height="3" rx="1.5" fill={secondary} />
+    <Rect x="45" y="65" width="10" height="3" rx="1.5" fill={secondary} />
+    <Path
+      d="M32 77 L42 77 M58 77 L68 77"
+      fill="none"
+      stroke={secondary}
+      strokeWidth={2}
+    />
+  </Svg>
+);
+
+// 12. 코트
+export const Coat = ({
+  primary = "#956C4F",
+  secondary = "#DCC1A6",
+  accent = "#563A2B",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    <Path
+      d="M35 14 L44 14 L50 24 L56 14 L65 14
+         L77 27 L83 45 L72 50 L68 39
+         L72 87 L28 87 L32 39 L28 50
+         L17 45 L23 27 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+    />
+    {/* 옷깃 */}
+    <Path
+      d="M35 14 L44 14 L50 24 L43 43 L32 28 Z"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={2}
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M65 14 L56 14 L50 24 L57 43 L68 28 Z"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={2}
+      strokeLinejoin="round"
+    />
+    {/* 앞섶 */}
+    <Path
+      d="M43 43 L50 24 L57 43 L54 85 L46 85 Z"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={1.8}
+      strokeLinejoin="round"
+    />
+    {/* 단추 */}
+    <Circle cx="54" cy="51" r="1.8" fill={accent} />
+    <Circle cx="54" cy="62" r="1.8" fill={accent} />
+    <Circle cx="54" cy="73" r="1.8" fill={accent} />
+    {/* 주머니 */}
+    <Path
+      d="M31 60 L42 60 L41 70 L30 70 Z
+         M58 60 L69 60 L70 70 L59 70 Z"
+      fill={secondary}
+      stroke={accent}
+      strokeWidth={1.5}
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+
+// 1. 운동화
+// export const Sneakers = ({
+//   primary = "#70A8D9",
+//   secondary = "#FFFFFF",
+//   accent = "#315F91",
+//   size = 85,
+// }: ItemSvgProps) => (
+//   <Svg width={size} height={size} viewBox="0 0 100 100">
+//     {/* 운동화 몸통 */}
+//     <Path
+//       d="M13 58
+//          Q22 55 30 42
+//          L39 29
+//          Q43 26 47 33
+//          L57 47
+//          Q66 54 78 56
+//          Q88 58 91 68
+//          L91 76
+//          Q90 82 82 82
+//          L18 82
+//          Q8 80 9 70
+//          Q9 63 13 58 Z"
+//       fill={primary}
+//       stroke={OUTLINE}
+//       strokeWidth={2.5}
+//       strokeLinejoin="round"
+//     />
+
+//     {/* 발목 부분 */}
+//     <Path
+//       d="M31 43 L39 29 Q43 26 47 33 L54 44
+//          Q43 49 31 43 Z"
+//       fill={secondary}
+//       stroke={OUTLINE}
+//       strokeWidth={2}
+//       strokeLinejoin="round"
+//     />
+
+//     {/* 신발끈 구멍 */}
+//     <Circle cx="43" cy="43" r="2" fill={accent} />
+//     <Circle cx="48" cy="48" r="2" fill={accent} />
+//     <Circle cx="53" cy="52" r="2" fill={accent} />
+
+//     {/* 운동화 끈 */}
+//     <Path
+//       d="M40 40 L52 47 M45 45 L57 51 M49 49 L60 54"
+//       fill="none"
+//       stroke={secondary}
+//       strokeWidth={3}
+//       strokeLinecap="round"
+//     />
+
+//     {/* 밑창 */}
+//     <Path
+//       d="M10 70 Q38 76 63 73 Q82 72 91 68
+//          L91 77 Q90 83 82 83 L18 83
+//          Q9 82 10 75 Z"
+//       fill={secondary}
+//       stroke={OUTLINE}
+//       strokeWidth={2}
+//       strokeLinejoin="round"
+//     />
+
+//     {/* 밑창 무늬 */}
+//     <Path
+//       d="M25 78 L32 78 M40 79 L47 79 M55 78 L62 78 M70 77 L77 77"
+//       stroke={accent}
+//       strokeWidth={1.5}
+//       strokeLinecap="round"
+//     />
+//   </Svg>
+// );
+// 12. 운동화 / 스니커즈 (Sneakers)
+export const Sneakers = ({
+  primary = "#70A8D9", // 신발 천 몸통 색상 (이미지에서는 레드 계열)
+  secondary = "#FFFFFF", // 밑창, 앞코 캡 & 발목 패치 색상
+  accent = "#315F91", // 신발끈 및 테두리 디테일 색상
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    {/* 1. 솟아난 신발 혀 (Tongue - 앞쪽 높게 솟은 혀 부분) */}
+    <Path
+      d="M25 20 L33 10 L43 25 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={3.5}
+      strokeLinejoin="round"
+    />
+
+    {/* 2. 운동화 하이탑 몸통 (발목까지 길게 올라가는 수직 일자 뒤축) */}
+    <Path
+      d="M12 70 
+         L12 22 
+         C22 24, 28 22, 34 20 
+         L78 54 
+         C84 58, 88 64, 88 70 
+         Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={3.5}
+      strokeLinejoin="round"
+    />
+
+    {/* 3. 발목 동그란 둥근 로고 패치 */}
+    <Circle
+      cx="24"
+      cy="38"
+      r="8"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={3}
+    />
+
+    {/* 4. 신발 하단 고무 환기구 구멍 2개 */}
+    <Circle cx="32" cy="62" r="2" fill={OUTLINE} />
+    <Circle cx="39" cy="62" r="2" fill={OUTLINE} />
+
+    {/* 5. 운동화 끈 (등선을 따라 사선으로 가로지르는 끈) */}
+    <Path
+      d="M34 25 L42 21 
+         M40 32 L48 28 
+         M46 39 L54 35 
+         M52 46 L60 42 
+         M58 53 L66 49 
+         M64 60 L72 56"
+      stroke={OUTLINE}
+      strokeWidth={3.5}
+      strokeLinecap="round"
+    />
+
+    {/* 6. 앞코 고무 캡 (Toe Cap) */}
+    <Path
+      d="M74 52 
+         C80 54, 88 60, 88 70 
+         L72 70 
+         Z"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={3.5}
+      strokeLinejoin="round"
+    />
+
+    {/* 7. 두툼한 밑창 (Sole) */}
+    <Rect
+      x="8"
+      y="70"
+      width="84"
+      height="14"
+      rx="2"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={3.5}
+      strokeLinejoin="round"
+    />
+
+    {/* 8. 밑창 고무 검은 라인 */}
+    <Path
+      d="M10 77 L90 77"
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinecap="round"
+    />
+  </Svg>
+);
+
+export const DressShoes = ({
+  primary = "#956C4F", // 구두 본체 색상
+  secondary = "#DCC1A6", // 내피/안감 색상
+  accent = "#563A2B", // 보석 포인트 색상
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    {/* 2. 날렵하고 긴 하이힐 굽 */}
+    <Path
+      d="M17 28
+     L17 80
+     C17 84 23 84 23 79
+     L28 35 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+    />
+
+    {/* 1. 하이힐 본체 (우아하게 파인 발등과 높고 뾰족한 뒤축) */}
+    <Path
+      d="M14 26 
+         C14 26 28 50 42 66 
+         C52 78 68 88 88 84 
+         C96 82 96 70 92 64 
+         C86 55 78 60 76 60 
+         C68 60 56 62 48 50 
+         C38 35 24 10 14 26 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={3}
+      strokeLinejoin="round"
+    />
+
+    {/* 3. 구두 앞코의 보석 장식 (다이아몬드/리본 형태) */}
+    <Path
+      d="M74 54 
+         L82 46 
+         L90 52 
+         L82 60 Z"
+      fill={accent}
+      stroke={OUTLINE}
+      strokeWidth={2.5}
+      strokeLinejoin="round"
+    />
+
+    {/* 4. 보석 반사 광택 라인 */}
+    <Path
+      d="M80 50 L84 56"
+      stroke={secondary}
+      strokeWidth={1.5}
+      strokeLinecap="round"
+    />
+  </Svg>
+);
+
+// 10. 슬리퍼 (Slippers)
+export const Slippers = ({
+  primary = "#75A981", // 밑창 색상
+  secondary = "#CDE5D0", // 발등 덮개 밴드 색상
+  accent = "#3B6B46", // 포인트 디테일 색상
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    {/* ===== 1. 왼쪽 슬리퍼 (Left Slipper) ===== */}
+    {/* 왼쪽 밑창 (상단 곡선 + 하단 U자형) */}
+    <Path
+      d="M14 26 
+         C14 12, 42 12, 42 26 
+         L40 70 
+         C40 86, 16 86, 16 70 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={3.5}
+      strokeLinejoin="round"
+    />
+
+    {/* 왼쪽 발등 덮개 (직사각형 밴드) */}
+    <Rect
+      x="11"
+      y="24"
+      width="34"
+      height="26"
+      rx="1"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={3.5}
+      strokeLinejoin="round"
+    />
+
+    {/* ===== 2. 오른쪽 슬리퍼 (Right Slipper) ===== */}
+    {/* 오른쪽 밑창 (상단 곡선 + 하단 U자형) */}
+    <Path
+      d="M58 26 
+         C58 12, 86 12, 86 26 
+         L84 70 
+         C84 86, 60 86, 60 70 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={3.5}
+      strokeLinejoin="round"
+    />
+
+    {/* 오른쪽 발등 덮개 (직사각형 밴드) */}
+    <Rect
+      x="55"
+      y="24"
+      width="34"
+      height="26"
+      rx="1"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={3.5}
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+
+export const FlipFlops = ({
+  primary = "#70A8D9", // 밑창 색상
+  secondary = "#D5E9FA", // 끈 하이라이트/포인트 색상
+  accent = "#315F91", // V자 끈 색상
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    {/* ===== 1. 왼쪽 조리 (Left Flip-flop) ===== */}
+    {/* 왼쪽 밑창 */}
+    <Path
+      d="M26 15
+         C14 15, 12 30, 14 48
+         C15 62, 12 75, 20 82
+         C28 89, 38 85, 38 72
+         C38 58, 42 35, 38 22
+         C36 17, 31 15, 26 15 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={3}
+      strokeLinejoin="round"
+    />
+
+    {/* 왼쪽 V자 끈 */}
+    <Path
+      d="M13 42
+         C18 32, 24 25, 27 25
+         C30 25, 35 34, 38 48"
+      fill="none"
+      stroke={accent}
+      strokeWidth={3.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M27 18 L27 27"
+      fill="none"
+      stroke={accent}
+      strokeWidth={3}
+      strokeLinecap="round"
+    />
+
+    {/* ===== 2. 오른쪽 조리 (Right Flip-flop) ===== */}
+    {/* 오른쪽 밑창 */}
+    <Path
+      d="M71 7
+         C59 7, 57 22, 59 40
+         C60 54, 57 67, 65 74
+         C73 81, 83 77, 83 64
+         C83 50, 87 27, 83 14
+         C81 9, 76 7, 71 7 Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={3}
+      strokeLinejoin="round"
+    />
+
+    {/* 오른쪽 V자 끈 */}
+    <Path
+      d="M58 34
+         C63 24, 69 17, 72 17
+         C75 17, 80 26, 83 40"
+      fill="none"
+      stroke={accent}
+      strokeWidth={3.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M72 10 L72 19"
+      fill="none"
+      stroke={accent}
+      strokeWidth={3}
+      strokeLinecap="round"
+    />
+  </Svg>
+);
+
+export const RainBoots = ({
+  primary = "#F2D36B",
+  secondary = "#FFF1B8",
+  accent = "#A88327",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    {/* 장화 몸통 (뒤꿈치-발목 수직 일자 직선 라인) */}
+    <Path
+      d="M26 18
+         L62 18
+         L62 52
+         C62 58 70 60 76 62
+         L82 64
+         C88 66 88 74 88 78
+         L26 78
+         Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={3}
+      strokeLinejoin="round"
+    />
+
+    {/* 장화 입구 (테두리 띠) */}
+    <Rect
+      x="22"
+      y="14"
+      width="44"
+      height="12"
+      rx="2"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={3}
+      strokeLinejoin="round"
+    />
+
+    {/* 주름 디테일 선 */}
+    <Path
+      d="M58 56 L58 64 M64 58 L64 66"
+      stroke={accent}
+      strokeWidth={2.5}
+      strokeLinecap="round"
+    />
+
+    {/* 일자 밑창 (Sole) */}
+    <Rect
+      x="20"
+      y="78"
+      width="70"
+      height="8"
+      rx="2"
+      fill={accent}
+      stroke={OUTLINE}
+      strokeWidth={3}
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+export const FurBoots = ({
+  primary = "#956C4F",
+  secondary = "#F5E7D2",
+  accent = "#563A2B",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    {/* 장화 몸통 (뒤꿈치 수직 일자 라인) */}
+    <Path
+      d="M26 28
+         L62 28
+         L62 52
+         C62 58 70 60 76 62
+         L82 64
+         C88 66 88 74 88 78
+         L26 78
+         Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={3}
+      strokeLinejoin="round"
+    />
+
+    {/* 윗부분의 두툼한 털 테두리 */}
+    <Path
+      d="M22 18
+         Q26 14 30 18
+         Q35 14 40 18
+         Q45 14 50 18
+         Q55 14 60 18
+         Q64 14 68 18
+         L68 30
+         L22 30 Z"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={3}
+      strokeLinejoin="round"
+    />
+
+    {/* 털의 세로 결 */}
+    <Path
+      d="M31 20 L31 28 M41 20 L41 28 M51 20 L51 28 M59 20 L59 28"
+      stroke={accent}
+      strokeWidth={2}
+      strokeLinecap="round"
+    />
+
+    {/* 일자 밑창 (Sole) */}
+    <Rect
+      x="20"
+      y="78"
+      width="70"
+      height="8"
+      rx="2"
+      fill={accent}
+      stroke={OUTLINE}
+      strokeWidth={3}
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+export const Boots = ({
+  primary = "#956C4F",
+  secondary = "#DCC1A6",
+  accent = "#563A2B",
+  size = 85,
+}: ItemSvgProps) => (
+  <Svg width={size} height={size} viewBox="0 0 100 100">
+    {/* 긴 부츠 몸통 (뒤꿈치 수직 일자 라인) */}
+    <Path
+      d="M26 18
+         L62 18
+         L62 52
+         C62 58 70 60 76 62
+         L82 64
+         C88 66 88 74 88 78
+         L26 78
+         Z"
+      fill={primary}
+      stroke={OUTLINE}
+      strokeWidth={3}
+      strokeLinejoin="round"
+    />
+
+    {/* 부츠 입구 띠 */}
+    <Rect
+      x="22"
+      y="14"
+      width="44"
+      height="10"
+      rx="2"
+      fill={secondary}
+      stroke={OUTLINE}
+      strokeWidth={3}
+      strokeLinejoin="round"
+    />
+
+    {/* 발목 부분 장식 띠와 버클 */}
+    <Path
+      d="M26 56 L62 56"
+      stroke={secondary}
+      strokeWidth={4}
+      strokeLinecap="round"
+    />
+    <Rect
+      x="40"
+      y="52"
+      width="10"
+      height="8"
+      rx="1.5"
+      fill={accent}
+      stroke={OUTLINE}
+      strokeWidth={1.5}
+    />
+
+    {/* 일자 밑창 (Sole) */}
+    <Rect
+      x="20"
+      y="78"
+      width="70"
+      height="8"
+      rx="2"
+      fill={accent}
+      stroke={OUTLINE}
+      strokeWidth={3}
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+export const Ambulance = ({
+  colorHex = "#FAFAFA", // 구급차 기본 화이트/라이트톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const stripeColor = secondary ?? "#FFCDD2"; // 붉은 십자가 및 포인트 톤
+  const wheelColor = accent ?? "#212121";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 1. 지붕 위 경광등 및 불빛 효과 */}
+      <Path
+        d="M58 26 C58 20, 66 20, 66 26 Z"
+        fill="#F44336"
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+      {/* 사이렌 불빛 파동 라인 */}
+      <Path
+        d="M54 15 L56 18 M62 13 L62 17 M70 15 L68 18"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+
+      {/* 2. 구급차 몸통 (박스형 뒷공간 + 운전석 캐빈) */}
+      <Path
+        d="M12 66
+     L12 34
+     C12 30, 16 26, 22 26
+     L62 26
+     L84 46
+     L88 48
+     C92 50, 94 54, 94 58
+     L94 62
+     C94 65, 92 66, 89 66
+     L12 66
+     Z"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+
+      {/* 3. 뒷공간과 운전석을 나누는 세로 격벽 라인 */}
+      <Path
+        d="M50 26 L50 66"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      {/* 4. 측면 십자가 (Plus) 심볼 */}
+      <Path
+        d="M23 44 L35 44 M29 38 L29 50"
+        stroke={stripeColor}
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M23 44 L35 44 M29 38 L29 50"
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+
+      {/* 5. 운전석 전면 창문 */}
+      <Path
+        d="M56 32 L72 32 L78 44 L56 44 Z"
+        fill={stripeColor}
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+
+      {/* 6. 하단 바퀴 2개 */}
+      {/* 뒷바퀴 */}
+      <Circle
+        cx="28"
+        cy="72"
+        r="11"
+        fill={wheelColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+      />
+      <Circle
+        cx="28"
+        cy="72"
+        r="4.5"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+      />
+
+      {/* 앞바퀴 */}
+      <Circle
+        cx="72"
+        cy="72"
+        r="11"
+        fill={wheelColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+      />
+      <Circle
+        cx="72"
+        cy="72"
+        r="4.5"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+      />
+    </Svg>
+  );
+};
+export const Drone = ({
+  colorHex = "#B0BEC5", // 드론 기본 메탈릭/라이트 그레이 톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const rotorColor = secondary ?? "#37474F";
+  const detailColor = accent ?? "#212121";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 4. 프로펠러 날개 (암의 방향과 90도 직각인 대각선 방향으로 교차 배치) */}
+      {/* 좌상단 프로펠러 (중심 22, 22 기준 우상-좌하 방향) */}
+      <Path
+        d="M10 34 L34 10"
+        stroke={rotorColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M10 34 L34 10"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+
+      {/* 우상단 프로펠러 (중심 78, 22 기준 좌상-우하 방향) */}
+      <Path
+        d="M66 10 L90 34"
+        stroke={rotorColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M66 10 L90 34"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+
+      {/* 좌하단 프로펠러 (중심 22, 78 기준 좌상-우하 방향) */}
+      <Path
+        d="M10 66 L34 90"
+        stroke={rotorColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M10 66 L34 90"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+
+      {/* 우하단 프로펠러 (중심 78, 78 기준 우상-좌하 방향) */}
+      <Path
+        d="M66 90 L90 66"
+        stroke={rotorColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M66 90 L90 66"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      {/* 1. 4개의 대각선 암 (Arms) */}
+      {/* 좌상단 암 */}
+      <Path
+        d="M42 42 L24 24"
+        stroke={bodyColor}
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M42 42 L24 24"
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinecap="round"
+      />
+
+      {/* 우상단 암 */}
+      <Path
+        d="M58 42 L76 24"
+        stroke={bodyColor}
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M58 42 L76 24"
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinecap="round"
+      />
+
+      {/* 좌하단 암 */}
+      <Path
+        d="M42 58 L24 76"
+        stroke={bodyColor}
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M42 58 L24 76"
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinecap="round"
+      />
+
+      {/* 우하단 암 */}
+      <Path
+        d="M58 58 L76 76"
+        stroke={bodyColor}
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M58 58 L76 76"
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinecap="round"
+      />
+
+      {/* 2. 중앙 본체 (Center Body) */}
+      <Circle
+        cx="50"
+        cy="50"
+        r="14"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+      />
+      <Circle
+        cx="50"
+        cy="50"
+        r="6"
+        fill={rotorColor}
+        stroke={OUTLINE}
+        strokeWidth="2"
+      />
+
+      {/* 3. 모터 하우징 (끝부분 원형) */}
+      <Circle
+        cx="22"
+        cy="22"
+        r="7"
+        fill={detailColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+      <Circle
+        cx="78"
+        cy="22"
+        r="7"
+        fill={detailColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+      <Circle
+        cx="22"
+        cy="78"
+        r="7"
+        fill={detailColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+      <Circle
+        cx="78"
+        cy="78"
+        r="7"
+        fill={detailColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+    </Svg>
+  );
+};
+export const Cruise = ({
+  colorHex = "#29B6F6", // 유람선 바다/기본 포인트 톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? "#ECEFF1"; // 선체 기본 색상
+  const deckColor = secondary ?? "#E53935"; // 중간 붉은색 갑판/선실
+  const waveColor = accent ?? "#29B6F6"; // 물결 색상
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 1. 하단 파도 (선체 하단과 겹치도록 위쪽으로 배치) */}
+      {/* <Path
+        d="M6 62 
+           Q 22 52, 38 62 
+           Q 54 72, 70 62 
+           Q 84 52, 94 62 
+           L 94 88 
+           L 6 88 
+           Z"
+        fill={waveColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      /> */}
+
+      {/* 파도 물결 추가 라인 */}
+      <Path
+        d="M8 72 
+           Q 24 62, 40 72 
+           Q 56 82, 72 72 
+           Q 86 62, 92 72"
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        fill="none"
+      />
+
+      {/* 2. 선체 메인 몸통 (Hull) */}
+      <Path
+        d="
+          M8 56
+          L16 46
+          L80 46
+          L90 46
+          Q96 54 94 60
+          Q92 68 82 68
+          L20 68
+          Q10 68 8 60
+          Z
+        "
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+
+      {/* 3. 선체 창문 디테일 (사각 창문 3개 + 원형/작은 창문 3개) */}
+      <Rect
+        x="22"
+        y="50"
+        width="10"
+        height="7"
+        rx="2"
+        fill="#1565C0"
+        stroke={OUTLINE}
+        strokeWidth="2"
+      />
+      <Rect
+        x="37"
+        y="50"
+        width="10"
+        height="7"
+        rx="2"
+        fill="#1565C0"
+        stroke={OUTLINE}
+        strokeWidth="2"
+      />
+      <Rect
+        x="52"
+        y="50"
+        width="10"
+        height="7"
+        rx="2"
+        fill="#1565C0"
+        stroke={OUTLINE}
+        strokeWidth="2"
+      />
+
+      {/* 우측 작은 원형/세로 구멍 창문들 */}
+      <Rect
+        x="68"
+        y="51"
+        width="3"
+        height="5"
+        rx="1.5"
+        fill="#E53935"
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+      />
+      <Rect
+        x="74"
+        y="51"
+        width="3"
+        height="5"
+        rx="1.5"
+        fill="#E53935"
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+      />
+      <Rect
+        x="80"
+        y="51"
+        width="3"
+        height="5"
+        rx="1.5"
+        fill="#E53935"
+        stroke={OUTLINE}
+        strokeWidth="1.5"
+      />
+
+      {/* 4. 중간 붉은색 선실 (Middle Deck) */}
+      <Path
+        d="M24 46
+           L30 32
+           L76 32
+           L84 46
+           Z"
+        fill={deckColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+      {/* 중간 선실 세로 구분선 */}
+      <Path
+        d="M40 32 L 40 46 M 55 32 L 55 46 M 70 32 L 70 46"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+
+      {/* 5. 최상단 조타실 (Top Cabin) */}
+      <Path
+        d="M34 32 
+           L 37 20 
+           L 69 20 
+           L 72 32 
+           Z"
+        fill="#CFD8DC"
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+      {/* 최상단 조타실 유리창 세로 라인 */}
+      <Path
+        d="M45 20 L 45 32 M 53 20 L 53 32 M 61 20 L 61 32"
+        stroke={OUTLINE}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+export const Butterfly = ({
+  colorHex = "#FFEE58",
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const wingColor = primary ?? colorHex;
+  const bodyColor = secondary ?? "#E0A458";
+  const detailColor = accent ?? "#5D1A0A";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 좌상 날개 */}
+      <Path
+        d="
+    M48 42
+    C18 24 6 42 12 60
+    C18 78 38 74 48 62
+    Z
+  "
+        fill={wingColor}
+        stroke={OUTLINE}
+        strokeWidth={3.5}
+      />
+
+      {/* 좌하 날개 */}
+      <Path
+        d="
+M50 58
+    C26 66 20 84 30 94
+    C42 101 52 92 54 76
+    Z
+  "
+        fill={wingColor}
+        stroke={OUTLINE}
+        strokeWidth={3.5}
+      />
+
+      {/* 우상 날개 */}
+      <Path
+        d="
+  M52 42
+    C82 18 96 38 92 58
+    C88 76 68 74 52 62
+    Z
+  "
+        fill={wingColor}
+        stroke={OUTLINE}
+        strokeWidth={3.5}
+      />
+
+      {/* 우하 날개 */}
+      <Path
+        d="
+  M54 58
+    C80 66 88 84 80 94
+    C70 101 60 92 56 76
+    Z
+  "
+        fill={wingColor}
+        stroke={OUTLINE}
+        strokeWidth={3.5}
+      />
+
+      {/* 더듬이 */}
+      <Path
+        d="M47 34 Q39 22 30 18"
+        stroke={OUTLINE}
+        strokeWidth={3}
+        fill="none"
+        strokeLinecap="round"
+      />
+
+      <Path
+        d="M47 34 Q54 20 62 15"
+        stroke={OUTLINE}
+        strokeWidth={3}
+        fill="none"
+        strokeLinecap="round"
+      />
+
+      {/* 몸통 */}
+      <Path
+        d="M47 34 L58 78"
+        stroke={OUTLINE}
+        strokeWidth={12}
+        strokeLinecap="round"
+      />
+
+      <Path
+        d="M47 34 L58 78"
+        stroke={bodyColor}
+        strokeWidth={7}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+export const Ladybug = ({
+  colorHex = "#E53935", // 무당벌레 기본 빨간색 톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const headColor = secondary ?? "#37474F";
+  const spotColor = accent ?? "#212121";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 1. 머리 */}
+      <Circle
+        cx="50"
+        cy="28"
+        r="13"
+        fill={headColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+      <Circle cx="45" cy="26" r="2" fill="#FFFFFF" />
+      <Circle cx="55" cy="26" r="2" fill="#FFFFFF" />
+
+      {/* 2. 더듬이 */}
+      <Path
+        d="M45 18 C42 12 38 10 35 10 M55 18 C58 12 62 10 65 10"
+        stroke={OUTLINE}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+
+      {/* 3. 몸통 (등껍질) */}
+      <Path
+        d="M50 38 C72 38 84 52 84 66 C84 80 70 90 50 90 C30 90 16 80 16 66 C16 52 28 38 50 38Z"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 4. 등판 가운데선 */}
+      <Path d="M50 38 L50 90" stroke={OUTLINE} strokeWidth="3" opacity={0.5} />
+
+      {/* 5. 점 무늬 */}
+      <Circle cx="34" cy="56" r="6" fill={spotColor} />
+      <Circle cx="34" cy="76" r="6" fill={spotColor} />
+      <Circle cx="66" cy="56" r="6" fill={spotColor} />
+      <Circle cx="66" cy="76" r="6" fill={spotColor} />
+
+      {/* 하이라이트 효과 */}
+      <Ellipse cx="30" cy="50" rx="6" ry="4" fill="#FFFFFF" opacity={0.3} />
+    </Svg>
+  );
+};
+export const Bee = ({
+  colorHex = "#FFEB3B", // 벌 기본 노란색 톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const wingColor = secondary ?? "#E0F7FA";
+  const stripeColor = accent ?? "#212121";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 날개 (좌측) */}
+
+      <Ellipse
+        cx="15"
+        cy="50"
+        rx="15"
+        ry="10"
+        fill={wingColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        opacity={0.8}
+        transform="rotate(-30 38 38)"
+      />
+
+      <Ellipse
+        cx="85"
+        cy="50"
+        rx="15"
+        ry="10"
+        fill={wingColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+        opacity={0.8}
+        transform="rotate(30 61 38)"
+      />
+
+      {/* 몸 */}
+      <Ellipse
+        cx="50"
+        cy="58"
+        rx="21"
+        ry="27"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 줄무늬 */}
+      <Path d="M32 50 H68" stroke={stripeColor} strokeWidth="5" />
+      <Path d="M30 61 H70" stroke={stripeColor} strokeWidth="5" />
+      <Path d="M35 72 H65" stroke={stripeColor} strokeWidth="5" />
+
+      {/* 얼굴 */}
+      <Circle cx="42" cy="43" r="3" fill={OUTLINE} />
+      <Circle cx="58" cy="43" r="3" fill={OUTLINE} />
+
+      {/* 웃는 입 */}
+
+      {/* 더듬이 */}
+      <Path
+        d="M43 34 Q39 24 33 23 M57 34 Q61 24 67 23"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        fill="none"
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+export const Snail = ({
+  colorHex = "#A1887F", // 달팽이 기본 갈색 톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const shellColor = secondary ?? "#D7CCC8";
+  const detailColor = accent ?? "#4E342E";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 몸 */}
+      <Path
+        d="
+          M20 68
+          Q25 55 43 58
+          H70
+          Q84 58 86 72
+          Q82 82 65 82
+          H30
+          Q18 80 20 68
+          Z
+        "
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 껍질 */}
+      <Circle
+        cx="42"
+        cy="52"
+        r="24"
+        fill={shellColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 소용돌이 */}
+      <Path
+        d="
+          M42 39
+          Q54 39 54 51
+          Q54 63 42 63
+          Q32 63 32 53
+          Q32 45 40 45
+          Q46 45 46 51
+          Q46 55 42 55
+        "
+        fill="none"
+        stroke={detailColor}
+        strokeWidth="4"
+        opacity={0.7}
+        strokeLinecap="round"
+      />
+
+      {/* 더듬이 */}
+      <Path
+        d="M70 59 L74 43 M77 60 L84 47"
+        stroke={OUTLINE}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+
+      <Circle cx="74" cy="42" r="3" fill={OUTLINE} />
+      <Circle cx="84" cy="46" r="3" fill={OUTLINE} />
+    </Svg>
+  );
+};
+export const Fox = ({
+  colorHex = "#FF7043", // 여우 기본 주황빛 톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const snoutColor = secondary ?? "#FFFFFF";
+  const detailColor = accent ?? "#D84315";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 귀 */}
+      <Path
+        d="M26 40 L30 15 L45 34"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M55 34 L70 15 L74 40"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 얼굴 */}
+      <Path
+        d="
+        M24 43
+        Q28 30 50 30
+        Q72 30 76 43
+        Q80 63 50 83
+        Q20 63 24 43
+        Z
+      "
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 흰 주둥이 */}
+      <Path
+        d="M35 60 Q50 50 65 60 Q61 75 50 77 Q39 75 35 60 Z"
+        fill={snoutColor}
+      />
+
+      {/* 눈 */}
+      <Circle cx="40" cy="52" r="3.5" fill={OUTLINE} />
+      <Circle cx="60" cy="52" r="3.5" fill={OUTLINE} />
+
+      {/* 코 */}
+      <Circle cx="50" cy="65" r="4" fill={OUTLINE} />
+    </Svg>
+  );
+};
+export const Koala = ({
+  colorHex = "#B0BEC5", // 코알라 기본 회색 톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const earInnerColor = secondary ?? "#78909C";
+  const noseColor = accent ?? "#37474F";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 귀 */}
+      <Circle
+        cx="24"
+        cy="34"
+        r="15"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+      <Circle
+        cx="76"
+        cy="34"
+        r="15"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+      <Circle cx="24" cy="34" r="7" fill={earInnerColor} />
+      <Circle cx="76" cy="34" r="7" fill={earInnerColor} />
+
+      {/* 얼굴 */}
+      <Circle
+        cx="50"
+        cy="55"
+        r="30"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+      <Circle cx="40" cy="52" r="4" fill={OUTLINE} />
+      <Circle cx="60" cy="52" r="4" fill={OUTLINE} />
+      <Circle cx="41.2" cy="51" r="1.2" fill="#FFFFFF" />
+      <Circle cx="61.2" cy="51" r="1.2" fill="#FFFFFF" />
+
+      {/* 코 (큰 타원) */}
+      <Ellipse cx="50" cy="63" rx="8" ry="6" fill={noseColor} />
+      <Circle cx="37" cy="60" r="4" fill={earInnerColor} opacity={0.5} />
+      <Circle cx="63" cy="60" r="4" fill={earInnerColor} opacity={0.5} />
+    </Svg>
+  );
+};
+export const Fish = ({
+  colorHex = "#FF7043", // 물고기 기본 주황빛 톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const tailColor = secondary ?? "#FFAB91";
+  const detailColor = accent ?? "#D84315";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 꼬리 */}
+      <Path
+        d="
+        M70 50
+        L88 30
+        L86 70
+        Z
+      "
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 몸통 */}
+      <Path
+        d="
+        M15 50
+        C22 30 45 23 68 35
+        C82 42 82 58 68 65
+        C45 77 22 70 15 50
+        Z
+      "
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      {/* 눈 */}
+      <Circle cx="32" cy="45" r="6" fill={tailColor} />
+      <Circle cx="33" cy="46" r="3" fill={OUTLINE} />
+
+      {/* 비늘 */}
+      <Path
+        d="M48 43 Q54 50 48 57"
+        stroke={detailColor}
+        strokeWidth="3"
+        fill="none"
+        opacity={0.35}
+      />
+    </Svg>
+  );
+};
+export const Cherry = ({
+  colorHex = "#E53935", // 체리 기본 빨간색 톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const fruitColor = primary ?? colorHex;
+  const stemColor = secondary ?? "#2E7D32";
+  const leafColor = accent ?? "#43A047";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Circle
+        cx="37"
+        cy="62"
+        r="17"
+        fill={fruitColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Circle
+        cx="63"
+        cy="62"
+        r="17"
+        fill={fruitColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Path
+        d="M37 47 C40 27 50 22 63 45"
+        stroke={stemColor}
+        strokeWidth="4"
+        fill="none"
+        strokeLinecap="round"
+      />
+
+      <Path
+        d="M47 29 C54 20 67 21 71 27 C61 32 53 32 47 29Z"
+        fill={leafColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+    </Svg>
+  );
+};
+export const Blueberry = ({
+  colorHex = "#3F51B5", // 블루베리 기본 진청색 톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const fruitColor = primary ?? colorHex;
+  const crownColor = secondary ?? "#1A237E";
+  const detailColor = accent ?? "#5C6BC0";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Ellipse
+        cx="50"
+        cy="56"
+        rx="30"
+        ry="24"
+        fill={fruitColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+      {/* 블루베리 특유의 별모양 꽃받침 자국 */}
+      <Path
+        d="M50 34 L52 38 L56 37 L53 41 L55 45 L50 42 L45 45 L47 41 L44 37 L48 38Z"
+        fill={crownColor}
+      />
+      <Ellipse
+        cx="39"
+        cy="47"
+        rx="6"
+        ry="4.5"
+        fill={detailColor}
+        opacity={0.35}
+      />
+    </Svg>
+  );
+};
+export const SweetPotato = ({
+  colorHex = "#7B2452", // 고구마 기본 자주빛 톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const skinColor = primary ?? colorHex;
+  const fleshColor = secondary ?? "#FFCA28";
+  const detailColor = accent ?? "#4A148C";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 1. 뒷쪽 고구마 */}
+      {/* 뒷쪽 고구마 */}
+      <Path
+        d="
+      M28 50
+      C18 45, 34 20, 65 22
+      C86 24, 89 40, 75 54
+      C64 63, 45 57, 28 50
+      Z
+    "
+        fill={skinColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M60 30 L65 37 M71 35 L74 42"
+        stroke={detailColor}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        opacity={0.6}
+      />
+
+      {/* 앞쪽 고구마 */}
+      <Path
+        d="
+      M30 50
+      C24 50, 18 60, 28 76
+      C40 90, 72 88, 90 67
+      C96 60, 84 48, 55 48
+      C44 48, 34 50, 30 50
+      Z
+    "
+        fill={skinColor}
+        stroke={OUTLINE}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M45 28 L52 36"
+        stroke={detailColor}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        opacity={0.45}
+      />
+
+      <Path
+        d="M55 23 L60 29"
+        stroke={detailColor}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        opacity={0.45}
+      />
+
+      <Path
+        d="M76 38 L81 44"
+        stroke={detailColor}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        opacity={0.45}
+      />
+      <Path
+        d="M58 73 L64 79"
+        stroke={detailColor}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        opacity={0.45}
+      />
+
+      <Path
+        d="M48 66 L54 73"
+        stroke={detailColor}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        opacity={0.45}
+      />
+
+      <Path
+        d="M70 58 L76 64"
+        stroke={detailColor}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        opacity={0.45}
+      />
+    </Svg>
+  );
+};
+export const Cupcake = ({
+  colorHex = "#F8BBD0", // 컵케이크 기본 분홍빛 크림 톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const creamColor = primary ?? colorHex;
+  const cupColor = secondary ?? "#8D6E63";
+  const cherryColor = accent ?? "#E53935";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 크림 */}
+      <Path
+        d="
+        M25 52
+        C18 44 24 32 35 32
+        C36 20 55 18 61 30
+        C74 25 84 36 77 48
+        C83 58 72 65 62 61
+        L38 61
+        C28 64 21 59 25 52Z
+      "
+        fill={creamColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      {/* 컵 */}
+      <Path
+        d="M30 60 L70 60 L64 84 Q50 90 36 84Z"
+        fill={cupColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+
+      <Path d="M40 64 L43 81" stroke="#FFFFFF" strokeWidth="3" opacity={0.35} />
+      <Path d="M52 63 L52 84" stroke="#FFFFFF" strokeWidth="3" opacity={0.35} />
+      <Path d="M63 64 L59 81" stroke="#FFFFFF" strokeWidth="3" opacity={0.35} />
+
+      {/* 체리 */}
+      <Circle
+        cx="51"
+        cy="22"
+        r="7"
+        fill={cherryColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+    </Svg>
+  );
+};
+
+export const CottonCandy = ({
+  colorHex = "#F48FB1", // 솜사탕 기본 분홍빛 톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const cloudColor = primary ?? colorHex;
+  const coneColor = secondary ?? "#BCAAA4"; // 종이 콘 기본 색상
+  const lineAccentColor = accent ?? "#AD1457"; // 콘 아웃라인/무늬 색상
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 종이 콘(막대 대신 원뿔) */}
+      <Polygon
+        points="42,60 58,60 52,90 48,90"
+        fill={coneColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M43 66 L57 66 M44 74 L56 74"
+        stroke={lineAccentColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+        opacity={0.4}
+      />
+
+      {/* 뭉게뭉게 솜사탕 (여러 원을 겹쳐 구름처럼) */}
+      <Circle
+        cx="32"
+        cy="46"
+        r="16"
+        fill={cloudColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+      <Circle
+        cx="50"
+        cy="34"
+        r="20"
+        fill={cloudColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+      <Circle
+        cx="68"
+        cy="46"
+        r="16"
+        fill={cloudColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+      <Circle cx="40" cy="52" r="14" fill={cloudColor} />
+      <Circle cx="60" cy="52" r="14" fill={cloudColor} />
+
+      {/* 입체 하이라이트 (Unchanged) */}
+      <Ellipse cx="42" cy="30" rx="9" ry="6" fill={WHITE} opacity={0.45} />
+      <Ellipse cx="60" cy="40" rx="6" ry="4" fill={WHITE} opacity={0.3} />
+
+      <G transform="translate(50, 44)">
+        <Circle cx="-6" cy="-2" r="2" fill={DARK} />
+        <Circle cx="6" cy="-2" r="2" fill={DARK} />
+
+        <Path
+          d="M -5 4 Q 0 9 5 4"
+          fill="none"
+          stroke={DARK}
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+        {/* 볼터치 (진한 핑크 계열, 투명도 조절) */}
+        <Circle cx="-12" cy="5" r="3.5" fill={lineAccentColor} opacity={0.6} />
+        {/* 왼쪽 볼 */}
+        <Circle cx="12" cy="5" r="3.5" fill={lineAccentColor} opacity={0.6} />
+        {/* 오른쪽 볼 */}
+      </G>
+    </Svg>
+  );
+};
+export const Sunflower = ({
+  colorHex = "#FDD835", // 해바라기 기본 노란빛 톤
+  primary,
+  secondary,
+  accent,
+  size = 90,
+}: ItemSvgProps) => {
+  const petalColor = primary ?? colorHex;
+  const centerColor = secondary ?? "#4E342E";
+  const stemColor = accent ?? "#2E7D32";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 줄기 + 잎 */}
+      <Path
+        d="M50 62 L50 90"
+        stroke={stemColor}
+        strokeWidth="4"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M50 78 C40 76 34 82 32 90 C42 90 48 86 50 78Z"
+        fill={stemColor}
+      />
+
+      {/* 뾰족한 꽃잎 8장 (타원을 회전시켜 배치) */}
+      <G>
+        {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
+          <Ellipse
+            key={angle}
+            cx="50"
+            cy="26"
+            rx="9"
+            ry="17"
+            fill={petalColor}
+            stroke={OUTLINE}
+            strokeWidth="4"
+            transform={`rotate(${angle} 50 50)`}
+          />
+        ))}
+      </G>
+
+      {/* 가운데 씨앗 원판 */}
+      <Circle
+        cx="50"
+        cy="50"
+        r="16"
+        fill={centerColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+      {/* 씨앗 질감 점들 */}
+      <Circle cx="45" cy="46" r="1.6" fill={OUTLINE} />
+      <Circle cx="55" cy="46" r="1.6" fill={OUTLINE} />
+      <Circle cx="50" cy="52" r="1.6" fill={OUTLINE} />
+      <Circle cx="44" cy="54" r="1.6" fill={OUTLINE} />
+      <Circle cx="56" cy="54" r="1.6" fill={OUTLINE} />
+    </Svg>
+  );
+};
+export const Flower = ({
+  colorHex = "#AB47BC", // 꽃 기본 보라빛 톤
+  primary,
+  secondary,
+  accent,
+  size = 90,
+}: ItemSvgProps) => {
+  const petalColor = primary ?? colorHex;
+  const centerColor = secondary ?? "#FFCA28";
+  const detailColor = accent ?? "#F57F17";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 꽃잎 */}
+      <Circle
+        cx="50"
+        cy="28"
+        r="17"
+        fill={petalColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+
+      <Circle
+        cx="72"
+        cy="43"
+        r="17"
+        fill={petalColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+
+      <Circle
+        cx="64"
+        cy="68"
+        r="17"
+        fill={petalColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+
+      <Circle
+        cx="36"
+        cy="68"
+        r="17"
+        fill={petalColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+
+      <Circle
+        cx="28"
+        cy="43"
+        r="17"
+        fill={petalColor}
+        stroke={OUTLINE}
+        strokeWidth="3"
+      />
+
+      {/* 가운데 */}
+      <Circle
+        cx="50"
+        cy="50"
+        r="14"
+        fill={centerColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Circle cx="45" cy="45" r="4" fill={detailColor} opacity={0.4} />
+    </Svg>
+  );
+};
+export const Flower1 = ({
+  colorHex = "#D85A38", // 이미지의 따뜻한 붉은 주황빛 꽃잎 컬러
+  primary,
+  secondary,
+  accent,
+  size = 85,
+}: ItemSvgProps) => {
+  const petalColor = primary ?? colorHex;
+  const stemColor = secondary ?? "#4A7C59"; // 초록빛 줄기
+  const centerColor = accent ?? "#FFF176"; // 노란색 꽃술
+  const OUTLINE = "#212121";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 1. 줄기 (부드러운 곡선 형태) */}
+      <Path
+        d="M 50 55 Q 42 75 48 95"
+        fill="none"
+        stroke={stemColor}
+        strokeWidth={4.5}
+        strokeLinecap="round"
+      />
+
+      {/* 2. 꽃잎 5장 (회전 대칭 구조로 둥글고 귀엽게 배치) */}
+      {[0, 72, 144, 216, 288].map((angle, index) => (
+        <G key={index} transform={`rotate(${angle}, 50, 45)`}>
+          {/* 꽃잎 기본 형태 */}
+          <Path
+            d="M 50 45 C 43 30 36 18 43 12 C 48 8 52 8 57 12 C 64 18 57 30 50 45 Z"
+            fill={petalColor}
+            stroke={OUTLINE}
+            strokeWidth={3}
+            strokeLinejoin="round"
+          />
+          {/* 꽃잎 안쪽의 따뜻한 하이라이트 디테일 */}
+          <Path
+            d="M 50 36 C 47 26 44 20 47 16"
+            fill="none"
+            stroke="#FFD54F"
+            strokeWidth={2.5}
+            strokeLinecap="round"
+            opacity={0.6}
+          />
+        </G>
+      ))}
+
+      {/* 3. 중앙 꽃술 배경 (동글동글한 코어) */}
+      <Circle
+        cx="50"
+        cy="45"
+        r="11"
+        fill={petalColor}
+        stroke={OUTLINE}
+        strokeWidth={3}
+      />
+    </Svg>
+  );
+};
+export const Cactus = ({
+  colorHex = "#66BB6A", // 선인장 기본 초록빛 톤
+  primary,
+  secondary,
+  accent,
+  size = 90,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const potColor = secondary ?? "#8D6E63";
+  const flowerColor = accent ?? "#E91E63";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 화분 */}
+      <Path
+        d="M30 82 L70 82 L66 94 L34 94Z"
+        fill={potColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+      {/* 팔 (왼쪽) */}
+      <Path
+        d="M38 55 H24 C17 55 17 42 24 42"
+        stroke={bodyColor}
+        strokeWidth="15"
+        fill="none"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M38 55 H24 C17 55 17 42 24 42"
+        stroke={OUTLINE}
+        strokeWidth="4"
+        fill="none"
+        strokeLinecap="round"
+        opacity={0.9}
+      />
+      {/* 팔 (오른쪽) */}
+      <Path
+        d="M62 65 H76 C83 65 83 52 76 52"
+        stroke={bodyColor}
+        strokeWidth="15"
+        fill="none"
+        strokeLinecap="round"
+      />
+      <Path
+        d="M62 65 H76 C83 65 83 52 76 52"
+        stroke={OUTLINE}
+        strokeWidth="4"
+        fill="none"
+        strokeLinecap="round"
+        opacity={0.9}
+      />
+
+      {/* 몸통 */}
+      <Rect
+        x="38"
+        y="30"
+        width="24"
+        height="55"
+        rx="12"
+        fill={bodyColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+      {/* 작은 가시 */}
+      <Path
+        d="M48 34 L46 30 M54 43 L58 40 M46 58 L43 61"
+        stroke={WHITE}
+        strokeWidth="2"
+        strokeLinecap="round"
+        opacity="0.7"
+      />
+
+      {/* 얼굴 */}
+      <Circle cx="45" cy="55" r="3" fill={DARK} />
+      <Circle cx="55" cy="55" r="3" fill={DARK} />
+      <Path
+        d="M45 63 Q50 67 55 63"
+        stroke={DARK}
+        strokeWidth="2.5"
+        fill="none"
+        strokeLinecap="round"
+      />
+      <Ellipse cx="43" cy="42" rx="4" ry="8" fill={WHITE} opacity={0.3} />
+    </Svg>
+  );
+};
+export const Cloud = ({
+  colorHex = "#E0F7FA", // 구름 기본 하늘빛/화이트 톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const cloudColor = primary ?? colorHex;
+  const highlightColor = secondary ?? "#FFFFFF";
+  const detailColor = accent ?? "#B2EBF2";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M20 65
+          C15 52 24 42 37 44
+          C40 30 58 26 68 39
+          C82 36 91 47 87 59
+          C95 68 85 78 74 77
+          L30 77
+          C20 77 15 72 20 65Z"
+        fill={cloudColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+      />
+
+      <Ellipse
+        cx="43"
+        cy="50"
+        rx="9"
+        ry="5"
+        fill={highlightColor}
+        opacity={0.5}
+      />
+    </Svg>
+  );
+};
+export const CrescentMoon = ({
+  colorHex = "#FFEE58",
+  primary,
+  secondary,
+  accent,
+  size = 90,
+}: ItemSvgProps) => {
+  const moonColor = primary ?? colorHex;
+  const highlightColor = secondary ?? "#FFFDE7";
+  const blushColor = accent ?? "#FF8A80";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="
+    M 72 8
+    C 91 26, 99 49, 91 69
+    C 82 91, 59 98, 38 89
+    C 30 86, 23 81, 18 75
+    C 38 85, 59 75, 70 57
+    C 81 39, 80 20, 72 8
+    Z
+  "
+        fill={moonColor}
+        stroke={OUTLINE}
+        strokeWidth={2}
+      />
+
+      {/* 오른쪽 바깥쪽 곡선만 검은 테두리 */}
+      <Path
+        d="
+    M 72 8
+    C 91 26, 99 49, 91 69
+    C 82 91, 59 98, 38 89
+  "
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinecap="round"
+      />
+
+      {/* 달 안쪽의 은은한 하이라이트 */}
+      <Path
+        d="M 72 15 C 84 30, 88 48, 82 64"
+        fill="none"
+        stroke={highlightColor}
+        strokeWidth={2.5}
+        strokeLinecap="round"
+        opacity={0.65}
+      />
+    </Svg>
+  );
+};
+export const Tree = ({
+  colorHex = "#9CCC65", // 나무 잎 기본 초록빛 톤
+  primary,
+  secondary,
+  accent,
+  size = 95,
+}: ItemSvgProps) => {
+  const leavesColor = primary ?? colorHex;
+  const trunkColor = secondary ?? "#FFA726";
+  const highlightColor = accent ?? "#FFFFFF";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 나무 기둥 및 가지 (아래가 넓고 위로 갈라지는 형태)[cite: 4] */}
+      <Path
+        d="M32 94 
+           L68 94 
+           C65 65 63 55 60 45
+           C66 43 72 38 68 30
+           C65 24 58 27 54 36
+           C52 30 50 22 50 22
+           C50 22 48 30 46 36
+           C42 27 35 24 32 30
+           C28 38 34 43 40 45
+           C37 55 35 65 32 94 Z"
+        fill={trunkColor}
+        stroke={OUTLINE}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+      {/* 몽글몽글한 잎사귀 덩어리 (구름 형태 복합 패스)[cite: 4] */}
+      <G transform="translate(9.4, -10) scale(0.78)">
+        <Path
+          d="M20 58
+           C12 45 22 30 38 32
+           C44 18 64 18 70 32
+           C86 30 96 45 88 58
+           C96 72 82 85 68 82
+           L32 82
+           C18 85 12 72 20 58 Z"
+          fill={leavesColor}
+          stroke={OUTLINE}
+          strokeWidth="4"
+          strokeLinejoin="round"
+        />
+
+        {/* 잎사귀 입체 하이라이트 */}
+        <Ellipse
+          cx="42"
+          cy="38"
+          rx="10"
+          ry="5"
+          fill={highlightColor}
+          opacity={0.4}
+        />
+      </G>
+    </Svg>
+  );
+};
+
+export const Piano = ({
+  colorHex = "#B8C0C8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const keyColor = secondary ?? "#FFFFFF";
+  const accentColor = accent ?? "#333333";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M15 18 Q15 12 22 12 H78 Q85 12 85 18 V72 H15 Z"
+        fill={bodyColor}
+        stroke={accentColor}
+        strokeWidth={3}
+        strokeLinejoin="round"
+      />
+      <Rect
+        x={22}
+        y={35}
+        width={56}
+        height={23}
+        rx={2}
+        fill={keyColor}
+        stroke={accentColor}
+        strokeWidth={2}
+      />
+      {Array.from({ length: 7 }, (_, i) => (
+        <Line
+          key={i}
+          x1={30 + i * 7}
+          y1={36}
+          x2={30 + i * 7}
+          y2={57}
+          stroke={accentColor}
+          strokeWidth={1.5}
+        />
+      ))}
+      {[27, 41, 55, 69].map((x) => (
+        <Rect
+          key={x}
+          x={x}
+          y={35}
+          width={4}
+          height={12}
+          rx={1}
+          fill={accentColor}
+        />
+      ))}
+      <Line
+        x1={22}
+        y1={64}
+        x2={78}
+        y2={64}
+        stroke={accentColor}
+        strokeWidth={3}
+      />
+      <Path
+        d="M23 72 L23 87 M77 72 L77 87"
+        stroke={accentColor}
+        strokeWidth={5}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+
+export const Violin = ({
+  colorHex = "#C98A47",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const neckColor = secondary ?? "#8D6E63";
+  const stringColor = accent ?? "#424242";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 활 */}
+      <Line
+        x1="68"
+        y1="18"
+        x2="89"
+        y2="84"
+        stroke={neckColor}
+        strokeWidth="3.5"
+        strokeLinecap="round"
+      />
+      <Line
+        x1="70"
+        y1="20"
+        x2="87"
+        y2="82"
+        stroke={stringColor}
+        strokeWidth="1"
+      />
+      {/* 바이올린 몸통 */}
+      <Path
+        d="
+    M44 12
+    L44 28
+
+    C30 30 24 40 30 50
+    C35 57 34 63 28 69
+C22 77 30 84 50 84
+C70 84 78 77 72 69
+
+    C70 87 78 77 72 69
+    C66 63 65 57 70 50
+    C76 40 70 30 56 28
+
+    L56 12
+    Z
+  "
+        fill={bodyColor}
+        stroke={stringColor}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
+
+      {/* 헤드 */}
+      <Rect
+        x="40"
+        y="4"
+        width="20"
+        height="12"
+        rx="4"
+        fill={neckColor}
+        stroke={stringColor}
+        strokeWidth="2"
+      />
+
+      {/* 현판 */}
+      <Rect x="45" y="16" width="10" height="42" rx="2" fill={neckColor} />
+
+      {/* 줄 */}
+      <Line
+        x1="49"
+        y1="8"
+        x2="49"
+        y2="82"
+        stroke={stringColor}
+        strokeWidth="1"
+      />
+
+      <Line
+        x1="53"
+        y1="8"
+        x2="53"
+        y2="82"
+        stroke={stringColor}
+        strokeWidth="1"
+      />
+
+      {/* 페그 */}
+      <Circle cx="40" cy="8" r="2" fill={stringColor} />
+      <Circle cx="60" cy="8" r="2" fill={stringColor} />
+      <Circle cx="40" cy="14" r="2" fill={stringColor} />
+      <Circle cx="60" cy="14" r="2" fill={stringColor} />
+
+      {/* 브릿지 */}
+      <Path
+        d="
+    M44 55
+    Q50 50 56 55
+    L54 64
+    L46 64
+    Z
+  "
+        fill={neckColor}
+        stroke={stringColor}
+        strokeWidth="2"
+      />
+
+      {/* 왼쪽 f홀 */}
+      <Path
+        d="
+          M41 44
+          Q36 48 41 54
+          Q36 60 41 64
+        "
+        fill="none"
+        stroke={stringColor}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+
+      {/* 오른쪽 f홀 */}
+      <Path
+        d="
+          M59 44
+          Q64 48 59 54
+          Q64 60 59 64
+        "
+        fill="none"
+        stroke={stringColor}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+
+export const Keyboard = ({
+  colorHex = "#B8C0C8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const keyColor = secondary ?? "#FFFFFF";
+  const detailColor = accent ?? "#424242";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Rect
+        x={8}
+        y={20}
+        width={84}
+        height={60}
+        rx={8}
+        fill={bodyColor}
+        stroke={detailColor}
+        strokeWidth={3}
+      />
+      <Rect x={17} y={29} width={24} height={8} rx={2} fill={detailColor} />
+      <Circle cx={53} cy={33} r={4} fill={detailColor} />
+      <Circle cx={68} cy={33} r={4} fill={detailColor} />
+      <Rect
+        x={17}
+        y={43}
+        width={66}
+        height={26}
+        rx={2}
+        fill={keyColor}
+        stroke={detailColor}
+        strokeWidth={2}
+      />
+      {Array.from({ length: 11 }, (_, i) => (
+        <Line
+          key={i}
+          x1={23 + i * 5.8}
+          y1={44}
+          x2={23 + i * 5.8}
+          y2={68}
+          stroke={detailColor}
+          strokeWidth={1.2}
+        />
+      ))}
+      {[25, 36, 48, 59, 71].map((x) => (
+        <Rect
+          key={x}
+          x={x}
+          y={44}
+          width={3.5}
+          height={13}
+          rx={0.5}
+          fill={detailColor}
+        />
+      ))}
+    </Svg>
+  );
+};
+
+export const Bongo = ({
+  colorHex = "#B8C0C8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const drumColor = secondary ?? "#F4D6A0";
+  const outlineColor = accent ?? "#424242";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {[25, 59].map((x, i) => (
+        <G key={x}>
+          <Path
+            d={`M${x - 12} 32
+               Q${x} 27 ${x + 12} 32
+               L${x + 9} 70
+               Q${x} 78 ${x - 9} 70 Z`}
+            fill={bodyColor}
+            stroke={outlineColor}
+            strokeWidth={3}
+            strokeLinejoin="round"
+          />
+          <Ellipse
+            cx={x}
+            cy={32}
+            rx={12}
+            ry={5}
+            fill={drumColor}
+            stroke={outlineColor}
+            strokeWidth={2.5}
+          />
+          <Line
+            x1={x - 9}
+            y1={43}
+            x2={x - 7}
+            y2={65}
+            stroke={outlineColor}
+            strokeWidth={2}
+          />
+          <Line
+            x1={x + 9}
+            y1={43}
+            x2={x + 7}
+            y2={65}
+            stroke={outlineColor}
+            strokeWidth={2}
+          />
+        </G>
+      ))}
+      <Line
+        x1={36}
+        y1={47}
+        x2={48}
+        y2={47}
+        stroke={outlineColor}
+        strokeWidth={3}
+      />
+    </Svg>
+  );
+};
+
+export const DrumSet = ({
+  colorHex = "#B8C0C8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const drumColor = secondary ?? "#F4D6A0";
+  const outlineColor = accent ?? "#424242";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Line
+        x1={12}
+        y1={82}
+        x2={88}
+        y2={82}
+        stroke={outlineColor}
+        strokeWidth={2.5}
+      />
+      <Ellipse
+        cx={50}
+        cy={65}
+        rx={19}
+        ry={18}
+        fill={bodyColor}
+        stroke={outlineColor}
+        strokeWidth={3}
+      />
+      <Ellipse
+        cx={50}
+        cy={65}
+        rx={12}
+        ry={11}
+        fill={drumColor}
+        stroke={outlineColor}
+        strokeWidth={2}
+      />
+      <Rect
+        x={27}
+        y={42}
+        width={14}
+        height={17}
+        rx={3}
+        fill={bodyColor}
+        stroke={outlineColor}
+        strokeWidth={2.5}
+      />
+      <Ellipse
+        cx={34}
+        cy={42}
+        rx={7}
+        ry={3}
+        fill={drumColor}
+        stroke={outlineColor}
+        strokeWidth={2}
+      />
+      <Rect
+        x={59}
+        y={40}
+        width={14}
+        height={18}
+        rx={3}
+        fill={bodyColor}
+        stroke={outlineColor}
+        strokeWidth={2.5}
+      />
+      <Ellipse
+        cx={66}
+        cy={40}
+        rx={7}
+        ry={3}
+        fill={drumColor}
+        stroke={outlineColor}
+        strokeWidth={2}
+      />
+      <Line
+        x1={18}
+        y1={28}
+        x2={18}
+        y2={83}
+        stroke={outlineColor}
+        strokeWidth={2.5}
+      />
+      <Ellipse
+        cx={18}
+        cy={26}
+        rx={12}
+        ry={4}
+        fill={drumColor}
+        stroke={outlineColor}
+        strokeWidth={2.5}
+      />
+      <Line
+        x1={82}
+        y1={28}
+        x2={82}
+        y2={83}
+        stroke={outlineColor}
+        strokeWidth={2.5}
+      />
+      <Ellipse
+        cx={82}
+        cy={26}
+        rx={12}
+        ry={4}
+        fill={drumColor}
+        stroke={outlineColor}
+        strokeWidth={2.5}
+      />
+    </Svg>
+  );
+};
+export const Guitar = ({
+  colorHex = "#B8C0C8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const neckColor = secondary ?? "#8D6E63";
+  const outlineColor = accent ?? "#424242";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 몸통을 넥 방향과 일치하도록 중심점 기준에 맞춰 transform 회전/정렬 */}
+      <G transform="rotate(-25, 50, 80)">
+        <Path
+          d="
+            M46 51
+            C34 44 21 49 20 62
+            C19 76 30 86 45 84
+            C56 82 60 75 59 67
+            C67 72 79 68 82 57
+            C85 45 76 35 63 38
+            C55 40 49 45 46 51
+            Z
+          "
+          fill={bodyColor}
+          stroke={outlineColor}
+          strokeWidth={3}
+          strokeLinejoin="round"
+        />
+      </G>
+
+      {/* 넥 및 헤드, 줄 부문 */}
+      <Path
+        d="M47 49 L73 18 L80 24 L55 55 Z"
+        fill={neckColor}
+        stroke={outlineColor}
+        strokeWidth={3}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M72 18 L79 11 L87 16 L80 25 Z"
+        fill={neckColor}
+        stroke={outlineColor}
+        strokeWidth={3}
+        strokeLinejoin="round"
+      />
+      <Circle
+        cx={41}
+        cy={62}
+        r={7}
+        fill={neckColor}
+        stroke={outlineColor}
+        strokeWidth={2}
+      />
+      <G transform="rotate(25, 50, 80)">
+        <Rect x={25} y={80} width={12} height={4} rx={10} fill={outlineColor} />
+      </G>
+      <Line
+        x1={38}
+        y1={62}
+        x2={78}
+        y2={18}
+        stroke={outlineColor}
+        strokeWidth={1}
+      />
+      <Line
+        x1={41}
+        y1={65}
+        x2={81}
+        y2={21}
+        stroke={outlineColor}
+        strokeWidth={1}
+      />
+    </Svg>
+  );
+};
+
+export const Harp = ({
+  colorHex = "#B8C0C8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const frameColor = primary ?? colorHex;
+  const stringColor = secondary ?? "#FFFFFF";
+  const outlineColor = accent ?? "#424242";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M22 15 L22 84 L80 84
+           Q86 83 80 77
+           L48 26
+           Q41 14 32 15 Z"
+        fill={frameColor}
+        stroke={outlineColor}
+        strokeWidth={3}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M32 23 Q40 18 46 29 L72 76 L31 76 Z"
+        fill={stringColor}
+        stroke={outlineColor}
+        strokeWidth={2}
+      />
+      {Array.from({ length: 7 }, (_, i) => (
+        <Line
+          key={i}
+          x1={34 + i * 5}
+          y1={24 + i * 4}
+          x2={34 + i * 5}
+          y2={75}
+          stroke={outlineColor}
+          strokeWidth={1.3}
+        />
+      ))}
+      <Rect
+        x={18}
+        y={81}
+        width={67}
+        height={7}
+        rx={2}
+        fill={frameColor}
+        stroke={outlineColor}
+        strokeWidth={2}
+      />
+    </Svg>
+  );
+};
+
+export const Trumpet = ({
+  colorHex = "#B8C0C8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const detailColor = secondary ?? "#E5A13B";
+  const outlineColor = accent ?? "#424242";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M13 42 L59 42 L78 27
+           L87 32 L87 48 L78 53 L59 48 L13 48 Z"
+        fill={bodyColor}
+        stroke={outlineColor}
+        strokeWidth={3}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M78 27 L87 23 L94 30 L94 49 L87 53 L78 48 Z"
+        fill={detailColor}
+        stroke={outlineColor}
+        strokeWidth={3}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M37 48 L37 61 Q37 67 43 67
+           L48 67 Q53 67 53 61 L53 48"
+        fill="none"
+        stroke={outlineColor}
+        strokeWidth={3}
+        strokeLinejoin="round"
+      />
+      {[37, 46, 55].map((x) => (
+        <G key={x}>
+          <Line
+            x1={x}
+            y1={35}
+            x2={x}
+            y2={42}
+            stroke={outlineColor}
+            strokeWidth={2.5}
+          />
+          <Circle
+            cx={x}
+            cy={33}
+            r={3}
+            fill={detailColor}
+            stroke={outlineColor}
+            strokeWidth={1.5}
+          />
+        </G>
+      ))}
+      <Line
+        x1={13}
+        y1={42}
+        x2={13}
+        y2={48}
+        stroke={outlineColor}
+        strokeWidth={3}
+      />
+    </Svg>
+  );
+};
+
+export const Maracas = ({
+  colorHex = "#B8C0C8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const headColor = primary ?? colorHex;
+  const handleColor = secondary ?? "#E5A13B";
+  const detailColor = accent ?? "#424242";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <G rotation="-25" origin="32, 35">
+        <Ellipse
+          cx={32}
+          cy={30}
+          rx={13}
+          ry={18}
+          fill={headColor}
+          stroke={detailColor}
+          strokeWidth={3}
+        />
+        <Path
+          d="M20 28 Q32 34 44 28"
+          fill="none"
+          stroke={detailColor}
+          strokeWidth={2}
+        />
+        <Path
+          d="M32 47 L32 83"
+          stroke={handleColor}
+          strokeWidth={7}
+          strokeLinecap="round"
+        />
+        <Path
+          d="M32 47 L32 83"
+          stroke={detailColor}
+          strokeWidth={1.5}
+          strokeLinecap="round"
+        />
+      </G>
+      <G rotation="25" origin="68, 35">
+        <Ellipse
+          cx={68}
+          cy={30}
+          rx={13}
+          ry={18}
+          fill={headColor}
+          stroke={detailColor}
+          strokeWidth={3}
+        />
+        <Path
+          d="M56 28 Q68 34 80 28"
+          fill="none"
+          stroke={detailColor}
+          strokeWidth={2}
+        />
+        <Path
+          d="M68 47 L68 83"
+          stroke={handleColor}
+          strokeWidth={7}
+          strokeLinecap="round"
+        />
+        <Path
+          d="M68 47 L68 83"
+          stroke={detailColor}
+          strokeWidth={1.5}
+          strokeLinecap="round"
+        />
+      </G>
+    </Svg>
+  );
+};
+
+export const Recorder = ({
+  colorHex = "#FFFFFF",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const bodyColor = primary ?? colorHex;
+  const outlineColor = secondary ?? "#111111";
+  const detailColor = accent ?? "#FFFFFF";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 리코더 본체 */}
+      <G transform="scale(0.8) translate(18,5)">
+        <Path
+          d="
+          M 9 72
+          Q 23 68 35 55
+          L 63 22
+          Q 67 17 75 16
+          Q 83 15 91 8
+          L 96 13
+          Q 91 20 92 29
+          Q 91 39 83 41
+          Q 78 43 73 39
+          L 70 49
+          Q 68 56 61 60
+          Q 43 72 34 86
+          Q 29 92 27 98
+          L 15 87
+          Z
+        "
+          fill={bodyColor}
+          stroke={outlineColor}
+          strokeWidth={4}
+          strokeLinejoin="round"
+        />
+        {/* 위쪽 마우스피스 */}
+        <Path
+          d="
+          M 63 22
+          Q 63 15 72 13
+          Q 81 12 86 5
+          L 94 3
+          L 100 10
+          Q 96 16 96 23
+          Q 96 32 90 37
+          Q 85 41 79 37
+          L 73 33
+        "
+          fill={bodyColor}
+          stroke={outlineColor}
+          strokeWidth={4}
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+        {/* 마우스피스 내부 연결선 */}
+        <Path
+          d="M 76 19 Q 81 18 84 15"
+          fill="none"
+          stroke={outlineColor}
+          strokeWidth={3}
+          strokeLinecap="round"
+        />
+
+        {/* 상단 연결부 테두리 */}
+        <Path
+          d="M 62 25 Q 72 29 77 38"
+          fill="none"
+          stroke={outlineColor}
+          strokeWidth={4}
+          strokeLinecap="round"
+        />
+        {/* 하단 연결부 테두리 */}
+        <Path
+          d="M 56 32 Q 65 36 70 45"
+          fill="none"
+          stroke={outlineColor}
+          strokeWidth={4}
+          strokeLinecap="round"
+        />
+        {/* 손가락 구멍 */}
+        {[
+          { x: 58, y: 40 },
+          { x: 53, y: 47 },
+          { x: 48, y: 54 },
+          { x: 43, y: 61 },
+          { x: 38, y: 68 },
+        ].map((hole, index) => (
+          <Circle
+            key={index}
+            cx={hole.x}
+            cy={hole.y}
+            r={1.7}
+            fill={outlineColor}
+          />
+        ))}
+        {/* 아래쪽 마우스피스 */}
+        <Path
+          d="
+          M 9 72
+          Q 5 69 2 73
+          Q -1 77 3 81
+          L 22 100
+          Q 26 103 30 99
+          Q 33 95 29 91
+          L 13 75
+          Z
+        "
+          fill={bodyColor}
+          stroke={outlineColor}
+          strokeWidth={4}
+          strokeLinejoin="round"
+        />
+        {/* 아래쪽 마우스피스 안쪽 */}
+        <Path
+          d="M 4 78 L 24 98"
+          fill="none"
+          stroke={detailColor}
+          strokeWidth={2}
+          strokeLinecap="round"
+        />
+        {/* 손가락 받침 */}
+        <Path
+          d="
+          M 20 59
+          Q 17 56 14 59
+          Q 11 62 14 65
+          L 39 90
+          Q 42 93 45 90
+          Q 48 87 45 84
+          Z
+        "
+          fill={bodyColor}
+          stroke={outlineColor}
+          strokeWidth={4}
+          strokeLinejoin="round"
+        />
+        {/* 손가락 받침 안쪽 */}
+        <Path
+          d="M 18 62 L 42 87"
+          fill="none"
+          stroke={detailColor}
+          strokeWidth={2}
+          strokeLinecap="round"
+        />
+        {/* 아래쪽 손가락 구멍 */}
+        <Circle cx={24} cy={78} r={1.7} fill={outlineColor} />
+      </G>
+    </Svg>
+  );
+};
+export const Rainbow = ({
+  colorHex = "#E57373", // 기본 무지개 맨 아웃라인 컬러 호환용
+  primary,
+  secondary,
+  accent,
+  size = 90,
+}: ItemSvgProps) => {
+  const cloudColor = primary ?? "#E1F5FE"; // 구름 색상
+  const outlineColor = accent ?? "#212121"; // 외곽선 색상
+
+  // 무지개 색상 순서 (빨, 주, 노, 초, 파, 남, 보)
+  const rainbowColors = [
+    "#E53935", // 빨강
+    "#FB8C00", // 주황
+    "#FDD835", // 노랑
+    "#7CB342", // 초록
+    "#039BE5", // 파랑
+    "#3949AB", // 남색
+    "#8E24AA", // 보라
+  ];
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 1. 무지개 아치 레이어 (안쪽에서 바깥쪽으로 순서대로 그리기) */}
+      <G>
+        {rainbowColors.map((color, index) => {
+          // 반지름을 점진적으로 키워서 아치 띠를 형성합니다.
+          const r = 38 - index * 3.5;
+          return (
+            <Path
+              key={index}
+              d={`M ${50 - r} 65 A ${r} ${r} 0 0 1 ${50 + r} 65`}
+              fill="none"
+              stroke={color}
+              strokeWidth="3.8"
+              strokeLinecap="butt"
+            />
+          );
+        })}
+
+        {/* 무지개 전체 바깥 테두리 선 (선명한 카툰 스타일 마감) */}
+        <Path
+          d="M 10 65 A 40 40 0 0 1 90 65"
+          fill="none"
+          stroke={outlineColor}
+          strokeWidth="3"
+        />
+        <Path
+          d="M 27.5 65 A 22.5 22.5 0 0 1 72.5 65"
+          fill="none"
+          stroke={outlineColor}
+          strokeWidth="3"
+        />
+      </G>
+
+      {/* 2. 왼쪽 구름 */}
+      <G transform="translate(-10,0)">
+        <Path
+          d="M 15 78 
+             C 12 70 20 62 28 65 
+             C 33 58 43 60 45 68 
+             C 52 70 52 82 44 86 
+             L 16 86 
+             C 12 85 13 80 15 78 Z"
+          fill={cloudColor}
+          stroke={outlineColor}
+          strokeWidth="3"
+          strokeLinejoin="round"
+        />
+      </G>
+
+      {/* 3. 오른쪽 구름 */}
+      <G transform="translate(13,0)">
+        <Path
+          d="M 85 78 
+             C 88 70 80 62 72 65 
+             C 67 58 57 60 55 68 
+             C 48 70 48 82 56 86 
+             L 84 86 
+             C 88 85 87 80 85 78 Z"
+          fill={cloudColor}
+          stroke={outlineColor}
+          strokeWidth="3"
+          strokeLinejoin="round"
+        />
+      </G>
+    </Svg>
+  );
+};
+
+export const WaterBottle = ({
+  colorHex = "#B8C0C8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const bottleColor = primary ?? "#BDE3F8";
+  const capColor = secondary ?? "#78909C";
+  const detailColor = accent ?? "#FFFFFF";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M40 17 L60 17 L60 29
+           Q60 34 66 42
+           Q74 51 74 63
+           L74 83
+           Q74 92 65 92
+           L35 92
+           Q26 92 26 83 L26 63
+           Q26 51 34 42
+           Q40 34 40 29 Z"
+        fill={bottleColor}
+        stroke={OUTLINE}
+        strokeWidth={3.5}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M40 17 L60 17 L60 29 L40 29 Z"
+        fill={bottleColor}
+        stroke={OUTLINE}
+        strokeWidth={3}
+      />
+      <Rect
+        x={37}
+        y={8}
+        width={26}
+        height={11}
+        rx={3}
+        fill={capColor}
+        stroke={OUTLINE}
+        strokeWidth={3}
+      />
+      <Path
+        d="M29 65 Q50 70 71 65"
+        fill="none"
+        stroke={capColor}
+        strokeWidth={2.5}
+      />
+      <Path
+        d="M35 45 Q29 52 30 62 L30 76"
+        fill="none"
+        stroke={detailColor}
+        strokeWidth={4}
+        strokeLinecap="round"
+      />
+      <Path
+        d="M31 84 Q35 91 40 85 M60 85 Q65 91 69 84"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={2.5}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+
+export const Juice = ({
+  colorHex = "#FDD166",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const drinkColor = primary ?? colorHex;
+  const glassColor = secondary ?? "#FFFFFF";
+  const detailColor = accent ?? "#E58B27";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 컵 안의 음료 */}
+      <Path
+        d="M25 27 L75 27 L66 82
+           Q50 89 34 82 Z"
+        fill={drinkColor}
+        stroke={detailColor}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {/* 컵 외곽 */}
+      <Path
+        d="M20 20 L80 20 L69 83
+           Q67 91 50 92
+           Q33 91 31 83 Z"
+        fill="none"
+        stroke={glassColor}
+        strokeWidth={4}
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M20 20 L80 20 L69 83
+           Q67 91 50 92
+           Q33 91 31 83 Z"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={2.5}
+        strokeLinejoin="round"
+      />
+
+      {/* 음료 표면 */}
+      <Ellipse
+        cx={50}
+        cy={28}
+        rx={25}
+        ry={5}
+        fill={drinkColor}
+        stroke={OUTLINE}
+        strokeWidth={2}
+      />
+
+      {/* 반짝임 */}
+      <Path
+        d="M31 36 L35 55"
+        fill="none"
+        stroke="#FFFFFF"
+        strokeWidth={3.5}
+        strokeLinecap="round"
+      />
+      <Circle cx={61} cy={39} r={2} fill="#FFFFFF" />
+      <Circle cx={56} cy={50} r={1.5} fill="#FFFFFF" />
+    </Svg>
+  );
+};
+
+export const DrinkCan = ({
+  colorHex = "#EF4444",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const canColor = primary ?? colorHex;
+  const topColor = secondary ?? "#D5DCE3";
+  const detailColor = accent ?? "#FFFFFF";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M29 17 L71 17
+           L75 27 L75 82
+           Q75 91 66 91 L34 91
+           Q25 91 25 82 L25 27 Z"
+        fill={canColor}
+        stroke={OUTLINE}
+        strokeWidth={3.5}
+        strokeLinejoin="round"
+      />
+
+      {/* 윗면 */}
+      <Ellipse
+        cx={50}
+        cy={18}
+        rx={21}
+        ry={5}
+        fill={topColor}
+        stroke={OUTLINE}
+        strokeWidth={3}
+      />
+      <Path
+        d="M36 18 Q50 23 64 18"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={2}
+      />
+
+      {/* 윗부분 테두리 */}
+      <Path
+        d="M28 27 Q50 32 72 27"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={2.5}
+      />
+
+      {/* 라벨 */}
+      <Path
+        d="M27 44 Q50 49 73 44 L73 66
+           Q50 71 27 66 Z"
+        fill={detailColor}
+        opacity={0.95}
+      />
+
+      {/* 라벨 장식 */}
+      <Path
+        d="M34 56 Q50 46 66 56"
+        fill="none"
+        stroke={canColor}
+        strokeWidth={3}
+        strokeLinecap="round"
+      />
+
+      {/* 캔의 반사광 */}
+      <Path
+        d="M32 31 L32 39 M32 72 L32 80"
+        fill="none"
+        stroke="#FFFFFF"
+        strokeWidth={3}
+        strokeLinecap="round"
+        opacity={0.8}
+      />
+
+      {/* 바닥 테두리 */}
+      <Path
+        d="M29 87 Q50 93 71 87"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={2}
+      />
+    </Svg>
+  );
+};
+
+export const DrinkingGlass = ({
+  colorHex = "#B8C0C8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const glassColor = primary ?? colorHex;
+  const drinkColor = secondary ?? "#9ADBF5";
+  const detailColor = accent ?? "#FFFFFF";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M24 20 L76 20 L68 80
+           Q66 88 50 88
+           Q34 88 32 80 Z"
+        fill={glassColor}
+        stroke={OUTLINE}
+        strokeWidth={3}
+        strokeLinejoin="round"
+      />
+
+      {/* 잔 안의 음료 */}
+      <Path
+        d="M28 44 L72 44 L68 79
+           Q50 86 32 79 Z"
+        fill={drinkColor}
+      />
+
+      {/* 음료 표면 */}
+      <Path
+        d="M28 44 Q50 49 72 44"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={2}
+      />
+
+      {/* 컵 테두리 */}
+      <Ellipse
+        cx={50}
+        cy={20}
+        rx={26}
+        ry={5}
+        fill="#FFFFFF"
+        stroke={OUTLINE}
+        strokeWidth={3}
+      />
+
+      {/* 유리 반짝임 */}
+      <Path
+        d="M32 29 L35 41 M34 53 L36 62"
+        fill="none"
+        stroke={detailColor}
+        strokeWidth={3}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+
+export const MilkBottle = ({
+  colorHex = "#B8C0C8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const bottleColor = primary ?? "#FFFDF4";
+  const milkColor = secondary ?? "#FFFFFF";
+  const capColor = accent ?? "#8CC8F4";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M40 19 L60 19 L60 31
+           Q60 37 67 45
+           Q75 54 75 64
+           L75 83
+           Q75 92 66 92 L34 92
+           Q25 92 25 83 L25 64
+           Q25 54 33 45
+           Q40 37 40 31 Z"
+        fill={bottleColor}
+        stroke={OUTLINE}
+        strokeWidth={3}
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M28 62 Q50 66 72 62 L72 81
+           Q72 89 64 89 L36 89
+           Q28 89 28 81 Z"
+        fill={milkColor}
+      />
+
+      <Rect
+        x={37}
+        y={10}
+        width={26}
+        height={12}
+        rx={3}
+        fill={capColor}
+        stroke={OUTLINE}
+        strokeWidth={3}
+      />
+
+      <Path d="M40 24 L60 24" stroke={OUTLINE} strokeWidth={2} />
+
+      <Path
+        d="M34 47 Q29 55 30 69"
+        fill="none"
+        stroke="#FFFFFF"
+        strokeWidth={4}
+        strokeLinecap="round"
+      />
+
+      <Path
+        d="M29 73 Q50 78 71 73"
+        fill="none"
+        stroke={capColor}
+        strokeWidth={2}
+      />
+    </Svg>
+  );
+};
+
+export const SodaBottle = ({
+  colorHex = "#D32F2F",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const bottleColor = primary ?? colorHex;
+  const capColor = secondary ?? "#EF4444";
+  const detailColor = accent ?? "#FFFFFF";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M40 18 L60 18 L60 28
+           Q60 34 66 41
+           Q72 47 68 54
+           Q64 60 69 67
+           Q75 75 70 86
+           Q68 92 60 92 L40 92
+           Q32 92 30 86
+           Q25 75 31 67
+           Q36 60 32 54
+           Q28 47 34 41
+           Q40 34 40 28 Z"
+        fill={bottleColor}
+        stroke={OUTLINE}
+        strokeWidth={3.5}
+        strokeLinejoin="round"
+      />
+
+      <Rect
+        x={39}
+        y={9}
+        width={22}
+        height={11}
+        rx={3}
+        fill={capColor}
+        stroke={OUTLINE}
+        strokeWidth={3}
+      />
+
+      {/* 라벨 */}
+      <Path
+        d="M32 52 Q50 57 68 52 L67 68
+           Q50 74 33 68 Z"
+        fill="#FFFFFF"
+        stroke={OUTLINE}
+        strokeWidth={2}
+      />
+
+      <Path
+        d="M36 59 Q50 63 64 59"
+        fill="none"
+        stroke={bottleColor}
+        strokeWidth={3}
+        strokeLinecap="round"
+      />
+
+      {/* 반사광 */}
+      <Path
+        d="M37 39 Q32 47 37 52 M34 74 L34 81"
+        fill="none"
+        stroke={detailColor}
+        strokeWidth={3}
+        strokeLinecap="round"
+      />
+
+      {/* 병 바닥 굴곡 */}
+      <Path
+        d="M35 87 Q40 92 44 87 Q50 93 56 87 Q62 92 66 87"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+
+export const JuiceBox = ({
+  colorHex = "#F9A825",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const boxColor = primary ?? colorHex;
+  const topColor = secondary ?? "#FFF8E1";
+  const strawColor = accent ?? "#E53935";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 옆면 */}
+      <Path
+        d="M70 26 L84 33 L84 83 L70 90 Z"
+        fill={topColor}
+        stroke={OUTLINE}
+        strokeWidth={3}
+        strokeLinejoin="round"
+      />
+
+      {/* 본체 */}
+      <Path
+        d="M17 26 L70 26 L70 90 L17 90 Z"
+        fill={boxColor}
+        stroke={OUTLINE}
+        strokeWidth={3}
+        strokeLinejoin="round"
+      />
+
+      {/* 윗면 */}
+      <Path
+        d="M17 26 L28 14 L84 14 L70 26 Z"
+        fill={topColor}
+        stroke={OUTLINE}
+        strokeWidth={3}
+        strokeLinejoin="round"
+      />
+
+      {/* 빨대 */}
+      <Path
+        d="M43 16 L43 5 L49 5 L49 23"
+        fill="none"
+        stroke={boxColor}
+        strokeWidth={3.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      {/* 앞면 라벨 */}
+      <Rect
+        x={24}
+        y={43}
+        width={39}
+        height={28}
+        rx={5}
+        fill={topColor}
+        opacity={0.9}
+      />
+
+      {/* 과일 장식 */}
+      <Circle cx={43} cy={55} r={8} fill={boxColor} />
+      <Path
+        d="M43 47 Q47 41 52 44"
+        fill="none"
+        stroke="#388E3C"
+        strokeWidth={2.5}
+        strokeLinecap="round"
+      />
+
+      <Path
+        d="M24 78 L63 78"
+        fill="none"
+        stroke="#FFFFFF"
+        strokeWidth={2}
+        strokeLinecap="round"
+        opacity={0.8}
+      />
+    </Svg>
+  );
+};
+
+export const Milk = ({
+  colorHex = "#FFFFFF",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const cartonColor = primary ?? colorHex;
+  const labelColor = secondary ?? "#54B6E8";
+  const detailColor = accent ?? "#424242";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <G transform="scale(0.95)">
+        {/* 오른쪽 옆면 */}
+        <Path
+          d="M50 45 L91 29 L91 77 L50 94 Z"
+          fill={cartonColor}
+          stroke={OUTLINE}
+          strokeWidth={1.2}
+          strokeLinejoin="round"
+        />
+
+        {/* 앞면 */}
+        <Path
+          d="M9 31 L50 45 L50 94 L9 77 Z"
+          fill={cartonColor}
+          stroke={OUTLINE}
+          strokeWidth={1.2}
+          strokeLinejoin="round"
+        />
+
+        {/* 앞면 라벨 */}
+        <Path d="M9 52 L50 65 L50 82 L9 68 Z" fill={labelColor} />
+
+        {/* 오른쪽 옆면 라벨 */}
+        <Path d="M50 65 L91 49 L91 65 L50 82 Z" fill={labelColor} />
+
+        {/* 왼쪽 지붕 접힘면 */}
+        <Path
+          d="M9 31 L32 15 L32 27 L50 45 Z"
+          fill={cartonColor}
+          stroke={OUTLINE}
+          strokeWidth={1.2}
+          strokeLinejoin="round"
+        />
+
+        {/* 왼쪽 지붕의 접힘면 음영 */}
+        <Path
+          d="M9 31 L32 15 L32 27 Z"
+          fill={detailColor}
+          stroke={OUTLINE}
+          strokeWidth={1.2}
+          strokeLinejoin="round"
+        />
+
+        {/* 왼쪽 지붕 내부 접힘선 */}
+        <Path d="M9 31 L32 27" fill="none" stroke={OUTLINE} strokeWidth={1.2} />
+
+        {/* 오른쪽 지붕 접힘면 */}
+        <Path
+          d="M73 11 L91 29 L50 45 L32 27 Z"
+          fill={cartonColor}
+          stroke={OUTLINE}
+          strokeWidth={1.2}
+          strokeLinejoin="round"
+        />
+
+        {/* 위쪽 밀봉 날개 */}
+        <Path
+          d="M32 15 L73 -1 L73 11 L32 27 Z"
+          fill={cartonColor}
+          stroke={OUTLINE}
+          strokeWidth={1.2}
+          strokeLinejoin="round"
+        />
+
+        {/* 밀봉 날개와 지붕의 연결선 */}
+        <Path
+          d="M32 27 L73 11"
+          fill="none"
+          stroke={OUTLINE}
+          strokeWidth={1.2}
+        />
+      </G>
+    </Svg>
+  );
+};
+
+export const Desk = ({
+  colorHex = "#DDA15E",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const wood = primary ?? colorHex;
+  const drawer = secondary ?? "#F2CC8F";
+  const detail = accent ?? "#8D5524";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 책상 다리 */}
+      <Path
+        d="M21 43 L31 43 L29 86 L20 86 Z"
+        fill={wood}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M8 37 L18 40 L16 83 L7 83 Z"
+        fill={wood}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M68 43 L78 43 L80 86 L71 86 Z"
+        fill={wood}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M80 43 L90 43 L92 86 L83 86 Z"
+        fill={wood}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+
+      {/* 서랍 */}
+      <Rect
+        x={35}
+        y={47}
+        width={30}
+        height={19}
+        rx={2}
+        fill={drawer}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+      />
+      <Circle cx={50} cy={56} r={2} fill={detail} />
+
+      {/* 책상 상판 */}
+      <Path
+        d="M10 30 L77 30 L91 40 L24 40 Z"
+        fill={drawer}
+        stroke={OUTLINE}
+        strokeWidth={1.7}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M24 40 L91 40 L88 47 L21 47 Z"
+        fill={wood}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M10 30 L24 40 L21 47 L8 37 Z"
+        fill={wood}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
 
 export const CATEGORY_ITEM_SVGS = {
-  star_flower: StarFlower,
-  heart_owl: HeartOwl,
+  desk: Desk,
+  milk: Milk,
+  juiceBox: JuiceBox,
+  sodaBottle: SodaBottle,
+  milkBottle: MilkBottle,
+  drinkingGlass: DrinkingGlass,
+  drinkCan: DrinkCan,
+  juice: Juice,
+  waterBottle: WaterBottle,
+  rainbow: Rainbow,
+  flower1: Flower1,
+  gimbap1: Gimbap1,
+  recorder: Recorder,
+  maracas: Maracas,
+  trumpet: Trumpet,
+  harp: Harp,
+  guitar: Guitar,
+  drumSet: DrumSet,
+  bongo: Bongo,
+  keyboard: Keyboard,
+  violin: Violin,
+  piano: Piano,
+  tree: Tree,
+  crescentMoon: CrescentMoon,
+  cloud: Cloud,
+  cactus: Cactus,
+  flower: Flower,
+  sunflower: Sunflower,
+  cottonCandy: CottonCandy,
+  cupcake: Cupcake,
+  sweetPotato: SweetPotato,
+  blueberry: Blueberry,
+  cherry: Cherry,
+  fish: Fish,
+  koala: Koala,
+  fox: Fox,
+  snail: Snail,
+  bee: Bee,
+  ladybug: Ladybug,
+  butterfly: Butterfly,
+  cruise: Cruise,
+  drone: Drone,
+  ambulance: Ambulance,
+  fireTruck: FireTruck,
+  scooter: Scooter,
+  taxi: Taxi,
+  sneakers: Sneakers,
+  dressShoes: DressShoes,
+
+  slippers: Slippers,
+  flipFlops: FlipFlops,
+  rainBoots: RainBoots,
+  furBoots: FurBoots,
+  boots: Boots,
+  tShirt: TShirt,
+  shortSleeveShirt: ShortSleeveShirt,
+  tankTop: TankTop,
+  shortSleeve: ShortSleeve,
+
+  shorts: Shorts,
+  longPants: LongPants,
+  skirt: Skirt,
+  dress: Dress,
+  hanbok: Hanbok,
+  jumper: Jumper,
+  coat: Coat,
+  bucketHat: BucketHat,
+  beret: Beret,
+  winterHat: WinterHat,
+  baseballCap: BaseballCap,
+
+  strawHat: StrawHat,
+
+  starFlower: StarFlower,
+  heartOwl: HeartOwl,
   heartKeychain: HeartKeychain,
   heartLeaf: HeartLeaf,
   heartChocolate: HeartChocolate,
