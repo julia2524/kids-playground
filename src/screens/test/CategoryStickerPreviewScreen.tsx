@@ -47,7 +47,7 @@ const SUB_CATEGORY_MAP: Record<string, string[]> = {
     "cleaning",
     "bathroom",
     "kitchen",
-
+    "toys_sports",
     "musical_instrument",
   ],
   vehicle: ["road_vehicle", "rail_special", "air_vehicle", "water_vehicle"],

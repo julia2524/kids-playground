@@ -18439,7 +18439,873 @@ export const Desk = ({
   );
 };
 
+export const Chair = ({
+  colorHex = "#E9A66B",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const wood = primary ?? colorHex;
+  const seat = secondary ?? "#F6C98D";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 뒤쪽 다리 */}
+      <Path
+        d="M28 53 L36 53 L34 87 L26 87 Z"
+        fill={wood}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M68 53 L76 53 L81 87 L73 87 Z"
+        fill={wood}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+
+      {/* 등받이 */}
+      <Path
+        d="M24 13 Q24 10 28 10 L69 10 Q74 10 74 15
+           L76 52 L28 52 Z"
+        fill={wood}
+        stroke={OUTLINE}
+        strokeWidth={1.7}
+        strokeLinejoin="round"
+      />
+
+      {/* 등받이 안쪽 */}
+      <Path
+        d="M32 18 L66 18 L68 43 L33 43 Z"
+        fill={seat}
+        stroke={OUTLINE}
+        strokeWidth={1.1}
+        strokeLinejoin="round"
+      />
+      {/* 앞쪽 다리 */}
+      <Path
+        d="M39 65 L47 65 L45 88 L37 88 Z"
+        fill={wood}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M86 65 L94 65 L97 88 L89 88 Z"
+        fill={wood}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+
+      {/* 좌석 */}
+      <Path
+        d="M27 50 L83 50 L97 60 L41 60 Z"
+        fill={seat}
+        stroke={OUTLINE}
+        strokeWidth={1.7}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M41 60 L97 60 L93 68 L38 68 Z"
+        fill={wood}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
+export const Sofa = ({
+  colorHex = "#72A7A1",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const sofaColor = primary ?? colorHex;
+  const cushion = secondary ?? "#A8D5CD";
+  const detail = accent ?? "#477D78";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 소파 다리 */}
+      <Path
+        d="M20 75 L29 75 L27 87 L19 87 Z"
+        fill={detail}
+        stroke={OUTLINE}
+        strokeWidth={1.4}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M73 75 L82 75 L84 87 L76 87 Z"
+        fill={detail}
+        stroke={OUTLINE}
+        strokeWidth={1.4}
+        strokeLinejoin="round"
+      />
+
+      {/* 등받이 */}
+      <Path
+        d="M17 35 Q17 25 27 25 L73 25
+           Q83 25 83 35 L83 66 L17 66 Z"
+        fill={sofaColor}
+        stroke={OUTLINE}
+        strokeWidth={1.7}
+        strokeLinejoin="round"
+      />
+
+      {/* 등받이 쿠션 */}
+      <Rect
+        x={25}
+        y={31}
+        width={23}
+        height={29}
+        rx={6}
+        fill={cushion}
+        stroke={OUTLINE}
+        strokeWidth={1.3}
+      />
+      <Rect
+        x={52}
+        y={31}
+        width={23}
+        height={29}
+        rx={6}
+        fill={cushion}
+        stroke={OUTLINE}
+        strokeWidth={1.3}
+      />
+
+      {/* 팔걸이 */}
+      <Path
+        d="M10 48 Q10 41 17 41 L24 43 L24 72
+           L10 72 Z"
+        fill={sofaColor}
+        stroke={OUTLINE}
+        strokeWidth={1.7}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M76 43 L83 41 Q90 41 90 48
+           L90 72 L76 72 Z"
+        fill={sofaColor}
+        stroke={OUTLINE}
+        strokeWidth={1.7}
+        strokeLinejoin="round"
+      />
+
+      {/* 좌석 쿠션 */}
+      <Path
+        d="M20 61 Q20 57 25 57 L75 57
+           Q80 57 80 62 L80 72 L20 72 Z"
+        fill={cushion}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+
+      {/* 앞면 */}
+      <Path
+        d="M20 72 L80 72 L78 80 L22 80 Z"
+        fill={sofaColor}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
+export const Bed = ({
+  colorHex = "#DDA7B5",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const frame = primary ?? "#B98261";
+  const blanket = secondary ?? colorHex;
+  const pillow = accent ?? "#FFF1D6";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 침대 다리 */}
+      <Path
+        d="M13 67 L21 67 L21 86 L14 86 Z"
+        fill={frame}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M79 68 L87 68 L88 86 L81 86 Z"
+        fill={frame}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+
+      {/* 침대 프레임 */}
+      <Path
+        d="M10 59 L87 59 L87 76 L10 76 Z"
+        fill={frame}
+        stroke={OUTLINE}
+        strokeWidth={1.7}
+        strokeLinejoin="round"
+      />
+
+      {/* 매트리스 */}
+      <Path
+        d="M10 51 Q10 46 16 46 L81 46 Q87 46 87 52
+           L87 62 L10 62 Z"
+        fill="#FFF8EC"
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+
+      {/* 베개 */}
+      <Path
+        d="M18 42 Q18 38 23 38 L42 38
+           Q46 38 46 42 L46 51 L18 51 Z"
+        fill={pillow}
+        stroke={OUTLINE}
+        strokeWidth={1.4}
+        strokeLinejoin="round"
+      />
+
+      {/* 이불 */}
+      <Path
+        d="M45 43 L78 43 Q82 43 82 48
+           L82 61 L45 61 Z"
+        fill={blanket}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+      <Path d="M45 43 L45 61" fill="none" stroke={OUTLINE} strokeWidth={1.2} />
+
+      {/* 헤드보드 */}
+      <Path
+        d="M9 29 Q9 25 13 25 L21 25
+           Q25 25 25 29 L25 62 L9 62 Z"
+        fill={frame}
+        stroke={OUTLINE}
+        strokeWidth={1.7}
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
+export const Wardrobe = ({
+  colorHex = "#B89AD9",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const body = primary ?? colorHex;
+  const door = secondary ?? "#D8C5EF";
+  const handle = accent ?? "#8064A2";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 본체 */}
+      <Rect
+        x={15}
+        y={12}
+        width={70}
+        height={76}
+        rx={3}
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={1.8}
+      />
+
+      {/* 왼쪽 문 */}
+      <Rect
+        x={20}
+        y={18}
+        width={28}
+        height={64}
+        rx={2}
+        fill={door}
+        stroke={OUTLINE}
+        strokeWidth={1.4}
+      />
+
+      {/* 오른쪽 문 */}
+      <Rect
+        x={52}
+        y={18}
+        width={28}
+        height={64}
+        rx={2}
+        fill={door}
+        stroke={OUTLINE}
+        strokeWidth={1.4}
+      />
+
+      {/* 문 안쪽 장식선 */}
+      <Path
+        d="M25 24 L43 24 L43 76 L25 76 Z"
+        fill="none"
+        stroke={body}
+        strokeWidth={1.1}
+      />
+      <Path
+        d="M57 24 L75 24 L75 76 L57 76 Z"
+        fill="none"
+        stroke={body}
+        strokeWidth={1.1}
+      />
+
+      {/* 손잡이 */}
+      <Circle
+        cx={43}
+        cy={49}
+        r={2}
+        fill={handle}
+        stroke={OUTLINE}
+        strokeWidth={0.7}
+      />
+      <Circle
+        cx={57}
+        cy={49}
+        r={2}
+        fill={handle}
+        stroke={OUTLINE}
+        strokeWidth={0.7}
+      />
+
+      {/* 아래 받침 */}
+      <Path
+        d="M18 85 L82 85 L80 90 L20 90 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
+export const Pencil = ({
+  colorHex = "#F4C542",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const body = primary ?? colorHex;
+  const band = secondary ?? "#E9A1A1";
+  const lead = accent ?? "#555555";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M25 73 L68 15 Q72 10 77 14 L84 19 Q88 23 84 28 L41 85 L25 91 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M25 73 L41 85 L25 91 Z"
+        fill="#F2D2A2"
+        stroke={OUTLINE}
+        strokeWidth={1.8}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M25 91 L29 82 L34 86 Z"
+        fill={lead}
+        stroke={OUTLINE}
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
+      <Path d="M64 20 L78 31" fill="none" stroke={band} strokeWidth={4} />
+      <Path d="M69 14 L85 26" fill="none" stroke={OUTLINE} strokeWidth={1.8} />
+      <Path
+        d="M40 73 L73 29"
+        fill="none"
+        stroke="#FFFFFF"
+        strokeWidth={1.5}
+        opacity={0.7}
+      />
+    </Svg>
+  );
+};
+
+export const PaperClip = ({
+  colorHex = "#8E9BA8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const metal = primary ?? colorHex;
+  const inner = secondary ?? "#FFFFFF";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M38 24
+           C38 10 61 10 61 25
+           L61 69
+           C61 88 34 88 34 69
+           L34 31
+           C34 22 47 22 47 32
+           L47 66
+           C47 71 40 71 40 66
+           L40 37"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={7}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M38 24
+           C38 10 61 10 61 25
+           L61 69
+           C61 88 34 88 34 69
+           L34 31
+           C34 22 47 22 47 32
+           L47 66
+           C47 71 40 71 40 66
+           L40 37"
+        fill="none"
+        stroke={metal}
+        strokeWidth={3.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M43 34 L43 65"
+        fill="none"
+        stroke={inner}
+        strokeWidth={1}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+
+export const Scissors = ({
+  colorHex = "#F08B83",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const handle = primary ?? colorHex;
+  const blade = secondary ?? "#C6D0D8";
+  const center = accent ?? "#E6B94A";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 손잡이 */}
+      <Path
+        d="M43 43 L28 17
+           C22 7 8 13 11 25
+           C14 36 26 40 39 49 Z"
+        fill={handle}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M48 48 L28 72
+           C18 84 6 74 12 63
+           C18 52 31 46 43 43 Z"
+        fill={handle}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {/* 손잡이 구멍 */}
+      <Path
+        d="M25 19 C20 16 17 21 20 26
+           C23 31 29 33 32 31
+           C35 28 30 22 25 19 Z"
+        fill="#FFFFFF"
+        stroke={OUTLINE}
+        strokeWidth={1.3}
+      />
+      <Path
+        d="M25 60 C19 59 15 65 18 69
+           C21 73 27 71 30 67
+           C33 64 29 61 25 60 Z"
+        fill="#FFFFFF"
+        stroke={OUTLINE}
+        strokeWidth={1.3}
+      />
+
+      {/* 날 */}
+      <Path
+        d="M42 46 L88 15 L55 58 L47 54 Z"
+        fill={blade}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M42 58 L88 83 L55 53 L47 49 Z"
+        fill={blade}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+      {/* 가운데 나사 */}
+      <Circle
+        cx={45}
+        cy={50}
+        r={4}
+        fill={center}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+      />
+    </Svg>
+  );
+};
+
+export const Pen = ({
+  colorHex = "#65A9E8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const body = primary ?? colorHex;
+  const detail = secondary ?? "#DCEAF7";
+  const ink = accent ?? "#3C4858";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 펜 몸통 */}
+      <Path
+        d="M18 77 L69 20 L81 31 L30 88 L17 91 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {/* 펜촉 */}
+      <Path
+        d="M18 77 L30 88 L17 91 Z"
+        fill={ink}
+        stroke={OUTLINE}
+        strokeWidth={1.7}
+        strokeLinejoin="round"
+      />
+
+      {/* 펜 끝부분 */}
+      <Path
+        d="M69 20 L76 12 L88 23 L81 31 Z"
+        fill={detail}
+        stroke={OUTLINE}
+        strokeWidth={1.8}
+        strokeLinejoin="round"
+      />
+
+      {/* 클립 */}
+      <Path
+        d="M70 19 L80 26 L84 21 L76 14"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {/* 몸통 장식선 */}
+      <Path
+        d="M29 72 L70 27"
+        fill="none"
+        stroke={detail}
+        strokeWidth={2.5}
+        strokeLinecap="round"
+      />
+      <Path d="M39 68 L45 73" fill="none" stroke={OUTLINE} strokeWidth={1.5} />
+    </Svg>
+  );
+};
+
+export const Ruler = ({
+  colorHex = "#F4D76B",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const body = primary ?? colorHex;
+  const marks = secondary ?? "#806B35";
+  const hole = accent ?? "#FFFFFF";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M15 20 L84 20 Q88 20 88 24
+           L88 43 L15 43 Q11 43 11 39 L11 24 Q11 20 15 20 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {Array.from({ length: 11 }, (_, i) => (
+        <Line
+          key={i}
+          x1={17 + i * 6.5}
+          y1={21}
+          x2={17 + i * 6.5}
+          y2={i % 5 === 0 ? 33 : i % 2 === 0 ? 28 : 25}
+          stroke={marks}
+          strokeWidth={1.3}
+        />
+      ))}
+
+      <Circle
+        cx={20}
+        cy={35}
+        r={2.2}
+        fill={hole}
+        stroke={OUTLINE}
+        strokeWidth={1}
+      />
+    </Svg>
+  );
+};
+
+export const Sketchbook = ({
+  colorHex = "#79B9E8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const cover = primary ?? colorHex;
+  const page = secondary ?? "#FFFDF5";
+  const detail = accent ?? "#F4C542";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 책 표지 */}
+      <Path
+        d="M22 15 L77 9 Q82 9 83 15 L88 78
+           Q88 83 83 84 L28 91 Q23 91 22 86 Z"
+        fill={cover}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {/* 속지 */}
+      <Path
+        d="M29 22 L76 17 L81 76 L34 82 Z"
+        fill={page}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+
+      {/* 그림 */}
+      <Circle cx={49} cy={39} r={9} fill={detail} />
+      <Path
+        d="M35 67 L47 51 L56 60 L63 52 L76 70 Z"
+        fill="#80C995"
+        stroke={OUTLINE}
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
+
+      {/* 스프링 */}
+      {Array.from({ length: 7 }, (_, i) => (
+        <Circle
+          key={i}
+          cx={22 + i * 0.3}
+          cy={23 + i * 9}
+          r={2.5}
+          fill="#FFFFFF"
+          stroke={OUTLINE}
+          strokeWidth={1.2}
+        />
+      ))}
+    </Svg>
+  );
+};
+
+export const Notebook = ({
+  colorHex = "#F2A7B8",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const cover = primary ?? colorHex;
+  const paper = secondary ?? "#FFFDF8";
+  const line = accent ?? "#83B9E8";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      <Path
+        d="M24 12 L79 12 Q84 12 84 17 L84 83
+           Q84 88 79 88 L24 88 Z"
+        fill={cover}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      <Path
+        d="M30 18 L77 18 L77 81 L30 81 Z"
+        fill={paper}
+        stroke={OUTLINE}
+        strokeWidth={1.4}
+      />
+
+      {Array.from({ length: 5 }, (_, i) => (
+        <Line
+          key={i}
+          x1={37}
+          y1={31 + i * 10}
+          x2={70}
+          y2={31 + i * 10}
+          stroke={line}
+          strokeWidth={1.5}
+        />
+      ))}
+
+      {Array.from({ length: 7 }, (_, i) => (
+        <Circle
+          key={i}
+          cx={24}
+          cy={20 + i * 10}
+          r={2}
+          fill="#FFFFFF"
+          stroke={OUTLINE}
+          strokeWidth={1}
+        />
+      ))}
+    </Svg>
+  );
+};
+export const Stapler = ({
+  colorHex = "#8DA7D9",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const body = primary ?? colorHex;
+  const base = secondary ?? "#AEB8C5";
+  const detail = accent ?? "#56657A";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 아래 받침 */}
+      <Path
+        d="M14 70 L87 70 L87 79 L14 79 Z"
+        fill={base}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {/* 스테이플러 윗부분 */}
+      {/* <Path
+        d="M20 42 L72 42 Q81 42 84 51
+           L88 68 L17 68 L15 54 Q14 44 20 42 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      /> */}
+      {/* 스테이플러 윗부분 */}
+      <G transform="rotate(-30 23 54)">
+        <Path
+          d="
+      M20 42
+      L72 42
+      Q81 42 84 51
+      L88 68
+      L17 68
+      L15 54
+      Q14 44 20 42
+      Z
+    "
+          fill={body}
+          stroke={OUTLINE}
+          strokeWidth={2}
+          strokeLinejoin="round"
+        />
+
+        {/* 윗면 장식 */}
+        <Path
+          d="M23 48 L70 48 Q77 48 79 55"
+          fill="none"
+          stroke="#FFFFFF"
+          strokeWidth={2}
+          strokeLinecap="round"
+        />
+      </G>
+
+      {/* 윗면 장식 */}
+      <Path
+        d="M23 48 L70 48 Q77 48 79 55"
+        fill="none"
+        stroke="#FFFFFF"
+        strokeWidth={2}
+        strokeLinecap="round"
+      />
+
+      {/* 금속 연결부 */}
+      <Rect
+        x={20}
+        y={65}
+        width={64}
+        height={5}
+        rx={1}
+        fill={detail}
+        stroke={OUTLINE}
+        strokeWidth={1.2}
+      />
+
+      {/* 회전축 */}
+      <Circle
+        cx={23}
+        cy={54}
+        r={3}
+        fill={base}
+        stroke={OUTLINE}
+        strokeWidth={1.3}
+      />
+    </Svg>
+  );
+};
+
 export const CATEGORY_ITEM_SVGS = {
+  stapler: Stapler,
+  notebook: Notebook,
+  sketchbook: Sketchbook,
+  ruler: Ruler,
+  pen: Pen,
+  scissors: Scissors,
+  paperclip: PaperClip,
+  pencil: Pencil,
+  wardrobe: Wardrobe,
+  bed: Bed,
+  sofa: Sofa,
+  chair: Chair,
   desk: Desk,
   milk: Milk,
   juiceBox: JuiceBox,

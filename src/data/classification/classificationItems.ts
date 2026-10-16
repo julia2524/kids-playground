@@ -2,6 +2,435 @@ import { ClassificationItem } from "../../types/game";
 
 export const classificationItems: ClassificationItem[] = [
   {
+    id: "stapler",
+    name: "스테이플러",
+    topCategory: "living",
+    subCategory: "stationery",
+    svgKey: "stapler",
+    shapes: [],
+    description:
+      "여러 장의 종이를 단단하게 묶어서 철할 때 사용하는 스테이플러예요.",
+    variants: [
+      {
+        colorId: "natural", // 블루그레이 본체 테마 -> 블루 그레이
+        primary: "#8DA7D9",
+        secondary: "#AEB8C5",
+        accent: "#56657A",
+      },
+      {
+        colorId: "pink", // 핑크 계열 -> 로즈 그레이
+        primary: "#F2A7B8",
+        secondary: "#C6D0D8",
+        accent: "#C5868B",
+      },
+      {
+        colorId: "yellow", // 옐로우 계열 -> 옐로우 베이지 그레이
+        primary: "#FFD54F",
+        secondary: "#C6D0D8",
+        accent: "#9E9552",
+      },
+      {
+        colorId: "green", // 그린 계열 -> 그린 그레이
+        primary: "#81C784",
+        secondary: "#C6D0D8",
+        accent: "#6B8A70",
+      },
+    ],
+  },
+  {
+    id: "notebook",
+    name: "공책",
+    topCategory: "living",
+    subCategory: "stationery",
+    svgKey: "notebook",
+    shapes: [],
+    description:
+      "연필로 글씨를 쓰거나 중요한 내용을 깔끔하게 적어두는 공책이에요.",
+    variants: [
+      {
+        colorId: "natural", // 핑크 계열 -> 로즈 그레이
+        primary: "#F2A7B8",
+        secondary: "#FFFDF8",
+        accent: "#C5868B",
+      },
+      {
+        colorId: "blue", // 블루 계열 -> 블루 그레이
+        primary: "#65A9E8",
+        secondary: "#FFFDF8",
+        accent: "#8B9DAE",
+      },
+      {
+        colorId: "yellow", // 옐로우 계열 -> 옐로우 베이지 그레이
+        primary: "#FFD54F",
+        secondary: "#FFFDF8",
+        accent: "#9E9552",
+      },
+      {
+        colorId: "green", // 그린 계열 -> 그린 그레이
+        primary: "#81C784",
+        secondary: "#FFFDF8",
+        accent: "#6B8A70",
+      },
+    ],
+  },
+  {
+    id: "sketchbook",
+    name: "스케치북",
+    topCategory: "living",
+    subCategory: "stationery",
+    svgKey: "sketchbook",
+    shapes: [],
+    description:
+      "알록달록 예쁜 그림을 마음껏 그리고 색칠할 수 있는 스케치북이에요.",
+    variants: [
+      {
+        colorId: "natural", // 블루/스카이 계열 -> 블루 그레이
+        primary: "#79B9E8",
+        secondary: "#FFFDF5",
+        accent: "#8B9DAE",
+      },
+      {
+        colorId: "pink", // 핑크 계열 -> 로즈 그레이
+        primary: "#F08B83",
+        secondary: "#FFFDF5",
+        accent: "#C5868B",
+      },
+      {
+        colorId: "yellow", // 옐로우 계열 -> 옐로우 베이지 그레이
+        primary: "#FFD54F",
+        secondary: "#FFFDF5",
+        accent: "#9E9552",
+      },
+      {
+        colorId: "green", // 그린 계열 -> 그린 그레이
+        primary: "#81C784",
+        secondary: "#FFFDF5",
+        accent: "#6B8A70",
+      },
+    ],
+  },
+  {
+    id: "ruler",
+    name: "자",
+    topCategory: "living",
+    subCategory: "stationery",
+    svgKey: "ruler",
+    shapes: ["square"],
+    description:
+      "길이를 반듯하게 재거나 곧은 선을 그릴 때 사용하는 노란색 자예요.",
+    variants: [
+      {
+        colorId: "natural", // 화사하고 클래식한 노란색 자 본래의 모습
+        primary: "#F4D76B",
+        secondary: "#806B35",
+        accent: "#FFFFFF", // 깔끔한 구멍 포인트
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크색 자 테마
+        primary: "#F08B83",
+        secondary: "#7A4A48",
+        accent: "#FFFFFF",
+      },
+      {
+        colorId: "blue", // 시원하고 청량한 스카이 블루 자 테마
+        primary: "#65A9E8",
+        secondary: "#3C5A78",
+        accent: "#FFFFFF",
+      },
+      {
+        colorId: "green", // 산뜻하고 싱그러운 초록색 자 테마
+        primary: "#81C784",
+        secondary: "#436846",
+        accent: "#FFFFFF",
+      },
+    ],
+  },
+  {
+    id: "pen",
+    name: "볼펜",
+    topCategory: "living",
+    subCategory: "stationery",
+    svgKey: "pen",
+    shapes: [],
+    description:
+      "공책에 사각사각 선명한 글씨를 쓸 때 사용하는 깔끔한 볼펜이에요.",
+    variants: [
+      {
+        colorId: "natural", // 시원하고 산뜻한 스카이 블루 펜 본래의 모습
+        primary: "#65A9E8",
+        secondary: "#DCEAF7",
+        accent: "#3C4858", // 딥 블루그레이 잉크/펜촉 톤
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크빛 볼펜 테마
+        primary: "#F08B83",
+        secondary: "#FCE4EC",
+        accent: "#5C4A4E", // 로즈 그레이 톤
+      },
+      {
+        colorId: "yellow", // 화사하고 발랄한 노란색 볼펜 테마
+        primary: "#FFD54F",
+        secondary: "#FFFDE7",
+        accent: "#5C563B", // 웜 베이지 그레이
+      },
+      {
+        colorId: "green", // 산뜻하고 청량한 민트 그린 볼펜 테마
+        primary: "#81C784",
+        secondary: "#E8F5E9",
+        accent: "#3B5C42", // 뮤트 그린그레이
+      },
+    ],
+  },
+  {
+    id: "scissors",
+    name: "가위",
+    topCategory: "living",
+    subCategory: "stationery",
+    svgKey: "scissors",
+    shapes: [],
+    description:
+      "종이를 반듯하게 오리거나 모양을 자를 때 사용하는 안전한 가위예요.",
+    variants: [
+      {
+        colorId: "natural", // 상큼하고 발랄한 코랄 핑크 손잡이 본래의 모습
+        primary: "#F08B83",
+        secondary: "#C6D0D8",
+        accent: "#E6B94A", // 반짝이는 골드 나사 포인트
+      },
+      {
+        colorId: "blue", // 시원하고 청량한 스카이 블루 가위 테마
+        primary: "#64B5F6",
+        secondary: "#CFD8DC",
+        accent: "#FFD54F", // 옐로우 나사 포인트
+      },
+      {
+        colorId: "yellow", // 상큼하고 화사한 노란색 손잡이 가위 테마
+        primary: "#FFD54F",
+        secondary: "#B0BEC5",
+        accent: "#FF8A80", // 핑크 나사 포인트
+      },
+      {
+        colorId: "green", // 산뜻하고 귀여운 민트 초록 가위 테마
+        primary: "#81C784",
+        secondary: "#CFD8DC",
+        accent: "#FFF176", // 레몬 나사 포인트
+      },
+    ],
+  },
+  {
+    id: "paperclip",
+    name: "클립",
+    topCategory: "living",
+    subCategory: "stationery",
+    svgKey: "paperclip",
+    shapes: [],
+    description:
+      "종이들을 깔끔하게 모아서 묶어둘 때 사용하는 반짝이는 클립이에요.",
+    variants: [
+      {
+        colorId: "natural", // 시크하고 깔끔한 메탈 실버 클립 본래의 모습
+        primary: "#8E9BA8",
+        secondary: "#FFFFFF",
+        accent: "#5C6B78", // 블루그레이 섀도우 톤
+      },
+      {
+        colorId: "pink", // 알록달록 상큼한 핑크 코팅 클립 테마
+        primary: "#F48FB1",
+        secondary: "#FCE4EC",
+        accent: "#9C526B", // 로즈 그레이 톤
+      },
+      {
+        colorId: "blue", // 시원하고 청량한 블루 코팅 클립 테마
+        primary: "#64B5F6",
+        secondary: "#E3F2FD",
+        accent: "#4A709C", // 블루 그레이 톤
+      },
+      {
+        colorId: "yellow", // 발랄하고 화사한 노란색 코팅 클립 테마
+        primary: "#FFD54F",
+        secondary: "#FFFDE7",
+        accent: "#9E8B3B", // 웜 베이지 그레이
+      },
+    ],
+  },
+  {
+    id: "pencil",
+    name: "연필",
+    topCategory: "living",
+    subCategory: "stationery",
+    svgKey: "pencil",
+    shapes: [],
+    description:
+      "공책에 글을 쓰거나 예쁜 그림을 그릴 때 사용하는 노란색 연필이에요.",
+    variants: [
+      {
+        colorId: "natural", // 알록달록하고 발랄한 노란색 연필 본래의 모습
+        primary: "#F4C542",
+        secondary: "#E9A1A1",
+        accent: "#666666", // 시크한 차콜 그레이 심 톤
+      },
+      {
+        colorId: "pink", // 사랑스러운 핑크 연필 테마
+        primary: "#FF8A80",
+        secondary: "#80CBC4",
+        accent: "#7E575C", // 로즈 그레이 톤
+      },
+      {
+        colorId: "blue", // 시원하고 청량한 블루 연필 테마
+        primary: "#64B5F6",
+        secondary: "#FFD54F",
+        accent: "#607D8B", // 블루 그레이 톤
+      },
+      {
+        colorId: "green", // 싱그러운 초록빛 연필 테마
+        primary: "#81C784",
+        secondary: "#FFB74D",
+        accent: "#687D6E", // 뮤트 그린그레이 톤
+      },
+    ],
+  },
+  {
+    id: "wardrobe",
+    name: "옷장",
+    topCategory: "living",
+    subCategory: "furniture",
+    svgKey: "wardrobe",
+    shapes: [],
+    description:
+      "예쁜 옷들과 물건들을 깔끔하게 정리해서 보관할 수 있는 옷장이에요.",
+    variants: [
+      {
+        colorId: "natural", // 포근하고 아기자기한 라벤더 컬러 옷장 본래의 모습
+        primary: "#B89AD9",
+        secondary: "#D8C5EF",
+        accent: "#8F82A0", // 차분한 퍼플 그레이 섀도우 톤
+      },
+      {
+        colorId: "pink", // 사랑스러운 파스텔 핑크 옷장 테마
+        primary: "#F8BBD0",
+        secondary: "#FCE4EC",
+        accent: "#C5868B", // 로즈빛이 감도는 핑크그레이
+      },
+      {
+        colorId: "blue", // 시원하고 화사한 스카이 블루 옷장 테마
+        primary: "#90CAF9",
+        secondary: "#E3F2FD",
+        accent: "#8B9DAE", // 시원한 블루 그레이
+      },
+      {
+        colorId: "brown", // 따뜻하고 차분한 우드 브라운 옷장 테마
+        primary: "#D7CCC8",
+        secondary: "#EFEBE9",
+        accent: "#8D7B73", // 브라운 그레이 (토프 톤)
+      },
+    ],
+  },
+  {
+    id: "bed",
+    name: "침대",
+    topCategory: "living",
+    subCategory: "furniture",
+    svgKey: "bed",
+    shapes: [],
+    description: "밤에 잠을 자거나 편안하게 누워서 쉴 수 있는 아늑한 침대예요.",
+    variants: [
+      {
+        colorId: "natural", // 포근한 핑크 이불과 원목 프레임 본래의 모습
+        primary: "#B98261",
+        secondary: "#DDA7B5",
+        accent: "#FFF1D6",
+      },
+      {
+        colorId: "pink", // 사랑스러운 올 핑크 테마
+        primary: "#E57373",
+        secondary: "#FFCDD2",
+        accent: "#FCE4EC",
+      },
+      {
+        colorId: "blue", // 시원하고 깔끔한 블루 테마
+        primary: "#64B5F6",
+        secondary: "#BBDEFB",
+        accent: "#E1F5FE",
+      },
+      {
+        colorId: "brown", // 차분하고 아늑한 코코아 브라운 테마
+        primary: "#8D6E63",
+        secondary: "#D7CCC8",
+        accent: "#EFEBE9",
+      },
+    ],
+  },
+  {
+    id: "sofa",
+    name: "소파",
+    topCategory: "living",
+    subCategory: "furniture",
+    svgKey: "sofa",
+    shapes: [],
+    description: "거실에서 편안하게 앉아 휴식할 수 있는 푹신한 소파예요.",
+    variants: [
+      {
+        colorId: "natural", // 아늑하고 편안한 민트그레이 소파 본래의 모습
+        primary: "#72A7A1",
+        secondary: "#A8D5CD",
+        accent: "#7A8B89", // 차분한 뮤트 블루그레이 섀도우 톤
+      },
+      {
+        colorId: "pink", // 아기자기한 파스텔 핑크 소파 테마
+        primary: "#FFAB91",
+        secondary: "#FFCCBC",
+        accent: "#B88A82", // 로즈빛이 감도는 핑크그레이
+      },
+      {
+        colorId: "yellow", // 따뜻하고 포근한 옐로우/베이지 소파 테마
+        primary: "#FFE082",
+        secondary: "#FFECB3",
+        accent: "#A69B80", // 웜 베이지 그레이
+      },
+      {
+        colorId: "brown", // 차분하고 부드러운 코코아 소파 테마
+        primary: "#BCAAA4",
+        secondary: "#D7CCC8",
+        accent: "#8C7E78", // 브라운 그레이 (토프 톤)
+      },
+    ],
+  },
+  {
+    id: "chair",
+    name: "의자",
+    topCategory: "living",
+    subCategory: "furniture",
+    svgKey: "chair",
+    shapes: [],
+    description: "편안하게 앉아서 쉴 수 있는 예쁜 의자에요.",
+    variants: [
+      {
+        colorId: "natural", // 따뜻하고 포근한 원목 의자 본래의 모습
+        primary: "#E9A66B",
+        secondary: "#F6C98D",
+        accent: "#B4A982",
+      },
+      {
+        colorId: "pink", // 아기자기한 파스텔 핑크 의자 테마
+        primary: "#F8BBD0",
+        secondary: "#FCE4EC",
+        accent: "#C5868B",
+      },
+      {
+        colorId: "blue", // 깔끔하고 시원한 스카이 블루 의자 테마
+        primary: "#B3E5FC",
+        secondary: "#E1F5FE",
+        accent: "#90A4AE",
+      },
+      {
+        colorId: "brown", // 차분하고 묵직한 다크 우드 의자 테마
+        primary: "#8D6E63",
+        secondary: "#D7CCC8",
+        accent: "#8D7B73",
+      },
+    ],
+  },
+  {
     id: "desk",
     name: "책상",
     topCategory: "living",
@@ -6810,7 +7239,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "roundBalloon",
     name: "풍선",
     topCategory: "living",
-    subCategory: "stationery",
+    subCategory: "toys_sports",
     svgKey: "roundBalloon",
     shapes: ["circle"],
     description: "둥실둥실 동그란 풍선이 날아가요! 어디까지 올라갈까요?",
@@ -7356,8 +7785,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "calendar",
     name: "달력",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "calendar",
     shapes: ["square"],
     description: "오늘은 며칠일까요? 달력에서 오늘 날짜를 찾아볼까요?",
@@ -7714,8 +8143,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "giftBox",
     name: "선물상자",
-    topCategory: "living",
-    subCategory: "stationery",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "giftBox",
     shapes: ["square"],
     description: "두근두근! 예쁜 선물상자 안에는 무엇이 들어 있을까요?",
@@ -7792,8 +8221,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "giftBox1",
     name: "선물상자",
-    topCategory: "living",
-    subCategory: "stationery",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "giftBox1",
     shapes: ["square"],
     description: "짜잔! 선물상자가 도착했어요. 얼른 열어보고 싶지 않나요?",
@@ -9633,8 +10062,7 @@ export const classificationItems: ClassificationItem[] = [
     name: "하트 풍선",
 
     topCategory: "living",
-
-    subCategory: "stationery",
+    subCategory: "toys_sports",
 
     svgKey: "heartBalloon",
 
@@ -10232,10 +10660,8 @@ export const classificationItems: ClassificationItem[] = [
     id: "starBalloon",
 
     name: "별 풍선",
-
     topCategory: "living",
-
-    subCategory: "stationery",
+    subCategory: "toys_sports",
 
     svgKey: "starBalloon",
 
