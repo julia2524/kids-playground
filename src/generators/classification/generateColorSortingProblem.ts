@@ -3,13 +3,12 @@
 // ============================================================
 
 import {
+  ColorSortingProblem,
   ColorSortingLevelConfig,
   ColorSortingObject,
-  ColorSortingProblem,
   ColorSortingTarget,
-} from "../types/Classification/Color/colorSotringTypes";
-
-import { ClassificationColorId, ClassificationItem } from "../types/game";
+} from "../../types/Classification/Color/colorSotringTypes";
+import { ClassificationColorId, ClassificationItem } from "../../types/game";
 
 // ============================================================
 // 색상 이름

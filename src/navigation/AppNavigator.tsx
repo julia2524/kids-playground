@@ -13,6 +13,11 @@ import ShapeBasketPreviewScreen from "../screens/test/ShapeBasketPreviewScreen";
 import ShapeSortingPlayScreen from "../screens/classification/ShapeSortingPlayScreen";
 import ShapeStickerPreviewScreen from "../screens/test/shapeStickerScreen";
 import CategoryStickerPreviewScreen from "../screens/test/CategoryStickerPreviewScreen";
+import CategorySortingTestScreen from "../screens/test/CategorySortingTestScreen";
+import CategoryBasketPreviewScreen from "../screens/test/CategoryBasketPreviewScreen";
+import CategoryScenePreviewScreen from "../screens/test/CategoryScenePreviewScreen";
+import AnimalCategoryBackgroundPreviewScreen from "../screens/test/AnimalCategoryBackgroundPreviewScreen";
+import CategorySortingPlayScreen from "../screens/classification/CategorySortingPlayScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +59,13 @@ export default function AppNavigator() {
           animation: "fade",
         }}
       />
+      <Stack.Screen
+        name="CategorySortingPlayScreen"
+        component={CategorySortingPlayScreen}
+        options={{
+          animation: "fade",
+        }}
+      />
 
       <Stack.Screen
         name="SettingScreen"
@@ -82,6 +94,18 @@ export default function AppNavigator() {
       <Stack.Screen
         name="CategoryStickerPreviewScreen"
         component={CategoryStickerPreviewScreen}
+      />
+      <Stack.Screen
+        name="CategorySortingTestScreen"
+        component={CategorySortingTestScreen}
+      />
+      <Stack.Screen
+        name="AnimalCategoryBackgroundPreviewScreen"
+        component={AnimalCategoryBackgroundPreviewScreen}
+      />
+      <Stack.Screen
+        name="CategoryScenePreviewScreen"
+        component={CategoryScenePreviewScreen}
       />
     </Stack.Navigator>
   );

@@ -41,16 +41,16 @@ export const colors = {
   cardBg: {
     color: "#FFF0F5", // 분홍 파스텔
     shape: "#F0F5FF", // 하늘 파스텔
-    size: "#EDFAF6", // 민트 파스텔
-    category: "#FFF9E6", // 노랑 파스텔
+    category: "#EDFAF6", // 민트 파스텔
+    size: "#FFF9E6", // 노랑 파스텔
   },
 
   // 버튼 & 강조 보더 색상
   accent: {
     color: "#FF6FAE",
     shape: "#4D8DFF",
-    size: "#34CDB2",
-    category: "#FFB020",
+    category: "#34CDB2",
+    size: "#FFB020",
   },
 } as const;
 
@@ -85,14 +85,7 @@ const MENU_GAME_CONFIGS = [
     accentColor: colors.accent.shape,
     cardBg: colors.cardBg.shape,
   },
-  {
-    id: "size",
-    titleKey: "planet_size_title",
-    subtitleKey: "planet_size_subtitle",
-    descKey: "planet_size_desc",
-    accentColor: colors.accent.size,
-    cardBg: colors.cardBg.size,
-  },
+
   {
     id: "category",
     titleKey: "planet_category_title",
@@ -100,6 +93,14 @@ const MENU_GAME_CONFIGS = [
     descKey: "planet_category_desc",
     accentColor: colors.accent.category,
     cardBg: colors.cardBg.category,
+  },
+  {
+    id: "size",
+    titleKey: "planet_size_title",
+    subtitleKey: "planet_size_subtitle",
+    descKey: "planet_size_desc",
+    accentColor: colors.accent.size,
+    cardBg: colors.cardBg.size,
   },
 ] as const;
 

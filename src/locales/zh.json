@@ -302,5 +302,9 @@
   "item_excavator": "挖掘机",
   "item_subway": "地铁",
   "item_cementMixer": "水泥搅拌车",
-  "item_ball": "球"
+  "item_ball": "球",
+
+  "sort_correct_place": "把它们放到正确的地方吧！",
+  "sort_by_shape": "按形状分一分吧！",
+  "find_friends_home": "帮小伙伴们找到自己的家吧！"
 }

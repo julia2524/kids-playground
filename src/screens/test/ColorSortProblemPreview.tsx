@@ -5,11 +5,10 @@ import { ClassificationColorId, ClassificationItem } from "../../types/game";
 
 import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
 
-import { ColorSortingProblem } from "../../types/Classification/Color/colorSotringTypes";
-
 import { RenderClassificationObjectSvg } from "../../assets/Classification/classificationItemSvgs";
 import { AppText } from "../../utils/AppText";
 import { classificationItems } from "../../data/classification/classificationItems";
+import { ColorSortingProblem } from "../../types/Classification/Color/colorSotringTypes";
 
 // ============================================================
 // COLOR LABELS

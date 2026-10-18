@@ -11,6 +11,7 @@ import Svg, {
 import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
 import { ColorSortingObject } from "../../types/Classification/Color/colorSotringTypes";
 import { ClassificationColorId } from "../../types/game";
+import { ShapeSortingObject } from "../../generators/classification/generateShapeSortingProblem";
 
 /**
  * ===============================================
@@ -19293,7 +19294,587 @@ export const Stapler = ({
   );
 };
 
+export const Bulldozer = ({
+  colorHex = "#E9B83F",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const body = primary ?? colorHex;
+  const track = secondary ?? "#68727D";
+  const detail = accent ?? "#F6D66B";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 무한궤도 */}
+      <Rect
+        x={12}
+        y={65}
+        width={65}
+        height={19}
+        rx={8}
+        fill={track}
+        stroke={OUTLINE}
+        strokeWidth={2}
+      />
+      <Path d="M20 74 H69" stroke="#D8DEE3" strokeWidth={2} />
+      {[22, 35, 48, 61].map((x) => (
+        <Circle
+          key={x}
+          cx={x}
+          cy={75}
+          r={4}
+          fill="#AAB3BC"
+          stroke={OUTLINE}
+          strokeWidth={1.2}
+        />
+      ))}
+
+      {/* 차체 */}
+      <Path
+        d="M22 42 L58 42 L72 64 L20 64 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {/* 운전석 */}
+      <Path
+        d="M29 24 L50 24 L58 43 L27 43 Z"
+        fill={detail}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M34 29 L47 29 L52 39 L32 39 Z"
+        fill="#D9F0F7"
+        stroke={OUTLINE}
+        strokeWidth={1.3}
+      />
+
+      {/* 앞쪽 밀기 판 */}
+      <Path
+        d="M69 47 L82 44 L89 69 L75 73 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M73 70 L91 66 L91 74 L75 79 Z"
+        fill={track}
+        stroke={OUTLINE}
+        strokeWidth={1.8}
+        strokeLinejoin="round"
+      />
+
+      {/* 뒤쪽 연결부 */}
+      <Path
+        d="M20 58 L12 62 L12 69 L20 69"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
+export const DumpTruck = ({
+  colorHex = "#E9B83F",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const body = primary ?? colorHex;
+  const cabin = secondary ?? "#F3C94F";
+  const window = accent ?? "#BCE6F5";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 바퀴 */}
+      {[27, 43, 77].map((x) => (
+        <G key={x}>
+          <Circle
+            cx={x}
+            cy={73}
+            r={9}
+            fill="#555E68"
+            stroke={OUTLINE}
+            strokeWidth={1.8}
+          />
+          <Circle
+            cx={x}
+            cy={73}
+            r={4}
+            fill="#DCE1E5"
+            stroke={OUTLINE}
+            strokeWidth={1.2}
+          />
+        </G>
+      ))}
+
+      {/* 적재함 */}
+      <Path
+        d="M12 29 L65 20 L72 51 L20 61 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M18 35 L60 28 L64 46 L22 54 Z"
+        fill={cabin}
+        stroke={OUTLINE}
+        strokeWidth={1.3}
+        strokeLinejoin="round"
+      />
+
+      {/* 적재함 뒤쪽 */}
+      <Path
+        d="M65 20 L72 24 L78 53 L72 51 Z"
+        fill={cabin}
+        stroke={OUTLINE}
+        strokeWidth={1.6}
+        strokeLinejoin="round"
+      />
+
+      {/* 운전석 */}
+      <Path
+        d="M65 43 L83 43 L91 55 L91 67 L69 67 Z"
+        fill={cabin}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M72 47 L81 47 L86 55 L72 55 Z"
+        fill={window}
+        stroke={OUTLINE}
+        strokeWidth={1.3}
+      />
+
+      {/* 차체 */}
+      <Path
+        d="M18 61 L91 61 L91 69 L18 69 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={1.8}
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+};
+
+export const Crane = ({
+  colorHex = "#E9B83F",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const body = primary ?? colorHex;
+  const cabin = secondary ?? "#F6D66B";
+  const hook = accent ?? "#68727D";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 바퀴 */}
+      {[25, 42, 70].map((x) => (
+        <G key={x}>
+          <Circle
+            cx={x}
+            cy={78}
+            r={7}
+            fill="#555E68"
+            stroke={OUTLINE}
+            strokeWidth={1.8}
+          />
+          <Circle
+            cx={x}
+            cy={78}
+            r={3}
+            fill="#DCE1E5"
+            stroke={OUTLINE}
+            strokeWidth={1}
+          />
+        </G>
+      ))}
+
+      {/* 차체 */}
+      <Path
+        d="M12 59 L76 59 L84 72 L12 72 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {/* 운전석 */}
+      <Path
+        d="M16 42 L34 42 L39 60 L16 60 Z"
+        fill={cabin}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M20 46 L30 46 L33 55 L20 55 Z"
+        fill="#C9EAF6"
+        stroke={OUTLINE}
+        strokeWidth={1.2}
+      />
+
+      {/* 크레인 붐 */}
+      <Path
+        d="M48 59 L58 59 L82 17 L75 13 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M56 45 L74 28 M62 33 L78 35 M68 24 L74 40"
+        fill="none"
+        stroke={OUTLINE}
+        strokeWidth={1.3}
+      />
+
+      {/* 붐 끝과 와이어 */}
+      <Circle
+        cx={79}
+        cy={16}
+        r={4}
+        fill={cabin}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+      />
+      <Path d="M79 20 L79 43" stroke={hook} strokeWidth={1.8} />
+      <Path
+        d="M79 43 C79 51 89 50 86 43"
+        fill="none"
+        stroke={hook}
+        strokeWidth={2.5}
+        strokeLinecap="round"
+      />
+    </Svg>
+  );
+};
+
+export const HighSpeedTrain = ({
+  colorHex = "#58A9D9",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const body = primary ?? colorHex;
+  const stripe = secondary ?? "#F5F4EA";
+  const window = accent ?? "#24465D";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 열차 몸체 */}
+      <Path
+        d="M14 69 L14 39 Q15 17 39 15
+        L79 23 Q88 26 88 39 L88 69 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {/* 유선형 앞부분 */}
+      <Path
+        d="M14 43 Q15 17 39 15
+        L49 18 L40 48 L14 53 Z"
+        fill={stripe}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+
+      {/* 앞 유리창 */}
+      <Path
+        d="M22 39 Q25 25 39 23 L42 25 L36 40 Z"
+        fill={window}
+        stroke={OUTLINE}
+        strokeWidth={1.4}
+        strokeLinejoin="round"
+      />
+
+      {/* 옆 창문 */}
+      <Path
+        d="M49 27 L61 29 L61 38 L46 36 Z"
+        fill={window}
+        stroke={OUTLINE}
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M66 31 L78 33 L78 41 L65 39 Z"
+        fill={window}
+        stroke={OUTLINE}
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
+
+      {/* 하단 띠 */}
+      <Path
+        d="M15 55 L87 55 L87 64 L15 64 Z"
+        fill={stripe}
+        stroke={OUTLINE}
+        strokeWidth={1.2}
+      />
+
+      {/* 바퀴 */}
+      {[19, 33, 64, 78].map((x) => (
+        <Circle
+          key={x}
+          cx={x}
+          cy={70}
+          r={5}
+          fill="#454D56"
+          stroke={OUTLINE}
+          strokeWidth={1.4}
+        />
+      ))}
+
+      {/* 레일 */}
+      <Path
+        d="M9 79 L92 79 M15 83 L87 83"
+        fill="none"
+        stroke="#777F87"
+        strokeWidth={2}
+      />
+    </Svg>
+  );
+};
+
+export const FreightTrain = ({
+  colorHex = "#6BAA83",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const body = primary ?? colorHex;
+  const cargo = secondary ?? "#E8BD73";
+  const window = accent ?? "#C6EAF6";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 화물칸 */}
+      <Rect
+        x={32}
+        y={25}
+        width={53}
+        height={39}
+        rx={2}
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={2}
+      />
+      {[43, 55, 67, 79].map((x) => (
+        <Path
+          key={x}
+          d={`M${x} 27 L${x} 62`}
+          stroke={OUTLINE}
+          strokeWidth={1.5}
+        />
+      ))}
+
+      {/* 화물 적재물 */}
+      <Path
+        d="M36 25 L42 17 L52 17 L57 25 Z"
+        fill={cargo}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M58 25 L64 19 L74 19 L79 25 Z"
+        fill={cargo}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+
+      {/* 기관차 앞부분 */}
+      <Path
+        d="M10 40 L32 40 L32 64 L10 64 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M14 44 L27 44 L27 52 L14 52 Z"
+        fill={window}
+        stroke={OUTLINE}
+        strokeWidth={1.3}
+      />
+
+      {/* 연결부 */}
+      <Path
+        d="M8 64 L89 64 L89 69 L8 69 Z"
+        fill="#7C858E"
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+      />
+
+      {/* 바퀴 */}
+      {[19, 39, 59, 79].map((x) => (
+        <Circle
+          key={x}
+          cx={x}
+          cy={73}
+          r={5}
+          fill="#515963"
+          stroke={OUTLINE}
+          strokeWidth={1.5}
+        />
+      ))}
+
+      {/* 레일 */}
+      <Path
+        d="M6 81 L94 81 M10 85 L90 85"
+        fill="none"
+        stroke="#777F87"
+        strokeWidth={2}
+      />
+    </Svg>
+  );
+};
+
+export const SteamLocomotive = ({
+  colorHex = "#4D9B79",
+  primary,
+  secondary,
+  accent,
+  size = 75,
+}: ItemSvgProps) => {
+  const body = primary ?? colorHex;
+  const detail = secondary ?? "#D9B75C";
+  const window = accent ?? "#C9EAF6";
+
+  return (
+    <Svg width={size} height={size} viewBox="0 0 100 100">
+      {/* 굴뚝 */}
+      <Path
+        d="M21 28 L30 28 L33 41 L18 41 Z"
+        fill={detail}
+        stroke={OUTLINE}
+        strokeWidth={1.7}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M18 27 L32 27 L32 31 L18 31 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+      />
+
+      {/* 보일러 */}
+      <Path
+        d="M15 39 Q15 32 24 32 L53 32
+        Q61 32 61 41 L61 62 L15 62 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+
+      {/* 앞쪽 원형 보일러 면 */}
+      <Circle
+        cx={17}
+        cy={49}
+        r={8}
+        fill={detail}
+        stroke={OUTLINE}
+        strokeWidth={1.8}
+      />
+
+      {/* 운전실 */}
+      <Path
+        d="M58 29 L75 29 L82 40 L82 62 L59 62 Z"
+        fill={body}
+        stroke={OUTLINE}
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M63 34 L74 34 L78 42 L63 42 Z"
+        fill={window}
+        stroke={OUTLINE}
+        strokeWidth={1.3}
+        strokeLinejoin="round"
+      />
+
+      {/* 하단 프레임 */}
+      <Path
+        d="M10 62 L87 62 L87 69 L10 69 Z"
+        fill={detail}
+        stroke={OUTLINE}
+        strokeWidth={1.6}
+        strokeLinejoin="round"
+      />
+
+      {/* 큰 구동 바퀴 */}
+      {[30, 48].map((x) => (
+        <G key={x}>
+          <Circle
+            cx={x}
+            cy={70}
+            r={9}
+            fill="#525B64"
+            stroke={OUTLINE}
+            strokeWidth={1.7}
+          />
+          <Circle
+            cx={x}
+            cy={70}
+            r={4}
+            fill="#D5DCE1"
+            stroke={OUTLINE}
+            strokeWidth={1.2}
+          />
+        </G>
+      ))}
+
+      {/* 작은 바퀴 */}
+      <Circle
+        cx={75}
+        cy={72}
+        r={5}
+        fill="#525B64"
+        stroke={OUTLINE}
+        strokeWidth={1.5}
+      />
+      <Circle cx={75} cy={72} r={2} fill="#D5DCE1" />
+
+      {/* 레일 */}
+      <Path
+        d="M7 83 L93 83 M12 87 L88 87"
+        fill="none"
+        stroke="#777F87"
+        strokeWidth={2}
+      />
+    </Svg>
+  );
+};
+
 export const CATEGORY_ITEM_SVGS = {
+  steamLocomotive: SteamLocomotive,
+  freightTrain: FreightTrain,
+  highSpeedTrain: HighSpeedTrain,
+  crane: Crane,
+  dumpTruck: DumpTruck,
+  bulldozer: Bulldozer,
   stapler: Stapler,
   notebook: Notebook,
   sketchbook: Sketchbook,
@@ -19558,6 +20139,7 @@ export const CATEGORY_ITEM_SVGS = {
 // RENDER CLASSIFICATION ITEM
 // ============================================================
 
+type SortingObjectTypes = ColorSortingObject | ShapeSortingObject;
 export const RenderClassificationItemSvg = ({
   itemId,
   colorHex,
@@ -19610,6 +20192,48 @@ export const RenderClassificationItemSvg = ({
 //
 // ============================================================
 
+// export const RenderClassificationObjectSvg = ({
+//   object,
+//   primary,
+//   secondary,
+//   accent,
+//   size = 95,
+// }: {
+//   object: ColorSortingObject;
+//   primary?: string;
+//   secondary?: string;
+//   accent?: string;
+//   size?: number;
+// }) => {
+//   // ----------------------------------------------------------
+//   // L1 ~ L4 기본 도형
+//   // ----------------------------------------------------------
+
+//   if (object.itemId.startsWith("simple-")) {
+//     return (
+//       <RenderBasicShapeSvg
+//         shapeId={object.shape}
+//         colorHex={primary}
+//         size={size}
+//       />
+//     );
+//   }
+
+//   // ----------------------------------------------------------
+//   // L5~ L15 실제 ClassificationItem
+//   // ----------------------------------------------------------
+
+//   return (
+//     <RenderClassificationItemSvg
+//       itemId={object.itemId}
+//       primary={primary}
+//       secondary={secondary}
+//       accent={accent}
+//       size={size}
+//     />
+//   );
+// };
+
 export const RenderClassificationObjectSvg = ({
   object,
   primary,
@@ -19617,20 +20241,19 @@ export const RenderClassificationObjectSvg = ({
   accent,
   size = 95,
 }: {
-  object: ColorSortingObject;
+  object: SortingObjectTypes;
   primary?: string;
   secondary?: string;
   accent?: string;
   size?: number;
 }) => {
   // ----------------------------------------------------------
-  // L1 ~ L4 기본 도형
+  // 1. 새로 추가된 단순 도형(SimpleShapeObject)인 경우
   // ----------------------------------------------------------
-
-  if (object.itemId.startsWith("simple-")) {
+  if ("kind" in object && object.kind === "simple_shape") {
     return (
       <RenderBasicShapeSvg
-        shapeId={object.shape}
+        shapeId={object.shapeId}
         colorHex={primary}
         size={size}
       />
@@ -19638,12 +20261,38 @@ export const RenderClassificationObjectSvg = ({
   }
 
   // ----------------------------------------------------------
-  // L5~ L15 실제 ClassificationItem
+  // 2. 새로 추가된 ShapeItemObject인 경우 (기존 렌더러 그대로 활용!)
   // ----------------------------------------------------------
+  if ("kind" in object && object.kind === "item") {
+    return (
+      <RenderClassificationItemSvg
+        itemId={object.itemId}
+        primary={primary}
+        secondary={secondary}
+        accent={accent}
+        size={size}
+      />
+    );
+  }
+
+  // ----------------------------------------------------------
+  // 3. 기존에 아주 잘 돌아가고 있던 ColorSortingObject 처리 영역
+  // ----------------------------------------------------------
+  const colorObj = object as ColorSortingObject;
+
+  if (colorObj.itemId.startsWith("simple-")) {
+    return (
+      <RenderBasicShapeSvg
+        shapeId={colorObj.shape}
+        colorHex={primary}
+        size={size}
+      />
+    );
+  }
 
   return (
     <RenderClassificationItemSvg
-      itemId={object.itemId}
+      itemId={colorObj.itemId}
       primary={primary}
       secondary={secondary}
       accent={accent}

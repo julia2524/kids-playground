@@ -34,24 +34,51 @@ const TOP_CATEGORY_LABELS: Record<string, string> = {
 
 // 🌿 2. 전체 고정 중분류 리스트 정의 (대분류별 매핑 정보 포함)
 // 각 중분류가 어떤 대분류에 속하는지 명시해주면 연동하기 훨씬 깔끔합니다!
-const SUB_CATEGORY_MAP: Record<string, string[]> = {
-  animal: ["land_animal", "insect", "bird", "sea_animal"],
+export const SUB_CATEGORY_MAP: Record<string, string[]> = {
+  animal: [
+    "pet",
+    "farm_animal",
+    "wild_animal",
+    "sea_animal",
+    "bird",
+    "insect",
+    "small_animal",
+  ],
+
   food: ["fruit", "vegetable", "meal", "snack", "drink"],
 
-  clothing: ["clothes", "shoes", "hat", "accessories"],
-  living: [
-    "furniture",
-    "electronics",
-    "stationery",
-    "daily",
-    "cleaning",
-    "bathroom",
-    "kitchen",
-    "toys_sports",
-    "musical_instrument",
+  clothing: [
+    "hat",
+    "clothes",
+    "shoes",
+    "hairpin",
+    "necklace",
+    "glasses",
+    "button",
   ],
-  vehicle: ["road_vehicle", "rail_special", "air_vehicle", "water_vehicle"],
-  nature: ["plant", "sky"],
+
+  nature: ["sky", "plant"],
+
+  vehicle: [
+    "road_vehicle",
+    "rail_vehicle",
+    "air_vehicle",
+    "water_vehicle",
+    "construction_vehicle",
+  ],
+
+  living: [
+    "musical_instrument",
+    "clock",
+    "stationery",
+    "electronics",
+    "furniture",
+    "ball",
+    "balloon",
+    "toys_sports",
+    "daily",
+  ],
+
   unknown: ["unknown"],
 };
 

@@ -46,7 +46,7 @@ export type ColorSortingAnswer = {
   objectIds: string[];
 };
 
-export type ClassificationProblem = {
+export type ColorSortingProblem = {
   level: number;
 
   round: number;

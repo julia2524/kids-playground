@@ -301,5 +301,9 @@
   "item_excavator": "Excavator",
   "item_subway": "Subway",
   "item_cementMixer": "Cement Mixer",
-  "item_ball": "Ball"
+  "item_ball": "Ball",
+
+  "sort_correct_place": "Let's sort them into the right place!",
+  "sort_by_shape": "Let's sort by shape!",
+  "find_friends_home": "Help the friends find their homes!"
 }

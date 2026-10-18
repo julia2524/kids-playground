@@ -12,7 +12,7 @@ import AppHeader from "../../components/AppHeader";
 import ColorSortingObjectBoard from "../../components/ColorSorting/ColorSortingObjectBoard";
 
 import ColorSortingTargetArea from "../../components/ColorSorting/ColorSortingTargetArea";
-import ColorSortingQuestion from "../../components/ColorSorting/ColorSortingQuestion";
+
 import ColorSortingFooter from "../../components/ColorSorting/ColorSortingFooter";
 import ClassificationTestControls from "../../components/common/ClassificationTestControls";
 import ColorSortingResultOverlay from "../../components/ColorSorting/ColorSortingResultOverlay";
@@ -24,8 +24,9 @@ import { saveLevelClear } from "../../utils/asyncStorage/progressStorage";
 import TutorialOverlay from "../../components/Tutorial/TutorialOverlay";
 import { playEarnedNotes } from "../../utils/sound";
 import useColorSortingGame from "../../hooks/Classification/useColorSortingGame";
-import { ClassificationProblem } from "../../types/Classification/Color/colorSotringTypes";
 import { useBackgroundMusic } from "../../utils/BackgroundMusicContext";
+import { ColorSortingProblem } from "../../types/Classification/Color/colorSotringTypes";
+import ClassificationQuestion from "../../components/common/ClassificationQuestion";
 
 // ============================================================
 // Types
@@ -34,7 +35,7 @@ import { useBackgroundMusic } from "../../utils/BackgroundMusicContext";
 type RouteProps = RouteProp<RootStackParamList, "ColorSortingPlayScreen">;
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
-export type ProblemObject = ClassificationProblem["objects"][number];
+export type ProblemObject = ColorSortingProblem["objects"][number];
 
 // ============================================================
 // Constants
@@ -208,7 +209,11 @@ export default function ColorSortingPlayScreen() {
       />
 
       <Container>
-        <ColorSortingQuestion />
+        {/* 색상 분류 화면 */}
+        <ClassificationQuestion
+          i18nKey="sort_correct_place"
+          text="알맞은 곳에 모아볼까요?"
+        />
 
         <ColorSortingObjectBoard
           objects={problem.objects}

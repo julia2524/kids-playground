@@ -234,9 +234,21 @@ export default function HomeScreen() {
           </ComingSoon>
 
           <ComingSoon
+            onPress={() => navigation.navigate("CategorySortingTestScreen")}
+          >
+            <ComingSoonText>🔶 카테고리 테스트</ComingSoonText>
+          </ComingSoon>
+          <ComingSoon
             onPress={() => navigation.navigate("CategoryStickerPreviewScreen")}
           >
             <ComingSoonText>🔶 종류 스티커</ComingSoonText>
+          </ComingSoon>
+          <ComingSoon
+            onPress={() =>
+              navigation.navigate("AnimalCategoryBackgroundPreviewScreen")
+            }
+          >
+            <ComingSoonText>🔶 카테고리 Box</ComingSoonText>
           </ComingSoon>
         </ScrollView>
         {/* Bottom Navigation */}

@@ -8,11 +8,11 @@ import ColorSortingTargetBasket from "./ColorSortingTargetBasket";
 
 import { useLanguage } from "../../context/LangaugeContext";
 import { COLOR_LABELS } from "../../generators/classification/generateColorSortingProblem";
-import { ClassificationProblem } from "../../types/Classification/Color/colorSotringTypes";
+import { ColorSortingProblem } from "../../types/Classification/Color/colorSotringTypes";
 
 type ColorSortingTargetAreaProps = {
-  targets: ClassificationProblem["targets"];
-  objects: ClassificationProblem["objects"];
+  targets: ColorSortingProblem["targets"];
+  objects: ColorSortingProblem["objects"];
   placedObjects: Record<string, string[]>;
   basketRefs: React.RefObject<Record<string, View | null>>; // 추가
 

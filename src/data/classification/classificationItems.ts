@@ -2,9 +2,222 @@ import { ClassificationItem } from "../../types/game";
 
 export const classificationItems: ClassificationItem[] = [
   {
+    id: "steamLocomotive",
+    name: "증기기관차",
+    topCategory: "vehicle",
+    subCategory: "rail_vehicle",
+    svgKey: "steamLocomotive",
+    shapes: [],
+    description: "칙칙폭폭 증기를 뿜으며 철길을 달리는 귀여운 증기기관차예요.",
+    variants: [
+      {
+        colorId: "natural", // 그린 본체 테마 -> 골드 디테일 & 스카이 블루 윈도우
+        primary: "#4D9B79",
+        secondary: "#D9B75C",
+        accent: "#C9EAF6",
+      },
+      {
+        colorId: "pink", // 핑크 계열 -> 로즈 그레이
+        primary: "#F2A7B8",
+        secondary: "#FFCCBC",
+        accent: "#C5868B",
+      },
+      {
+        colorId: "blue", // 블루 계열 -> 블루 그레이
+        primary: "#65A9E8",
+        secondary: "#FFE082",
+        accent: "#8B9DAE",
+      },
+      {
+        colorId: "yellow", // 옐로우 계열 -> 옐로우 베이지 그레이
+        primary: "#FFD54F",
+        secondary: "#81C784",
+        accent: "#9E9552",
+      },
+    ],
+  },
+  {
+    id: "freightTrain",
+    name: "화물열차",
+    topCategory: "vehicle",
+    subCategory: "rail_vehicle",
+    svgKey: "freightTrain",
+    shapes: [],
+    description:
+      "철도 위로 무거운 짐과 상자들을 가득 싣고 달리는 튼튼한 화물열차예요.",
+    variants: [
+      {
+        colorId: "natural", // 본래의 자연스러운 그린 테마
+        primary: "#6BAA83",
+        secondary: "#E8BD73",
+        accent: "#6B8A70",
+      },
+      {
+        colorId: "pink", // 핑크 계열 톤온톤
+        primary: "#F2A7B8",
+        secondary: "#FFCCBC",
+        accent: "#C5868B",
+      },
+      {
+        colorId: "blue", // 💙 완벽한 블루 계열 (시원한 블루 + 하늘빛 보조색 + 블루그레이 엑센트)
+        primary: "#65A9E8",
+        secondary: "#BBDEFB",
+        accent: "#8B9DAE",
+      },
+      {
+        colorId: "yellow", // 💛 완벽한 옐로우 계열 (따뜻한 옐로우 + 연노랑/크림 보조색 + 옐로우그레이 엑센트)
+        primary: "#FFD54F",
+        secondary: "#FFFDE7",
+        accent: "#9E9552",
+      },
+    ],
+  },
+  {
+    id: "highSpeedTrain",
+    name: "고속열차",
+    topCategory: "vehicle",
+    subCategory: "rail_vehicle",
+    svgKey: "highSpeedTrain",
+    shapes: [],
+    description: "철도 위를 바람처럼 빠르게 달리는 멋진 고속열차예요.",
+    variants: [
+      {
+        colorId: "natural", // 스카이 블루 본체 테마 -> 다크 블루그레이 윈도우
+        primary: "#58A9D9",
+        secondary: "#F5F4EA",
+        accent: "#24465D",
+      },
+      {
+        colorId: "pink", // 핑크 계열 -> 로즈 그레이
+        primary: "#F2A7B8",
+        secondary: "#FFFDF8",
+        accent: "#C5868B",
+      },
+      {
+        colorId: "blue", // 블루 계열 -> 블루 그레이
+        primary: "#65A9E8",
+        secondary: "#E3F2FD",
+        accent: "#8B9DAE",
+      },
+      {
+        colorId: "green", // 그린 계열 -> 그린 그레이
+        primary: "#81C784",
+        secondary: "#E8F5E9",
+        accent: "#6B8A70",
+      },
+    ],
+  },
+  {
+    id: "crane",
+    name: "크레인",
+    topCategory: "vehicle",
+    subCategory: "construction_vehicle",
+    svgKey: "crane",
+    shapes: [],
+    description:
+      "높은 곳까지 무거운 물건을 번쩍 들어 올려주는 멋진 크레인이에요.",
+    variants: [
+      {
+        colorId: "natural", // 노란색 본체 테마 -> 블루그레이/그레이 훅
+        primary: "#E9B83F",
+        secondary: "#F6D66B",
+        accent: "#68727D",
+      },
+      {
+        colorId: "pink", // 핑크 계열 -> 로즈 그레이
+        primary: "#F2A7B8",
+        secondary: "#F8BBD0",
+        accent: "#C5868B",
+      },
+      {
+        colorId: "blue", // 블루 계열 -> 블루 그레이
+        primary: "#65A9E8",
+        secondary: "#90CAF9",
+        accent: "#8B9DAE",
+      },
+      {
+        colorId: "green", // 그린 계열 -> 그린 그레이
+        primary: "#81C784",
+        secondary: "#A5D6A7",
+        accent: "#6B8A70",
+      },
+    ],
+  },
+  {
+    id: "dumpTruck",
+    name: "덤프트럭",
+    topCategory: "vehicle",
+    subCategory: "construction_vehicle",
+    svgKey: "dumpTruck",
+    shapes: [],
+    description:
+      "커다란 짐칸에 모래나 흙을 가득 싣고 달리는 멋진 덤프트럭이에요.",
+    variants: [
+      {
+        colorId: "natural", // 노란색 본체 테마 -> 스카이 블루 윈도우/그레이
+        primary: "#E9B83F",
+        secondary: "#F3C94F",
+        accent: "#8B9DAE",
+      },
+      {
+        colorId: "pink", // 핑크 계열 -> 로즈 그레이
+        primary: "#F2A7B8",
+        secondary: "#F8BBD0",
+        accent: "#C5868B",
+      },
+      {
+        colorId: "blue", // 블루 계열 -> 블루 그레이
+        primary: "#65A9E8",
+        secondary: "#90CAF9",
+        accent: "#8B9DAE",
+      },
+      {
+        colorId: "green", // 그린 계열 -> 그린 그레이
+        primary: "#81C784",
+        secondary: "#A5D6A7",
+        accent: "#6B8A70",
+      },
+    ],
+  },
+  {
+    id: "bulldozer",
+    name: "불도저",
+    topCategory: "vehicle",
+    subCategory: "construction_vehicle",
+    svgKey: "bulldozer",
+    shapes: [],
+    description: "무거운 흙이나 돌을 척척 밀어내는 멋진 불도저예요.",
+    variants: [
+      {
+        colorId: "natural", // 노란색 본체 테마 -> 웜 베이지 그레이
+        primary: "#E9B83F",
+        secondary: "#68727D",
+        accent: "#9E9552",
+      },
+      {
+        colorId: "pink", // 핑크 계열 -> 로즈 그레이
+        primary: "#F2A7B8",
+        secondary: "#68727D",
+        accent: "#C5868B",
+      },
+      {
+        colorId: "blue", // 블루 계열 -> 블루 그레이
+        primary: "#65A9E8",
+        secondary: "#68727D",
+        accent: "#8B9DAE",
+      },
+      {
+        colorId: "green", // 그린 계열 -> 그린 그레이
+        primary: "#81C784",
+        secondary: "#68727D",
+        accent: "#6B8A70",
+      },
+    ],
+  },
+  {
     id: "stapler",
     name: "스테이플러",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "stationery",
     svgKey: "stapler",
     shapes: [],
@@ -40,7 +253,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "notebook",
     name: "공책",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "stationery",
     svgKey: "notebook",
     shapes: [],
@@ -76,7 +289,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "sketchbook",
     name: "스케치북",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "stationery",
     svgKey: "sketchbook",
     shapes: [],
@@ -112,7 +325,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "ruler",
     name: "자",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "stationery",
     svgKey: "ruler",
     shapes: ["square"],
@@ -148,7 +361,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "pen",
     name: "볼펜",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "stationery",
     svgKey: "pen",
     shapes: [],
@@ -184,7 +397,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "scissors",
     name: "가위",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "stationery",
     svgKey: "scissors",
     shapes: [],
@@ -220,7 +433,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "paperclip",
     name: "클립",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "stationery",
     svgKey: "paperclip",
     shapes: [],
@@ -256,7 +469,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "pencil",
     name: "연필",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "stationery",
     svgKey: "pencil",
     shapes: [],
@@ -292,7 +505,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "wardrobe",
     name: "옷장",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "furniture",
     svgKey: "wardrobe",
     shapes: [],
@@ -328,7 +541,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "bed",
     name: "침대",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "furniture",
     svgKey: "bed",
     shapes: [],
@@ -363,7 +576,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "sofa",
     name: "소파",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "furniture",
     svgKey: "sofa",
     shapes: [],
@@ -398,7 +611,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "chair",
     name: "의자",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "furniture",
     svgKey: "chair",
     shapes: [],
@@ -433,7 +646,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "desk",
     name: "책상",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "furniture",
     svgKey: "desk",
     shapes: [],
@@ -807,7 +1020,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "recorder",
     name: "리코더",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "musical_instrument",
     svgKey: "recorder",
     shapes: [],
@@ -842,7 +1055,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "maracas",
     name: "마라카스",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "musical_instrument",
     svgKey: "maracas",
     shapes: [],
@@ -877,7 +1090,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "trumpet",
     name: "트럼펫",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "musical_instrument",
     svgKey: "trumpet",
     shapes: [],
@@ -912,7 +1125,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "harp",
     name: "하프",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "musical_instrument",
     svgKey: "harp",
     shapes: [],
@@ -947,7 +1160,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "guitar",
     name: "기타",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "musical_instrument",
     svgKey: "guitar",
     shapes: [],
@@ -982,7 +1195,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "drumSet",
     name: "드럼 세트",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "musical_instrument",
     svgKey: "drumSet",
     shapes: [],
@@ -1017,7 +1230,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "bongo",
     name: "봉고",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "musical_instrument",
     svgKey: "bongo",
     shapes: [],
@@ -1052,7 +1265,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "keyboard",
     name: "키보드",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "musical_instrument",
     svgKey: "keyboard",
     shapes: [],
@@ -1087,7 +1300,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "violin",
     name: "바이올린",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "musical_instrument",
     svgKey: "violin",
     shapes: [],
@@ -1122,7 +1335,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "piano",
     name: "피아노",
-    topCategory: "living", // 혹은 해당 카테고리에 맞게 설정
+    topCategory: "things", // 혹은 해당 카테고리에 맞게 설정
     subCategory: "musical_instrument",
     svgKey: "piano",
     shapes: [],
@@ -1542,7 +1755,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "koala",
     name: "코알라",
     topCategory: "animal",
-    subCategory: "land_animal",
+    subCategory: "wild_animal",
     svgKey: "koala",
     shapes: [],
     description: "동글동글한 귀와 커다란 코를 가진 귀여운 코알라예요.",
@@ -1559,7 +1772,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "fox",
     name: "여우",
     topCategory: "animal",
-    subCategory: "land_animal",
+    subCategory: "wild_animal",
     svgKey: "fox",
     shapes: [],
     description: "뾰족한 귀와 날렵한 주둥이를 가진 영리한 여우예요.",
@@ -1582,7 +1795,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "snail",
     name: "달팽이",
     topCategory: "animal",
-    subCategory: "insect",
+    subCategory: "small_animal",
     svgKey: "snail",
     shapes: [],
     description: "동글동글한 집을 짊어지고 영차영차 기어가는 달팽이에요.",
@@ -3224,7 +3437,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "heartHairpin",
     name: "하트 머리핀",
     topCategory: "clothing",
-    subCategory: "accessories",
+    subCategory: "hairpin",
     svgKey: "heartHairpin",
     shapes: ["heart"],
     description: "하트 장식이 달린 머리핀이에요! 머리에 예쁘게 꽂아볼까요?",
@@ -3689,7 +3902,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "starHairpin",
     name: "별 머리핀",
     topCategory: "clothing",
-    subCategory: "accessories",
+    subCategory: "hairpin",
     svgKey: "starHairpin",
     shapes: ["star"],
     description: "별 장식이 달린 머리핀이에요! 머리에 예쁘게 꽂아볼까요?",
@@ -4223,7 +4436,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "train",
     name: "기차",
     topCategory: "vehicle",
-    subCategory: "rail_special",
+    subCategory: "rail_vehicle",
     svgKey: "train",
     shapes: [],
     description: "칙칙폭폭! 기차가 힘차게 달려가요. 어디까지 갈까요?",
@@ -4644,7 +4857,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "excavator",
     name: "포크레인",
     topCategory: "vehicle",
-    subCategory: "rail_special",
+    subCategory: "construction_vehicle",
     svgKey: "excavator",
     shapes: [],
     description: "윙윙! 굴착기의 커다란 팔이 흙을 푹푹 파고 있어요.",
@@ -4697,7 +4910,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "subway",
     name: "지하철",
     topCategory: "vehicle",
-    subCategory: "rail_special",
+    subCategory: "rail_vehicle",
     svgKey: "subway",
     shapes: [],
     description: "슝! 지하철이 깜깜한 터널을 빠르게 지나가요.",
@@ -4750,7 +4963,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "cementMixer",
     name: "레미콘",
     topCategory: "vehicle",
-    subCategory: "rail_special",
+    subCategory: "construction_vehicle",
     svgKey: "cementMixer",
     shapes: [],
     description: "빙글빙글! 레미콘 트럭 통이 돌아가며 시멘트를 골고루 섞어요.",
@@ -5196,7 +5409,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "pig",
     name: "돼지",
     topCategory: "animal",
-    subCategory: "land_animal",
+    subCategory: "farm_animal",
     svgKey: "pig",
     shapes: ["circle"],
     description: "꿀꿀! 귀여운 돼지가 꼬리를 빙글빙글 말았어요.",
@@ -5231,7 +5444,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "bear",
     name: "곰",
     topCategory: "animal",
-    subCategory: "land_animal",
+    subCategory: "farm_animal",
     svgKey: "bear",
     shapes: [],
     description: "어흥? 아니죠! 귀여운 곰이 숲속에서 어슬렁어슬렁 걸어와요.",
@@ -5269,7 +5482,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "cow",
     name: "소",
     topCategory: "animal",
-    subCategory: "land_animal",
+    subCategory: "farm_animal",
     svgKey: "cow",
     shapes: [], // TODO: shapesPool 연결 단계에서 채움
     description: "음메~! 들판에서 소가 풀을 냠냠 먹고 있어요.",
@@ -5311,7 +5524,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "dog",
     name: "개",
     topCategory: "animal",
-    subCategory: "land_animal",
+    subCategory: "pet",
     svgKey: "dog",
     shapes: [], // TODO: shapesPool 연결 단계에서 채움
     description: "멍멍! 꼬리를 살랑살랑 흔드는 강아지가 왔어요.",
@@ -5353,7 +5566,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "cat",
     name: "고양이",
     topCategory: "animal",
-    subCategory: "land_animal",
+    subCategory: "pet",
     svgKey: "cat",
     shapes: [], // TODO: shapesPool 연결 단계에서 채움
     description:
@@ -5395,7 +5608,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "rabbit",
     name: "토끼",
     topCategory: "animal",
-    subCategory: "land_animal",
+    subCategory: "pet",
     svgKey: "rabbit",
     shapes: [], // TODO: shapesPool 연결 단계에서 채움
     description: "깡충깡충! 귀여운 토끼가 폴짝 뛰어왔어요.",
@@ -6891,8 +7104,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "ball",
     name: "공",
-    topCategory: "living",
-    subCategory: "toys_sports",
+    topCategory: "things",
+    subCategory: "ball",
     svgKey: "ball",
     shapes: ["circle"],
     description: "데굴데굴 굴러가는 공이에요! 어떤 공을 만들어 볼까요?",
@@ -7022,7 +7235,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "sunglasses",
     name: "선글라스",
     topCategory: "clothing",
-    subCategory: "accessories",
+    subCategory: "glasses",
     svgKey: "sunglasses",
     shapes: ["circle"],
     description: "햇빛을 쏙 가려주는 멋진 선글라스예요! 누가 써볼까요?",
@@ -7098,8 +7311,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "basketball",
     name: "농구공",
-    topCategory: "living",
-    subCategory: "toys_sports",
+    topCategory: "things",
+    subCategory: "ball",
     svgKey: "basketball",
     shapes: ["circle"],
     description: "통통 튀는 농구공이에요! 골대에 슛! 넣어볼까요?",
@@ -7139,8 +7352,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "baseball",
     name: "야구공",
-    topCategory: "living",
-    subCategory: "toys_sports",
+    topCategory: "things",
+    subCategory: "ball",
     svgKey: "baseball",
     shapes: ["circle"],
     description: "힘껏 휙! 날아가는 야구공이에요. 누가 멋지게 쳐볼까요?",
@@ -7162,8 +7375,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "tennisBall",
     name: "테니스공",
-    topCategory: "living",
-    subCategory: "toys_sports",
+    topCategory: "things",
+    subCategory: "ball",
     svgKey: "tennisBall",
     shapes: ["circle"],
     description: "통통! 튀어 오르는 테니스공이에요. 어디까지 날아갈까요?",
@@ -7238,8 +7451,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "roundBalloon",
     name: "풍선",
-    topCategory: "living",
-    subCategory: "toys_sports",
+    topCategory: "things",
+    subCategory: "balloon",
     svgKey: "roundBalloon",
     shapes: ["circle"],
     description: "둥실둥실 동그란 풍선이 날아가요! 어디까지 올라갈까요?",
@@ -7915,7 +8128,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "microwave",
     name: "전자레인지",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "electronics",
     svgKey: "microwave",
     shapes: ["square"],
@@ -8063,7 +8276,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "tv",
     name: "텔레비전",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "electronics",
     svgKey: "tv",
     shapes: ["square"],
@@ -8298,8 +8511,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "squareClock",
     name: "네모 시계",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "things",
+    subCategory: "clock",
     svgKey: "squareClock",
     shapes: ["square"],
     description: "똑딱똑딱! 네모난 시계가 시간을 알려주고 있어요.",
@@ -8453,7 +8666,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "bookshelf",
     name: "책장",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "furniture",
     svgKey: "bookshelf",
     shapes: ["square"],
@@ -8530,7 +8743,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "refrigerator",
     name: "냉장고",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "electronics",
     svgKey: "refrigerator",
     shapes: ["square"],
@@ -8601,7 +8814,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "laptop",
     name: "노트북",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "electronics",
     svgKey: "laptop",
     shapes: ["square"],
@@ -8679,7 +8892,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "calculator",
     name: "계산기",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "electronics",
     svgKey: "calculator",
     shapes: ["square"],
@@ -8816,7 +9029,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "squareSunglasses",
     name: "사각 선글라스",
     topCategory: "clothing",
-    subCategory: "accessories",
+    subCategory: "glasses",
     svgKey: "squareSunglasses",
     shapes: ["square"],
     description: "네모난 선글라스를 쓰면 멋쟁이로 변신! 누가 써볼까요?",
@@ -8892,7 +9105,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "phone",
     name: "휴대폰",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "electronics",
     svgKey: "phone",
     shapes: ["square"],
@@ -8969,7 +9182,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "remoteControl",
     name: "리모콘",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "electronics",
     svgKey: "remoteControl",
     shapes: ["square"],
@@ -9046,7 +9259,7 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "switch",
     name: "스위치",
-    topCategory: "living",
+    topCategory: "things",
     subCategory: "electronics",
     svgKey: "switch",
     shapes: ["square"],
@@ -9204,7 +9417,7 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "삼각자",
 
-    topCategory: "living",
+    topCategory: "things",
 
     subCategory: "stationery",
 
@@ -9270,7 +9483,7 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "트라이앵글",
 
-    topCategory: "living",
+    topCategory: "things",
 
     subCategory: "musical_instrument",
 
@@ -10061,8 +10274,8 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "하트 풍선",
 
-    topCategory: "living",
-    subCategory: "toys_sports",
+    topCategory: "things",
+    subCategory: "balloon",
 
     svgKey: "heartBalloon",
 
@@ -10298,7 +10511,7 @@ export const classificationItems: ClassificationItem[] = [
 
     topCategory: "clothing",
 
-    subCategory: "accessories",
+    subCategory: "button",
 
     svgKey: "heartButton",
 
@@ -10355,9 +10568,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "하트 시계",
 
-    topCategory: "living",
+    topCategory: "things",
 
-    subCategory: "daily",
+    subCategory: "clock",
 
     svgKey: "heartClock",
 
@@ -10441,7 +10654,7 @@ export const classificationItems: ClassificationItem[] = [
     name: "하트 선글라스",
 
     topCategory: "clothing",
-    subCategory: "accessories",
+    subCategory: "glasses",
 
     svgKey: "heartSunglasses",
 
@@ -10559,7 +10772,7 @@ export const classificationItems: ClassificationItem[] = [
 
     topCategory: "clothing",
 
-    subCategory: "accessories",
+    subCategory: "necklace",
 
     svgKey: "heartNecklace",
 
@@ -10660,8 +10873,8 @@ export const classificationItems: ClassificationItem[] = [
     id: "starBalloon",
 
     name: "별 풍선",
-    topCategory: "living",
-    subCategory: "toys_sports",
+    topCategory: "things",
+    subCategory: "balloon",
 
     svgKey: "starBalloon",
 
@@ -10957,7 +11170,7 @@ export const classificationItems: ClassificationItem[] = [
     name: "별 단추",
     topCategory: "clothing",
 
-    subCategory: "accessories",
+    subCategory: "button",
 
     svgKey: "starButton",
 
@@ -11014,9 +11227,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "별 시계",
 
-    topCategory: "living",
+    topCategory: "things",
 
-    subCategory: "daily",
+    subCategory: "clock",
 
     svgKey: "starClock",
 
@@ -11217,7 +11430,7 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "별 선글라스",
     topCategory: "clothing",
-    subCategory: "accessories",
+    subCategory: "glasses",
 
     svgKey: "starSunglasses",
 
@@ -11274,7 +11487,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "starNecklace",
     name: "별 목걸이",
     topCategory: "clothing",
-    subCategory: "accessories",
+    subCategory: "necklace",
     svgKey: "starNecklace",
     shapes: ["star"],
     description: "반짝이는 별 목걸이예요! 목에 걸면 멋진 별처럼 변신!",
@@ -11350,7 +11563,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "button1",
     name: "단추",
     topCategory: "clothing",
-    subCategory: "accessories",
+    subCategory: "button",
     svgKey: "button1",
     shapes: ["circle"],
     description:
@@ -11429,7 +11642,7 @@ export const classificationItems: ClassificationItem[] = [
     name: "단추",
     topCategory: "clothing",
 
-    subCategory: "accessories",
+    subCategory: "button",
     svgKey: "button2",
     shapes: ["circle"],
     description: "동글동글 귀여운 단추예요! 어떤 색 옷에 달아볼까요?",
@@ -11505,8 +11718,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "circleClock",
     name: "동그란 시계",
-    topCategory: "living",
-    subCategory: "daily",
+    topCategory: "things",
+    subCategory: "clock",
     svgKey: "circleClock",
     shapes: ["circle"],
     description: "똑딱똑딱! 동그란 시계가 지금 몇 시인지 알려주고 있어요.",

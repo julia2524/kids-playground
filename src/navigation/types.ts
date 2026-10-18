@@ -21,11 +21,19 @@ export type RootStackParamList = {
     gameType: "shape";
     level: number;
   };
+  CategorySortingPlayScreen: {
+    gameType: "category";
+    level: number;
+  };
   LanguageScreen: undefined;
   ShapeSortingTestScreen: undefined;
   ShapeStickerScreen: undefined;
   ShapeBasketPreviewScreen: undefined;
   CategoryStickerPreviewScreen: undefined;
+
+  CategorySortingTestScreen: undefined;
+  AnimalCategoryBackgroundPreviewScreen: undefined;
+  CategoryScenePreviewScreen: undefined;
 };
 // PatternPlayScreen: {
 //   gameType: "pattern";

@@ -7,10 +7,8 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/types";
 import StarRow from "../../design-system/components/StarRow";
-import { colorSortingLevels } from "../../types/Classification/Color/colorSortingLevels";
 import AppHeader from "../../components/AppHeader";
 
-import ColorSortingQuestion from "../../components/ColorSorting/ColorSortingQuestion";
 import ColorSortingFooter from "../../components/ColorSorting/ColorSortingFooter";
 import ClassificationTestControls from "../../components/common/ClassificationTestControls";
 import ColorSortingResultOverlay from "../../components/ColorSorting/ColorSortingResultOverlay";
@@ -22,12 +20,12 @@ import { saveLevelClear } from "../../utils/asyncStorage/progressStorage";
 import TutorialOverlay from "../../components/Tutorial/TutorialOverlay";
 import { playEarnedNotes } from "../../utils/sound";
 import ShapeSortingTargetArea from "../../components/ShapeSorting/ShapeSortingTargetArea";
-import { ClassificationProblem } from "../../types/Classification/Color/colorSotringTypes";
 import useShapeSortingGame from "../../hooks/Classification/useShapeSortingGame";
 import ShapeSortingObjectBoard from "../../components/ShapeSorting/ShapeSortingObjectBoard";
 import { ShapeSortingObject } from "../../generators/classification/generateShapeSortingProblem";
 import { ShapeSortingLevels } from "../../types/Classification/Shape/shapeSortingLevels";
 import { useBackgroundMusic } from "../../utils/BackgroundMusicContext";
+import ClassificationQuestion from "../../components/common/ClassificationQuestion";
 
 // ============================================================
 // Types
@@ -211,7 +209,12 @@ export default function ShapeSortingPlayScreen() {
       />
 
       <Container>
-        <ColorSortingQuestion />
+        {/* 형태나 속성 분류 게임일 때 */}
+        {/* 모양 분류 화면 */}
+        <ClassificationQuestion
+          i18nKey="sort_by_shape"
+          text="모양에 맞춰 모아볼까요?"
+        />
 
         <ShapeSortingObjectBoard
           objects={problem.objects}
@@ -262,7 +265,7 @@ export default function ShapeSortingPlayScreen() {
         )}
       </Container>
 
-      {/* {tutorialVisible && tutorialObject && (
+      {tutorialVisible && tutorialObject && (
         <TutorialOverlay
           visible={tutorialVisible}
           object={tutorialObject}
@@ -273,7 +276,7 @@ export default function ShapeSortingPlayScreen() {
           }}
           toRef={{
             get current() {
-              return basketRefs.current[firstObject.targetId]?? null;
+              return basketRefs.current[tutorialObject.targetId] ?? null;
             },
           }}
           onComplete={() => {
@@ -285,7 +288,7 @@ export default function ShapeSortingPlayScreen() {
             setTutorialVisible(false);
           }}
         />
-      )} */}
+      )}
 
       {/* ==================================================== */}
       {/* Result Overlay */}

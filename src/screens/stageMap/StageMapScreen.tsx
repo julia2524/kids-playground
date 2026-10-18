@@ -19,6 +19,7 @@ import { useLanguage } from "../../context/LangaugeContext";
 import i18n from "../../i18n";
 import { triggerHaptic } from "../../utils/haptic";
 import { ShapeSortingLevels } from "../../types/Classification/Shape/shapeSortingLevels";
+import { CategorySortingLevels } from "../../types/Classification/Category/categorySortingLevels";
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -58,6 +59,8 @@ export default function StageMapScreen() {
         return colorSortingLevels;
       case "shape": // 👈 모양 분류 레벨 설정 추가
         return ShapeSortingLevels;
+      case "category": // 👈 모양 분류 레벨 설정 추가
+        return CategorySortingLevels;
       default:
         return [];
     }
@@ -143,6 +146,13 @@ export default function StageMapScreen() {
         break;
       case "shape": // 👈 모양 분류 플레이 화면으로 이동 연결
         navigation.navigate("ShapeSortingPlayScreen", {
+          // 실제 사용하시는 플레이 화면 이름으로 맞춰주세요!
+          gameType,
+          level,
+        });
+        break;
+      case "category": // 👈 모양 분류 플레이 화면으로 이동 연결
+        navigation.navigate("CategorySortingPlayScreen", {
           // 실제 사용하시는 플레이 화면 이름으로 맞춰주세요!
           gameType,
           level,

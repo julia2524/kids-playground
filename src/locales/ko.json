@@ -302,5 +302,9 @@
   "item_excavator": "굴착기",
   "item_subway": "지하철",
   "item_cementMixer": "레미콘",
-  "item_ball": "공"
+  "item_ball": "공",
+
+  "sort_correct_place": "알맞은 곳에 모아볼까요?",
+  "sort_by_shape": "모양에 맞춰 모아볼까요?",
+  "find_friends_home": "친구들의 집을 찾아주세요!"
 }

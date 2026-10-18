@@ -4,7 +4,7 @@ import { unlockStickers } from "../../utils/asyncStorage/stickerStorage";
 import { playStreakNote } from "../../utils/sound";
 import { classificationItems } from "../../data/classification/classificationItems";
 import { generateColorSortingProblem } from "../../generators/classification/generateColorSortingProblem";
-import { ClassificationProblem } from "../../types/Classification/Color/colorSotringTypes";
+import { ColorSortingProblem } from "../../types/Classification/Color/colorSotringTypes";
 
 export type RoundResult = "correct" | "wrong" | null;
 
@@ -48,7 +48,7 @@ export default function useColorSortingGame({
   // Problem 생성
   // ==========================================================
 
-  const problem: ClassificationProblem | null = useMemo(() => {
+  const problem: ColorSortingProblem | null = useMemo(() => {
     const config = colorSortingLevels.find((item) => item.level === testLevel);
 
     if (!config) {

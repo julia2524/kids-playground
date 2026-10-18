@@ -34,7 +34,7 @@ const PLANET = {
     ringDark: "#9275E8",
   },
 
-  size: {
+  category: {
     light: "#C9F5D5",
     main: "#88D7A4",
     dark: "#5EBA83",
@@ -42,7 +42,7 @@ const PLANET = {
     ringDark: "#67CFC0",
   },
 
-  category: {
+  size: {
     light: "#FFE9A8",
     main: "#FFD36F",
     dark: "#EFAF45",
@@ -176,11 +176,13 @@ function ShapeDetails() {
 function SizeDetails() {
   return (
     <G>
-      <Circle cx="65" cy="83" r="11" fill="#B9F0E4" opacity={0.7} />
+      <Circle cx="65" cy="83" r="11" fill="#F1B653" opacity={0.7} />
 
-      <Circle cx="90" cy="78" r="7" fill="#67CFC0" opacity={0.55} />
+      <Circle cx="90" cy="78" r="7" fill="#F1B653" opacity={0.55} />
 
-      <Circle cx="110" cy="92" r="4" fill="#FFFFFF" opacity={0.7} />
+      <Circle cx="110" cy="92" r="4" fill="#F1B653" opacity={0.7} />
+
+      <Circle cx="130" cy="106" r="1" fill="#F1B653" opacity={0.7} />
     </G>
   );
 }
@@ -188,13 +190,13 @@ function CategoryDetails() {
   return (
     <G>
       {/* 발자국 느낌 */}
-      <Circle cx="67" cy="92" r="6" fill="#F1B653" opacity={0.45} />
+      <Circle cx="67" cy="92" r="6" fill="#B9F0E4" opacity={0.45} />
 
-      <Circle cx="58" cy="84" r="3" fill="#F1B653" opacity={0.4} />
+      <Circle cx="58" cy="84" r="3" fill="#67CFC0" opacity={0.4} />
 
-      <Circle cx="68" cy="81" r="3" fill="#F1B653" opacity={0.4} />
+      <Circle cx="68" cy="81" r="3" fill="#FFFFFF" opacity={0.4} />
 
-      <Circle cx="78" cy="84" r="3" fill="#F1B653" opacity={0.4} />
+      <Circle cx="78" cy="84" r="3" fill="#FFFFFF" opacity={0.4} />
     </G>
   );
 }

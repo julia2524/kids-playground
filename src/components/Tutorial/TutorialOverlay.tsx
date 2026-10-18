@@ -1,55 +1,31 @@
-// import React, { useEffect, useRef, useState } from "react";
-
-// import { Animated, Easing, StyleSheet, Text, View } from "react-native";
-
-// import { ColorSortingObject } from "../../types/colorSotringTypes";
-
-// import { classificationItems } from "../../data/classification/classificationItems";
-
-// import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
-
-// import { RenderClassificationObjectSvg } from "../../assets/Classification/classificationItemSvgs";
-
-// import HandPointer from "../../design-system/ui/HandPointer";
-
 // import styled from "styled-components/native";
-// import { AppText } from "../../utils/AppText";
-// import i18n from "../../i18n";
-// import { useLanguage } from "../../context/LangaugeContext";
+
+// import React, { useEffect, useRef, useState } from "react";
+// import { Animated, Easing, View } from "react-native";
+
+// import { ColorSortingObject } from "../../types/Classification/Color/colorSotringTypes";
+// import { classificationItems } from "../../data/classification/classificationItems";
+// import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
+// import { RenderClassificationObjectSvg } from "../../assets/Classification/classificationItemSvgs";
+// import HandPointer from "../../design-system/ui/HandPointer";
+// import { ShapeSortingObject } from "../../generators/classification/generateShapeSortingProblem";
 
 // type Point = {
 //   x: number;
 //   y: number;
 // };
 
+// // 모든 정렬 객체를 아우르는 통합 타입 정의
+// type SortingObject = ColorSortingObject | ShapeSortingObject;
+
 // type TutorialOverlayProps = {
 //   visible: boolean;
-//   object: ColorSortingObject | null;
+//   object: SortingObject | null;
 //   fromRef: React.RefObject<View | null>;
 //   toRef: React.RefObject<View | null>;
 //   onComplete: () => void;
 //   onGrab: () => void;
 // };
-
-// // colorId(red, blue ...)에 맞는 번역된 색상 이름을 가져온다.
-// function getColorName(colorId: string) {
-//   return i18n.t(`color_${colorId}`, { defaultValue: colorId });
-// }
-// // 배경색이 밝으면 어두운 글자, 어두우면 흰 글자
-// function getReadableTextColor(color?: string) {
-//   if (!color || !color.startsWith("#")) return "#59451a";
-//   let hex = color.slice(1);
-//   if (hex.length === 3)
-//     hex = hex
-//       .split("")
-//       .map((c) => c + c)
-//       .join("");
-//   const r = parseInt(hex.slice(0, 2), 16);
-//   const g = parseInt(hex.slice(2, 4), 16);
-//   const b = parseInt(hex.slice(4, 6), 16);
-//   const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-//   return luminance > 0.6 ? "#4A3A12" : "#FFFFFF";
-// }
 
 // export default function TutorialOverlay({
 //   visible,
@@ -59,20 +35,15 @@
 //   onComplete,
 //   onGrab,
 // }: TutorialOverlayProps) {
-//   useLanguage(); // 언어가 바뀌면 다시 렌더링
 //   const overlayRef = useRef<View>(null);
-
 //   const [startPoint, setStartPoint] = useState<Point | null>(null);
 //   const [endPoint, setEndPoint] = useState<Point | null>(null);
 //   const [objectSize, setObjectSize] = useState(72);
-//   // const [isPointing, setIsPointing] = useState(true);
 
 //   const progress = useRef(new Animated.Value(0)).current;
 //   const opacity = useRef(new Animated.Value(0)).current;
-//   const labelScale = useRef(new Animated.Value(0.4)).current;
 //   const sessionRef = useRef(0);
 
-//   // 좌표 측정용 View는 좌표가 없어도 항상 렌더링한다.
 //   useEffect(() => {
 //     const session = ++sessionRef.current;
 
@@ -83,7 +54,6 @@
 
 //     setStartPoint(null);
 //     setEndPoint(null);
-//     //  setIsPointing(true);
 
 //     if (!visible || !object) return;
 
@@ -91,12 +61,6 @@
 //       const overlay = overlayRef.current;
 //       const from = fromRef.current;
 //       const to = toRef.current;
-
-//       console.log("[튜토리얼 참조 확인]", {
-//         overlay: !!overlay,
-//         from: !!from,
-//         to: !!to,
-//       });
 
 //       if (!overlay || !from || !to) return;
 
@@ -120,8 +84,6 @@
 //               y: ty - oy + th / 2,
 //             };
 
-//             console.log("[튜토리얼 좌표]", { start, end });
-
 //             setStartPoint(start);
 //             setEndPoint(end);
 //             setObjectSize(Math.max(40, Math.min(fw - 12, fh - 12)));
@@ -138,46 +100,10 @@
 //     };
 //   }, [visible, object, fromRef, toRef, progress, opacity]);
 
-//   // 1. 색상 이름과 손가락을 먼저 보여준다.
-//   // 2. 잠깐 기다린 뒤 기존 드래그 시범을 실행한다.
 //   useEffect(() => {
 //     if (!visible || !object || !startPoint || !endPoint) return;
 
 //     const session = sessionRef.current;
-
-//     //  setIsPointing(true);
-
-//     // 말풍선 팝 애니메이션 (말풍선이 실제로 나타나는 시점에 실행)
-//     labelScale.setValue(0.85);
-//     const labelAnimation = Animated.sequence([
-//       // 1) 살짝 작은 상태에서 부드럽게 제 크기로 (튀지 않음)
-//       Animated.timing(labelScale, {
-//         toValue: 1,
-//         duration: 350,
-//         easing: Easing.out(Easing.cubic),
-//         useNativeDriver: true,
-//       }),
-//       // 2) 읽는 동안 천천히 한 번 숨 쉬듯 커졌다 작아짐
-//       Animated.timing(labelScale, {
-//         toValue: 1.06,
-//         duration: 500,
-//         easing: Easing.inOut(Easing.ease),
-//         useNativeDriver: true,
-//       }),
-//       Animated.timing(labelScale, {
-//         toValue: 1,
-//         duration: 500,
-//         easing: Easing.inOut(Easing.ease),
-//         useNativeDriver: true,
-//       }),
-//     ]);
-//     labelAnimation.start();
-
-//     // const pointingTimer = setTimeout(() => {
-//     //   if (sessionRef.current === session) {
-//     //     setIsPointing(false);
-//     //   }
-//     // }, 1800);
 
 //     const animation = Animated.sequence([
 //       Animated.timing(opacity, {
@@ -185,7 +111,7 @@
 //         duration: 250,
 //         useNativeDriver: true,
 //       }),
-//       Animated.delay(1550),
+//       Animated.delay(350),
 //       Animated.timing(progress, {
 //         toValue: 1,
 //         duration: 1300,
@@ -206,34 +132,27 @@
 //       }
 //     });
 
-//     return () => {
-//       // clearTimeout(pointingTimer);
-//       animation.stop();
-//       labelAnimation.stop();
-//     };
-//   }, [
-//     visible,
-//     object,
-//     startPoint,
-//     endPoint,
-//     progress,
-//     opacity,
-//     labelScale,
-//     onComplete,
-//   ]);
-//   const item = object
-//     ? classificationItems.find((entry) => entry.id === object.itemId)
+//     return () => animation.stop();
+//   }, [visible, object, startPoint, endPoint, progress, opacity, onComplete]);
+
+//   // 안전하게 itemId와 colorId 추출
+//   const itemId = object && "itemId" in object ? object.itemId : undefined;
+//   const colorId = object && "colorId" in object ? object.colorId : undefined;
+
+//   const item = itemId
+//     ? classificationItems.find((entry) => entry.id === itemId)
 //     : undefined;
 
 //   const variant = item?.variants.find(
-//     (entry) => entry.colorId === object?.colorId,
+//     (entry) => colorId && entry.colorId === colorId,
 //   );
 
 //   const primaryColor = object
-//     ? (variant?.primary ?? COLOR_SORTING_COLORS[object.colorId])
+//     ? (variant?.primary ??
+//       (colorId
+//         ? COLOR_SORTING_COLORS[colorId as keyof typeof COLOR_SORTING_COLORS]
+//         : undefined))
 //     : undefined;
-
-//   const colorName = object ? getColorName(object.colorId) : "";
 
 //   const translateX =
 //     startPoint && endPoint
@@ -254,54 +173,33 @@
 //   return (
 //     <Overlay ref={overlayRef} collapsable={false} pointerEvents="none">
 //       {visible && object && startPoint && endPoint && (
-//         <>
-//           {/* {isPointing && (
-//             <LabelContainer
-//               style={{ opacity, transform: [{ scale: labelScale }] }}
-//             >
-//               <LabelText
-//                 bgColor={primaryColor ?? "#fff5c7"}
-//                 textColor={getReadableTextColor(primaryColor)}
-//               >
-//                 {colorName}
-//               </LabelText>
-//             </LabelContainer>
-//           )} */}
-
-//           <LabelContainer
-//             style={{ opacity, transform: [{ scale: labelScale }] }}
-//           >
-//             <LabelText
-//               bgColor={primaryColor ?? "#fff5c7"}
-//               textColor={getReadableTextColor(primaryColor)}
-//             >
-//               {colorName}
-//             </LabelText>
-//           </LabelContainer>
-
-//           <MovingGroup
+//         <MovingGroup
+//           style={{
+//             left: startPoint.x - objectSize / 2,
+//             top: startPoint.y - objectSize / 2,
+//             opacity: 1,
+//             transform: [{ translateX }, { translateY }],
+//           }}
+//         >
+//           <ObjectContainer
 //             style={{
-//               left: startPoint.x - objectSize / 2,
-//               top: startPoint.y - objectSize / 2,
-//               opacity,
-//               transform: [{ translateX }, { translateY }],
+//               width: objectSize,
+//               height: objectSize,
 //             }}
 //           >
-//             <ObjectContainer size={objectSize}>
-//               <RenderClassificationObjectSvg
-//                 object={object}
-//                 primary={primaryColor!}
-//                 secondary={variant?.secondary}
-//                 accent={variant?.accent}
-//                 size={objectSize}
-//               />
-//             </ObjectContainer>
+//             <RenderClassificationObjectSvg
+//               object={object}
+//               primary={primaryColor!}
+//               secondary={variant?.secondary}
+//               accent={variant?.accent}
+//               size={objectSize}
+//             />
+//           </ObjectContainer>
 
-//             <HandContainer>
-//               <HandPointer size={54} tapping={false} />
-//             </HandContainer>
-//           </MovingGroup>
-//         </>
+//           <HandContainer>
+//             <HandPointer size={54} tapping={false} />
+//           </HandContainer>
+//         </MovingGroup>
 //       )}
 //     </Overlay>
 //   );
@@ -319,29 +217,6 @@
 //   elevation: 9999;
 // `;
 
-// const LabelContainer = styled(AnimatedView)`
-//   position: absolute;
-//   top: 50px;
-//   left: 0;
-//   right: 0;
-//   align-items: center;
-//   z-index: 10000;
-//   elevation: 10000;
-// `;
-
-// const LabelText = styled(AppText)<{ bgColor: string; textColor: string }>`
-//   overflow: hidden;
-//   padding: 10px 28px;
-//   border-radius: 22px;
-//   border-width: 4px;
-//   border-color: rgba(255, 255, 255, 0.9);
-//   background-color: ${({ bgColor }) => bgColor};
-//   color: ${({ textColor }) => textColor};
-//   font-size: 30px;
-//   font-weight: 800;
-//   text-align: center;
-// `;
-
 // const MovingGroup = styled(AnimatedView)`
 //   position: absolute;
 //   width: 90px;
@@ -352,11 +227,7 @@
 //   elevation: 9999;
 // `;
 
-// const ObjectContainer = styled.View<{
-//   size: number;
-// }>`
-//   width: ${({ size }) => size}px;
-//   height: ${({ size }) => size}px;
+// const ObjectContainer = styled.View`
 //   align-items: center;
 //   justify-content: center;
 // `;
@@ -370,22 +241,36 @@
 import styled from "styled-components/native";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Animated, Easing, StyleSheet, View } from "react-native";
+import { Animated, Easing, View } from "react-native";
 
 import { ColorSortingObject } from "../../types/Classification/Color/colorSotringTypes";
 import { classificationItems } from "../../data/classification/classificationItems";
 import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
 import { RenderClassificationObjectSvg } from "../../assets/Classification/classificationItemSvgs";
 import HandPointer from "../../design-system/ui/HandPointer";
+import { ShapeSortingObject } from "../../generators/classification/generateShapeSortingProblem";
+import { CategorySortingObject } from "../../generators/classification/generateCategorySortingProblem";
+import { ObjectArtwork } from "../CategorySorting/CategorySortingObjectComponent";
 
 type Point = {
   x: number;
   y: number;
 };
 
+// 모든 정렬 객체를 아우르는 통합 타입 정의
+type SortingObject =
+  | ColorSortingObject
+  | ShapeSortingObject
+  | CategorySortingObject;
+
+// Category 오브젝트만 instanceId를 가진다
+const isCategoryObject = (
+  object: SortingObject | null,
+): object is CategorySortingObject => !!object && "instanceId" in object;
+
 type TutorialOverlayProps = {
   visible: boolean;
-  object: ColorSortingObject | null;
+  object: SortingObject | null;
   fromRef: React.RefObject<View | null>;
   toRef: React.RefObject<View | null>;
   onComplete: () => void;
@@ -409,7 +294,6 @@ export default function TutorialOverlay({
   const opacity = useRef(new Animated.Value(0)).current;
   const sessionRef = useRef(0);
 
-  // 좌표 측정용 View는 좌표가 없어도 항상 렌더링한다.
   useEffect(() => {
     const session = ++sessionRef.current;
 
@@ -427,12 +311,6 @@ export default function TutorialOverlay({
       const overlay = overlayRef.current;
       const from = fromRef.current;
       const to = toRef.current;
-
-      console.log("[튜토리얼 참조 확인]", {
-        overlay: !!overlay,
-        from: !!from,
-        to: !!to,
-      });
 
       if (!overlay || !from || !to) return;
 
@@ -456,8 +334,6 @@ export default function TutorialOverlay({
               y: ty - oy + th / 2,
             };
 
-            console.log("[튜토리얼 좌표]", { start, end });
-
             setStartPoint(start);
             setEndPoint(end);
             setObjectSize(Math.max(40, Math.min(fw - 12, fh - 12)));
@@ -474,7 +350,6 @@ export default function TutorialOverlay({
     };
   }, [visible, object, fromRef, toRef, progress, opacity]);
 
-  // 좌표가 모두 준비된 후에만 애니메이션을 실행한다.
   useEffect(() => {
     if (!visible || !object || !startPoint || !endPoint) return;
 
@@ -510,16 +385,28 @@ export default function TutorialOverlay({
     return () => animation.stop();
   }, [visible, object, startPoint, endPoint, progress, opacity, onComplete]);
 
-  const item = object
-    ? classificationItems.find((entry) => entry.id === object.itemId)
+  // ==========================================================
+  // 색상 계산 (Color / Shape 오브젝트용)
+  // Category 오브젝트는 primary/secondary/accent를 직접 갖고 있어서
+  // 아래 조회를 거치지 않는다.
+  // ==========================================================
+
+  const itemId = object && "itemId" in object ? object.itemId : undefined;
+  const colorId = object && "colorId" in object ? object.colorId : undefined;
+
+  const item = itemId
+    ? classificationItems.find((entry) => entry.id === itemId)
     : undefined;
 
   const variant = item?.variants.find(
-    (entry) => entry.colorId === object?.colorId,
+    (entry) => colorId && entry.colorId === colorId,
   );
 
   const primaryColor = object
-    ? (variant?.primary ?? COLOR_SORTING_COLORS[object.colorId])
+    ? (variant?.primary ??
+      (colorId
+        ? COLOR_SORTING_COLORS[colorId as keyof typeof COLOR_SORTING_COLORS]
+        : undefined))
     : undefined;
 
   const translateX =
@@ -555,13 +442,17 @@ export default function TutorialOverlay({
               height: objectSize,
             }}
           >
-            <RenderClassificationObjectSvg
-              object={object}
-              primary={primaryColor!}
-              secondary={variant?.secondary}
-              accent={variant?.accent}
-              size={objectSize}
-            />
+            {isCategoryObject(object) ? (
+              <ObjectArtwork object={object} size={objectSize} />
+            ) : (
+              <RenderClassificationObjectSvg
+                object={object}
+                primary={primaryColor!}
+                secondary={variant?.secondary}
+                accent={variant?.accent}
+                size={objectSize}
+              />
+            )}
           </ObjectContainer>
 
           <HandContainer>
@@ -572,6 +463,7 @@ export default function TutorialOverlay({
     </Overlay>
   );
 }
+
 const AnimatedView = Animated.View;
 
 const Overlay = styled.View`

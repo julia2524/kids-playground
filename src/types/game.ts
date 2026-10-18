@@ -8,51 +8,113 @@ export type StageMapGameType =
   | "pattern"
   | "puzzle"
   | "maze";
-
 export type ClassificationTopCategory =
-  | "animal" //동물
-  | "food" //음식
-  | "clothing" //의류
-  | "vehicle" //탈 것
-  | "nature" //자연
-  | "living" //생활
-  | "unknown"; //알 수 없음
+  | "animal" // 동물
+  | "food" // 음식
+  | "clothing" // 의류 및 꾸미는 물건
+  | "vehicle" // 탈것
+  | "nature" // 자연
+  | "things" // 생활물건과 놀이물건
+  | "unknown"; // 미분류
 
 export type ClassificationSubCategory =
-  | "musical_instrument"
-  | "toys_sports" //장난감
-  | "plant" //식물
-  | "sky" //하늘
-  | "clothes" //옷
-  | "shoes" //신발
-  | "hat" //모자
-  | "accessories" //악세사리
-  | "land_animal"
-  | "insect"
-  | "bird"
-  | "sea_animal"
-  | "fruit"
-  | "vegetable"
-  | "meal"
-  | "snack"
-  | "drink"
-  | "furniture"
-  | "electronics"
-  | "stationery"
-  | "daily"
-  | "cleaning"
-  | "bathroom"
-  | "kitchen"
-  | "road_vehicle"
-  | "rail_special"
-  | "air_vehicle"
-  | "water_vehicle"
-  | "flower"
-  | "tree"
-  | "nature_etc"
-  | "decoration_sign"
+  // 동물
+  | "pet" // 반려동물
+  | "farm_animal" // 농장 동물
+  | "wild_animal" // 숲·야생 동물
+  | "sea_animal" // 바다 동물
+  | "bird" // 새
+  | "insect" // 곤충
+  | "small_animal" // 작은 동물
+
+  // 음식
+  | "fruit" // 과일
+  | "vegetable" // 채소
+  | "meal" // 한 끼 음식
+  | "snack" // 간식
+  | "drink" // 음료
+
+  // 의류 및 꾸미는 물건
+  | "hat" // 모자
+  | "clothes" // 옷
+  | "shoes" // 신발
+  | "hairpin" // 머리핀
+  | "necklace" // 목걸이
+  | "glasses" // 안경
+  | "button" //단추
+
+  // 자연
+  | "sky" // 하늘에서 볼 수 있는 것
+  | "plant" // 식물
+
+  // 탈것
+  | "road_vehicle" // 도로에서 다니는 탈것
+  | "rail_vehicle" // 레일 위를 다니는 탈것
+  | "air_vehicle" // 하늘을 나는 탈것
+  | "water_vehicle" // 물에서 다니는 탈것
+  | "construction_vehicle" // 공사하는 차
+
+  // 생활물건과 놀이물건
+  | "musical_instrument" // 악기
+  | "clock" // 시계
+  | "stationery" // 문구
+  | "electronics" // 전자제품
+  | "furniture" // 가구
+  | "ball" // 공
+  | "balloon" // 풍선
+  | "toys_sports" // 장난감·놀이 도구
+  | "daily" // 기타 생활물건
+
+  // 미분류
   | "unknown";
 
+export const SUB_CATEGORY_MAP: Record<string, string[]> = {
+  animal: [
+    "pet",
+    "farm_animal",
+    "wild_animal",
+    "sea_animal",
+    "bird",
+    "insect",
+    "small_animal",
+  ],
+
+  food: ["fruit", "vegetable", "meal", "snack", "drink"],
+
+  clothing: [
+    "hat",
+    "clothes",
+    "shoes",
+    "hairpin",
+    "necklace",
+    "glasses",
+    "button",
+  ],
+
+  nature: ["sky", "plant"],
+
+  vehicle: [
+    "road_vehicle",
+    "rail_vehicle",
+    "air_vehicle",
+    "water_vehicle",
+    "construction_vehicle",
+  ],
+
+  things: [
+    "musical_instrument",
+    "clock",
+    "stationery",
+    "electronics",
+    "furniture",
+    "ball",
+    "balloon",
+    "toys_sports",
+    "daily",
+  ],
+
+  unknown: ["unknown"],
+};
 export type ClassificationColorId =
   | "natural"
   | "red"
