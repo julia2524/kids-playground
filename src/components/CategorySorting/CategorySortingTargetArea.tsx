@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
@@ -8,6 +8,8 @@ import type {
   CategorySortingObject,
   CategorySortingTarget,
 } from "../../generators/classification/generateCategorySortingProblem";
+import { useLanguage } from "../../context/LangaugeContext";
+import i18n from "../../i18n";
 
 type CategorySortingTargetAreaProps = {
   targets: CategorySortingTarget[];
@@ -19,6 +21,10 @@ type CategorySortingTargetAreaProps = {
   onRemoveObject: (targetId: string, objectId: string) => void;
 };
 
+// 번역 키: classification.item.heartChocolate / classification.category.snack
+const getLabelKey = (target: CategorySortingTarget) =>
+  `classification.${target.labelType}.${target.label}`;
+
 export default function CategorySortingTargetArea({
   targets,
   objects,
@@ -27,9 +33,19 @@ export default function CategorySortingTargetArea({
   onTargetPress,
   onRemoveObject,
 }: CategorySortingTargetAreaProps) {
+  useLanguage();
+  const localizedTargets = useMemo(
+    () =>
+      targets.map((target) => ({
+        ...target,
+        // 번역이 없으면 영어 키가 그대로 보임
+        label: i18n.t(getLabelKey(target), { defaultValue: target.label }),
+      })),
+    [targets, i18n.locale],
+  );
   return (
     <TargetGridContainer>
-      {targets.map((target) => (
+      {localizedTargets.map((target) => (
         <BasketSlot
           key={target.id}
           collapsable={false}

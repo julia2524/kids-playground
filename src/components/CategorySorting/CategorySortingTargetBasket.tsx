@@ -78,6 +78,7 @@ export default function CategorySortingTargetBasket({
     bodySize.width,
     bodySize.height,
   );
+  console.log(target);
 
   return (
     <BasketButton activeOpacity={0.9} onPress={onPress}>
@@ -85,8 +86,11 @@ export default function CategorySortingTargetBasket({
       <BasketBackground pointerEvents="none" />
 
       {/* 카테고리명은 여기에만 표시 */}
+
       <BasketHeader>
-        <BasketTitle numberOfLines={1}>{target.label}</BasketTitle>
+        <TitlePill>
+          <BasketTitle numberOfLines={2}>{target.label}</BasketTitle>
+        </TitlePill>
       </BasketHeader>
 
       <BasketBody onLayout={handleBodyLayout}>
@@ -160,19 +164,26 @@ const BasketHeader = styled.View`
   padding: 6px 6px 0px 6px;
 `;
 
-// 배경 위에서도 읽히도록 반투명 흰색 알약 위에 글자를 올림
-const BasketTitle = styled(AppText)`
-  font-size: 13px;
-  font-weight: 900;
-  color: #29263d;
-  text-align: center;
-
+// 배경 위에서도 읽히도록 반투명 흰색 알약. 한 줄/두 줄 모두 높이를 맞춤
+const TitlePill = styled.View`
+  max-width: 100%;
+  min-height: 40px;
   padding: 3px 10px;
-  border-radius: 10px;
-  overflow: hidden;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.85);
 `;
 
+const BasketTitle = styled(AppText)`
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 900;
+  color: #29263d;
+  text-align: center;
+`;
 const BasketBody = styled.View`
   flex: 1;
   align-items: center;

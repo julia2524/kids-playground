@@ -14,7 +14,7 @@ const ALL_TOP_CATEGORIES = [
   "animal",
   "food",
   "clothing",
-  "living",
+  "things",
   "vehicle",
   "nature",
   "unknown",
@@ -26,7 +26,7 @@ const TOP_CATEGORY_LABELS: Record<string, string> = {
   animal: "동물",
   food: "음식",
   clothing: "의류",
-  living: "생활",
+  things: "생활물건과 놀이물건",
   vehicle: "탈것",
   nature: "자연",
   unknown: "알 수 없음",
@@ -67,7 +67,7 @@ export const SUB_CATEGORY_MAP: Record<string, string[]> = {
     "construction_vehicle",
   ],
 
-  living: [
+  things: [
     "musical_instrument",
     "clock",
     "stationery",

@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Dimensions,
   FlatList,
@@ -22,6 +22,10 @@ import AppHeader from "../../components/AppHeader";
 import i18n from "../../i18n";
 import { useLanguage } from "../../context/LangaugeContext";
 import { triggerHaptic } from "../../utils/haptic";
+import {
+  getLastGame,
+  saveLastGame,
+} from "../../utils/asyncStorage/progressStorage";
 
 // ============================================================
 // 메인 화면과 통일된 몽환 파스텔 컬러 팔레트
@@ -121,6 +125,27 @@ export default function ClassificationMenuScreen() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList<ClassificationGame>>(null);
 
+  // 💡 1. 화면 진입 시 마지막 접속했던 게임 위치로 자동 스크롤
+  useEffect(() => {
+    const loadLastGamePosition = async () => {
+      const lastGameId = await getLastGame();
+      if (!lastGameId) return;
+
+      const targetIndex = GAMES.findIndex((game) => game.id === lastGameId);
+      if (targetIndex !== -1) {
+        setCurrentIndex(targetIndex);
+        setTimeout(() => {
+          flatListRef.current?.scrollToOffset({
+            offset: targetIndex * SNAP_INTERVAL,
+            animated: false, // 진입 시 튀지 않게 바로 이동
+          });
+        }, 100);
+      }
+    };
+
+    loadLastGamePosition();
+  }, []);
+
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const offsetX = event.nativeEvent.contentOffset.x;
     const index = Math.round(offsetX / SNAP_INTERVAL);
@@ -130,6 +155,7 @@ export default function ClassificationMenuScreen() {
   };
 
   const handleSelectGame = (game: ClassificationGame) => {
+    saveLastGame(game.id); // 마지막 게임 저장
     navigation.navigate("StageMapScreen", { gameType: game.id });
   };
 

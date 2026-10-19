@@ -9,6 +9,7 @@ import { colors } from "../../design-system/tokens/colors";
 import StarBadge from "../../design-system/ui/StarBadge";
 import { StageMapGameType } from "../../types/game";
 import { triggerHaptic } from "../../utils/haptic";
+import GameRewardBadge from "../common/GameRewardBadge";
 
 // ============================================================
 // Theme / Color Definitions
@@ -19,6 +20,7 @@ type ColorSortingResultOverlayProps = {
   level: number;
   earnedStars: number;
   isLastLevel: boolean;
+  gameType?: "color" | "shape" | "category";
 
   onHome: () => void;
   onRestart: () => void;
@@ -30,6 +32,7 @@ export default function ColorSortingResultOverlay({
   level,
   earnedStars,
   isLastLevel,
+  gameType = "color", // 👈 기본값 설정
   onHome,
   onRestart,
   onNextLevel,
@@ -103,8 +106,12 @@ export default function ColorSortingResultOverlay({
                     style={{ marginTop: starOffsets[index] }}
                   >
                     {/* 외부 Badge 컴포넌트가 존재한다고 가정 */}
-                    {/* <GameRewardBadge gameType="color" type={type} size={42} /> */}
-                    <StarBadge type={type} size={42} />
+                    <GameRewardBadge
+                      gameType={gameType}
+                      type={type}
+                      size={42}
+                    />
+                    {/* <StarBadge type={type} size={42} /> */}
                   </StarWrapper>
                 );
               })}

@@ -202,7 +202,7 @@ export default function ColorSortingPlayScreen() {
           <StarRow
             earnedStars={earnedStars}
             totalStars={5}
-            gameType="classification"
+            gameType="color"
             size={30}
           />
         }
@@ -297,6 +297,7 @@ export default function ColorSortingPlayScreen() {
           level={testLevel}
           earnedStars={earnedStars}
           isLastLevel={testLevel === colorSortingLevels.length}
+          gameType={gameType} // 👈 이 부분을 추가해주면 오버레이로 gameType이 전달됩니다!
           onHome={() => {
             navigation.navigate("Home");
           }}

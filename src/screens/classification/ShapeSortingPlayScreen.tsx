@@ -202,7 +202,7 @@ export default function ShapeSortingPlayScreen() {
           <StarRow
             earnedStars={earnedStars}
             totalStars={5}
-            gameType="classification"
+            gameType="shape"
             size={30}
           />
         }
@@ -298,6 +298,7 @@ export default function ShapeSortingPlayScreen() {
           level={testLevel}
           earnedStars={earnedStars}
           isLastLevel={testLevel === ShapeSortingLevels.length}
+          gameType={gameType} // 👈 이 부분을 추가해주면 오버레이로 gameType이 전달됩니다!
           onHome={() => {
             navigation.navigate("Home");
           }}

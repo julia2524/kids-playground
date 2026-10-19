@@ -48,6 +48,8 @@ const TOTAL_ROUNDS = 10;
 // 개발용 Level / Round 컨트롤바 표시 여부 (배포 시 false)
 const SHOW_TEST_CONTROLS = true;
 
+// 튜토리얼을 보여 줄 마지막 레벨 (1 ~ 이 값까지)
+const TUTORIAL_MAX_LEVEL = 3;
 // ============================================================
 // Screen
 // ============================================================
@@ -146,7 +148,7 @@ export default function CategorySortingPlayScreen() {
   // ==========================================================
 
   useEffect(() => {
-    if (testLevel !== 1 || !problem) {
+    if (testLevel > TUTORIAL_MAX_LEVEL || !problem) {
       tutorialVisibleRef.current = false;
       setTutorialVisible(false);
       setTutorialObject(null);
@@ -197,7 +199,7 @@ export default function CategorySortingPlayScreen() {
           <StarRow
             earnedStars={earnedStars}
             totalStars={5}
-            gameType="classification"
+            gameType="category"
             size={30}
           />
         }
@@ -292,6 +294,7 @@ export default function CategorySortingPlayScreen() {
           level={testLevel}
           earnedStars={earnedStars}
           isLastLevel={testLevel === CategorySortingLevels.length}
+          gameType={gameType} // 👈 이 부분을 추가해주면 오버레이로 gameType이 전달됩니다!
           onHome={() => {
             navigation.navigate("Home");
           }}

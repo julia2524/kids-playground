@@ -52,3 +52,22 @@ export async function resetProgress(gameType: string) {
     console.warn("[progress] reset 실패", e);
   }
 }
+
+const LAST_GAME_KEY = "LAST_ACCESSED_CLASSIFICATION_GAME";
+
+export const saveLastGame = async (gameId: string) => {
+  try {
+    await AsyncStorage.setItem(LAST_GAME_KEY, gameId);
+  } catch (e) {
+    console.error("Failed to save last game", e);
+  }
+};
+
+export const getLastGame = async (): Promise<string | null> => {
+  try {
+    return await AsyncStorage.getItem(LAST_GAME_KEY);
+  } catch (e) {
+    console.error("Failed to get last game", e);
+    return null;
+  }
+};

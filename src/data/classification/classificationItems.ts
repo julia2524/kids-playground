@@ -5444,7 +5444,7 @@ export const classificationItems: ClassificationItem[] = [
     id: "bear",
     name: "곰",
     topCategory: "animal",
-    subCategory: "farm_animal",
+    subCategory: "wild_animal",
     svgKey: "bear",
     shapes: [],
     description: "어흥? 아니죠! 귀여운 곰이 숲속에서 어슬렁어슬렁 걸어와요.",
