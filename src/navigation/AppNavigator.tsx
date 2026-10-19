@@ -16,7 +16,7 @@ import CategoryStickerPreviewScreen from "../screens/test/CategoryStickerPreview
 import CategorySortingTestScreen from "../screens/test/CategorySortingTestScreen";
 import CategoryBasketPreviewScreen from "../screens/test/CategoryBasketPreviewScreen";
 import CategoryScenePreviewScreen from "../screens/test/CategoryScenePreviewScreen";
-import AnimalCategoryBackgroundPreviewScreen from "../screens/test/AnimalCategoryBackgroundPreviewScreen";
+import AnimalCategoryBackgroundPreviewScreen from "../screens/test/CategoryBackgroundPreviewScreen";
 import CategorySortingPlayScreen from "../screens/classification/CategorySortingPlayScreen";
 
 const Stack = createNativeStackNavigator();

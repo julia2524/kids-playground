@@ -10627,7 +10627,7 @@ export const Frame = ({
     </Svg>
   );
 };
-export const TriangleRuller = ({
+export const TriangleRuler = ({
   colorHex = "#FF8B8B",
   primary,
   secondary,
@@ -20012,7 +20012,7 @@ export const CATEGORY_ITEM_SVGS = {
   christmasTree: ChristmasTree,
   partyHat: PartyHat,
   triangleInstrument: TriangleInstrument,
-  triangleRuller: TriangleRuller,
+  triangleRuler: TriangleRuler,
 
   frame: Frame,
   switch: Switch,

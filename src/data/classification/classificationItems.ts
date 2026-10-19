@@ -9413,7 +9413,7 @@ export const classificationItems: ClassificationItem[] = [
     ],
   },
   {
-    id: "triangleRuller",
+    id: "triangleRuler",
 
     name: "삼각자",
 
@@ -9421,7 +9421,7 @@ export const classificationItems: ClassificationItem[] = [
 
     subCategory: "stationery",
 
-    svgKey: "triangleRuller",
+    svgKey: "triangleRuler",
 
     shapes: ["triangle"],
 

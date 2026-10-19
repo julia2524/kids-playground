@@ -19,7 +19,10 @@ export type AnimalBackgroundKind =
   | "bird"
   | "insect";
 
-type Props = { width?: string; height?: string };
+type Props = {
+  width?: string | number;
+  height?: string | number;
+};
 
 const Sky = () => (
   <>

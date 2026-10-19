@@ -34,6 +34,7 @@ export default function CategorySortingTargetArea({
   onRemoveObject,
 }: CategorySortingTargetAreaProps) {
   useLanguage();
+
   const localizedTargets = useMemo(
     () =>
       targets.map((target) => ({
