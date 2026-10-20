@@ -98,8 +98,9 @@ export function AnimalBackground({ width = "100%", height = 220 }: Props) {
     <Svg
       width={width}
       height={height}
-      viewBox="0 0 360 220"
-      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 240 180"
+      preserveAspectRatio="none"
+      style={{ width: "100%", height: "100%" }}
     >
       <Defs>
         <LinearGradient id="animalSky" x1="0" y1="0" x2="0" y2="1">
@@ -329,8 +330,9 @@ export function WildAnimalBackground({ width = "100%", height = 220 }: Props) {
     <Svg
       width={width}
       height={height}
-      viewBox="0 0 360 220"
-      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 240 180"
+      preserveAspectRatio="none"
+      style={{ width: "100%", height: "100%" }}
     >
       <Defs>
         <LinearGradient id="animalSky" x1="0" y1="0" x2="0" y2="1">
@@ -525,8 +527,9 @@ export function PetBackground({ width = "100%", height = 220 }: Props) {
     <Svg
       width={width}
       height={height}
-      viewBox="0 0 360 220"
-      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 240 180"
+      preserveAspectRatio="none"
+      style={{ width: "100%", height: "100%" }}
     >
       <Defs>
         <LinearGradient id="petSky" x1="0" y1="0" x2="0" y2="1">
@@ -758,7 +761,8 @@ export function FarmAnimalBackground({ width = "100%", height = 180 }: Props) {
       width={width}
       height={height}
       viewBox="0 0 240 180"
-      preserveAspectRatio="xMidYMid meet"
+      preserveAspectRatio="none"
+      style={{ width: "100%", height: "100%" }}
     >
       <Defs>
         {/* 부드러운 동화책 하늘 */}
@@ -1100,67 +1104,14 @@ export function FarmAnimalBackground({ width = "100%", height = 180 }: Props) {
   );
 }
 
-/** Underwater scene: water, light rays and sea plants only. */
-// export function SeaAnimalBackground({ width = "240", height = "180" }: Props) {
-//   return (
-//     <Svg width={width} height={height} viewBox="0 0 240 180">
-//       <Defs>
-//         <LinearGradient id="animalUnderwater" x1="0" y1="0" x2="0" y2="1">
-//           <Stop offset="0" stopColor="#76D8F0" />
-//           <Stop offset="1" stopColor="#168FC8" />
-//         </LinearGradient>
-//       </Defs>
-//       <Rect width="240" height="180" fill="url(#animalUnderwater)" />
-//       <Path
-//         d="M0 28 Q32 17 60 29 T120 28 T180 28 T240 24"
-//         stroke="#B8F0F8"
-//         strokeWidth="3"
-//         opacity="0.7"
-//         fill="none"
-//       />
-//       <Path d="M24 0 L67 0 L112 138 L76 138Z" fill="#C5F6FC" opacity="0.13" />
-//       <Path
-//         d="M124 0 L158 0 L193 128 L165 128Z"
-//         fill="#C5F6FC"
-//         opacity="0.13"
-//       />
-//       {[
-//         { x: 26, y: 54, r: 4 },
-//         { x: 48, y: 79, r: 3 },
-//         { x: 199, y: 48, r: 5 },
-//         { x: 215, y: 86, r: 3 },
-//         { x: 151, y: 62, r: 3 },
-//       ].map((b, i) => (
-//         <Circle
-//           key={i}
-//           cx={b.x}
-//           cy={b.y}
-//           r={b.r}
-//           fill="#D8FAFF"
-//           opacity="0.75"
-//         />
-//       ))}
-//       <Path
-//         d="M0 143 Q42 135 82 145 T160 143 T240 140 L240 180 L0 180Z"
-//         fill="#F5DDA5"
-//       />
-//       <Path d="M18 151 Q7 127 18 111 Q31 130 18 151Z" fill="#278FB0" />
-//       <Path d="M29 153 Q22 126 42 116 Q47 139 29 153Z" fill="#36A8BD" />
-//       <Path d="M218 151 Q207 126 219 107 Q231 128 218 151Z" fill="#278FB0" />
-//       <Path d="M229 154 Q222 131 237 119 L240 144Z" fill="#36A8BD" />
-//       <Path d="M10 151 Q17 138 29 145 Q24 158 10 151Z" fill="#7DCFC5" />
-//       <Path d="M205 153 Q216 139 229 147 Q220 161 205 153Z" fill="#7DCFC5" />
-//       <Ellipse cx="120" cy="170" rx="82" ry="5" fill="#E8C987" opacity="0.45" />
-//     </Svg>
-//   );
-// }
 export function SeaAnimalBackground({ width = "240", height = "180" }: Props) {
   return (
     <Svg
       width={width}
       height={height}
       viewBox="0 0 240 180"
-      preserveAspectRatio="xMidYMid meet"
+      preserveAspectRatio="none"
+      style={{ width: "100%", height: "100%" }}
     >
       <Defs>
         <LinearGradient id="animalUnderwater" x1="0" y1="0" x2="0" y2="1">
@@ -1227,305 +1178,14 @@ export function SeaAnimalBackground({ width = "240", height = "180" }: Props) {
   );
 }
 
-// export function BirdBackground({ width = "240", height = "180" }: Props) {
-//   return (
-//     <Svg
-//       width={width}
-//       height={height}
-//       viewBox="0 0 240 180"
-//       preserveAspectRatio="xMidYMid meet"
-//     >
-//       <Defs>
-//         <LinearGradient id="birdSky" x1="0" y1="0" x2="0" y2="1">
-//           <Stop offset="0" stopColor="#B9E1F0" />
-//           <Stop offset="1" stopColor="#E5F0E8" />
-//         </LinearGradient>
-
-//         <LinearGradient id="birdTrunk" x1="0" y1="0" x2="1" y2="0">
-//           <Stop offset="0" stopColor="#805438" />
-//           <Stop offset="0.48" stopColor="#A8734B" />
-//           <Stop offset="1" stopColor="#70472F" />
-//         </LinearGradient>
-
-//         <LinearGradient id="birdNest" x1="0" y1="0" x2="0" y2="1">
-//           <Stop offset="0" stopColor="#C69A69" />
-//           <Stop offset="1" stopColor="#936744" />
-//         </LinearGradient>
-
-//         <LinearGradient id="birdHill" x1="0" y1="0" x2="0" y2="1">
-//           <Stop offset="0" stopColor="#B7D58F" />
-//           <Stop offset="1" stopColor="#91B77D" />
-//         </LinearGradient>
-//       </Defs>
-
-//       {/* 하늘 */}
-//       <Rect width="240" height="180" fill="url(#birdSky)" />
-
-//       {/* 멀리 있는 부드러운 구름 */}
-//       <G fill="#F8FBF7" opacity={0.85}>
-//         <Path d="M0 36 Q5 28 13 33 Q17 20 27 29 Q35 26 39 36Z" />
-//         <Path d="M120 57 Q126 49 134 54 Q141 42 150 51 Q159 47 164 57Z" />
-//       </G>
-
-//       {/* 멀리 보이는 낮은 언덕 */}
-//       <Path
-//         d="M0 143 Q38 130 76 142 T151 140 T240 136
-//            L240 180 L0 180Z"
-//         fill="url(#birdHill)"
-//       />
-
-//       {/* 먼 곳의 작은 나무 실루엣 */}
-//       <G fill="#7CA47A">
-//         <Circle cx="21" cy="139" r="10" />
-//         <Circle cx="31" cy="136" r="13" />
-//         <Circle cx="42" cy="141" r="9" />
-//         <Circle cx="179" cy="139" r="10" />
-//         <Circle cx="190" cy="136" r="13" />
-//         <Circle cx="201" cy="141" r="9" />
-//       </G>
-
-//       {/* 오른쪽의 큰 나무줄기 */}
-//       <Path
-//         d="M174 180
-//            Q185 151 181 126
-//            Q178 106 161 87
-//            Q149 72 143 51
-//            Q139 39 146 31
-//            L160 25
-//            Q158 41 166 55
-//            Q177 76 190 89
-//            Q202 108 202 133
-//            Q204 157 222 180Z"
-//         fill="url(#birdTrunk)"
-//       />
-
-//       {/* 나무줄기의 밝은 면 */}
-//       <Path
-//         d="M179 174
-//            Q190 146 186 126
-//            Q184 106 170 88
-//            Q158 72 153 51
-//            Q150 41 154 34"
-//         fill="none"
-//         stroke="#C18B5D"
-//         strokeWidth={5}
-//         strokeLinecap="round"
-//       />
-
-//       {/* 나무껍질의 결 */}
-//       <G
-//         fill="none"
-//         stroke="#6E4933"
-//         strokeWidth={1.5}
-//         strokeLinecap="round"
-//         opacity={0.8}
-//       >
-//         <Path d="M193 126 Q204 132 215 128" />
-//         <Path d="M190 145 Q199 149 207 146" />
-//         <Path d="M183 161 Q191 165 199 162" />
-//       </G>
-
-//       {/* 둥지를 받치는 굵은 가지 */}
-//       <Path
-//         d="M235 145
-//            Q211 132 184 126
-//            Q158 120 132 125
-//            Q104 130 75 120
-//            Q52 114 26 117"
-//         fill="none"
-//         stroke="#754B32"
-//         strokeWidth={13}
-//         strokeLinecap="round"
-//       />
-//       <Path
-//         d="M235 140
-//            Q205 127 183 122
-//            Q155 116 132 121
-//            Q104 126 75 116
-//            Q51 110 27 113"
-//         fill="none"
-//         stroke="#A8754E"
-//         strokeWidth={7}
-//         strokeLinecap="round"
-//       />
-
-//       {/* 가지 끝의 작은 곁가지 */}
-//       <Path
-//         d="M54 114 Q43 105 38 96 M78 119 Q69 126 66 132"
-//         fill="none"
-//         stroke="#93623F"
-//         strokeWidth={4}
-//         strokeLinecap="round"
-//       />
-
-//       {/* 둥지 뒤쪽 그림자 */}
-//       <Ellipse
-//         cx="118"
-//         cy="115"
-//         rx="36"
-//         ry="10"
-//         fill="#75543D"
-//         opacity={0.22}
-//       />
-
-//       {/* 둥지 몸체 */}
-//       <Path
-//         d="M81 94
-//            Q91 87 105 91
-//            Q123 86 140 92
-//            Q154 97 153 108
-//            Q150 126 119 130
-//            Q88 127 81 110Z"
-//         fill="url(#birdNest)"
-//         stroke="#8A6040"
-//         strokeWidth={1.5}
-//       />
-
-//       {/* 둥지 안쪽 */}
-//       <Path
-//         d="M86 98
-//            Q103 104 119 101
-//            Q137 103 149 97
-//            Q145 112 120 115
-//            Q97 113 86 98Z"
-//         fill="#78543B"
-//       />
-
-//       {/* 둥지 안의 알: 새 없이도 둥지임을 알 수 있게 */}
-//       <Ellipse
-//         cx="105"
-//         cy="98"
-//         rx="6"
-//         ry="8"
-//         fill="#F8F0D8"
-//         stroke="#D8C9A9"
-//         strokeWidth={0.8}
-//       />
-//       <Ellipse
-//         cx="119"
-//         cy="96"
-//         rx="6.5"
-//         ry="9"
-//         fill="#FFF8E7"
-//         stroke="#D8C9A9"
-//         strokeWidth={0.8}
-//       />
-//       <Ellipse
-//         cx="132"
-//         cy="99"
-//         rx="5.5"
-//         ry="7"
-//         fill="#F3E7CC"
-//         stroke="#D8C9A9"
-//         strokeWidth={0.8}
-//       />
-
-//       {/* 둥지에 엮인 가지 */}
-//       <G fill="none" strokeLinecap="round" strokeLinejoin="round">
-//         <Path d="M80 96 Q100 108 151 96" stroke="#D8B27A" strokeWidth={3} />
-//         <Path d="M82 102 Q112 116 150 103" stroke="#E0BD84" strokeWidth={2.5} />
-//         <Path d="M87 111 Q114 122 145 110" stroke="#B88A58" strokeWidth={3} />
-//         <Path
-//           d="M91 92 Q82 103 92 117 M101 91 Q95 107 104 122
-//              M138 92 Q147 105 139 118"
-//           stroke="#C49A68"
-//           strokeWidth={2}
-//         />
-//         <Path
-//           d="M76 98 Q92 87 108 94 T155 97"
-//           stroke="#E4C58F"
-//           strokeWidth={3}
-//         />
-//       </G>
-
-//       {/* 둥지 앞쪽의 테두리 */}
-//       <Path
-//         d="M80 96
-//            Q99 108 119 104
-//            Q140 106 153 96"
-//         fill="none"
-//         stroke="#E3C18A"
-//         strokeWidth={4}
-//         strokeLinecap="round"
-//       />
-
-//       {/* 둥지 앞쪽으로 내려오는 잔가지 */}
-//       <Path
-//         d="M96 119 Q105 124 110 129
-//            M133 117 Q141 121 145 126"
-//         fill="none"
-//         stroke="#8B6243"
-//         strokeWidth={2.5}
-//         strokeLinecap="round"
-//       />
-
-//       {/* 위쪽 나뭇잎: 둥지를 둘러싼 수관 */}
-//       <G>
-//         <Path
-//           d="M0 0 H240 V45
-//              Q218 54 201 39
-//              Q183 54 167 38
-//              Q148 53 132 36
-//              Q111 51 94 35
-//              Q72 50 54 32
-//              Q33 43 17 29
-//              L0 35Z"
-//           fill="#6E9C59"
-//         />
-
-//         {[
-//           [12, 12, 24],
-//           [38, 17, 25],
-//           [65, 7, 28],
-//           [92, 14, 27],
-//           [120, 7, 29],
-//           [150, 15, 27],
-//           [178, 7, 31],
-//           [207, 15, 28],
-//           [233, 8, 29],
-//         ].map(([x, y, r], i) => (
-//           <Circle
-//             key={i}
-//             cx={x}
-//             cy={y}
-//             r={r}
-//             fill={i % 2 === 0 ? "#8DBB62" : "#A0C96E"}
-//           />
-//         ))}
-//       </G>
-
-//       {/* 나무 오른쪽의 작은 잎사귀 */}
-//       <G fill="#8CB66B">
-//         <Circle cx="219" cy="51" r="17" />
-//         <Circle cx="234" cy="43" r="19" />
-//         <Circle cx="227" cy="64" r="15" />
-//       </G>
-
-//       {/* 아래쪽은 작은 풀잎만 배치 */}
-//       <G fill="none" strokeLinecap="round" strokeWidth={2}>
-//         <Path
-//           d="M8 180 Q10 169 17 165 M14 180 Q22 169 29 168"
-//           stroke="#789E6D"
-//         />
-//         <Path
-//           d="M53 180 Q55 173 61 170 M59 180 Q65 174 70 174"
-//           stroke="#88AC70"
-//         />
-//         <Path
-//           d="M145 180 Q149 171 155 168 M152 180 Q159 174 164 174"
-//           stroke="#789E6D"
-//         />
-//       </G>
-//     </Svg>
-//   );
-// }
 export function BirdBackground({ width = "240", height = "180" }: Props) {
   return (
     <Svg
       width={width}
       height={height}
       viewBox="0 0 240 180"
-      preserveAspectRatio="xMidYMid meet"
+      preserveAspectRatio="none"
+      style={{ width: "100%", height: "100%" }}
     >
       <Defs>
         <LinearGradient id="birdSky" x1="0" y1="0" x2="0" y2="1">
@@ -1575,212 +1235,195 @@ export function BirdBackground({ width = "240", height = "180" }: Props) {
         <Circle cx="190" cy="136" r="13" />
         <Circle cx="201" cy="141" r="9" />
       </G>
-      {/* 둥지를 받치는 굵은 가지 (나무줄기 x=188 좌표 내부에서 자연스럽게 뻗어 나오도록 수정) */}
-      <Path
-        d="M188 128
-     Q162 120 132 125
-     Q104 130 75 120
-     Q52 114 26 117"
-        fill="none"
-        stroke="#805F4A"
-        strokeWidth={13}
-        strokeLinecap="round"
-      />
-      <Path
-        d="M186 124
-     Q159 116 132 121
-     Q104 126 75 116
-     Q51 110 27 113"
-        fill="none"
-        stroke="#B08B71"
-        strokeWidth={7}
-        strokeLinecap="round"
-      />
 
-      {/* 가지 끝의 작은 곁가지 */}
-      <Path
-        d="M54 114 Q43 105 38 96 M78 119 Q69 126 66 132"
-        fill="none"
-        stroke="#9B785E"
-        strokeWidth={4}
-        strokeLinecap="round"
-      />
-      {/* 오른쪽의 큰 나무줄기 */}
-      <Path
-        d="M174 180
-           Q185 151 181 126
-           Q178 106 161 87
-           Q149 72 143 51
-           Q139 39 146 31
-           L160 25
-           Q158 41 166 55
-           Q177 76 190 89
-           Q202 108 202 133
-           Q204 157 222 180Z"
-        fill="url(#birdTrunk)"
-      />
-
-      {/* 나무줄기의 밝은 면 */}
-      <Path
-        d="M179 174
-           Q190 146 186 126
-           Q184 106 170 88
-           Q158 72 153 51
-           Q150 41 154 34"
-        fill="none"
-        stroke="#C9A387"
-        strokeWidth={5}
-        strokeLinecap="round"
-      />
-
-      {/* 나무껍질의 결 */}
-      <G
-        fill="none"
-        stroke="#6D4F3C"
-        strokeWidth={1.5}
-        strokeLinecap="round"
-        opacity={0.65}
-      >
-        <Path d="M193 126 Q204 132 215 128" />
-        <Path d="M190 145 Q199 149 207 146" />
-        <Path d="M183 161 Q191 165 199 162" />
-      </G>
-
-      {/* 둥지를 받치는 굵은 가지 */}
-      {/* <Path
-        d="M235 145
-           Q211 132 184 126
-           Q158 120 132 125
-           Q104 130 75 120
-           Q52 114 26 117"
-        fill="none"
-        stroke="#805F4A"
-        strokeWidth={13}
-        strokeLinecap="round"
-      />
-      <Path
-        d="M235 140
-           Q205 127 183 122
-           Q155 116 132 121
-           Q104 126 75 116
-           Q51 110 27 113"
-        fill="none"
-        stroke="#B08B71"
-        strokeWidth={7}
-        strokeLinecap="round"
-      /> */}
-
-      {/* 가지 끝의 작은 곁가지 */}
-      <Path
-        d="M54 114 Q43 105 38 96 M78 119 Q69 126 66 132"
-        fill="none"
-        stroke="#9B785E"
-        strokeWidth={4}
-        strokeLinecap="round"
-      />
-
-      {/* 둥지 뒤쪽 그림자 */}
-      <Ellipse
-        cx="118"
-        cy="115"
-        rx="36"
-        ry="10"
-        fill="#755845"
-        opacity={0.18}
-      />
-
-      {/* 둥지 몸체 */}
-      <Path
-        d="M81 94
-           Q91 87 105 91
-           Q123 86 140 92
-           Q154 97 153 108
-           Q150 126 119 130
-           Q88 127 81 110Z"
-        fill="url(#birdNest)"
-        stroke="#997758"
-        strokeWidth={1.5}
-      />
-
-      {/* 둥지 안쪽 */}
-      <Path
-        d="M86 98
-           Q103 104 119 101
-           Q137 103 149 97
-           Q145 112 120 115
-           Q97 113 86 98Z"
-        fill="#83634B"
-      />
-
-      {/* 둥지 안의 알 */}
-      <Ellipse
-        cx="105"
-        cy="98"
-        rx="6"
-        ry="8"
-        fill="#FAF2E1"
-        stroke="#E2D4B9"
-        strokeWidth={0.8}
-      />
-      <Ellipse
-        cx="119"
-        cy="96"
-        rx="6.5"
-        ry="9"
-        fill="#FFFBF0"
-        stroke="#E2D4B9"
-        strokeWidth={0.8}
-      />
-      <Ellipse
-        cx="132"
-        cy="99"
-        rx="5.5"
-        ry="7"
-        fill="#F7EBD6"
-        stroke="#E2D4B9"
-        strokeWidth={0.8}
-      />
-
-      {/* 둥지에 엮인 가지 */}
-      <G fill="none" strokeLinecap="round" strokeLinejoin="round">
-        <Path d="M80 96 Q100 108 151 96" stroke="#E5C799" strokeWidth={3} />
-        <Path d="M82 102 Q112 116 150 103" stroke="#ECCF9E" strokeWidth={2.5} />
-        <Path d="M87 111 Q114 122 145 110" stroke="#C9A071" strokeWidth={3} />
+      {/* 🌳 나무와 둥지 전체를 우측으로 바싹 붙이기 위한 그룹 (transform 이동) */}
+      <G transform="translate(45, 0)">
+        {/* 둥지를 받치는 굵은 가지 */}
         <Path
-          d="M91 92 Q82 103 92 117 M101 91 Q95 107 104 122
-             M138 92 Q147 105 139 118"
-          stroke="#D4B081"
-          strokeWidth={2}
+          d="M188 128
+             Q162 120 132 125
+             Q104 130 75 120
+             Q52 114 26 117"
+          fill="none"
+          stroke="#805F4A"
+          strokeWidth={13}
+          strokeLinecap="round"
         />
         <Path
-          d="M76 98 Q92 87 108 94 T155 97"
-          stroke="#EED7AF"
-          strokeWidth={3}
+          d="M186 124
+             Q159 116 132 121
+             Q104 126 75 116
+             Q51 110 27 113"
+          fill="none"
+          stroke="#B08B71"
+          strokeWidth={7}
+          strokeLinecap="round"
         />
+
+        {/* 가지 끝의 작은 곁가지 */}
+        <Path
+          d="M54 114 Q43 105 38 96 M78 119 Q69 126 66 132"
+          fill="none"
+          stroke="#9B785E"
+          strokeWidth={4}
+          strokeLinecap="round"
+        />
+
+        {/* 오른쪽의 큰 나무줄기 */}
+        <Path
+          d="M174 180
+             Q185 151 181 126
+             Q178 106 161 87
+             Q149 72 143 51
+             Q139 39 146 31
+             L160 25
+             Q158 41 166 55
+             Q177 76 190 89
+             Q202 108 202 133
+             Q204 157 222 180Z"
+          fill="url(#birdTrunk)"
+        />
+
+        {/* 나무줄기의 밝은 면 */}
+        <Path
+          d="M179 174
+             Q190 146 186 126
+             Q184 106 170 88
+             Q158 72 153 51
+             Q150 41 154 34"
+          fill="none"
+          stroke="#C9A387"
+          strokeWidth={5}
+          strokeLinecap="round"
+        />
+
+        {/* 나무껍질의 결 */}
+        <G
+          fill="none"
+          stroke="#6D4F3C"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          opacity={0.65}
+        >
+          <Path d="M193 126 Q204 132 215 128" />
+          <Path d="M190 145 Q199 149 207 146" />
+          <Path d="M183 161 Q191 165 199 162" />
+        </G>
+
+        {/* 둥지 뒤쪽 그림자 */}
+        <Ellipse
+          cx="118"
+          cy="115"
+          rx="36"
+          ry="10"
+          fill="#755845"
+          opacity={0.18}
+        />
+
+        {/* 둥지 몸체 */}
+        <Path
+          d="M81 94
+             Q91 87 105 91
+             Q123 86 140 92
+             Q154 97 153 108
+             Q150 126 119 130
+             Q88 127 81 110Z"
+          fill="url(#birdNest)"
+          stroke="#997758"
+          strokeWidth={1.5}
+        />
+
+        {/* 둥지 안쪽 */}
+        <Path
+          d="M86 98
+             Q103 104 119 101
+             Q137 103 149 97
+             Q145 112 120 115
+             Q97 113 86 98Z"
+          fill="#83634B"
+        />
+
+        {/* 둥지 안의 알 */}
+        <Ellipse
+          cx="105"
+          cy="98"
+          rx="6"
+          ry="8"
+          fill="#FAF2E1"
+          stroke="#E2D4B9"
+          strokeWidth={0.8}
+        />
+        <Ellipse
+          cx="119"
+          cy="96"
+          rx="6.5"
+          ry="9"
+          fill="#FFFBF0"
+          stroke="#E2D4B9"
+          strokeWidth={0.8}
+        />
+        <Ellipse
+          cx="132"
+          cy="99"
+          rx="5.5"
+          ry="7"
+          fill="#F7EBD6"
+          stroke="#E2D4B9"
+          strokeWidth={0.8}
+        />
+
+        {/* 둥지에 엮인 가지 */}
+        <G fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <Path d="M80 96 Q100 108 151 96" stroke="#E5C799" strokeWidth={3} />
+          <Path
+            d="M82 102 Q112 116 150 103"
+            stroke="#ECCF9E"
+            strokeWidth={2.5}
+          />
+          <Path d="M87 111 Q114 122 145 110" stroke="#C9A071" strokeWidth={3} />
+          <Path
+            d="M91 92 Q82 103 92 117 M101 91 Q95 107 104 122
+               M138 92 Q147 105 139 118"
+            stroke="#D4B081"
+            strokeWidth={2}
+          />
+          <Path
+            d="M76 98 Q92 87 108 94 T155 97"
+            stroke="#EED7AF"
+            strokeWidth={3}
+          />
+        </G>
+
+        {/* 둥지 앞쪽의 테두리 */}
+        <Path
+          d="M80 96
+             Q99 108 119 104
+             Q140 106 153 96"
+          fill="none"
+          stroke="#EED3A5"
+          strokeWidth={4}
+          strokeLinecap="round"
+        />
+
+        {/* 둥지 앞쪽으로 내려오는 잔가지 */}
+        <Path
+          d="M96 119 Q105 124 110 129
+             M133 117 Q141 121 145 126"
+          fill="none"
+          stroke="#9B7558"
+          strokeWidth={2.5}
+          strokeLinecap="round"
+        />
+
+        {/* 나무 오른쪽의 작은 잎사귀 */}
+        <G fill="#92B877">
+          <Circle cx="219" cy="51" r="17" />
+          <Circle cx="234" cy="43" r="19" />
+          <Circle cx="227" cy="64" r="15" />
+        </G>
       </G>
 
-      {/* 둥지 앞쪽의 테두리 */}
-      <Path
-        d="M80 96
-           Q99 108 119 104
-           Q140 106 153 96"
-        fill="none"
-        stroke="#EED3A5"
-        strokeWidth={4}
-        strokeLinecap="round"
-      />
-
-      {/* 둥지 앞쪽으로 내려오는 잔가지 */}
-      <Path
-        d="M96 119 Q105 124 110 129
-           M133 117 Q141 121 145 126"
-        fill="none"
-        stroke="#9B7558"
-        strokeWidth={2.5}
-        strokeLinecap="round"
-      />
-
-      {/* 위쪽 나뭇잎 */}
+      {/* 위쪽 나뭇잎 (상단 지붕 잎사귀도 같이 살짝 우측 느낌을 맞추려면 그룹에 넣거나 유지) */}
       <G>
         <Path
           d="M0 0 H240 V45
@@ -1815,13 +1458,6 @@ export function BirdBackground({ width = "240", height = "180" }: Props) {
         ))}
       </G>
 
-      {/* 나무 오른쪽의 작은 잎사귀 */}
-      <G fill="#92B877">
-        <Circle cx="219" cy="51" r="17" />
-        <Circle cx="234" cy="43" r="19" />
-        <Circle cx="227" cy="64" r="15" />
-      </G>
-
       {/* 아래쪽 풀잎 */}
       <G fill="none" strokeLinecap="round" strokeWidth={2}>
         <Path
@@ -1841,88 +1477,1323 @@ export function BirdBackground({ width = "240", height = "180" }: Props) {
   );
 }
 /** Flower meadow for insects: no butterflies, ladybugs, or other insect-like decorations. */
+// export function InsectBackground({ width = "240", height = "180" }: Props) {
+//   return (
+//     <Svg width={width} height={height} viewBox="0 0 240 180">
+//       <Sky />
+//       <Cloud x={18} y={25} scale={0.75} />
+//       <Cloud x={164} y={22} scale={0.8} />
+//       <Path
+//         d="M0 94 Q44 71 87 91 T166 85 T240 92 L240 180 L0 180Z"
+//         fill="#A9DCA0"
+//       />
+//       <Path
+//         d="M0 120 Q47 102 100 120 T190 113 T240 119 L240 180 L0 180Z"
+//         fill="#C6E99B"
+//       />
+//       <Path
+//         d="M0 145 Q65 130 124 145 T240 138 L240 180 L0 180Z"
+//         fill="#A5D97D"
+//       />
+//       <G transform="translate(26 116)">
+//         {[0, 72, 144, 216, 288].map((a) => (
+//           <Ellipse
+//             key={a}
+//             cx="0"
+//             cy="-8"
+//             rx="4.5"
+//             ry="7"
+//             fill="#F7A7C3"
+//             transform={`rotate(${a})`}
+//           />
+//         ))}
+//         <Circle r="5" fill="#F7D76A" />
+//         <Path
+//           d="M0 6 L-2 34"
+//           stroke="#65AF6C"
+//           strokeWidth="3"
+//           strokeLinecap="round"
+//         />
+//         <Path d="M-2 22 Q-14 12 -16 23 Q-9 29 -2 22Z" fill="#79C77B" />
+//       </G>
+//       <G transform="translate(209 129)">
+//         {[0, 72, 144, 216, 288].map((a) => (
+//           <Ellipse
+//             key={a}
+//             cx="0"
+//             cy="-7"
+//             rx="4"
+//             ry="6"
+//             fill="#FFF6E5"
+//             transform={`rotate(${a})`}
+//           />
+//         ))}
+//         <Circle r="4.5" fill="#F6D35E" />
+//         <Path
+//           d="M0 5 L-2 27"
+//           stroke="#65AF6C"
+//           strokeWidth="3"
+//           strokeLinecap="round"
+//         />
+//       </G>
+//       <G transform="translate(68 145)">
+//         {[0, 72, 144, 216, 288].map((a) => (
+//           <Ellipse
+//             key={a}
+//             cx="0"
+//             cy="-6"
+//             rx="4"
+//             ry="5.5"
+//             fill="#F7D76A"
+//             transform={`rotate(${a})`}
+//           />
+//         ))}
+//         <Circle r="4" fill="#FFF0B2" />
+//         <Path
+//           d="M0 5 L2 21"
+//           stroke="#65AF6C"
+//           strokeWidth="3"
+//           strokeLinecap="round"
+//         />
+//       </G>
+//       <Grass x={7} y={169} color="#6DBB69" />
+//       <Grass x={125} y={163} color="#7FC774" />
+//       <Grass x={230} y={167} color="#6DBB69" />
+//     </Svg>
+//   );
+// }
+
+// export function InsectBackground({ width = "240", height = "180" }: Props) {
+//   return (
+//     <Svg width={width} height={height} viewBox="0 0 240 180">
+//       <Defs>
+//         <LinearGradient id="insectSky" x1="0" y1="0" x2="0" y2="1">
+//           <Stop offset="0" stopColor="#76C9E8" />
+//           <Stop offset="1" stopColor="#D6F0D0" />
+//         </LinearGradient>
+
+//         <LinearGradient id="bark" x1="0" y1="0" x2="1" y2="0">
+//           <Stop offset="0" stopColor="#795137" />
+//           <Stop offset="0.38" stopColor="#C99A68" />
+//           <Stop offset="0.68" stopColor="#E0B782" />
+//           <Stop offset="1" stopColor="#96613E" />
+//         </LinearGradient>
+
+//         <LinearGradient id="forestSoil" x1="0" y1="0" x2="0" y2="1">
+//           <Stop offset="0" stopColor="#6C963D" />
+//           <Stop offset="0.3" stopColor="#8D9D4E" />
+//           <Stop offset="1" stopColor="#66503B" />
+//         </LinearGradient>
+
+//         <LinearGradient id="leafLight" x1="0" y1="0" x2="1" y2="1">
+//           <Stop offset="0" stopColor="#B8E86D" />
+//           <Stop offset="0.55" stopColor="#6DC44C" />
+//           <Stop offset="1" stopColor="#358C40" />
+//         </LinearGradient>
+
+//         <LinearGradient id="leafDark" x1="0" y1="0" x2="1" y2="1">
+//           <Stop offset="0" stopColor="#66C85B" />
+//           <Stop offset="1" stopColor="#217744" />
+//         </LinearGradient>
+//       </Defs>
+
+//       {/* 먼 하늘과 숲 */}
+//       <Rect width="240" height="180" fill="url(#insectSky)" />
+
+//       <Path
+//         d="M0 72 Q22 48 47 61 T94 55
+//            Q119 48 141 67 T190 55 L240 69
+//            L240 125 L0 125Z"
+//         fill="#73A85A"
+//       />
+//       <Path
+//         d="M0 89 Q29 69 53 83 T106 76
+//            Q132 65 160 84 T211 77 L240 84
+//            L240 139 L0 139Z"
+//         fill="#477E49"
+//       />
+
+//       {/* 뒤쪽 숲의 어두운 틈 */}
+//       <Path
+//         d="M83 25 Q105 36 118 64
+//            L138 92 L164 106 L240 98
+//            L240 145 L69 145Z"
+//         fill="#315F3D"
+//         opacity={0.72}
+//       />
+
+//       {/* 오른쪽 위로 뻗은 굵은 가지 */}
+//       <Path
+//         d="M25 53
+//            Q70 43 103 16
+//            Q121 2 144 -4
+//            L158 3
+//            Q128 13 113 31
+//            Q77 58 39 73Z"
+//         fill="#795037"
+//         stroke="#62402F"
+//         strokeWidth={1.5}
+//       />
+//       <Path
+//         d="M38 54 Q80 39 111 15 Q125 5 141 1"
+//         fill="none"
+//         stroke="#C99B68"
+//         strokeWidth={4}
+//         strokeLinecap="round"
+//       />
+
+//       {/* 왼쪽을 가득 채우는 나무줄기 */}
+//       <Path
+//         d="M0 0
+//            L76 0
+//            Q70 17 76 35
+//            Q80 49 72 66
+//            Q65 83 75 103
+//            L68 124
+//            Q72 145 63 180
+//            L0 180Z"
+//         fill="url(#bark)"
+//         stroke="#805638"
+//         strokeWidth={1.4}
+//       />
+
+//       {/* 나무껍질의 굵고 불규칙한 결 */}
+//       <G fill="none" strokeLinecap="round" strokeLinejoin="round">
+//         <Path
+//           d="M12 -4 Q18 15 13 31 T17 66
+//              Q12 84 17 103 T12 143 L16 181"
+//           stroke="#795035"
+//           strokeWidth={2.3}
+//         />
+//         <Path
+//           d="M29 -3 Q25 19 31 35
+//              L27 52 Q34 67 29 83
+//              L35 103 Q28 124 32 143 L27 180"
+//           stroke="#E5BD8B"
+//           strokeWidth={2.2}
+//         />
+//         <Path
+//           d="M47 0 Q43 20 49 38
+//              Q42 52 49 68 L45 87
+//              Q51 105 45 125 T48 158 L44 180"
+//           stroke="#936440"
+//           strokeWidth={2}
+//         />
+//         <Path
+//           d="M62 0 L59 19 Q65 30 59 46
+//              L64 65 Q56 81 63 96"
+//           stroke="#F0CB97"
+//           strokeWidth={1.8}
+//         />
+//         <Path
+//           d="M7 45 L21 39 M32 72 L43 66
+//              M15 115 L24 108 M40 137 L51 131
+//              M8 158 L21 151"
+//           stroke="#A9784C"
+//           strokeWidth={1.5}
+//         />
+//         <Path
+//           d="M21 7 L24 18 M53 24 L56 35
+//              M19 82 L23 93 M54 110 L57 119"
+//           stroke="#66442F"
+//           strokeWidth={1.2}
+//         />
+//       </G>
+
+//       {/* 나무 밑동이 바닥으로 넓어지는 형태 */}
+//       <Path
+//         d="M0 120
+//            Q19 114 37 126
+//            Q48 137 66 131
+//            Q75 125 86 136
+//            L98 180 L0 180Z"
+//         fill="#8B6242"
+//       />
+//       <Path
+//         d="M0 139 Q20 130 37 140
+//            Q50 147 69 139 L83 180 L0 180Z"
+//         fill="#A77A50"
+//       />
+
+//       {/* 위쪽을 덮는 거대한 잎 */}
+//       <Path
+//         d="M90 4
+//            Q120 1 157 21
+//            Q174 33 181 49
+//            Q147 44 123 30
+//            Q104 19 90 4Z"
+//         fill="url(#leafDark)"
+//         stroke="#2C7D40"
+//         strokeWidth={1.2}
+//       />
+//       <Path
+//         d="M93 5 Q131 22 171 45"
+//         fill="none"
+//         stroke="#B7E77A"
+//         strokeWidth={1.7}
+//       />
+//       <Path
+//         d="M124 20 L124 31 M143 29 L143 37 M157 37 L159 43"
+//         fill="none"
+//         stroke="#3F9548"
+//         strokeWidth={1.1}
+//       />
+
+//       {/* 오른쪽 위에서 내려오는 큰 잎 */}
+//       <Path
+//         d="M240 0
+//            L240 68
+//            Q220 66 207 51
+//            Q193 34 190 9
+//            L203 0Z"
+//         fill="url(#leafLight)"
+//         stroke="#347E3B"
+//         strokeWidth={1.3}
+//       />
+//       <Path
+//         d="M207 3 Q216 34 237 58"
+//         fill="none"
+//         stroke="#E0F3A0"
+//         strokeWidth={2}
+//       />
+//       <Path
+//         d="M214 22 L202 16 M221 35 L207 30
+//            M229 47 L218 43"
+//         fill="none"
+//         stroke="#4A9C46"
+//         strokeWidth={1.2}
+//       />
+
+//       <Path
+//         d="M240 25
+//            Q214 28 196 48
+//            Q182 64 178 84
+//            Q204 75 222 56
+//            Q235 43 240 25Z"
+//         fill="#6FCE55"
+//         stroke="#348746"
+//         strokeWidth={1.2}
+//       />
+//       <Path
+//         d="M237 29 Q208 54 184 78"
+//         fill="none"
+//         stroke="#D0EE8D"
+//         strokeWidth={1.7}
+//       />
+//       <Path
+//         d="M219 46 L218 60 M204 59 L207 69"
+//         fill="none"
+//         stroke="#3F9748"
+//         strokeWidth={1.1}
+//       />
+
+//       {/* 왼쪽 나무에서 자라는 넓은 잎 */}
+//       <Path
+//         d="M69 75
+//            Q91 62 107 78
+//            Q112 93 101 111
+//            Q84 100 69 75Z"
+//         fill="url(#leafLight)"
+//         stroke="#398649"
+//         strokeWidth={1.2}
+//       />
+//       <Path
+//         d="M72 77 Q89 91 100 106"
+//         fill="none"
+//         stroke="#D4F09B"
+//         strokeWidth={1.7}
+//       />
+
+//       <Path
+//         d="M73 100
+//            Q93 87 111 101
+//            Q122 116 116 135
+//            Q93 126 73 100Z"
+//         fill="#48A94F"
+//         stroke="#2E8041"
+//         strokeWidth={1.2}
+//       />
+//       <Path
+//         d="M76 102 Q98 117 114 131"
+//         fill="none"
+//         stroke="#A7DF75"
+//         strokeWidth={1.6}
+//       />
+
+//       {/* 오른쪽 아래의 넓은 잎 */}
+//       <Path
+//         d="M240 79
+//            Q219 69 199 84
+//            Q185 97 184 115
+//            Q209 111 227 98
+//            Q237 89 240 79Z"
+//         fill="#88D65D"
+//         stroke="#3B9145"
+//         strokeWidth={1.3}
+//       />
+//       <Path
+//         d="M238 82 Q214 97 190 111"
+//         fill="none"
+//         stroke="#D2F19A"
+//         strokeWidth={1.7}
+//       />
+
+//       {/* 화면 아래를 차지하는 가까운 흙과 숲 바닥 */}
+//       <Path
+//         d="M0 133
+//            Q29 124 54 136
+//            Q76 145 102 137
+//            Q129 128 153 138
+//            Q179 145 201 132
+//            Q222 124 240 134
+//            L240 180 L0 180Z"
+//         fill="url(#forestSoil)"
+//       />
+
+//       {/* 바닥 위의 이끼 낀 흙 */}
+//       <Path
+//         d="M0 149
+//            Q27 137 53 146
+//            Q79 155 108 147
+//            Q139 137 163 149
+//            Q196 158 219 143
+//            L240 146 L240 180 L0 180Z"
+//         fill="#8E9D4C"
+//       />
+
+//       <Path
+//         d="M0 164
+//            Q36 150 65 163
+//            Q97 174 127 161
+//            Q158 151 187 165
+//            Q217 175 240 158
+//            L240 180 L0 180Z"
+//         fill="#6F583F"
+//       />
+
+//       {/* 바닥의 흙결 */}
+//       <G fill="none" strokeLinecap="round" strokeWidth={1.4}>
+//         <Path
+//           d="M15 159 Q27 154 38 159
+//              M79 167 Q92 161 105 166
+//              M151 155 Q164 151 175 156
+//              M204 169 Q218 162 230 164"
+//           stroke="#B3B46B"
+//         />
+//         <Path
+//           d="M28 174 L40 171
+//              M119 174 L133 170
+//              M179 176 L190 172"
+//           stroke="#4F4837"
+//         />
+//       </G>
+
+//       {/* 왼쪽 아래의 가까운 이끼 바위 */}
+//       <Path
+//         d="M0 120
+//            Q5 114 14 118
+//            Q21 111 30 118
+//            Q39 115 44 124
+//            L51 140
+//            Q35 146 20 139
+//            Q8 143 0 136Z"
+//         fill="#A9B3A7"
+//         stroke="#6F8174"
+//         strokeWidth={1.3}
+//       />
+//       <Path
+//         d="M2 124 Q9 117 15 123
+//            M19 122 Q27 118 32 126
+//            M12 134 Q23 130 31 137"
+//         fill="none"
+//         stroke="#DDE2D3"
+//         strokeWidth={2}
+//         strokeLinecap="round"
+//       />
+
+//       {/* 오른쪽 아래의 큰 바위 */}
+//       <Path
+//         d="M193 135
+//            Q198 125 207 129
+//            Q215 123 222 132
+//            Q233 128 240 139
+//            L240 158
+//            Q224 163 211 156
+//            Q200 159 193 149Z"
+//         fill="#A7B0A4"
+//         stroke="#6B7C70"
+//         strokeWidth={1.3}
+//       />
+//       <Path
+//         d="M200 137 Q207 131 213 138
+//            M218 136 Q227 132 234 142
+//            M207 149 Q217 145 226 152"
+//         fill="none"
+//         stroke="#DCE0D3"
+//         strokeWidth={1.8}
+//         strokeLinecap="round"
+//       />
+
+//       {/* 바닥에 붙은 큰 잎: 전경의 원근감 */}
+//       <Path
+//         d="M51 180
+//            Q61 155 86 149
+//            Q79 166 69 180Z"
+//         fill="#3D9146"
+//         stroke="#286E39"
+//         strokeWidth={1.2}
+//       />
+//       <Path
+//         d="M54 178 Q68 162 82 153"
+//         fill="none"
+//         stroke="#A9D875"
+//         strokeWidth={1.4}
+//       />
+
+//       <Path
+//         d="M126 180
+//            Q134 157 160 153
+//            Q152 171 143 180Z"
+//         fill="#4BA24B"
+//         stroke="#307C3C"
+//         strokeWidth={1.2}
+//       />
+//       <Path
+//         d="M130 178 Q144 164 156 156"
+//         fill="none"
+//         stroke="#B8DF78"
+//         strokeWidth={1.4}
+//       />
+
+//       {/* 작은 잔디는 가장자리만 */}
+//       <Path
+//         d="M0 151 Q5 140 9 135 Q8 146 13 150
+//            Q16 139 20 137 Q18 149 22 153"
+//         fill="#4B983F"
+//       />
+//       <Path
+//         d="M231 145 Q232 135 238 130
+//            Q235 142 240 145"
+//         fill="#3E8B3D"
+//       />
+//     </Svg>
+//   );
+// }
+// export function InsectBackground({ width = "240", height = "180" }: Props) {
+//   // 🌿 잔디가 배치될 바닥 영역 데이터 배열 (랜덤 느낌을 위한 임의 좌표들)
+//   const FLOOR_GRASS_DATA = [
+//     // [x, y, scale, opacity, isPattern2]
+//     // 왼쪽 앞쪽
+//     [15, 155, 1.1, 1, false],
+//     [35, 160, 0.9, 0.9, true],
+//     [55, 158, 1, 1, false],
+//     [10, 168, 0.9, 0.85, true],
+//     [28, 172, 1, 1, false],
+//     [48, 170, 0.9, 0.9, true],
+//     [5, 178, 1.1, 0.9, false],
+//     [22, 180, 1, 1, false],
+//     [42, 178, 0.9, 0.85, true],
+//     // 중앙 앞쪽
+//     [75, 152, 1, 1, false],
+//     [95, 158, 0.9, 0.9, true],
+//     [115, 155, 1.1, 1, false],
+//     [70, 165, 0.9, 0.85, true],
+//     [90, 170, 1, 1, false],
+//     [110, 168, 1.1, 0.9, true],
+//     [65, 175, 1, 1, false],
+//     [85, 180, 0.9, 0.85, true],
+//     [105, 178, 1, 1, false],
+//     // 오른쪽 앞쪽
+//     [135, 155, 1.1, 1, false],
+//     [155, 160, 0.9, 0.9, true],
+//     [175, 158, 1, 1, false],
+//     [130, 168, 0.9, 0.85, true],
+//     [150, 172, 1, 1, false],
+//     [170, 170, 0.9, 0.9, true],
+//     [125, 178, 1.1, 0.9, false],
+//     [142, 180, 1, 1, false],
+//     [162, 178, 0.9, 0.85, true],
+//     // 뒤쪽 라인
+//     [195, 152, 1, 1, false],
+//     [215, 158, 0.9, 0.9, true],
+//     [235, 155, 1.1, 1, false],
+//     [190, 165, 0.9, 0.85, true],
+//     [210, 170, 1, 1, false],
+//     [230, 168, 1.1, 0.9, true],
+//     [185, 175, 1, 1, false],
+//     [205, 180, 0.9, 0.85, true],
+//     [225, 178, 1, 1, false],
+//     [180, 160, 0.9, 0.8, false],
+//     [200, 165, 1, 1, true],
+//     [220, 160, 0.9, 0.9, false],
+//   ] as const;
+//   return (
+//     <Svg
+//       width={width}
+//       height={height}
+//       viewBox="0 0 240 180"
+//       preserveAspectRatio="xMidYMid meet"
+//     >
+//       <Defs>
+//         <LinearGradient id="insectSky" x1="0" y1="0" x2="0" y2="1">
+//           <Stop offset="0" stopColor="#BFE3EC" />
+//           <Stop offset="1" stopColor="#E2EFE0" />
+//         </LinearGradient>
+
+//         <LinearGradient id="bark" x1="0" y1="0" x2="1" y2="0">
+//           <Stop offset="0" stopColor="#8C6347" />
+//           <Stop offset="0.38" stopColor="#C99E75" />
+//           <Stop offset="0.68" stopColor="#DFC399" />
+//           <Stop offset="1" stopColor="#A47552" />
+//         </LinearGradient>
+
+//         <LinearGradient id="forestSoil" x1="0" y1="0" x2="0" y2="1">
+//           <Stop offset="0" stopColor="#85A85C" />
+//           <Stop offset="0.3" stopColor="#9AB067" />
+//           <Stop offset="1" stopColor="#7E6852" />
+//         </LinearGradient>
+
+//         <LinearGradient id="leafLight" x1="0" y1="0" x2="1" y2="1">
+//           <Stop offset="0" stopColor="#C4E887" />
+//           <Stop offset="0.55" stopColor="#87CF6B" />
+//           <Stop offset="1" stopColor="#55A161" />
+//         </LinearGradient>
+
+//         <LinearGradient id="leafDark" x1="0" y1="0" x2="1" y2="1">
+//           <Stop offset="0" stopColor="#8AD97D" />
+//           <Stop offset="1" stopColor="#3F8F5F" />
+//         </LinearGradient>
+//       </Defs>
+
+//       {/* 먼 하늘과 숲 */}
+//       <Rect width="240" height="180" fill="url(#insectSky)" />
+
+//       <Path
+//         d="M0 72 Q22 48 47 61 T94 55
+//             Q119 48 141 67 T190 55 L240 69
+//             L240 125 L0 125Z"
+//         fill="#8CB874"
+//       />
+//       <Path
+//         d="M0 89 Q29 69 53 83 T106 76
+//             Q132 65 160 84 T211 77 L240 84
+//             L240 139 L0 139Z"
+//         fill="#669968"
+//       />
+
+//       {/* 뒤쪽 숲의 어두운 틈 */}
+//       <Path
+//         d="M83 25 Q105 36 118 64
+//             L138 92 L164 106 L240 98
+//             L240 145 L69 145Z"
+//         fill="#4D7757"
+//         opacity={0.72}
+//       />
+
+//       {/* 오른쪽 위로 뻗은 굵은 가지 */}
+//       <Path
+//         d="M25 53
+//             Q70 43 103 16
+//             Q121 2 144 -4
+//             L158 3
+//             Q128 13 113 31
+//             Q77 58 39 73Z"
+//         fill="#896147"
+//         stroke="#734F37"
+//         strokeWidth={1.5}
+//       />
+//       <Path
+//         d="M38 54 Q80 39 111 15 Q125 5 141 1"
+//         fill="none"
+//         stroke="#D4AB7B"
+//         strokeWidth={4}
+//         strokeLinecap="round"
+//       />
+
+//       {/* 왼쪽을 가득 채우는 나무줄기 */}
+//       <Path
+//         d="M0 0
+//             L76 0
+//             Q70 17 76 35
+//             Q80 49 72 66
+//             Q65 83 75 103
+//             L68 124
+//             Q72 145 63 180
+//             L0 180Z"
+//         fill="url(#bark)"
+//         stroke="#916645"
+//         strokeWidth={1.4}
+//       />
+
+//       {/* 나무껍질의 굵고 불규칙한 결 */}
+//       <G fill="none" strokeLinecap="round" strokeLinejoin="round">
+//         <Path
+//           d="M12 -4 Q18 15 13 31 T17 66
+//               Q12 84 17 103 T12 143 L16 181"
+//           stroke="#8A5E3F"
+//           strokeWidth={2.3}
+//         />
+//         <Path
+//           d="M29 -3 Q25 19 31 35
+//               L27 52 Q34 67 29 83
+//               L35 103 Q28 124 32 143 L27 180"
+//           stroke="#ECCCA4"
+//           strokeWidth={2.2}
+//         />
+//         <Path
+//           d="M47 0 Q43 20 49 38
+//               Q42 52 49 68 L45 87
+//               Q51 105 45 125 T48 158 L44 180"
+//           stroke="#A67850"
+//           strokeWidth={2}
+//         />
+//         <Path
+//           d="M62 0 L59 19 Q65 30 59 46
+//               L64 65 Q56 81 63 96"
+//           stroke="#F5DEC0"
+//           strokeWidth={1.8}
+//         />
+//         <Path
+//           d="M7 45 L21 39 M32 72 L43 66
+//               M15 115 L24 108 M40 137 L51 131
+//               M8 158 L21 151"
+//           stroke="#BC8C60"
+//           strokeWidth={1.5}
+//         />
+//         <Path
+//           d="M21 7 L24 18 M53 24 L56 35
+//               M19 82 L23 93 M54 110 L57 119"
+//           stroke="#734F36"
+//           strokeWidth={1.2}
+//         />
+//       </G>
+
+//       {/* 나무 밑동이 바닥으로 넓어지는 형태 */}
+//       <Path
+//         d="M0 120
+//             Q19 114 37 126
+//             Q48 137 66 131
+//             Q75 125 86 136
+//             L98 180 L0 180Z"
+//         fill="#9C7351"
+//       />
+//       <Path
+//         d="M0 139 Q20 130 37 140
+//             Q50 147 69 139 L83 180 L0 180Z"
+//         fill="#B88E65"
+//       />
+
+//       {/* 위쪽을 덮는 거대한 잎 */}
+//       {/* <Path
+//         d="M90 4
+//             Q120 1 157 21
+//             Q174 33 181 49
+//             Q147 44 123 30
+//             Q104 19 90 4Z"
+//         fill="url(#leafDark)"
+//         stroke="#458C5A"
+//         strokeWidth={1.2}
+//       />
+//       <Path
+//         d="M93 5 Q131 22 171 45"
+//         fill="none"
+//         stroke="#CEEE96"
+//         strokeWidth={1.7}
+//       />
+//       <Path
+//         d="M124 20 L124 31 M143 29 L143 37 M157 37 L159 43"
+//         fill="none"
+//         stroke="#5DA76A"
+//         strokeWidth={1.1}
+//       /> */}
+
+//       {/* 오른쪽 위에서 내려오는 큰 잎 */}
+//       {/* <Path
+//         d="M240 0
+//             L240 68
+//             Q220 66 207 51
+//             Q193 34 190 9
+//             L203 0Z"
+//         fill="url(#leafLight)"
+//         stroke="#4E9457"
+//         strokeWidth={1.3}
+//       />
+//       <Path
+//         d="M207 3 Q216 34 237 58"
+//         fill="none"
+//         stroke="#ECF8BA"
+//         strokeWidth={2}
+//       />
+//       <Path
+//         d="M214 22 L202 16 M221 35 L207 30
+//             M229 47 L218 43"
+//         fill="none"
+//         stroke="#68B066"
+//         strokeWidth={1.2}
+//       />
+
+//       <Path
+//         d="M240 25
+//             Q214 28 196 48
+//             Q182 64 178 84
+//             Q204 75 222 56
+//             Q235 43 240 25Z"
+//         fill="#82D86C"
+//         stroke="#4E9C60"
+//         strokeWidth={1.2}
+//       />
+//       <Path
+//         d="M237 29 Q208 54 184 78"
+//         fill="none"
+//         stroke="#E2F5AA"
+//         strokeWidth={1.7}
+//       />
+//       <Path
+//         d="M219 46 L218 60 M204 59 L207 69"
+//         fill="none"
+//         stroke="#5EA76A"
+//         strokeWidth={1.1}
+//       /> */}
+
+//       {/* 왼쪽 나무에서 자라는 넓은 잎 */}
+//       {/* <Path
+//         d="M69 75
+//             Q91 62 107 78
+//             Q112 93 101 111
+//             Q84 100 69 75Z"
+//         fill="url(#leafLight)"
+//         stroke="#549C63"
+//         strokeWidth={1.2}
+//       />
+//       <Path
+//         d="M72 77 Q89 91 100 106"
+//         fill="none"
+//         stroke="#E2F5B2"
+//         strokeWidth={1.7}
+//       />
+
+//       <Path
+//         d="M73 100
+//             Q93 87 111 101
+//             Q122 116 116 135
+//             Q93 126 73 100Z"
+//         fill="#61BA69"
+//         stroke="#448F57"
+//         strokeWidth={1.2}
+//       />
+//       <Path
+//         d="M76 102 Q98 117 114 131"
+//         fill="none"
+//         stroke="#C0EC93"
+//         strokeWidth={1.6}
+//       /> */}
+
+//       {/* 오른쪽 아래의 넓은 잎 */}
+//       {/* <Path
+//         d="M240 79
+//             Q219 69 199 84
+//             Q185 97 184 115
+//             Q209 111 227 98
+//             Q237 89 240 79Z"
+//         fill="#9DE175"
+//         stroke="#52A160"
+//         strokeWidth={1.3}
+//       />
+//       <Path
+//         d="M238 82 Q214 97 190 111"
+//         fill="none"
+//         stroke="#E4F7B2"
+//         strokeWidth={1.7}
+//       /> */}
+
+//       {/* 화면 아래를 차지하는 가까운 흙과 숲 바닥 */}
+//       <Path
+//         d="M0 133
+//             Q29 124 54 136
+//             Q76 145 102 137
+//             Q129 128 153 138
+//             Q179 145 201 132
+//             Q222 124 240 134
+//             L240 180 L0 180Z"
+//         fill="url(#forestSoil)"
+//       />
+
+//       {/* 바닥 위의 이끼 낀 흙 */}
+//       <Path
+//         d="M0 149
+//             Q27 137 53 146
+//             Q79 155 108 147
+//             Q139 137 163 149
+//             Q196 158 219 143
+//             L240 146 L240 180 L0 180Z"
+//         fill="#9AB067"
+//       />
+
+//       <Path
+//         d="M0 164
+//             Q36 150 65 163
+//             Q97 174 127 161
+//             Q158 151 187 165
+//             Q217 175 240 158
+//             L240 180 L0 180Z"
+//         fill="#7E6852"
+//       />
+
+//       {/* 바닥의 흙결 */}
+//       <G fill="none" strokeLinecap="round" strokeWidth={1.4}>
+//         <Path
+//           d="M15 159 Q27 154 38 159
+//               M79 167 Q92 161 105 166
+//               M151 155 Q164 151 175 156
+//               M204 169 Q218 162 230 164"
+//           stroke="#C4C58B"
+//         />
+//         <Path
+//           d="M28 174 L40 171
+//               M119 174 L133 170
+//               M179 176 L190 172"
+//           stroke="#685E4B"
+//         />
+//       </G>
+
+//       {/* 왼쪽 아래의 가까운 이끼 바위 */}
+//       <Path
+//         d="M0 120
+//             Q5 114 14 118
+//             Q21 111 30 118
+//             Q39 115 44 124
+//             L51 140
+//             Q35 146 20 139
+//             Q8 143 0 136Z"
+//         fill="#B4BEB2"
+//         stroke="#7F9285"
+//         strokeWidth={1.3}
+//       />
+//       <Path
+//         d="M2 124 Q9 117 15 123
+//             M19 122 Q27 118 32 126
+//             M12 134 Q23 130 31 137"
+//         fill="none"
+//         stroke="#E6EBE1"
+//         strokeWidth={2}
+//         strokeLinecap="round"
+//       />
+
+//       {/* 오른쪽 아래의 큰 바위 */}
+//       <Path
+//         d="M193 135
+//             Q198 125 207 129
+//             Q215 123 222 132
+//             Q233 128 240 139
+//             L240 158
+//             Q224 163 211 156
+//             Q200 159 193 149Z"
+//         fill="#B2BBAF"
+//         stroke="#7B8C80"
+//         strokeWidth={1.3}
+//       />
+//       <Path
+//         d="M200 137 Q207 131 213 138
+//             M218 136 Q227 132 234 142
+//             M207 149 Q217 145 226 152"
+//         fill="none"
+//         stroke="#E4E8DF"
+//         strokeWidth={1.8}
+//         strokeLinecap="round"
+//       />
+
+//       {/* 바닥에 붙은 큰 잎: 전경의 원근감 */}
+//       {/* <Path
+//         d="M51 180
+//             Q61 155 86 149
+//             Q79 166 69 180Z"
+//         fill="#55A15F"
+//         stroke="#3A824A"
+//         strokeWidth={1.2}
+//       />
+//       <Path
+//         d="M54 178 Q68 162 82 153"
+//         fill="none"
+//         stroke="#C0E58F"
+//         strokeWidth={1.4}
+//       />
+
+//       <Path
+//         d="M126 180
+//             Q134 157 160 153
+//             Q152 171 143 180Z"
+//         fill="#63B363"
+//         stroke="#438E4F"
+//         strokeWidth={1.2}
+//       />
+//       <Path
+//         d="M130 178 Q144 164 156 156"
+//         fill="none"
+//         stroke="#CCECA0"
+//         strokeWidth={1.4}
+//       /> */}
+//       {/* 🌿 바닥 전체에 깔리는 작은 잔디 그룹 */}
+//       <G>
+//         {FLOOR_GRASS_DATA.map(([x, y, scale, opacity, isPattern2], i) => (
+//           <G
+//             key={i}
+//             transform={`translate(${x}, ${y}) scale(${scale})`}
+//             opacity={opacity}
+//           >
+//             {isPattern2 ? (
+//               // 🌿 잔디 모양 패턴 2 (기존 오른쪽 잔디)
+//               <Path d="M-5 -5 Q-4 -15 2 -20 Q-1 -8 4 -5" fill="#559D56" />
+//             ) : (
+//               // 🌿 잔디 모양 패턴 1 (기존 왼쪽 잔디)
+//               <Path
+//                 d="M-11 -2 Q-6 -13 -2 -18 Q-3 -7 2 -3 Q5 -14 9 -16 Q7 -4 11 0"
+//                 fill="#63A859"
+//               />
+//             )}
+//           </G>
+//         ))}
+//       </G>
+//       {/* 작은 잔디는 가장자리만 */}
+//       {/* <Path
+//         d="M0 151 Q5 140 9 135 Q8 146 13 150
+//             Q16 139 20 137 Q18 149 22 153"
+//         fill="#63A859"
+//       />
+//       <Path
+//         d="M231 145 Q232 135 238 130
+//             Q235 142 240 145"
+//         fill="#559D56"
+//       /> */}
+//     </Svg>
+//   );
+// }
 export function InsectBackground({ width = "240", height = "180" }: Props) {
+  // 🌿 잔디 데이터 (TypeScript as const 유지)
+  const FLOOR_GRASS_DATA = [
+    // 왼쪽 앞쪽
+    [15, 155, 1.1, 1, false],
+    [35, 160, 0.9, 0.9, true],
+    [55, 158, 1, 1, false],
+    [10, 168, 0.9, 0.85, true],
+    [28, 172, 1, 1, false],
+    [48, 170, 0.9, 0.9, true],
+    [5, 178, 1.1, 0.9, false],
+    [22, 180, 1, 1, false],
+    [42, 178, 0.9, 0.85, true],
+    // 중앙 앞쪽
+    [75, 152, 1, 1, false],
+    [95, 158, 0.9, 0.9, true],
+    [115, 155, 1.1, 1, false],
+    [70, 165, 0.9, 0.85, true],
+    [90, 170, 1, 1, false],
+    [110, 168, 1.1, 0.9, true],
+    [65, 175, 1, 1, false],
+    [85, 180, 0.9, 0.85, true],
+    [105, 178, 1, 1, false],
+    // 오른쪽 앞쪽
+    [135, 155, 1.1, 1, false],
+    [155, 160, 0.9, 0.9, true],
+    [175, 158, 1, 1, false],
+    [130, 168, 0.9, 0.85, true],
+    [150, 172, 1, 1, false],
+    [170, 170, 0.9, 0.9, true],
+    [125, 178, 1.1, 0.9, false],
+    [142, 180, 1, 1, false],
+    [162, 178, 0.9, 0.85, true],
+    // 뒤쪽 라인
+    [195, 152, 1, 1, false],
+    [215, 158, 0.9, 0.9, true],
+    [235, 155, 1.1, 1, false],
+    [190, 165, 0.9, 0.85, true],
+    [210, 170, 1, 1, false],
+    [230, 168, 1.1, 0.9, true],
+    [185, 175, 1, 1, false],
+    [205, 180, 0.9, 0.85, true],
+    [225, 178, 1, 1, false],
+    [180, 160, 0.9, 0.8, false],
+    [200, 165, 1, 1, true],
+    [220, 160, 0.9, 0.9, false],
+  ] as const;
+
   return (
-    <Svg width={width} height={height} viewBox="0 0 240 180">
-      <Sky />
-      <Cloud x={18} y={25} scale={0.75} />
-      <Cloud x={164} y={22} scale={0.8} />
+    <Svg
+      width={width}
+      height={height}
+      viewBox="0 0 240 180"
+      preserveAspectRatio="none"
+      style={{ width: "100%", height: "100%" }}
+    >
+      <Defs>
+        <LinearGradient id="insectSky" x1="0" y1="0" x2="0" y2="1">
+          <Stop offset="0" stopColor="#CBEBF3" />
+          <Stop offset="1" stopColor="#EBF3E8" />
+        </LinearGradient>
+
+        <LinearGradient id="bark" x1="0" y1="0" x2="1" y2="0">
+          <Stop offset="0" stopColor="#9E7B62" />
+          <Stop offset="0.38" stopColor="#D8B892" />
+          <Stop offset="0.68" stopColor="#EAD2B2" />
+          <Stop offset="1" stopColor="#B28C70" />
+        </LinearGradient>
+
+        <LinearGradient id="forestSoil" x1="0" y1="0" x2="0" y2="1">
+          <Stop offset="0" stopColor="#9EC27A" />
+          <Stop offset="0.3" stopColor="#B0C482" />
+          <Stop offset="1" stopColor="#927D65" />
+        </LinearGradient>
+      </Defs>
+
+      {/* 먼 하늘과 숲 */}
+      <Rect width="240" height="180" fill="url(#insectSky)" />
+
       <Path
-        d="M0 94 Q44 71 87 91 T166 85 T240 92 L240 180 L0 180Z"
-        fill="#A9DCA0"
+        d="M0 72 Q22 48 47 61 T94 55
+            Q119 48 141 67 T190 55 L240 69
+            L240 125 L0 125Z"
+        fill="#9EC88A"
       />
       <Path
-        d="M0 120 Q47 102 100 120 T190 113 T240 119 L240 180 L0 180Z"
-        fill="#C6E99B"
+        d="M0 89 Q29 69 53 83 T106 76
+            Q132 65 160 84 T211 77 L240 84
+            L240 139 L0 139Z"
+        fill="#7EA87D"
+      />
+
+      {/* 뒤쪽 숲의 어두운 틈 */}
+      <Path
+        d="M83 25 Q105 36 118 64
+            L138 92 L164 106 L240 98
+            L240 145 L69 145Z"
+        fill="#618A6A"
+        opacity={0.6}
+      />
+
+      {/* 오른쪽 위로 뻗은 굵은 가지 */}
+      <Path
+        d="M25 53
+            Q70 43 103 16
+            Q121 2 144 -4
+            L158 3
+            Q128 13 113 31
+            Q77 58 39 73Z"
+        fill="#9C775D"
+        stroke="#84624B"
+        strokeWidth={1.5}
       />
       <Path
-        d="M0 145 Q65 130 124 145 T240 138 L240 180 L0 180Z"
-        fill="#A5D97D"
+        d="M38 54 Q80 39 111 15 Q125 5 141 1"
+        fill="none"
+        stroke="#E2C198"
+        strokeWidth={4}
+        strokeLinecap="round"
       />
-      <G transform="translate(26 116)">
-        {[0, 72, 144, 216, 288].map((a) => (
-          <Ellipse
-            key={a}
-            cx="0"
-            cy="-8"
-            rx="4.5"
-            ry="7"
-            fill="#F7A7C3"
-            transform={`rotate(${a})`}
-          />
-        ))}
-        <Circle r="5" fill="#F7D76A" />
+
+      {/* 왼쪽을 가득 채우는 나무줄기 */}
+      <Path
+        d="M0 0
+            L76 0
+            Q70 17 76 35
+            Q80 49 72 66
+            Q65 83 75 103
+            L68 124
+            Q72 145 63 180
+            L0 180Z"
+        fill="url(#bark)"
+        stroke="#A58167"
+        strokeWidth={1.4}
+      />
+
+      {/* 나무껍질의 결 */}
+      <G fill="none" strokeLinecap="round" strokeLinejoin="round">
         <Path
-          d="M0 6 L-2 34"
-          stroke="#65AF6C"
-          strokeWidth="3"
-          strokeLinecap="round"
+          d="M12 -4 Q18 15 13 31 T17 66
+              Q12 84 17 103 T12 143 L16 181"
+          stroke="#99755B"
+          strokeWidth={2.3}
         />
-        <Path d="M-2 22 Q-14 12 -16 23 Q-9 29 -2 22Z" fill="#79C77B" />
-      </G>
-      <G transform="translate(209 129)">
-        {[0, 72, 144, 216, 288].map((a) => (
-          <Ellipse
-            key={a}
-            cx="0"
-            cy="-7"
-            rx="4"
-            ry="6"
-            fill="#FFF6E5"
-            transform={`rotate(${a})`}
-          />
-        ))}
-        <Circle r="4.5" fill="#F6D35E" />
         <Path
-          d="M0 5 L-2 27"
-          stroke="#65AF6C"
-          strokeWidth="3"
-          strokeLinecap="round"
+          d="M29 -3 Q25 19 31 35
+              L27 52 Q34 67 29 83
+              L35 103 Q28 124 32 143 L27 180"
+          stroke="#F2DFCA"
+          strokeWidth={2.2}
         />
-      </G>
-      <G transform="translate(68 145)">
-        {[0, 72, 144, 216, 288].map((a) => (
-          <Ellipse
-            key={a}
-            cx="0"
-            cy="-6"
-            rx="4"
-            ry="5.5"
-            fill="#F7D76A"
-            transform={`rotate(${a})`}
-          />
-        ))}
-        <Circle r="4" fill="#FFF0B2" />
         <Path
-          d="M0 5 L2 21"
-          stroke="#65AF6C"
-          strokeWidth="3"
-          strokeLinecap="round"
+          d="M47 0 Q43 20 49 38
+              Q42 52 49 68 L45 87
+              Q51 105 45 125 T48 158 L44 180"
+          stroke="#B08D73"
+          strokeWidth={2}
+        />
+        <Path
+          d="M62 0 L59 19 Q65 30 59 46
+              L64 65 Q56 81 63 96"
+          stroke="#F8EADB"
+          strokeWidth={1.8}
+        />
+        <Path
+          d="M7 45 L21 39 M32 72 L43 66
+              M15 115 L24 108 M40 137 L51 131
+              M8 158 L21 151"
+          stroke="#C8A381"
+          strokeWidth={1.5}
+        />
+        <Path
+          d="M21 7 L24 18 M53 24 L56 35
+              M19 82 L23 93 M54 110 L57 119"
+          stroke="#8A6B53"
+          strokeWidth={1.2}
         />
       </G>
-      <Grass x={7} y={169} color="#6DBB69" />
-      <Grass x={125} y={163} color="#7FC774" />
-      <Grass x={230} y={167} color="#6DBB69" />
+
+      {/* 나무 밑동 */}
+      <Path
+        d="M0 120
+            Q19 114 37 126
+            Q48 137 66 131
+            Q75 125 86 136
+            L98 180 L0 180Z"
+        fill="#AC886C"
+      />
+      <Path
+        d="M0 139 Q20 130 37 140
+            Q50 147 69 139 L83 180 L0 180Z"
+        fill="#C4A180"
+      />
+
+      {/* 화면 아래의 은은한 흙과 바닥 */}
+      <Path
+        d="M0 133
+            Q29 124 54 136
+            Q76 145 102 137
+            Q129 128 153 138
+            Q179 145 201 132
+            Q222 124 240 134
+            L240 180 L0 180Z"
+        fill="url(#forestSoil)"
+      />
+
+      {/* 이끼 낀 흙 */}
+      <Path
+        d="M0 149
+            Q27 137 53 146
+            Q79 155 108 147
+            Q139 137 163 149
+            Q196 158 219 143
+            L240 146 L240 180 L0 180Z"
+        fill="#B0C583"
+      />
+
+      <Path
+        d="M0 164
+            Q36 150 65 163
+            Q97 174 127 161
+            Q158 151 187 165
+            Q217 175 240 158
+            L240 180 L0 180Z"
+        fill="#927F69"
+      />
+
+      {/* 바닥 흙결 */}
+      <G fill="none" strokeLinecap="round" strokeWidth={1.4}>
+        <Path
+          d="M15 159 Q27 154 38 159
+              M79 167 Q92 161 105 166
+              M151 155 Q164 151 175 156
+              M204 169 Q218 162 230 164"
+          stroke="#D4D7A2"
+        />
+        <Path
+          d="M28 174 L40 171
+              M119 174 L133 170
+              M179 176 L190 172"
+          stroke="#7A6A58"
+        />
+      </G>
+
+      {/* 왼쪽 아래 이끼 바위 */}
+      <Path
+        d="M0 120
+            Q5 114 14 118
+            Q21 111 30 118
+            Q39 115 44 124
+            L51 140
+            Q35 146 20 139
+            Q8 143 0 136Z"
+        fill="#C4CCC2"
+        stroke="#96A89A"
+        strokeWidth={1.3}
+      />
+      <Path
+        d="M2 124 Q9 117 15 123
+            M19 122 Q27 118 32 126
+            M12 134 Q23 130 31 137"
+        fill="none"
+        stroke="#F0F4ED"
+        strokeWidth={2}
+        strokeLinecap="round"
+      />
+
+      {/* 오른쪽 아래 큰 바위 */}
+      <Path
+        d="M193 135
+            Q198 125 207 129
+            Q215 123 222 132
+            Q233 128 240 139
+            L240 158
+            Q224 163 211 156
+            Q200 159 193 149Z"
+        fill="#C1C8BF"
+        stroke="#92A396"
+        strokeWidth={1.3}
+      />
+      <Path
+        d="M200 137 Q207 131 213 138
+            M218 136 Q227 132 234 142
+            M207 149 Q217 145 226 152"
+        fill="none"
+        stroke="#EEF1EA"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+      />
+
+      {/* 🌿 바닥 전체에 깔리는 작은 잔디 그룹 (소프트 파스텔 그린 적용) */}
+      <G>
+        {FLOOR_GRASS_DATA.map(([x, y, scale, opacity, isPattern2], i) => (
+          <G
+            key={i}
+            transform={`translate(${x}, ${y}) scale(${scale})`}
+            opacity={opacity}
+          >
+            {isPattern2 ? (
+              // 소프트 세이지 잔디 2
+              <Path d="M-5 -5 Q-4 -15 2 -20 Q-1 -8 4 -5" fill="#7BAA6E" />
+            ) : (
+              // 소프트 세이지 잔디 1
+              <Path
+                d="M-11 -2 Q-6 -13 -2 -18 Q-3 -7 2 -3 Q5 -14 9 -16 Q7 -4 11 0"
+                fill="#84B776"
+              />
+            )}
+          </G>
+        ))}
+      </G>
+
+      {/* 작은 들꽃 (Y 좌표를 180 안쪽으로 보정) */}
+      {[
+        [38, 168],
+        [83, 162],
+        [146, 165],
+        [175, 172],
+      ].map(([x, y], i) => (
+        <G key={i}>
+          <Circle cx={x} cy={y - 4} r={2.5} fill="#FFFDF5" />
+          <Circle cx={x - 4} cy={y} r={2.5} fill="#FFFDF5" />
+          <Circle cx={x + 4} cy={y} r={2.5} fill="#FFFDF5" />
+          <Circle cx={x} cy={y + 3} r={2.5} fill="#FFFDF5" />
+          <Circle cx={x} cy={y} r={2} fill="#EBD27A" />
+        </G>
+      ))}
     </Svg>
   );
 }

@@ -451,8 +451,9 @@ function ShapeOutline({
     <Svg
       width="100%"
       height="100%"
-      viewBox="0 0 100 100"
-      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 240 180"
+      preserveAspectRatio="none"
+      style={{ width: "100%", height: "100%" }}
     >
       {shapeId === "circle" && (
         <Circle
