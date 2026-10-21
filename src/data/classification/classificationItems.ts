@@ -10509,9 +10509,9 @@ export const classificationItems: ClassificationItem[] = [
 
     name: "하트 단추",
 
-    topCategory: "clothing",
+    topCategory: "unknown",
 
-    subCategory: "button",
+    subCategory: "unknown",
 
     svgKey: "heartButton",
 
@@ -11168,9 +11168,9 @@ export const classificationItems: ClassificationItem[] = [
     id: "starButton",
 
     name: "별 단추",
-    topCategory: "clothing",
+    topCategory: "unknown",
 
-    subCategory: "button",
+    subCategory: "unknown",
 
     svgKey: "starButton",
 
@@ -11562,8 +11562,8 @@ export const classificationItems: ClassificationItem[] = [
   {
     id: "button1",
     name: "단추",
-    topCategory: "clothing",
-    subCategory: "button",
+    topCategory: "unknown",
+    subCategory: "unknown",
     svgKey: "button1",
     shapes: ["circle"],
     description:
@@ -11642,8 +11642,8 @@ export const classificationItems: ClassificationItem[] = [
     name: "단추",
     topCategory: "clothing",
 
-    subCategory: "button",
-    svgKey: "button2",
+    subCategory: "unknown",
+    svgKey: "unknown",
     shapes: ["circle"],
     description: "동글동글 귀여운 단추예요! 어떤 색 옷에 달아볼까요?",
     variants: [

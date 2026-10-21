@@ -10,9 +10,7 @@ import FoodCategoryBackground, {
 import ClothingCategoryBackground, {
   ClothingBackgroundKind,
 } from "../../components/CategorySorting/ClothingCategoryBackgrounds";
-import RemainCategoryBackground, {
-  NatureBackgroundKind,
-} from "../../components/CategorySorting/NatureCategoryBackgrounds";
+
 import VehicleCategoryBackground, {
   VehicleBackgroundCategory,
 } from "../../components/CategorySorting/VehicleCategoryBackgrounds";
@@ -20,6 +18,9 @@ import {
   ThingsCategoryBackground,
   ThingsCategoryKind,
 } from "../../components/CategorySorting/ThingsCategoryBackgrounds";
+import RemainCategoryBackground, {
+  NatureBackgroundKind,
+} from "../../components/CategorySorting/NatureCategoryBackgrounds";
 
 const ANIMAL_PREVIEW_ITEMS: {
   category: AnimalBackgroundKind;
@@ -120,6 +121,12 @@ const CLOTHING_PREVIEW_ITEMS: {
   color: string;
 }[] = [
   {
+    category: "clothing",
+    label: "의류 및 꾸미는 물건",
+    description: "멋진 옷과 반짝이는 액세서리 상자",
+    color: "#F2A7B8", // 👗 러블리한 파스텔 핑크 톤
+  },
+  {
     category: "hat",
     label: "모자",
     description: "아늑한 옷걸이와 모자 선반",
@@ -155,47 +162,14 @@ const CLOTHING_PREVIEW_ITEMS: {
     description: "동글동글 안경케이스와 거울",
     color: "#39A9D5", // 👓 시원한 스카이 블루 톤
   },
-  {
-    category: "button",
-    label: "단추",
-    description: "아기자기한 바느질 상자와 실타래",
-    color: "#E8788B", // 🔘 아기자기한 마젠타 톤
-  },
 ];
 
-export type MainCategoryKind =
-  | "animal"
-  | "food"
-  | "clothing"
-  | "nature"
-  | "vehicle"
-  | "things";
-export type RemainCategoryKind =
-  | "food"
-  | "clothing"
-  | "nature"
-  | "sky"
-  | "plant";
-
-export const REMAIN_CATEGORY_PREVIEW_ITEMS: {
-  category: RemainCategoryKind;
+export const NATURE_CATEGORY_PREVIEW_ITEMS: {
+  category: NatureBackgroundKind;
   label: string;
   description: string;
   color: string;
 }[] = [
-  {
-    category: "food",
-    label: "먹는 것",
-    description: "맛있는 음식이 가득한 요리 세계",
-    color: "#E88778", // 🍎 상큼한 코랄/레드 톤
-  },
-
-  {
-    category: "clothing",
-    label: "의류 및 꾸미는 물건",
-    description: "멋진 옷과 반짝이는 액세서리 상자",
-    color: "#F2A7B8", // 👗 러블리한 파스텔 핑크 톤
-  },
   {
     category: "nature",
     label: "자연",
@@ -391,7 +365,7 @@ export default function AnimalCategoryBackgroundPreviewScreen() {
               <CategoryCode>{item.category}</CategoryCode>
             </PreviewCard>
           ))}
-          {REMAIN_CATEGORY_PREVIEW_ITEMS.map((item) => (
+          {NATURE_CATEGORY_PREVIEW_ITEMS.map((item) => (
             <PreviewCard key={item.category}>
               <CardHeader>
                 <ColorDot color={item.color} />

@@ -47,15 +47,7 @@ export const SUB_CATEGORY_MAP: Record<string, string[]> = {
 
   food: ["fruit", "vegetable", "meal", "snack", "drink"],
 
-  clothing: [
-    "hat",
-    "clothes",
-    "shoes",
-    "hairpin",
-    "necklace",
-    "glasses",
-    "button",
-  ],
+  clothing: ["hat", "clothes", "shoes", "hairpin", "necklace", "glasses"],
 
   nature: ["sky", "plant"],
 

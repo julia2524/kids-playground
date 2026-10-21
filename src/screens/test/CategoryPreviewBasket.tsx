@@ -747,23 +747,7 @@ function Motif({
           />
         </G>
       );
-    case "button":
-      return (
-        <G>
-          {[0, 1, 2].map((i) => (
-            <G key={i} transform={`translate(${48 + i * 24} 54)`}>
-              <Circle
-                r="10"
-                fill={[PALETTE.red, PALETTE.yellow, PALETTE.blue][i]}
-                stroke="#A16D4A"
-                strokeWidth={1.3}
-              />
-              <Circle cx="-3" cy="-2" r="1.5" fill="#FFFFFF" />
-              <Circle cx="3" cy="2" r="1.5" fill="#FFFFFF" />
-            </G>
-          ))}
-        </G>
-      );
+
     case "pet":
       return (
         <G>

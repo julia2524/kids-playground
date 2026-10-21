@@ -83,13 +83,13 @@ export default function CategorySortingBackground({
 
   // 3. 의류 및 꾸미는 물건 (Clothing) 계열
   const clothingKinds: ClothingBackgroundKind[] = [
+    "clothing",
     "hat",
     "clothes",
     "shoes",
     "hairpin",
     "necklace",
     "glasses",
-    "button",
   ];
   if (
     topCategory === "clothing" ||
@@ -99,7 +99,7 @@ export default function CategorySortingBackground({
     const kind = (
       clothingKinds.includes(subCategory as ClothingBackgroundKind)
         ? subCategory
-        : "hat"
+        : "clothing"
     ) as ClothingBackgroundKind;
     return (
       <ClothingCategoryBackground
