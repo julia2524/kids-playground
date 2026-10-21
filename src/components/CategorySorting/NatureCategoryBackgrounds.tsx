@@ -18,50 +18,11 @@ type Props = {
   height?: number | string;
 };
 
-// 2. 공통 Frame 컴포넌트 (320x240 기준)
-function Frame({
-  edge,
-  pale,
-  children,
-}: {
-  edge: string;
-  pale: string;
-  children?: React.ReactNode;
-}) {
-  return (
-    <>
-      <Rect width="320" height="240" rx="18" fill={pale} />
-      {children}
-      <Rect
-        x="3"
-        y="3"
-        width="314"
-        height="234"
-        rx="16"
-        fill="none"
-        stroke={edge}
-        strokeWidth="4"
-      />
-      <Rect
-        x="9"
-        y="9"
-        width="302"
-        height="222"
-        rx="12"
-        fill="none"
-        stroke="#FFFFFF"
-        strokeWidth="2"
-        opacity=".9"
-      />
-    </>
-  );
-}
-
 function SkyScene() {
   return (
     <>
       {/* 1. 파스텔 밤하늘 */}
-      <Rect x="0" y="0" width="320" height="240" rx="14" fill="#E9F7FF" />
+      <Rect x="0" y="0" width="420" height="340" rx="14" fill="#E9F7FF" />
 
       <Defs>
         <LinearGradient id="dreamySky" x1="0" y1="0" x2="0" y2="1">
@@ -340,10 +301,10 @@ function SkyScene() {
 
       {/* 8. 전체를 감싸는 우유빛 소프트 오버레이 */}
       <Rect
-        x="4"
-        y="4"
-        width="312"
-        height="232"
+        x="0"
+        y="0"
+        width="412"
+        height="332"
         rx="12"
         fill="#FFFDF6"
         opacity={0.3}
@@ -961,10 +922,10 @@ function PlantScene() {
 
       {/* 9. 전체 풍경을 부드럽게 연결하는 우유빛 오버레이 */}
       <Rect
-        x="4"
-        y="4"
-        width="312"
-        height="232"
+        x="0"
+        y="0"
+        width="412"
+        height="332"
         rx="11"
         fill="#FFFDF6"
         opacity={0.32}

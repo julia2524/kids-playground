@@ -14,8 +14,7 @@ import NatureCategoryBackground, {
 import VehicleCategoryBackground, {
   VehicleBackgroundCategory,
 } from "./VehicleCategoryBackgrounds";
-import {
-  ThingsCategoryBackground,
+import ThingsCategoryBackground, {
   ThingsCategoryKind,
 } from "./ThingsCategoryBackgrounds";
 

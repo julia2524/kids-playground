@@ -14,13 +14,13 @@ import ClothingCategoryBackground, {
 import VehicleCategoryBackground, {
   VehicleBackgroundCategory,
 } from "../../components/CategorySorting/VehicleCategoryBackgrounds";
-import {
-  ThingsCategoryBackground,
-  ThingsCategoryKind,
-} from "../../components/CategorySorting/ThingsCategoryBackgrounds";
+
 import RemainCategoryBackground, {
   NatureBackgroundKind,
 } from "../../components/CategorySorting/NatureCategoryBackgrounds";
+import ThingsCategoryBackground, {
+  ThingsCategory,
+} from "../../components/CategorySorting/ThingsCategoryBackgrounds";
 
 const ANIMAL_PREVIEW_ITEMS: {
   category: AnimalBackgroundKind;
@@ -235,7 +235,7 @@ export const VEHICLE_SUB_CATEGORY_PREVIEW_ITEMS: {
 ];
 
 export const THINGS_SUB_CATEGORY_PREVIEW_ITEMS: {
-  category: ThingsCategoryKind;
+  category: ThingsCategory;
   label: string;
   description: string;
   color: string;
