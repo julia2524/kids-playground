@@ -20180,60 +20180,6 @@ export const RenderClassificationItemSvg = ({
   );
 };
 
-// ============================================================
-// RENDER COLOR SORTING OBJECT
-// ============================================================
-//
-// L1
-// → 기본 도형 SVG
-//
-// L2 ~ L8
-// → 실제 ClassificationItem SVG
-//
-// ============================================================
-
-// export const RenderClassificationObjectSvg = ({
-//   object,
-//   primary,
-//   secondary,
-//   accent,
-//   size = 95,
-// }: {
-//   object: ColorSortingObject;
-//   primary?: string;
-//   secondary?: string;
-//   accent?: string;
-//   size?: number;
-// }) => {
-//   // ----------------------------------------------------------
-//   // L1 ~ L4 기본 도형
-//   // ----------------------------------------------------------
-
-//   if (object.itemId.startsWith("simple-")) {
-//     return (
-//       <RenderBasicShapeSvg
-//         shapeId={object.shape}
-//         colorHex={primary}
-//         size={size}
-//       />
-//     );
-//   }
-
-//   // ----------------------------------------------------------
-//   // L5~ L15 실제 ClassificationItem
-//   // ----------------------------------------------------------
-
-//   return (
-//     <RenderClassificationItemSvg
-//       itemId={object.itemId}
-//       primary={primary}
-//       secondary={secondary}
-//       accent={accent}
-//       size={size}
-//     />
-//   );
-// };
-
 export const RenderClassificationObjectSvg = ({
   object,
   primary,

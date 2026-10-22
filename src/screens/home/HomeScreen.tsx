@@ -234,9 +234,9 @@ export default function HomeScreen() {
           </ComingSoon>
 
           <ComingSoon
-            onPress={() => navigation.navigate("CategorySortingTestScreen")}
+            onPress={() => navigation.navigate("SizeSortingTestScreen")}
           >
-            <ComingSoonText>🔶 카테고리 테스트</ComingSoonText>
+            <ComingSoonText>🔶 크기분류 테스트</ComingSoonText>
           </ComingSoon>
           <ComingSoon
             onPress={() => navigation.navigate("CategoryStickerPreviewScreen")}

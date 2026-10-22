@@ -18,6 +18,7 @@ import CategoryBasketPreviewScreen from "../screens/test/CategoryBasketPreviewSc
 import CategoryScenePreviewScreen from "../screens/test/CategoryScenePreviewScreen";
 import AnimalCategoryBackgroundPreviewScreen from "../screens/test/CategoryBackgroundPreviewScreen";
 import CategorySortingPlayScreen from "../screens/classification/CategorySortingPlayScreen";
+import SizeSortingTestScreen from "../screens/test/SizeSortingTestScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -106,6 +107,10 @@ export default function AppNavigator() {
       <Stack.Screen
         name="CategoryScenePreviewScreen"
         component={CategoryScenePreviewScreen}
+      />
+      <Stack.Screen
+        name="SizeSortingTestScreen"
+        component={SizeSortingTestScreen}
       />
     </Stack.Navigator>
   );
