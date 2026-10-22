@@ -7,6 +7,7 @@ import ProgressStar from "../../../components/stageMap/ProgressStar";
 import ProgressSun from "../../../components/stageMap/ProgressSun";
 import ProgressRainbow from "../../../components/stageMap/ProgressRainbow";
 import { AppText } from "../../../utils/AppText";
+import ProgressMoon from "../../../components/stageMap/ProgressMoon";
 
 interface StageNodeProps {
   gameType: string;
@@ -99,6 +100,8 @@ export default function StageNode({
           <ProgressSun size={120} progress={progress} />
         ) : gameType === "category" ? (
           <ProgressRainbow size={120} progress={progress} />
+        ) : gameType === "size" ? (
+          <ProgressMoon size={120} progress={progress} />
         ) : (
           <ProgressStar size={120} progress={progress} />
         )}

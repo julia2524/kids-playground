@@ -12,6 +12,10 @@ export type RootStackParamList = {
   SettingScreen: undefined;
 
   StickerGalleryScreen: undefined;
+  StickerDetailScreen: {
+    stickerId: string;
+    stickerName: string;
+  };
 
   ColorSortingPlayScreen: {
     gameType: "color";
@@ -25,6 +29,10 @@ export type RootStackParamList = {
     gameType: "category";
     level: number;
   };
+  SizeSortingPlayScreen: {
+    gameType: "size";
+    level: number;
+  };
   LanguageScreen: undefined;
   ShapeSortingTestScreen: undefined;
   ShapeStickerScreen: undefined;
@@ -35,6 +43,7 @@ export type RootStackParamList = {
   AnimalCategoryBackgroundPreviewScreen: undefined;
   CategoryScenePreviewScreen: undefined;
   SizeSortingTestScreen: undefined;
+  ProgressMoonTestScreen: undefined;
 };
 // PatternPlayScreen: {
 //   gameType: "pattern";

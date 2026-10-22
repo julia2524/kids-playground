@@ -2,6 +2,7 @@ import React from "react";
 import RainbowBadge from "../../design-system/ui/RainbowBadge";
 import StarBadge from "../../design-system/ui/StarBadge";
 import SunBadge from "../../design-system/ui/SunBadge";
+import MoonBadge from "../../design-system/ui/MoonBadge";
 
 export type RewardBadgeType = "full" | "half" | "empty";
 
@@ -35,9 +36,12 @@ export default function GameRewardBadge({
   if (gameType === "category") {
     return <RainbowBadge type={type} size={size} />;
   }
+  if (gameType === "size") {
+    return <MoonBadge type={type} size={size} />;
+  }
 
   // 🧩 추후 확장할 게임들 (필요에 따라 주석 해제 및 전용 배지 연결)
-  // if (gameType === "pattern") {
+  // if (gameType === "size") {
   //   return <PatternBadge type={type} size={size} />;
   // }
 

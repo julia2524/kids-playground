@@ -244,11 +244,9 @@ export default function HomeScreen() {
             <ComingSoonText>🔶 종류 스티커</ComingSoonText>
           </ComingSoon>
           <ComingSoon
-            onPress={() =>
-              navigation.navigate("AnimalCategoryBackgroundPreviewScreen")
-            }
+            onPress={() => navigation.navigate("ProgressMoonTestScreen")}
           >
-            <ComingSoonText>🔶 카테고리 Box</ComingSoonText>
+            <ComingSoonText>달 위상변화</ComingSoonText>
           </ComingSoon>
         </ScrollView>
         {/* Bottom Navigation */}

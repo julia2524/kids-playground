@@ -13,6 +13,7 @@ import { useLanguage } from "../../context/LangaugeContext";
 import i18n from "../../i18n";
 import { useBackgroundMusic } from "../../utils/BackgroundMusicContext";
 import { classificationItems } from "../../data/classification/classificationItems";
+import { triggerHaptic } from "../../utils/haptic";
 
 const UNLOCKED_STICKERS_KEY = "@unlocked_stickers";
 
@@ -346,6 +347,22 @@ export default function StickerGalleryScreen() {
   const progressPercent =
     totalCount > 0 ? Math.round((unlockedCount / totalCount) * 100) : 0;
 
+  // 스티커 클릭 → 해금된 스티커의 상세 화면으로 이동
+  const handleStickerPress = useCallback(
+    (stickerId: string, stickerName: string) => {
+      // 실제 해금된 스티커인지 확인
+      if (!unlockedStickers.includes(stickerId)) return;
+
+      triggerHaptic("light");
+
+      navigation.navigate("StickerDetailScreen", {
+        gameType: "category",
+        stickerId,
+        stickerName,
+      });
+    },
+    [unlockedStickers, navigation],
+  );
   return (
     <Container>
       <AppHeader
@@ -389,6 +406,14 @@ export default function StickerGalleryScreen() {
                 key={key}
                 isUnlocked={isUnlocked}
                 activeOpacity={isUnlocked ? 0.8 : 1}
+                onPress={() =>
+                  handleStickerPress(
+                    key,
+                    i18n.t(`item_${key}`, {
+                      defaultValue: obj?.name ?? key,
+                    }),
+                  )
+                }
               >
                 {isUnlocked ? (
                   <>
@@ -419,12 +444,12 @@ export default function StickerGalleryScreen() {
       </ScrollView>
 
       {/* 이스터에그 알럿 */}
-      <CustomAlert
+      {/* <CustomAlert
         visible={alertVisible}
         title="이스터에그!"
         message={alertMessage}
         onClose={() => setAlertVisible(false)}
-      />
+      /> */}
     </Container>
   );
 }

@@ -19,6 +19,9 @@ import CategoryScenePreviewScreen from "../screens/test/CategoryScenePreviewScre
 import AnimalCategoryBackgroundPreviewScreen from "../screens/test/CategoryBackgroundPreviewScreen";
 import CategorySortingPlayScreen from "../screens/classification/CategorySortingPlayScreen";
 import SizeSortingTestScreen from "../screens/test/SizeSortingTestScreen";
+import SizeSortingPlayScreen from "../screens/classification/SizeSortingPlayScreen";
+import ProgressMoonTestScreen from "../screens/test/ProgressMoonTestScreen";
+import StickerDetailScreen from "../screens/sticker/StickerDetailScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -67,6 +70,13 @@ export default function AppNavigator() {
           animation: "fade",
         }}
       />
+      <Stack.Screen
+        name="SizeSortingPlayScreen"
+        component={SizeSortingPlayScreen}
+        options={{
+          animation: "fade",
+        }}
+      />
 
       <Stack.Screen
         name="SettingScreen"
@@ -82,6 +92,14 @@ export default function AppNavigator() {
           animation: "fade",
         }}
       />
+      <Stack.Screen
+        name="StickerDetailScreen"
+        component={StickerDetailScreen}
+        options={{
+          animation: "fade",
+        }}
+      />
+
       <Stack.Screen name="LanguageScreen" component={LanguageScreen} />
       <Stack.Screen
         name="ShapeSortingTestScreen"
@@ -111,6 +129,10 @@ export default function AppNavigator() {
       <Stack.Screen
         name="SizeSortingTestScreen"
         component={SizeSortingTestScreen}
+      />
+      <Stack.Screen
+        name="ProgressMoonTestScreen"
+        component={ProgressMoonTestScreen}
       />
     </Stack.Navigator>
   );
