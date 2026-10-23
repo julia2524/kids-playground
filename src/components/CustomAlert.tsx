@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 import { AppText } from "../utils/AppText";
 import i18n from "../i18n";
 import { colors } from "../design-system/tokens/colors";
+import { triggerHaptic } from "../utils/haptic";
 
 interface CustomAlertProps {
   visible: boolean;
@@ -30,6 +31,17 @@ export default function CustomAlert({
   onCancel,
   confirmText = "Confirm",
 }: CustomAlertProps) {
+  const handleClosePress = () => {
+    triggerHaptic("light");
+    // playSound("grab");
+    onClose?.();
+  };
+  const handleCanclePress = () => {
+    triggerHaptic("light");
+    // playSound("grab");
+    onCancel?.();
+  };
+
   return (
     <Modal
       transparent
@@ -45,12 +57,12 @@ export default function CustomAlert({
 
           <ButtonContainer>
             {showCancel && (
-              <CancelButton onPress={onCancel} activeOpacity={0.8}>
+              <CancelButton onPress={handleCanclePress} activeOpacity={0.8}>
                 <CancelButtonText>{i18n.t("cancel")}</CancelButtonText>
               </CancelButton>
             )}
 
-            <ConfirmButton onPress={onClose} activeOpacity={0.8}>
+            <ConfirmButton onPress={handleClosePress} activeOpacity={0.8}>
               <ConfirmButtonText>
                 {i18n.t("confirm") || confirmText}
               </ConfirmButtonText>

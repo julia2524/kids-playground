@@ -1,5 +1,9 @@
 {
   "sticker_workshop_title": "My Sticker Workshop",
+  "sticker_clear_title": "Clear Everything?",
+  "sticker_clear_message": "All of your drawings will be erased.",
+  "sticker_clear_confirm": "Yes, Clear It",
+
   "subtitle": "Fun Space Playground!",
   "hero_tag": "✨ What shall we play today?",
   "hero_title": "Play and Learn\nTogether!",
