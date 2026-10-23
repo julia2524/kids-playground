@@ -1,3 +1,205 @@
+// import React from "react";
+// import { Ionicons } from "@expo/vector-icons";
+// import styled from "styled-components/native";
+
+// import { classificationItems } from "../../data/classification/classificationItems";
+// import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
+// import { RenderClassificationObjectSvg } from "../../assets/Classification/classificationItemSvgs";
+
+// import {
+//   ColorSortingObject,
+//   ColorSortingTarget,
+// } from "../../types/Classification/Color/colorSotringTypes";
+// import { AppText } from "../../utils/AppText";
+
+// type ColorSortingTargetBasketProps = {
+//   target: ColorSortingTarget;
+//   objects: ColorSortingObject[];
+//   placedObjectIds: string[];
+//   onPress: () => void;
+//   onRemoveObject: (objectId: string) => void;
+// };
+
+// const getLuminance = (hex: string) => {
+//   const clean = hex.replace("#", "");
+
+//   if (clean.length !== 6) return 0;
+
+//   const r = parseInt(clean.slice(0, 2), 16);
+//   const g = parseInt(clean.slice(2, 4), 16);
+//   const b = parseInt(clean.slice(4, 6), 16);
+
+//   return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+// };
+
+// const getBasketColor = (hex: string) =>
+//   getLuminance(hex) > 0.95 ? "#CFC9E4" : hex;
+
+// const getHeaderTextColor = (hex: string) =>
+//   getLuminance(hex) > 0.75 ? "#4B4453" : "#FFFFFF";
+
+// export default function ColorSortingTargetBasket({
+//   target,
+//   objects,
+//   placedObjectIds,
+//   onPress,
+//   onRemoveObject,
+// }: ColorSortingTargetBasketProps) {
+//   const targetColorHex = COLOR_SORTING_COLORS[target.colorId] ?? "#7C5CFF";
+
+//   const basketColor = getBasketColor(targetColorHex);
+//   const headerTextColor = getHeaderTextColor(basketColor);
+
+//   return (
+//     <TargetBasket
+//       targetColor={targetColorHex}
+//       activeOpacity={0.9}
+//       onPress={onPress}
+//     >
+//       <BasketHeader style={{ backgroundColor: targetColorHex }}>
+//         <BasketTitle textColor={headerTextColor}>{target.label}</BasketTitle>
+//       </BasketHeader>
+
+//       <BasketBody>
+//         <DashedBox targetColor={basketColor}>
+//           {placedObjectIds.length === 0 ? (
+//             <PlusCircle color={basketColor}>
+//               <Ionicons name="add" size={26} color="#FFFFFF" />
+//             </PlusCircle>
+//           ) : (
+//             <BasketItemsRow>
+//               {placedObjectIds.map((objectId) => {
+//                 const object = objects.find((item) => item.id === objectId);
+
+//                 if (!object) return null;
+
+//                 const item = classificationItems.find(
+//                   (item) => item.id === object.itemId,
+//                 );
+
+//                 const variant = item?.variants.find(
+//                   (variant) => variant.colorId === object.colorId,
+//                 );
+
+//                 const basicColor = COLOR_SORTING_COLORS[object.colorId];
+
+//                 return (
+//                   <PlacedItemChip
+//                     key={objectId}
+//                     onPress={() => onRemoveObject(objectId)}
+//                   >
+//                     <RenderClassificationObjectSvg
+//                       object={object}
+//                       primary={variant?.primary ?? basicColor}
+//                       secondary={variant?.secondary}
+//                       accent={variant?.accent}
+//                       size={40}
+//                     />
+//                   </PlacedItemChip>
+//                 );
+//               })}
+//             </BasketItemsRow>
+//           )}
+//         </DashedBox>
+//       </BasketBody>
+//     </TargetBasket>
+//   );
+// }
+// const TargetBasket = styled.TouchableOpacity<{
+//   targetColor: string;
+// }>`
+//   flex: 1;
+//   background-color: #ffffff;
+
+//   border-radius: 22px;
+//   border-width: 3px;
+//   border-color: ${(p) => p.targetColor};
+
+//   overflow: hidden;
+
+//   elevation: 3;
+//   shadow-color: #6f63a8;
+//   shadow-offset: 0px 3px;
+//   shadow-opacity: 0.1;
+//   shadow-radius: 6px;
+// `;
+
+// const BasketHeader = styled.View`
+//   height: 34px;
+
+//   flex-direction: row;
+//   align-items: center;
+//   justify-content: center;
+
+//   gap: 6px;
+
+//   padding-left: 6px;
+//   padding-right: 6px;
+// `;
+
+// const BasketTitle = styled(AppText)<{
+//   textColor: string;
+// }>`
+//   font-size: 13px;
+//   font-weight: 900;
+//   color: ${(p) => p.textColor};
+// `;
+
+// const BasketBody = styled.View`
+//   flex: 1;
+//   padding: 8px;
+// `;
+
+// const DashedBox = styled.View<{
+//   targetColor: string;
+// }>`
+//   flex: 1;
+
+//   align-items: center;
+//   justify-content: center;
+
+//   border-radius: 14px;
+//   border-width: 1.5px;
+//   border-style: dashed;
+
+//   border-color: ${(p) => p.targetColor}66;
+//   background-color: ${(p) => p.targetColor}12;
+// `;
+
+// const PlusCircle = styled.View<{
+//   color: string;
+// }>`
+//   width: 38px;
+//   height: 38px;
+
+//   border-radius: 19px;
+
+//   background-color: ${(p) => p.color};
+
+//   align-items: center;
+//   justify-content: center;
+
+//   opacity: 0.35;
+// `;
+
+// const BasketItemsRow = styled.View`
+//   flex-direction: row;
+//   flex-wrap: wrap;
+
+//   align-items: center;
+//   justify-content: center;
+
+//   gap: 2px;
+// `;
+
+// const PlacedItemChip = styled.TouchableOpacity`
+//   width: 44px;
+//   height: 44px;
+
+//   align-items: center;
+//   justify-content: center;
+// `;
+
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
@@ -5,6 +207,7 @@ import styled from "styled-components/native";
 import { classificationItems } from "../../data/classification/classificationItems";
 import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColors";
 import { RenderClassificationObjectSvg } from "../../assets/Classification/classificationItemSvgs";
+import { ObjectArtwork, StickerPlacement } from "./ColorSortingObjectComponent";
 
 import {
   ColorSortingObject,
@@ -16,6 +219,7 @@ type ColorSortingTargetBasketProps = {
   target: ColorSortingTarget;
   objects: ColorSortingObject[];
   placedObjectIds: string[];
+  stickerPlacements: Record<string, StickerPlacement>;
   onPress: () => void;
   onRemoveObject: (objectId: string) => void;
 };
@@ -42,6 +246,7 @@ export default function ColorSortingTargetBasket({
   target,
   objects,
   placedObjectIds,
+  stickerPlacements,
   onPress,
   onRemoveObject,
 }: ColorSortingTargetBasketProps) {
@@ -50,61 +255,99 @@ export default function ColorSortingTargetBasket({
   const basketColor = getBasketColor(targetColorHex);
   const headerTextColor = getHeaderTextColor(basketColor);
 
+  // 드래그로 놓은 자리에 붙는 스티커 / 탭으로 넣어 자동 배치되는 오브젝트 분리
+  const stickerIds = placedObjectIds.filter((id) => stickerPlacements[id]);
+  const gridIds = placedObjectIds.filter((id) => !stickerPlacements[id]);
+
   return (
-    <TargetBasket
-      targetColor={targetColorHex}
-      activeOpacity={0.9}
-      onPress={onPress}
-    >
-      <BasketHeader style={{ backgroundColor: targetColorHex }}>
-        <BasketTitle textColor={headerTextColor}>{target.label}</BasketTitle>
-      </BasketHeader>
+    <BasketWrapper>
+      <TargetBasket
+        targetColor={targetColorHex}
+        activeOpacity={0.9}
+        onPress={onPress}
+      >
+        <BasketHeader style={{ backgroundColor: targetColorHex }}>
+          <BasketTitle textColor={headerTextColor}>{target.label}</BasketTitle>
+        </BasketHeader>
 
-      <BasketBody>
-        <DashedBox targetColor={basketColor}>
-          {placedObjectIds.length === 0 ? (
-            <PlusCircle color={basketColor}>
-              <Ionicons name="add" size={26} color="#FFFFFF" />
-            </PlusCircle>
-          ) : (
-            <BasketItemsRow>
-              {placedObjectIds.map((objectId) => {
-                const object = objects.find((item) => item.id === objectId);
+        <BasketBody>
+          <DashedBox targetColor={basketColor}>
+            {placedObjectIds.length === 0 ? (
+              <PlusCircle color={basketColor}>
+                <Ionicons name="add" size={26} color="#FFFFFF" />
+              </PlusCircle>
+            ) : gridIds.length > 0 ? (
+              <BasketItemsRow>
+                {gridIds.map((objectId) => {
+                  const object = objects.find((item) => item.id === objectId);
 
-                if (!object) return null;
+                  if (!object) return null;
 
-                const item = classificationItems.find(
-                  (item) => item.id === object.itemId,
-                );
+                  const item = classificationItems.find(
+                    (item) => item.id === object.itemId,
+                  );
 
-                const variant = item?.variants.find(
-                  (variant) => variant.colorId === object.colorId,
-                );
+                  const variant = item?.variants.find(
+                    (variant) => variant.colorId === object.colorId,
+                  );
 
-                const basicColor = COLOR_SORTING_COLORS[object.colorId];
+                  const basicColor = COLOR_SORTING_COLORS[object.colorId];
 
-                return (
-                  <PlacedItemChip
-                    key={objectId}
-                    onPress={() => onRemoveObject(objectId)}
-                  >
-                    <RenderClassificationObjectSvg
-                      object={object}
-                      primary={variant?.primary ?? basicColor}
-                      secondary={variant?.secondary}
-                      accent={variant?.accent}
-                      size={40}
-                    />
-                  </PlacedItemChip>
-                );
-              })}
-            </BasketItemsRow>
-          )}
-        </DashedBox>
-      </BasketBody>
-    </TargetBasket>
+                  return (
+                    <PlacedItemChip
+                      key={objectId}
+                      onPress={() => onRemoveObject(objectId)}
+                    >
+                      <RenderClassificationObjectSvg
+                        object={object}
+                        primary={variant?.primary ?? basicColor}
+                        secondary={variant?.secondary}
+                        accent={variant?.accent}
+                        size={40}
+                      />
+                    </PlacedItemChip>
+                  );
+                })}
+              </BasketItemsRow>
+            ) : null}
+          </DashedBox>
+        </BasketBody>
+      </TargetBasket>
+
+      {/* 드래그로 정답 처리된 오브젝트: 놓은 자리, 놓은 크기 그대로
+          (TargetBasket은 overflow: hidden 이라 바깥 레이어로 둔다) */}
+      <StickerLayer pointerEvents="box-none">
+        {stickerIds.map((objectId) => {
+          const object = objects.find((item) => item.id === objectId);
+          const placement = stickerPlacements[objectId];
+
+          if (!object || !placement) return null;
+
+          return (
+            <StickerButton
+              key={objectId}
+              activeOpacity={0.7}
+              onPress={() => onRemoveObject(objectId)}
+              style={{
+                left: placement.x,
+                top: placement.y,
+                width: placement.size,
+                height: placement.size,
+              }}
+            >
+              <ObjectArtwork object={object} size={placement.artSize} />
+            </StickerButton>
+          );
+        })}
+      </StickerLayer>
+    </BasketWrapper>
   );
 }
+
+const BasketWrapper = styled.View`
+  flex: 1;
+`;
+
 const TargetBasket = styled.TouchableOpacity<{
   targetColor: string;
 }>`
@@ -196,6 +439,20 @@ const PlacedItemChip = styled.TouchableOpacity`
   width: 44px;
   height: 44px;
 
+  align-items: center;
+  justify-content: center;
+`;
+
+const StickerLayer = styled.View`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+`;
+
+const StickerButton = styled.TouchableOpacity`
+  position: absolute;
   align-items: center;
   justify-content: center;
 `;

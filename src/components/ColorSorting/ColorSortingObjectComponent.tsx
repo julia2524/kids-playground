@@ -122,11 +122,11 @@
 //   const rotateAnim = useRef(new Animated.Value(0)).current;
 
 //   // ==========================================================
-//   // Refs
+//   // Refs (any로 선언하여 styled-components ref 호환성 확보)
 //   // ==========================================================
 
 //   const posRef = useRef({ x: 0, y: 0 });
-//   const bubbleRef = useRef<View>(null);
+//   const bubbleRef = useRef<any>(null);
 //   const busyRef = useRef(false);
 
 //   // 드래그 시작 시 "원래 자리"의 화면 좌표 (translate 제외)
@@ -189,9 +189,6 @@
 
 //   // ==========================================================
 //   // 원상복구
-//   // - 바구니에서 꺼냈을 때
-//   // - 다음 라운드 / 레벨로 넘어가서 isPlaced가 false로 돌아왔을 때
-//   // - 같은 컴포넌트가 다른 object로 재사용될 때
 //   // ==========================================================
 
 //   useEffect(() => {
@@ -222,7 +219,7 @@
 //   };
 
 //   // ==========================================================
-//   // 정답: 팡! 터지고 → 바구니로 예쁘게 안착
+//   // 정답
 //   // ==========================================================
 
 //   const settleIntoBasket = () => {
@@ -252,7 +249,6 @@
 //         }),
 //       ]),
 //     ]).start(() => {
-//       // 다음 문제는 빨리 생성
 //       latest.current.onCorrectDrop(
 //         latest.current.objectId,
 //         latest.current.colorId,
@@ -260,7 +256,6 @@
 //       busyRef.current = false;
 //       latest.current.onDragEnd();
 //     });
-//     // burst는 따로 실행
 //     Animated.timing(burst, {
 //       toValue: 1,
 //       duration: 520,
@@ -270,11 +265,9 @@
 //   };
 
 //   // ==========================================================
-//   // 오답: 톡! 펑! 비눗방울 터지듯 순식간에 팝업 삭제
+//   // 오답
 //   // ==========================================================
-//   // ==========================================================
-//   // 오답: 화면 밖으로 팅~! 튕겨 나가며 떨어지기
-//   // ==========================================================
+
 //   const fadeAway = () => {
 //     busyRef.current = true;
 //     triggerHaptic("error");
@@ -284,7 +277,6 @@
 //     const currentX = posRef.current.x;
 //     const currentY = posRef.current.y;
 
-//     // 1. 회전 애니메이션 동시 진행 (살짝 갸우뚱하며 튕김)
 //     Animated.timing(rotateAnim, {
 //       toValue: 1,
 //       duration: 450,
@@ -292,30 +284,26 @@
 //       useNativeDriver: true,
 //     }).start();
 
-//     // 2. 통~ 튀었다가 화면 밑으로 떨어지기
 //     Animated.sequence([
-//       // [1단계] 살짝 위로 튀어 오름 (Bounce Up)
 //       Animated.timing(pan, {
 //         toValue: {
 //           x: currentX,
-//           y: currentY - 40, // 현재 위치보다 40px 위로 팅!
+//           y: currentY - 40,
 //         },
 //         duration: 120,
 //         easing: Easing.out(Easing.quad),
 //         useNativeDriver: true,
 //       }),
-//       // [2단계] 화면 아래로 빠르게 하강 (Drop Down)
 //       Animated.parallel([
 //         Animated.timing(pan, {
 //           toValue: {
-//             x: currentX, // 필요 시 약간 옆으로 비스듬히(currentX + 30) 튕기게 할 수도 있습니다.
-//             y: currentY + 700, // 화면 밑으로 완전히 튕겨 나감
+//             x: currentX,
+//             y: currentY + 700,
 //           },
 //           duration: 350,
-//           easing: Easing.in(Easing.quad), // 가속도 붙으며 떨어짐
+//           easing: Easing.in(Easing.quad),
 //           useNativeDriver: true,
 //         }),
-//         // 떨어진 후 스르륵 페이드
 //         Animated.timing(fade, {
 //           toValue: 0,
 //           duration: 300,
@@ -323,7 +311,6 @@
 //         }),
 //       ]),
 //     ]).start(() => {
-//       // 애니메이션 완료 후 원상복구 및 오답 콜백 실행
 //       pan.setValue({ x: 0, y: 0 });
 //       scale.setValue(1);
 //       rotateAnim.setValue(0);
@@ -334,40 +321,6 @@
 //       latest.current.onDragEnd();
 //     });
 //   };
-//   // const fadeAway = () => {
-//   //   busyRef.current = true;
-//   //   Animated.sequence([
-//   //     // 1. 깜짝 놀라듯 아주 짧게 살짝 커짐 (약 0.08초)
-//   //     Animated.timing(scale, {
-//   //       toValue: 1.2,
-//   //       duration: 90,
-//   //       easing: Easing.out(Easing.ease),
-//   //       useNativeDriver: true,
-//   //     }),
-//   //     // 2. 쏙 오므라들며 삭제
-//   //     Animated.parallel([
-//   //       Animated.timing(scale, {
-//   //         toValue: 0.1,
-//   //         duration: 110,
-//   //         useNativeDriver: true,
-//   //       }),
-//   //       Animated.timing(fade, {
-//   //         toValue: 0,
-//   //         duration: 100,
-//   //         useNativeDriver: true,
-//   //       }),
-//   //     ]),
-//   //   ]).start(() => {
-//   //     // 애니메이션 종료 후 상태값 초기화 및 콜백
-//   //     pan.setValue({ x: 0, y: 0 });
-//   //     scale.setValue(1);
-
-//   //     latest.current.onWrongDrop?.(latest.current.objectId);
-
-//   //     busyRef.current = false;
-//   //     latest.current.onDragEnd();
-//   //   });
-//   // };
 
 //   const handleRelease = () => {
 //     const origin = originRectRef.current;
@@ -408,7 +361,7 @@
 //       const [targetColorId] = hitTarget;
 
 //       if (targetColorId === latest.current.colorId) {
-//         settleIntoBasket(); // targetRect 제거
+//         settleIntoBasket();
 //         return;
 //       }
 
@@ -434,7 +387,6 @@
 
 //       onPanResponderGrant: () => {
 //         triggerHaptic("light");
-//         // playSound("grab");
 //         pan.stopAnimation();
 
 //         dragRef.current = {
@@ -442,27 +394,33 @@
 //           range: null,
 //         };
 
-//         bubbleRef.current?.measureInWindow((x, y, width, height) => {
-//           // 현재 translate를 빼서 "원래 자리"의 좌표로 저장
-//           const originX = x - posRef.current.x;
-//           const originY = y - posRef.current.y;
+//         if (
+//           bubbleRef.current &&
+//           typeof bubbleRef.current.measureInWindow === "function"
+//         ) {
+//           bubbleRef.current.measureInWindow(
+//             (x: number, y: number, width: number, height: number) => {
+//               const originX = x - posRef.current.x;
+//               const originY = y - posRef.current.y;
 
-//           originRectRef.current = {
-//             x: originX,
-//             y: originY,
-//             width,
-//             height,
-//           };
+//               originRectRef.current = {
+//                 x: originX,
+//                 y: originY,
+//                 width,
+//                 height,
+//               };
 
-//           latest.current.getDragBounds((bounds) => {
-//             dragRef.current.range = {
-//               minX: bounds.left - originX,
-//               maxX: bounds.right - (originX + width),
-//               minY: bounds.top - originY,
-//               maxY: bounds.bottom - (originY + height),
-//             };
-//           });
-//         });
+//               latest.current.getDragBounds((bounds) => {
+//                 dragRef.current.range = {
+//                   minX: bounds.left - originX,
+//                   maxX: bounds.right - (originX + width),
+//                   minY: bounds.top - originY,
+//                   maxY: bounds.bottom - (originY + height),
+//                 };
+//               });
+//             },
+//           );
+//         }
 
 //         latest.current.onDragStart();
 //       },
@@ -487,7 +445,7 @@
 //   ).current;
 
 //   // ==========================================================
-//   // 정답 폭죽 파티클
+//   // 파티클
 //   // ==========================================================
 
 //   const particles = Array.from({ length: PARTICLE_COUNT }).map((_, index) => {
@@ -508,7 +466,6 @@
 //           height: size,
 //           borderRadius: size / 2,
 
-//           // burst = 0 일 때는 보이지 않는다
 //           opacity: burst.interpolate({
 //             inputRange: [0, 0.1, 0.65, 1],
 //             outputRange: [0, 1, 1, 0],
@@ -539,10 +496,9 @@
 //     );
 //   });
 
-//   // rotate interpolate 설정
 //   const spin = rotateAnim.interpolate({
 //     inputRange: [0, 1],
-//     outputRange: ["0deg", "-35deg"], // 왼쪽으로 살짝 돌면서 튕겨나감
+//     outputRange: ["0deg", "-35deg"],
 //   });
 
 //   // ==========================================================
@@ -557,8 +513,6 @@
 //           flex: 1,
 //           transform: [...pan.getTranslateTransform(), { rotate: spin }],
 //         },
-
-//         // 드래그 중인 오브젝트만 zIndex + elevation을 "같이" 올린다
 //         isDragging ? { zIndex: 30, elevation: 30 } : null,
 //       ]}
 //     >
@@ -576,7 +530,7 @@
 //           style={{ opacity: isPlaced ? 0 : 1 }}
 //         >
 //           <ObjectBubble
-//             ref={(node: View | null) => {
+//             ref={(node: any) => {
 //               bubbleRef.current = node;
 //               tutorialRef?.(object.id, node);
 //             }}
@@ -596,7 +550,6 @@
 //       </Animated.View>
 
 //       <BurstLayer pointerEvents="none">
-//         {/* 퍼져 나가는 링 */}
 //         <Ring
 //           size={bubbleSize}
 //           color={primaryColor}
@@ -704,6 +657,13 @@ export type DragBounds = {
   right: number;
   top: number;
   bottom: number;
+  // 오브젝트가 "놓일 수 있는" 보드 영역 (window 좌표)
+  board: {
+    left: number;
+    right: number;
+    top: number;
+    bottom: number;
+  };
 };
 
 export type Rect = {
@@ -715,13 +675,25 @@ export type Rect = {
 
 export type TargetRects = Record<string, Rect>;
 
+// 바구니 안에 스티커처럼 붙을 위치 / 크기 (바구니 좌상단 기준)
+export type StickerPlacement = {
+  x: number;
+  y: number;
+  size: number; // 버블 크기
+  artSize: number; // SVG 크기
+};
+
 type ColorSortingObjectProps = {
   object: ColorSortingObject;
   objectSize: number;
 
+  // 보드 안에서의 기본 슬롯 위치 (absolute)
+  slotLeft: number;
+  slotTop: number;
+  zIndex?: number;
+
   isSelected: boolean;
   isPlaced: boolean;
-  isDragging: boolean;
 
   onPress: () => void;
 
@@ -731,7 +703,11 @@ type ColorSortingObjectProps = {
   onDragStart: () => void;
   onDragEnd: () => void;
 
-  onCorrectDrop: (objectId: string, targetColorId: string) => void;
+  onCorrectDrop: (
+    objectId: string,
+    targetColorId: string,
+    placement: StickerPlacement,
+  ) => void;
   onWrongDrop?: (objectId: string) => void;
   tutorialRef?: (objectId: string, node: View | null) => void;
 };
@@ -740,8 +716,9 @@ type ColorSortingObjectProps = {
 // Constants
 // ============================================================
 
-const BUBBLE_EXTRA_SIZE = 12;
+export const BUBBLE_EXTRA_SIZE = 12;
 const DRAG_THRESHOLD = 4;
+const BOARD_SETTLE_PADDING = 4;
 
 // 바구니 판정 영역을 살짝 넓혀줌
 const TARGET_HIT_PADDING = 8;
@@ -758,15 +735,47 @@ const clamp = (value: number, min: number, max: number) =>
   Math.min(Math.max(value, min), max);
 
 // ============================================================
+// Object artwork (바구니에서도 같은 그림을 쓰기 위해 export)
+// ============================================================
+
+export function ObjectArtwork({
+  object,
+  size,
+}: {
+  object: ColorSortingObject;
+  size: number;
+}) {
+  const item = classificationItems.find((item) => item.id === object.itemId);
+
+  const variant = item?.variants.find(
+    (variant) => variant.colorId === object.colorId,
+  );
+
+  const primary = variant?.primary ?? COLOR_SORTING_COLORS[object.colorId];
+
+  return (
+    <RenderClassificationObjectSvg
+      object={object}
+      primary={primary}
+      secondary={variant?.secondary}
+      accent={variant?.accent}
+      size={size}
+    />
+  );
+}
+
+// ============================================================
 // Component
 // ============================================================
 
 export default function ColorSortingObjectComponent({
   object,
   objectSize,
+  slotLeft,
+  slotTop,
+  zIndex = 0,
   isSelected,
   isPlaced,
-  isDragging,
 
   onPress,
 
@@ -826,9 +835,11 @@ export default function ColorSortingObjectComponent({
       minY: number;
       maxY: number;
     } | null;
+    board: DragBounds["board"] | null;
   }>({
     start: { x: 0, y: 0 },
     range: null,
+    board: null,
   });
 
   // ==========================================================
@@ -838,6 +849,7 @@ export default function ColorSortingObjectComponent({
   const latest = useRef({
     objectId: object.id,
     colorId: object.colorId as string,
+    objectSize,
     isPlaced,
     getDragBounds,
     getTargetRects,
@@ -850,6 +862,7 @@ export default function ColorSortingObjectComponent({
   latest.current = {
     objectId: object.id,
     colorId: object.colorId as string,
+    objectSize,
     isPlaced,
     getDragBounds,
     getTargetRects,
@@ -881,16 +894,26 @@ export default function ColorSortingObjectComponent({
     if (!isPlaced) {
       pan.stopAnimation();
       pan.setValue({ x: 0, y: 0 });
+      posRef.current = { x: 0, y: 0 };
+
+      scale.stopAnimation();
       scale.setValue(1);
+
+      fade.stopAnimation();
       fade.setValue(1);
+
+      burst.stopAnimation();
       burst.setValue(0);
+
+      rotateAnim.stopAnimation();
+      rotateAnim.setValue(0);
 
       busyRef.current = false;
     }
-  }, [isPlaced, object.id, pan, scale, fade, burst]);
+  }, [isPlaced, object.id, pan, scale, fade, burst, rotateAnim]);
 
   // ==========================================================
-  // 원래 자리로 돌아가기
+  // 원래 자리로 돌아가기 (터치 중단 시)
   // ==========================================================
 
   const returnToOrigin = () => {
@@ -905,43 +928,100 @@ export default function ColorSortingObjectComponent({
   };
 
   // ==========================================================
-  // 정답
+  // 보드 안에서 놓았을 때: 놓은 자리에 그대로 둔다
+  // (보드 밖이면 가장 가까운 보드 안쪽으로 보정)
   // ==========================================================
 
-  const settleIntoBasket = () => {
+  const settleInBoard = () => {
+    const origin = originRectRef.current;
+    const board = dragRef.current.board;
+
+    if (!origin || !board) {
+      returnToOrigin();
+      return;
+    }
+
+    const { x: px, y: py } = posRef.current;
+
+    const minX = board.left + BOARD_SETTLE_PADDING - origin.x;
+    const maxX = board.right - BOARD_SETTLE_PADDING - (origin.x + origin.width);
+    const minY = board.top + BOARD_SETTLE_PADDING - origin.y;
+    const maxY =
+      board.bottom - BOARD_SETTLE_PADDING - (origin.y + origin.height);
+
+    const x = clamp(px, minX, Math.max(minX, maxX));
+    const y = clamp(py, minY, Math.max(minY, maxY));
+
+    // 이미 보드 안이면 그대로 둔다
+    if (x === px && y === py) {
+      latest.current.onDragEnd();
+      return;
+    }
+
+    Animated.spring(pan, {
+      toValue: { x, y },
+      friction: 7,
+      tension: 90,
+      useNativeDriver: true,
+    }).start(() => {
+      posRef.current = { x, y };
+      latest.current.onDragEnd();
+    });
+  };
+
+  // ==========================================================
+  // 정답
+  // 놓은 자리/크기 그대로 "탁" 붙는 느낌 -> 바구니에 스티커로 인계
+  // ==========================================================
+
+  const settleIntoBasket = (rect: Rect) => {
+    if (busyRef.current) return;
+
+    const origin = originRectRef.current;
+    if (!origin) return;
+
     busyRef.current = true;
+
+    // 바구니(BasketSlot) 좌상단 기준 좌표
+    const placement: StickerPlacement = {
+      x: origin.x + posRef.current.x - rect.x,
+      y: origin.y + posRef.current.y - rect.y,
+      size: latest.current.objectSize + BUBBLE_EXTRA_SIZE,
+      artSize: latest.current.objectSize,
+    };
+
     triggerHaptic("success");
     playSound("correct_sound");
 
+    scale.setValue(1);
+    fade.setValue(1);
     burst.setValue(0);
+
     Animated.sequence([
+      // 살짝 커졌다가
       Animated.timing(scale, {
-        toValue: 1.3,
-        duration: 110,
+        toValue: 1.15,
+        duration: 90,
         easing: Easing.out(Easing.quad),
         useNativeDriver: true,
       }),
-      Animated.parallel([
-        Animated.timing(scale, {
-          toValue: 0.4,
-          duration: 220,
-          easing: Easing.in(Easing.quad),
-          useNativeDriver: true,
-        }),
-        Animated.timing(fade, {
-          toValue: 0,
-          duration: 220,
-          useNativeDriver: true,
-        }),
-      ]),
+      // 제 크기로 안착
+      Animated.spring(scale, {
+        toValue: 1,
+        friction: 5,
+        tension: 140,
+        useNativeDriver: true,
+      }),
     ]).start(() => {
       latest.current.onCorrectDrop(
         latest.current.objectId,
         latest.current.colorId,
+        placement,
       );
       busyRef.current = false;
       latest.current.onDragEnd();
     });
+
     Animated.timing(burst, {
       toValue: 1,
       duration: 520,
@@ -955,6 +1035,8 @@ export default function ColorSortingObjectComponent({
   // ==========================================================
 
   const fadeAway = () => {
+    if (busyRef.current) return;
+
     busyRef.current = true;
     triggerHaptic("error");
     playSound("wrong_sound");
@@ -998,6 +1080,7 @@ export default function ColorSortingObjectComponent({
       ]),
     ]).start(() => {
       pan.setValue({ x: 0, y: 0 });
+      posRef.current = { x: 0, y: 0 };
       scale.setValue(1);
       rotateAnim.setValue(0);
 
@@ -1039,15 +1122,16 @@ export default function ColorSortingObjectComponent({
         }
       }
 
+      // 바구니가 아닌 곳 -> 놓은 자리에 그대로
       if (!hitTarget) {
-        returnToOrigin();
+        settleInBoard();
         return;
       }
 
-      const [targetColorId] = hitTarget;
+      const [targetColorId, targetRect] = hitTarget;
 
       if (targetColorId === latest.current.colorId) {
-        settleIntoBasket();
+        settleIntoBasket(targetRect);
         return;
       }
 
@@ -1078,6 +1162,7 @@ export default function ColorSortingObjectComponent({
         dragRef.current = {
           start: { ...posRef.current },
           range: null,
+          board: null,
         };
 
         if (
@@ -1103,6 +1188,7 @@ export default function ColorSortingObjectComponent({
                   minY: bounds.top - originY,
                   maxY: bounds.bottom - (originY + height),
                 };
+                dragRef.current.board = bounds.board;
               });
             },
           );
@@ -1194,13 +1280,17 @@ export default function ColorSortingObjectComponent({
   return (
     <Animated.View
       {...panResponder.panHandlers}
-      style={[
-        {
-          flex: 1,
-          transform: [...pan.getTranslateTransform(), { rotate: spin }],
-        },
-        isDragging ? { zIndex: 30, elevation: 30 } : null,
-      ]}
+      // 바구니에 들어간 뒤에는 (투명하게 남아 있어도) 터치를 막지 않도록
+      pointerEvents={isPlaced ? "none" : "auto"}
+      style={{
+        position: "absolute",
+        left: slotLeft,
+        top: slotTop,
+        width: bubbleSize,
+        height: bubbleSize,
+        zIndex,
+        transform: [...pan.getTranslateTransform(), { rotate: spin }],
+      }}
     >
       <Animated.View
         style={{
@@ -1224,13 +1314,7 @@ export default function ColorSortingObjectComponent({
             size={bubbleSize}
             isSelected={isSelected}
           >
-            <RenderClassificationObjectSvg
-              object={object}
-              primary={primaryColor}
-              secondary={variant?.secondary}
-              accent={variant?.accent}
-              size={objectSize}
-            />
+            <ObjectArtwork object={object} size={objectSize} />
           </ObjectBubble>
         </ObjectCell>
       </Animated.View>

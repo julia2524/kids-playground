@@ -65,9 +65,11 @@
 //   const navigation = useNavigation<NavigationProps>();
 //   const route = useRoute<RouteProps>();
 //   const { gameType, level: initialLevel = 1 } = route.params ?? {};
-//   const footerRef = useRef<View>(null);
 
-//   const tutorialObjectRefs = useRef<Record<string, View | null>>({});
+//   // 💡 [수정 포인트 1] footerRef 타입을 any로 열어주어 자식 컴포넌트로 전달 시 발생하는 타입 충돌 방지
+//   const footerRef = useRef<any>(null);
+
+//   const tutorialObjectRefs = useRef<Record<string, any>>({});
 //   const tutorialVisibleRef = useRef(false);
 //   const [tutorialVisible, setTutorialVisible] = React.useState(false);
 //   const [tutorialObject, setTutorialObject] =
@@ -104,29 +106,38 @@
 //     initialLevel,
 //     totalRounds: TOTAL_ROUNDS,
 //   });
-//   const basketRefs = useRef<Record<string, View | null>>({});
 
+//   // 💡 [수정 포인트 2] basketRefs 타입을 any로 열어주어 타입 충돌 방지
+//   const basketRefs = useRef<Record<string, any>>({});
+
+//   // 💡 [수정 포인트 3] node를 안전하게 캐스팅하고 measureInWindow 안전 검사 및 인자 타입 추가
 //   const getTargetRects = useCallback(
 //     (callback: (rects: TargetRects) => void) => {
 //       const entries = Object.entries(basketRefs.current).filter(
-//         ([, node]) => node,
-//       ) as [string, View][];
+//         ([, node]) => node !== null && node !== undefined,
+//       );
 
 //       const rects: TargetRects = {};
 //       if (entries.length === 0) return callback(rects);
 
 //       let remaining = entries.length;
 //       entries.forEach(([colorId, node]) => {
-//         node.measureInWindow(
-//           (x: number, y: number, width: number, height: number) => {
-//             rects[colorId] = { x, y, width, height };
-//             if (--remaining === 0) callback(rects);
-//           },
-//         );
+//         const targetNode = node as any;
+//         if (targetNode && typeof targetNode.measureInWindow === "function") {
+//           targetNode.measureInWindow(
+//             (x: number, y: number, width: number, height: number) => {
+//               rects[colorId] = { x, y, width, height };
+//               if (--remaining === 0) callback(rects);
+//             },
+//           );
+//         } else {
+//           if (--remaining === 0) callback(rects);
+//         }
 //       });
 //     },
 //     [],
 //   );
+
 //   useEffect(() => {
 //     if (!roundResult || !gameType) return;
 //     saveLevelClear(gameType, testLevel, earnedStars);
@@ -341,6 +352,7 @@
 
 //   color: #29263d;
 // `;
+
 import React, { useCallback, useEffect, useRef } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -426,6 +438,7 @@ export default function ColorSortingPlayScreen() {
     earnedStars,
     selectedObjectId,
     placedObjects,
+    stickerPlacements, // 추가
     wrongObjectIds, // 추가
     roundResult,
 
@@ -486,6 +499,13 @@ export default function ColorSortingPlayScreen() {
     saveLevelClear(gameType, testLevel, earnedStars);
   }, [roundResult]);
 
+  // (hooks 순서 규칙 때문에 early return 위로 올림)
+  useEffect(() => {
+    if (!roundResult) return;
+    // earnedStars는 라운드당 0.5 → 별 획득한 라운드 수 = earnedStars / 0.5
+    playEarnedNotes(Math.round(earnedStars / 0.5));
+  }, [roundResult]);
+
   useEffect(() => {
     console.log("[튜토리얼 확인]", {
       testLevel,
@@ -534,11 +554,7 @@ export default function ColorSortingPlayScreen() {
       </SafeAreaContainer>
     );
   }
-  useEffect(() => {
-    if (!roundResult) return;
-    // earnedStars는 라운드당 0.5 → 별 획득한 라운드 수 = earnedStars / 0.5
-    playEarnedNotes(Math.round(earnedStars / 0.5));
-  }, [roundResult]);
+
   return (
     <SafeAreaContainer edges={["top", "bottom"]}>
       {/* ================================================== */}
@@ -592,6 +608,7 @@ export default function ColorSortingPlayScreen() {
           targets={problem.targets}
           objects={problem.objects}
           placedObjects={placedObjects}
+          stickerPlacements={stickerPlacements}
           basketRefs={basketRefs}
           onTargetPress={handleTargetPress}
           onRemoveObject={handleRemoveFromTarget}
