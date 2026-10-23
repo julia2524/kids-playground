@@ -12,6 +12,8 @@ import { COLOR_SORTING_COLORS } from "../../data/classification/colorSortingColo
 import { ColorSortingObject } from "../../types/Classification/Color/colorSotringTypes";
 import { ClassificationColorId } from "../../types/game";
 import { ShapeSortingObject } from "../../generators/classification/generateShapeSortingProblem";
+import { CategorySortingObject } from "../../generators/classification/generateCategorySortingProblem";
+import { SizeSortingObject } from "../../generators/classification/generateSizeSortingProblem";
 
 /**
  * ===============================================
@@ -20139,7 +20141,11 @@ export const CATEGORY_ITEM_SVGS = {
 // RENDER CLASSIFICATION ITEM
 // ============================================================
 
-type SortingObjectTypes = ColorSortingObject | ShapeSortingObject;
+type SortingObjectTypes =
+  | ColorSortingObject
+  | ShapeSortingObject
+  | CategorySortingObject
+  | SizeSortingObject;
 export const RenderClassificationItemSvg = ({
   itemId,
   colorHex,

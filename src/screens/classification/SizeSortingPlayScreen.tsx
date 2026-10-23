@@ -25,9 +25,13 @@ import useSizeSortingGame from "../../hooks/Classification/useSizeSortingGeme";
 import { TargetRects } from "../../components/SizeSorting/SizeSortingObjectComponent";
 import SizeSortingObjectBoard from "../../components/SizeSorting/SizeSortingObjectBoard";
 import SizeSortingTargetArea from "../../components/SizeSorting/SizeSortingTargetArea";
+import { SizeSortingObject } from "../../generators/classification/generateSizeSortingProblem";
+import TutorialOverlay from "../../components/Tutorial/TutorialOverlay";
 
 type RouteProps = RouteProp<RootStackParamList, "SizeSortingPlayScreen">;
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
+
+export type ProblemObject = SizeSortingObject;
 
 const TOTAL_ROUNDS = 10;
 const SHOW_TEST_CONTROLS = true;
@@ -41,6 +45,12 @@ export default function SizeSortingPlayScreen() {
 
   const footerRef = useRef<View>(null);
   const basketRefs = useRef<Record<string, View | null>>({});
+
+  const tutorialObjectRefs = useRef<Record<string, View | null>>({});
+  const tutorialVisibleRef = useRef(false);
+  const [tutorialVisible, setTutorialVisible] = React.useState(false);
+  const [tutorialObject, setTutorialObject] =
+    React.useState<ProblemObject | null>(null);
 
   const {
     problem,
@@ -112,6 +122,20 @@ export default function SizeSortingPlayScreen() {
     playEarnedNotes(Math.round(earnedStars / 0.5));
   }, [roundResult, earnedStars]);
 
+  useEffect(() => {
+    if (!problem || testLevel !== 1) {
+      tutorialVisibleRef.current = false;
+      setTutorialVisible(false);
+      return;
+    }
+
+    const firstObject = problem.objects[0] ?? null;
+    if (!firstObject) return;
+
+    setTutorialObject(firstObject);
+    tutorialVisibleRef.current = true;
+    setTutorialVisible(true);
+  }, [problem, roundIndex, testLevel]);
   if (!problem) {
     return (
       <SafeAreaContainer>
@@ -156,6 +180,13 @@ export default function SizeSortingPlayScreen() {
           getTargetRects={getTargetRects}
           onCorrectDrop={handleDropObject}
           onWrongDrop={handleWrongDrop}
+          tutorialRef={(objectId, node) => {
+            tutorialObjectRefs.current[objectId] = node;
+          }}
+          onObjectGrab={() => {
+            tutorialVisibleRef.current = false;
+            setTutorialVisible(false);
+          }}
         />
 
         <SizeSortingTargetArea
@@ -173,7 +204,31 @@ export default function SizeSortingPlayScreen() {
             roundIndex={roundIndex}
           />
         </View>
-
+        {tutorialVisible && tutorialObject && (
+          <TutorialOverlay
+            key={`${testLevel}-${roundIndex}`}
+            visible={tutorialVisible}
+            object={tutorialObject}
+            fromRef={{
+              get current() {
+                return tutorialObjectRefs.current[tutorialObject.id] ?? null;
+              },
+            }}
+            toRef={{
+              get current() {
+                return basketRefs.current[tutorialObject.targetId] ?? null;
+              },
+            }}
+            onComplete={() => {
+              tutorialVisibleRef.current = false;
+              setTutorialVisible(false);
+            }}
+            onGrab={() => {
+              tutorialVisibleRef.current = false;
+              setTutorialVisible(false);
+            }}
+          />
+        )}
         {SHOW_TEST_CONTROLS && (
           <ClassificationTestControls
             level={testLevel}

@@ -11,6 +11,7 @@ import HandPointer from "../../design-system/ui/HandPointer";
 import { ShapeSortingObject } from "../../generators/classification/generateShapeSortingProblem";
 import { CategorySortingObject } from "../../generators/classification/generateCategorySortingProblem";
 import { ObjectArtwork } from "../CategorySorting/CategorySortingObjectComponent";
+import { SizeSortingObject } from "../../generators/classification/generateSizeSortingProblem";
 
 type Point = {
   x: number;
@@ -21,7 +22,8 @@ type Point = {
 type SortingObject =
   | ColorSortingObject
   | ShapeSortingObject
-  | CategorySortingObject;
+  | CategorySortingObject
+  | SizeSortingObject;
 
 // Category 오브젝트만 instanceId를 가진다
 const isCategoryObject = (
@@ -49,10 +51,18 @@ export default function TutorialOverlay({
   const [startPoint, setStartPoint] = useState<Point | null>(null);
   const [endPoint, setEndPoint] = useState<Point | null>(null);
   const [objectSize, setObjectSize] = useState(72);
+  const TUTORIAL_EXTRA_SCALE = 0.85;
+  const objectScale =
+    object && "scale" in object && typeof object.scale === "number"
+      ? object.scale
+      : 1;
 
   const progress = useRef(new Animated.Value(0)).current;
   const opacity = useRef(new Animated.Value(0)).current;
   const sessionRef = useRef(0);
+
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
 
   useEffect(() => {
     const session = ++sessionRef.current;
@@ -138,12 +148,12 @@ export default function TutorialOverlay({
 
     animation.start(({ finished }) => {
       if (finished && sessionRef.current === session) {
-        onComplete();
+        onCompleteRef.current(); // ← onComplete() 대신
       }
     });
 
     return () => animation.stop();
-  }, [visible, object, startPoint, endPoint, progress, opacity, onComplete]);
+  }, [visible, object, startPoint, endPoint, progress, opacity]);
 
   // ==========================================================
   // 색상 계산 (Color / Shape 오브젝트용)
@@ -154,13 +164,16 @@ export default function TutorialOverlay({
   const itemId = object && "itemId" in object ? object.itemId : undefined;
   const colorId = object && "colorId" in object ? object.colorId : undefined;
 
+  // Size 오브젝트처럼 variant를 직접 가진 경우 우선 사용
+  const ownVariant = object && "variant" in object ? object.variant : undefined;
+
   const item = itemId
     ? classificationItems.find((entry) => entry.id === itemId)
     : undefined;
 
-  const variant = item?.variants.find(
-    (entry) => colorId && entry.colorId === colorId,
-  );
+  const variant =
+    ownVariant ??
+    item?.variants.find((entry) => colorId && entry.colorId === colorId);
 
   const primaryColor = object
     ? (variant?.primary ??
@@ -168,6 +181,20 @@ export default function TutorialOverlay({
         ? COLOR_SORTING_COLORS[colorId as keyof typeof COLOR_SORTING_COLORS]
         : undefined))
     : undefined;
+  // const item = itemId
+  //   ? classificationItems.find((entry) => entry.id === itemId)
+  //   : undefined;
+
+  // const variant = item?.variants.find(
+  //   (entry) => colorId && entry.colorId === colorId,
+  // );
+
+  // const primaryColor = object
+  //   ? (variant?.primary ??
+  //     (colorId
+  //       ? COLOR_SORTING_COLORS[colorId as keyof typeof COLOR_SORTING_COLORS]
+  //       : undefined))
+  //   : undefined;
 
   const translateX =
     startPoint && endPoint
@@ -200,6 +227,7 @@ export default function TutorialOverlay({
             style={{
               width: objectSize,
               height: objectSize,
+              transform: [{ scale: objectScale }],
             }}
           >
             {isCategoryObject(object) ? (
