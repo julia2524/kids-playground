@@ -147,7 +147,7 @@ export default function CategorySortingObjectComponent({
   // ==========================================================
 
   const position = useRef({ x: 0, y: 0 });
-  const bubbleRef = useRef<View>(null);
+  const bubbleRef = useRef<any>(null);
   const originRef = useRef<DragOrigin | null>(null);
   const busyRef = useRef(false);
 
@@ -456,26 +456,33 @@ export default function CategorySortingObjectComponent({
           range: null,
         };
 
-        bubbleRef.current?.measureInWindow((x, y, width, height) => {
-          const originX = x - position.current.x;
-          const originY = y - position.current.y;
+        if (
+          bubbleRef.current &&
+          typeof bubbleRef.current.measureInWindow === "function"
+        ) {
+          bubbleRef.current?.measureInWindow(
+            (x: number, y: number, width: number, height: number) => {
+              const originX = x - position.current.x;
+              const originY = y - position.current.y;
 
-          originRef.current = {
-            x: originX,
-            y: originY,
-            width,
-            height,
-          };
+              originRef.current = {
+                x: originX,
+                y: originY,
+                width,
+                height,
+              };
 
-          latest.current.getDragBounds((bounds) => {
-            dragRef.current.range = {
-              minX: bounds.left - originX,
-              maxX: bounds.right - (originX + width),
-              minY: bounds.top - originY,
-              maxY: bounds.bottom - (originY + height),
-            };
-          });
-        });
+              latest.current.getDragBounds((bounds) => {
+                dragRef.current.range = {
+                  minX: bounds.left - originX,
+                  maxX: bounds.right - (originX + width),
+                  minY: bounds.top - originY,
+                  maxY: bounds.bottom - (originY + height),
+                };
+              });
+            },
+          );
+        }
 
         latest.current.onDragStart();
       },
@@ -590,7 +597,7 @@ export default function CategorySortingObjectComponent({
           style={{ opacity: isPlaced ? 0 : 1 }}
         >
           <ObjectBubble
-            ref={(node: View | null) => {
+            ref={(node: any) => {
               bubbleRef.current = node;
               tutorialRef?.(objectId, node);
             }}

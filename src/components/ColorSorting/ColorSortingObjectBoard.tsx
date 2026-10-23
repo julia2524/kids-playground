@@ -64,15 +64,9 @@ const getObjectSize = ({
 }) => {
   const baseSize = getBaseObjectSize(columns);
 
-  // 아직 Board 크기를 측정하지 못한 첫 렌더링
-  // 기존 디자인 크기를 그대로 사용
   if (!boardWidth || !boardHeight) {
     return baseSize;
   }
-
-  // ==========================================================
-  // Board 내부에서 사용할 수 있는 공간
-  // ==========================================================
 
   const horizontalPadding = 16;
   const verticalPadding = 24;
@@ -86,16 +80,9 @@ const getObjectSize = ({
   const availableHeight =
     boardHeight - verticalPadding - verticalGap * (rows - 1);
 
-  // Bubble이 SVG보다 12px 크기 때문에
-  // SVG가 들어갈 수 있는 실제 공간에서 12px 여유를 뺀다.
   const widthBasedSize = availableWidth / columns - 12;
 
   const heightBasedSize = availableHeight / rows - 12;
-
-  // ----------------------------------------------------------
-  // 평소에는 기존 크기 유지
-  // 공간이 부족할 때만 자동으로 작아짐
-  // ----------------------------------------------------------
 
   return Math.max(48, Math.min(baseSize, widthBasedSize, heightBasedSize));
 };
@@ -125,21 +112,30 @@ export default function ColorSortingObjectBoard({
     height: 0,
   });
 
-  const boardRef = useRef<View>(null);
+  const boardRef = useRef<any>(null);
   const [draggingObjectId, setDraggingObjectId] = useState<string | null>(null);
 
-  // 좌/우/상: Board 기준, 하단: Footer 바닥까지
+  // 💡 [핵심 수정] boardRef와 props로 넘어온 footerRef를 'as any'로 캐스팅하여 엄격한 타입 검사 우회
   const getDragBounds = (callback: (bounds: DragBounds) => void) => {
-    boardRef.current?.measureInWindow((bx, by, bw) => {
-      footerRef.current?.measureInWindow((_fx, fy, _fw, fh) => {
-        callback({
-          left: bx - DRAG_EDGE_OVERFLOW,
-          right: bx + bw + DRAG_EDGE_OVERFLOW,
-          top: by - DRAG_EDGE_OVERFLOW,
-          bottom: fy + fh,
-        });
+    const boardNode = boardRef.current as any;
+    const footerNode = footerRef.current as any;
+
+    if (boardNode && typeof boardNode.measureInWindow === "function") {
+      boardNode.measureInWindow((bx: number, by: number, bw: number) => {
+        if (footerNode && typeof footerNode.measureInWindow === "function") {
+          footerNode.measureInWindow(
+            (_fx: number, fy: number, _fw: number, fh: number) => {
+              callback({
+                left: bx - DRAG_EDGE_OVERFLOW,
+                right: bx + bw + DRAG_EDGE_OVERFLOW,
+                top: by - DRAG_EDGE_OVERFLOW,
+                bottom: fy + fh,
+              });
+            },
+          );
+        }
       });
-    });
+    }
   };
 
   // ==========================================================
@@ -228,7 +224,7 @@ export default function ColorSortingObjectBoard({
                 onDragEnd={() => setDraggingObjectId(null)}
                 onCorrectDrop={onCorrectDrop}
                 onWrongDrop={onWrongDrop}
-                isDragging={draggingObjectId === object.id} // 추가
+                isDragging={draggingObjectId === object.id}
                 tutorialRef={tutorialRef}
               />
             ))}
@@ -265,7 +261,6 @@ const ObjectBoard = styled.View<{
 
   z-index: ${(p) => (p.isDragging ? 100 : 1)};
 
-  /* Android: elevation이 zIndex보다 우선하므로 드래그 중에만 올린다 */
   elevation: ${(p) => (p.isDragging ? 10 : 0)};
   shadow-color: transparent;
 `;

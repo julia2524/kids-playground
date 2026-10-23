@@ -33,7 +33,7 @@ export default function ShapeSortingTargetArea({
           <BasketSlot
             key={target.id}
             collapsable={false}
-            ref={(node: View | null) => {
+            ref={(node: any) => {
               basketRefs.current[target.id] = node;
             }}
           >

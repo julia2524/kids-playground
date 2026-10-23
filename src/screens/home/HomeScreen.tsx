@@ -233,10 +233,8 @@ export default function HomeScreen() {
             <ComingSoonText>🌐 번역 검증하기</ComingSoonText>
           </ComingSoon>
 
-          <ComingSoon
-            onPress={() => navigation.navigate("SizeSortingTestScreen")}
-          >
-            <ComingSoonText>🔶 크기분류 테스트</ComingSoonText>
+          <ComingSoon onPress={() => navigation.navigate("PatternTestScreen")}>
+            <ComingSoonText>⁉️ 패턴 놀이</ComingSoonText>
           </ComingSoon>
           <ComingSoon
             onPress={() => navigation.navigate("CategoryStickerPreviewScreen")}

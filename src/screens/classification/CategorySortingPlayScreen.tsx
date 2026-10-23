@@ -69,7 +69,7 @@ export default function CategorySortingPlayScreen() {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProps>();
   const { gameType, level: initialLevel = 1 } = route.params ?? {};
-  const footerRef = useRef<View>(null);
+  const footerRef = useRef<any>(null);
 
   // 튜토리얼
   const tutorialObjectRefs = useRef<Record<string, View | null>>({});
@@ -106,32 +106,57 @@ export default function CategorySortingPlayScreen() {
     totalRounds: TOTAL_ROUNDS,
   });
 
-  const basketRefs = useRef<Record<string, View | null>>({});
+  const basketRefs = useRef<Record<string, any>>({});
 
+  // const getTargetRects = useCallback(
+  //   (callback: (rects: TargetRects) => void) => {
+  //     const entries = Object.entries(basketRefs.current).filter(
+  //       ([, node]) => node,
+  //     ) as [string, View][];
+
+  //     const rects: TargetRects = {};
+  //     if (entries.length === 0) return callback(rects);
+
+  //     let remaining = entries.length;
+  //     entries.forEach(([targetId, node]) => {
+  //       node.measureInWindow((x, y, width, height) => {
+  //         rects[targetId] = { x, y, width, height };
+  //         if (--remaining === 0) callback(rects);
+  //       });
+  //     });
+  //   },
+  //   [],
+  // );
+
+  // ==========================================================
+  // 클리어 저장 / 효과음
+  // ==========================================================
   const getTargetRects = useCallback(
     (callback: (rects: TargetRects) => void) => {
       const entries = Object.entries(basketRefs.current).filter(
-        ([, node]) => node,
-      ) as [string, View][];
+        ([, node]) => node !== null && node !== undefined,
+      );
 
       const rects: TargetRects = {};
       if (entries.length === 0) return callback(rects);
 
       let remaining = entries.length;
-      entries.forEach(([targetId, node]) => {
-        node.measureInWindow((x, y, width, height) => {
-          rects[targetId] = { x, y, width, height };
+      entries.forEach(([colorId, node]) => {
+        const targetNode = node as any;
+        if (targetNode && typeof targetNode.measureInWindow === "function") {
+          targetNode.measureInWindow(
+            (x: number, y: number, width: number, height: number) => {
+              rects[colorId] = { x, y, width, height };
+              if (--remaining === 0) callback(rects);
+            },
+          );
+        } else {
           if (--remaining === 0) callback(rects);
-        });
+        }
       });
     },
     [],
   );
-
-  // ==========================================================
-  // 클리어 저장 / 효과음
-  // ==========================================================
-
   useEffect(() => {
     if (!roundResult || !gameType) return;
     saveLevelClear(gameType, testLevel, earnedStars);

@@ -22,6 +22,7 @@ import SizeSortingTestScreen from "../screens/test/SizeSortingTestScreen";
 import SizeSortingPlayScreen from "../screens/classification/SizeSortingPlayScreen";
 import ProgressMoonTestScreen from "../screens/test/ProgressMoonTestScreen";
 import StickerDetailScreen from "../screens/sticker/StickerDetailScreen";
+import PatternTestScreen from "../screens/test/PatterTestScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -134,6 +135,7 @@ export default function AppNavigator() {
         name="ProgressMoonTestScreen"
         component={ProgressMoonTestScreen}
       />
+      <Stack.Screen name="PatternTestScreen" component={PatternTestScreen} />
     </Stack.Navigator>
   );
 }

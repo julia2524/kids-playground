@@ -49,24 +49,37 @@ export default function ShapeSortingObjectBoard({
   tutorialRef,
   onObjectGrab,
 }: Props) {
-  const boardRef = useRef<View>(null);
+  // 💡 [수정 포인트 1] ref 타입을 any로 열어주어 styled-components와의 타입 충돌 방지
+  const boardRef = useRef<any>(null);
   const [draggingObjectId, setDraggingObjectId] = useState<string | null>(null);
   const [boardSize, setBoardSize] = useState({
     width: 0,
     height: 0,
   });
 
+  // 💡 [수정 포인트 2] boardRef와 footerRef를 as any로 캐스팅 및 measureInWindow 안전 검사 추가
   const getDragBounds = (callback: (bounds: DragBounds) => void) => {
-    boardRef.current?.measureInWindow((bx, by, bw, bh) => {
-      footerRef.current?.measureInWindow((_fx, fy, _fw, fh) => {
-        callback({
-          left: bx - DRAG_EDGE_OVERFLOW,
-          right: bx + bw + DRAG_EDGE_OVERFLOW,
-          top: by - DRAG_EDGE_OVERFLOW,
-          bottom: fy + fh,
-        });
-      });
-    });
+    const boardNode = boardRef.current as any;
+    const footerNode = footerRef.current as any;
+
+    if (boardNode && typeof boardNode.measureInWindow === "function") {
+      boardNode.measureInWindow(
+        (bx: number, by: number, bw: number, bh: number) => {
+          if (footerNode && typeof footerNode.measureInWindow === "function") {
+            footerNode.measureInWindow(
+              (_fx: number, fy: number, _fw: number, fh: number) => {
+                callback({
+                  left: bx - DRAG_EDGE_OVERFLOW,
+                  right: bx + bw + DRAG_EDGE_OVERFLOW,
+                  top: by - DRAG_EDGE_OVERFLOW,
+                  bottom: fy + fh,
+                });
+              },
+            );
+          }
+        },
+      );
+    }
   };
 
   const columns = getGridColumns(objects.length);
@@ -166,7 +179,6 @@ const ObjectBoard = styled.View<{ isDragging: boolean }>`
   border-color: rgba(255, 255, 255, 0.95);
   justify-content: space-evenly;
   z-index: ${(p) => (p.isDragging ? 100 : 1)};
-  elevation: ${(p) => (p.isDragging ? 10 : 0)};
 `;
 
 const ObjectRow = styled.View`

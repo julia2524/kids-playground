@@ -73,7 +73,7 @@ export default function LanguageScreen() {
       <ScrollView contentContainerStyle={{ padding: 16 }}>
         <CountText>총 {translationKeys.length}개 번역 키 등록됨</CountText>
 
-        {translationKeys.map((key) => {
+        {/* {translationKeys.map((key) => {
           // 현재 설정된 i18n으로 번역 결과 조회
           const translatedText = i18n.t(key);
 
@@ -81,6 +81,23 @@ export default function LanguageScreen() {
             <ItemCard key={key}>
               <KeyText>🔑 {key}</KeyText>
               <ValueText>{translatedText}</ValueText>
+            </ItemCard>
+          );
+        })} */}
+        {translationKeys.map((key) => {
+          // 현재 설정된 i18n으로 번역 결과 조회
+          const translatedText = i18n.t(key, { returnObjects: true }); // 객체 반환 허용 설정
+
+          // 반환된 값이 객체(Object) 형태인지 확인
+          const displayValue =
+            typeof translatedText === "object" && translatedText !== null
+              ? JSON.stringify(translatedText, null, 2) // 객체라면 JSON 문자열로 변환
+              : String(translatedText);
+
+          return (
+            <ItemCard key={key}>
+              <KeyText>🔑 {key}</KeyText>
+              <ValueText>{displayValue}</ValueText>
             </ItemCard>
           );
         })}

@@ -51,7 +51,7 @@ export default function CategorySortingTargetArea({
           key={target.id}
           collapsable={false}
           // 드래그 앤 드롭 충돌 판정용: target.id로 위치를 측정한다
-          ref={(node: View | null) => {
+          ref={(node: any) => {
             basketRefs.current[target.id] = node;
           }}
         >

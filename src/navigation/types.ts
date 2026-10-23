@@ -44,6 +44,7 @@ export type RootStackParamList = {
   CategoryScenePreviewScreen: undefined;
   SizeSortingTestScreen: undefined;
   ProgressMoonTestScreen: undefined;
+  PatternTestScreen: undefined;
 };
 // PatternPlayScreen: {
 //   gameType: "pattern";

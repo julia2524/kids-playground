@@ -43,8 +43,8 @@ export default function SizeSortingPlayScreen() {
 
   const { gameType, level: initialLevel = 1 } = route.params ?? {};
 
-  const footerRef = useRef<View>(null);
-  const basketRefs = useRef<Record<string, View | null>>({});
+  const footerRef = useRef<any>(null);
+  const basketRefs = useRef<Record<string, any | null>>({});
 
   const tutorialObjectRefs = useRef<Record<string, View | null>>({});
   const tutorialVisibleRef = useRef(false);
@@ -78,30 +78,56 @@ export default function SizeSortingPlayScreen() {
     initialLevel,
     totalRounds: TOTAL_ROUNDS,
   });
-  const getTargetRects = (callback: (rects: TargetRects) => void) => {
-    const rects: TargetRects = {};
-    const refs = basketRefs.current;
+  // const getTargetRects = (callback: (rects: TargetRects) => void) => {
+  //   const rects: TargetRects = {};
+  //   const refs = basketRefs.current;
 
-    const entries = Object.entries(refs).filter(([, node]) => node != null);
+  //   const entries = Object.entries(refs).filter(([, node]) => node != null);
 
-    if (entries.length === 0) {
-      callback(rects);
-      return;
-    }
+  //   if (entries.length === 0) {
+  //     callback(rects);
+  //     return;
+  //   }
 
-    let remaining = entries.length;
+  //   let remaining = entries.length;
 
-    entries.forEach(([targetId, node]) => {
-      node!.measureInWindow((x, y, width, height) => {
-        rects[targetId] = { x, y, width, height };
-        remaining -= 1;
+  //   entries.forEach(([targetId, node]) => {
+  //     node!.measureInWindow((x, y, width, height) => {
+  //       rects[targetId] = { x, y, width, height };
+  //       remaining -= 1;
 
-        if (remaining === 0) {
-          callback(rects);
+  //       if (remaining === 0) {
+  //         callback(rects);
+  //       }
+  //     });
+  //   });
+  // };
+  const getTargetRects = useCallback(
+    (callback: (rects: TargetRects) => void) => {
+      const entries = Object.entries(basketRefs.current).filter(
+        ([, node]) => node !== null && node !== undefined,
+      );
+
+      const rects: TargetRects = {};
+      if (entries.length === 0) return callback(rects);
+
+      let remaining = entries.length;
+      entries.forEach(([colorId, node]) => {
+        const targetNode = node as any;
+        if (targetNode && typeof targetNode.measureInWindow === "function") {
+          targetNode.measureInWindow(
+            (x: number, y: number, width: number, height: number) => {
+              rects[colorId] = { x, y, width, height };
+              if (--remaining === 0) callback(rects);
+            },
+          );
+        } else {
+          if (--remaining === 0) callback(rects);
         }
       });
-    });
-  };
+    },
+    [],
+  );
   useEffect(() => {
     playThemeBGM("game");
 

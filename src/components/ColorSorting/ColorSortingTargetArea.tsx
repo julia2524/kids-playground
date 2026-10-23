@@ -49,7 +49,7 @@ export default function ColorSortingTargetArea({
         <BasketSlot
           key={target.id}
           collapsable={false}
-          ref={(node: View | null) => {
+          ref={(node: any) => {
             basketRefs.current[target.colorId] = node;
           }}
         >

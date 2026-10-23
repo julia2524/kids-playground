@@ -116,7 +116,7 @@ export default function SizeSortingObjectComponent({
   const rotateAnim = useRef(new Animated.Value(0)).current;
 
   const posRef = useRef({ x: 0, y: 0 });
-  const bubbleRef = useRef<View>(null);
+  const bubbleRef = useRef<any>(null);
   const busyRef = useRef(false);
   const originRectRef = useRef<Rect | null>(null);
 
@@ -359,26 +359,33 @@ export default function SizeSortingObjectComponent({
           range: null,
         };
 
-        bubbleRef.current?.measureInWindow((x, y, width, height) => {
-          const originX = x - posRef.current.x;
-          const originY = y - posRef.current.y;
+        if (
+          bubbleRef.current &&
+          typeof bubbleRef.current.measureInWindow === "function"
+        ) {
+          bubbleRef.current?.measureInWindow(
+            (x: number, y: number, width: number, height: number) => {
+              const originX = x - posRef.current.x;
+              const originY = y - posRef.current.y;
 
-          originRectRef.current = {
-            x: originX,
-            y: originY,
-            width,
-            height,
-          };
+              originRectRef.current = {
+                x: originX,
+                y: originY,
+                width,
+                height,
+              };
 
-          latest.current.getDragBounds((bounds) => {
-            dragRef.current.range = {
-              minX: bounds.left - originX,
-              maxX: bounds.right - (originX + width),
-              minY: bounds.top - originY,
-              maxY: bounds.bottom - (originY + height),
-            };
-          });
-        });
+              latest.current.getDragBounds((bounds) => {
+                dragRef.current.range = {
+                  minX: bounds.left - originX,
+                  maxX: bounds.right - (originX + width),
+                  minY: bounds.top - originY,
+                  maxY: bounds.bottom - (originY + height),
+                };
+              });
+            },
+          );
+        }
 
         latest.current.onDragStart();
       },
@@ -475,7 +482,7 @@ export default function SizeSortingObjectComponent({
           style={{ opacity: isPlaced ? 0 : 1 }}
         >
           <ObjectBubble
-            ref={(node: View | null) => {
+            ref={(node: any) => {
               bubbleRef.current = node;
               tutorialRef?.(object.id, node);
             }}
