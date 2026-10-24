@@ -933,6 +933,8 @@ export default function ColorSortingObjectComponent({
   // ==========================================================
 
   const settleInBoard = () => {
+    triggerHaptic("light"); // 👈 드롭되어 정착할 때 햅틱 실행!
+
     const origin = originRectRef.current;
     const board = dragRef.current.board;
 
