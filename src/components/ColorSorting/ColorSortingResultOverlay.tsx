@@ -20,7 +20,7 @@ type ColorSortingResultOverlayProps = {
   level: number;
   earnedStars: number;
   isLastLevel: boolean;
-  gameType?: "color" | "shape" | "category" | "size";
+  gameType?: "color" | "shape" | "category" | "size" | "pattern";
 
   onHome: () => void;
   onRestart: () => void;

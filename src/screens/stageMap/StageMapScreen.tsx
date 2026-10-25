@@ -21,6 +21,7 @@ import { triggerHaptic } from "../../utils/haptic";
 import { ShapeSortingLevels } from "../../types/Classification/Shape/shapeSortingLevels";
 import { CategorySortingLevels } from "../../types/Classification/Category/categorySortingLevels";
 import { SizeSortingLevels } from "../../types/Classification/Size/sizeSortingLevels";
+import { PATTERN_LEVELS } from "../../types/Pattern/patternLevels";
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -41,7 +42,7 @@ export default function StageMapScreen() {
   const route = useRoute<StageMapRouteProp>();
   const gameType = route.params.gameType;
 
-  const scrollRef = useRef<ScrollView>(null);
+  const scrollRef = useRef<any>(null);
   const scrollY = useRef(new Animated.Value(0)).current;
 
   // 진입 깜빡임(Flash) 방지를 위한 상태
@@ -64,6 +65,8 @@ export default function StageMapScreen() {
         return CategorySortingLevels;
       case "size": // 👈 모양 분류 레벨 설정 추가
         return SizeSortingLevels;
+      case "pattern": // 👈 모양 분류 레벨 설정 추가
+        return PATTERN_LEVELS;
       default:
         return [];
     }
@@ -163,6 +166,13 @@ export default function StageMapScreen() {
         break;
       case "size": // 👈 모양 분류 플레이 화면으로 이동 연결
         navigation.navigate("SizeSortingPlayScreen", {
+          // 실제 사용하시는 플레이 화면 이름으로 맞춰주세요!
+          gameType,
+          level,
+        });
+        break;
+      case "pattern": // 👈 모양 분류 플레이 화면으로 이동 연결
+        navigation.navigate("PatternPlayScreen", {
           // 실제 사용하시는 플레이 화면 이름으로 맞춰주세요!
           gameType,
           level,

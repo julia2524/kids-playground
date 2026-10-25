@@ -19,7 +19,7 @@ import RemainCategoryBackground, {
   NatureBackgroundKind,
 } from "../../components/CategorySorting/NatureCategoryBackgrounds";
 import ThingsCategoryBackground, {
-  ThingsCategory,
+  ThingsCategoryKind,
 } from "../../components/CategorySorting/ThingsCategoryBackgrounds";
 
 const ANIMAL_PREVIEW_ITEMS: {
@@ -235,7 +235,7 @@ export const VEHICLE_SUB_CATEGORY_PREVIEW_ITEMS: {
 ];
 
 export const THINGS_SUB_CATEGORY_PREVIEW_ITEMS: {
-  category: ThingsCategory;
+  category: ThingsCategoryKind;
   label: string;
   description: string;
   color: string;

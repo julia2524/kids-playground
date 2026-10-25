@@ -46,8 +46,8 @@ function SkyScene() {
       <Rect
         x="0"
         y="0"
-        width="312"
-        height="232"
+        width="412"
+        height="332"
         rx="12"
         fill="url(#dreamySky)"
       />

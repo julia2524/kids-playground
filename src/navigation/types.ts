@@ -33,6 +33,11 @@ export type RootStackParamList = {
     gameType: "size";
     level: number;
   };
+  PatternPlayScreen: {
+    gameType: "pattern";
+    level: number;
+  };
+
   LanguageScreen: undefined;
   ShapeSortingTestScreen: undefined;
   ShapeStickerScreen: undefined;
@@ -45,6 +50,7 @@ export type RootStackParamList = {
   SizeSortingTestScreen: undefined;
   ProgressMoonTestScreen: undefined;
   PatternTestScreen: undefined;
+  PatternGeneratorTestScreen: undefined;
 };
 // PatternPlayScreen: {
 //   gameType: "pattern";
