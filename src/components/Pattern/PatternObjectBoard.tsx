@@ -22,6 +22,8 @@ type Props = {
   onCorrectDrop: (element: PatternElement) => void;
   onWrongDrop: (objectId: string) => void;
   onObjectGrab?: () => void;
+
+  registerChoiceRef?: (id: string, ref: View | null) => void;
 };
 
 const DRAG_EDGE_OVERFLOW = 16;
@@ -74,6 +76,8 @@ export default function PatternObjectBoard({
   onCorrectDrop,
   onWrongDrop,
   onObjectGrab,
+
+  registerChoiceRef,
 }: Props) {
   const { width: windowWidth } = useWindowDimensions();
   const boardRef = useRef<any>(null);
@@ -130,6 +134,8 @@ export default function PatternObjectBoard({
             // 슬롯은 항상 같은 크기로 남는다 → 오답으로 사라져도 나머지는 안 움직임
             <SlotBox
               key={`${roundKey}-${id}`}
+              ref={(node: any) => registerChoiceRef?.(id, node)}
+              collapsable={false}
               style={{
                 width: bubble,
                 height: bubble,

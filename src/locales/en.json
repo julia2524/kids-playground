@@ -45,6 +45,10 @@
   "sound_section": "Sound Settings",
   "sfx_title": "Sound Effects",
   "sfx_desc": "Sounds played when pressing buttons or playing",
+
+  "pattern_xylophone_title": "Pattern Xylophone",
+  "pattern_xylophone_desc": "Play xylophone sounds as patterns appear.",
+
   "bgm_title": "Background Music",
   "bgm_desc": "Play music while playing the game",
   "correct_sfx_title": "Correct Answer Sound",
@@ -156,9 +160,9 @@
   "setting_game_shape_desc_full": "Reset the progress of the shape sorting game.",
   "setting_game_shape_sticker_desc_full": "Reset all shape stickers.",
 
-  "setting_game_size_title": "Size Match",
-  "setting_game_size_desc": "Reset the progress of the size game.",
-  "setting_game_size_sticker_desc": "Reset all size stickers.",
+  "setting_game_size_title": "Sorting Game (Size)",
+  "setting_game_size_desc": "Reset the progress of the size sorting game.",
+  "setting_game_size_sticker_desc": "Reset the size stickers you have collected.",
 
   "setting_game_category_title_full": "Category Sorting",
   "setting_game_category_desc_full": "Reset the progress of the category game.",

@@ -25,6 +25,8 @@ import StickerDetailScreen from "../screens/sticker/StickerDetailScreen";
 import PatternGeneratorTestScreen from "../screens/test/PatternGeneratorTestScreen";
 import PatternTestScreen from "../screens/test/PatternTestScreen";
 import PatternPlayScreen from "../screens/pattern/PatternPlayScreen";
+import AstroCatPreviewScreen from "../screens/test/AstroCatPreviewScreen";
+import PuzzleTestScreen from "../screens/test/PuzzleTestScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -149,6 +151,11 @@ export default function AppNavigator() {
         name="PatternGeneratorTestScreen"
         component={PatternGeneratorTestScreen}
       />
+      <Stack.Screen
+        name="AstroCatPreviewScreen"
+        component={AstroCatPreviewScreen}
+      />
+      <Stack.Screen name="PuzzleTestScreen" component={PuzzleTestScreen} />
     </Stack.Navigator>
   );
 }

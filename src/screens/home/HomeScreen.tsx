@@ -164,7 +164,7 @@ export default function HomeScreen() {
         </HeroCard>
 
         {/* 1. 카테고리 필터 바 */}
-        <FilterRow>
+        {/* <FilterRow>
           {CATEGORY_FILTERS.map((filter) => {
             const isActive = filter.id === "all"; // 필터 선택 상태 관리 시 활성화
             return (
@@ -189,7 +189,7 @@ export default function HomeScreen() {
               </FilterButton>
             );
           })}
-        </FilterRow>
+        </FilterRow> */}
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
@@ -226,25 +226,18 @@ export default function HomeScreen() {
               );
             })}
           </GameGrid>
-
           {/* 번역 검증! */}
           <ComingSoon onPress={() => navigation.navigate("LanguageScreen")}>
-            {/* <ComingSoonEmoji>🌐</ComingSoonEmoji> */}
             <ComingSoonText>🌐 번역 검증하기</ComingSoonText>
           </ComingSoon>
 
-          <ComingSoon onPress={() => navigation.navigate("PatternTestScreen")}>
-            <ComingSoonText>⁉️ 패턴 놀이</ComingSoonText>
+          <ComingSoon onPress={() => navigation.navigate("PuzzleTestScreen")}>
+            <ComingSoonText>퍼즐판 확인</ComingSoonText>
           </ComingSoon>
           <ComingSoon
-            onPress={() => navigation.navigate("CategoryStickerPreviewScreen")}
+            onPress={() => navigation.navigate("AstroCatPreviewScreen")}
           >
-            <ComingSoonText>🔶 종류 스티커</ComingSoonText>
-          </ComingSoon>
-          <ComingSoon
-            onPress={() => navigation.navigate("ProgressMoonTestScreen")}
-          >
-            <ComingSoonText>달 위상변화</ComingSoonText>
+            <ComingSoonText>마스코트 확인</ComingSoonText>
           </ComingSoon>
         </ScrollView>
         {/* Bottom Navigation */}

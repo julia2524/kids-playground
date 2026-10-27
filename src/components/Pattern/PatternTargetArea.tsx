@@ -8,8 +8,12 @@ import {
   useWindowDimensions,
 } from "react-native";
 import styled from "styled-components/native";
-import type { PatternElement } from "../../types/Pattern/patternTypes";
+import type {
+  PatternElement,
+  PatternRule,
+} from "../../types/Pattern/patternTypes";
 import { RenderClassificationObjectSvg } from "../../assets/Classification/classificationItemSvgs";
+import { playPatternXylophone } from "../../utils/sound";
 
 const COLOR_MAP: Record<string, string> = {
   red: "#FF6464",
@@ -29,12 +33,35 @@ type Props = {
   sequence: (PatternElement | null)[];
   blankIndex: number;
   placedElement: PatternElement | null;
+  rule: PatternRule;
   blankSlotRef:
     | React.RefObject<View | null>
     | React.MutableRefObject<View | null>;
   playIntroAnimation?: boolean;
 };
 
+/**
+ * 패턴 규칙에 따라 각 칸의 음 번호를 결정한다.
+ * 0 = 도, 1 = 레, 2 = 미
+ */
+function getPatternNoteIndex(rule: PatternRule, index: number): number {
+  switch (rule) {
+    case "AB":
+      return index % 2;
+
+    case "AAB":
+      return [0, 0, 1][index % 3];
+
+    case "ABB":
+      return [0, 1, 1][index % 3];
+
+    case "ABC":
+      return index % 3;
+
+    default:
+      return 0;
+  }
+}
 function renderElement(
   element: PatternElement | null,
   size: number,
@@ -87,6 +114,7 @@ export default function PatternTargetArea({
   sequence,
   blankIndex,
   placedElement,
+  rule,
   blankSlotRef,
   playIntroAnimation = true,
 }: Props) {
@@ -124,6 +152,16 @@ export default function PatternTargetArea({
       if (index >= sequence.length) return;
 
       setVisibleCount(index + 1);
+
+      // ? 칸에서는 소리를 재생하지 않는다.
+      if (index !== blankIndex) {
+        const noteIndex = getPatternNoteIndex(rule, index);
+        void playPatternXylophone(noteIndex);
+      }
+
+      //   const noteIndex = getPatternNoteIndex(rule, index);
+      //   // 패턴 칸이 등장하는 순간 실로폰 재생
+      //   void playPatternXylophone(noteIndex);
 
       Animated.sequence([
         Animated.timing(values[index], {

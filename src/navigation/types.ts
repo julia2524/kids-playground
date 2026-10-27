@@ -51,6 +51,8 @@ export type RootStackParamList = {
   ProgressMoonTestScreen: undefined;
   PatternTestScreen: undefined;
   PatternGeneratorTestScreen: undefined;
+  AstroCatPreviewScreen: undefined;
+  PuzzleTestScreen: undefined;
 };
 // PatternPlayScreen: {
 //   gameType: "pattern";

@@ -106,7 +106,7 @@ import { ASSETS } from "../assets/assets";
 
 export const SETTING_LEVEL_CLEAR_INFO = {
   maze: {
-    iconName: "color-palette",
+    iconName: "magnet-outline",
     get title() {
       return i18n.t("setting_game_maze_title");
     },
@@ -118,7 +118,7 @@ export const SETTING_LEVEL_CLEAR_INFO = {
     },
   },
   puzzle: {
-    iconName: "color-palette",
+    iconName: "extension-puzzle-outline",
     get title() {
       return i18n.t("setting_game_puzzle_title");
     },
@@ -130,7 +130,7 @@ export const SETTING_LEVEL_CLEAR_INFO = {
     },
   },
   pattern: {
-    iconName: "color-palette",
+    iconName: "repeat-outline",
     get title() {
       return i18n.t("setting_game_pattern_title");
     },
@@ -167,7 +167,7 @@ export const SETTING_LEVEL_CLEAR_INFO = {
     },
   },
   size: {
-    iconName: "diamond",
+    iconName: "resize",
     get title() {
       return i18n.t("setting_game_size_title");
     },
@@ -192,50 +192,6 @@ export const SETTING_LEVEL_CLEAR_INFO = {
     },
   },
 };
-// export const SETTING_LEVEL_CLEAR_INFO = {
-//   maze: {
-//     iconName: "color-palette",
-//     title: "미로 찾기",
-//     description: "미로 찾기 게임의 진행 기록을 초기화합니다.",
-//     stickerDescription: "획득한 미로 찾기 스티커를 초기화합니다.",
-//   },
-//   puzzle: {
-//     iconName: "color-palette",
-//     title: "퍼즐 맞추기",
-//     description: "퍼즐 맞추기 게임의 진행 기록을 초기화합니다.",
-//     stickerDescription: "획득한 퍼즐 스티커를 초기화합니다.",
-//   },
-//   pattern: {
-//     iconName: "color-palette",
-//     title: "패턴 놀이",
-//     description: "패턴 놀이 게임의 진행 기록을 초기화합니다.",
-//     stickerDescription: "획득한 패턴 스티커를 초기화합니다.",
-//   },
-//   color: {
-//     iconName: "color-palette",
-//     title: "분류 놀이 (색상)",
-//     description: "색상 분류 게임의 진행 기록을 초기화합니다.",
-//     stickerDescription: "획득한 색상 스티커를 초기화합니다.",
-//   },
-//   shape: {
-//     iconName: "diamond",
-//     title: "분류 놀이 (모양)",
-//     description: "모양 분류 게임의 진행 기록을 초기화합니다.",
-//     stickerDescription: "획득한 모양 스티커를 초기화합니다.",
-//   },
-//   size: {
-//     iconName: "diamond",
-//     title: "크기 비교",
-//     description: "크기 비교 게임의 진행 기록을 초기화합니다.",
-//     stickerDescription: "획득한 크기 스티커를 초기화합니다.",
-//   },
-//   category: {
-//     iconName: "fast-food",
-//     title: "분류 놀이 (종류)",
-//     description: "종류 분류 게임의 진행 기록을 초기화합니다.",
-//     stickerDescription: "획득한 종류 스티커를 초기화합니다.",
-//   },
-// };
 
 export const STAGE_MAP_INFO: Record<
   StageMapGameType,

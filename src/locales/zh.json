@@ -45,6 +45,10 @@
   "sound_section": "声音设置",
   "sfx_title": "音效",
   "sfx_desc": "点击按钮或玩游戏时的声音",
+
+  "pattern_xylophone_title": "图案木琴音效",
+  "pattern_xylophone_desc": "当图案出现时播放木琴音效。",
+
   "bgm_title": "背景音乐",
   "bgm_desc": "游戏过程中播放音乐",
   "correct_sfx_title": "答对音效",
@@ -157,8 +161,8 @@
   "setting_game_shape_desc_full": "重置形状分类游戏的进度记录。",
   "setting_game_shape_sticker_desc_full": "重置已获得的形状贴纸。",
 
-  "setting_game_size_title": "大小比较",
-  "setting_game_size_desc": "重置大小比较游戏的进度记录。",
+  "setting_game_size_title": "分类游戏（大小）",
+  "setting_game_size_desc": "重置大小分类游戏的进度记录。",
   "setting_game_size_sticker_desc": "重置已获得的大小贴纸。",
 
   "setting_game_category_title_full": "种类分类",

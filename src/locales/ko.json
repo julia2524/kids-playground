@@ -45,6 +45,10 @@
   "sound_section": "소리 설정",
   "sfx_title": "효과음",
   "sfx_desc": "버튼을 누르거나 게임할 때 나는 소리",
+
+  "pattern_xylophone_title": "패턴 실로폰 효과음",
+  "pattern_xylophone_desc": "패턴이 나타날 때 실로폰 소리를 재생해요.",
+
   "bgm_title": "배경음악",
   "bgm_desc": "게임을 하는 동안 음악을 재생해요",
   "correct_sfx_title": "정답 효과",
@@ -157,8 +161,8 @@
   "setting_game_shape_desc_full": "모양 분류 게임의 진행 기록을 초기화합니다.",
   "setting_game_shape_sticker_desc_full": "획득한 모양 스티커를 초기화합니다.",
 
-  "setting_game_size_title": "크기 비교",
-  "setting_game_size_desc": "크기 비교 게임의 진행 기록을 초기화합니다.",
+  "setting_game_size_title": "분류 놀이 (크기)",
+  "setting_game_size_desc": "크기 분류 게임의 진행 기록을 초기화합니다.",
   "setting_game_size_sticker_desc": "획득한 크기 스티커를 초기화합니다.",
 
   "setting_game_category_title_full": "분류 놀이 (종류)",

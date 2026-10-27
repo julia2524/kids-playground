@@ -47,3 +47,24 @@ export async function getBGMEnabled(): Promise<boolean> {
 export async function setBGMEnabled(enabled: boolean): Promise<void> {
   await AsyncStorage.setItem(BGM_ENABLED_KEY, String(enabled));
 }
+
+// =========================
+// 패턴 게임 실로폰 효과음
+// =========================
+
+const PATTERN_XYLOPHONE_ENABLED_KEY = "@pattern_xylophone_enabled";
+
+export async function getPatternXylophoneEnabled(): Promise<boolean> {
+  const value = await AsyncStorage.getItem(PATTERN_XYLOPHONE_ENABLED_KEY);
+
+  // 최초 실행 시 기본값은 ON
+  if (value === null) return true;
+
+  return value === "true";
+}
+
+export async function setPatternXylophoneEnabled(
+  enabled: boolean,
+): Promise<void> {
+  await AsyncStorage.setItem(PATTERN_XYLOPHONE_ENABLED_KEY, String(enabled));
+}

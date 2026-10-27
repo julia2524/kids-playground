@@ -1,6 +1,7 @@
 import { createAudioPlayer, AudioPlayer } from "expo-audio";
 import {
   getCorrectEffectEnabled,
+  getPatternXylophoneEnabled,
   getSoundEnabled,
 } from "./asyncStorage/audioSettingsStorage";
 
@@ -11,6 +12,9 @@ const players = {
   correct_sound: [] as AudioPlayer[],
   wrong_sound: [] as AudioPlayer[],
   notes: [] as AudioPlayer[], // ⭐ 음계용
+
+  // 패턴 게임 실로폰
+  patternXylophone: [] as AudioPlayer[],
 };
 
 // ⭐ 마지막으로 성공한 음계 인덱스를 기억
@@ -104,6 +108,21 @@ export async function preloadSounds() {
       createAudioPlayer(require("../../assets/sounds/note_9.wav")), // 높은 레
       createAudioPlayer(require("../../assets/sounds/note_10.wav")), // 높은 미
     ];
+
+    // 패턴 게임 실로폰 음원 미리 로드
+    players.patternXylophone = [
+      createAudioPlayer(require("../../assets/sounds/xylophone-c.wav")),
+      createAudioPlayer(require("../../assets/sounds/xylophone-d.wav")),
+      createAudioPlayer(require("../../assets/sounds/xylophone-e.wav")),
+      //  createAudioPlayer(require("../../assets/sounds/xylophone-f.wav")),
+      createAudioPlayer(require("../../assets/sounds/xylophone-g.wav")),
+      createAudioPlayer(require("../../assets/sounds/xylophone-a.wav")),
+      // createAudioPlayer(require("../../assets/sounds/xylophone-b.wav")),
+      // createAudioPlayer(require("../../assets/sounds/xylophone-c2.wav")),
+    ];
+    players.patternXylophone.forEach((player) => {
+      player.volume = 0.5;
+    });
     isPreloaded = true;
     isNotesReady = true; // ⭐⭐⭐ 이 줄 반드시 추가!
 
@@ -249,5 +268,30 @@ export async function playEarnedNotes(earnedStars: number) {
         await playPlayerSafely(player);
       }
     }, i * 220);
+  }
+}
+
+// 패턴 오브젝트 등장 시 실로폰 재생
+export async function playPatternXylophone(noteIndex: number): Promise<void> {
+  try {
+    const enabled = await getPatternXylophoneEnabled();
+
+    if (!enabled) return;
+
+    const list = players.patternXylophone;
+
+    if (list.length === 0) {
+      console.log("실로폰 음원이 아직 준비되지 않음");
+      return;
+    }
+
+    // 도 → 미 → 솔 순서로 반복
+    const index = ((noteIndex % list.length) + list.length) % list.length;
+
+    const player = list[index];
+
+    await playPlayerSafely(player);
+  } catch (error) {
+    console.log("실로폰 재생 실패:", error);
   }
 }

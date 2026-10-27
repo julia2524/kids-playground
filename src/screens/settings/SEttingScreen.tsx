@@ -27,8 +27,10 @@ import { useLanguage } from "../../context/LangaugeContext";
 import { useBackgroundMusic } from "../../utils/BackgroundMusicContext";
 import {
   getCorrectEffectEnabled,
+  getPatternXylophoneEnabled,
   getSoundEnabled,
   setCorrectEffectEnabled,
+  setPatternXylophoneEnabled,
   setSoundEnabled,
 } from "../../utils/asyncStorage/audioSettingsStorage";
 import { syncHapticGlobalState, triggerHaptic } from "../../utils/haptic";
@@ -115,6 +117,15 @@ export default function SettingScreen() {
     handleResetGame("category");
   };
 
+  const handleResetSize = () => {
+    triggerHaptic("light");
+    handleResetGame("size");
+  };
+
+  const handleResetPattern = () => {
+    triggerHaptic("light");
+    handleResetGame("pattern");
+  };
   // =========================
   // 보호자 안내 설정 연동
   // =========================
@@ -155,6 +166,9 @@ export default function SettingScreen() {
   // const [backgroundMusic, setBackgroundMusic] = useState(true);
   const [correctEffect, setCorrectEffect] = useState(true);
 
+  const [patternXylophoneEnabled, setPatternXylophoneEnabledState] =
+    useState(true);
+
   const { backgroundMusic, setBackgroundMusic } = useBackgroundMusic();
   // 💡 BGM 스위치 토글 핸들러
   const handleBgmToggle = async (value: boolean) => {
@@ -171,11 +185,14 @@ export default function SettingScreen() {
         const correctEnabled = await getCorrectEffectEnabled();
         const guardianEnabled = await getGuardianNoticeEnabled();
 
+        const xylophoneEnabled = await getPatternXylophoneEnabled();
+
         if (!isMounted) return;
 
         setSoundEffect(enabled);
         setCorrectEffect(correctEnabled);
         setGuardianNoticeEnabledState(guardianEnabled);
+        setPatternXylophoneEnabledState(xylophoneEnabled);
       };
 
       loadSettings();
@@ -195,6 +212,12 @@ export default function SettingScreen() {
     triggerHaptic("light");
     setCorrectEffect(value);
     await setCorrectEffectEnabled(value);
+  };
+
+  const handlePatternXylophoneToggle = async (value: boolean) => {
+    triggerHaptic("light");
+    setPatternXylophoneEnabledState(value);
+    await setPatternXylophoneEnabled(value);
   };
 
   //   // 🎁 스티커 수집 기록 전체 초기화
@@ -309,7 +332,29 @@ export default function SettingScreen() {
             </SettingRow>
 
             <Divider />
+            <SettingRow>
+              <SettingInfo>
+                <IconBadge style={{ backgroundColor: colors.softYellow }}>
+                  <Ionicons name="musical-note" size={24} color="#FBBF24" />
+                </IconBadge>
 
+                <SettingTextWrapper>
+                  <SettingTitle>
+                    {i18n.t("pattern_xylophone_title")}
+                  </SettingTitle>
+
+                  <SettingDescription>
+                    {i18n.t("pattern_xylophone_desc")}
+                  </SettingDescription>
+                </SettingTextWrapper>
+              </SettingInfo>
+
+              <StyledSwitch
+                value={patternXylophoneEnabled}
+                onValueChange={handlePatternXylophoneToggle}
+              />
+            </SettingRow>
+            <Divider />
             <SettingRow>
               <SettingInfo>
                 <IconBadge style={{ backgroundColor: colors.softPink }}>
@@ -387,6 +432,12 @@ export default function SettingScreen() {
             <ResetProgressButton
               gameType="category"
               onPress={handleResetCategory}
+            />
+            <ResetProgressButton gameType="size" onPress={handleResetSize} />
+
+            <ResetProgressButton
+              gameType="pattern"
+              onPress={handleResetPattern}
             />
           </SettingCard>
         </Section>

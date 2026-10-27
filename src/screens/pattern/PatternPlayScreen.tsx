@@ -24,13 +24,19 @@ import ClassificationQuestion from "../../components/common/ClassificationQuesti
 
 import usePatternGame from "../../hooks/usePatternGame";
 import PatternTargetArea from "../../components/Pattern/PatternTargetArea";
-import PatternObjectBoard from "../../components/Pattern/PatternObjectBoard";
+import PatternObjectBoard, {
+  getChoiceId,
+} from "../../components/Pattern/PatternObjectBoard";
+import TutorialOverlay from "../../components/Tutorial/TutorialOverlay";
+import { PatternElement } from "../../types/Pattern/patternTypes";
 
 type RouteProps = RouteProp<RootStackParamList, "PatternPlayScreen">;
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
+export type ProblemObject = PatternElement;
+
 const TOTAL_ROUNDS = 10;
-const SHOW_TEST_CONTROLS = false;
+const SHOW_TEST_CONTROLS = true;
 
 export default function PatternPlayScreen() {
   const { playThemeBGM } = useBackgroundMusic();
@@ -46,6 +52,17 @@ export default function PatternPlayScreen() {
   const route = useRoute<RouteProps>();
   const { gameType, level: initialLevel = 1 } = route.params ?? {};
   const footerRef = useRef<any>(null);
+
+  // 튜토리얼
+  const tutorialObjectRefs = useRef<Record<string, View | null>>({});
+  const tutorialVisibleRef = useRef(false);
+
+  const [tutorialVisible, setTutorialVisible] = React.useState(false);
+  const [tutorialObject, setTutorialObject] =
+    React.useState<PatternElement | null>(null);
+  const [tutorialChoiceId, setTutorialChoiceId] = React.useState<string | null>(
+    null,
+  );
 
   const {
     problem,
@@ -93,7 +110,32 @@ export default function PatternPlayScreen() {
     if (!roundResult) return;
     playEarnedNotes(Math.round(earnedStars / 0.5));
   }, [roundResult]);
+  // 문제가 바뀔 때마다 튜토리얼 표시
+  useEffect(() => {
+    if (!problem) return;
 
+    const answerIndex = problem.choices.findIndex(
+      (choice) => JSON.stringify(choice) === JSON.stringify(problem.answer),
+    );
+
+    if (answerIndex < 0) return;
+
+    const answerChoice = problem.choices[answerIndex];
+    const choiceId = getChoiceId(answerChoice, answerIndex);
+
+    const timer = setTimeout(() => {
+      if (!tutorialObjectRefs.current[choiceId] || !blankSlotRef.current) {
+        return;
+      }
+
+      setTutorialObject(answerChoice);
+      setTutorialChoiceId(choiceId);
+      tutorialVisibleRef.current = true;
+      setTutorialVisible(true);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, [problem, problemKey]);
   if (!problem) {
     return (
       <SafeAreaContainer>
@@ -135,6 +177,7 @@ export default function PatternPlayScreen() {
           key={problemKey}
           sequence={problem.sequence}
           blankIndex={problem.blankIndex}
+          rule={problem.rule}
           placedElement={placedElement}
           blankSlotRef={blankSlotRef}
         />
@@ -151,6 +194,13 @@ export default function PatternPlayScreen() {
           getTargetRects={getTargetRects}
           onCorrectDrop={handleDropObject}
           onWrongDrop={handleWrongDrop}
+          registerChoiceRef={(id, ref) => {
+            tutorialObjectRefs.current[id] = ref;
+          }}
+          onObjectGrab={() => {
+            tutorialVisibleRef.current = false;
+            setTutorialVisible(false);
+          }}
         />
 
         <FooterWrapper ref={footerRef} collapsable={false}>
@@ -173,6 +223,27 @@ export default function PatternPlayScreen() {
         )}
       </Container>
 
+      {tutorialVisible && tutorialObject && tutorialChoiceId && (
+        <TutorialOverlay
+          visible={tutorialVisible}
+          object={null}
+          patternElement={tutorialObject}
+          fromRef={{
+            get current() {
+              return tutorialObjectRefs.current[tutorialChoiceId] ?? null;
+            },
+          }}
+          toRef={blankSlotRef}
+          onComplete={() => {
+            tutorialVisibleRef.current = false;
+            setTutorialVisible(false);
+          }}
+          onGrab={() => {
+            tutorialVisibleRef.current = false;
+            setTutorialVisible(false);
+          }}
+        />
+      )}
       {roundResult && (
         <ColorSortingResultOverlay
           level={testLevel}
