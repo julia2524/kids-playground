@@ -1,7 +1,18 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Animated, ScrollView, View } from "react-native";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { Animated, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import {
+  RouteProp,
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import styled from "styled-components/native";
@@ -12,16 +23,24 @@ import { STAGE_MAP_INFO } from "../../constants/game";
 import MapTrail from "./components/MapTrail";
 import StageNode from "./components/StageNode";
 import AppHeader from "../../components/AppHeader";
+
 import { colorSortingLevels } from "../../types/Classification/Color/colorSortingLevels";
+import { ShapeSortingLevels } from "../../types/Classification/Shape/shapeSortingLevels";
+import { CategorySortingLevels } from "../../types/Classification/Category/categorySortingLevels";
+import { SizeSortingLevels } from "../../types/Classification/Size/sizeSortingLevels";
+import { PATTERN_LEVELS } from "../../types/Pattern/patternLevels";
+import { PUZZLE_LEVELS } from "../../types/Puzzle/puzzleLevels";
+
 import { ASSETS } from "../../assets/assets";
 import useGameProgress from "../../hooks/useGameProgress";
 import { useLanguage } from "../../context/LangaugeContext";
 import i18n from "../../i18n";
 import { triggerHaptic } from "../../utils/haptic";
-import { ShapeSortingLevels } from "../../types/Classification/Shape/shapeSortingLevels";
-import { CategorySortingLevels } from "../../types/Classification/Category/categorySortingLevels";
-import { SizeSortingLevels } from "../../types/Classification/Size/sizeSortingLevels";
-import { PATTERN_LEVELS } from "../../types/Pattern/patternLevels";
+
+import {
+  getPuzzleProgress,
+  PuzzleProgress,
+} from "../../utils/asyncStorage/puzzleProgressStorage";
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -33,59 +52,191 @@ type StageMapRouteProp = RouteProp<RootStackParamList, "StageMapScreen">;
 const NODE_STEP_Y = 150;
 const TOP_PADDING = 120;
 const BOTTOM_PADDING = 140;
+
 export const NODE_SIZE = 120;
+
 const HORIZONTAL_SAFE_PADDING = 70;
 
+const EMPTY_PUZZLE_PROGRESS: PuzzleProgress = {
+  bestStars: {},
+  clearedLevels: [],
+};
+
+// const PUZZLE_CHARACTER_INFO: Record<
+//   string,
+//   { title: string; subtitle: string }
+// > = {
+//   polarbear: {
+//     title: i18n.t("puzzle_map_polarbear_title"),
+//     subtitle: i18n.t("puzzle_map_polarbear_subtitle"),
+//   },
+//   rabbit: {
+//     title: i18n.t("puzzle_map_rabbit_title"),
+//     subtitle: i18n.t("puzzle_map_rabbit_subtitle"),
+//   },
+//   lion: {
+//     title: i18n.t("puzzle_map_lion_title"),
+//     subtitle: i18n.t("puzzle_map_lion_subtitle"),
+//   },
+//   penguin: {
+//     title: i18n.t("puzzle_map_penguin_title"),
+//     subtitle: i18n.t("puzzle_map_penguin_subtitle"),
+//   },
+//   elephant: {
+//     title: i18n.t("puzzle_map_elephant_title"),
+//     subtitle: i18n.t("puzzle_map_elephant_subtitle"),
+//   },
+//   pig: {
+//     title: i18n.t("puzzle_map_pig_title"),
+//     subtitle: i18n.t("puzzle_map_pig_subtitle"),
+//   },
+//   bear: {
+//     title: i18n.t("puzzle_map_bear_title"),
+//     subtitle: i18n.t("puzzle_map_bear_subtitle"),
+//   },
+// };
 export default function StageMapScreen() {
-  const { locale } = useLanguage(); // 💡 언어 변경 감지
+  const { locale } = useLanguage();
+
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<StageMapRouteProp>();
-  const gameType = route.params.gameType;
+
+  const {
+    gameType,
+    character = "polarbear",
+    puzzleCategory = "animal",
+  } = route.params;
+
+  const isPuzzle = gameType === "puzzle";
 
   const scrollRef = useRef<any>(null);
   const scrollY = useRef(new Animated.Value(0)).current;
-
-  // 진입 깜빡임(Flash) 방지를 위한 상태
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   const [trackWidth, setTrackWidth] = useState(0);
   const [viewportHeight, setViewportHeight] = useState(0);
-  const [isReady, setIsReady] = useState(false); // 준비 완료 상태
+  const [isReady, setIsReady] = useState(false);
 
   // ============================================================
-  // Game Type별 레벨 설정
+  // 퍼즐 전용 진행 기록
+  // 기존 분류/패턴 게임의 진행 기록과 분리
   // ============================================================
-  const levelConfigs = (() => {
+  const [puzzleProgress, setPuzzleProgress] = useState<PuzzleProgress>(
+    EMPTY_PUZZLE_PROGRESS,
+  );
+
+  const [puzzleLoaded, setPuzzleLoaded] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      let active = true;
+
+      if (!isPuzzle) {
+        setPuzzleLoaded(false);
+
+        return () => {
+          active = false;
+        };
+      }
+
+      setPuzzleLoaded(false);
+
+      getPuzzleProgress(character)
+        .then((result) => {
+          if (!active) return;
+
+          setPuzzleProgress(result);
+          setPuzzleLoaded(true);
+        })
+        .catch((error) => {
+          console.warn("퍼즐 진행 상황을 불러오지 못했어요.", error);
+
+          if (active) {
+            setPuzzleProgress(EMPTY_PUZZLE_PROGRESS);
+            setPuzzleLoaded(true);
+          }
+        });
+
+      return () => {
+        active = false;
+      };
+    }, [isPuzzle, character]),
+  );
+
+  // ============================================================
+  // 게임별 레벨 설정
+  // ============================================================
+  const levelConfigs = useMemo(() => {
     switch (gameType) {
       case "color":
         return colorSortingLevels;
-      case "shape": // 👈 모양 분류 레벨 설정 추가
+
+      case "shape":
         return ShapeSortingLevels;
-      case "category": // 👈 모양 분류 레벨 설정 추가
+
+      case "category":
         return CategorySortingLevels;
-      case "size": // 👈 모양 분류 레벨 설정 추가
+
+      case "size":
         return SizeSortingLevels;
-      case "pattern": // 👈 모양 분류 레벨 설정 추가
+
+      case "pattern":
         return PATTERN_LEVELS;
+
+      case "puzzle":
+        return PUZZLE_LEVELS;
+
       default:
         return [];
     }
-  })();
+  }, [gameType]);
 
   // ============================================================
-  // 실제 존재하는 Stage만 가져오기
+  // 실제 레벨이 존재하는 스테이지만 사용
   // ============================================================
-  const availableStages = STAGE_CONFIGS.filter((stage) =>
-    Object.values(levelConfigs).some((level) => level.level === stage.level),
+  const availableStages = useMemo(
+    () =>
+      STAGE_CONFIGS.filter((stage) =>
+        Object.values(levelConfigs).some(
+          (level) => level.level === stage.level,
+        ),
+      ),
+    [levelConfigs],
   );
-  // ✅ 추가 (availableStages 선언 바로 아래)
+
+  // 기존 게임의 진행 기록은 기존 훅을 그대로 사용
   const { progress, currentLevel, loaded } = useGameProgress(
     gameType,
     availableStages.length,
   );
 
   // ============================================================
-  // Map 전체 높이
+  // 퍼즐 진행 상태 계산
+  // ============================================================
+  const puzzleCurrentLevel = useMemo(() => {
+    const firstUncleared = PUZZLE_LEVELS.find(
+      (item) => !puzzleProgress.clearedLevels.includes(item.level),
+    );
+
+    // 모든 레벨을 클리어했다면 마지막 레벨에 위치
+    return (
+      firstUncleared?.level ??
+      PUZZLE_LEVELS[PUZZLE_LEVELS.length - 1]?.level ??
+      1
+    );
+  }, [puzzleProgress.clearedLevels]);
+
+  const puzzleHighestClearedLevel = useMemo(
+    () => Math.max(0, ...puzzleProgress.clearedLevels),
+    [puzzleProgress.clearedLevels],
+  );
+
+  const activeLevel = isPuzzle ? puzzleCurrentLevel : currentLevel;
+
+  const mapLoaded = isPuzzle ? puzzleLoaded : loaded;
+
+  // ============================================================
+  // 지도 전체 높이
   // ============================================================
   const contentHeight =
     TOP_PADDING +
@@ -93,123 +244,216 @@ export default function StageMapScreen() {
     Math.max(availableStages.length - 1, 0) * NODE_STEP_Y;
 
   // ============================================================
-  // Stage 위치 계산
+  // 스테이지 위치 계산
   // ============================================================
-  const positions = availableStages.map((stage, index) => {
-    const y = contentHeight - BOTTOM_PADDING - index * NODE_STEP_Y;
-    const usableHalfWidth = Math.max(
-      trackWidth / 2 - HORIZONTAL_SAFE_PADDING,
-      0,
-    );
-    const x = trackWidth / 2 + stage.xOffset * usableHalfWidth;
-    return { x, y };
-  });
+  const positions = useMemo(
+    () =>
+      availableStages.map((stage, index) => {
+        const y = contentHeight - BOTTOM_PADDING - index * NODE_STEP_Y;
+
+        const usableHalfWidth = Math.max(
+          trackWidth / 2 - HORIZONTAL_SAFE_PADDING,
+          0,
+        );
+
+        const x = trackWidth / 2 + stage.xOffset * usableHalfWidth;
+
+        return { x, y };
+      }),
+    [availableStages, contentHeight, trackWidth],
+  );
 
   // ============================================================
   // 현재 레벨 위치로 스크롤 동기화
   // ============================================================
   useEffect(() => {
-    if (!loaded) return; // ✅ 추가
+    if (!mapLoaded) return;
     if (trackWidth === 0 || viewportHeight === 0) return;
+    if (availableStages.length === 0) return;
 
-    const targetIndex = availableStages.findIndex(
-      (stage) => stage.level === currentLevel,
+    const foundIndex = availableStages.findIndex(
+      (stage) => stage.level === activeLevel,
     );
 
-    if (targetIndex === -1) return;
+    const targetIndex =
+      foundIndex >= 0 ? foundIndex : availableStages.length - 1;
 
     const targetY = positions[targetIndex]?.y ?? 0;
+
     const scrollYPosition = Math.max(targetY - viewportHeight / 2, 0);
 
-    // 1️⃣ 배경 Animated Value 초기값을 타겟 스크롤 위치에 바로 맞춥니다.
     scrollY.setValue(scrollYPosition);
 
-    // 2️⃣ ScrollView 실제 위치를 해당 레벨로 이동
     scrollRef.current?.scrollTo({
       y: scrollYPosition,
       animated: false,
     });
 
-    // 3️⃣ 스크롤 준비 완료 상태 변경 및 Fade-In 애니메이션 시작
     setIsReady(true);
-    Animated.timing(fadeAnim, {
+
+    fadeAnim.setValue(0);
+
+    const animation = Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 150, // 0.15초 동안 서서히 나타남
+      duration: 150,
       useNativeDriver: true,
-    }).start();
-  }, [trackWidth, viewportHeight, currentLevel, availableStages, positions]);
+    });
+
+    animation.start();
+
+    return () => {
+      animation.stop();
+    };
+  }, [
+    mapLoaded,
+    trackWidth,
+    viewportHeight,
+    activeLevel,
+    availableStages,
+    positions,
+    scrollY,
+    fadeAnim,
+  ]);
 
   // ============================================================
-  // Stage 선택
+  // 스테이지 선택
   // ============================================================
-  const handleStagePress = (level: number) => {
-    switch (gameType) {
-      case "color":
-        navigation.navigate("ColorSortingPlayScreen", {
-          gameType,
-          level,
-        });
-        break;
-      case "shape": // 👈 모양 분류 플레이 화면으로 이동 연결
-        navigation.navigate("ShapeSortingPlayScreen", {
-          // 실제 사용하시는 플레이 화면 이름으로 맞춰주세요!
-          gameType,
-          level,
-        });
-        break;
-      case "category": // 👈 모양 분류 플레이 화면으로 이동 연결
-        navigation.navigate("CategorySortingPlayScreen", {
-          // 실제 사용하시는 플레이 화면 이름으로 맞춰주세요!
-          gameType,
-          level,
-        });
-        break;
-      case "size": // 👈 모양 분류 플레이 화면으로 이동 연결
-        navigation.navigate("SizeSortingPlayScreen", {
-          // 실제 사용하시는 플레이 화면 이름으로 맞춰주세요!
-          gameType,
-          level,
-        });
-        break;
-      case "pattern": // 👈 모양 분류 플레이 화면으로 이동 연결
-        navigation.navigate("PatternPlayScreen", {
-          // 실제 사용하시는 플레이 화면 이름으로 맞춰주세요!
-          gameType,
-          level,
-        });
-        break;
-    }
-  };
+  const handleStagePress = useCallback(
+    (level: number) => {
+      if (isPuzzle) {
+        const unlocked =
+          level === 1 || puzzleProgress.clearedLevels.includes(level - 1);
 
+        if (!unlocked) return;
+
+        navigation.navigate("PuzzlePlayScreen", {
+          gameType: "puzzle",
+          puzzleCategory,
+          character,
+          level,
+        });
+
+        return;
+      }
+
+      switch (gameType) {
+        case "color":
+          navigation.navigate("ColorSortingPlayScreen", {
+            gameType,
+            level,
+          });
+          break;
+
+        case "shape":
+          navigation.navigate("ShapeSortingPlayScreen", {
+            gameType,
+            level,
+          });
+          break;
+
+        case "category":
+          navigation.navigate("CategorySortingPlayScreen", {
+            gameType,
+            level,
+          });
+          break;
+
+        case "size":
+          navigation.navigate("SizeSortingPlayScreen", {
+            gameType,
+            level,
+          });
+          break;
+
+        case "pattern":
+          navigation.navigate("PatternPlayScreen", {
+            gameType,
+            level,
+          });
+          break;
+      }
+    },
+    [
+      isPuzzle,
+      puzzleProgress.clearedLevels,
+      navigation,
+      puzzleCategory,
+      character,
+      gameType,
+    ],
+  );
+
+  // 💡 컴포넌트 내부(또는 useMemo)로 이동하여 locale 변경 시 실시간 반영
+  const puzzleCharacterInfo = useMemo(
+    () => ({
+      polarbear: {
+        title: i18n.t("puzzle_map_polarbear_title"),
+        subtitle: i18n.t("puzzle_map_polarbear_subtitle"),
+      },
+      rabbit: {
+        title: i18n.t("puzzle_map_rabbit_title"),
+        subtitle: i18n.t("puzzle_map_rabbit_subtitle"),
+      },
+      lion: {
+        title: i18n.t("puzzle_map_lion_title"),
+        subtitle: i18n.t("puzzle_map_lion_subtitle"),
+      },
+      penguin: {
+        title: i18n.t("puzzle_map_penguin_title"),
+        subtitle: i18n.t("puzzle_map_penguin_subtitle"),
+      },
+      elephant: {
+        title: i18n.t("puzzle_map_elephant_title"),
+        subtitle: i18n.t("puzzle_map_elephant_subtitle"),
+      },
+      pig: {
+        title: i18n.t("puzzle_map_pig_title"),
+        subtitle: i18n.t("puzzle_map_pig_subtitle"),
+      },
+      bear: {
+        title: i18n.t("puzzle_map_bear_title"),
+        subtitle: i18n.t("puzzle_map_bear_subtitle"),
+      },
+    }),
+    [locale],
+  );
   // ============================================================
-  // Header 정보
+  // 헤더 정보
   // ============================================================
-  // 💡 현재 언어(locale)에 맞는 타이틀/서브타이틀 동적 생성
   const { title, subtitle } = useMemo(() => {
-    // 1. STAGE_MAP_INFO에서 gameType에 해당하는 키 객체 가져오기
-    const info = gameType
-      ? STAGE_MAP_INFO[gameType as keyof typeof STAGE_MAP_INFO]
-      : undefined;
+    if (isPuzzle) {
+      const info =
+        puzzleCharacterInfo[character as keyof typeof puzzleCharacterInfo] ??
+        puzzleCharacterInfo.polarbear;
 
-    // 2. 정보가 없을 경우 Fallback 기본값 제공
+      return {
+        title: info.title,
+        subtitle: info.subtitle,
+      };
+    }
+
+    const info = STAGE_MAP_INFO[gameType as keyof typeof STAGE_MAP_INFO];
+
     if (!info) {
       return {
-        title: i18n.t("stage_default_title", { defaultValue: "분류 놀이" }),
+        title: i18n.t("stage_default_title", {
+          defaultValue: "분류 놀이",
+        }),
         subtitle: i18n.t("stage_default_subtitle", {
           defaultValue: "알맞은 항목을 찾아요!",
         }),
       };
     }
 
-    // 3. 정상 키가 존재하면 i18n 번역값 반환 (defaultValue 지정으로 키 미등록 시 기본 한국어 노출)
     return {
-      title: i18n.t(info.titleKey, { defaultValue: "분류 놀이" }),
+      title: i18n.t(info.titleKey, {
+        defaultValue: "분류 놀이",
+      }),
       subtitle: i18n.t(info.subtitleKey, {
         defaultValue: "알맞은 항목을 찾아요!",
       }),
     };
-  }, [gameType, locale]);
-
+  }, [gameType, isPuzzle, character, locale]);
   const isClassificationGame =
     gameType === "color" ||
     gameType === "shape" ||
@@ -217,63 +461,79 @@ export default function StageMapScreen() {
     gameType === "category";
 
   // ============================================================
-  // 배경 전환 (고정 길이 구간 + 짧은 fade)
+  // 배경 전환
   // ============================================================
-  const BG_SECTION = NODE_STEP_Y * 7; // 배경 한 장이 차지하는 스크롤 길이 (노드 약 7개)
-  const BG_FADE = 220; // 전환(fade) 구간 길이
+  const BG_SECTION = NODE_STEP_Y * 7;
+  const BG_FADE = 220;
 
   const maxScrollDistance = Math.max(contentHeight - viewportHeight, 1);
 
-  // 아래(스크롤 최대)에서 위로 올라갈수록 bg2 → bg3 → bg4
   const fadeIn = (boundaryFromBottom: number) => {
-    const center = maxScrollDistance - boundaryFromBottom; // scrollY 기준 경계 위치
+    const center = maxScrollDistance - boundaryFromBottom;
+
     return scrollY.interpolate({
       inputRange: [center - BG_FADE / 2, center + BG_FADE / 2],
-      outputRange: [1, 0], // 위로 올라오면(scrollY↓) 나타남
+      outputRange: [1, 0],
       extrapolate: "clamp",
     });
   };
 
-  const bg2Opacity = Animated.multiply(fadeIn(BG_SECTION * 1), fadeAnim);
+  const bg2Opacity = Animated.multiply(fadeIn(BG_SECTION), fadeAnim);
+
   const bg3Opacity = Animated.multiply(fadeIn(BG_SECTION * 2), fadeAnim);
+
   const bg4Opacity = Animated.multiply(fadeIn(BG_SECTION * 3), fadeAnim);
 
+  // ============================================================
+  // 렌더링
+  // ============================================================
   return (
     <SafeAreaContainer edges={["top"]}>
       <Container>
-        {/* ======================================================
-            Map View Area (isReady 상태에 따라 Fade-In)
-        ====================================================== */}
         <MapContainer
-          onLayout={(e) => setViewportHeight(e.nativeEvent.layout.height)}
+          onLayout={(event) =>
+            setViewportHeight(event.nativeEvent.layout.height)
+          }
         >
-          {/* bg1은 항상 즉시 표시 → 흰 화면 방지 */}
+          {/* 배경 */}
           <BackgroundLayer source={ASSETS.stageBg1} resizeMode="cover" />
 
-          {/* bg2~4는 scrollY에 따라 (기존 그대로) */}
           <BackgroundLayer
             source={ASSETS.stageBg2}
             resizeMode="cover"
             style={{ opacity: bg2Opacity }}
           />
+
           <BackgroundLayer
             source={ASSETS.stageBg3}
             resizeMode="cover"
             style={{ opacity: bg3Opacity }}
           />
+
           <BackgroundLayer
             source={ASSETS.stageBg4}
             resizeMode="cover"
             style={{ opacity: bg4Opacity }}
           />
 
-          {/* 헤더 + 지도 + 버튼만 fade-in */}
-          <Animated.View style={{ flex: 1, opacity: fadeAnim }}>
-            {/* Header */}
+          {/* 헤더와 지도 */}
+          <Animated.View
+            style={{
+              flex: 1,
+              opacity: isReady ? fadeAnim : 0,
+            }}
+          >
             <AppHeader
               title={title}
               subtitle={subtitle}
               onBackPress={() => {
+                if (isPuzzle) {
+                  navigation.navigate("PuzzleThemeSelectScreen", {
+                    puzzleCategory,
+                  });
+                  return;
+                }
+
                 if (isClassificationGame) {
                   navigation.navigate("ClassificationMenuScreen");
                 } else {
@@ -283,11 +543,12 @@ export default function StageMapScreen() {
               onMascotPress={() => navigation.navigate("SettingScreen")}
             />
 
-            {/* 실제 Stage Map */}
             <Animated.ScrollView
               ref={scrollRef}
               showsVerticalScrollIndicator={false}
-              onLayout={(e) => setTrackWidth(e.nativeEvent.layout.width)}
+              onLayout={(event) =>
+                setTrackWidth(event.nativeEvent.layout.width)
+              }
               contentContainerStyle={{
                 height: contentHeight,
               }}
@@ -313,35 +574,62 @@ export default function StageMapScreen() {
                   width: "100%",
                 }}
               >
+                {/* 구불구불한 길 */}
                 {trackWidth > 0 && (
                   <MapTrail
                     width={trackWidth}
                     height={contentHeight}
-                    points={availableStages.map((stage, idx) => ({
-                      ...positions[idx],
-                      completed: stage.level < progress.highestClearedLevel,
+                    points={availableStages.map((stage, index) => ({
+                      ...positions[index],
+                      completed: isPuzzle
+                        ? puzzleProgress.clearedLevels.includes(stage.level)
+                        : stage.level < progress.highestClearedLevel,
                     }))}
                   />
                 )}
 
+                {/* 스테이지 노드 */}
                 {availableStages.map((stage, index) => {
                   const pos = positions[index];
+
                   if (!pos) return null;
-                  const unlocked =
-                    stage.level <= progress.highestClearedLevel + 1;
-                  const completed = stage.level < currentLevel;
+
+                  const cleared = isPuzzle
+                    ? puzzleProgress.clearedLevels.includes(stage.level)
+                    : stage.level < currentLevel;
+
+                  const unlocked = isPuzzle
+                    ? stage.level === 1 ||
+                      puzzleProgress.clearedLevels.includes(stage.level - 1)
+                    : stage.level <= progress.highestClearedLevel + 1;
+
+                  const isCurrent = isPuzzle
+                    ? stage.level === puzzleCurrentLevel && !cleared
+                    : stage.level === currentLevel;
+
+                  const stars = isPuzzle
+                    ? (puzzleProgress.bestStars[String(stage.level)] ?? 0)
+                    : (progress.stars[stage.level] ?? 0);
+
+                  const puzzleLevel = PUZZLE_LEVELS.find(
+                    (item) => item.level === stage.level,
+                  );
+
+                  const nodeName = isPuzzle
+                    ? `${puzzleLevel?.pieceCount ?? 0}조각`
+                    : stage.name;
 
                   return (
                     <StageNode
                       key={stage.level}
                       gameType={gameType}
                       level={stage.level}
-                      name={stage.name}
+                      name={nodeName}
                       unlocked={unlocked}
-                      completed={completed}
-                      isCurrent={stage.level === currentLevel}
-                      stars={Math.min(progress.stars[stage.level] ?? 0, 3)}
-                      maxStars={3}
+                      completed={cleared}
+                      isCurrent={isCurrent}
+                      stars={Math.min(stars, isPuzzle ? 5 : 3)}
+                      maxStars={isPuzzle ? 5 : 3}
                       onPress={() => {
                         triggerHaptic("light");
                         handleStagePress(stage.level);
@@ -356,7 +644,7 @@ export default function StageMapScreen() {
               </View>
             </Animated.ScrollView>
 
-            {/* Sticker Gallery */}
+            {/* 스티커 갤러리 */}
             <FloatingStickerButton
               activeOpacity={0.85}
               onPress={() => {

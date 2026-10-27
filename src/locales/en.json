@@ -1,4 +1,6 @@
 {
+  "result_title": "Great Job!",
+
   "sticker_workshop_title": "My Sticker Workshop",
   "sticker_clear_title": "Clear Everything?",
   "sticker_clear_message": "All of your drawings will be erased.",
@@ -713,5 +715,57 @@
       "starOrnament": "Star Ornament",
       "medal": "Medal"
     }
-  }
+  },
+  "puzzle_space_title": "Puzzle Space",
+  "puzzle_hero_title": "Which puzzle would you like to solve?",
+  "puzzle_hero_desc": "Choose your favorite theme and piece the puzzle together!",
+  "puzzle_start": "Start Puzzle",
+
+  "puzzle_tray_complete": "All done! Great job!",
+  "puzzle_tray_guide": "Drag the pieces to fit them into the picture",
+
+  "puzzle_animal_title": "Cute Animal Puzzle",
+  "puzzle_animal_subtitle": "Animal",
+  "puzzle_animal_desc": "Match and assemble cute forest friends and animals!",
+  "puzzle_vehicle_title": "Exciting Vehicle Puzzle",
+  "puzzle_vehicle_subtitle": "Vehicle",
+  "puzzle_vehicle_desc": "Put together cars, trains, and airplanes!",
+  "puzzle_dinosaur_title": "Roaring Dinosaur Puzzle",
+  "puzzle_dinosaur_subtitle": "Dinosaur",
+  "puzzle_dinosaur_desc": "Meet and explore mysterious dinosaur friends!",
+  "puzzle_object_title": "Colorful Object Puzzle",
+  "puzzle_object_subtitle": "Object",
+  "puzzle_object_desc": "Match familiar objects from everyday life!",
+
+  "puzzle_map_polarbear_title": "Polar Bear Adventure",
+  "puzzle_map_polarbear_subtitle": "Let's solve puzzles in the icy world!",
+  "puzzle_map_rabbit_title": "Rabbit Adventure",
+  "puzzle_map_rabbit_subtitle": "Let's solve puzzles with forest friends!",
+  "puzzle_map_lion_title": "Lion Adventure",
+  "puzzle_map_lion_subtitle": "Go on an adventure with the brave lion!",
+  "puzzle_map_penguin_title": "Penguin Adventure",
+  "puzzle_map_penguin_subtitle": "Let's solve puzzles with glacier friends!",
+  "puzzle_map_elephant_title": "Elephant Adventure",
+  "puzzle_map_elephant_subtitle": "Go on an adventure with a big friend!",
+  "puzzle_map_pig_title": "Pig Adventure",
+  "puzzle_map_pig_subtitle": "Let's solve puzzles with farm friends!",
+  "puzzle_map_bear_title": "Bear Adventure",
+  "puzzle_map_bear_subtitle": "Go on an adventure with the forest bear!",
+
+  "select_animal_title": "Choose your animal friend!",
+  "select_animal_desc": "Piece together puzzles with your favorite animal friend.",
+  "animal_rabbit_title": "Rabbit",
+  "animal_rabbit_desc": "Cute rabbit friend",
+  "animal_polarbear_title": "Polar Bear",
+  "animal_polarbear_desc": "Cozy polar bear friend",
+  "animal_lion_title": "Lion",
+  "animal_lion_desc": "Brave lion friend",
+  "animal_penguin_title": "Penguin",
+  "animal_penguin_desc": "Waddling penguin friend",
+  "animal_elephant_title": "Elephant",
+  "animal_elephant_desc": "Big elephant friend",
+  "animal_bear_title": "Bear",
+  "animal_bear_desc": "Strong bear friend",
+  "animal_pig_title": "Pig",
+  "animal_pig_desc": "Pink pig friend"
 }

@@ -1,4 +1,6 @@
 {
+  "result_title": "做得真棒！",
+
   "sticker_workshop_title": "我的贴纸工坊",
   "sticker_clear_title": "全部清除吗？",
   "sticker_clear_message": "您画的图画都会消失哦。",
@@ -713,5 +715,57 @@
       "starOrnament": "星形饰品",
       "medal": "奖牌"
     }
-  }
+  },
+  "puzzle_space_title": "拼图宇宙",
+  "puzzle_hero_title": "你想拼哪一个拼图呢？",
+  "puzzle_hero_desc": "选择喜欢的主题，开始拼拼图吧！",
+  "puzzle_start": "开始拼图",
+
+  "puzzle_tray_complete": "拼图完成了！你真棒！",
+  "puzzle_tray_guide": "把拼图块拖动到画板上对齐吧",
+
+  "puzzle_animal_title": "可爱动物拼图",
+  "puzzle_animal_subtitle": "动物",
+  "puzzle_animal_desc": "快来拼出可爱的森林小伙伴吧！",
+  "puzzle_vehicle_title": "有趣交通工具拼图",
+  "puzzle_vehicle_subtitle": "交通工具",
+  "puzzle_vehicle_desc": "组装汽车、火车和飞机吧！",
+  "puzzle_dinosaur_title": "恐龙世界拼图",
+  "puzzle_dinosaur_subtitle": "恐龙",
+  "puzzle_dinosaur_desc": "一起去认识神秘的恐龙朋友！",
+  "puzzle_object_title": "缤纷物品拼图",
+  "puzzle_object_subtitle": "物品",
+  "puzzle_object_desc": "拼出日常生活中熟悉的物品吧！",
+
+  "puzzle_map_polarbear_title": "北极熊探险",
+  "puzzle_map_polarbear_subtitle": "一起来冰雪世界拼图吧！",
+  "puzzle_map_rabbit_title": "兔子探险",
+  "puzzle_map_rabbit_subtitle": "和森林朋友一起拼图吧！",
+  "puzzle_map_lion_title": "狮子探险",
+  "puzzle_map_lion_subtitle": "和勇敢的狮子一起去冒险吧！",
+  "puzzle_map_penguin_title": "企鹅探险",
+  "puzzle_map_penguin_subtitle": "和冰川朋友一起拼图吧！",
+  "puzzle_map_elephant_title": "大象探险",
+  "puzzle_map_elephant_subtitle": "和巨大的朋友一起去冒险吧！",
+  "puzzle_map_pig_title": "小猪探险",
+  "puzzle_map_pig_subtitle": "和农场朋友一起拼图吧！",
+  "puzzle_map_bear_title": "小熊探险",
+  "puzzle_map_bear_subtitle": "和森林里的熊一起去冒险吧！",
+
+  "select_animal_title": "选择你的动物朋友！",
+  "select_animal_desc": "和喜欢的动物朋友一起拼图吧。",
+  "animal_rabbit_title": "兔子",
+  "animal_rabbit_desc": "可爱的兔子朋友",
+  "animal_polarbear_title": "北极熊",
+  "animal_polarbear_desc": "温暖的北极熊朋友",
+  "animal_lion_title": "狮子",
+  "animal_lion_desc": "勇敢的狮子朋友",
+  "animal_penguin_title": "企鹅",
+  "animal_penguin_desc": "摇晃的企鹅朋友",
+  "animal_elephant_title": "大象",
+  "animal_elephant_desc": "大大的大象朋友",
+  "animal_bear_title": "熊",
+  "animal_bear_desc": "强壮的熊朋友",
+  "animal_pig_title": "小猪",
+  "animal_pig_desc": "粉嫩的小猪朋友"
 }

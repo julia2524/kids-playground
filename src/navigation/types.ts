@@ -1,12 +1,23 @@
+import { PuzzleCategoryType } from "../screens/puzzle/puzzleMenuScreen";
 import { GameType, StageMapGameType } from "../types/game";
 
 export type RootStackParamList = {
   Home: undefined;
 
   ClassificationMenuScreen: undefined;
+  PuzzleMenuScreen: undefined;
+  PuzzleThemeSelectScreen: {
+    puzzleCategory: PuzzleCategoryType;
+  };
 
   StageMapScreen: {
     gameType: StageMapGameType;
+    puzzleCategory?: "animal" | "vehicle" | "dinosaur" | "object";
+    character?: string;
+  };
+  PuzzleRoadMapScreen: {
+    puzzleCategory?: "animal" | "vehicle" | "dinosaur" | "object";
+    character: string;
   };
 
   SettingScreen: undefined;
@@ -37,6 +48,12 @@ export type RootStackParamList = {
     gameType: "pattern";
     level: number;
   };
+  PuzzlePlayScreen: {
+    gameType: "puzzle";
+    puzzleCategory?: "animal" | "vehicle" | "dinosaur" | "object"; // 👈 추가!
+    character?: string;
+    level?: number;
+  };
 
   LanguageScreen: undefined;
   ShapeSortingTestScreen: undefined;
@@ -54,17 +71,3 @@ export type RootStackParamList = {
   AstroCatPreviewScreen: undefined;
   PuzzleTestScreen: undefined;
 };
-// PatternPlayScreen: {
-//   gameType: "pattern";
-//   level: number;
-// };
-
-// PuzzlePlayScreen: {
-//   gameType: "puzzle";
-//   level: number;
-// };
-
-// MazePlayScreen: {
-//   gameType: "maze";
-//   level: number;
-// };

@@ -10,6 +10,8 @@ import StarBadge from "../../design-system/ui/StarBadge";
 import { StageMapGameType } from "../../types/game";
 import { triggerHaptic } from "../../utils/haptic";
 import GameRewardBadge from "../common/GameRewardBadge";
+import i18n from "../../i18n";
+import { useLanguage } from "../../context/LangaugeContext";
 
 // ============================================================
 // Theme / Color Definitions
@@ -20,7 +22,7 @@ type ColorSortingResultOverlayProps = {
   level: number;
   earnedStars: number;
   isLastLevel: boolean;
-  gameType?: "color" | "shape" | "category" | "size" | "pattern";
+  gameType?: "color" | "shape" | "category" | "size" | "pattern" | "puzzle";
 
   onHome: () => void;
   onRestart: () => void;
@@ -38,6 +40,7 @@ export default function ColorSortingResultOverlay({
   onNextLevel,
   onGoRoadmap,
 }: ColorSortingResultOverlayProps) {
+  useLanguage();
   const handleGoRoadPress = () => {
     triggerHaptic("light");
     // playSound("grab");
@@ -121,7 +124,7 @@ export default function ColorSortingResultOverlay({
           {/* ================================================= */}
           {/* 성공 문구 */}
           {/* ================================================= */}
-          <ResultTitle>정말 잘했어요!</ResultTitle>
+          <ResultTitle>{i18n.t("result_title")}</ResultTitle>
 
           {/* ================================================= */}
           {/* 버튼 */}

@@ -524,7 +524,7 @@ export const BabyBunny: React.FC<BabyBunnyProps> = ({
         </G>
 
         {/* 앞발: 가슴 앞에 모은 자세 */}
-        <Path
+        {/* <Path
           d="M86 111
              C77 115 77 126 84 132
              C91 139 103 138 112 131
@@ -556,10 +556,10 @@ export const BabyBunny: React.FC<BabyBunnyProps> = ({
              L123 124
              L134 114Z"
           fill="url(#bunny-pawGrad)"
-        />
+        /> */}
 
         {/* 앞발 하이라이트 */}
-        <Path
+        {/* <Path
           d="M87 117 Q92 113 98 116"
           stroke="#FFFFFF"
           strokeWidth={2.5}
@@ -572,7 +572,7 @@ export const BabyBunny: React.FC<BabyBunnyProps> = ({
           strokeWidth={2.5}
           strokeLinecap="round"
           opacity={0.9}
-        />
+        /> */}
 
         {/* 몸통의 부드러운 하이라이트 */}
         <Path

@@ -30,6 +30,6 @@ export interface PuzzleBoardProps {
   rows?: number;
   columns?: number;
   boardAspectRatio?: number;
-  onComplete?: () => void;
+  onComplete?: (wrongDropCount: number) => void;
   title?: string;
 }

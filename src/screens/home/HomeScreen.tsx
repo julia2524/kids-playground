@@ -119,6 +119,10 @@ export default function HomeScreen() {
       navigation.navigate("ClassificationMenuScreen");
       return;
     }
+    if (gameType === "puzzle") {
+      navigation.navigate("PuzzleMenuScreen");
+      return;
+    }
     navigation.navigate("StageMapScreen", { gameType });
   };
 

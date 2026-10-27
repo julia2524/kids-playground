@@ -88,7 +88,7 @@ export const GAME_CARDS = [
     descKey: "game_puzzle_desc",
     bgColor: COLORS.softYellow,
     image: ASSETS.cardPuzzle,
-    isUnlocked: false,
+    isUnlocked: true,
   },
   {
     id: "maze",

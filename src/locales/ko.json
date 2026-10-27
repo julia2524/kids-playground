@@ -1,4 +1,6 @@
 {
+  "result_title": "정말 잘했어요!",
+
   "sticker_workshop_title": "나만의 스티커 공방",
   "sticker_clear_title": "모두 지울까요?",
   "sticker_clear_message": "그린 그림이 모두 사라져요.",
@@ -716,5 +718,57 @@
       "starOrnament": "별 장식",
       "medal": "메달"
     }
-  }
+  },
+  "puzzle_space_title": "퍼즐 우주",
+  "puzzle_hero_title": "어떤 퍼즐을 맞출까요?",
+  "puzzle_hero_desc": "좋아하는 테마를 골라 퍼즐 조각을 맞춰보세요!",
+  "puzzle_start": "퍼즐 시작하기",
+
+  "puzzle_tray_complete": "완성했어요! 정말 잘했어!",
+  "puzzle_tray_guide": "조각을 끌어다가 그림에 맞춰보세요",
+
+  "puzzle_animal_title": "귀여운 동물 퍼즐",
+  "puzzle_animal_subtitle": "동물",
+  "puzzle_animal_desc": "숲속 친구들과 동물들을 맞추어봐요!",
+  "puzzle_vehicle_title": "신나는 탈것 퍼즐",
+  "puzzle_vehicle_subtitle": "탈것",
+  "puzzle_vehicle_desc": "자동차, 기차, 비행기를 조립해요!",
+  "puzzle_dinosaur_title": "쿵쾅쿵쾅 공룡 퍼즐",
+  "puzzle_dinosaur_subtitle": "공룡",
+  "puzzle_dinosaur_desc": "신비로운 공룡 친구들을 만나봐요!",
+  "puzzle_object_title": "알록달록 사물 퍼즐",
+  "puzzle_object_subtitle": "사물",
+  "puzzle_object_desc": "일상 속 친숙한 물건들을 맞춰봐요!",
+
+  "puzzle_map_polarbear_title": "북극곰 탐험",
+  "puzzle_map_polarbear_subtitle": "얼음 세상의 퍼즐을 맞춰보자!",
+  "puzzle_map_rabbit_title": "토끼 탐험",
+  "puzzle_map_rabbit_subtitle": "숲속 친구와 퍼즐을 맞춰보자!",
+  "puzzle_map_lion_title": "사자 탐험",
+  "puzzle_map_lion_subtitle": "용감한 사자와 모험을 떠나자!",
+  "puzzle_map_penguin_title": "펭귄 탐험",
+  "puzzle_map_penguin_subtitle": "빙하 친구와 퍼즐을 맞춰보자!",
+  "puzzle_map_elephant_title": "코끼리 탐험",
+  "puzzle_map_elephant_subtitle": "커다란 친구와 모험을 떠나자!",
+  "puzzle_map_pig_title": "돼지 탐험",
+  "puzzle_map_pig_subtitle": "농장 친구와 퍼즐을 맞춰보자!",
+  "puzzle_map_bear_title": "곰 탐험",
+  "puzzle_map_bear_subtitle": "숲속 곰과 모험을 떠나자!",
+
+  "select_animal_title": "함께할 동물 친구를 골라주세요!",
+  "select_animal_desc": "좋아하는 동물 친구와 함께 퍼즐을 맞춰봐요.",
+  "animal_rabbit_title": "토끼",
+  "animal_rabbit_desc": "귀여운 토끼 친구",
+  "animal_polarbear_title": "북극곰",
+  "animal_polarbear_desc": "포근한 북극곰 친구",
+  "animal_lion_title": "사자",
+  "animal_lion_desc": "용감한 사자 친구",
+  "animal_penguin_title": "펭귄",
+  "animal_penguin_desc": "뒤뚱뒤뚱 펭귄 친구",
+  "animal_elephant_title": "코끼리",
+  "animal_elephant_desc": "커다란 코끼리 친구",
+  "animal_bear_title": "곰",
+  "animal_bear_desc": "든든한 곰 친구",
+  "animal_pig_title": "돼지",
+  "animal_pig_desc": "핑크빛 돼지 친구"
 }

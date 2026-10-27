@@ -11,10 +11,8 @@ import ShapeSortingTestScreen from "../screens/test/ShapeSortingTestScreen";
 import ShapeStickerScreen from "../screens/test/shapeStickerScreen";
 import ShapeBasketPreviewScreen from "../screens/test/ShapeBasketPreviewScreen";
 import ShapeSortingPlayScreen from "../screens/classification/ShapeSortingPlayScreen";
-import ShapeStickerPreviewScreen from "../screens/test/shapeStickerScreen";
 import CategoryStickerPreviewScreen from "../screens/test/CategoryStickerPreviewScreen";
 import CategorySortingTestScreen from "../screens/test/CategorySortingTestScreen";
-import CategoryBasketPreviewScreen from "../screens/test/CategoryBasketPreviewScreen";
 import CategoryScenePreviewScreen from "../screens/test/CategoryScenePreviewScreen";
 import AnimalCategoryBackgroundPreviewScreen from "../screens/test/CategoryBackgroundPreviewScreen";
 import CategorySortingPlayScreen from "../screens/classification/CategorySortingPlayScreen";
@@ -27,6 +25,10 @@ import PatternTestScreen from "../screens/test/PatternTestScreen";
 import PatternPlayScreen from "../screens/pattern/PatternPlayScreen";
 import AstroCatPreviewScreen from "../screens/test/AstroCatPreviewScreen";
 import PuzzleTestScreen from "../screens/test/PuzzleTestScreen";
+import PuzzlePlayScreen from "../screens/puzzle/puzzlePlayScreen";
+import PuzzleMenuScreen from "../screens/puzzle/puzzleMenuScreen";
+import PuzzleThemeSelectScreen from "../screens/puzzle/PuzzleThemeSelectScreen";
+import PuzzleRoadMapScreen from "../screens/stageMap/PuzzleRoadMapScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -47,13 +49,33 @@ export default function AppNavigator() {
         }}
       />
       <Stack.Screen
+        name="PuzzleMenuScreen"
+        component={PuzzleMenuScreen}
+        options={{
+          animation: "fade",
+        }}
+      />
+      <Stack.Screen
+        name="PuzzleThemeSelectScreen"
+        component={PuzzleThemeSelectScreen}
+        options={{
+          animation: "fade",
+        }}
+      />
+      <Stack.Screen
         name="StageMapScreen"
         component={StageMapScreen}
         options={{
           animation: "fade",
         }}
       />
-
+      <Stack.Screen
+        name="PuzzleRoadMapScreen"
+        component={PuzzleRoadMapScreen}
+        options={{
+          animation: "fade",
+        }}
+      />
       <Stack.Screen
         name="ColorSortingPlayScreen"
         component={ColorSortingPlayScreen}
@@ -89,7 +111,13 @@ export default function AppNavigator() {
           animation: "fade",
         }}
       />
-
+      <Stack.Screen
+        name="PuzzlePlayScreen"
+        component={PuzzlePlayScreen}
+        options={{
+          animation: "fade",
+        }}
+      />
       <Stack.Screen
         name="SettingScreen"
         component={SettingScreen}
@@ -111,7 +139,6 @@ export default function AppNavigator() {
           animation: "fade",
         }}
       />
-
       <Stack.Screen name="LanguageScreen" component={LanguageScreen} />
       <Stack.Screen
         name="ShapeSortingTestScreen"
