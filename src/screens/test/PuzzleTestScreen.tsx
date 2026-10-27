@@ -172,6 +172,12 @@ import {
 
 import PuzzleBoard from "../../components/Puzzle/engine/PuzzleBoard";
 import BabyLionPuzzleArtwork from "../../components/Puzzle/assets/BabyLion/BabyLionPuzzleArtwork";
+import BabyBunnyPuzzleScene from "../../components/Puzzle/assets/BabyBunny/BabyBunnyPuzzleScene";
+import BabyElephantPuzzleScene from "../../components/Puzzle/assets/BabyElephant/BabyElephantPuzzleScene";
+import ChocoBearPuzzleScene from "../../components/Puzzle/assets/ChocoBear/ChocoBearPuzzleScene";
+import PinkyPigPuzzleScene from "../../components/Puzzle/assets/PinkyPig/PinkyPigPuzzleScene";
+import PochiPenguinPuzzleScene from "../../components/Puzzle/assets/PochiPenguin/PochiPenguinPuzzleScene";
+import PolarBearPuzzleScene from "../../components/Puzzle/assets/PolarBear/PolarBearPuzzleScene";
 
 export default function PuzzleTestScreen() {
   return (
@@ -191,7 +197,7 @@ export default function PuzzleTestScreen() {
       <View style={styles.gameContainer}>
         <PuzzleBoard
           title="🦁 아기 사자 퍼즐"
-          Artwork={BabyLionPuzzleArtwork}
+          Artwork={PolarBearPuzzleScene}
           viewBoxWidth={240}
           viewBoxHeight={180}
           rows={3}

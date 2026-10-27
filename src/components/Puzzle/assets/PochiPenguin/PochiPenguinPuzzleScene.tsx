@@ -4,6 +4,7 @@ import Svg from "react-native-svg";
 import PochiGlacialBackground from "./PochiGlacialBackground";
 import IceFloePlatform from "./IceFloePlatform";
 import PochiPenguin from "./PochiPenguin";
+import BabyLionPuzzleArtwork from "./PochiPenguinPuzzleArtwork";
 
 interface PochiPenguinPuzzleSceneProps {
   width?: number | string;
@@ -21,14 +22,7 @@ export default function PochiPenguinPuzzleScene({
       viewBox="0 0 240 180"
       preserveAspectRatio="xMidYMid meet"
     >
-      {/* Layer 1: Glacial night sky, aurora, distant mountains, sea */}
-      <PochiGlacialBackground />
-
-      {/* Layer 2: Floating ice floe platform */}
-      <IceFloePlatform />
-
-      {/* Layer 3: Pochi Penguin character */}
-      <PochiPenguin scale={0.5} x={60} y={48} />
+      <BabyLionPuzzleArtwork />
     </Svg>
   );
 }

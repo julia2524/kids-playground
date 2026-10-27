@@ -52,50 +52,6 @@ export default function PuzzleBoard({
     () => createPuzzlePieces(viewBoxWidth, viewBoxHeight, rows, columns),
     [viewBoxWidth, viewBoxHeight, rows, columns],
   );
-
-  //   const makePositions = useCallback(() => {
-  //     if (!layoutWidth || !boardWidth || !calculatedBoardHeight) return;
-  //     const shuffled = shuffleArray(generatedPieces);
-  //     const usableWidth = Math.max(100, layoutWidth - 24);
-  //     const usableTrayHeight = TRAY_HEIGHT - 54;
-  //     const next: Record<string, PuzzlePiecePosition> = {};
-
-  //     shuffled.forEach((piece, index) => {
-  //       const colCount = Math.max(
-  //         1,
-  //         Math.floor((usableWidth - 8) / (pieceWidth + 8)),
-  //       );
-  //       const row = Math.floor(index / colCount);
-  //       const col = index % colCount;
-  //       const maxX = Math.max(0, layoutWidth - pieceWidth - 8);
-  //       const baseX = 8 + col * (pieceWidth + 8);
-  //       const baseY = trayTop + 42 + row * (pieceHeight + 8);
-  //       const jitterX = Math.random() * 10 - 5;
-  //       const jitterY = Math.random() * 8 - 4;
-
-  //       next[piece.id] = {
-  //         x: Math.max(4, Math.min(maxX, baseX + jitterX)),
-  //         y: Math.max(
-  //           trayTop + 36,
-  //           Math.min(trayTop + usableTrayHeight - pieceHeight, baseY + jitterY),
-  //         ),
-  //         placed: false,
-  //       };
-  //     });
-
-  //     setPieces(generatedPieces);
-  //     setPositions(next);
-  //     setPlacedCount(0);
-  //     setCompleteSent(false);
-  //   }, [
-  //     layoutWidth,
-  //     boardWidth,
-  //     calculatedBoardHeight,
-  //     generatedPieces,
-  //     pieceWidth,
-  //     pieceHeight,
-  //     trayTop,
-  //   ]);
   const makePositions = useCallback(() => {
     if (!layoutWidth || !boardWidth || !calculatedBoardHeight) return;
 
@@ -225,11 +181,11 @@ export default function PuzzleBoard({
 
   return (
     <SafeAreaView style={styles.safe}>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <View style={styles.headerSpacer} />
         <Text style={styles.title}>{title}</Text>
         <View style={styles.headerSpacer} />
-      </View>
+      </View> */}
 
       <View style={styles.playArea} onLayout={onRootLayout}>
         <View style={styles.boardStage}>

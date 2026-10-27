@@ -1,9 +1,7 @@
 import React from "react";
 import Svg from "react-native-svg";
 
-import MoonlitMeadowBackground from "./MoonlitMeadowBackground";
-import CloudPlatform from "./CloudPlatform";
-import BabyBunny from "./BabyBunny";
+import BabyBunnyPuzzleArtwork from "./BabyBunnyPuzzleArtwork";
 
 interface BabyBunnyPuzzleSceneProps {
   width?: number | string;
@@ -21,14 +19,7 @@ export default function BabyBunnyPuzzleScene({
       viewBox="0 0 240 180"
       preserveAspectRatio="xMidYMid meet"
     >
-      {/* Layer 1: Moonlit night sky, stars, distant hills, meadow */}
-      <MoonlitMeadowBackground />
-
-      {/* Layer 2: Fluffy cloud platform */}
-      <CloudPlatform />
-
-      {/* Layer 3: Baby Bunny character */}
-      <BabyBunny scale={0.5} x={60} y={48} />
+      <BabyBunnyPuzzleArtwork />
     </Svg>
   );
 }
