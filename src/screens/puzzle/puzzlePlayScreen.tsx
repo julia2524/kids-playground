@@ -14,13 +14,13 @@ import StarRow from "../../design-system/components/StarRow";
 import AppHeader from "../../components/AppHeader";
 import PuzzleBoard from "../../components/Puzzle/engine/PuzzleBoard";
 
-import PolarBearPuzzleScene from "../../components/Puzzle/assets/PolarBear/PolarBearPuzzleScene";
-import BabyLionPuzzleScene from "../../components/Puzzle/assets/BabyLion/BabyLionPuzzleScene";
-import BabyBunnyPuzzleScene from "../../components/Puzzle/assets/BabyBunny/BabyBunnyPuzzleScene";
-import PochiPenguinPuzzleScene from "../../components/Puzzle/assets/PochiPenguin/PochiPenguinPuzzleScene";
-import BabyElephantPuzzleScene from "../../components/Puzzle/assets/BabyElephant/BabyElephantPuzzleScene";
-import PinkyPigPuzzleScene from "../../components/Puzzle/assets/PinkyPig/PinkyPigPuzzleScene";
-import ChocoBearPuzzleScene from "../../components/Puzzle/assets/ChocoBear/ChocoBearPuzzleScene";
+import PolarBearPuzzleScene from "../../components/Puzzle/assets/animal/PolarBear/PolarBearPuzzleScene";
+import BabyLionPuzzleScene from "../../components/Puzzle/assets/animal/BabyLion/BabyLionPuzzleScene";
+import BabyBunnyPuzzleScene from "../../components/Puzzle/assets/animal/BabyBunny/BabyBunnyPuzzleScene";
+import PochiPenguinPuzzleScene from "../../components/Puzzle/assets/animal/PochiPenguin/PochiPenguinPuzzleScene";
+import BabyElephantPuzzleScene from "../../components/Puzzle/assets/animal/BabyElephant/BabyElephantPuzzleScene";
+import PinkyPigPuzzleScene from "../../components/Puzzle/assets/animal/PinkyPig/PinkyPigPuzzleScene";
+import ChocoBearPuzzleScene from "../../components/Puzzle/assets/animal/ChocoBear/ChocoBearPuzzleScene";
 
 import ColorSortingResultOverlay from "../../components/ColorSorting/ColorSortingResultOverlay";
 import { playEarnedNotes } from "../../utils/sound";

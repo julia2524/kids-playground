@@ -9,6 +9,7 @@ const players = {
   grab: [] as AudioPlayer[],
   correct: [] as AudioPlayer[],
   wrong: [] as AudioPlayer[],
+  wrong_puzzle_sound: [] as AudioPlayer[],
   correct_sound: [] as AudioPlayer[],
   wrong_sound: [] as AudioPlayer[],
   notes: [] as AudioPlayer[], // ⭐ 음계용
@@ -94,7 +95,16 @@ export async function preloadSounds() {
     wrong2.volume = 0.8;
     wrong3.volume = 0.8;
     players.wrong_sound = [wrong1, wrong2, wrong3];
-
+    const wrongPuzzle1 = createAudioPlayer(
+      require("../../assets/sounds/wrong_puzzle_1.wav"),
+    );
+    const wrongPuzzle2 = createAudioPlayer(
+      require("../../assets/sounds/wrong_puzzle_2.wav"),
+    );
+    const wrongPuzzle3 = createAudioPlayer(
+      require("../../assets/sounds/wrong_puzzle_3.wav"),
+    );
+    players.wrong_puzzle_sound = [wrongPuzzle1, wrongPuzzle2, wrongPuzzle3];
     // ⭐ 음계 10개 미리 로드
     players.notes = [
       createAudioPlayer(require("../../assets/sounds/note_1.wav")), // 도
@@ -151,7 +161,7 @@ async function playPlayerSafely(player: AudioPlayer) {
 }
 // 기존 랜덤 재생
 export async function playSound(
-  soundType: "grab" | "correct_sound" | "wrong_sound",
+  soundType: "grab" | "correct_sound" | "wrong_sound" | "wrong_puzzle_sound",
 ) {
   // if (!generalSoundEnabled) return; // ⭐ 일반 효과음
   const enabled = await getSoundEnabled();

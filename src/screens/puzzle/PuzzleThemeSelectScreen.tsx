@@ -117,6 +117,9 @@ export default function PuzzleThemeSelectScreen() {
   const { puzzleCategory } = route.params;
   const titleKey = `puzzle_${puzzleCategory}_title`;
   const headerTitle = i18n.t(titleKey);
+  const selectTitle = i18n.t(`select_${puzzleCategory}_title`);
+
+  const selectDescription = i18n.t(`select_${puzzleCategory}_desc`);
 
   const configs = useMemo(() => {
     switch (puzzleCategory) {
@@ -169,7 +172,7 @@ export default function PuzzleThemeSelectScreen() {
         />
 
         <MainContainer>
-          <TitleArea>
+          {/* <TitleArea>
             <Title>
               {i18n.t("select_animal_title") ||
                 "함께할 동물 친구를 골라주세요!"}
@@ -178,6 +181,10 @@ export default function PuzzleThemeSelectScreen() {
               {i18n.t("select_animal_desc") ||
                 "좋아하는 동물 친구와 함께 퍼즐을 맞춰봐요."}
             </Description>
+          </TitleArea> */}
+          <TitleArea>
+            <Title>{selectTitle}</Title>
+            <Description>{selectDescription}</Description>
           </TitleArea>
 
           <FlatList

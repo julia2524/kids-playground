@@ -18,9 +18,18 @@ import AppHeader from "../../components/AppHeader";
 import i18n from "../../i18n";
 import { useLanguage } from "../../context/LangaugeContext";
 import { triggerHaptic } from "../../utils/haptic";
+import {
+  getLastPuzzleCategory,
+  saveLastPuzzleCategory,
+} from "../../utils/asyncStorage/puzzleProgressStorage";
 
 // 퍼즐 카테고리 타입 정의 (동물, 탈것, 공룡, 사물 등)
-export type PuzzleCategoryType = "animal" | "vehicle" | "dinosaur" | "object";
+export type PuzzleCategoryType =
+  | "animal"
+  | "vehicle"
+  | "flag"
+  | "dinosaur"
+  | "object";
 
 // ============================================================
 // 몽환 파스텔 컬러 팔레트 (퍼즐 테마에 맞춘 확장)
@@ -39,6 +48,7 @@ export const colors = {
   cardBg: {
     animal: "#FFF0F5", // 동물: 분홍 파스텔
     vehicle: "#F0F5FF", // 탈것: 하늘 파스텔
+    flag: "#FFF2F2", // 연한 국기 레드 느낌
     dinosaur: "#EDFAF6", // 공룡: 민트 파스텔
     object: "#FFF9E6", // 사물: 노랑 파스텔
   },
@@ -46,6 +56,7 @@ export const colors = {
   accent: {
     animal: "#FF6FAE",
     vehicle: "#4D8DFF",
+    flag: "#E84A5F", // 선명한 국기 레드
     dinosaur: "#34CDB2",
     object: "#FFB020",
   },
@@ -90,6 +101,16 @@ const MENU_PUZZLE_CONFIGS: readonly PuzzleGameConfig[] = [
     isUnlocked: false,
   },
   {
+    id: "flag",
+    titleKey: "puzzle_flag_title",
+    subtitleKey: "puzzle_flag_subtitle",
+    descKey: "puzzle_flag_desc",
+    iconName: "flag",
+    accentColor: colors.accent.flag,
+    cardBg: colors.cardBg.flag,
+    isUnlocked: true,
+  },
+  {
     id: "dinosaur",
     titleKey: "puzzle_dinosaur_title",
     subtitleKey: "puzzle_dinosaur_subtitle",
@@ -127,6 +148,30 @@ export default function PuzzleMenuScreen() {
       description: i18n.t(item.descKey) || "",
     }));
   }, [locale]);
+  useEffect(() => {
+    const loadLastPuzzlePosition = async () => {
+      const lastPuzzleId = await getLastPuzzleCategory();
+
+      if (!lastPuzzleId) return;
+
+      const targetIndex = PUZZLES.findIndex(
+        (puzzle) => puzzle.id === lastPuzzleId,
+      );
+
+      if (targetIndex !== -1) {
+        setCurrentIndex(targetIndex);
+
+        setTimeout(() => {
+          flatListRef.current?.scrollToOffset({
+            offset: targetIndex * SNAP_INTERVAL,
+            animated: false,
+          });
+        }, 100);
+      }
+    };
+
+    loadLastPuzzlePosition();
+  }, [PUZZLES]);
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const offsetX = event.nativeEvent.contentOffset.x;
@@ -138,25 +183,20 @@ export default function PuzzleMenuScreen() {
 
   // const handleSelectPuzzle = (puzzle: (typeof PUZZLES)[number]) => {
   //   triggerHaptic("light");
-  //   if (puzzle.id === "animal") {
-  //     navigation.navigate("AnimalSelectScreen", {
-  //       puzzleCategory: puzzle.id,
-  //     });
-  //     return;
-  //   } else {
-  //     navigation.navigate("StageMapScreen", {
-  //       puzzleCategory: puzzle.id,
-  //     } as any);
-  //   }
+
+  //   navigation.navigate("PuzzleThemeSelectScreen", {
+  //     puzzleCategory: puzzle.id,
+  //   });
   // };
-  const handleSelectPuzzle = (puzzle: (typeof PUZZLES)[number]) => {
+  const handleSelectPuzzle = async (puzzle: (typeof PUZZLES)[number]) => {
     triggerHaptic("light");
+
+    await saveLastPuzzleCategory(puzzle.id);
 
     navigation.navigate("PuzzleThemeSelectScreen", {
       puzzleCategory: puzzle.id,
     });
   };
-
   const scrollToIndex = (index: number) => {
     if (index < 0 || index >= PUZZLES.length) return;
     flatListRef.current?.scrollToOffset({
