@@ -28,7 +28,7 @@
   "nav_book": "도감",
   "nav_settings": "설정",
   "alert_locked_title": "알림",
-  "alert_locked_message": "{{gameName}}는 곧 열릴 예정이에요!",
+  "alert_locked_message": "{{gameName}}{{particle}} 곧 열릴 예정이에요!",
 
   "guardian_notice_title": "보호자 안내",
   "guardian_notice_p1": "이 앱은 만 3~6세 유아를 위한\n간단한 분류·인지 놀이입니다.",

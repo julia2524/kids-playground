@@ -22,6 +22,8 @@ import {
   getLastPuzzleCategory,
   saveLastPuzzleCategory,
 } from "../../utils/asyncStorage/puzzleProgressStorage";
+import CustomAlert from "../../components/CustomAlert";
+import { getKoreanSubjectParticle } from "../../utils/korean";
 
 // 퍼즐 카테고리 타입 정의 (동물, 탈것, 공룡, 사물 등)
 export type PuzzleCategoryType =
@@ -197,6 +199,22 @@ export default function PuzzleMenuScreen() {
       puzzleCategory: puzzle.id,
     });
   };
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const showLockedAlert = (gameName: string) => {
+    setAlertTitle(i18n.t("alert_locked_title"));
+
+    setAlertMessage(
+      i18n.t("alert_locked_message", {
+        gameName,
+        particle: getKoreanSubjectParticle(gameName),
+      }),
+    );
+
+    setAlertVisible(true);
+  };
   const scrollToIndex = (index: number) => {
     if (index < 0 || index >= PUZZLES.length) return;
     flatListRef.current?.scrollToOffset({
@@ -247,6 +265,7 @@ export default function PuzzleMenuScreen() {
               scrollEventThrottle={16}
               renderItem={({ item, index }) => {
                 const isActive = index === currentIndex;
+                const cardTitle = i18n.t(item.titleKey);
                 return (
                   <GameCardWrapper>
                     <GameCard
@@ -258,6 +277,7 @@ export default function PuzzleMenuScreen() {
                         if (item.isUnlocked) {
                           handleSelectPuzzle(item);
                         } else {
+                          showLockedAlert(cardTitle);
                         }
                       }}
                     >
@@ -332,6 +352,12 @@ export default function PuzzleMenuScreen() {
               />
             </ArrowButton>
           </BottomArea>
+          <CustomAlert
+            visible={alertVisible}
+            title={alertTitle}
+            message={alertMessage}
+            onClose={() => setAlertVisible(false)}
+          />
         </MainContainer>
       </Screen>
     </Background>
