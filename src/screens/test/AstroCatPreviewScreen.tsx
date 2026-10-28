@@ -4,9 +4,9 @@ import {
   View,
   Text,
   TouchableOpacity,
-  SafeAreaView,
   ScrollView,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import AstroCatMascot from "../../components/Puzzle/assets/AstroCatMascot";
 
 export const AstroCatPreviewScreen = () => {

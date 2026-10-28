@@ -1,110 +1,6 @@
-// import React from "react";
-// import {
-//   StyleSheet,
-//   Text,
-//   View,
-//   SafeAreaView,
-//   TouchableOpacity,
-// } from "react-native";
-
-// import PuzzleBoard from "../../components/Puzzle/engine/PuzzleBoard";
-
-// import PolarBearPuzzleScene from "../../components/Puzzle/assets/animal/PolarBear/PolarBearPuzzleScene";
-// import BabyBunnyPuzzleScene from "../../components/Puzzle/assets/animal/BabyBunny/BabyBunnyPuzzleScene";
-// import KoreaFlagPuzzleScene from "../../components/Puzzle/assets/flag/Korea/KoreaFlagPuzzleScene";
-
-// export default function PuzzleTestScreen() {
-//   return (
-//     <SafeAreaView style={styles.container}>
-//       {/* 상단 헤더 */}
-//       <View style={styles.header}>
-//         <TouchableOpacity style={styles.backButton} activeOpacity={0.7}>
-//           <Text style={styles.backButtonText}>〈</Text>
-//         </TouchableOpacity>
-
-//         <Text style={styles.headerTitle}>🦁 아기 사자 퍼즐</Text>
-
-//         <View style={styles.placeholderBox} />
-//       </View>
-
-//       {/* 퍼즐 엔진이 보드와 조각을 직접 관리 */}
-//       <View style={styles.gameContainer}>
-//         <PuzzleBoard
-//           title="🦁 아기 사자 퍼즐"
-//           Artwork={BabyBunnyPuzzleScene}
-//           viewBoxWidth={240}
-//           viewBoxHeight={180}
-//           rows={2}
-//           columns={2}
-//           onComplete={() => {
-//             // TODO: 완성 효과음 및 애니메이션
-//           }}
-//         />
-//       </View>
-//     </SafeAreaView>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#FFF9F0",
-//   },
-
-//   header: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     justifyContent: "space-between",
-//     paddingHorizontal: 20,
-//     paddingVertical: 12,
-//   },
-
-//   backButton: {
-//     width: 40,
-//     height: 40,
-//     borderRadius: 20,
-//     backgroundColor: "#EBF8FF",
-//     alignItems: "center",
-//     justifyContent: "center",
-//     borderWidth: 2,
-//     borderColor: "#39465D",
-//   },
-
-//   backButtonText: {
-//     fontSize: 18,
-//     fontWeight: "bold",
-//     color: "#39465D",
-//   },
-
-//   headerTitle: {
-//     fontSize: 20,
-//     fontWeight: "800",
-//     color: "#39465D",
-//   },
-
-//   placeholderBox: {
-//     width: 40,
-//   },
-
-//   gameContainer: {
-//     flex: 1,
-//     paddingHorizontal: 16,
-//     paddingTop: 12,
-//     paddingBottom: 16,
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-// });
-
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  TouchableOpacity,
-} from "react-native";
-
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import PuzzleBoard from "../../components/Puzzle/engine/PuzzleBoard";
 import KoreaFlagPuzzleArtwork from "../../components/Puzzle/assets/flag/KoreaFlagPuzzleScene";
 import UsaFlagPuzzleScene from "../../components/Puzzle/assets/flag/UsaFlagPuzzleScene";
@@ -114,6 +10,13 @@ import { FranceFlagPuzzleScene } from "../../components/Puzzle/assets/flag/Franc
 import { ChinaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ChinaFlagPuzzleScene";
 import { UKFlagPuzzleScene } from "../../components/Puzzle/assets/flag/UKFlagPuzzleScene";
 import { AustraliaPuzzleScene } from "../../components/Puzzle/assets/flag/AustraliaPuzzleScene";
+import { EiffelTowerPuzzleScene } from "../../components/Puzzle/assets/landmark/EiffelTowerPuzzleScene";
+import { LeaningTowerPuzzleScene } from "../../components/Puzzle/assets/landmark/LeaningTowerPuzzleScene";
+import { BigBenPuzzleScene } from "../../components/Puzzle/assets/landmark/BigBenPuzzleScene";
+import { StatueOfLibertyPuzzleScene } from "../../components/Puzzle/assets/landmark/StatueOfLibertyPuzzleScene";
+import { EgyptPyramidPuzzleScene } from "../../components/Puzzle/assets/landmark/EgyptPyramidPuzzleScene";
+import { TajMahalPuzzleScene } from "../../components/Puzzle/assets/landmark/TajMahalPuzzleScene";
+import { OperaHousePuzzleScene } from "../../components/Puzzle/assets/landmark/OperaHousePuzzleScene";
 
 export default function PuzzleTestScreen() {
   return (
@@ -133,9 +36,9 @@ export default function PuzzleTestScreen() {
       <View style={styles.gameContainer}>
         <PuzzleBoard
           title="🇰🇷 태극기 퍼즐"
-          Artwork={AustraliaPuzzleScene}
+          Artwork={TajMahalPuzzleScene}
           viewBoxWidth={240}
-          viewBoxHeight={180}
+          viewBoxHeight={300}
           rows={1}
           columns={1}
           onComplete={() => {
