@@ -5,6 +5,19 @@ import styled from "styled-components/native";
 import { COLORS } from "../../design-system/tokens/colors";
 import { AppText } from "../../utils/AppText";
 
+export const Background = styled.View`
+  flex: 1;
+`;
+
+export const BackgroundImage = styled.Image`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
 export const Container = styled(SafeAreaView)`
   flex: 1;
 `;

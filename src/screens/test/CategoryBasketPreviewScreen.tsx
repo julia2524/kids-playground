@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import {
   BasketTargetData,

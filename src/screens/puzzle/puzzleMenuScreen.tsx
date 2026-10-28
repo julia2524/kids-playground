@@ -206,11 +206,11 @@ export default function PuzzleMenuScreen() {
   };
 
   return (
-    <ImageBackground
-      source={ASSETS.classificationMenuBackground}
-      resizeMode="cover"
-      style={{ flex: 1 }}
-    >
+    <Background>
+      <BackgroundImage
+        source={ASSETS.classificationMenuBackground}
+        resizeMode="cover"
+      />
       <Screen edges={["top", "bottom"]}>
         <AppHeader
           title={i18n.t("puzzle_space_title") || "퍼즐 탐험대"}
@@ -334,10 +334,22 @@ export default function PuzzleMenuScreen() {
           </BottomArea>
         </MainContainer>
       </Screen>
-    </ImageBackground>
+    </Background>
   );
 }
+export const Background = styled.View`
+  flex: 1;
+`;
 
+export const BackgroundImage = styled.Image`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
 export const Screen = styled(SafeAreaView)`
   flex: 1;
   justify-content: space-between;
