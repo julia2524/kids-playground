@@ -28,7 +28,6 @@ import PuzzleTestScreen from "../screens/test/PuzzleTestScreen";
 import PuzzlePlayScreen from "../screens/puzzle/puzzlePlayScreen";
 import PuzzleMenuScreen from "../screens/puzzle/puzzleMenuScreen";
 import PuzzleThemeSelectScreen from "../screens/puzzle/PuzzleThemeSelectScreen";
-import PuzzleRoadMapScreen from "../screens/stageMap/PuzzleRoadMapScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -69,13 +68,7 @@ export default function AppNavigator() {
           animation: "fade",
         }}
       />
-      <Stack.Screen
-        name="PuzzleRoadMapScreen"
-        component={PuzzleRoadMapScreen}
-        options={{
-          animation: "fade",
-        }}
-      />
+
       <Stack.Screen
         name="ColorSortingPlayScreen"
         component={ColorSortingPlayScreen}

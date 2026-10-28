@@ -111,6 +111,9 @@ import UsaFlagPuzzleScene from "../../components/Puzzle/assets/flag/UsaFlagPuzzl
 import KoreaFlagPuzzleScene from "../../components/Puzzle/assets/flag/KoreaFlagPuzzleScene";
 import { JapanFlagPuzzleScene } from "../../components/Puzzle/assets/flag/JapanFlagPuzzleScene";
 import { FranceFlagPuzzleScene } from "../../components/Puzzle/assets/flag/FranceFlagPuzzleScene";
+import { ChinaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ChinaFlagPuzzleScene";
+import { UKFlagPuzzleScene } from "../../components/Puzzle/assets/flag/UKFlagPuzzleScene";
+import { AustraliaPuzzleScene } from "../../components/Puzzle/assets/flag/AustraliaPuzzleScene";
 
 export default function PuzzleTestScreen() {
   return (
@@ -130,7 +133,7 @@ export default function PuzzleTestScreen() {
       <View style={styles.gameContainer}>
         <PuzzleBoard
           title="🇰🇷 태극기 퍼즐"
-          Artwork={FranceFlagPuzzleScene}
+          Artwork={AustraliaPuzzleScene}
           viewBoxWidth={240}
           viewBoxHeight={180}
           rows={1}

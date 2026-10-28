@@ -105,6 +105,64 @@ export const ANIMAL_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#F2F5FF",
   },
 ] as const;
+export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
+  {
+    id: "korea",
+    titleKey: "flag_korea_title",
+    descKey: "flag_korea_desc",
+    iconName: "flag",
+    accentColor: "#E84A5F",
+    cardBg: "#FFF2F2",
+  },
+  {
+    id: "usa",
+    titleKey: "flag_usa_title",
+    descKey: "flag_usa_desc",
+    iconName: "star",
+    accentColor: "#4D8DFF",
+    cardBg: "#F0F5FF",
+  },
+  {
+    id: "japan",
+    titleKey: "flag_japan_title",
+    descKey: "flag_japan_desc",
+    iconName: "ellipse",
+    accentColor: "#FF6FAE",
+    cardBg: "#FFF0F5",
+  },
+  {
+    id: "uk",
+    titleKey: "flag_uk_title",
+    descKey: "flag_uk_desc",
+    iconName: "diamond",
+    accentColor: "#5B6CFF",
+    cardBg: "#F2F5FF",
+  },
+  {
+    id: "australia",
+    titleKey: "flag_australia_title",
+    descKey: "flag_australia_desc",
+    iconName: "moon",
+    accentColor: "#6B7CFF",
+    cardBg: "#EEF3FF",
+  },
+  {
+    id: "china",
+    titleKey: "flag_china_title",
+    descKey: "flag_china_desc",
+    iconName: "star",
+    accentColor: "#FFB020",
+    cardBg: "#FFF7E8",
+  },
+  {
+    id: "france",
+    titleKey: "flag_france_title",
+    descKey: "flag_france_desc",
+    iconName: "ribbon",
+    accentColor: "#4D8DFF",
+    cardBg: "#F4F7FF",
+  },
+] as const;
 
 export default function PuzzleThemeSelectScreen() {
   const { locale } = useLanguage();
@@ -125,6 +183,8 @@ export default function PuzzleThemeSelectScreen() {
     switch (puzzleCategory) {
       case "animal":
         return ANIMAL_CONFIGS;
+      case "flag":
+        return FLAG_CONFIGS;
 
       // case "vehicle":
       //   return VEHICLE_CONFIGS;
@@ -149,13 +209,13 @@ export default function PuzzleThemeSelectScreen() {
     }));
   }, [locale]);
 
-  const handleSelectAnimal = (animal: (typeof items)[number]) => {
+  const handleSelectItem = (item: (typeof items)[number]) => {
     triggerHaptic("light");
 
     navigation.navigate("StageMapScreen", {
       gameType: "puzzle",
-      puzzleCategory: "animal",
-      character: animal.id,
+      puzzleCategory,
+      character: item.id,
     });
   };
   return (
@@ -205,7 +265,7 @@ export default function PuzzleThemeSelectScreen() {
               <AnimalCard
                 bgColor={item.cardBg}
                 activeOpacity={0.9}
-                onPress={() => handleSelectAnimal(item)}
+                onPress={() => handleSelectItem(item)}
               >
                 <IconCircle style={{ backgroundColor: item.accentColor }}>
                   <Ionicons name={item.iconName} size={42} color="#FFFFFF" />

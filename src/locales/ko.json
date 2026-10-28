@@ -782,5 +782,20 @@
   "animal_bear_title": "곰",
   "animal_bear_desc": "든든한 곰 친구",
   "animal_pig_title": "돼지",
-  "animal_pig_desc": "핑크빛 돼지 친구"
+  "animal_pig_desc": "핑크빛 돼지 친구",
+
+  "flag_korea_title": "태극기",
+  "flag_korea_desc": "대한민국의 국기",
+  "flag_usa_title": "성조기",
+  "flag_usa_desc": "미국의 국기",
+  "flag_japan_title": "일장기",
+  "flag_japan_desc": "일본의 국기",
+  "flag_uk_title": "유니언잭",
+  "flag_uk_desc": "영국의 국기",
+  "flag_australia_title": "호주 국기",
+  "flag_australia_desc": "호주의 국기",
+  "flag_china_title": "오성홍기",
+  "flag_china_desc": "중국의 국기",
+  "flag_france_title": "프랑스 국기",
+  "flag_france_desc": "프랑스의 국기"
 }

@@ -31,6 +31,13 @@ import {
   getPuzzleStars,
   TOTAL_PUZZLE_LEVELS,
 } from "../../types/Puzzle/puzzleLevels";
+import KoreaFlagPuzzleScene from "../../components/Puzzle/assets/flag/KoreaFlagPuzzleScene";
+import { AustraliaPuzzleScene } from "../../components/Puzzle/assets/flag/AustraliaPuzzleScene";
+import { ChinaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ChinaFlagPuzzleScene";
+import { FranceFlagPuzzleScene } from "../../components/Puzzle/assets/flag/FranceFlagPuzzleScene";
+import { JapanFlagPuzzleScene } from "../../components/Puzzle/assets/flag/JapanFlagPuzzleScene";
+import { UKFlagPuzzleScene } from "../../components/Puzzle/assets/flag/UKFlagPuzzleScene";
+import UsaFlagPuzzleScene from "../../components/Puzzle/assets/flag/UsaFlagPuzzleScene";
 
 type RouteProps = RouteProp<RootStackParamList, "PuzzlePlayScreen">;
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
@@ -69,6 +76,40 @@ const ANIMAL_PUZZLE_DATA: Record<
   },
 };
 
+const FLAG_PUZZLE_DATA: Record<
+  string,
+  { title: string; Artwork: React.ComponentType<any> }
+> = {
+  korea: {
+    title: "🇰🇷 태극기 퍼즐",
+    Artwork: KoreaFlagPuzzleScene,
+  },
+  austrailia: {
+    title: "🇦🇺 호주 국기 퍼즐",
+    Artwork: AustraliaPuzzleScene,
+  },
+  china: {
+    title: "🇨🇳 중국 국기 퍼즐",
+    Artwork: ChinaFlagPuzzleScene,
+  },
+  france: {
+    title: "🇫🇷 프랑스 국기 퍼즐", // 오타 수정
+    Artwork: FranceFlagPuzzleScene,
+  },
+  japan: {
+    title: "🇯🇵 일장기 퍼즐",
+    Artwork: JapanFlagPuzzleScene,
+  },
+  uk: {
+    title: "영국 국기 퍼즐",
+    Artwork: UKFlagPuzzleScene,
+  },
+  usa: {
+    title: "성조기 퍼즐",
+    Artwork: UsaFlagPuzzleScene,
+  },
+};
+
 export default function PuzzlePlayScreen() {
   const { playThemeBGM } = useBackgroundMusic();
 
@@ -98,10 +139,16 @@ export default function PuzzlePlayScreen() {
   const [isCompleted, setIsCompleted] = useState(false);
   const [boardKey, setBoardKey] = useState(0);
 
-  const currentPuzzle =
-    ANIMAL_PUZZLE_DATA[character] ?? ANIMAL_PUZZLE_DATA.polarbear;
-
+  // const currentPuzzle =
+  //   ANIMAL_PUZZLE_DATA[character] ?? ANIMAL_PUZZLE_DATA.polarbear;
+  // puzzleCategory에 따라 animal 또는 flag 데이터셋 선택하도록 일반화
+  const currentPuzzleDataset =
+    puzzleCategory === "flag" ? FLAG_PUZZLE_DATA : ANIMAL_PUZZLE_DATA;
   const levelConfig = getPuzzleLevelConfig(level);
+  const currentPuzzle =
+    currentPuzzleDataset[character] ??
+    currentPuzzleDataset[Object.keys(currentPuzzleDataset)[0]] ??
+    ANIMAL_PUZZLE_DATA.polarbear;
 
   const handleComplete = useCallback((wrongDropCount: number) => {
     const stars = getPuzzleStars(wrongDropCount);

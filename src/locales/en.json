@@ -779,5 +779,26 @@
   "animal_bear_title": "Bear",
   "animal_bear_desc": "Strong bear friend",
   "animal_pig_title": "Pig",
-  "animal_pig_desc": "Pink pig friend"
+  "animal_pig_desc": "Pink pig friend",
+
+  "flag_korea_title": "Taegeukgi",
+  "flag_korea_desc": "National flag of South Korea",
+
+  "flag_usa_title": "Stars and Stripes",
+  "flag_usa_desc": "National flag of the United States",
+
+  "flag_japan_title": "Hinomaru",
+  "flag_japan_desc": "National flag of Japan",
+
+  "flag_uk_title": "Union Jack",
+  "flag_uk_desc": "National flag of the United Kingdom",
+
+  "flag_australia_title": "Australian Flag",
+  "flag_australia_desc": "National flag of Australia",
+
+  "flag_china_title": "Five-star Red Flag",
+  "flag_china_desc": "National flag of China",
+
+  "flag_france_title": "French Flag",
+  "flag_france_desc": "National flag of France"
 }

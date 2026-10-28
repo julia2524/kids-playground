@@ -41,6 +41,10 @@ import {
   getPuzzleProgress,
   PuzzleProgress,
 } from "../../utils/asyncStorage/puzzleProgressStorage";
+import {
+  ANIMAL_CONFIGS,
+  FLAG_CONFIGS,
+} from "../puzzle/PuzzleThemeSelectScreen";
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -62,39 +66,6 @@ const EMPTY_PUZZLE_PROGRESS: PuzzleProgress = {
   clearedLevels: [],
 };
 
-// const PUZZLE_CHARACTER_INFO: Record<
-//   string,
-//   { title: string; subtitle: string }
-// > = {
-//   polarbear: {
-//     title: i18n.t("puzzle_map_polarbear_title"),
-//     subtitle: i18n.t("puzzle_map_polarbear_subtitle"),
-//   },
-//   rabbit: {
-//     title: i18n.t("puzzle_map_rabbit_title"),
-//     subtitle: i18n.t("puzzle_map_rabbit_subtitle"),
-//   },
-//   lion: {
-//     title: i18n.t("puzzle_map_lion_title"),
-//     subtitle: i18n.t("puzzle_map_lion_subtitle"),
-//   },
-//   penguin: {
-//     title: i18n.t("puzzle_map_penguin_title"),
-//     subtitle: i18n.t("puzzle_map_penguin_subtitle"),
-//   },
-//   elephant: {
-//     title: i18n.t("puzzle_map_elephant_title"),
-//     subtitle: i18n.t("puzzle_map_elephant_subtitle"),
-//   },
-//   pig: {
-//     title: i18n.t("puzzle_map_pig_title"),
-//     subtitle: i18n.t("puzzle_map_pig_subtitle"),
-//   },
-//   bear: {
-//     title: i18n.t("puzzle_map_bear_title"),
-//     subtitle: i18n.t("puzzle_map_bear_subtitle"),
-//   },
-// };
 export default function StageMapScreen() {
   const { locale } = useLanguage();
 
@@ -414,9 +385,39 @@ export default function StageMapScreen() {
         title: i18n.t("puzzle_map_bear_title"),
         subtitle: i18n.t("puzzle_map_bear_subtitle"),
       },
+
+      korea: {
+        title: i18n.t("flag_korea_title"),
+        subtitle: i18n.t("flag_korea_desc"),
+      },
+      usa: {
+        title: i18n.t("flag_usa_title"),
+        subtitle: i18n.t("flag_usa_desc"),
+      },
+      japan: {
+        title: i18n.t("flag_japan_title"),
+        subtitle: i18n.t("flag_japan_desc"),
+      },
+      uk: {
+        title: i18n.t("flag_uk_title"),
+        subtitle: i18n.t("flag_uk_desc"),
+      },
+      australia: {
+        title: i18n.t("flag_australia_title"),
+        subtitle: i18n.t("flag_australia_desc"),
+      },
+      china: {
+        title: i18n.t("flag_china_title"),
+        subtitle: i18n.t("flag_china_desc"),
+      },
+      france: {
+        title: i18n.t("flag_france_title"),
+        subtitle: i18n.t("flag_france_desc"),
+      },
     }),
     [locale],
   );
+
   // ============================================================
   // 헤더 정보
   // ============================================================

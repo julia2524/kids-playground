@@ -779,5 +779,26 @@
   "animal_bear_title": "熊",
   "animal_bear_desc": "强壮的熊朋友",
   "animal_pig_title": "小猪",
-  "animal_pig_desc": "粉嫩的小猪朋友"
+  "animal_pig_desc": "粉嫩的小猪朋友",
+
+  "flag_korea_title": "太极旗",
+  "flag_korea_desc": "韩国国旗",
+
+  "flag_usa_title": "星条旗",
+  "flag_usa_desc": "美国国旗",
+
+  "flag_japan_title": "日章旗",
+  "flag_japan_desc": "日本国旗",
+
+  "flag_uk_title": "米字旗",
+  "flag_uk_desc": "英国国旗",
+
+  "flag_australia_title": "澳大利亚国旗",
+  "flag_australia_desc": "澳大利亚国旗",
+
+  "flag_china_title": "五星红旗",
+  "flag_china_desc": "中国国旗",
+
+  "flag_france_title": "法国国旗",
+  "flag_france_desc": "法国国旗"
 }
