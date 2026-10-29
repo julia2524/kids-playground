@@ -1,3 +1,4 @@
+//직선퍼즐
 // import React, {
 //   useCallback,
 //   useEffect,
@@ -382,6 +383,7 @@
 //   position: absolute;
 //   background-color: ${(p) => p.color};
 // `;
+
 import React, {
   useCallback,
   useEffect,

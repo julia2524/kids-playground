@@ -1,3 +1,4 @@
+//직선퍼즐
 // import React from "react";
 // import Svg, { Rect } from "react-native-svg";
 // import styled from "styled-components/native";
