@@ -38,6 +38,13 @@ import { FranceFlagPuzzleScene } from "../../components/Puzzle/assets/flag/Franc
 import { JapanFlagPuzzleScene } from "../../components/Puzzle/assets/flag/JapanFlagPuzzleScene";
 import { UKFlagPuzzleScene } from "../../components/Puzzle/assets/flag/UKFlagPuzzleScene";
 import UsaFlagPuzzleScene from "../../components/Puzzle/assets/flag/UsaFlagPuzzleScene";
+import { BigBenPuzzleScene } from "../../components/Puzzle/assets/landmark/BigBenPuzzleScene";
+import { EgyptPyramidPuzzleScene } from "../../components/Puzzle/assets/landmark/EgyptPyramidPuzzleScene";
+import { EiffelTowerPuzzleScene } from "../../components/Puzzle/assets/landmark/EiffelTowerPuzzleScene";
+import { LeaningTowerPuzzleScene } from "../../components/Puzzle/assets/landmark/LeaningTowerPuzzleScene";
+import { OperaHousePuzzleScene } from "../../components/Puzzle/assets/landmark/OperaHousePuzzleScene";
+import { StatueOfLibertyPuzzleScene } from "../../components/Puzzle/assets/landmark/StatueOfLibertyPuzzleScene";
+import { TajMahalPuzzleScene } from "../../components/Puzzle/assets/landmark/TajMahalPuzzleScene";
 
 type RouteProps = RouteProp<RootStackParamList, "PuzzlePlayScreen">;
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
@@ -110,6 +117,40 @@ const FLAG_PUZZLE_DATA: Record<
   },
 };
 
+const LANDMARK_PUZZLE_DATA: Record<
+  string,
+  { title: string; Artwork: React.ComponentType<any> }
+> = {
+  bigben: {
+    title: "🇬🇧 빅벤 퍼즐",
+    Artwork: BigBenPuzzleScene,
+  },
+  pyramid: {
+    title: "🇪🇬 피라미드 퍼즐",
+    Artwork: EgyptPyramidPuzzleScene,
+  },
+  eiffel: {
+    title: "🇫🇷 에펠탑 퍼즐",
+    Artwork: EiffelTowerPuzzleScene,
+  },
+  pisa: {
+    title: "🇮🇹 피사의 사탑 퍼즐",
+    Artwork: LeaningTowerPuzzleScene,
+  },
+  operahouse: {
+    title: "🇦🇺 오페라하우스 퍼즐",
+    Artwork: OperaHousePuzzleScene,
+  },
+  liberty: {
+    title: "🇺🇸 자유의 여신상 퍼즐",
+    Artwork: StatueOfLibertyPuzzleScene,
+  },
+  tajmahal: {
+    title: "🇮🇳 타지마할 퍼즐",
+    Artwork: TajMahalPuzzleScene,
+  },
+};
+
 export default function PuzzlePlayScreen() {
   const { playThemeBGM } = useBackgroundMusic();
 
@@ -142,8 +183,21 @@ export default function PuzzlePlayScreen() {
   // const currentPuzzle =
   //   ANIMAL_PUZZLE_DATA[character] ?? ANIMAL_PUZZLE_DATA.polarbear;
   // puzzleCategory에 따라 animal 또는 flag 데이터셋 선택하도록 일반화
+
+  const PUZZLE_DATA_MAP = {
+    animal: ANIMAL_PUZZLE_DATA,
+    flag: FLAG_PUZZLE_DATA,
+    landmark: LANDMARK_PUZZLE_DATA,
+    // vehicle: VEHICLE_PUZZLE_DATA,
+    // dinosaur: DINOSAUR_PUZZLE_DATA,
+    // object: OBJECT_PUZZLE_DATA,
+  } as const;
+
   const currentPuzzleDataset =
-    puzzleCategory === "flag" ? FLAG_PUZZLE_DATA : ANIMAL_PUZZLE_DATA;
+    PUZZLE_DATA_MAP[puzzleCategory as keyof typeof PUZZLE_DATA_MAP] ??
+    ANIMAL_PUZZLE_DATA;
+  // const currentPuzzleDataset =
+  //   puzzleCategory === "flag" ? FLAG_PUZZLE_DATA : ANIMAL_PUZZLE_DATA;
   const levelConfig = getPuzzleLevelConfig(level);
   const currentPuzzle =
     currentPuzzleDataset[character] ??

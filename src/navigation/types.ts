@@ -12,11 +12,18 @@ export type RootStackParamList = {
 
   StageMapScreen: {
     gameType: StageMapGameType;
-    puzzleCategory?: "animal" | "vehicle" | "dinosaur" | "object" | "flag";
+    puzzleCategory?:
+      | "animal"
+      | "vehicle"
+      | "dinosaur"
+      | "object"
+      | "flag"
+      | "landmark";
     character?: string;
   };
 
   SettingScreen: undefined;
+  ProgressManagementScreen: undefined;
 
   StickerGalleryScreen: undefined;
   StickerDetailScreen: {
@@ -46,7 +53,13 @@ export type RootStackParamList = {
   };
   PuzzlePlayScreen: {
     gameType: "puzzle";
-    puzzleCategory?: "animal" | "vehicle" | "dinosaur" | "object" | "flag"; // 👈 추가!
+    puzzleCategory?:
+      | "animal"
+      | "vehicle"
+      | "dinosaur"
+      | "object"
+      | "flag"
+      | "landmark"; // 👈 추가!
     character?: string;
     level?: number;
   };

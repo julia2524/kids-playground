@@ -56,6 +56,11 @@
   "correct_sfx_title": "정답 효과",
   "correct_sfx_desc": "정답을 맞혔을 때 효과음을 재생해요",
 
+  "progress_management_title": "기록 및 데이터 관리",
+  "progress_management_desc": "게임 기록과 스티커북을 관리해요.",
+  "progress_management_game_desc": "초기화할 게임을 선택해 주세요.",
+  "progress_management_sticker_desc": "모은 스티커를 처음부터 다시 모으고 싶을 때 사용해요.",
+
   "alert_reset_progress_title": "진행 상황 초기화",
   "alert_reset_progress_msg": "{{gameTitle}} 게임의 진행 기록을 정말 초기화하시겠어요?",
   "alert_reset_success_title": "초기화 완료",
@@ -76,6 +81,13 @@
   "haptic_section": "진동 설정",
   "haptic_title": "터치 진동",
   "haptic_desc": "버튼을 누를 때 은은한 햅틱 진동을 느껴요.",
+
+  "puzzle_reset_section": "퍼즐 놀이 기록 초기화",
+  "puzzle_reset_description": "퍼즐 놀이의 진행 기록을 카테고리별로 초기화해요.",
+  "puzzle_reset_item_description": "이 놀이의 진행 기록을 초기화해요.",
+  "puzzle_reset_animal_title": "퍼즐 놀이 (동물)",
+  "puzzle_reset_flag_title": "퍼즐 놀이 (국기)",
+  "puzzle_reset_landmark_title": "퍼즐 놀이 (랜드마크)",
 
   "classification_space_title": "분류 우주",
   "classification_hero_title": "어떤 행성을 탐험할까요?",
@@ -727,6 +739,9 @@
   "puzzle_tray_complete": "완성했어요! 정말 잘했어!",
   "puzzle_tray_guide": "조각을 끌어다가 그림에 맞춰보세요",
 
+  "puzzle_landmark_title": "세계 랜드마크 퍼즐",
+  "puzzle_landmark_subtitle": "랜드마크",
+  "puzzle_landmark_desc": "유명한 세계 랜드마크들을 맞춰봐요!",
   "puzzle_animal_title": "귀여운 동물 퍼즐",
   "puzzle_animal_subtitle": "동물",
   "puzzle_animal_desc": "숲속 친구들과 동물들을 맞추어봐요!",
@@ -768,6 +783,8 @@
   "select_dinosaur_desc": "신나는 공룡 친구와 퍼즐 탐험을 떠나봐요.",
   "select_object_title": "함께할 물건을 골라주세요!",
   "select_object_desc": "재미있는 물건 퍼즐에 도전해봐요.",
+  "select_landmark_title": "함께할 랜드마크를 골라주세요!",
+  "select_landmark_desc": "세계의 멋진 랜드마크들을 만나봐요.",
 
   "animal_rabbit_title": "토끼",
   "animal_rabbit_desc": "귀여운 토끼 친구",
@@ -797,5 +814,20 @@
   "flag_china_title": "오성홍기",
   "flag_china_desc": "중국의 국기",
   "flag_france_title": "프랑스 국기",
-  "flag_france_desc": "프랑스의 국기"
+  "flag_france_desc": "프랑스의 국기",
+
+  "landmark_bigben_title": "빅벤",
+  "landmark_bigben_desc": "영국의 유명한 시계탑",
+  "landmark_pyramid_title": "피라미드",
+  "landmark_pyramid_desc": "이집트의 거대한 피라미드",
+  "landmark_eiffel_title": "에펠탑",
+  "landmark_eiffel_desc": "프랑스의 상징적인 탑",
+  "landmark_pisa_title": "피사의 사탑",
+  "landmark_pisa_desc": "기울어진 이탈리아의 탑",
+  "landmark_operahouse_title": "오페라하우스",
+  "landmark_operahouse_desc": "호주의 아름다운 공연장",
+  "landmark_liberty_title": "자유의 여신상",
+  "landmark_liberty_desc": "미국을 대표하는 조각상",
+  "landmark_tajmahal_title": "타지마할",
+  "landmark_tajmahal_desc": "인도의 아름다운 궁전"
 }

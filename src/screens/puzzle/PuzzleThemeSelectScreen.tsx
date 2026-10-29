@@ -105,6 +105,7 @@ export const ANIMAL_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#F2F5FF",
   },
 ] as const;
+
 export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
   {
     id: "korea",
@@ -163,6 +164,64 @@ export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#F4F7FF",
   },
 ] as const;
+export const LANDMARK_CONFIGS: readonly PuzzleItemConfig[] = [
+  {
+    id: "bigben",
+    titleKey: "landmark_bigben_title",
+    descKey: "landmark_bigben_desc",
+    iconName: "time",
+    accentColor: "#5B6CFF",
+    cardBg: "#F2F5FF",
+  },
+  {
+    id: "pyramid",
+    titleKey: "landmark_pyramid_title",
+    descKey: "landmark_pyramid_desc",
+    iconName: "triangle",
+    accentColor: "#FFB020",
+    cardBg: "#FFF7E8",
+  },
+  {
+    id: "eiffel",
+    titleKey: "landmark_eiffel_title",
+    descKey: "landmark_eiffel_desc",
+    iconName: "restaurant",
+    accentColor: "#4D8DFF",
+    cardBg: "#F0F5FF",
+  },
+  {
+    id: "pisa",
+    titleKey: "landmark_pisa_title",
+    descKey: "landmark_pisa_desc",
+    iconName: "business",
+    accentColor: "#7C5CFF",
+    cardBg: "#F2F5FF",
+  },
+  {
+    id: "operahouse",
+    titleKey: "landmark_operahouse_title",
+    descKey: "landmark_operahouse_desc",
+    iconName: "moon",
+    accentColor: "#55D6BE",
+    cardBg: "#EDFAF6",
+  },
+  {
+    id: "liberty",
+    titleKey: "landmark_liberty_title",
+    descKey: "landmark_liberty_desc",
+    iconName: "flame",
+    accentColor: "#34CDB2",
+    cardBg: "#EDFDF8",
+  },
+  {
+    id: "tajmahal",
+    titleKey: "landmark_tajmahal_title",
+    descKey: "landmark_tajmahal_desc",
+    iconName: "sparkles",
+    accentColor: "#FF6FAE",
+    cardBg: "#FFF0F5",
+  },
+] as const;
 
 export default function PuzzleThemeSelectScreen() {
   const { locale } = useLanguage();
@@ -185,6 +244,8 @@ export default function PuzzleThemeSelectScreen() {
         return ANIMAL_CONFIGS;
       case "flag":
         return FLAG_CONFIGS;
+      case "landmark":
+        return LANDMARK_CONFIGS;
 
       // case "vehicle":
       //   return VEHICLE_CONFIGS;

@@ -56,6 +56,11 @@
   "correct_sfx_title": "Correct Answer Sound",
   "correct_sfx_desc": "Play sound effect when you get the correct answer",
 
+  "progress_management_title": "Progress & Data Management",
+  "progress_management_desc": "Manage game progress and your sticker book.",
+  "progress_management_game_desc": "Choose a game to reset.",
+  "progress_management_sticker_desc": "Reset your collected stickers and start again.",
+
   "alert_reset_progress_title": "Reset Progress",
   "alert_reset_progress_msg": "Are you sure you want to reset the progress for {{gameTitle}}?",
   "alert_reset_success_title": "Reset Complete",
@@ -76,6 +81,13 @@
   "haptic_section": "Haptics",
   "haptic_title": "Touch Haptics",
   "haptic_desc": "Feel soft haptic feedback when tapping buttons.",
+
+  "puzzle_reset_section": "Puzzle Progress Reset",
+  "puzzle_reset_description": "Reset puzzle game progress by category.",
+  "puzzle_reset_item_description": "Reset the progress for this puzzle game.",
+  "puzzle_reset_animal_title": "Animal Puzzle",
+  "puzzle_reset_flag_title": "Flag Puzzle",
+  "puzzle_reset_landmark_title": "Landmark Puzzle",
 
   "classification_space_title": "Sorting Space",
   "classification_hero_title": "Which planet shall we explore?",
@@ -724,6 +736,9 @@
   "puzzle_tray_complete": "All done! Great job!",
   "puzzle_tray_guide": "Drag the pieces to fit them into the picture",
 
+  "puzzle_landmark_title": "World Landmark Puzzle",
+  "puzzle_landmark_subtitle": "Landmarks",
+  "puzzle_landmark_desc": "Match famous landmarks from around the world!",
   "puzzle_animal_title": "Cute Animal Puzzle",
   "puzzle_animal_subtitle": "Animal",
   "puzzle_animal_desc": "Match and assemble cute forest friends and animals!",
@@ -765,6 +780,8 @@
   "select_dinosaur_desc": "Go on a puzzle adventure with a fun dinosaur friend.",
   "select_object_title": "Choose an Object!",
   "select_object_desc": "Challenge yourself with fun object puzzles.",
+  "select_landmark_title": "Choose a Landmark to Explore!",
+  "select_landmark_desc": "Discover amazing landmarks from around the world.",
 
   "animal_rabbit_title": "Rabbit",
   "animal_rabbit_desc": "Cute rabbit friend",
@@ -783,22 +800,31 @@
 
   "flag_korea_title": "Taegeukgi",
   "flag_korea_desc": "National flag of South Korea",
-
   "flag_usa_title": "Stars and Stripes",
   "flag_usa_desc": "National flag of the United States",
-
   "flag_japan_title": "Hinomaru",
   "flag_japan_desc": "National flag of Japan",
-
   "flag_uk_title": "Union Jack",
   "flag_uk_desc": "National flag of the United Kingdom",
-
   "flag_australia_title": "Australian Flag",
   "flag_australia_desc": "National flag of Australia",
-
   "flag_china_title": "Five-star Red Flag",
   "flag_china_desc": "National flag of China",
-
   "flag_france_title": "French Flag",
-  "flag_france_desc": "National flag of France"
+  "flag_france_desc": "National flag of France",
+
+  "landmark_bigben_title": "Big Ben",
+  "landmark_bigben_desc": "Famous clock tower in the UK",
+  "landmark_pyramid_title": "Pyramids",
+  "landmark_pyramid_desc": "Ancient pyramids of Egypt",
+  "landmark_eiffel_title": "Eiffel Tower",
+  "landmark_eiffel_desc": "Iconic tower of France",
+  "landmark_pisa_title": "Leaning Tower of Pisa",
+  "landmark_pisa_desc": "Famous leaning tower in Italy",
+  "landmark_operahouse_title": "Sydney Opera House",
+  "landmark_operahouse_desc": "Beautiful performing arts center in Australia",
+  "landmark_liberty_title": "Statue of Liberty",
+  "landmark_liberty_desc": "Famous monument of the United States",
+  "landmark_tajmahal_title": "Taj Mahal",
+  "landmark_tajmahal_desc": "Beautiful palace in India"
 }

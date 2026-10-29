@@ -414,6 +414,34 @@ export default function StageMapScreen() {
         title: i18n.t("flag_france_title"),
         subtitle: i18n.t("flag_france_desc"),
       },
+      bigben: {
+        title: i18n.t("landmark_bigben_title"),
+        subtitle: i18n.t("landmark_bigben_desc"),
+      },
+      pyramid: {
+        title: i18n.t("landmark_pyramid_title"),
+        subtitle: i18n.t("landmark_pyramid_desc"),
+      },
+      eiffel: {
+        title: i18n.t("landmark_eiffel_title"),
+        subtitle: i18n.t("landmark_eiffel_desc"),
+      },
+      pisa: {
+        title: i18n.t("landmark_pisa_title"),
+        subtitle: i18n.t("landmark_pisa_desc"),
+      },
+      operahouse: {
+        title: i18n.t("landmark_operahouse_title"),
+        subtitle: i18n.t("landmark_operahouse_desc"),
+      },
+      liberty: {
+        title: i18n.t("landmark_liberty_title"),
+        subtitle: i18n.t("landmark_liberty_desc"),
+      },
+      tajmahal: {
+        title: i18n.t("landmark_tajmahal_title"),
+        subtitle: i18n.t("landmark_tajmahal_desc"),
+      },
     }),
     [locale],
   );

@@ -30,6 +30,7 @@ export type PuzzleCategoryType =
   | "animal"
   | "vehicle"
   | "flag"
+  | "landmark"
   | "dinosaur"
   | "object";
 
@@ -51,6 +52,7 @@ export const colors = {
     animal: "#FFF0F5", // 동물: 분홍 파스텔
     vehicle: "#F0F5FF", // 탈것: 하늘 파스텔
     flag: "#FFF2F2", // 연한 국기 레드 느낌
+    landmark: "#FFF9E6",
     dinosaur: "#EDFAF6", // 공룡: 민트 파스텔
     object: "#FFF9E6", // 사물: 노랑 파스텔
   },
@@ -59,6 +61,7 @@ export const colors = {
     animal: "#FF6FAE",
     vehicle: "#4D8DFF",
     flag: "#E84A5F", // 선명한 국기 레드
+    landmark: "#FFB020",
     dinosaur: "#34CDB2",
     object: "#FFB020",
   },
@@ -92,16 +95,7 @@ const MENU_PUZZLE_CONFIGS: readonly PuzzleGameConfig[] = [
     cardBg: colors.cardBg.animal,
     isUnlocked: true,
   },
-  {
-    id: "vehicle",
-    titleKey: "puzzle_vehicle_title",
-    subtitleKey: "puzzle_vehicle_subtitle",
-    descKey: "puzzle_vehicle_desc",
-    iconName: "car-sport",
-    accentColor: colors.accent.vehicle,
-    cardBg: colors.cardBg.vehicle,
-    isUnlocked: false,
-  },
+
   {
     id: "flag",
     titleKey: "puzzle_flag_title",
@@ -111,6 +105,26 @@ const MENU_PUZZLE_CONFIGS: readonly PuzzleGameConfig[] = [
     accentColor: colors.accent.flag,
     cardBg: colors.cardBg.flag,
     isUnlocked: true,
+  },
+  {
+    id: "landmark",
+    titleKey: "puzzle_landmark_title",
+    subtitleKey: "puzzle_landmark_subtitle",
+    descKey: "puzzle_landmark_desc",
+    iconName: "business",
+    accentColor: "#FFB020",
+    cardBg: "#FFF9E6",
+    isUnlocked: true,
+  },
+  {
+    id: "vehicle",
+    titleKey: "puzzle_vehicle_title",
+    subtitleKey: "puzzle_vehicle_subtitle",
+    descKey: "puzzle_vehicle_desc",
+    iconName: "car-sport",
+    accentColor: colors.accent.vehicle,
+    cardBg: colors.cardBg.vehicle,
+    isUnlocked: false,
   },
   {
     id: "dinosaur",

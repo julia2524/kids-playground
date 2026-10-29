@@ -56,6 +56,11 @@
   "correct_sfx_title": "答对音效",
   "correct_sfx_desc": "答对问题时播放音效",
 
+  "progress_management_title": "进度与数据管理",
+  "progress_management_desc": "管理游戏进度和贴纸册。",
+  "progress_management_game_desc": "请选择要重置的游戏。",
+  "progress_management_sticker_desc": "清空已收集的贴纸，并重新开始收集。",
+
   "alert_reset_progress_title": "重置游戏进度",
   "alert_reset_progress_msg": "确定要重置 {{gameTitle}} 游戏的记录吗？",
   "alert_reset_success_title": "重置完成",
@@ -76,6 +81,13 @@
   "haptic_section": "振动设置",
   "haptic_title": "触觉反馈",
   "haptic_desc": "点击按钮时会有轻柔的振动反馈。",
+
+  "puzzle_reset_section": "拼图游戏进度重置",
+  "puzzle_reset_description": "按类别重置拼图游戏的进度记录。",
+  "puzzle_reset_item_description": "重置此拼图游戏的进度记录。",
+  "puzzle_reset_animal_title": "动物拼图",
+  "puzzle_reset_flag_title": "国旗拼图",
+  "puzzle_reset_landmark_title": "地标拼图",
 
   "classification_space_title": "分类宇宙",
   "classification_hero_title": "探索哪个星球呢？",
@@ -724,6 +736,9 @@
   "puzzle_tray_complete": "拼图完成了！你真棒！",
   "puzzle_tray_guide": "把拼图块拖动到画板上对齐吧",
 
+  "puzzle_landmark_title": "世界地标拼图",
+  "puzzle_landmark_subtitle": "地标",
+  "puzzle_landmark_desc": "来认识并拼出世界著名地标吧！",
   "puzzle_animal_title": "可爱动物拼图",
   "puzzle_animal_subtitle": "动物",
   "puzzle_animal_desc": "快来拼出可爱的森林小伙伴吧！",
@@ -765,6 +780,8 @@
   "select_dinosaur_desc": "和有趣的恐龙伙伴一起展开拼图冒险吧。",
   "select_object_title": "请选择一个物品！",
   "select_object_desc": "来挑战有趣的物品拼图吧。",
+  "select_landmark_title": "请选择一起探索的世界地标！",
+  "select_landmark_desc": "来认识世界各地精彩的地标吧。",
 
   "animal_rabbit_title": "兔子",
   "animal_rabbit_desc": "可爱的兔子朋友",
@@ -783,22 +800,31 @@
 
   "flag_korea_title": "太极旗",
   "flag_korea_desc": "韩国国旗",
-
   "flag_usa_title": "星条旗",
   "flag_usa_desc": "美国国旗",
-
   "flag_japan_title": "日章旗",
   "flag_japan_desc": "日本国旗",
-
   "flag_uk_title": "米字旗",
   "flag_uk_desc": "英国国旗",
-
   "flag_australia_title": "澳大利亚国旗",
   "flag_australia_desc": "澳大利亚国旗",
-
   "flag_china_title": "五星红旗",
   "flag_china_desc": "中国国旗",
-
   "flag_france_title": "法国国旗",
-  "flag_france_desc": "法国国旗"
+  "flag_france_desc": "法国国旗",
+
+  "landmark_bigben_title": "大本钟",
+  "landmark_bigben_desc": "英国著名的大钟楼",
+  "landmark_pyramid_title": "金字塔",
+  "landmark_pyramid_desc": "埃及雄伟的金字塔",
+  "landmark_eiffel_title": "埃菲尔铁塔",
+  "landmark_eiffel_desc": "法国著名地标",
+  "landmark_pisa_title": "比萨斜塔",
+  "landmark_pisa_desc": "意大利著名的斜塔",
+  "landmark_operahouse_title": "悉尼歌剧院",
+  "landmark_operahouse_desc": "澳大利亚著名表演艺术中心",
+  "landmark_liberty_title": "自由女神像",
+  "landmark_liberty_desc": "美国著名地标",
+  "landmark_tajmahal_title": "泰姬陵",
+  "landmark_tajmahal_desc": "印度著名宫殿"
 }

@@ -423,8 +423,46 @@ export default function SettingScreen() {
             </SettingRow>
           </SettingCard>
         </Section>
-        {/* 🔄 진행 상황 초기화 */}
         <Section>
+          <SectionTitle>{i18n.t("progress_management_title")}</SectionTitle>
+
+          <SettingCard>
+            <TouchableOpacity
+              activeOpacity={0.75}
+              onPress={() => navigation.navigate("ProgressManagementScreen")}
+            >
+              <SettingRow>
+                <SettingInfo>
+                  <IconBadge style={{ backgroundColor: colors.softBlue }}>
+                    <Ionicons
+                      name="refresh-circle-outline"
+                      size={24}
+                      color={colors.blue}
+                    />
+                  </IconBadge>
+
+                  <SettingTextWrapper>
+                    <SettingTitle>
+                      {i18n.t("progress_management_title")}
+                    </SettingTitle>
+
+                    <SettingDescription>
+                      {i18n.t("progress_management_desc")}
+                    </SettingDescription>
+                  </SettingTextWrapper>
+                </SettingInfo>
+
+                <Ionicons
+                  name="chevron-forward"
+                  size={20}
+                  color={colors.textGroup.secondary}
+                />
+              </SettingRow>
+            </TouchableOpacity>
+          </SettingCard>
+        </Section>
+        {/* 🔄 진행 상황 초기화 */}
+        {/* <Section>
           <SectionTitle>{i18n.t("reset_progress_section")}</SectionTitle>
           <SettingCard>
             <ResetProgressButton gameType="color" onPress={handleResetColor} />
@@ -440,9 +478,9 @@ export default function SettingScreen() {
               onPress={handleResetPattern}
             />
           </SettingCard>
-        </Section>
+        </Section> */}
 
-        <Section>
+        {/* <Section>
           <SectionTitle>{i18n.t("reset_stickerbook_section")}</SectionTitle>
           <SettingCard>
             <ResetStickerButtonRow onPress={handleResetStickers}>
@@ -469,7 +507,7 @@ export default function SettingScreen() {
               </SettingInfo>
             </ResetStickerButtonRow>
           </SettingCard>
-        </Section>
+        </Section> */}
       </Content>
 
       <CustomAlert

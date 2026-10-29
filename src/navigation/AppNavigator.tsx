@@ -28,6 +28,7 @@ import PuzzleTestScreen from "../screens/test/PuzzleTestScreen";
 import PuzzlePlayScreen from "../screens/puzzle/puzzlePlayScreen";
 import PuzzleMenuScreen from "../screens/puzzle/puzzleMenuScreen";
 import PuzzleThemeSelectScreen from "../screens/puzzle/PuzzleThemeSelectScreen";
+import ProgressManagementScreen from "../screens/settings/ProgressManagementScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -117,6 +118,10 @@ export default function AppNavigator() {
         options={{
           animation: "fade",
         }}
+      />
+      <Stack.Screen
+        name="ProgressManagementScreen"
+        component={ProgressManagementScreen}
       />
       <Stack.Screen
         name="StickerGalleryScreen"

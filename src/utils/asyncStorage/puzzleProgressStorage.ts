@@ -87,6 +87,39 @@ export function isPuzzleLevelUnlocked(
 }
 
 const LAST_PUZZLE_KEY = "LAST_ACCESSED_PUZZLE_CATEGORY";
+// 퍼즐 카테고리별 진행 기록 초기화.
+// character 값은 getPuzzleProgress(character)에 전달하는 값과 같아야 한다.
+export async function resetPuzzleProgress(character: string): Promise<boolean> {
+  try {
+    await AsyncStorage.removeItem(getStorageKey(character));
+
+    // 초기화한 카테고리가 마지막으로 접근한 카테고리일 때만
+    // 마지막 카테고리 기록도 지운다.
+    const lastCategory = await AsyncStorage.getItem(LAST_PUZZLE_KEY);
+    if (lastCategory === character) {
+      await AsyncStorage.removeItem(LAST_PUZZLE_KEY);
+    }
+
+    return true;
+  } catch (error) {
+    console.warn("퍼즐 진행 기록을 초기화하지 못했어요.", error);
+    return false;
+  }
+}
+export async function resetPuzzleProgressByCharacters(
+  characters: string[],
+): Promise<boolean> {
+  try {
+    const keys = characters.map((character) => getStorageKey(character));
+
+    await AsyncStorage.multiRemove(keys);
+
+    return true;
+  } catch (error) {
+    console.warn("퍼즐 진행 기록을 초기화하지 못했어요.", error);
+    return false;
+  }
+}
 
 export const saveLastPuzzleCategory = async (category: string) => {
   try {
