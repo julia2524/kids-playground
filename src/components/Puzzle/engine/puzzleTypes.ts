@@ -75,4 +75,5 @@ export interface PuzzleBoardProps {
   boardAspectRatio?: number;
   onComplete?: (wrongDropCount: number) => void;
   title?: string;
+  onWrongDropCountChange: (wrongDropCount: number) => void;
 }
