@@ -11,6 +11,7 @@ import i18n, { loadSavedLanguage } from "./src/i18n";
 import { colors } from "./src/design-system/tokens/colors";
 import { BackgroundMusicProvider } from "./src/utils/BackgroundMusicContext";
 import { preloadSounds } from "./src/utils/sound";
+import { syncHapticGlobalState } from "./src/utils/haptic";
 
 export default function App() {
   // 1. 커스텀 폰트 로드
@@ -27,7 +28,11 @@ export default function App() {
     const initApp = async () => {
       try {
         // 앱 초기화 시 언어 로드와 사운드 프리로드를 같이 실행
-        await Promise.all([loadSavedLanguage(), preloadSounds()]);
+        await Promise.all([
+          loadSavedLanguage(),
+          preloadSounds(),
+          syncHapticGlobalState(),
+        ]);
       } catch (e) {
         console.warn("앱 초기화 실패:", e);
       } finally {
@@ -56,12 +61,7 @@ export default function App() {
               },
             }}
           >
-            <StatusBar
-              barStyle="dark-content"
-              backgroundColor="transparent"
-              translucent
-              hidden={true}
-            />
+            <StatusBar barStyle="dark-content" hidden={true} />
             <AppNavigator />
           </NavigationContainer>
         </ThemeProvider>
