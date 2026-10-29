@@ -111,18 +111,59 @@ export default function PatternPlayScreen() {
     playEarnedNotes(Math.round(earnedStars / 0.5));
   }, [roundResult]);
   // 문제가 바뀔 때마다 튜토리얼 표시
-  useEffect(() => {
-    if (!problem) return;
+  // useEffect(() => {
+  //   if (!problem) return;
 
+  //   const answerIndex = problem.choices.findIndex(
+  //     (choice) => JSON.stringify(choice) === JSON.stringify(problem.answer),
+  //   );
+
+  //   if (answerIndex < 0) return;
+
+  //   const answerChoice = problem.choices[answerIndex];
+  //   const choiceId = getChoiceId(answerChoice, answerIndex);
+
+  //   const timer = setTimeout(() => {
+  //     if (!tutorialObjectRefs.current[choiceId] || !blankSlotRef.current) {
+  //       return;
+  //     }
+
+  //     setTutorialObject(answerChoice);
+  //     setTutorialChoiceId(choiceId);
+  //     tutorialVisibleRef.current = true;
+  //     setTutorialVisible(true);
+  //   }, 2500);
+
+  //   return () => clearTimeout(timer);
+  // }, [problem, problemKey]);
+  // 문제가 바뀔 때마다 튜토리얼 표시
+  useEffect(() => {
+    // Level 1이 아니거나 문제가 없으면 튜토리얼을 표시하지 않음
+    if (testLevel !== 1 || !problem) {
+      tutorialVisibleRef.current = false;
+      setTutorialVisible(false);
+      setTutorialObject(null);
+      setTutorialChoiceId(null);
+      return;
+    }
+
+    // 현재 정답 선택지 찾기
     const answerIndex = problem.choices.findIndex(
       (choice) => JSON.stringify(choice) === JSON.stringify(problem.answer),
     );
 
-    if (answerIndex < 0) return;
+    if (answerIndex < 0) {
+      tutorialVisibleRef.current = false;
+      setTutorialVisible(false);
+      setTutorialObject(null);
+      setTutorialChoiceId(null);
+      return;
+    }
 
     const answerChoice = problem.choices[answerIndex];
     const choiceId = getChoiceId(answerChoice, answerIndex);
 
+    // 이전 타이머가 정리되고, 선택지 ref가 준비될 시간을 줌
     const timer = setTimeout(() => {
       if (!tutorialObjectRefs.current[choiceId] || !blankSlotRef.current) {
         return;
@@ -135,7 +176,7 @@ export default function PatternPlayScreen() {
     }, 2500);
 
     return () => clearTimeout(timer);
-  }, [problem, problemKey]);
+  }, [testLevel, problem, problemKey]);
   if (!problem) {
     return (
       <SafeAreaContainer>
