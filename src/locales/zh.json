@@ -73,6 +73,17 @@
   "alert_reset_stickers_fail_title": "重置失败",
   "alert_reset_stickers_fail_msg": "重置过程中出现问题，请重试。",
 
+  "clear_all_drawings_section": "贴纸工坊",
+  "clear_all_drawings_section_desc": "一次性清除在工坊中绘制的所有图画。",
+  "clear_all_drawings_button": "清除所有绘画",
+  "clear_all_drawings_desc": "删除所有贴纸上的绘画内容，贴纸颜色将保留。",
+  "clear_all_drawings_title": "要清除所有绘画吗？",
+  "clear_all_drawings_message": "所有贴纸上的绘画内容都会被删除，贴纸颜色将保留。",
+  "clear_all_drawings_success_title": "已清除所有绘画",
+  "clear_all_drawings_success_message": "贴纸颜色已保留。",
+  "clear_all_drawings_fail_title": "无法删除",
+  "clear_all_drawings_fail_message": "请稍后重试。",
+
   "btn_confirm": "确定",
   "btn_cancel": "取消",
   "btn_reset": "重置",

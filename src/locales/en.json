@@ -73,6 +73,17 @@
   "alert_reset_stickers_fail_title": "Reset Failed",
   "alert_reset_stickers_fail_msg": "An error occurred during reset. Please try again.",
 
+  "clear_all_drawings_section": "Sticker Workshop",
+  "clear_all_drawings_section_desc": "Clear all drawings created in the workshop at once.",
+  "clear_all_drawings_button": "Clear All Drawings",
+  "clear_all_drawings_desc": "Remove drawings from all stickers. Sticker colors will be kept.",
+  "clear_all_drawings_title": "Clear all drawings?",
+  "clear_all_drawings_message": "All drawings on your stickers will be removed. Sticker colors will remain unchanged.",
+  "clear_all_drawings_success_title": "All drawings cleared",
+  "clear_all_drawings_success_message": "Sticker colors have been kept.",
+  "clear_all_drawings_fail_title": "Couldn't clear drawings",
+  "clear_all_drawings_fail_message": "Please try again later.",
+
   "btn_confirm": "OK",
   "btn_cancel": "Cancel",
   "btn_reset": "Reset",

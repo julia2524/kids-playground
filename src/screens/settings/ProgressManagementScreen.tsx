@@ -21,6 +21,7 @@ import { resetUnlockedStickers } from "../../utils/asyncStorage/stickerStorage";
 import { resetPuzzleProgressByCharacters } from "../../utils/asyncStorage/puzzleProgressStorage";
 import { triggerHaptic } from "../../utils/haptic";
 import { useLanguage } from "../../context/LangaugeContext";
+import { clearAllStickerDrawings } from "../../utils/asyncStorage/stickerArtworkStorage";
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -224,6 +225,44 @@ export default function ProgressManagementScreen() {
       },
     );
   };
+
+  const handleClearAllDrawings = () => {
+    triggerHaptic("light");
+
+    showAlert(
+      i18n.t("clear_all_drawings_title", {
+        defaultValue: "그린 그림을 모두 지울까요?",
+      }),
+      i18n.t("clear_all_drawings_message", {
+        defaultValue:
+          "모든 스티커에 그린 그림이 삭제돼요. 스티커 색상은 유지돼요.",
+      }),
+      async () => {
+        const ok = await clearAllStickerDrawings();
+
+        showAlert(
+          ok
+            ? i18n.t("clear_all_drawings_success_title", {
+                defaultValue: "그림을 모두 지웠어요",
+              })
+            : i18n.t("clear_all_drawings_fail_title", {
+                defaultValue: "삭제하지 못했어요",
+              }),
+          ok
+            ? i18n.t("clear_all_drawings_success_message", {
+                defaultValue: "스티커 색상은 그대로 유지돼요.",
+              })
+            : i18n.t("clear_all_drawings_fail_message", {
+                defaultValue: "잠시 후 다시 시도해 주세요.",
+              }),
+        );
+      },
+      {
+        showCancel: true,
+        confirmText: i18n.t("btn_reset"),
+      },
+    );
+  };
   return (
     <Container>
       <GradientBackground />
@@ -354,6 +393,58 @@ export default function ProgressManagementScreen() {
 
                   <SettingDescription>
                     {i18n.t("reset_stickerbook_desc")}
+                  </SettingDescription>
+                </SettingTextWrapper>
+              </SettingInfo>
+
+              <Ionicons
+                name="chevron-forward"
+                size={20}
+                color={colors.textGroup.secondary}
+              />
+            </ResetStickerButtonRow>
+          </SettingCard>
+        </Section>
+        {/* 스티커 공방 그림 전체 삭제 */}
+        <Section>
+          <SectionTitle>
+            {i18n.t("clear_all_drawings_section", {
+              defaultValue: "스티커 공방",
+            })}
+          </SectionTitle>
+
+          <SectionDescription>
+            {i18n.t("clear_all_drawings_section_desc", {
+              defaultValue: "공방에서 그린 그림을 한 번에 정리해요.",
+            })}
+          </SectionDescription>
+
+          <SettingCard>
+            <ResetStickerButtonRow
+              onPress={handleClearAllDrawings}
+              activeOpacity={0.75}
+            >
+              <SettingInfo>
+                <IconBadge>
+                  <Ionicons
+                    name="brush-outline"
+                    size={21}
+                    color={colors.feedback.error}
+                  />
+                </IconBadge>
+
+                <SettingTextWrapper>
+                  <SettingTitle style={{ color: colors.feedback.error }}>
+                    {i18n.t("clear_all_drawings_button", {
+                      defaultValue: "그린 그림 전체 지우기",
+                    })}
+                  </SettingTitle>
+
+                  <SettingDescription>
+                    {i18n.t("clear_all_drawings_desc", {
+                      defaultValue:
+                        "모든 스티커의 그림을 삭제해요. 스티커 색상은 유지돼요.",
+                    })}
                   </SettingDescription>
                 </SettingTextWrapper>
               </SettingInfo>

@@ -73,6 +73,17 @@
   "alert_reset_stickers_fail_title": "초기화 실패",
   "alert_reset_stickers_fail_msg": "초기화 중 문제가 발생했습니다. 다시 시도해 주세요.",
 
+  "clear_all_drawings_section": "스티커 공방",
+  "clear_all_drawings_section_desc": "공방에서 그린 그림을 한 번에 정리해요.",
+  "clear_all_drawings_button": "그린 그림 전체 지우기",
+  "clear_all_drawings_desc": "모든 스티커의 그림을 삭제해요. 스티커 색상은 유지돼요.",
+  "clear_all_drawings_title": "그린 그림을 모두 지울까요?",
+  "clear_all_drawings_message": "모든 스티커에 그린 그림이 삭제돼요. 스티커 색상은 유지돼요.",
+  "clear_all_drawings_success_title": "그림을 모두 지웠어요",
+  "clear_all_drawings_success_message": "스티커 색상은 그대로 유지돼요.",
+  "clear_all_drawings_fail_title": "삭제하지 못했어요",
+  "clear_all_drawings_fail_message": "잠시 후 다시 시도해 주세요.",
+
   "btn_confirm": "확인",
   "btn_cancel": "취소",
   "btn_reset": "초기화",
