@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "kidsPlayground",
-    "slug": "kidsPlayground",
+    "name": "Kids Playground",
+    "slug": "KidsPlayground",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,7 +11,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#6741D9",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -28,7 +28,16 @@
       "expo-font",
       "expo-audio",
       "expo-status-bar",
-      "expo-asset"
+      "expo-asset",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#6741D9"
+        }
+      ]
     ]
   }
 }

@@ -229,7 +229,7 @@ export default function HomeScreen() {
             })}
           </GameGrid>
           {/* 번역 검증! */}
-          <ComingSoon onPress={() => navigation.navigate("LanguageScreen")}>
+          {/* <ComingSoon onPress={() => navigation.navigate("LanguageScreen")}>
             <ComingSoonText>🌐 번역 검증하기</ComingSoonText>
           </ComingSoon>
 
@@ -240,7 +240,7 @@ export default function HomeScreen() {
             onPress={() => navigation.navigate("AstroCatPreviewScreen")}
           >
             <ComingSoonText>마스코트 확인</ComingSoonText>
-          </ComingSoon>
+          </ComingSoon> */}
         </ScrollView>
         {/* Bottom Navigation */}
         <BottomTab bottomInset={insets.bottom}>

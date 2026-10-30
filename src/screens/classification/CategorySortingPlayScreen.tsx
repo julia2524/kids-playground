@@ -46,7 +46,7 @@ export type ProblemObject = CategorySortingObject;
 const TOTAL_ROUNDS = 10;
 
 // 개발용 Level / Round 컨트롤바 표시 여부 (배포 시 false)
-const SHOW_TEST_CONTROLS = true;
+const SHOW_TEST_CONTROLS = false;
 
 // 튜토리얼을 보여 줄 마지막 레벨 (1 ~ 이 값까지)
 const TUTORIAL_MAX_LEVEL = 3;

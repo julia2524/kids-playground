@@ -429,7 +429,10 @@ export default function SettingScreen() {
           <SettingCard>
             <TouchableOpacity
               activeOpacity={0.75}
-              onPress={() => navigation.navigate("ProgressManagementScreen")}
+              onPress={() => {
+                triggerHaptic("light");
+                navigation.navigate("ProgressManagementScreen");
+              }}
             >
               <SettingRow>
                 <SettingInfo>
