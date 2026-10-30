@@ -1,3 +1,65 @@
+// export interface StageConfig {
+//   level: number;
+//   name: string;
+//   xOffset: number;
+// }
+
+// export const STAGE_CONFIGS: StageConfig[] = [
+//   // Chapter 1 ~ 5 ( 기존 1 ~ 25 완만하고 예쁜 지그재그 재정렬 )
+//   { level: 1, name: "알록달록 연습장", xOffset: 0 },
+//   { level: 2, name: "앵두 밭", xOffset: -0.55 },
+//   { level: 3, name: "초록 풀숲", xOffset: 0.6 },
+//   { level: 4, name: "무지개 언덕", xOffset: -0.45 },
+//   { level: 5, name: "별빛 호수", xOffset: 0.5 },
+//   { level: 6, name: "구름 정원", xOffset: -0.65 },
+//   { level: 7, name: "반짝 별길", xOffset: 0.55 },
+//   { level: 8, name: "솜사탕 동산", xOffset: -0.4 },
+//   { level: 9, name: "과자 성", xOffset: 0.6 },
+//   { level: 10, name: "무지개 성단", xOffset: -0.5 },
+//   { level: 11, name: "비눗방울 마을", xOffset: 0.45 },
+//   { level: 12, name: "낮잠 구름", xOffset: -0.6 },
+//   { level: 13, name: "딸기 폭포", xOffset: 0.55 },
+//   { level: 14, name: "은하수 길", xOffset: -0.45 },
+//   { level: 15, name: "젤리 왕국", xOffset: 0.6 },
+//   { level: 16, name: "새싹 들판", xOffset: -0.5 },
+//   { level: 17, name: "노을빛 언덕", xOffset: 0.65 },
+//   { level: 18, name: "꿀벌 목장", xOffset: -0.4 },
+//   { level: 19, name: "이슬 맺힌 풀잎", xOffset: 0.5 },
+//   { level: 20, name: "바람개비 동산", xOffset: -0.65 },
+//   { level: 21, name: "달빛 오아시스", xOffset: 0.45 },
+//   { level: 22, name: "별사탕 공장", xOffset: -0.55 },
+//   { level: 23, name: "오색빛깔 성", xOffset: 0.6 },
+//   { level: 24, name: "하늘 정원", xOffset: -0.35 },
+//   { level: 25, name: "해님 대왕의 궁전", xOffset: 0.3 },
+
+//   // Chapter 6 확장 영역 ( Level 26 ~ 50 )
+//   { level: 26, name: "민들레 씨앗 언덕", xOffset: -0.6 },
+//   { level: 27, name: "알록달록 풍선 탑", xOffset: 0.55 },
+//   { level: 28, name: "보석 결정 동굴", xOffset: -0.45 },
+//   { level: 29, name: "파도 소리 해변", xOffset: 0.65 },
+//   { level: 30, name: "무지개 물고기 쉼터", xOffset: -0.3 },
+//   { level: 31, name: "장난감 태엽 공장", xOffset: 0.4 },
+//   { level: 32, name: "도토리 숲속 오솔길", xOffset: -0.6 },
+//   { level: 33, name: "단풍잎 카펫 길", xOffset: 0.5 },
+//   { level: 34, name: "하늘빛 소라껍데기", xOffset: -0.45 },
+//   { level: 35, name: "반딧불이 밤하늘", xOffset: 0.6 },
+//   { level: 36, name: "초콜릿 분수 광장", xOffset: -0.55 },
+//   { level: 37, name: "마법 스케치북", xOffset: 0.45 },
+//   { level: 38, name: "거울 호수 정원", xOffset: -0.65 },
+//   { level: 39, name: "우주선 승강장", xOffset: 0.35 },
+//   { level: 40, name: "토성과 고리 정글", xOffset: -0.5 },
+//   { level: 41, name: "달콤 쿠키 산맥", xOffset: 0.6 },
+//   { level: 42, name: "시계태엽 타워", xOffset: -0.4 },
+//   { level: 43, name: "황금 열쇠 광산", xOffset: 0.55 },
+//   { level: 44, name: "수수께끼 미로 숲", xOffset: -0.6 },
+//   { level: 45, name: "오로라 언덕", xOffset: 0.45 },
+//   { level: 46, name: "수경 재배 숲", xOffset: -0.5 },
+//   { level: 47, name: "크리스탈 성곽", xOffset: 0.65 },
+//   { level: 48, name: "꿈꾸는 유성우 길", xOffset: -0.35 },
+//   { level: 49, name: "마법사의 비밀 서재", xOffset: 0.5 },
+//   { level: 50, name: "최종 마법의 왕국", xOffset: 0 },
+// ];
+
 export interface StageConfig {
   level: number;
   name: string;
@@ -5,7 +67,7 @@ export interface StageConfig {
 }
 
 export const STAGE_CONFIGS: StageConfig[] = [
-  // Chapter 1 ~ 5 ( 기존 1 ~ 25 완만하고 예쁜 지그재그 재정렬 )
+  // Chapter 1 ~ 5 ( Level 1 ~ 25 )
   { level: 1, name: "알록달록 연습장", xOffset: 0 },
   { level: 2, name: "앵두 밭", xOffset: -0.55 },
   { level: 3, name: "초록 풀숲", xOffset: 0.6 },
@@ -32,7 +94,7 @@ export const STAGE_CONFIGS: StageConfig[] = [
   { level: 24, name: "하늘 정원", xOffset: -0.35 },
   { level: 25, name: "해님 대왕의 궁전", xOffset: 0.3 },
 
-  // Chapter 6 확장 영역 ( Level 26 ~ 50 )
+  // Chapter 6 ~ 10 ( Level 26 ~ 50 )
   { level: 26, name: "민들레 씨앗 언덕", xOffset: -0.6 },
   { level: 27, name: "알록달록 풍선 탑", xOffset: 0.55 },
   { level: 28, name: "보석 결정 동굴", xOffset: -0.45 },
@@ -57,5 +119,59 @@ export const STAGE_CONFIGS: StageConfig[] = [
   { level: 47, name: "크리스탈 성곽", xOffset: 0.65 },
   { level: 48, name: "꿈꾸는 유성우 길", xOffset: -0.35 },
   { level: 49, name: "마법사의 비밀 서재", xOffset: 0.5 },
-  { level: 50, name: "최종 마법의 왕국", xOffset: 0 },
+  { level: 50, name: "빛의 요정 정원", xOffset: 0 },
+
+  // Chapter 11 ~ 15 ( Level 51 ~ 75 ) - 83개 커버용 확장
+  { level: 51, name: "구름 피아노 건반", xOffset: -0.5 },
+  { level: 52, name: "무지개 분수대", xOffset: 0.55 },
+  { level: 53, name: "아기 곰의 산장", xOffset: -0.6 },
+  { level: 54, name: "별빛 반딧불 숲", xOffset: 0.45 },
+  { level: 55, name: "바닐라 아이스크림 언덕", xOffset: -0.4 },
+  { level: 56, name: "캔디 캐슬 성문", xOffset: 0.6 },
+  { level: 57, name: "초코칩 오솔길", xOffset: -0.55 },
+  { level: 58, name: "달콤 호박 마차", xOffset: 0.5 },
+  { level: 59, name: "반짝모래 사막", xOffset: -0.45 },
+  { level: 60, name: "오아시스 수정 연못", xOffset: 0.65 },
+  { level: 61, name: "바람의 요정 계곡", xOffset: -0.35 },
+  { level: 62, name: "소원의 등대", xOffset: 0.4 },
+  { level: 63, name: "앵무새 깃털 숲", xOffset: -0.65 },
+  { level: 64, name: "무지개빛 폭포 다리", xOffset: 0.5 },
+  { level: 65, name: "참새 방앗간 마을", xOffset: -0.5 },
+  { level: 66, name: "해바라기 끝없는 들판", xOffset: 0.6 },
+  { level: 67, name: "토끼의 당근 정원", xOffset: -0.4 },
+  { level: 68, name: "다람쥐 도토리 창고", xOffset: 0.55 },
+  { level: 69, name: "구름 위 캠핑장", xOffset: -0.6 },
+  { level: 70, name: "모험가의 나침반 언덕", xOffset: 0.45 },
+  { level: 71, name: "빛나는 수정 계단", xOffset: -0.5 },
+  { level: 72, name: "별똥별 정거장", xOffset: 0.6 },
+  { level: 73, name: "오색 빛 오로라 광장", xOffset: -0.35 },
+  { level: 74, name: "시간의 모래시계 탑", xOffset: 0.5 },
+  { level: 75, name: "지혜의 부엉이 나무", xOffset: 0 },
+
+  // Chapter 16 ~ 20 ( Level 76 ~ 100 ) - 100개 완성
+  { level: 76, name: "꿈나라 비행선", xOffset: -0.55 },
+  { level: 77, name: "노을빛 피아노 섬", xOffset: 0.5 },
+  { level: 78, name: "푸른 바다 인어 성", xOffset: -0.45 },
+  { level: 79, name: "진주 품은 조개 껍질", xOffset: 0.65 },
+  { level: 80, name: "용의 보석 상자", xOffset: -0.4 },
+  { level: 81, name: "불사조의 깃털 언덕", xOffset: 0.55 },
+  { level: 82, name: "유니콘의 호수", xOffset: -0.6 },
+  { level: 83, name: "페가수스의 하늘 길", xOffset: 0.45 },
+  { level: 84, name: "황금 사과 나무 숲", xOffset: -0.5 },
+  { level: 85, name: "천사의 하얀 날개 동산", xOffset: 0.6 },
+  { level: 86, name: "요정들의 축제 광장", xOffset: -0.35 },
+  { level: 87, name: "바람이 머무는 언덕", xOffset: 0.5 },
+  { level: 88, name: "꽃잎 배 띄우는 강", xOffset: -0.65 },
+  { level: 89, name: "풀잎 악단 연주회", xOffset: 0.4 },
+  { level: 90, name: "달빛 아래 무도회장", xOffset: -0.5 },
+  { level: 91, name: "별 헤는 아이의 테라스", xOffset: 0.6 },
+  { level: 92, name: "은하수 건너는 다리", xOffset: -0.45 },
+  { level: 93, name: "코스모스 꽃길", xOffset: 0.55 },
+  { level: 94, name: "오색찬란 무지개 성문", xOffset: -0.6 },
+  { level: 95, name: "꿈의 시작점 오락실", xOffset: 0.4 },
+  { level: 96, name: "꼬마 영웅의 출발지", xOffset: -0.5 },
+  { level: 97, name: "환상의 패턴 왕국 입구", xOffset: 0.6 },
+  { level: 98, name: "전설의 마법사 탑", xOffset: -0.35 },
+  { level: 99, name: "모든 지혜의 도서관", xOffset: 0.5 },
+  { level: 100, name: "최종 마법의 왕국 궁전", xOffset: 0 },
 ];
