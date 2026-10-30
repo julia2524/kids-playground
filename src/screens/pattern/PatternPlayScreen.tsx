@@ -1,7 +1,10 @@
 // screens/Pattern/PatternPlayScreen.tsx
 import React, { useCallback, useEffect, useRef } from "react";
 import { StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
@@ -36,9 +39,10 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 export type ProblemObject = PatternElement;
 
 const TOTAL_ROUNDS = 10;
-const SHOW_TEST_CONTROLS = true;
+const SHOW_TEST_CONTROLS = false;
 
 export default function PatternPlayScreen() {
+  const insets = useSafeAreaInsets();
   const { playThemeBGM } = useBackgroundMusic();
 
   useEffect(() => {
@@ -179,16 +183,30 @@ export default function PatternPlayScreen() {
   }, [testLevel, problem, problemKey]);
   if (!problem) {
     return (
-      <SafeAreaContainer>
+      <View
+        style={{
+          flex: 1,
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          backgroundColor: "#eef0fe",
+        }}
+      >
         <Container>
           <ErrorText>문제를 불러올 수 없습니다.</ErrorText>
         </Container>
-      </SafeAreaContainer>
+      </View>
     );
   }
 
   return (
-    <SafeAreaContainer edges={["top", "bottom"]}>
+    <View
+      style={{
+        flex: 1,
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+        backgroundColor: "#eef0fe",
+      }}
+    >
       <LinearGradient
         colors={["#D9EAFF", "#EEE8FF", "#F8F5FF"]}
         style={StyleSheet.absoluteFill}
@@ -299,7 +317,7 @@ export default function PatternPlayScreen() {
           }
         />
       )}
-    </SafeAreaContainer>
+    </View>
   );
 }
 

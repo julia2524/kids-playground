@@ -539,6 +539,7 @@ import type {
 import i18n from "../../../i18n";
 
 import { useLanguage } from "../../../context/LangaugeContext";
+import { colors } from "../../../design-system/tokens/colors";
 
 const DEFAULT_VIEWBOX_WIDTH = 240;
 
@@ -1161,7 +1162,7 @@ const Tray = styled.View`
 
   border-color: #39465d;
 
-  background-color: #8ed6f2;
+  background-color: ${colors.feedback.info};
 
   padding-top: 12px;
 

@@ -318,7 +318,7 @@
 // `;
 
 import React, { useCallback, useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import {
   SafeAreaView,
   useSafeAreaInsets,
@@ -569,7 +569,14 @@ export default function PuzzlePlayScreen() {
   }, []);
 
   return (
-    <SafeAreaContainer edges={["top"]}>
+    <View
+      style={{
+        flex: 1,
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+        backgroundColor: "#eef0fe",
+      }}
+    >
       <LinearGradient
         colors={["#D9EAFF", "#EEE8FF", "#F8F5FF"]}
         style={StyleSheet.absoluteFill}
@@ -588,7 +595,7 @@ export default function PuzzlePlayScreen() {
         }
       />
 
-      <Container style={{ paddingBottom: bottomSpace }}>
+      <Container>
         <GameContainer>
           <PuzzleBoard
             key={boardKey}
@@ -616,7 +623,7 @@ export default function PuzzlePlayScreen() {
           onGoRoadmap={handleGoRoadmap}
         />
       )}
-    </SafeAreaContainer>
+    </View>
   );
 }
 

@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
@@ -34,9 +37,10 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 export type ProblemObject = SizeSortingObject;
 
 const TOTAL_ROUNDS = 10;
-const SHOW_TEST_CONTROLS = true;
+const SHOW_TEST_CONTROLS = false;
 
 export default function SizeSortingPlayScreen() {
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProps>();
   const { playThemeBGM } = useBackgroundMusic();
@@ -152,7 +156,14 @@ export default function SizeSortingPlayScreen() {
   }
 
   return (
-    <SafeAreaContainer edges={["top", "bottom"]}>
+    <View
+      style={{
+        flex: 1,
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+        backgroundColor: "#eef0fe",
+      }}
+    >
       <LinearGradient
         colors={["#D9EAFF", "#EEE8FF", "#F8F5FF"]}
         style={StyleSheet.absoluteFill}
@@ -262,7 +273,7 @@ export default function SizeSortingPlayScreen() {
           }
         />
       )}
-    </SafeAreaContainer>
+    </View>
   );
 }
 

@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
@@ -43,13 +46,15 @@ export type ProblemObject = ShapeSortingObject;
 const TOTAL_ROUNDS = 10;
 
 // 개발용 Level / Round 컨트롤바 표시 여부 (배포 시 false)
-const SHOW_TEST_CONTROLS = true;
+const SHOW_TEST_CONTROLS = false;
 
 // ============================================================
 // Screen
 // ============================================================
 
 export default function ShapeSortingPlayScreen() {
+  const insets = useSafeAreaInsets();
+
   const { playThemeBGM } = useBackgroundMusic();
 
   useEffect(() => {
@@ -192,7 +197,14 @@ export default function ShapeSortingPlayScreen() {
   }
 
   return (
-    <SafeAreaContainer edges={["top", "bottom"]}>
+    <View
+      style={{
+        flex: 1,
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+        backgroundColor: "#eef0fe",
+      }}
+    >
       {/* ================================================== */}
       {/* Background */}
       {/* ================================================== */}
@@ -323,7 +335,7 @@ export default function ShapeSortingPlayScreen() {
           }}
         />
       )}
-    </SafeAreaContainer>
+    </View>
   );
 }
 

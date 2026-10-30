@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import styled from "styled-components/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
@@ -55,6 +58,7 @@ const TUTORIAL_MAX_LEVEL = 3;
 // ============================================================
 
 export default function CategorySortingPlayScreen() {
+  const insets = useSafeAreaInsets();
   const { playThemeBGM } = useBackgroundMusic();
 
   useEffect(() => {
@@ -186,16 +190,30 @@ export default function CategorySortingPlayScreen() {
 
   if (!problem) {
     return (
-      <SafeAreaContainer>
+      <View
+        style={{
+          flex: 1,
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          backgroundColor: "#eef0fe",
+        }}
+      >
         <Container>
           <ErrorText>문제를 불러올 수 없습니다.</ErrorText>
         </Container>
-      </SafeAreaContainer>
+      </View>
     );
   }
 
   return (
-    <SafeAreaContainer edges={["top", "bottom"]}>
+    <View
+      style={{
+        flex: 1,
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+        backgroundColor: "#eef0fe",
+      }}
+    >
       {/* Background */}
       <LinearGradient
         colors={["#D9EAFF", "#EEE8FF", "#F8F5FF"]}
@@ -322,7 +340,7 @@ export default function CategorySortingPlayScreen() {
           }}
         />
       )}
-    </SafeAreaContainer>
+    </View>
   );
 }
 

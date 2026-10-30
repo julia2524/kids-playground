@@ -7,7 +7,9 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {},
+      "bundleIdentifier": "com.julia2524.kidsPlayground"
     },
     "android": {
       "adaptiveIcon": {
@@ -16,8 +18,17 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
+      "statusBar": {
+        "translucent": true
+      },
       "predictiveBackGestureEnabled": false,
-      "package": "com.julia2524.kidsPlayground"
+      "package": "com.julia2524.kidsPlayground",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -36,6 +47,13 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#6741D9"
+        }
+      ],
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-5145202325745375~1521225871",
+          "iosAppId": "ca-app-pub-3381041851241163~3333333333"
         }
       ]
     ]

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StatusBar } from "react-native";
+
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { ThemeProvider } from "styled-components/native";
 import { useFonts } from "expo-font";
@@ -12,6 +12,7 @@ import { colors } from "./src/design-system/tokens/colors";
 import { BackgroundMusicProvider } from "./src/utils/BackgroundMusicContext";
 import { preloadSounds } from "./src/utils/sound";
 import { syncHapticGlobalState } from "./src/utils/haptic";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   // 1. 커스텀 폰트 로드
@@ -61,7 +62,7 @@ export default function App() {
               },
             }}
           >
-            <StatusBar barStyle="dark-content" hidden={true} />
+            <StatusBar style="light" hidden={false} />
             <AppNavigator />
           </NavigationContainer>
         </ThemeProvider>
