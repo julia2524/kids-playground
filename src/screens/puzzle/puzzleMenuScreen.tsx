@@ -10,7 +10,10 @@ import styled from "styled-components/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import { AppText } from "../../utils/AppText";
 import { RootStackParamList } from "../../navigation/types";
 import { ASSETS } from "../../assets/assets";
@@ -24,6 +27,7 @@ import {
 } from "../../utils/asyncStorage/puzzleProgressStorage";
 import CustomAlert from "../../components/CustomAlert";
 import { getKoreanSubjectParticle } from "../../utils/korean";
+import BannerAd from "../../services/BannerAd";
 
 // 퍼즐 카테고리 타입 정의 (동물, 탈것, 공룡, 사물 등)
 export type PuzzleCategoryType =
@@ -149,6 +153,7 @@ const MENU_PUZZLE_CONFIGS: readonly PuzzleGameConfig[] = [
 ] as const;
 
 export default function PuzzleMenuScreen() {
+  const insets = useSafeAreaInsets(); // ⭐ 하단 안전 영역 값 가져오기
   const { locale } = useLanguage();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -374,6 +379,10 @@ export default function PuzzleMenuScreen() {
           />
         </MainContainer>
       </Screen>
+      {/* ⭐ 3. 화면 하단 고정 표준 배너 광고 (제스처 홈바 위쪽에 안전하게 위치) */}
+      <BannerAdContainer bottomInset={insets.bottom}>
+        <BannerAd />
+      </BannerAdContainer>
     </Background>
   );
 }
@@ -516,7 +525,7 @@ export const BottomArea = styled.View`
   align-items: center;
   justify-content: center;
   gap: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 60px;
 `;
 
 export const ArrowButton = styled.TouchableOpacity`
@@ -544,4 +553,16 @@ export const Dot = styled.View<{ active: boolean }>`
   height: 8px;
   border-radius: 4px;
   background-color: ${({ active }) => (active ? "#7C5CFF" : "#DCD7EE")};
+`;
+
+const BannerAdContainer = styled.View<{ bottomInset: number }>`
+  height: 60px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  position: absolute;
+  bottom: ${(props) => Math.max(props.bottomInset, 12)}px;
+  left: 0;
+  z-index: 20;
 `;

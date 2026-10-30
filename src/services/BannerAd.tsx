@@ -43,7 +43,7 @@ export default function BannerAd() {
   return (
     <RNBannerAd
       unitId={adUnitId}
-      size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+      size={BannerAdSize.BANNER}
       requestOptions={{
         requestNonPersonalizedAdsOnly: true,
       }}

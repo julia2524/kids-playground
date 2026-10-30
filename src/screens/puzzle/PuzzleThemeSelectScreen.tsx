@@ -4,7 +4,10 @@ import styled from "styled-components/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import { AppText } from "../../utils/AppText";
 import { RootStackParamList } from "../../navigation/types";
 import { ASSETS } from "../../assets/assets";
@@ -12,6 +15,7 @@ import AppHeader from "../../components/AppHeader";
 import i18n from "../../i18n";
 import { useLanguage } from "../../context/LangaugeContext";
 import { triggerHaptic } from "../../utils/haptic";
+import BannerAd from "../../services/BannerAd";
 
 export type AnimalCharacterType =
   | "rabbit"
@@ -224,6 +228,7 @@ export const LANDMARK_CONFIGS: readonly PuzzleItemConfig[] = [
 ] as const;
 
 export default function PuzzleThemeSelectScreen() {
+  const insets = useSafeAreaInsets(); // ⭐ 하단 안전 영역 값 가져오기
   const { locale } = useLanguage();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -316,7 +321,7 @@ export default function PuzzleThemeSelectScreen() {
             style={{ flex: 1 }}
             contentContainerStyle={{
               paddingHorizontal: 24,
-              paddingBottom: 24,
+              paddingBottom: 50,
             }}
             columnWrapperStyle={{
               justifyContent: "space-between",
@@ -340,9 +345,26 @@ export default function PuzzleThemeSelectScreen() {
           />
         </MainContainer>
       </Screen>
+
+      {/* ⭐ 3. 화면 하단 고정 표준 배너 광고 (제스처 홈바 위쪽에 안전하게 위치) */}
+      <BannerAdContainer bottomInset={insets.bottom}>
+        <BannerAd />
+      </BannerAdContainer>
     </Background>
   );
 }
+const BannerAdContainer = styled.View<{ bottomInset: number }>`
+  height: 60px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  position: absolute;
+  bottom: ${(props) => Math.max(props.bottomInset, 12)}px;
+  left: 0;
+  z-index: 20;
+`;
+
 export const Background = styled.View`
   flex: 1;
 `;

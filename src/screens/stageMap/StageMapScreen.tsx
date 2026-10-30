@@ -516,35 +516,32 @@
 //   // 렌더링
 //   // ============================================================
 //   return (
-//     <SafeAreaContainer edges={["top"]}>
-//       <Container>
+//     <Container>
+//       {/* 1. 🌟 배경 이미지들은 SafeArea 바깥에 두어 상태표시줄까지 꽉 채우기 */}
+//       <BackgroundLayer source={ASSETS.stageBg1} resizeMode="cover" />
+//       <BackgroundLayer
+//         source={ASSETS.stageBg2}
+//         resizeMode="cover"
+//         style={{ opacity: bg2Opacity }}
+//       />
+//       <BackgroundLayer
+//         source={ASSETS.stageBg3}
+//         resizeMode="cover"
+//         style={{ opacity: bg3Opacity }}
+//       />
+//       <BackgroundLayer
+//         source={ASSETS.stageBg4}
+//         resizeMode="cover"
+//         style={{ opacity: bg4Opacity }}
+//       />
+
+//       {/* 2. 🛡️ 상단바 침범을 막고 콘텐츠를 보호할 부분만 SafeAreaContainer로 감싸기 */}
+//       <SafeAreaContainer edges={["top"]}>
 //         <MapContainer
 //           onLayout={(event) =>
 //             setViewportHeight(event.nativeEvent.layout.height)
 //           }
 //         >
-//           {/* 배경 */}
-//           <BackgroundLayer source={ASSETS.stageBg1} resizeMode="cover" />
-
-//           <BackgroundLayer
-//             source={ASSETS.stageBg2}
-//             resizeMode="cover"
-//             style={{ opacity: bg2Opacity }}
-//           />
-
-//           <BackgroundLayer
-//             source={ASSETS.stageBg3}
-//             resizeMode="cover"
-//             style={{ opacity: bg3Opacity }}
-//           />
-
-//           <BackgroundLayer
-//             source={ASSETS.stageBg4}
-//             resizeMode="cover"
-//             style={{ opacity: bg4Opacity }}
-//           />
-
-//           {/* 헤더와 지도 */}
 //           <Animated.View
 //             style={{
 //               flex: 1,
@@ -682,14 +679,15 @@
 //             >
 //               <Ionicons name="book" size={26} color="#7C5CFF" />
 //             </FloatingStickerButton>
+
+//             {/* ⭐ 화면 하단 고정 광고 */}
+//             <BannerAdContainer>
+//               <BannerAd />
+//             </BannerAdContainer>
 //           </Animated.View>
 //         </MapContainer>
-//         {/* ⭐ 화면 하단 고정 광고 */}
-//         <BannerAdContainer>
-//           <BannerAd />
-//         </BannerAdContainer>
-//       </Container>
-//     </SafeAreaContainer>
+//       </SafeAreaContainer>
+//     </Container>
 //   );
 // }
 
@@ -763,7 +761,10 @@ import React, {
   useState,
 } from "react";
 import { Animated, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import {
   RouteProp,
   useFocusEffect,
@@ -823,6 +824,7 @@ const EMPTY_PUZZLE_PROGRESS: PuzzleProgress = {
 };
 
 export default function StageMapScreen() {
+  const insets = useSafeAreaInsets(); // ⭐ 하단 안전 영역 값 가져오기
   const { locale } = useLanguage();
 
   const navigation = useNavigation<NavigationProp>();
@@ -1293,7 +1295,7 @@ export default function StageMapScreen() {
       />
 
       {/* 2. 🛡️ 상단바 침범을 막고 콘텐츠를 보호할 부분만 SafeAreaContainer로 감싸기 */}
-      <SafeAreaContainer edges={["top"]}>
+      <SafeAreaContainer edges={["top", "bottom"]}>
         <MapContainer
           onLayout={(event) =>
             setViewportHeight(event.nativeEvent.layout.height)
@@ -1332,6 +1334,7 @@ export default function StageMapScreen() {
                 setTrackWidth(event.nativeEvent.layout.width)
               }
               contentContainerStyle={{
+                paddingBottom: 80,
                 height: contentHeight,
               }}
               onScroll={Animated.event(
@@ -1436,14 +1439,14 @@ export default function StageMapScreen() {
             >
               <Ionicons name="book" size={26} color="#7C5CFF" />
             </FloatingStickerButton>
-
-            {/* ⭐ 화면 하단 고정 광고 */}
-            <BannerAdContainer>
-              <BannerAd />
-            </BannerAdContainer>
           </Animated.View>
         </MapContainer>
       </SafeAreaContainer>
+
+      {/* ⭐ 화면 하단 고정 광고 */}
+      <BannerAdContainer bottomInset={insets.bottom}>
+        <BannerAd />
+      </BannerAdContainer>
     </Container>
   );
 }
@@ -1489,7 +1492,7 @@ const MapContainer = styled.View`
 const FloatingStickerButton = styled.TouchableOpacity`
   position: absolute;
   right: 20px;
-  bottom: 55px;
+  bottom: 65px;
   width: 56px;
   height: 56px;
   border-radius: 28px;
@@ -1500,12 +1503,24 @@ const FloatingStickerButton = styled.TouchableOpacity`
   z-index: 10;
 `;
 
-export const BannerAdContainer = styled.View`
+// export const BannerAdContainer = styled.View`
+//   height: 60px;
+
+//   align-items: center;
+
+//   justify-content: center;
+
+//   background-color: ${colors.white};
+// `;
+
+const BannerAdContainer = styled.View<{ bottomInset: number }>`
   height: 60px;
-
+  width: 100%;
   align-items: center;
-
   justify-content: center;
-
-  background-color: ${colors.white};
+  background-color: transparent;
+  position: absolute;
+  bottom: ${(props) => Math.max(props.bottomInset, 12)}px;
+  left: 0;
+  z-index: 20;
 `;
