@@ -188,6 +188,7 @@ export default function SizeSortingPlayScreen() {
           text="크기에 맞는 곳에 모아볼까요?"
         />
         <SizeSortingObjectBoard
+          key={`board-${testLevel}-${roundIndex}`} // ← 이 줄 추가 (핵심!)
           objects={problem.objects}
           selectedObjectId={selectedObjectId}
           placedObjectIds={[...allPlacedIds, ...wrongObjectIds]}
@@ -206,6 +207,7 @@ export default function SizeSortingPlayScreen() {
         />
 
         <SizeSortingTargetArea
+          key={`targets-${testLevel}-${roundIndex}`}
           targets={problem.targets}
           objects={problem.objects}
           placedObjects={placedObjects}

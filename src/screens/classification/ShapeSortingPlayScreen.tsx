@@ -46,7 +46,7 @@ export type ProblemObject = ShapeSortingObject;
 const TOTAL_ROUNDS = 10;
 
 // 개발용 Level / Round 컨트롤바 표시 여부 (배포 시 false)
-const SHOW_TEST_CONTROLS = false;
+const SHOW_TEST_CONTROLS = true;
 
 // ============================================================
 // Screen
@@ -236,6 +236,7 @@ export default function ShapeSortingPlayScreen() {
         />
 
         <ShapeSortingObjectBoard
+          key={`board-${testLevel}-${roundIndex}`}
           objects={problem.objects}
           selectedObjectId={selectedObjectId}
           placedObjectIds={[...allPlacedIds, ...wrongObjectIds]} // 변경
@@ -254,6 +255,7 @@ export default function ShapeSortingPlayScreen() {
         />
 
         <ShapeSortingTargetArea
+          key={`targets-${testLevel}-${roundIndex}`}
           targets={problem.targets}
           objects={problem.objects}
           placedObjects={placedObjects}
