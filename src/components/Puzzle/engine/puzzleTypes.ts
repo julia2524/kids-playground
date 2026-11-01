@@ -1,3 +1,4 @@
+//직선 퍼즐
 // import React from "react";
 
 // export interface PuzzleArtworkProps {

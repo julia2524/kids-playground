@@ -1,6 +1,5 @@
-//직선퍼즐
 // import React from "react";
-// import Svg, { Rect } from "react-native-svg";
+// import Svg, { Path, Rect } from "react-native-svg";
 // import styled from "styled-components/native";
 // import type { PuzzleArtworkComponent, PuzzlePieceData } from "./puzzleTypes";
 
@@ -13,6 +12,7 @@
 //   columns: number;
 //   width: number;
 //   height: number;
+//   hideArtwork?: boolean;
 // }
 
 // export default function PuzzleTargetBoard({
@@ -20,26 +20,26 @@
 //   viewBoxWidth,
 //   viewBoxHeight,
 //   pieces,
-//   rows,
-//   columns,
 //   width,
 //   height,
+//   hideArtwork = false,
 // }: Props) {
 //   return (
 //     <Board boardWidth={width} boardHeight={height}>
 //       {/* 흐린 원본 그림 */}
-//       <FaintArtwork pointerEvents="none">
-//         <Svg
-//           width={width}
-//           height={height}
-//           viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
-//           preserveAspectRatio="none"
-//         >
-//           <Artwork width={viewBoxWidth} height={viewBoxHeight} />
-//         </Svg>
-//       </FaintArtwork>
-
-//       {/* 점선 격자 + 테두리 */}
+//       {!hideArtwork && (
+//         <FaintArtwork pointerEvents="none">
+//           <Svg
+//             width={width}
+//             height={height}
+//             viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+//             preserveAspectRatio="none"
+//           >
+//             <Artwork width={viewBoxWidth} height={viewBoxHeight} />
+//           </Svg>
+//         </FaintArtwork>
+//       )}
+//       {/* 점선 지그소 경계선 + 테두리 */}
 //       <GridLayer pointerEvents="none">
 //         <Svg
 //           width={width}
@@ -47,20 +47,20 @@
 //           viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
 //           preserveAspectRatio="none"
 //         >
-//           {pieces.map((piece) => (
-//             <Rect
-//               key={piece.id}
-//               x={piece.sourceX}
-//               y={piece.sourceY}
-//               width={piece.sourceWidth}
-//               height={piece.sourceHeight}
-//               fill="none"
-//               stroke="#52647A"
-//               strokeWidth={0.8}
-//               strokeDasharray="3 2"
-//               opacity={0.72}
-//             />
-//           ))}
+//           {pieces.map((piece) =>
+//             piece.guidePath ? (
+//               <Path
+//                 key={piece.id}
+//                 d={piece.guidePath}
+//                 fill="none"
+//                 stroke="#52647A"
+//                 strokeWidth={0.8}
+//                 strokeDasharray="3 2"
+//                 strokeLinejoin="round"
+//                 opacity={0.72}
+//               />
+//             ) : null,
+//           )}
 //           <Rect
 //             x={0.5}
 //             y={0.5}
@@ -127,7 +127,7 @@ interface Props {
   hideArtwork?: boolean;
 }
 
-export default function PuzzleTargetBoard({
+function PuzzleTargetBoard({
   Artwork,
   viewBoxWidth,
   viewBoxHeight,
@@ -189,6 +189,9 @@ export default function PuzzleTargetBoard({
   );
 }
 
+// 정적인 보드: props가 바뀌지 않으면 다시 그리지 않음
+export default React.memo(PuzzleTargetBoard);
+
 // ============================================================
 // Styled Components
 // ============================================================
@@ -222,8 +225,9 @@ const GridLayer = styled.View`
   left: 0;
 `;
 
+//직선퍼즐
 // import React from "react";
-// import Svg, { Path, Rect } from "react-native-svg";
+// import Svg, { Rect } from "react-native-svg";
 // import styled from "styled-components/native";
 // import type { PuzzleArtworkComponent, PuzzlePieceData } from "./puzzleTypes";
 
@@ -243,6 +247,8 @@ const GridLayer = styled.View`
 //   viewBoxWidth,
 //   viewBoxHeight,
 //   pieces,
+//   rows,
+//   columns,
 //   width,
 //   height,
 // }: Props) {
@@ -260,7 +266,7 @@ const GridLayer = styled.View`
 //         </Svg>
 //       </FaintArtwork>
 
-//       {/* 점선 지그소 경계선 + 테두리 */}
+//       {/* 점선 격자 + 테두리 */}
 //       <GridLayer pointerEvents="none">
 //         <Svg
 //           width={width}
@@ -268,20 +274,20 @@ const GridLayer = styled.View`
 //           viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
 //           preserveAspectRatio="none"
 //         >
-//           {pieces.map((piece) =>
-//             piece.guidePath ? (
-//               <Path
-//                 key={piece.id}
-//                 d={piece.guidePath}
-//                 fill="none"
-//                 stroke="#52647A"
-//                 strokeWidth={0.8}
-//                 strokeDasharray="3 2"
-//                 strokeLinejoin="round"
-//                 opacity={0.72}
-//               />
-//             ) : null,
-//           )}
+//           {pieces.map((piece) => (
+//             <Rect
+//               key={piece.id}
+//               x={piece.sourceX}
+//               y={piece.sourceY}
+//               width={piece.sourceWidth}
+//               height={piece.sourceHeight}
+//               fill="none"
+//               stroke="#52647A"
+//               strokeWidth={0.8}
+//               strokeDasharray="3 2"
+//               opacity={0.72}
+//             />
+//           ))}
 //           <Rect
 //             x={0.5}
 //             y={0.5}
