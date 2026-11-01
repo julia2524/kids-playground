@@ -1,3 +1,4 @@
+//직선게임
 // import type { PuzzlePieceData } from "./puzzleTypes";
 
 // export function createPuzzlePieces(

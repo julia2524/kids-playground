@@ -76,4 +76,5 @@ export interface PuzzleBoardProps {
   onComplete?: (wrongDropCount: number) => void;
   title?: string;
   onWrongDropCountChange: (wrongDropCount: number) => void;
+  hideArtwork?: boolean;
 }

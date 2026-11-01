@@ -16,6 +16,15 @@ export const PUZZLE_LEVELS: PuzzleLevelConfig[] = [
   { level: 8, rows: 3, columns: 4, pieceCount: 12 },
   { level: 9, rows: 4, columns: 3, pieceCount: 12 },
   { level: 10, rows: 4, columns: 4, pieceCount: 16 },
+
+  { level: 11, rows: 2, columns: 2, pieceCount: 4 },
+  { level: 12, rows: 2, columns: 3, pieceCount: 6 },
+  { level: 13, rows: 3, columns: 2, pieceCount: 6 },
+  { level: 14, rows: 2, columns: 4, pieceCount: 8 },
+  { level: 15, rows: 4, columns: 2, pieceCount: 8 },
+  { level: 16, rows: 3, columns: 4, pieceCount: 12 },
+  { level: 17, rows: 4, columns: 3, pieceCount: 12 },
+  { level: 18, rows: 4, columns: 4, pieceCount: 16 },
 ];
 
 export const TOTAL_PUZZLE_LEVELS = PUZZLE_LEVELS.length;

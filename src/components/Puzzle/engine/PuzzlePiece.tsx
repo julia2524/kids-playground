@@ -416,7 +416,13 @@ interface Props {
   placed: boolean;
   onMove: (pieceId: string, x: number, y: number) => void;
   // true = 정답, false = 오답
-  onDrop: (pieceId: string, x: number, y: number) => boolean;
+  onDrop: (
+    pieceId: string,
+    x: number,
+    y: number,
+  ) => "correct" | "wrong" | "free";
+  boundsWidth?: number;
+  boundsHeight?: number;
 }
 
 const PARTICLE_COUNT = 10;
@@ -437,6 +443,8 @@ export default function PuzzlePiece({
   targetHeight,
   placed,
   onDrop,
+  boundsWidth,
+  boundsHeight,
 }: Props) {
   const [isDragging, setIsDragging] = useState(false);
 
@@ -460,6 +468,22 @@ export default function PuzzlePiece({
   ).current;
 
   const start = useRef({ x: renderX, y: renderY });
+
+  // 조각(돌기 포함)이 화면 안에 머무를 수 있는 x, y 범위
+  const minX = marginX;
+  const maxX = (boundsWidth ?? Infinity) - renderWidth - marginX;
+  const minY = marginY;
+  const maxY = (boundsHeight ?? Infinity) - renderHeight - marginY;
+
+  const clamp = (v: number, min: number, max: number) =>
+    Math.min(Math.max(v, min), max);
+
+  // 경계 밖으로 나가면 손가락보다 느리게 따라오는 저항 효과
+  const rubber = (v: number, min: number, max: number) => {
+    if (v < min) return min + (v - min) * 0.25;
+    if (v > max) return max + (v - max) * 0.25;
+    return v;
+  };
 
   // 정답 효과
   const scale = useRef(new Animated.Value(1)).current;
@@ -554,9 +578,9 @@ export default function PuzzlePiece({
     (finalX: number, finalY: number) => {
       position.setValue({ x: finalX, y: finalY });
 
-      const isCorrect = onDrop(piece.id, finalX, finalY);
+      const result = onDrop(piece.id, finalX, finalY);
 
-      if (!isCorrect) {
+      if (result === "wrong") {
         playWrongAnimation();
       }
 
@@ -589,7 +613,14 @@ export default function PuzzlePiece({
           });
         },
 
-        onPanResponderRelease: (_, gesture) => {
+        onPanResponderRelease: (e, gesture) => {
+          console.log("[release]", {
+            dx: gesture.dx,
+            dy: gesture.dy,
+            startY: start.current.y,
+            moveY: gesture.moveY, // 손가락의 화면상 y
+            pageY: e.nativeEvent.pageY,
+          });
           finishDrop(
             start.current.x + gesture.dx,
             start.current.y + gesture.dy,
@@ -597,6 +628,7 @@ export default function PuzzlePiece({
         },
 
         onPanResponderTerminate: (_, gesture) => {
+          console.log("[terminate]", gesture.dx, gesture.dy);
           finishDrop(
             start.current.x + gesture.dx,
             start.current.y + gesture.dy,

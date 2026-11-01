@@ -364,6 +364,8 @@ import { LeaningTowerPuzzleScene } from "../../components/Puzzle/assets/landmark
 import { OperaHousePuzzleScene } from "../../components/Puzzle/assets/landmark/OperaHousePuzzleScene";
 import { StatueOfLibertyPuzzleScene } from "../../components/Puzzle/assets/landmark/StatueOfLibertyPuzzleScene";
 import { TajMahalPuzzleScene } from "../../components/Puzzle/assets/landmark/TajMahalPuzzleScene";
+import ClassificationTestControls from "../../components/common/ClassificationTestControls";
+import PuzzleTestControls from "../../components/Puzzle/PuzzleTestControls";
 
 type RouteProps = RouteProp<RootStackParamList, "PuzzlePlayScreen">;
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
@@ -469,6 +471,8 @@ const LANDMARK_PUZZLE_DATA: Record<
     Artwork: TajMahalPuzzleScene,
   },
 };
+const HIDE_ARTWORK_FROM_LEVEL = 11;
+const SHOW_TEST_CONTROLS = false;
 
 export default function PuzzlePlayScreen() {
   const { playThemeBGM } = useBackgroundMusic();
@@ -556,6 +560,14 @@ export default function PuzzlePlayScreen() {
     resetBoard();
   }, [level, resetBoard]);
 
+  // 컨트롤러에서 레벨을 변경할 때 실행될 함수
+  const handleChangeLevel = useCallback(
+    (newLevel: number) => {
+      setLevel(newLevel);
+      resetBoard();
+    },
+    [resetBoard],
+  );
   const handleGoRoadmap = useCallback(() => {
     navigation.navigate("StageMapScreen", {
       gameType: "puzzle",
@@ -568,6 +580,7 @@ export default function PuzzlePlayScreen() {
     setCurrentStars(getPuzzleStars(wrongDropCount));
   }, []);
 
+  const hideArtwork = level >= HIDE_ARTWORK_FROM_LEVEL;
   return (
     <View
       style={{
@@ -607,8 +620,17 @@ export default function PuzzlePlayScreen() {
             columns={levelConfig.columns}
             onComplete={handleComplete}
             onWrongDropCountChange={handleWrongDropCountChange}
+            hideArtwork={hideArtwork}
           />
         </GameContainer>
+        {/* 퍼즐에 맞게 라운드를 뺀 레벨 전용 컨트롤러 */}
+        {SHOW_TEST_CONTROLS && (
+          <PuzzleTestControls
+            level={level}
+            totalLevels={TOTAL_PUZZLE_LEVELS}
+            onChangeLevel={handleChangeLevel}
+          />
+        )}
       </Container>
 
       {isCompleted && (

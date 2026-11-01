@@ -284,6 +284,7 @@
   "item_ladybug": "Ladybug",
   "item_bee": "Bee",
   "item_snail": "Snail",
+  "item_cuttonCandy": "Cotton Candy",
 
   "item_cupcake": "Cupcake",
   "item_heartChocolate": "Heart Chocolate",
@@ -560,6 +561,7 @@
       "triangleSandwich": "Sandwich",
       "pizzaSlice": "Pizza Slice",
       "cuttonCandy": "Cotton Candy",
+
       "cupcake": "Cupcake",
       "heartChocolate": "Heart Chocolate",
       "candy": "Candy",

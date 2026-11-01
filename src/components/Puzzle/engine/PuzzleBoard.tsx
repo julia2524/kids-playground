@@ -518,9 +518,15 @@
 //   font-weight: 800;
 // `;
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
-import { LayoutChangeEvent } from "react-native";
+import { LayoutChangeEvent, View } from "react-native";
 
 import styled from "styled-components/native";
 
@@ -575,6 +581,7 @@ export default function PuzzleBoard({
   title = "그림 퍼즐 맞추기",
 
   onWrongDropCountChange,
+  hideArtwork = false,
 }: PuzzleBoardProps) {
   useLanguage();
 
@@ -595,6 +602,9 @@ export default function PuzzleBoard({
   const [wrongDropCount, setWrongDropCount] = useState(0);
 
   const [completeSent, setCompleteSent] = useState(false);
+
+  // 💡 [수정 포인트 1] playAreaRef 타입을 any로 열어주어 styled-components와의 ref 충돌 방지
+  const playAreaRef = useRef<any>(null);
 
   const availableBoardHeight = Math.max(
     0,
@@ -808,8 +818,17 @@ export default function PuzzleBoard({
     const { width, height } = event.nativeEvent.layout;
 
     setLayoutWidth(width);
-
     setLayoutHeight(height);
+
+    // 💡 [수정 포인트 2] playAreaRef 안전 검사 및 좌표 인자 타입 추가
+    const playAreaNode = playAreaRef.current;
+    if (playAreaNode && typeof playAreaNode.measureInWindow === "function") {
+      playAreaNode.measureInWindow(
+        (x: number, y: number, w: number, h: number) => {
+          console.log("[playArea window]", { x, y, w, h });
+        },
+      );
+    }
   };
 
   const movePiece = useCallback((id: string, x: number, y: number) => {
@@ -835,31 +854,24 @@ export default function PuzzleBoard({
   }, []);
 
   const dropPiece = useCallback(
-    (id: string, x: number, y: number): boolean => {
+    (id: string, x: number, y: number): "correct" | "wrong" | "free" => {
       const piece = generatedPieces.find((item) => item.id === id);
-
-      if (!piece) return false;
+      if (!piece) return "free";
 
       const currentPosition = positions[id];
-
-      if (!currentPosition || currentPosition.placed) return false;
+      if (!currentPosition || currentPosition.placed) return "free";
 
       bringToFront(id);
 
       const targetX = boardLeft + piece.column * cellWidth;
-
       const targetY = boardTop + piece.row * cellHeight;
-
       const targetCenterX = targetX + cellWidth / 2;
-
       const targetCenterY = targetY + cellHeight / 2;
 
       const pieceCenterX = x + pieceWidth / 2;
-
       const pieceCenterY = y + pieceHeight / 2;
 
       const snapDistanceX = Math.max(26, cellWidth * 0.34);
-
       const snapDistanceY = Math.max(26, cellHeight * 0.34);
 
       const isNearTarget =
@@ -869,55 +881,47 @@ export default function PuzzleBoard({
       if (isNearTarget) {
         setPositions((current) => {
           const item = current[id];
-
           if (!item || item.placed) return current;
-
           return {
             ...current,
-
-            [id]: {
-              x: targetX,
-
-              y: targetY,
-
-              placed: true,
-            },
+            [id]: { x: targetX, y: targetY, placed: true },
           };
         });
-
         setPlacedCount((count) => count + 1);
-
-        return true;
+        return "correct";
       }
-
-      // 틀렸을 때 내부 상태만 업데이트 (부모 setState 호출은 useEffect로 위임)
-
-      setWrongDropCount((prev) => prev + 1);
+      // 기존 isInsideBoard 계산과 console.log 를 지우고 아래로 교체
+      const isInsideTray =
+        pieceCenterX >= trayX &&
+        pieceCenterX <= trayX + trayWidth &&
+        pieceCenterY >= trayY &&
+        pieceCenterY <= trayY + trayHeight;
 
       movePiece(id, x, y);
 
-      return false;
-    },
+      if (isInsideTray) {
+        // 트레이 안에 놓은 경우: 오답 처리 없이 그 자리에 둔다
+        return "free";
+      }
 
+      // 트레이 밖(보드 위 엉뚱한 칸 등)에 놓은 경우에만 오답
+      setWrongDropCount((prev) => prev + 1);
+      return "wrong";
+    },
     [
       generatedPieces,
-
       positions,
-
       boardLeft,
-
       boardTop,
-
       cellWidth,
-
       cellHeight,
-
       pieceWidth,
-
       pieceHeight,
-
+      trayX,
+      trayY,
+      trayWidth,
+      trayHeight,
       movePiece,
-
       bringToFront,
     ],
   );
@@ -969,7 +973,7 @@ export default function PuzzleBoard({
 
   return (
     <Root>
-      <PlayArea onLayout={onRootLayout}>
+      <PlayArea ref={playAreaRef} onLayout={onRootLayout}>
         {isReady && (
           <>
             <BoardStage>
@@ -986,6 +990,7 @@ export default function PuzzleBoard({
                   columns={columns}
                   width={boardWidth}
                   height={calculatedBoardHeight}
+                  hideArtwork={hideArtwork} // ← 추가
                 />
               </BoardCard>
             </BoardStage>
@@ -1042,6 +1047,8 @@ export default function PuzzleBoard({
                     targetWidth={cellWidth}
                     targetHeight={cellHeight}
                     placed
+                    boundsWidth={layoutWidth}
+                    boundsHeight={layoutHeight}
                     onMove={movePiece}
                     onDrop={dropPiece}
                   />

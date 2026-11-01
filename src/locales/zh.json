@@ -284,6 +284,7 @@
   "item_ladybug": "瓢虫",
   "item_bee": "蜜蜂",
   "item_snail": "蜗牛",
+  "item_cuttonCandy": "棉花糖",
 
   "item_cupcake": "纸杯蛋糕",
   "item_heartChocolate": "Heart 心形巧克力",
@@ -560,6 +561,7 @@
       "triangleSandwich": "三明治",
       "pizzaSlice": "披萨块",
       "cuttonCandy": "棉花糖",
+
       "cupcake": "纸杯蛋糕",
       "heartChocolate": "心形巧克力",
       "candy": "糖果",
