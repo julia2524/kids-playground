@@ -39,7 +39,7 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 export type ProblemObject = PatternElement;
 
 const TOTAL_ROUNDS = 10;
-const SHOW_TEST_CONTROLS = false;
+const SHOW_TEST_CONTROLS = true;
 
 export default function PatternPlayScreen() {
   const insets = useSafeAreaInsets();
@@ -104,42 +104,16 @@ export default function PatternPlayScreen() {
     );
   }, []);
 
-  // 클리어 저장 / 효과음
   useEffect(() => {
     if (!roundResult || !gameType) return;
-    saveLevelClear(gameType, testLevel, earnedStars);
-  }, [roundResult]);
 
+    void saveLevelClear(gameType, testLevel, earnedStars);
+  }, [roundResult, gameType, testLevel, earnedStars]);
   useEffect(() => {
     if (!roundResult) return;
     playEarnedNotes(Math.round(earnedStars / 0.5));
   }, [roundResult]);
-  // 문제가 바뀔 때마다 튜토리얼 표시
-  // useEffect(() => {
-  //   if (!problem) return;
 
-  //   const answerIndex = problem.choices.findIndex(
-  //     (choice) => JSON.stringify(choice) === JSON.stringify(problem.answer),
-  //   );
-
-  //   if (answerIndex < 0) return;
-
-  //   const answerChoice = problem.choices[answerIndex];
-  //   const choiceId = getChoiceId(answerChoice, answerIndex);
-
-  //   const timer = setTimeout(() => {
-  //     if (!tutorialObjectRefs.current[choiceId] || !blankSlotRef.current) {
-  //       return;
-  //     }
-
-  //     setTutorialObject(answerChoice);
-  //     setTutorialChoiceId(choiceId);
-  //     tutorialVisibleRef.current = true;
-  //     setTutorialVisible(true);
-  //   }, 2500);
-
-  //   return () => clearTimeout(timer);
-  // }, [problem, problemKey]);
   // 문제가 바뀔 때마다 튜토리얼 표시
   useEffect(() => {
     // Level 1이 아니거나 문제가 없으면 튜토리얼을 표시하지 않음

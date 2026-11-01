@@ -1091,6 +1091,8 @@ export default function PuzzleBoard({
                     targetWidth={cellWidth}
                     targetHeight={cellHeight}
                     placed={false}
+                    boundsWidth={layoutWidth} // ← 추가
+                    boundsHeight={layoutHeight} // ← 추가
                     onMove={movePiece}
                     onDrop={dropPiece}
                   />

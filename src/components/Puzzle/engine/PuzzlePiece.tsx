@@ -428,6 +428,12 @@ interface Props {
 const PARTICLE_COUNT = 10;
 const PARTICLE_COLORS = ["#FFC93C", "#7C5CFF", "#FF7AA8"];
 
+// 컴포넌트 밖 상단에 상수 추가
+const BOUNDS_INSET_LEFT = 8;
+const BOUNDS_INSET_TOP = 8;
+const BOUNDS_INSET_RIGHT = 8; // 오른쪽은 더 크게
+const BOUNDS_INSET_BOTTOM = 8; // 아래쪽은 더 크게
+
 export default function PuzzlePiece({
   piece,
   Artwork,
@@ -470,10 +476,18 @@ export default function PuzzlePiece({
   const start = useRef({ x: renderX, y: renderY });
 
   // 조각(돌기 포함)이 화면 안에 머무를 수 있는 x, y 범위
-  const minX = marginX;
-  const maxX = (boundsWidth ?? Infinity) - renderWidth - marginX;
-  const minY = marginY;
-  const maxY = (boundsHeight ?? Infinity) - renderHeight - marginY;
+  // const minX = marginX;
+  // const maxX = (boundsWidth ?? Infinity) - renderWidth - marginX;
+  // const minY = marginY;
+  // const maxY = (boundsHeight ?? Infinity) - renderHeight - marginY;
+
+  // 기존 minX ~ maxY 계산을 교체
+  const minX = marginX + BOUNDS_INSET_LEFT;
+  const maxX =
+    (boundsWidth ?? Infinity) - renderWidth - marginX - BOUNDS_INSET_RIGHT;
+  const minY = marginY + BOUNDS_INSET_TOP;
+  const maxY =
+    (boundsHeight ?? Infinity) - renderHeight - marginY - BOUNDS_INSET_BOTTOM;
 
   const clamp = (v: number, min: number, max: number) =>
     Math.min(Math.max(v, min), max);
@@ -574,19 +588,47 @@ export default function PuzzlePiece({
   }, [rotateAnim]);
 
   // 드롭 결과 처리
+  // const finishDrop = useCallback(
+  //   (finalX: number, finalY: number) => {
+  //     position.setValue({ x: finalX, y: finalY });
+
+  //     const result = onDrop(piece.id, finalX, finalY);
+
+  //     if (result === "wrong") {
+  //       playWrongAnimation();
+  //     }
+
+  //     setIsDragging(false);
+  //   },
+  //   [position, onDrop, piece.id, playWrongAnimation],
+  // );
   const finishDrop = useCallback(
-    (finalX: number, finalY: number) => {
-      position.setValue({ x: finalX, y: finalY });
+    (rawX: number, rawY: number) => {
+      const finalX = clamp(rawX, minX, maxX);
+      const finalY = clamp(rawY, minY, maxY);
 
-      const result = onDrop(piece.id, finalX, finalY);
+      const commit = () => {
+        position.setValue({ x: finalX, y: finalY });
+        const result = onDrop(piece.id, finalX, finalY);
+        if (result === "wrong") {
+          playWrongAnimation();
+        }
+        setIsDragging(false);
+      };
 
-      if (result === "wrong") {
-        playWrongAnimation();
+      if (finalX !== rawX || finalY !== rawY) {
+        // 경계 밖: 안쪽으로 spring 복귀 후 드롭 처리
+        Animated.spring(position, {
+          toValue: { x: finalX, y: finalY },
+          friction: 6,
+          tension: 120,
+          useNativeDriver: true,
+        }).start(commit);
+      } else {
+        commit();
       }
-
-      setIsDragging(false);
     },
-    [position, onDrop, piece.id, playWrongAnimation],
+    [position, onDrop, piece.id, playWrongAnimation, minX, maxX, minY, maxY],
   );
 
   // ==========================================================
@@ -606,36 +648,54 @@ export default function PuzzlePiece({
           triggerHaptic("light");
         },
 
+        // onPanResponderMove: (_, gesture) => {
+        //   position.setValue({
+        //     x: start.current.x + gesture.dx,
+        //     y: start.current.y + gesture.dy,
+        //   });
+        // },
         onPanResponderMove: (_, gesture) => {
           position.setValue({
-            x: start.current.x + gesture.dx,
-            y: start.current.y + gesture.dy,
+            x: rubber(start.current.x + gesture.dx, minX, maxX),
+            y: rubber(start.current.y + gesture.dy, minY, maxY),
           });
         },
-
-        onPanResponderRelease: (e, gesture) => {
-          console.log("[release]", {
-            dx: gesture.dx,
-            dy: gesture.dy,
-            startY: start.current.y,
-            moveY: gesture.moveY, // 손가락의 화면상 y
-            pageY: e.nativeEvent.pageY,
-          });
+        // onPanResponderRelease: (e, gesture) => {
+        //   console.log("[release]", {
+        //     dx: gesture.dx,
+        //     dy: gesture.dy,
+        //     startY: start.current.y,
+        //     moveY: gesture.moveY, // 손가락의 화면상 y
+        //     pageY: e.nativeEvent.pageY,
+        //   });
+        //   finishDrop(
+        //     start.current.x + gesture.dx,
+        //     start.current.y + gesture.dy,
+        //   );
+        // },
+        onPanResponderRelease: (_, gesture) => {
           finishDrop(
             start.current.x + gesture.dx,
             start.current.y + gesture.dy,
           );
         },
 
+        // onPanResponderTerminate: (_, gesture) => {
+        //   console.log("[terminate]", gesture.dx, gesture.dy);
+        //   finishDrop(
+        //     start.current.x + gesture.dx,
+        //     start.current.y + gesture.dy,
+        //   );
+        // },
         onPanResponderTerminate: (_, gesture) => {
-          console.log("[terminate]", gesture.dx, gesture.dy);
           finishDrop(
             start.current.x + gesture.dx,
             start.current.y + gesture.dy,
           );
         },
       }),
-    [placed, renderX, renderY, position, finishDrop],
+    // [placed, renderX, renderY, position, finishDrop],
+    [placed, renderX, renderY, position, finishDrop, minX, maxX, minY, maxY],
   );
 
   const spin = rotateAnim.interpolate({
@@ -699,6 +759,14 @@ export default function PuzzlePiece({
     piece.sourceWidth + piece.margin * 2
   } ${piece.sourceHeight + piece.margin * 2}`;
 
+  console.log("[bounds]", {
+    boundsWidth,
+    boundsHeight,
+    minX,
+    maxX,
+    minY,
+    maxY,
+  });
   return (
     <Piece
       {...panResponder.panHandlers}

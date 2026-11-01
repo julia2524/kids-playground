@@ -49,7 +49,7 @@ export type ProblemObject = CategorySortingObject;
 const TOTAL_ROUNDS = 10;
 
 // 개발용 Level / Round 컨트롤바 표시 여부 (배포 시 false)
-const SHOW_TEST_CONTROLS = false;
+const SHOW_TEST_CONTROLS = true;
 
 // 튜토리얼을 보여 줄 마지막 레벨 (1 ~ 이 값까지)
 const TUTORIAL_MAX_LEVEL = 3;
@@ -146,10 +146,16 @@ export default function CategorySortingPlayScreen() {
   // ==========================================================
   // 클리어 저장 / 효과음
   // ==========================================================
+  // useEffect(() => {
+  //   if (!roundResult || !gameType) return;
+  //   saveLevelClear(gameType, testLevel, earnedStars);
+  // }, [roundResult]);
+
   useEffect(() => {
     if (!roundResult || !gameType) return;
-    saveLevelClear(gameType, testLevel, earnedStars);
-  }, [roundResult]);
+
+    void saveLevelClear(gameType, testLevel, earnedStars);
+  }, [roundResult, gameType, testLevel, earnedStars]);
 
   useEffect(() => {
     if (!roundResult) return;

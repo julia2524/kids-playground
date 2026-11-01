@@ -19,8 +19,9 @@ type UsePatternGameParams = {
 
 const NEXT_ROUND_DELAY = 400;
 const STAR_PER_ROUND = 0.5;
-const MAX_MISTAKES_FOR_STAR = 1;
-const STICKER_START_LEVEL = 10;
+
+const MAX_MISTAKES_FOR_STAR = 2;
+const STICKER_START_LEVEL = 46;
 
 export function areSameElement(a: PatternElement, b: PatternElement): boolean {
   if (a.kind !== b.kind) return false;
