@@ -248,6 +248,7 @@ export default function CategorySortingPlayScreen() {
         />
 
         <CategorySortingObjectBoard
+          key={`board-${testLevel}-${roundIndex}`}
           objects={problem.objects}
           selectedObjectId={selectedObjectId}
           placedObjectIds={[...allPlacedIds, ...wrongObjectIds]}
@@ -266,6 +267,7 @@ export default function CategorySortingPlayScreen() {
         />
 
         <CategorySortingTargetArea
+          key={`targets-${testLevel}-${roundIndex}`}
           targets={problem.targets}
           objects={problem.objects}
           placedObjects={placedObjects}
