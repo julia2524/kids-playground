@@ -119,7 +119,7 @@ export const ALL_STICKER_KEYS = [
   "shortSleeveShirt",
   "tankTop",
   "shortSleeve",
-  "shots",
+  "shorts",
   "longPants",
   "skirt",
   "dress",

@@ -272,6 +272,16 @@
   "item_lollipop": "Lollipop",
   "item_wheel": "Wheel",
   "item_circleClock": "Round Clock",
+
+  "item_stapler": "Stapler",
+  "item_notebook": "Notebook",
+  "item_sketchbook": "Sketchbook",
+  "item_ruler": "Ruler",
+  "item_pen": "Pen",
+  "item_scissors": "Scissors",
+  "item_paperclip": "Paper Clip",
+  "item_pencil": "Pencil",
+
   "item_donut1": "Donut",
   "item_button1": "Button",
   "item_button2": "Button",
@@ -279,7 +289,7 @@
   "item_koala": "Koala",
   "item_fox": "Fox",
   "item_fish": "Fish",
-  "item_heartOwl": "Barn owl",
+  "item_heartOwl": "Owl",
   "item_butterfly": "Butterfly",
   "item_ladybug": "Ladybug",
   "item_bee": "Bee",
@@ -445,6 +455,8 @@
   "find_friends_home": "Help the friends find their homes!",
   "sort_by_size": "Let's sort by size!",
 
+  "find_next_in_pattern": "What comes next?",
+
   "size_large": "Big",
   "size_medium": "Medium",
   "size_small": "Small",
@@ -593,7 +605,7 @@
       "shortSleeveShirt": "Short-Sleeve Shirt",
       "tankTop": "Tank Top",
       "shortSleeve": "Short Sleeve",
-      "shots": "Shorts",
+      "shorts": "Shorts",
       "longPants": "Pants",
       "skirt": "Skirt",
       "dress": "Dress",
@@ -655,7 +667,7 @@
       "submarine": "Submarine",
       "boat": "Boat",
       "sailboat": "Sailboat",
-      "cemetMixer": "Cement Mixer",
+
       "excavator": "Excavator",
       "crane": "Crane",
       "dumpTruck": "Dump Truck",

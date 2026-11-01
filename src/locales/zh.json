@@ -272,6 +272,16 @@
   "item_lollipop": "棒棒糖",
   "item_wheel": "轮子",
   "item_circleClock": "圆形时钟",
+
+  "item_stapler": "订书机",
+  "item_notebook": "笔记本",
+  "item_sketchbook": "素描本",
+  "item_ruler": "尺子",
+  "item_pen": "圆珠笔",
+  "item_scissors": "剪刀",
+  "item_paperclip": "回形针",
+  "item_pencil": "铅笔",
+
   "item_donut1": "甜甜圈",
   "item_button1": "纽扣",
   "item_button2": "纽扣",
@@ -279,7 +289,7 @@
   "item_koala": "考拉",
   "item_fox": "狐狸",
   "item_fish": "鱼",
-  "item_heartOwl": "仓鸮",
+  "item_heartOwl": "猫头鹰",
   "item_butterfly": "蝴蝶",
   "item_ladybug": "瓢虫",
   "item_bee": "蜜蜂",
@@ -445,6 +455,8 @@
   "find_friends_home": "帮小伙伴们找到自己的家吧！",
   "sort_by_size": "按大小分一分吧！",
 
+  "find_next_in_pattern": "接下来会是什么呢？",
+
   "size_large": "大的",
   "size_medium": "中等",
   "size_small": "小的",
@@ -500,7 +512,7 @@
       "unknown": "未分类"
     },
     "item": {
-      "watermelonSlice": "西瓜片",
+      "watermelonSlice": "切片西瓜",
       "cementMixer": "水泥搅拌车",
       "button1": "纽扣",
       "button2": "纽扣",
@@ -593,7 +605,7 @@
       "shortSleeveShirt": "短袖衬衫",
       "tankTop": "背心",
       "shortSleeve": "短袖衫",
-      "shots": "短裤",
+      "shorts": "短裤",
       "longPants": "长裤",
       "skirt": "短裙",
       "dress": "连衣裙",
@@ -655,7 +667,7 @@
       "submarine": "潜水艇",
       "boat": "小船",
       "sailboat": "帆船",
-      "cemetMixer": "水泥搅拌车",
+
       "excavator": "挖掘机",
       "crane": "起重机",
       "dumpTruck": "渣土车",
