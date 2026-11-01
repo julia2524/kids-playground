@@ -1,6 +1,9 @@
 // import React, { useCallback, useEffect, useRef } from "react";
 // import { StyleSheet, Text, View } from "react-native";
-// import { SafeAreaView } from "react-native-safe-area-context";
+// import {
+//   SafeAreaView,
+//   useSafeAreaInsets,
+// } from "react-native-safe-area-context";
 // import styled from "styled-components/native";
 // import { LinearGradient } from "expo-linear-gradient";
 // import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
@@ -44,13 +47,14 @@
 // const TOTAL_ROUNDS = 10;
 
 // // 개발용 Level / Round 컨트롤바 표시 여부 (배포 시 false)
-// const SHOW_TEST_CONTROLS = false;
+// const SHOW_TEST_CONTROLS = true;
 
 // // ============================================================
 // // Screen
 // // ============================================================
 
 // export default function ColorSortingPlayScreen() {
+//   const insets = useSafeAreaInsets();
 //   const { playThemeBGM } = useBackgroundMusic();
 
 //   useEffect(() => {
@@ -201,7 +205,14 @@
 //   }
 
 //   return (
-//     <SafeAreaContainer edges={["top", "bottom"]}>
+//     <View
+//       style={{
+//         flex: 1,
+//         paddingTop: insets.top,
+//         paddingBottom: insets.bottom,
+//         backgroundColor: "#eef0fe",
+//       }}
+//     >
 //       {/* ================================================== */}
 //       {/* Background */}
 //       {/* ================================================== */}
@@ -331,7 +342,7 @@
 //           }}
 //         />
 //       )}
-//     </SafeAreaContainer>
+//     </View>
 //   );
 // }
 
@@ -407,7 +418,7 @@ export type ProblemObject = ColorSortingProblem["objects"][number];
 const TOTAL_ROUNDS = 10;
 
 // 개발용 Level / Round 컨트롤바 표시 여부 (배포 시 false)
-const SHOW_TEST_CONTROLS = false;
+const SHOW_TEST_CONTROLS = true;
 
 // ============================================================
 // Screen
@@ -603,9 +614,10 @@ export default function ColorSortingPlayScreen() {
         />
 
         <ColorSortingObjectBoard
+          key={`board-${testLevel}-${roundIndex}`} // ← 이 줄 추가 (핵심!)
           objects={problem.objects}
           selectedObjectId={selectedObjectId}
-          placedObjectIds={[...allPlacedIds, ...wrongObjectIds]} // 변경
+          placedObjectIds={[...allPlacedIds, ...wrongObjectIds]}
           onObjectPress={handleSelectObject}
           footerRef={footerRef}
           getTargetRects={getTargetRects}
@@ -621,6 +633,7 @@ export default function ColorSortingPlayScreen() {
         />
 
         <ColorSortingTargetArea
+          key={`targets-${testLevel}-${roundIndex}`} // ← 이 줄 추가 (핵심!)
           targets={problem.targets}
           objects={problem.objects}
           placedObjects={placedObjects}
