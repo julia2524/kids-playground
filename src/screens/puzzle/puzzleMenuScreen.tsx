@@ -270,7 +270,7 @@ export default function PuzzleMenuScreen() {
             <FlatList
               ref={flatListRef}
               data={PUZZLES}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item, index) => `${item.id}-${index}`}
               horizontal
               showsHorizontalScrollIndicator={false}
               snapToInterval={SNAP_INTERVAL}

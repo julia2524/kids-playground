@@ -39,7 +39,7 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 export type ProblemObject = PatternElement;
 
 const TOTAL_ROUNDS = 10;
-const SHOW_TEST_CONTROLS = true;
+const SHOW_TEST_CONTROLS = false;
 
 export default function PatternPlayScreen() {
   const insets = useSafeAreaInsets();

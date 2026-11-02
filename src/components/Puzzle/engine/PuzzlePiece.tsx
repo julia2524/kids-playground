@@ -497,6 +497,7 @@ const Particle = styled(Animated.View)<{ color: string }>`
   position: absolute;
   background-color: ${(p) => p.color};
 `;
+
 //직선퍼즐
 // import React, {
 //   useCallback,

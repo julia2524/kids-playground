@@ -3,16 +3,20 @@ import React, { useEffect, useState } from "react";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { ThemeProvider } from "styled-components/native";
 import { useFonts } from "expo-font";
+import { StatusBar } from "expo-status-bar";
+
+import mobileAds, { MaxAdContentRating } from "react-native-google-mobile-ads";
 
 import { LanguageProvider } from "./src/context/LangaugeContext";
 import AppNavigator from "./src/navigation/AppNavigator";
 import { theme } from "./src/design-system/theme";
-import i18n, { loadSavedLanguage } from "./src/i18n";
+import { loadSavedLanguage } from "./src/i18n";
 import { colors } from "./src/design-system/tokens/colors";
 import { BackgroundMusicProvider } from "./src/utils/BackgroundMusicContext";
 import { preloadSounds } from "./src/utils/sound";
 import { syncHapticGlobalState } from "./src/utils/haptic";
-import { StatusBar } from "expo-status-bar";
+import { useAppPlayTimer } from "./src/utils/asyncStorage/useAppPlayTimer";
+import RestModal from "./src/components/RestModal";
 
 export default function App() {
   // 1. 커스텀 폰트 로드
@@ -25,10 +29,30 @@ export default function App() {
   // 2. 저장된 언어 설정 로드 상태
   const [isLangLoaded, setIsLangLoaded] = useState<boolean>(false);
 
+  const {
+    shouldShowRestModal,
+    isCooltimeActive,
+    remainingCooltimeSec,
+    startThreeMinuteRest,
+    resetPlayTime,
+  } = useAppPlayTimer();
+
+  // 3. 앱 초기화
   useEffect(() => {
+    let isMounted = true;
+
     const initApp = async () => {
       try {
-        // 앱 초기화 시 언어 로드와 사운드 프리로드를 같이 실행
+        // AdMob 아동 대상 광고 요청 설정
+        await mobileAds().setRequestConfiguration({
+          maxAdContentRating: MaxAdContentRating.G,
+          tagForChildDirectedTreatment: true,
+        });
+
+        // AdMob 초기화
+        await mobileAds().initialize();
+
+        // 언어, 사운드, 진동 설정 로드
         await Promise.all([
           loadSavedLanguage(),
           preloadSounds(),
@@ -37,17 +61,26 @@ export default function App() {
       } catch (e) {
         console.warn("앱 초기화 실패:", e);
       } finally {
-        setIsLangLoaded(true);
+        if (isMounted) {
+          setIsLangLoaded(true);
+        }
       }
     };
 
     initApp();
-  }, []); // 최상단에 고정된 single useEffect
 
-  // 3. 폰트나 언어가 아직 로드되지 않았으면 렌더링 대기
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // 4. 폰트나 언어가 아직 로드되지 않았으면 렌더링 대기
   if (!fontsLoaded || !isLangLoaded) {
     return null;
   }
+
+  // 5. 쉬어가기 모달 표시 여부
+  const isModalVisible = shouldShowRestModal || isCooltimeActive;
 
   return (
     <LanguageProvider>
@@ -63,7 +96,17 @@ export default function App() {
             }}
           >
             <StatusBar style="light" hidden={false} />
+
             <AppNavigator />
+
+            {/* 카운트다운 기능이 포함된 통합 쉬어가기 모달 */}
+            <RestModal
+              visible={isModalVisible}
+              isCooltimeActive={isCooltimeActive}
+              remainingCooltimeSec={remainingCooltimeSec}
+              onRestThreeMinutes={startThreeMinuteRest}
+              onWatchAdSuccess={resetPlayTime}
+            />
           </NavigationContainer>
         </ThemeProvider>
       </BackgroundMusicProvider>

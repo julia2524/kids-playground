@@ -9,7 +9,7 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {},
-      "bundleIdentifier": "com.julia2524.kidsPlayground"
+      "bundleIdentifier": "com.skinnymommybear.kidsplayground"
     },
     "android": {
       "adaptiveIcon": {
@@ -22,7 +22,7 @@
         "translucent": true
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.julia2524.kidsPlayground",
+      "package": "com.skinnymommybear.kidsplayground",
       "permissions": [
         "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS",

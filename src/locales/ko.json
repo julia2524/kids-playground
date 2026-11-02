@@ -853,5 +853,12 @@
   "landmark_liberty_title": "자유의 여신상",
   "landmark_liberty_desc": "미국을 대표하는 조각상",
   "landmark_tajmahal_title": "타지마할",
-  "landmark_tajmahal_desc": "인도의 아름다운 궁전"
+  "landmark_tajmahal_desc": "인도의 아름다운 궁전",
+
+  "rest_modal_adult_title": "잠깐! 어른과 함께할게요!!",
+  "rest_modal_adult_desc": "소중한 어른과 같이 놀아요!",
+  "rest_modal_wait_title": "잠깐 기다려요!",
+  "rest_modal_wait_desc": "조금만 기다리면 다시 놀 수 있어요!",
+  "rest_modal_ad_button": "광고 보고 바로 놀기",
+  "rest_modal_rest_button": "3분 동안 쉬기"
 }

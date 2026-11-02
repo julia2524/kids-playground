@@ -315,7 +315,7 @@ export default function PuzzleThemeSelectScreen() {
 
           <FlatList
             data={items}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item, index) => `${item.id}-${index}`}
             numColumns={2}
             showsVerticalScrollIndicator={false}
             style={{ flex: 1 }}

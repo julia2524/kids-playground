@@ -14,7 +14,10 @@ import {
   NativeSyntheticEvent,
   NativeTouchEvent,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import styled from "styled-components/native";
 import {
@@ -33,7 +36,7 @@ import { AppText } from "../../utils/AppText";
 import { useLanguage } from "../../context/LangaugeContext";
 import CustomAlert from "../../components/CustomAlert";
 import { triggerHaptic } from "../../utils/haptic";
-
+import BannerAd from "../../services/BannerAd";
 // ============================================================
 // 설정
 // ============================================================
@@ -80,10 +83,6 @@ type ArtworkCollection = Record<string, SavedArtwork>;
 type DrawingTool = "draw" | "eraser";
 type PanelMode = "draw" | "paint";
 type Point = { x: number; y: number };
-
-// ============================================================
-// 색상 / 브러시
-// ============================================================
 
 const INK_COLORS = [
   { id: "red", hex: "#EF5350" },
@@ -134,6 +133,7 @@ const distanceToSegment = (p: Point, a: Point, b: Point) => {
 // ============================================================
 
 export default function StickerDetailScreen() {
+  const insets = useSafeAreaInsets(); // ⭐ 하단 안전 영역 값 가져오기
   useLanguage();
 
   const navigation = useNavigation<any>();
@@ -142,57 +142,77 @@ export default function StickerDetailScreen() {
 
   const { gameType, stickerId, stickerName } = route.params;
 
-  // 캔버스 영역 측정 먼저 선언
-  const [areaSize, setAreaSize] = useState({ w: 0, h: 0 });
-  const handleAreaLayout = (event: LayoutChangeEvent) => {
-    const { width: w, height: h } = event.nativeEvent.layout;
-    setAreaSize((prev) =>
-      Math.abs(prev.w - w) < 1 && Math.abs(prev.h - h) < 1 ? prev : { w, h },
-    );
-  };
-
-  const CANVAS_AREA_PADDING = 8;
-  const CANVAS_CARD_PADDING = 6;
-  const canvasSize = useMemo(() => {
-    if (!areaSize.w || !areaSize.h) {
-      return clamp(Math.min(width - 40, 340), MIN_CANVAS_SIZE, MAX_CANVAS_SIZE);
-    }
-    const free =
-      Math.min(areaSize.w, areaSize.h) -
-      CANVAS_AREA_PADDING * 2 -
-      CANVAS_CARD_PADDING * 2;
-    return clamp(Math.floor(free), MIN_CANVAS_SIZE, MAX_CANVAS_SIZE);
-  }, [areaSize, width]);
-
   // ----------------------------------------------------------
-  // 반응형 계산 (캔버스와 패널 가로 크기 일치화)
+  // ⭐ [떨림 방지 핵심] onLayout 제거 및 화면 기반 안정적 크기 계산
   // ----------------------------------------------------------
   const isLandscape = width > height;
   const shortSide = Math.min(width, height);
-  const scale = clamp(shortSide / 390, 0.9, 1.4);
 
+  // 줌/큰 글꼴 환경에서도 UI가 과도하게 커져서 부모를 뚫고 나가지 않도록 스케일 상한선(1.1) 엄격 제한
+  const scale = clamp(shortSide / 390, 0.8, 1.1);
+
+  const CANVAS_AREA_PADDING = 8;
+  const CANVAS_CARD_PADDING = 6;
+
+  // ⭐ 줌 및 큰 글꼴 환경에서도 CanvasArea 내부에 완벽히 안착하도록 안전계수 적용
+  const canvasSize = useMemo(() => {
+    if (isLandscape) {
+      const availableHeight = height - (insets.top + insets.bottom) - 60;
+      return clamp(
+        Math.floor(availableHeight - 24),
+        MIN_CANVAS_SIZE,
+        MAX_CANVAS_SIZE,
+      );
+    } else {
+      const estimatedHeaderHeight = 56;
+      const estimatedBannerHeight = 65;
+      const estimatedPaletteHeight = 135;
+      const verticalBuffer =
+        estimatedHeaderHeight +
+        estimatedBannerHeight +
+        estimatedPaletteHeight +
+        24;
+
+      const totalAreaPadding = CANVAS_AREA_PADDING * 2;
+      const totalCardPadding = CANVAS_CARD_PADDING * 2;
+
+      const maxAvailableHeight =
+        height -
+        verticalBuffer -
+        (insets.top + insets.bottom) -
+        totalAreaPadding -
+        totalCardPadding;
+      const maxAvailableWidth = width - totalAreaPadding - totalCardPadding;
+
+      // ⭐ 줌 상태에서 카드가 삐져나가지 않도록 0.85를 곱해 여유 공간을 확실히 확보합니다.
+      const size = Math.min(maxAvailableWidth, maxAvailableHeight) * 0.85;
+      return clamp(Math.floor(size), MIN_CANVAS_SIZE, MAX_CANVAS_SIZE);
+    }
+  }, [width, height, isLandscape, insets]);
+  // ----------------------------------------------------------
+  // 반응형 팔레트 (공간이 부족하면 팔레트가 스스로 줄어듦)
+  // ----------------------------------------------------------
   const PANEL_MARGIN = 10;
-  const PANEL_PADDING = Math.round(14 * scale);
+  const PANEL_PADDING = Math.round(8 * scale);
 
-  // 세로 모드일 때는 캔버스 크기(canvasSize)와 정확히 일치시키고, 가로 모드일 때는 비율 유지
   const panelOuterWidth = isLandscape
     ? clamp(Math.round(width * 0.38), 280, 460)
-    : canvasSize;
+    : canvasSize + CANVAS_AREA_PADDING * 2 + CANVAS_CARD_PADDING * 2;
 
   const panelInnerWidth =
     panelOuterWidth - PANEL_MARGIN * 2 - PANEL_PADDING * 2;
 
-  const INK_GAP = 8;
+  const INK_GAP = 6;
   const inkSize = Math.min(
-    Math.round(54 * scale),
+    Math.round(42 * scale),
     Math.floor((panelInnerWidth - INK_GAP * 4) / 5),
   );
   const stickerChipSize = Math.min(
-    Math.round(50 * scale),
+    Math.round(38 * scale),
     Math.floor((panelInnerWidth - INK_GAP * 4) / 5),
   );
-  const toolHeight = Math.round(56 * scale);
-  const iconSize = Math.round(24 * scale);
+  const toolHeight = Math.round(38 * scale);
+  const iconSize = Math.round(18 * scale);
 
   // ----------------------------------------------------------
   // 스티커 데이터
@@ -327,10 +347,7 @@ export default function StickerDetailScreen() {
 
   // ----------------------------------------------------------
   // 불러오기 / 자동 저장
-  // 화면에 다시 진입할 때 최신 저장 데이터를 불러온다.
-  // 설정 화면에서 전체 삭제한 그림이 되살아나지 않도록 한다.
   // ----------------------------------------------------------
-
   const [isFocused, setIsFocused] = useState(false);
 
   useFocusEffect(
@@ -341,18 +358,15 @@ export default function StickerDetailScreen() {
         setIsLoaded(false);
         setIsSaved(true);
 
-        // 이전 그림의 현재 경로와 캐시를 초기화한다.
         currentPathRef.current = "";
         setCurrentPath("");
         pointsCacheRef.current.clear();
 
         try {
           const json = await AsyncStorage.getItem(ARTWORK_STORAGE_KEY);
-
           if (!isActive) return;
 
           const collection: ArtworkCollection = json ? JSON.parse(json) : {};
-
           const savedArtwork = collection[stickerId];
 
           if (savedArtwork) {
@@ -389,7 +403,6 @@ export default function StickerDetailScreen() {
   );
 
   useEffect(() => {
-    // 포커스가 있고 저장 데이터를 불러온 상태에서만 저장한다.
     if (!isLoaded || !isFocused) return;
 
     setIsSaved(false);
@@ -397,7 +410,6 @@ export default function StickerDetailScreen() {
     const timeout = setTimeout(async () => {
       try {
         const json = await AsyncStorage.getItem(ARTWORK_STORAGE_KEY);
-
         const collection: ArtworkCollection = json ? JSON.parse(json) : {};
 
         collection[stickerId] = {
@@ -421,8 +433,9 @@ export default function StickerDetailScreen() {
 
     return () => clearTimeout(timeout);
   }, [isLoaded, isFocused, stickerId, selectedColor, drawings]);
+
   // ----------------------------------------------------------
-  // 스티커 이름 다국어화 (언어 변경 즉시 반영)
+  // 스티커 이름 다국어화
   // ----------------------------------------------------------
   const localizedStickerName = useMemo(() => {
     const normalizedShapeId = stickerId?.replace(/^basic/i, "");
@@ -460,7 +473,6 @@ export default function StickerDetailScreen() {
 
     for (const key of keyCandidates) {
       const translated = i18n.t(key, { defaultValue: "" });
-
       if (translated && !translated.includes("missing")) {
         return translated;
       }
@@ -569,7 +581,7 @@ export default function StickerDetailScreen() {
     setDrawings((previous) => [
       ...previous,
       {
-        id: `${stickerId}-${Date.now()}-${strokeIdRef.current}`,
+        id: `${stickerId}-${Date.now()}-${Math.random().toString(36).substring(2, 7)}-${strokeIdRef.current}`,
         path: finishedPath,
         color: selectedInk,
         strokeWidth: brushWidth,
@@ -580,7 +592,7 @@ export default function StickerDetailScreen() {
   };
 
   // ----------------------------------------------------------
-  // 햅틱이 포함된 액션 핸들러들
+  // 액션 핸들러들
   // ----------------------------------------------------------
   const handleSelectTool = (newTool: DrawingTool) => {
     triggerHaptic("light");
@@ -646,7 +658,7 @@ export default function StickerDetailScreen() {
   );
 
   // ----------------------------------------------------------
-  // 도구 패널 UI (햅틱 + Vector Icons 적용)
+  // 도구 패널 UI
   // ----------------------------------------------------------
   const renderDrawPanel = () => (
     <>
@@ -713,7 +725,7 @@ export default function StickerDetailScreen() {
             selected={brushWidth === item.size}
             onPress={() => handleSelectBrush(item.size)}
             activeOpacity={0.7}
-            style={{ minHeight: Math.round(44 * scale) }}
+            style={{ minHeight: Math.round(38 * scale) }}
           >
             <BrushDot
               style={{
@@ -811,11 +823,8 @@ export default function StickerDetailScreen() {
         />
 
         <Body style={{ flexDirection: isLandscape ? "row" : "column" }}>
-          {/* 캔버스 영역 */}
-          <CanvasArea
-            onLayout={handleAreaLayout}
-            style={{ padding: CANVAS_AREA_PADDING }}
-          >
+          {/* 캔버스 영역 (오버플로우 방지 및 안전 안착 보장) */}
+          <CanvasArea style={{ padding: CANVAS_AREA_PADDING }}>
             <CanvasCard style={{ padding: CANVAS_CARD_PADDING }}>
               <Canvas style={{ width: canvasSize, height: canvasSize }}>
                 <StickerLayer pointerEvents="none">
@@ -874,7 +883,7 @@ export default function StickerDetailScreen() {
             </CanvasCard>
           </CanvasArea>
 
-          {/* 도구 패널 영역 (캔버스와 가로 폭 일치 및 ScrollView 적용) */}
+          {/* 도구 패널 영역 */}
           <PanelWrap
             style={
               isLandscape
@@ -882,8 +891,6 @@ export default function StickerDetailScreen() {
                 : {
                     width: panelOuterWidth,
                     alignSelf: "center",
-                    flex: 1,
-                    maxHeight: height * 0.45,
                   }
             }
           >
@@ -892,17 +899,17 @@ export default function StickerDetailScreen() {
               showsVerticalScrollIndicator={false}
               contentContainerStyle={{
                 padding: PANEL_MARGIN,
-                paddingBottom: 24,
+                paddingBottom: 70,
               }}
             >
-              <StudioPanel style={{ padding: PANEL_PADDING }}>
+              <StudioPanel style={{ padding: 10 }}>
                 {/* 모드 전환 탭 */}
                 <ModeRow>
                   <ModeButton
                     selected={panelMode === "draw"}
                     onPress={() => handleModeChange("draw")}
                     activeOpacity={0.8}
-                    style={{ minHeight: Math.round(46 * scale) }}
+                    style={{ minHeight: Math.round(36 * scale) }}
                   >
                     <MaterialCommunityIcons
                       name="pencil"
@@ -914,7 +921,7 @@ export default function StickerDetailScreen() {
                     selected={panelMode === "paint"}
                     onPress={() => handleModeChange("paint")}
                     activeOpacity={0.8}
-                    style={{ minHeight: Math.round(46 * scale) }}
+                    style={{ minHeight: Math.round(36 * scale) }}
                   >
                     <MaterialCommunityIcons
                       name="palette-outline"
@@ -949,12 +956,17 @@ export default function StickerDetailScreen() {
           defaultValue: "네, 지울래요",
         })}
       />
+
+      {/* 하단 고정 표준 배너 광고 */}
+      <BannerAdContainer bottomInset={insets.bottom}>
+        <BannerAd />
+      </BannerAdContainer>
     </Container>
   );
 }
 
 // ============================================================
-// 스타일
+// 스타일 (카드 및 영역이 삐져나가지 않도록 엄격히 제어)
 // ============================================================
 
 const Container = styled.View`
@@ -970,6 +982,9 @@ const CanvasArea = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  padding: 8px;
+  width: 100%;
 `;
 
 const CanvasCard = styled.View`
@@ -982,6 +997,11 @@ const CanvasCard = styled.View`
   shadow-opacity: 0.08;
   shadow-radius: 8px;
   elevation: 3;
+  overflow: hidden;
+
+  /* ⭐ 카드가 영역을 절대 넘지 못하도록 강제 제한 */
+  max-width: 100%;
+  max-height: 100%;
 `;
 
 const Canvas = styled.View`
@@ -1067,43 +1087,28 @@ const StudioPanel = styled.View`
 `;
 
 const SectionGap = styled.View`
-  height: 10px;
+  height: 6px;
 `;
 
 const ModeRow = styled.View`
   flex-direction: row;
-  gap: 8px;
+  gap: 6px;
 `;
 
 const ModeButton = styled(TouchableOpacity)<{ selected: boolean }>`
   flex: 1;
   align-items: center;
   justify-content: center;
-  border-radius: 14px;
+  border-radius: 12px;
   background-color: ${(props) => (props.selected ? "#52796f" : "#f1eee6")};
 `;
 
 const ToolBarRow = styled.View`
   flex-direction: row;
-  gap: 8px;
+  gap: 6px;
 `;
 
 const ToolChip = styled(TouchableOpacity)<{ selected: boolean }>`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  border-radius: 14px;
-  background-color: ${(props) => (props.selected ? "#eaf2ec" : "#f7f5f0")};
-  border-width: 2px;
-  border-color: ${(props) => (props.selected ? "#52796f" : "transparent")};
-`;
-
-const BrushSizeRow = styled.View`
-  flex-direction: row;
-  gap: 8px;
-`;
-
-const BrushSizeButton = styled(TouchableOpacity)<{ selected: boolean }>`
   flex: 1;
   align-items: center;
   justify-content: center;
@@ -1112,6 +1117,23 @@ const BrushSizeButton = styled(TouchableOpacity)<{ selected: boolean }>`
   border-width: 2px;
   border-color: ${(props) => (props.selected ? "#52796f" : "transparent")};
 `;
+
+const BrushSizeRow = styled.View`
+  flex-direction: row;
+  gap: 6px;
+`;
+
+const BrushSizeButton = styled(TouchableOpacity)<{ selected: boolean }>`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: ${(props) => (props.selected ? "#eaf2ec" : "#f7f5f0")};
+  border-width: 2px;
+  border-color: ${(props) => (props.selected ? "#52796f" : "transparent")};
+`;
+
+const BrushDivider = styled.View``; // 기존 코드 호환성용
 
 const BrushDot = styled.View``;
 
@@ -1130,7 +1152,7 @@ const InkColorCircle = styled(TouchableOpacity)<{ selected: boolean }>`
 const StickerColorGrid = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 `;
 
 const StickerColorChip = styled(TouchableOpacity)<{ selected: boolean }>`
@@ -1138,4 +1160,16 @@ const StickerColorChip = styled(TouchableOpacity)<{ selected: boolean }>`
   justify-content: center;
   border-width: ${(props) => (props.selected ? 3 : 1)}px;
   border-color: ${(props) => (props.selected ? "#2f3e35" : "#cbd5e1")};
+`;
+
+const BannerAdContainer = styled.View<{ bottomInset: number }>`
+  height: 60px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  position: absolute;
+  bottom: ${(props) => Math.max(props.bottomInset, 12)}px;
+  left: 0;
+  z-index: 20;
 `;

@@ -14,6 +14,8 @@ import i18n from "../../i18n";
 import { useBackgroundMusic } from "../../utils/BackgroundMusicContext";
 import { classificationItems } from "../../data/classification/classificationItems";
 import { triggerHaptic } from "../../utils/haptic";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import BannerAd from "../../services/BannerAd";
 
 const UNLOCKED_STICKERS_KEY = "@unlocked_stickers";
 
@@ -273,6 +275,7 @@ export const ALL_STICKER_KEYS = [
 ];
 
 export default function StickerGalleryScreen() {
+  const insets = useSafeAreaInsets(); // ⭐ 하단 안전 영역 값 가져오기
   const { playThemeBGM } = useBackgroundMusic();
 
   useEffect(() => {
@@ -443,13 +446,10 @@ export default function StickerGalleryScreen() {
         </GridContainer>
       </ScrollView>
 
-      {/* 이스터에그 알럿 */}
-      {/* <CustomAlert
-        visible={alertVisible}
-        title="이스터에그!"
-        message={alertMessage}
-        onClose={() => setAlertVisible(false)}
-      /> */}
+      {/* ⭐ 3. 화면 하단 고정 표준 배너 광고 (제스처 홈바 위쪽에 안전하게 위치) */}
+      <BannerAdContainer bottomInset={insets.bottom}>
+        <BannerAd />
+      </BannerAdContainer>
     </Container>
   );
 }
@@ -553,4 +553,16 @@ const LockedName = styled(AppText)`
   color: #94a3b8;
   margin-top: 4px;
   font-weight: 700;
+`;
+
+const BannerAdContainer = styled.View<{ bottomInset: number }>`
+  height: 60px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  position: absolute;
+  bottom: ${(props) => Math.max(props.bottomInset, 12)}px;
+  left: 0;
+  z-index: 20;
 `;

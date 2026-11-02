@@ -851,5 +851,12 @@
   "landmark_liberty_title": "自由女神像",
   "landmark_liberty_desc": "美国著名地标",
   "landmark_tajmahal_title": "泰姬陵",
-  "landmark_tajmahal_desc": "印度著名宫殿"
+  "landmark_tajmahal_desc": "印度著名宫殿",
+
+  "rest_modal_adult_title": "等等！和大人一起玩吧！",
+  "rest_modal_adult_desc": "和重要的大人一起玩吧！",
+  "rest_modal_wait_title": "请稍等一下！",
+  "rest_modal_wait_desc": "稍等一会儿就可以继续玩啦！",
+  "rest_modal_ad_button": "观看广告立即继续",
+  "rest_modal_rest_button": "休息3分钟"
 }

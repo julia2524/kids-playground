@@ -317,7 +317,7 @@ export default function ProgressManagementScreen() {
             {i18n.t("puzzle_reset_description")}
           </SectionDescription>
 
-          <SettingCard>
+          {/* <SettingCard>
             {PUZZLE_RESET_ITEMS.map(({ category, titleKey, characters }) => {
               const gameTitle = i18n.t(titleKey);
 
@@ -357,6 +357,52 @@ export default function ProgressManagementScreen() {
                 </ResetPuzzleButtonRow>
               );
             })}
+          </SettingCard> */}
+          <SettingCard>
+            {PUZZLE_RESET_ITEMS.map(
+              ({ category, titleKey, characters }, index) => {
+                const gameTitle = i18n.t(titleKey);
+
+                return (
+                  <React.Fragment key={category}>
+                    <ResetPuzzleButtonRow
+                      activeOpacity={0.75}
+                      onPress={() => handleResetPuzzle(characters, gameTitle)}
+                    >
+                      <SettingInfo>
+                        <IconBadge
+                          style={{
+                            backgroundColor: colors.softBlue,
+                          }}
+                        >
+                          <Ionicons
+                            name="extension-puzzle-outline"
+                            size={21}
+                            color={colors.blue}
+                          />
+                        </IconBadge>
+
+                        <SettingTextWrapper>
+                          <SettingTitle>{gameTitle}</SettingTitle>
+
+                          <SettingDescription>
+                            {i18n.t("puzzle_reset_item_description")}
+                          </SettingDescription>
+                        </SettingTextWrapper>
+                      </SettingInfo>
+
+                      <Ionicons
+                        name="chevron-forward"
+                        size={20}
+                        color={colors.textGroup.secondary}
+                      />
+                    </ResetPuzzleButtonRow>
+
+                    {index < PUZZLE_RESET_ITEMS.length - 1 && <Divider />}
+                  </React.Fragment>
+                );
+              },
+            )}
           </SettingCard>
         </Section>
 
@@ -567,4 +613,11 @@ const SettingDescription = styled(AppText)`
   font-family: ${(props) => props.theme.fontFamily};
   font-size: 14px;
   color: ${colors.textGroup.secondary};
+`;
+
+export const Divider = styled.View`
+  height: 1.5px;
+  background-color: ${colors.border.default};
+  opacity: 0.5;
+  margin-vertical: 4px;
 `;

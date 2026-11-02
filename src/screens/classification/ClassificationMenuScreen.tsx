@@ -754,7 +754,7 @@ export default function ClassificationMenuScreen() {
             <FlatList
               ref={flatListRef}
               data={GAMES}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item, index) => `${item.id}-${index}`}
               horizontal
               showsHorizontalScrollIndicator={false}
               snapToInterval={SNAP_INTERVAL}
