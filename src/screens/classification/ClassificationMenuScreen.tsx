@@ -130,7 +130,7 @@
 //   const [currentIndex, setCurrentIndex] = useState(0);
 //   const flatListRef = useRef<FlatList<ClassificationGame>>(null);
 
-//   // 💡 1. 화면 진입 시 마지막 접속했던 게임 위치로 자동 스크롤
+//   // 💡 화면 진입 시 마지막 접속했던 게임 위치로 자동 스크롤
 //   useEffect(() => {
 //     const loadLastGamePosition = async () => {
 //       const lastGameId = await getLastGame();
@@ -178,9 +178,9 @@
 //         source={ASSETS.classificationMenuBackground}
 //         resizeMode="cover"
 //       />
-//       <Screen edges={["top", "bottom"]}>
+//       {/* 1. 상단만 안전 영역을 잡고, 하단은 광고 공간을 위해 비워둠 */}
+//       <Screen edges={["top"]}>
 //         {/* 고정 헤더 */}
-
 //         <AppHeader
 //           title={i18n.t("classification_space_title")}
 //           onBackPress={() => {
@@ -188,7 +188,8 @@
 //           }}
 //           onMascotPress={() => navigation.navigate("SettingScreen")}
 //         />
-//         <MainContainer>
+//         {/* 2. 광고 높이(60px) + 여백만큼 하단 패딩을 주어 인디케이터가 광고에 안 먹히게 보호 */}
+//         <MainContainer style={{ paddingBottom: 70 }}>
 //           <CarouselArea>
 //             <TitleArea>
 //               <Title>{i18n.t("classification_hero_title")}</Title>
@@ -197,7 +198,7 @@
 //             <FlatList
 //               ref={flatListRef}
 //               data={GAMES}
-//               keyExtractor={(item) => item.id}
+//               keyExtractor={(item, index) => `${item.id}-${index}`}
 //               horizontal
 //               showsHorizontalScrollIndicator={false}
 //               snapToInterval={SNAP_INTERVAL}
@@ -300,9 +301,15 @@
 //           </BottomArea>
 //         </MainContainer>
 //       </Screen>
+
+//       {/* ⭐ 3. 화면 하단 고정 표준 배너 광고 (제스처 홈바 위쪽에 안전하게 위치) */}
+//       <BannerAdContainer bottomInset={insets.bottom}>
+//         <BannerAd />
+//       </BannerAdContainer>
 //     </Background>
 //   );
 // }
+
 // const BannerAdContainer = styled.View<{ bottomInset: number }>`
 //   height: 60px;
 //   width: 100%;
@@ -328,6 +335,7 @@
 //   width: 100%;
 //   height: 100%;
 // `;
+
 // export const Screen = styled(SafeAreaView)`
 //   flex: 1;
 //   justify-content: space-between;
@@ -524,7 +532,7 @@
 //   align-items: center;
 //   justify-content: center;
 //   gap: 20px;
-//   margin-bottom: 10px;
+//   margin-bottom: 60px;
 // `;
 
 // export const ArrowButton = styled.TouchableOpacity`
@@ -566,10 +574,7 @@ import styled from "styled-components/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AppText } from "../../utils/AppText";
 import { RootStackParamList } from "../../navigation/types";
 import { ClassificationGameType } from "../../types/game";
@@ -597,19 +602,17 @@ export const colors = {
   yellow: "#FFD95A",
   mint: "#55D6BE",
   white: "#FFFFFF",
-  background: "#F2F5FF", // 메인화면과 유사한 은은한 연보라/하늘 배경
+  background: "#F2F5FF",
   text: "#29263D",
   secondaryText: "#7E7B9A",
 
-  // 테마별 카드 배경 (메인 화면처럼 부드러운 파스텔 틴트)
   cardBg: {
-    color: "#FFF0F5", // 분홍 파스텔
-    shape: "#F0F5FF", // 하늘 파스텔
-    category: "#EDFAF6", // 민트 파스텔
-    size: "#FFF9E6", // 노랑 파스텔
+    color: "#FFF0F5",
+    shape: "#F0F5FF",
+    category: "#EDFAF6",
+    size: "#FFF9E6",
   },
 
-  // 버튼 & 강조 보더 색상
   accent: {
     color: "#FF6FAE",
     shape: "#4D8DFF",
@@ -632,6 +635,7 @@ type ClassificationGame = {
   accentColor: string;
   cardBg: string;
 };
+
 const MENU_GAME_CONFIGS = [
   {
     id: "color",
@@ -649,7 +653,6 @@ const MENU_GAME_CONFIGS = [
     accentColor: colors.accent.shape,
     cardBg: colors.cardBg.shape,
   },
-
   {
     id: "category",
     titleKey: "planet_category_title",
@@ -669,10 +672,9 @@ const MENU_GAME_CONFIGS = [
 ] as const;
 
 export default function ClassificationMenuScreen() {
-  const insets = useSafeAreaInsets(); // ⭐ 하단 안전 영역 값 가져오기
-  const { locale } = useLanguage(); // 👈 언어 변경 상태를 감지
+  const insets = useSafeAreaInsets();
+  const { locale } = useLanguage();
 
-  // locale이 변경될 때마다 GAMES의 i18n.t 번역 갱신!
   const GAMES = useMemo(() => {
     return MENU_GAME_CONFIGS.map((item) => ({
       ...item,
@@ -681,12 +683,12 @@ export default function ClassificationMenuScreen() {
       description: i18n.t(item.descKey),
     }));
   }, [locale]);
+
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList<ClassificationGame>>(null);
 
-  // 💡 화면 진입 시 마지막 접속했던 게임 위치로 자동 스크롤
   useEffect(() => {
     const loadLastGamePosition = async () => {
       const lastGameId = await getLastGame();
@@ -698,7 +700,7 @@ export default function ClassificationMenuScreen() {
         setTimeout(() => {
           flatListRef.current?.scrollToOffset({
             offset: targetIndex * SNAP_INTERVAL,
-            animated: false, // 진입 시 튀지 않게 바로 이동
+            animated: false,
           });
         }, 100);
       }
@@ -716,7 +718,7 @@ export default function ClassificationMenuScreen() {
   };
 
   const handleSelectGame = (game: ClassificationGame) => {
-    saveLastGame(game.id); // 마지막 게임 저장
+    saveLastGame(game.id);
     navigation.navigate("StageMapScreen", { gameType: game.id });
   };
 
@@ -728,15 +730,17 @@ export default function ClassificationMenuScreen() {
     });
   };
 
+  // ⭐ 하단 배너 광고 높이(60px) + 안전영역(insets.bottom)을 계산하여 콘텐츠가 가리지 않도록 여유 공간 확보
+  const bannerTotalHeight = 60 + Math.max(insets.bottom, 12);
+
   return (
     <Background>
       <BackgroundImage
         source={ASSETS.classificationMenuBackground}
         resizeMode="cover"
       />
-      {/* 1. 상단만 안전 영역을 잡고, 하단은 광고 공간을 위해 비워둠 */}
-      <Screen edges={["top"]}>
-        {/* 고정 헤더 */}
+      {/* ⭐ SafeAreaView 대신 일반 View를 사용하고 paddingTop을 insets.top으로 수동 고정하여 툭 밀림 원천 차단 */}
+      <Screen style={{ paddingTop: insets.top }}>
         <AppHeader
           title={i18n.t("classification_space_title")}
           onBackPress={() => {
@@ -744,8 +748,8 @@ export default function ClassificationMenuScreen() {
           }}
           onMascotPress={() => navigation.navigate("SettingScreen")}
         />
-        {/* 2. 광고 높이(60px) + 여백만큼 하단 패딩을 주어 인디케이터가 광고에 안 먹히게 보호 */}
-        <MainContainer style={{ paddingBottom: 70 }}>
+
+        <MainContainer style={{ paddingBottom: bannerTotalHeight + 10 }}>
           <CarouselArea>
             <TitleArea>
               <Title>{i18n.t("classification_hero_title")}</Title>
@@ -785,7 +789,6 @@ export default function ClassificationMenuScreen() {
                         </ShootingStarArea>
 
                         <PlanetScene>
-                          {/* 크기 변경 애니메이션 제거 (145px 고정) */}
                           <ClassificationPlanet type={item.id} size={145} />
                           <Orbit>
                             <OrbitLine />
@@ -815,7 +818,6 @@ export default function ClassificationMenuScreen() {
             />
           </CarouselArea>
 
-          {/* 하단 인디케이터 & 화살표 */}
           <BottomArea>
             <ArrowButton
               onPress={() => {
@@ -858,7 +860,6 @@ export default function ClassificationMenuScreen() {
         </MainContainer>
       </Screen>
 
-      {/* ⭐ 3. 화면 하단 고정 표준 배너 광고 (제스처 홈바 위쪽에 안전하게 위치) */}
       <BannerAdContainer bottomInset={insets.bottom}>
         <BannerAd />
       </BannerAdContainer>
@@ -892,7 +893,8 @@ export const BackgroundImage = styled.Image`
   height: 100%;
 `;
 
-export const Screen = styled(SafeAreaView)`
+// ⭐ SafeAreaView 대신 일반 View 기반으로 변경하여 첫 렌더링 시 밀림 현상 방지
+export const Screen = styled.View`
   flex: 1;
   justify-content: space-between;
 `;
@@ -964,7 +966,6 @@ export const GameCardWrapper = styled.View`
   margin-right: ${ITEM_SPACING}px;
 `;
 
-// 메인 화면의 말랑말랑한 둥근 카드 느낌
 export const GameCard = styled.TouchableOpacity<{
   active: boolean;
   bgColor: string;
@@ -975,14 +976,12 @@ export const GameCard = styled.TouchableOpacity<{
   border-width: 3px;
   border-color: #ffffff;
 
-  /* 부드러운 그림자 효과 */
   shadow-color: #a3a8cc;
   shadow-offset: 0px 8px;
   shadow-opacity: ${({ active }) => (active ? 0.2 : 0.08)};
   shadow-radius: 12px;
   elevation: ${({ active }) => (active ? 5 : 2)};
 
-  /* 스케일 애니메이션 대신 불투명도 차이만 적용 */
   opacity: ${({ active }) => (active ? 1 : 0.65)};
 `;
 
@@ -1049,7 +1048,6 @@ export const GameDescription = styled(AppText)`
   margin-top: 2px;
 `;
 
-// 메인 카드의 버튼처럼 동그라미 화살표 아이콘이 들어간 둥글둥글한 버튼
 export const StartButton = styled.View`
   height: 50px;
   border-radius: 25px;
@@ -1068,18 +1066,8 @@ export const StartButton = styled.View`
 export const StartButtonText = styled(AppText)`
   color: #ffffff;
   font-size: ${(props) => props.theme.typography.body.fontSize}px;
-
   flex: 1;
   text-align: center;
-`;
-
-export const ArrowCircle = styled.View`
-  width: 34px;
-  height: 34px;
-  border-radius: 17px;
-  background-color: #ffffff;
-  align-items: center;
-  justify-content: center;
 `;
 
 export const BottomArea = styled.View`
@@ -1088,7 +1076,7 @@ export const BottomArea = styled.View`
   align-items: center;
   justify-content: center;
   gap: 20px;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 `;
 
 export const ArrowButton = styled.TouchableOpacity`
