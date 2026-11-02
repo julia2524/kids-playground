@@ -752,16 +752,6 @@ const FloatingStickerButton = styled.TouchableOpacity`
   z-index: 10;
 `;
 
-// export const BannerAdContainer = styled.View`
-//   height: 60px;
-
-//   align-items: center;
-
-//   justify-content: center;
-
-//   background-color: ${colors.white};
-// `;
-
 const BannerAdContainer = styled.View<{ bottomInset: number }>`
   height: 60px;
   width: 100%;
