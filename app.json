@@ -3,6 +3,7 @@
     "name": "Kids Playground",
     "slug": "KidsPlayground",
     "version": "1.0.0",
+
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -18,16 +19,13 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "statusBar": {
-        "translucent": true
-      },
       "predictiveBackGestureEnabled": false,
       "package": "com.skinnymommybear.kidsplayground",
       "permissions": [
-        "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS",
         "android.permission.FOREGROUND_SERVICE",
-        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"
+        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+        "android.permission.RECORD_AUDIO"
       ]
     },
     "web": {
@@ -40,6 +38,15 @@
       "expo-audio",
       "expo-status-bar",
       "expo-asset",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableMinifyInReleaseBuilds": false,
+            "extraProguardRules": "-keep class * extends androidx.room.RoomDatabase { <init>(); }\n-keep class * extends androidx.work.InputMerger { <init>(); }"
+          }
+        }
+      ],
       [
         "expo-splash-screen",
         {
@@ -56,6 +63,11 @@
           "iosAppId": "ca-app-pub-3381041851241163~3333333333"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "0abb3259-8fa3-431b-adf3-97454c33c055"
+      }
+    }
   }
 }

@@ -44,3 +44,10 @@ yarn-error.*
 .env
 .env.local
 .env.*
+
+credentials.json
+credentials/
+*.aab
+*.apks
+*.apk
+*crash*.txt
