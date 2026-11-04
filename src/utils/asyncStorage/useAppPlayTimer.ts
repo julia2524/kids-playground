@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { AppState, AppStateStatus } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const PLAY_TIME_LIMIT = 1 * 60 * 1000; // 15분 (밀리초): 15 * 60 * 1000
-const REST_COOLTIME = 1 * 3 * 1000; // 3분 (밀리초): 3 * 60 * 1000
+const PLAY_TIME_LIMIT = 15 * 60 * 1000; // 15분 (밀리초): 15 * 60 * 1000
+const REST_COOLTIME = 3 * 60 * 1000; // 3분 (밀리초): 3 * 60 * 1000
 
 const STORAGE_KEY_PLAY = "@accumulated_play_time";
 const STORAGE_KEY_REST_UNTIL = "@rest_until_timestamp";
@@ -108,7 +108,7 @@ export function useAppPlayTimer() {
     // ⭐ [수정] 여기서는 resetPlayTime을 부르지 않고 팝업만 닫고 쿨타임 모드로 진입
     setShouldShowRestModal(false);
     setIsCooltimeActive(true);
-    setRemainingCooltimeSec(3); // 3분 = 180초: 180
+    setRemainingCooltimeSec(180); // 3분 = 180초: 180
   };
 
   // 광고 보고 바로 해제 시 또는 3분이 다 끝났을 때

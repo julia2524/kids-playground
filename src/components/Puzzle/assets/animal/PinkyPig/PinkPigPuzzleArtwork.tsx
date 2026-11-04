@@ -9,7 +9,7 @@ import PinkyPig from "./PinkyPig";
  * 이 컴포넌트 자체는 Svg 루트를 만들지 않습니다.
  * 배경/바위/사자 모두 원본 240 x 180 좌표계를 사용합니다.
  */
-export default function BabyLionPuzzleArtwork() {
+export default function PinkPigPuzzleArtwork() {
   return (
     <>
       <PinkyFarmBackground />
