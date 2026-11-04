@@ -31,6 +31,7 @@ type ColorSortingObjectBoardProps = {
   onWrongDrop?: (objectId: string) => void;
   tutorialRef?: (objectId: string, node: View | null) => void;
   onObjectGrab?: (objectId: string) => void;
+  onObjectSizeChange?: (size: number) => void;
 };
 
 // ObjectBoard 스타일과 맞춰야 하는 값
@@ -112,6 +113,7 @@ export default function ColorSortingObjectBoard({
   onWrongDrop,
   tutorialRef,
   onObjectGrab,
+  onObjectSizeChange,
 }: ColorSortingObjectBoardProps) {
   // ==========================================================
   // Board 실제 크기
@@ -189,6 +191,13 @@ export default function ColorSortingObjectBoard({
     boardWidth: boardSize.width,
     boardHeight: boardSize.height,
   });
+
+  useEffect(() => {
+    if (boardSize.width > 0 && boardSize.height > 0) {
+      onObjectSizeChange?.(objectSize);
+    }
+  }, [objectSize, boardSize.width, boardSize.height]);
+  3;
 
   // ==========================================================
   // 슬롯 위치 계산 (기존 row + space-evenly 레이아웃과 같은 배치)

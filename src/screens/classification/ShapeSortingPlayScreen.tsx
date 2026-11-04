@@ -77,6 +77,10 @@ export default function ShapeSortingPlayScreen() {
   const [tutorialObject, setTutorialObject] =
     React.useState<ProblemObject | null>(null);
 
+  const [boardObjectSize, setBoardObjectSize] = React.useState<
+    number | undefined
+  >();
+
   const {
     problem,
 
@@ -252,6 +256,7 @@ export default function ShapeSortingPlayScreen() {
             tutorialVisibleRef.current = false;
             setTutorialVisible(false);
           }}
+          onObjectSizeChange={setBoardObjectSize}
         />
 
         <ShapeSortingTargetArea
@@ -309,6 +314,7 @@ export default function ShapeSortingPlayScreen() {
             tutorialVisibleRef.current = false;
             setTutorialVisible(false);
           }}
+          objectSize={boardObjectSize}
         />
       )}
 

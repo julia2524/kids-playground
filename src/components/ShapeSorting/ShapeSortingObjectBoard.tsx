@@ -25,6 +25,7 @@ type Props = {
   onWrongDrop?: (objectId: string) => void;
   tutorialRef?: (objectId: string, node: View | null) => void;
   onObjectGrab?: (objectId: string) => void;
+  onObjectSizeChange?: (size: number) => void;
 };
 
 const DRAG_EDGE_OVERFLOW = 10;
@@ -58,6 +59,7 @@ export default function ShapeSortingObjectBoard({
   onWrongDrop,
   tutorialRef,
   onObjectGrab,
+  onObjectSizeChange,
 }: Props) {
   const boardRef = useRef<any>(null);
   const [draggingObjectId, setDraggingObjectId] = useState<string | null>(null);
@@ -131,6 +133,12 @@ export default function ShapeSortingObjectBoard({
           ),
         )
       : baseSize;
+
+  useEffect(() => {
+    if (boardSize.width > 0 && boardSize.height > 0) {
+      onObjectSizeChange?.(objectSize);
+    }
+  }, [objectSize, boardSize.width, boardSize.height]);
 
   // ----------------------------------------------------------
   // 슬롯 위치 계산 (기존 row + space-evenly 레이아웃과 같은 배치)

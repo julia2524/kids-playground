@@ -79,6 +79,10 @@ export default function ColorSortingPlayScreen() {
   const [tutorialObject, setTutorialObject] =
     React.useState<ProblemObject | null>(null);
 
+  const [boardObjectSize, setBoardObjectSize] = React.useState<
+    number | undefined
+  >();
+
   const {
     problem,
 
@@ -259,6 +263,7 @@ export default function ColorSortingPlayScreen() {
             tutorialVisibleRef.current = false;
             setTutorialVisible(false);
           }}
+          onObjectSizeChange={setBoardObjectSize}
         />
 
         <ColorSortingTargetArea
@@ -316,6 +321,7 @@ export default function ColorSortingPlayScreen() {
             tutorialVisibleRef.current = false;
             setTutorialVisible(false);
           }}
+          objectSize={boardObjectSize}
         />
       )}
 
