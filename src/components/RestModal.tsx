@@ -303,10 +303,6 @@ export default function RestModal({
             // 광고 실패 안내 화면
             // ==================================
             <ErrorContent>
-              <ErrorIcon>
-                <ErrorEmoji>☁️</ErrorEmoji>
-              </ErrorIcon>
-
               <Title>{i18n.t("rest_modal_ad_error_title")}</Title>
 
               <Description>{getAdErrorMessage()}</Description>
