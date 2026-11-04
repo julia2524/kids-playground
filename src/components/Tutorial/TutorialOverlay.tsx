@@ -19,14 +19,12 @@ type Point = {
   y: number;
 };
 
-// 모든 정렬 객체를 아우르는 통합 타입 정의
 type SortingObject =
   | ColorSortingObject
   | ShapeSortingObject
   | CategorySortingObject
   | SizeSortingObject;
 
-// Category 오브젝트만 instanceId를 가진다
 const isCategoryObject = (
   object: SortingObject | null,
 ): object is CategorySortingObject => !!object && "instanceId" in object;
@@ -50,14 +48,14 @@ export default function TutorialOverlay({
   onComplete,
   onGrab,
 }: TutorialOverlayProps) {
-  // 💡 [수정 포인트 1] overlayRef 타입을 any로 열어주어 타입 충돌 방지
   const overlayRef = useRef<any>(null);
   const hasTutorialObject = object !== null || patternElement !== null;
 
   const [startPoint, setStartPoint] = useState<Point | null>(null);
   const [endPoint, setEndPoint] = useState<Point | null>(null);
   const [objectSize, setObjectSize] = useState(72);
-  const TUTORIAL_EXTRA_SCALE = 0.85;
+
+  // 실제 게임 화면의 오브젝트 scale을 그대로 사용합니다.
   const objectScale =
     object && "scale" in object && typeof object.scale === "number"
       ? object.scale
@@ -90,7 +88,6 @@ export default function TutorialOverlay({
 
       if (!overlay || !from || !to) return;
 
-      // 💡 [수정 포인트 2] measureInWindow 호출 부 안전성 체크 및 인자 타입 추가
       if (typeof overlay.measureInWindow === "function") {
         overlay.measureInWindow((ox: number, oy: number) => {
           if (sessionRef.current !== session) return;
@@ -118,7 +115,11 @@ export default function TutorialOverlay({
 
                       setStartPoint(start);
                       setEndPoint(end);
-                      setObjectSize(Math.max(40, Math.min(fw - 12, fh - 12)));
+
+                      // 💡 [핵심] 실제 게임 안의 원본 뷰 크기(fw, fh 중 큰 값 또는 fw)를 그대로 사용하여
+                      // 실제 게임 오브젝트와 완벽하게 동일한 크기로 맞춥니다.
+                      const originalSize = Math.max(fw, fh);
+                      setObjectSize(originalSize > 0 ? originalSize : 72);
                     },
                   );
                 }
@@ -127,7 +128,7 @@ export default function TutorialOverlay({
           }
         });
       }
-    }, 500);
+    }, 100);
 
     return () => {
       clearTimeout(timer);
@@ -165,20 +166,15 @@ export default function TutorialOverlay({
 
     animation.start(({ finished }) => {
       if (finished && sessionRef.current === session) {
-        onCompleteRef.current(); // ← onComplete() 대신
+        onCompleteRef.current();
       }
     });
 
     return () => animation.stop();
   }, [visible, object, startPoint, endPoint, progress, opacity]);
 
-  // ==========================================================
-  // 색상 계산 (Color / Shape 오브젝트용)
-  // ==========================================================
-
   const itemId = object && "itemId" in object ? object.itemId : undefined;
   const colorId = object && "colorId" in object ? object.colorId : undefined;
-
   const ownVariant = object && "variant" in object ? object.variant : undefined;
 
   const item = itemId
@@ -287,17 +283,6 @@ export default function TutorialOverlay({
                 size={objectSize}
               />
             ) : null}
-            {/* {isCategoryObject(object) ? (
-              <ObjectArtwork object={object} size={objectSize} />
-            ) : (
-              <RenderClassificationObjectSvg
-                object={object}
-                primary={primaryColor!}
-                secondary={variant?.secondary}
-                accent={variant?.accent}
-                size={objectSize}
-              />
-            )} */}
           </ObjectContainer>
 
           <HandContainer>

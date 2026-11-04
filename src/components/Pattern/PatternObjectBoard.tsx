@@ -27,6 +27,7 @@ type Props = {
 };
 
 const DRAG_EDGE_OVERFLOW = 16;
+const DRAG_TOP_MARGIN = 100; // 빈칸 위로 여유 공간
 
 // 화면 Container의 좌우 padding (PatternPlayScreen의 Container와 맞출 것)
 const SCREEN_PADDING_X = 16;
@@ -90,37 +91,72 @@ export default function PatternObjectBoard({
     [choices.length, boardWidth],
   );
 
+  // const getDragBounds = (callback: (bounds: DragBounds) => void) => {
+  //   const boardNode = boardRef.current as any;
+  //   const footerNode = footerRef.current as any;
+
+  //   if (boardNode && typeof boardNode.measureInWindow === "function") {
+  //     boardNode.measureInWindow(
+  //       (bx: number, by: number, bw: number, bh: number) => {
+  //         if (footerNode && typeof footerNode.measureInWindow === "function") {
+  //           footerNode.measureInWindow(
+  //             (_fx: number, fy: number, _fw: number, fh: number) => {
+  //               callback({
+  //                 left: bx - DRAG_EDGE_OVERFLOW,
+  //                 right: bx + bw + DRAG_EDGE_OVERFLOW,
+  //                 top: by - DRAG_EDGE_OVERFLOW - 200, // 위로 빈칸까지 드래그 허용
+  //                 bottom: fy + fh,
+  //               });
+  //             },
+  //           );
+  //         } else {
+  //           callback({
+  //             left: bx - DRAG_EDGE_OVERFLOW,
+  //             right: bx + bw + DRAG_EDGE_OVERFLOW,
+  //             top: by - 240,
+  //             bottom: by + bh + 40,
+  //           });
+  //         }
+  //       },
+  //     );
+  //   }
+  // };
   const getDragBounds = (callback: (bounds: DragBounds) => void) => {
     const boardNode = boardRef.current as any;
     const footerNode = footerRef.current as any;
 
-    if (boardNode && typeof boardNode.measureInWindow === "function") {
-      boardNode.measureInWindow(
-        (bx: number, by: number, bw: number, bh: number) => {
-          if (footerNode && typeof footerNode.measureInWindow === "function") {
-            footerNode.measureInWindow(
-              (_fx: number, fy: number, _fw: number, fh: number) => {
-                callback({
-                  left: bx - DRAG_EDGE_OVERFLOW,
-                  right: bx + bw + DRAG_EDGE_OVERFLOW,
-                  top: by - DRAG_EDGE_OVERFLOW - 200, // 위로 빈칸까지 드래그 허용
-                  bottom: fy + fh,
-                });
-              },
-            );
-          } else {
+    if (!boardNode || typeof boardNode.measureInWindow !== "function") return;
+
+    boardNode.measureInWindow(
+      (bx: number, by: number, bw: number, bh: number) => {
+        // 빈칸 위치를 기준으로 위쪽 한계를 계산 (기기 크기와 무관하게 항상 도달 가능)
+        getTargetRects((rects) => {
+          const blank = rects["blank"];
+          const top = blank
+            ? Math.min(by - DRAG_EDGE_OVERFLOW, blank.y - DRAG_TOP_MARGIN)
+            : 0; // 빈칸을 못 찾으면 화면 맨 위까지
+
+          const finish = (bottom: number) =>
             callback({
               left: bx - DRAG_EDGE_OVERFLOW,
               right: bx + bw + DRAG_EDGE_OVERFLOW,
-              top: by - 240,
-              bottom: by + bh + 40,
+              top,
+              bottom,
             });
-          }
-        },
-      );
-    }
-  };
 
+          if (footerNode && typeof footerNode.measureInWindow === "function") {
+            footerNode.measureInWindow(
+              (_fx: number, fy: number, _fw: number, fh: number) => {
+                finish(fy + fh);
+              },
+            );
+          } else {
+            finish(by + bh + 40);
+          }
+        });
+      },
+    );
+  };
   return (
     <ObjectBoard
       ref={boardRef}

@@ -37,7 +37,7 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 export type ProblemObject = SizeSortingObject;
 
 const TOTAL_ROUNDS = 10;
-const SHOW_TEST_CONTROLS = false;
+const SHOW_TEST_CONTROLS = true;
 
 export default function SizeSortingPlayScreen() {
   const insets = useSafeAreaInsets();
