@@ -860,5 +860,14 @@
   "rest_modal_wait_title": "잠깐 기다려요!",
   "rest_modal_wait_desc": "조금만 기다리면 다시 놀 수 있어요!",
   "rest_modal_ad_button": "광고 보고 바로 놀기",
-  "rest_modal_rest_button": "3분 동안 쉬기"
+  "rest_modal_rest_button": "3분 동안 쉬기",
+
+  "rest_modal_ad_error_title": "광고를 불러올 수 없어요",
+  "rest_modal_ad_load_failed": "지금은 광고를 준비하지 못했어요. 잠시 후 다시 시도해 주세요.",
+  "rest_modal_ad_show_failed": "광고 재생 중 문제가 발생했어요. 다시 시도해 주세요.",
+  "rest_modal_ad_cancelled": "광고를 끝까지 시청해야 보상을 받을 수 있어요.",
+  "rest_modal_ad_already_showing": "이미 광고가 진행 중이에요. 잠시만 기다려 주세요.",
+  "rest_modal_ad_retry_button": "다시 시도하기",
+  "rest_modal_ad_back_button": "돌아가기",
+  "rest_modal_ad_loading": "광고 준비 중..."
 }

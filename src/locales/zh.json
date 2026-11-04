@@ -858,5 +858,14 @@
   "rest_modal_wait_title": "请稍等一下！",
   "rest_modal_wait_desc": "稍等一会儿就可以继续玩啦！",
   "rest_modal_ad_button": "观看广告立即继续",
-  "rest_modal_rest_button": "休息3分钟"
+  "rest_modal_rest_button": "休息3分钟",
+
+  "rest_modal_ad_error_title": "无法加载广告",
+  "rest_modal_ad_load_failed": "目前暂时无法准备广告，请稍后再试。",
+  "rest_modal_ad_show_failed": "广告播放时出现问题，请重新尝试。",
+  "rest_modal_ad_cancelled": "需要完整观看广告才能获得奖励哦。",
+  "rest_modal_ad_already_showing": "广告已经在播放中，请稍等一下。",
+  "rest_modal_ad_retry_button": "重新尝试",
+  "rest_modal_ad_back_button": "返回",
+  "rest_modal_ad_loading": "正在准备广告..."
 }

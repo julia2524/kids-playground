@@ -858,5 +858,14 @@
   "rest_modal_wait_title": "Please wait a moment!",
   "rest_modal_wait_desc": "You can play again after a short break!",
   "rest_modal_ad_button": "Watch an ad and play now",
-  "rest_modal_rest_button": "Take a 3-minute break"
+  "rest_modal_rest_button": "Take a 3-minute break",
+
+  "rest_modal_ad_error_title": "Unable to load ad",
+  "rest_modal_ad_load_failed": "No ad is available right now. Please try again shortly.",
+  "rest_modal_ad_show_failed": "Something went wrong while playing the ad. Please try again.",
+  "rest_modal_ad_cancelled": "Please watch the entire ad to receive your reward.",
+  "rest_modal_ad_already_showing": "An ad is already in progress. Please wait.",
+  "rest_modal_ad_retry_button": "Try Again",
+  "rest_modal_ad_back_button": "Go Back",
+  "rest_modal_ad_loading": "Preparing ad..."
 }

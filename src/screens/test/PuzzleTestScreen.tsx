@@ -35,6 +35,7 @@ export default function PuzzleTestScreen() {
       {/* 퍼즐 엔진이 보드와 조각을 직접 관리 */}
       <View style={styles.gameContainer}>
         <PuzzleBoard
+          onWrongDropCountChange={() => {}}
           title="🇰🇷 태극기 퍼즐"
           Artwork={TajMahalPuzzleScene}
           viewBoxWidth={240}

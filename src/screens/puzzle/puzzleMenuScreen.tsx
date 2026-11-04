@@ -29,7 +29,6 @@ import CustomAlert from "../../components/CustomAlert";
 import { getKoreanSubjectParticle } from "../../utils/korean";
 import BannerAd from "../../services/BannerAd";
 
-// 퍼즐 카테고리 타입 정의 (동물, 탈것, 공룡, 사물 등)
 export type PuzzleCategoryType =
   | "animal"
   | "vehicle"
@@ -38,9 +37,6 @@ export type PuzzleCategoryType =
   | "dinosaur"
   | "object";
 
-// ============================================================
-// 몽환 파스텔 컬러 팔레트 (퍼즐 테마에 맞춘 확장)
-// ============================================================
 export const colors = {
   purple: "#7C5CFF",
   blue: "#4D8DFF",
@@ -53,18 +49,18 @@ export const colors = {
   secondaryText: "#7E7B9A",
 
   cardBg: {
-    animal: "#FFF0F5", // 동물: 분홍 파스텔
-    vehicle: "#F0F5FF", // 탈것: 하늘 파스텔
-    flag: "#FFF2F2", // 연한 국기 레드 느낌
+    animal: "#FFF0F5",
+    vehicle: "#F0F5FF",
+    flag: "#FFF2F2",
     landmark: "#FFF9E6",
-    dinosaur: "#EDFAF6", // 공룡: 민트 파스텔
-    object: "#FFF9E6", // 사물: 노랑 파스텔
+    dinosaur: "#EDFAF6",
+    object: "#FFF9E6",
   },
 
   accent: {
     animal: "#FF6FAE",
     vehicle: "#4D8DFF",
-    flag: "#E84A5F", // 선명한 국기 레드
+    flag: "#E84A5F",
     landmark: "#FFB020",
     dinosaur: "#34CDB2",
     object: "#FFB020",
@@ -72,9 +68,19 @@ export const colors = {
 } as const;
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
-const CARD_WIDTH = SCREEN_WIDTH * 0.76;
-const ITEM_SPACING = 16;
+
+// ⭐ 카드가 화면을 더 큼직하게 꽉 채우도록 너비를 90%로 늘림 (좌우 여백 최소화)
+// const CARD_WIDTH = SCREEN_WIDTH * 0.81;
+// const ITEM_SPACING = 16;
+// const SNAP_INTERVAL = CARD_WIDTH + ITEM_SPACING;
+// const SIDE_SPACE = (SCREEN_WIDTH - CARD_WIDTH) / 2;
+
+// ⭐ 카드가 큼직하면서도 좌우 균형이 딱 맞도록 너비를 0.86으로 살짝 키웁니다.
+const CARD_WIDTH = SCREEN_WIDTH * 0.8;
+const ITEM_SPACING = 12; // 간격을 살짝 줄여서 중앙 정렬감을 높임
 const SNAP_INTERVAL = CARD_WIDTH + ITEM_SPACING;
+
+// ⭐ 양옆 여백을 '카드와 화면의 빈 공간 / 2' 로 정확히 나누어 중앙에 고정시킵니다.
 const SIDE_SPACE = (SCREEN_WIDTH - CARD_WIDTH) / 2;
 
 type PuzzleGameConfig = {
@@ -99,7 +105,6 @@ const MENU_PUZZLE_CONFIGS: readonly PuzzleGameConfig[] = [
     cardBg: colors.cardBg.animal,
     isUnlocked: true,
   },
-
   {
     id: "flag",
     titleKey: "puzzle_flag_title",
@@ -120,47 +125,16 @@ const MENU_PUZZLE_CONFIGS: readonly PuzzleGameConfig[] = [
     cardBg: "#FFF9E6",
     isUnlocked: true,
   },
-  // {
-  //   id: "vehicle",
-  //   titleKey: "puzzle_vehicle_title",
-  //   subtitleKey: "puzzle_vehicle_subtitle",
-  //   descKey: "puzzle_vehicle_desc",
-  //   iconName: "car-sport",
-  //   accentColor: colors.accent.vehicle,
-  //   cardBg: colors.cardBg.vehicle,
-  //   isUnlocked: false,
-  // },
-  // {
-  //   id: "dinosaur",
-  //   titleKey: "puzzle_dinosaur_title",
-  //   subtitleKey: "puzzle_dinosaur_subtitle",
-  //   descKey: "puzzle_dinosaur_desc",
-  //   iconName: "bonfire", // 공룡을 연상시키는 아이콘 또는 대체 가능
-  //   accentColor: colors.accent.dinosaur,
-  //   cardBg: colors.cardBg.dinosaur,
-  //   isUnlocked: false,
-  // },
-  // {
-  //   id: "object",
-  //   titleKey: "puzzle_object_title",
-  //   subtitleKey: "puzzle_object_subtitle",
-  //   descKey: "puzzle_object_desc",
-  //   iconName: "cube",
-  //   accentColor: colors.accent.object,
-  //   cardBg: colors.cardBg.object,
-  //   isUnlocked: false,
-  // },
 ] as const;
 
 export default function PuzzleMenuScreen() {
-  const insets = useSafeAreaInsets(); // ⭐ 하단 안전 영역 값 가져오기
+  const insets = useSafeAreaInsets();
   const { locale } = useLanguage();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList<any>>(null);
 
-  // 다국어 번역 매핑
   const PUZZLES = useMemo(() => {
     return MENU_PUZZLE_CONFIGS.map((item) => ({
       ...item,
@@ -169,10 +143,10 @@ export default function PuzzleMenuScreen() {
       description: i18n.t(item.descKey) || "",
     }));
   }, [locale]);
+
   useEffect(() => {
     const loadLastPuzzlePosition = async () => {
       const lastPuzzleId = await getLastPuzzleCategory();
-
       if (!lastPuzzleId) return;
 
       const targetIndex = PUZZLES.findIndex(
@@ -181,7 +155,6 @@ export default function PuzzleMenuScreen() {
 
       if (targetIndex !== -1) {
         setCurrentIndex(targetIndex);
-
         setTimeout(() => {
           flatListRef.current?.scrollToOffset({
             offset: targetIndex * SNAP_INTERVAL,
@@ -202,38 +175,29 @@ export default function PuzzleMenuScreen() {
     }
   };
 
-  // const handleSelectPuzzle = (puzzle: (typeof PUZZLES)[number]) => {
-  //   triggerHaptic("light");
-
-  //   navigation.navigate("PuzzleThemeSelectScreen", {
-  //     puzzleCategory: puzzle.id,
-  //   });
-  // };
   const handleSelectPuzzle = async (puzzle: (typeof PUZZLES)[number]) => {
     triggerHaptic("light");
-
     await saveLastPuzzleCategory(puzzle.id);
-
     navigation.navigate("PuzzleThemeSelectScreen", {
       puzzleCategory: puzzle.id,
     });
   };
+
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertTitle, setAlertTitle] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
 
   const showLockedAlert = (gameName: string) => {
     setAlertTitle(i18n.t("alert_locked_title"));
-
     setAlertMessage(
       i18n.t("alert_locked_message", {
         gameName,
         particle: getKoreanSubjectParticle(gameName),
       }),
     );
-
     setAlertVisible(true);
   };
+
   const scrollToIndex = (index: number) => {
     if (index < 0 || index >= PUZZLES.length) return;
     flatListRef.current?.scrollToOffset({
@@ -313,8 +277,12 @@ export default function PuzzleMenuScreen() {
                       </IllustrationArea>
 
                       <GameInfo>
-                        <GameTitle>{item.title}</GameTitle>
-                        <GameDescription>{item.description}</GameDescription>
+                        <GameTitle numberOfLines={1} adjustsFontSizeToFit>
+                          {item.title}
+                        </GameTitle>
+                        <GameDescription numberOfLines={2}>
+                          {item.description}
+                        </GameDescription>
                       </GameInfo>
 
                       <StartButton
@@ -331,7 +299,6 @@ export default function PuzzleMenuScreen() {
             />
           </CarouselArea>
 
-          {/* 하단 인디케이터 & 화살표 */}
           <BottomArea>
             <ArrowButton
               onPress={() => {
@@ -379,13 +346,13 @@ export default function PuzzleMenuScreen() {
           />
         </MainContainer>
       </Screen>
-      {/* ⭐ 3. 화면 하단 고정 표준 배너 광고 (제스처 홈바 위쪽에 안전하게 위치) */}
       <BannerAdContainer bottomInset={insets.bottom}>
         <BannerAd />
       </BannerAdContainer>
     </Background>
   );
 }
+
 export const Background = styled.View`
   flex: 1;
 `;
@@ -399,6 +366,7 @@ export const BackgroundImage = styled.Image`
   width: 100%;
   height: 100%;
 `;
+
 export const Screen = styled(SafeAreaView)`
   flex: 1;
   justify-content: space-between;
@@ -412,7 +380,7 @@ export const TitleArea = styled.View`
   align-items: center;
   padding-right: 24px;
   padding-left: 24px;
-  margin-bottom: 35px;
+  margin-bottom: 20px;
 `;
 
 export const Title = styled(AppText)`
@@ -437,6 +405,7 @@ export const CarouselArea = styled.View`
 export const GameCardWrapper = styled.View`
   width: ${CARD_WIDTH}px;
   margin-right: ${ITEM_SPACING}px;
+  justify-content: center;
 `;
 
 export const GameCard = styled.TouchableOpacity<{
@@ -445,7 +414,7 @@ export const GameCard = styled.TouchableOpacity<{
 }>`
   background-color: ${({ bgColor }) => bgColor};
   border-radius: 32px;
-  padding: 20px;
+  padding: 22px;
   border-width: 3px;
   border-color: #ffffff;
 
@@ -459,16 +428,17 @@ export const GameCard = styled.TouchableOpacity<{
 `;
 
 export const IllustrationArea = styled.View`
-  height: 180px;
+  height: 140px;
   align-items: center;
   justify-content: center;
   position: relative;
+  margin-bottom: 8px;
 `;
 
 export const IconCircle = styled.View`
-  width: 120px;
-  height: 120px;
-  border-radius: 60px;
+  width: 104px;
+  height: 104px;
+  border-radius: 52px;
   align-items: center;
   justify-content: center;
   shadow-color: #000;
@@ -481,13 +451,14 @@ export const IconCircle = styled.View`
 export const GameInfo = styled.View`
   align-items: center;
   margin-bottom: 16px;
-  margin-top: 8px;
+  margin-top: 4px;
 `;
 
 export const GameTitle = styled(AppText)`
   color: #29263d;
   font-size: ${(props) => props.theme.typography.h3.fontSize}px;
   font-family: ${(props) => props.theme.fontFamily};
+  text-align: center;
 `;
 
 export const GameDescription = styled(AppText)`
