@@ -49,7 +49,7 @@ export type ProblemObject = CategorySortingObject;
 const TOTAL_ROUNDS = 10;
 
 // 개발용 Level / Round 컨트롤바 표시 여부 (배포 시 false)
-const SHOW_TEST_CONTROLS = false;
+const SHOW_TEST_CONTROLS = true;
 
 // 튜토리얼을 보여 줄 마지막 레벨 (1 ~ 이 값까지)
 const TUTORIAL_MAX_LEVEL = 3;
@@ -81,6 +81,10 @@ export default function CategorySortingPlayScreen() {
   const [tutorialVisible, setTutorialVisible] = React.useState(false);
   const [tutorialObject, setTutorialObject] =
     React.useState<ProblemObject | null>(null);
+
+  const [boardObjectSize, setBoardObjectSize] = React.useState<
+    number | undefined
+  >();
 
   const {
     problem,
@@ -264,6 +268,7 @@ export default function CategorySortingPlayScreen() {
             tutorialVisibleRef.current = false;
             setTutorialVisible(false);
           }}
+          onObjectSizeChange={setBoardObjectSize}
         />
 
         <CategorySortingTargetArea
@@ -322,6 +327,7 @@ export default function CategorySortingPlayScreen() {
             tutorialVisibleRef.current = false;
             setTutorialVisible(false);
           }}
+          objectSize={boardObjectSize}
         />
       )}
 

@@ -55,6 +55,9 @@ export default function SizeSortingPlayScreen() {
   const [tutorialVisible, setTutorialVisible] = React.useState(false);
   const [tutorialObject, setTutorialObject] =
     React.useState<ProblemObject | null>(null);
+  const [boardObjectSize, setBoardObjectSize] = React.useState<
+    number | undefined
+  >();
 
   const {
     problem,
@@ -204,6 +207,7 @@ export default function SizeSortingPlayScreen() {
             tutorialVisibleRef.current = false;
             setTutorialVisible(false);
           }}
+          onObjectSizeChange={setBoardObjectSize}
         />
 
         <SizeSortingTargetArea
@@ -246,6 +250,7 @@ export default function SizeSortingPlayScreen() {
               tutorialVisibleRef.current = false;
               setTutorialVisible(false);
             }}
+            objectSize={boardObjectSize}
           />
         )}
         {SHOW_TEST_CONTROLS && (

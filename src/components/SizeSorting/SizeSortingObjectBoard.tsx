@@ -25,6 +25,7 @@ type Props = {
   onWrongDrop?: (objectId: string) => void;
   tutorialRef?: (objectId: string, node: View | null) => void;
   onObjectGrab?: (objectId: string) => void;
+  onObjectSizeChange?: (size: number) => void;
 };
 
 const DRAG_EDGE_OVERFLOW = 10;
@@ -90,6 +91,7 @@ export default function SizeSortingObjectBoard({
   onWrongDrop,
   tutorialRef,
   onObjectGrab,
+  onObjectSizeChange,
 }: Props) {
   const [boardSize, setBoardSize] = useState({
     width: 0,
@@ -154,6 +156,11 @@ export default function SizeSortingObjectBoard({
     boardHeight: boardSize.height,
   });
 
+  useEffect(() => {
+    if (boardSize.width > 0 && boardSize.height > 0) {
+      onObjectSizeChange?.(objectSize);
+    }
+  }, [objectSize, boardSize.width, boardSize.height]);
   // ----------------------------------------------------------
   // 슬롯 위치 계산 (기존 row + space-evenly 레이아웃과 같은 배치)
   // 오브젝트는 모두 보드의 직계 자식으로 absolute 배치한다.
