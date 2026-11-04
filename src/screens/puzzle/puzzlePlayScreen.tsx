@@ -22,7 +22,7 @@ import BabyElephantPuzzleScene from "../../components/Puzzle/assets/animal/BabyE
 import PinkyPigPuzzleScene from "../../components/Puzzle/assets/animal/PinkyPig/PinkyPigPuzzleScene";
 import ChocoBearPuzzleScene from "../../components/Puzzle/assets/animal/ChocoBear/ChocoBearPuzzleScene";
 
-import ColorSortingResultOverlay from "../../components/ColorSorting/ColorSortingResultOverlay";
+import ResultOverlay from "../../components/ResultOverlay";
 import { playEarnedNotes } from "../../utils/sound";
 import { useBackgroundMusic } from "../../utils/BackgroundMusicContext";
 import { savePuzzleLevelStars } from "../../utils/asyncStorage/puzzleProgressStorage";
@@ -315,7 +315,7 @@ export default function PuzzlePlayScreen() {
       </Container>
 
       {isCompleted && (
-        <ColorSortingResultOverlay
+        <ResultOverlay
           level={level}
           earnedStars={earnedStars}
           isLastLevel={level >= TOTAL_PUZZLE_LEVELS}
@@ -369,7 +369,7 @@ const GameContainer = styled.View`
 // import PinkyPigPuzzleScene from "../../components/Puzzle/assets/animal/PinkyPig/PinkyPigPuzzleScene";
 // import ChocoBearPuzzleScene from "../../components/Puzzle/assets/animal/ChocoBear/ChocoBearPuzzleScene";
 
-// import ColorSortingResultOverlay from "../../components/ColorSorting/ColorSortingResultOverlay";
+// import ResultOverlay from "../../components/ColorSorting/ResultOverlay";
 // import { playEarnedNotes } from "../../utils/sound";
 // import { useBackgroundMusic } from "../../utils/BackgroundMusicContext";
 // import { savePuzzleLevelStars } from "../../utils/asyncStorage/puzzleProgressStorage";
@@ -634,7 +634,7 @@ const GameContainer = styled.View`
 //       </Container>
 
 //       {isCompleted && (
-//         <ColorSortingResultOverlay
+//         <ResultOverlay
 //           level={level}
 //           earnedStars={earnedStars}
 //           isLastLevel={level >= TOTAL_PUZZLE_LEVELS}

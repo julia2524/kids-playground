@@ -15,7 +15,7 @@ import AppHeader from "../../components/AppHeader";
 import ClassificationQuestion from "../../components/common/ClassificationQuestion";
 import ClassificationTestControls from "../../components/common/ClassificationTestControls";
 import ColorSortingFooter from "../../components/ColorSorting/ColorSortingFooter";
-import ColorSortingResultOverlay from "../../components/ColorSorting/ColorSortingResultOverlay";
+import ResultOverlay from "../../components/ResultOverlay";
 
 import { SizeSortingLevels } from "../../types/Classification/Size/sizeSortingLevels";
 
@@ -262,7 +262,7 @@ export default function SizeSortingPlayScreen() {
       </Container>
 
       {roundResult && (
-        <ColorSortingResultOverlay
+        <ResultOverlay
           level={testLevel}
           earnedStars={earnedStars}
           isLastLevel={testLevel === SizeSortingLevels.length}

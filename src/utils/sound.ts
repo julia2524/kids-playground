@@ -254,31 +254,75 @@ export async function playLastSuccessNote() {
 
 // ⭐ earnedStars 개수만큼 도 → 레 → 미 ... 순차 연주!
 // ⭐ earnedStars 개수만큼 도 → 레 → 미 ... 깨끗하게 순차 연주
+// export async function playEarnedNotes(earnedStars: number) {
+//   // if (!successSoundEnabled) return; // ⭐ 가장 중요!
+//   const enabled = await getCorrectEffectEnabled();
+//   if (!enabled) return;
+
+//   if (!players.notes || players.notes.length === 0) {
+//     console.log("음계 플레이어가 아직 준비되지 않음");
+//     return;
+//   }
+
+//   const count = Math.min(Math.max(earnedStars, 0), players.notes.length);
+//   if (count <= 0) return;
+
+//   // 이전 연주 중인 음들을 일단 전부 정지
+//   await stopAllNotes();
+
+//   // 순차 재생 (간격을 충분히 줌)
+//   for (let i = 0; i < count; i++) {
+//     setTimeout(async () => {
+//       const player = players.notes[i];
+//       if (player) {
+//         await playPlayerSafely(player);
+//       }
+//     }, i * 220);
+//   }
+// }
 export async function playEarnedNotes(earnedStars: number) {
-  // if (!successSoundEnabled) return; // ⭐ 가장 중요!
+  await stopEarnedNotes();
+
+  const playbackId = earnedNotesPlaybackId;
+
   const enabled = await getCorrectEffectEnabled();
+
+  // 설정 확인 중 재생이 취소되었다면 종료
+  if (playbackId !== earnedNotesPlaybackId) return;
   if (!enabled) return;
 
-  if (!players.notes || players.notes.length === 0) {
-    console.log("음계 플레이어가 아직 준비되지 않음");
-    return;
-  }
+  if (!players.notes || players.notes.length === 0) return;
 
   const count = Math.min(Math.max(earnedStars, 0), players.notes.length);
+
   if (count <= 0) return;
 
-  // 이전 연주 중인 음들을 일단 전부 정지
-  await stopAllNotes();
-
-  // 순차 재생 (간격을 충분히 줌)
   for (let i = 0; i < count; i++) {
-    setTimeout(async () => {
+    const timer = setTimeout(async () => {
+      if (playbackId !== earnedNotesPlaybackId) return;
+
       const player = players.notes[i];
+
       if (player) {
         await playPlayerSafely(player);
       }
     }, i * 220);
+
+    earnedNotesTimers.push(timer);
   }
+}
+let earnedNotesTimers: ReturnType<typeof setTimeout>[] = [];
+let earnedNotesPlaybackId = 0;
+export async function stopEarnedNotes() {
+  // 기존에 예약된 재생 무효화
+  earnedNotesPlaybackId += 1;
+
+  // 예약된 타이머 전부 취소
+  earnedNotesTimers.forEach(clearTimeout);
+  earnedNotesTimers = [];
+
+  // 현재 재생 중인 음원도 정지
+  await stopAllNotes();
 }
 
 // 패턴 오브젝트 등장 시 실로폰 재생

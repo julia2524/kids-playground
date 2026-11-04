@@ -3,22 +3,22 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import styled from "styled-components/native";
 import { TouchableOpacity } from "react-native";
 
-import { AppText } from "../../utils/AppText";
-import UfoLevelBadge from "../UfoLevelBadge";
-import { colors } from "../../design-system/tokens/colors";
-import StarBadge from "../../design-system/ui/StarBadge";
-import { StageMapGameType } from "../../types/game";
-import { triggerHaptic } from "../../utils/haptic";
-import GameRewardBadge from "../common/GameRewardBadge";
-import i18n from "../../i18n";
-import { useLanguage } from "../../context/LangaugeContext";
+import { AppText } from "../utils/AppText";
+import UfoLevelBadge from "./UfoLevelBadge";
+import { colors } from "../design-system/tokens/colors";
+
+import { triggerHaptic } from "../utils/haptic";
+import GameRewardBadge from "./common/GameRewardBadge";
+import i18n from "../i18n";
+import { useLanguage } from "../context/LangaugeContext";
+import { stopEarnedNotes } from "../utils/sound";
 
 // ============================================================
 // Theme / Color Definitions
 // ============================================================
 
 // Component Props Definition
-type ColorSortingResultOverlayProps = {
+type ResultOverlayProps = {
   level: number;
   earnedStars: number;
   isLastLevel: boolean;
@@ -30,7 +30,7 @@ type ColorSortingResultOverlayProps = {
   onGoRoadmap: () => void;
 };
 
-export default function ColorSortingResultOverlay({
+export default function ResultOverlay({
   level,
   earnedStars,
   isLastLevel,
@@ -39,33 +39,33 @@ export default function ColorSortingResultOverlay({
   onRestart,
   onNextLevel,
   onGoRoadmap,
-}: ColorSortingResultOverlayProps) {
+}: ResultOverlayProps) {
   useLanguage();
   const handleGoRoadPress = () => {
     triggerHaptic("light");
-    // playSound("grab");
+    stopEarnedNotes();
     onGoRoadmap?.();
   };
   const handleRestartPress = () => {
     triggerHaptic("light");
-    // playSound("grab");
+    stopEarnedNotes();
     onRestart?.();
   };
   const handleNextLevelPress = () => {
     triggerHaptic("light");
-    // playSound("grab");
+    stopEarnedNotes();
     onNextLevel?.();
   };
   const handleHomePress = () => {
     triggerHaptic("light");
-    // playSound("grab");
+    stopEarnedNotes();
     onHome?.();
   };
   // ⭐ 별 5개를 표시
   const starOffsets = [18, 6, 0, 6, 18];
 
   return (
-    <ResultOverlay>
+    <ResultOverlayContainer>
       <ResultCard>
         <Inner>
           {/* ================================================= */}
@@ -159,7 +159,7 @@ export default function ColorSortingResultOverlay({
           </HomeButton>
         </Inner>
       </ResultCard>
-    </ResultOverlay>
+    </ResultOverlayContainer>
   );
 }
 
@@ -167,7 +167,7 @@ export default function ColorSortingResultOverlay({
 // Overlay
 // ============================================================
 
-const ResultOverlay = styled.View`
+const ResultOverlayContainer = styled.View`
   position: absolute;
   top: 0;
   left: 0;

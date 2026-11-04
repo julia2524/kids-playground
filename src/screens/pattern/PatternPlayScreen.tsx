@@ -15,7 +15,7 @@ import AppHeader from "../../components/AppHeader";
 
 import ColorSortingFooter from "../../components/ColorSorting/ColorSortingFooter";
 import ClassificationTestControls from "../../components/common/ClassificationTestControls";
-import ColorSortingResultOverlay from "../../components/ColorSorting/ColorSortingResultOverlay";
+import ResultOverlay from "../../components/ResultOverlay";
 
 import { AppText } from "../../utils/AppText";
 import { saveLevelClear } from "../../utils/asyncStorage/progressStorage";
@@ -278,7 +278,7 @@ export default function PatternPlayScreen() {
         />
       )}
       {roundResult && (
-        <ColorSortingResultOverlay
+        <ResultOverlay
           level={testLevel}
           earnedStars={earnedStars}
           isLastLevel={testLevel === PATTERN_LEVELS.length}
