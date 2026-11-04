@@ -17,6 +17,7 @@ import {
 import { useLanguage } from "../../context/LangaugeContext";
 import i18n from "../../i18n";
 import { ObjectArtwork, StickerPlacement } from "./ShapeSortingObjectComponent";
+import { colors } from "../../design-system/tokens/colors";
 
 export type ShapeId = "circle" | "triangle" | "square" | "heart" | "star";
 
@@ -29,12 +30,22 @@ type ShapeSortingTargetBasketProps = {
   onRemoveObject: (objectId: string) => void;
 };
 
+// const SHAPE_COLORS: Record<ShapeId, string> = {
+//   circle: "#F6C94A",
+//   triangle: "#55B879",
+//   square: "#55A9F5",
+//   heart: "#F28BAA",
+//   star: "#A28AF5",
+// };
+
+const SHAPE_COLOR = "#9f8bf0";
+
 const SHAPE_COLORS: Record<ShapeId, string> = {
-  circle: "#F6C94A",
-  triangle: "#55B879",
-  square: "#55A9F5",
-  heart: "#F28BAA",
-  star: "#A28AF5",
+  circle: SHAPE_COLOR,
+  triangle: SHAPE_COLOR,
+  square: SHAPE_COLOR,
+  heart: SHAPE_COLOR,
+  star: SHAPE_COLOR,
 };
 
 const SHAPE_I18N_KEYS: Record<ShapeId, string> = {
