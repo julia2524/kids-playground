@@ -12,6 +12,7 @@ import GameRewardBadge from "./common/GameRewardBadge";
 import i18n from "../i18n";
 import { useLanguage } from "../context/LangaugeContext";
 import { stopEarnedNotes } from "../utils/sound";
+import { useBackgroundMusic } from "../utils/BackgroundMusicContext";
 
 // ============================================================
 // Theme / Color Definitions
@@ -41,6 +42,7 @@ export default function ResultOverlay({
   onGoRoadmap,
 }: ResultOverlayProps) {
   useLanguage();
+  const { playThemeBGM } = useBackgroundMusic();
   const handleGoRoadPress = () => {
     triggerHaptic("light");
     stopEarnedNotes();
@@ -59,6 +61,8 @@ export default function ResultOverlay({
   const handleHomePress = () => {
     triggerHaptic("light");
     stopEarnedNotes();
+
+    playThemeBGM("main");
     onHome?.();
   };
   // ⭐ 별 5개를 표시

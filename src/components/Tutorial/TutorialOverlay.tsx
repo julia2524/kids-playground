@@ -296,8 +296,6 @@ export default function TutorialOverlay({
               )
             ) : object && isCategoryObject(object) ? (
               <ObjectArtwork object={object} size={objectSize} />
-            ) : object && isCategoryObject(object) ? (
-              <ObjectArtwork object={object} size={objectSize} />
             ) : object && isShapeObject(object) ? (
               <ShapeObjectArtwork object={object} size={objectSize} />
             ) : object && isSizeObject(object) ? (

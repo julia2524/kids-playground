@@ -47,7 +47,7 @@ export type ProblemObject = ColorSortingProblem["objects"][number];
 const TOTAL_ROUNDS = 10;
 
 // 개발용 Level / Round 컨트롤바 표시 여부 (배포 시 false)
-const SHOW_TEST_CONTROLS = true;
+const SHOW_TEST_CONTROLS = false;
 
 // ============================================================
 // Screen
@@ -335,7 +335,10 @@ export default function ColorSortingPlayScreen() {
           isLastLevel={testLevel === colorSortingLevels.length}
           gameType={gameType} // 👈 이 부분을 추가해주면 오버레이로 gameType이 전달됩니다!
           onHome={() => {
-            navigation.navigate("Home");
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "Home" }],
+            });
           }}
           onRestart={() => {
             handleChangeLevel(testLevel);

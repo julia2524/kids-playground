@@ -2,7 +2,7 @@
   "expo": {
     "name": "Kids Playground",
     "slug": "KidsPlayground",
-    "version": "1.0.0",
+    "version": "1.0.1",
 
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -62,7 +62,8 @@
           "androidAppId": "ca-app-pub-5145202325745375~1521225871",
           "iosAppId": "ca-app-pub-3381041851241163~3333333333"
         }
-      ]
+      ],
+      "expo-sqlite"
     ],
     "extra": {
       "eas": {

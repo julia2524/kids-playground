@@ -51,3 +51,5 @@ credentials/
 *.apks
 *.apk
 *crash*.txt
+
+eas-archive/
