@@ -869,5 +869,14 @@
   "rest_modal_ad_already_showing": "이미 광고가 진행 중이에요. 잠시만 기다려 주세요.",
   "rest_modal_ad_retry_button": "다시 시도하기",
   "rest_modal_ad_back_button": "돌아가기",
-  "rest_modal_ad_loading": "광고 준비 중..."
+  "rest_modal_ad_loading": "광고 준비 중...",
+
+  "update_modal_eyebrow": "KIDS PLAYGROUND",
+  "update_modal_title": "새로운 업데이트가 있어요!",
+  "update_modal_description": "더 즐겁고 재미있는 놀이를 위해\nKids Playground를 최신 버전으로\n업데이트해 주세요.",
+  "update_modal_info_text": "새로운 기능과 개선 사항을 만나보세요!",
+  "update_modal_loading": "업데이트 준비 중...",
+  "update_modal_update_button": "업데이트하기",
+  "update_modal_later_button": "나중에 할게요",
+  "update_modal_footer": "더 좋은 놀이 시간을 위해 준비했어요 💜"
 }

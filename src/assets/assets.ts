@@ -6,6 +6,7 @@ export const ASSETS = {
   cardMaze: require("../assets/Home/card_maze.png"),
   mascot: require("../assets/Common/kids_mascot.png"),
   parentPause: require("../assets/Services/parentPause.png"),
+  updateMascot: require("../assets/Update/update-mascot.png"),
   classificationMenuBackground: require("../assets/Classification/classification_menu-background.png"),
 
   stageBg1: require("../assets/StageMap/stage_bg1.png"),

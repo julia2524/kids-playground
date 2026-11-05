@@ -867,5 +867,14 @@
   "rest_modal_ad_already_showing": "An ad is already in progress. Please wait.",
   "rest_modal_ad_retry_button": "Try Again",
   "rest_modal_ad_back_button": "Go Back",
-  "rest_modal_ad_loading": "Preparing ad..."
+  "rest_modal_ad_loading": "Preparing ad...",
+
+  "update_modal_eyebrow": "KIDS PLAYGROUND",
+  "update_modal_title": "A New Update Is Available!",
+  "update_modal_description": "For a more fun and exciting play experience,\nplease update Kids Playground\nto the latest version.",
+  "update_modal_info_text": "Discover new features and improvements!",
+  "update_modal_loading": "Preparing update...",
+  "update_modal_update_button": "Update Now",
+  "update_modal_later_button": "Later",
+  "update_modal_footer": "Prepared with love for even more fun playtime 💜"
 }

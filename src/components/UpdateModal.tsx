@@ -1,6 +1,8 @@
 import React from "react";
-import { ActivityIndicator, Modal, Platform, Text } from "react-native";
+import { ActivityIndicator, Image, Modal, Platform, Text } from "react-native";
 import styled from "styled-components/native";
+import i18n from "../i18n";
+import { ASSETS } from "../assets/assets";
 
 interface UpdateModalProps {
   visible: boolean;
@@ -25,26 +27,45 @@ export default function UpdateModal({
     >
       <Overlay>
         <ModalContainer>
-          {/* 상단 아이콘 */}
-          <IconCircle>
-            <IconText>🚀</IconText>
-          </IconCircle>
+          {/* 업데이트 마스코트 */}
+          <UpdateMascot>
+            <Image
+              source={ASSETS.updateMascot}
+              style={{
+                width: 116,
+                height: 116,
+              }}
+              resizeMode="contain"
+            />
+          </UpdateMascot>
 
           {/* 안내 문구 */}
-          <Eyebrow>KIDS PLAYGROUND</Eyebrow>
+          <Eyebrow>
+            {i18n.t("update_modal_eyebrow", {
+              defaultValue: "KIDS PLAYGROUND",
+            })}
+          </Eyebrow>
 
-          <Title>새로운 업데이트가 있어요!</Title>
+          <Title>
+            {i18n.t("update_modal_title", {
+              defaultValue: "새로운 업데이트가 있어요!",
+            })}
+          </Title>
 
           <Description>
-            더 즐겁고 재미있는 놀이를 위해{"\n"}
-            Kids Playground를 최신 버전으로{"\n"}
-            업데이트해 주세요.
+            {i18n.t("update_modal_description", {
+              defaultValue:
+                "더 즐겁고 재미있는 놀이를 위해\nKids Playground를 최신 버전으로\n업데이트해 주세요.",
+            })}
           </Description>
 
           {/* 업데이트 안내 */}
           <InfoBox>
-            <InfoIcon>✨</InfoIcon>
-            <InfoText>새로운 기능과 개선 사항을 만나보세요!</InfoText>
+            <InfoText>
+              {i18n.t("update_modal_info_text", {
+                defaultValue: "새로운 기능과 개선 사항을 만나보세요!",
+              })}
+            </InfoText>
           </InfoBox>
 
           {/* 업데이트 버튼 */}
@@ -57,11 +78,17 @@ export default function UpdateModal({
               isUpdating ? (
                 <LoadingRow>
                   <ActivityIndicator color="#FFFFFF" size="small" />
-                  <UpdateButtonText>업데이트 준비 중...</UpdateButtonText>
+                  <UpdateButtonText>
+                    {i18n.t("update_modal_loading", {
+                      defaultValue: "업데이트 준비 중...",
+                    })}
+                  </UpdateButtonText>
                 </LoadingRow>
               ) : (
                 <UpdateButtonText style={{ opacity: pressed ? 0.86 : 1 }}>
-                  업데이트하기
+                  {i18n.t("update_modal_update_button", {
+                    defaultValue: "업데이트하기",
+                  })}
                 </UpdateButtonText>
               )
             }
@@ -70,11 +97,17 @@ export default function UpdateModal({
           {/* 나중에 버튼 */}
           <LaterButton onPress={onLater} disabled={isUpdating}>
             <LaterButtonText isUpdating={isUpdating}>
-              나중에 할게요
+              {i18n.t("update_modal_later_button", {
+                defaultValue: "나중에 할게요",
+              })}
             </LaterButtonText>
           </LaterButton>
 
-          <Footer>더 좋은 놀이 시간을 위해 준비했어요 💜</Footer>
+          <Footer>
+            {i18n.t("update_modal_footer", {
+              defaultValue: "더 좋은 놀이 시간을 위해 준비했어요 💜",
+            })}
+          </Footer>
         </ModalContainer>
       </Overlay>
     </Modal>
@@ -163,6 +196,13 @@ const InfoBox = styled.View`
   padding-horizontal: 12px;
   margin-top: 22px;
   margin-bottom: 22px;
+`;
+const UpdateMascot = styled.View`
+  width: 124px;
+  height: 124px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
 `;
 
 const InfoIcon = styled.Text`

@@ -867,5 +867,14 @@
   "rest_modal_ad_already_showing": "广告已经在播放中，请稍等一下。",
   "rest_modal_ad_retry_button": "重新尝试",
   "rest_modal_ad_back_button": "返回",
-  "rest_modal_ad_loading": "正在准备广告..."
+  "rest_modal_ad_loading": "正在准备广告...",
+
+  "update_modal_eyebrow": "KIDS PLAYGROUND",
+  "update_modal_title": "发现新版本更新啦！",
+  "update_modal_description": "为了带来更有趣、更快乐的游戏体验，\n请将 Kids Playground\n更新到最新版本。",
+  "update_modal_info_text": "快来体验全新的功能和优化吧！",
+  "update_modal_loading": "正在准备更新...",
+  "update_modal_update_button": "立即更新",
+  "update_modal_later_button": "稍后再说",
+  "update_modal_footer": "为了带来更美好的游戏时光 💜"
 }
