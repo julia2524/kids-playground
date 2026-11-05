@@ -26,6 +26,7 @@ import i18n from "../../../i18n";
 
 import { useLanguage } from "../../../context/LangaugeContext";
 import { colors } from "../../../design-system/tokens/colors";
+import PuzzleTutorialOverlay from "../../Tutorial/PuzzleTutorialOverlay";
 
 const DEFAULT_VIEWBOX_WIDTH = 240;
 
@@ -54,6 +55,7 @@ export default function PuzzleBoard({
   title = "그림 퍼즐 맞추기",
   onWrongDropCountChange,
   hideArtwork = false,
+  showTutorial = false, // ← 추가
 }: PuzzleBoardProps) {
   useLanguage();
 
@@ -67,6 +69,9 @@ export default function PuzzleBoard({
   const [zOrder, setZOrder] = useState<string[]>([]);
   const [wrongDropCount, setWrongDropCount] = useState(0);
   const [completeSent, setCompleteSent] = useState(false);
+
+  const [tutorialPieceId, setTutorialPieceId] = useState<string | null>(null);
+  const [userDragging, setUserDragging] = useState(false);
 
   // dropPiece 를 고정된 함수로 유지하기 위해 최신 positions 를 ref 로 보관
   const positionsRef = useRef(positions);
@@ -212,6 +217,8 @@ export default function PuzzleBoard({
     setWrongDropCount(0);
     setCompleteSent(false);
     setZOrder(shuffled.map((piece) => piece.id));
+
+    setTutorialPieceId(shuffled[0]?.id ?? null); // ← 추가
   }, [
     layoutWidth,
     layoutHeight,
@@ -223,6 +230,8 @@ export default function PuzzleBoard({
     generatedPieces,
     pieceLayout,
   ]);
+
+  const handleDragStart = useCallback(() => setUserDragging(true), []);
 
   useEffect(() => {
     makePositions();
@@ -265,6 +274,7 @@ export default function PuzzleBoard({
   // positions 대신 positionsRef 를 읽어서 함수가 매번 새로 만들어지지 않게 함
   const dropPiece = useCallback(
     (id: string, x: number, y: number): "correct" | "wrong" | "free" => {
+      setUserDragging(false); // ← 추가
       const piece = generatedPieces.find((item) => item.id === id);
       if (!piece) return "free";
 
@@ -372,6 +382,35 @@ export default function PuzzleBoard({
     [pieces, positions, zOrder],
   );
 
+  const tutorialPiece = tutorialPieceId
+    ? pieces.find((p) => p.id === tutorialPieceId)
+    : undefined;
+  const tutorialPos = tutorialPieceId ? positions[tutorialPieceId] : undefined;
+
+  const tutorialVisible =
+    showTutorial &&
+    isReady &&
+    placedCount === 0 &&
+    !userDragging &&
+    !!tutorialPiece &&
+    !!tutorialPos &&
+    !tutorialPos.placed;
+
+  // 목표 칸의 중심에 조각 중심이 오도록 좌상단 계산
+  const tutorialTo = tutorialPiece
+    ? {
+        x:
+          boardLeft +
+          tutorialPiece.column * cellWidth +
+          cellWidth / 2 -
+          pieceWidth / 2,
+        y:
+          boardTop +
+          tutorialPiece.row * cellHeight +
+          cellHeight / 2 -
+          pieceHeight / 2,
+      }
+    : { x: 0, y: 0 };
   return (
     <Root>
       <PlayArea onLayout={onRootLayout}>
@@ -492,6 +531,19 @@ export default function PuzzleBoard({
                 );
               })}
             </PieceLayer>
+            {tutorialPiece && tutorialPos && (
+              <PuzzleTutorialOverlay
+                visible={tutorialVisible}
+                piece={tutorialPiece}
+                Artwork={Artwork}
+                viewBoxWidth={viewBoxWidth}
+                viewBoxHeight={viewBoxHeight}
+                from={{ x: tutorialPos.x, y: tutorialPos.y }}
+                to={tutorialTo}
+                width={pieceWidth}
+                height={pieceHeight}
+              />
+            )}
           </>
         )}
       </PlayArea>

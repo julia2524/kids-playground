@@ -78,4 +78,5 @@ export interface PuzzleBoardProps {
   title?: string;
   onWrongDropCountChange: (wrongDropCount: number) => void;
   hideArtwork?: boolean;
+  showTutorial: boolean; // ← 추가
 }

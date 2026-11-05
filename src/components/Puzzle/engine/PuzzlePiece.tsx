@@ -29,6 +29,7 @@ interface Props {
   targetHeight: number;
   placed: boolean;
   onMove: (pieceId: string, x: number, y: number) => void;
+  onDragStart?: (pieceId: string) => void;
   // "correct" = 정답, "wrong" = 오답, "free" = 오답 아님(자유 배치)
   onDrop: (
     pieceId: string,
@@ -72,7 +73,7 @@ interface ArtworkProps {
   pxToSrc: number;
 }
 
-const PieceArtwork = React.memo(function PieceArtwork({
+export const PieceArtwork = React.memo(function PieceArtwork({
   piece,
   Artwork,
   viewBoxWidth,
@@ -141,6 +142,7 @@ function PuzzlePiece({
   onDrop,
   boundsWidth,
   boundsHeight,
+  onDragStart,
 }: Props) {
   const [isDragging, setIsDragging] = useState(false);
 
@@ -311,6 +313,7 @@ function PuzzlePiece({
             start.current = { x: value.x, y: value.y };
           });
           setIsDragging(true);
+          onDragStart?.(piece.id); // ← 추가
           triggerHaptic("light");
         },
 
@@ -335,7 +338,19 @@ function PuzzlePiece({
           );
         },
       }),
-    [placed, renderX, renderY, position, finishDrop, minX, maxX, minY, maxY],
+    [
+      placed,
+      renderX,
+      renderY,
+      position,
+      finishDrop,
+      minX,
+      maxX,
+      minY,
+      maxY,
+      onDragStart,
+      piece.id,
+    ],
   );
 
   const spin = rotateAnim.interpolate({
@@ -497,7 +512,6 @@ const Particle = styled(Animated.View)<{ color: string }>`
   position: absolute;
   background-color: ${(p) => p.color};
 `;
-
 //직선퍼즐
 // import React, {
 //   useCallback,

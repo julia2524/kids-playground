@@ -339,7 +339,10 @@ export default function CategorySortingPlayScreen() {
           isLastLevel={testLevel === CategorySortingLevels.length}
           gameType={gameType} // 👈 이 부분을 추가해주면 오버레이로 gameType이 전달됩니다!
           onHome={() => {
-            navigation.navigate("Home");
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "Home" }],
+            });
           }}
           onRestart={() => {
             handleChangeLevel(testLevel);

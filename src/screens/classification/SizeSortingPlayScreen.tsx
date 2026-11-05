@@ -272,7 +272,12 @@ export default function SizeSortingPlayScreen() {
           earnedStars={earnedStars}
           isLastLevel={testLevel === SizeSortingLevels.length}
           gameType={gameType}
-          onHome={() => navigation.navigate("Home")}
+          onHome={() => {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "Home" }],
+            });
+          }}
           onRestart={() => handleChangeLevel(testLevel)}
           onNextLevel={handleNextAfterResult}
           onGoRoadmap={() =>

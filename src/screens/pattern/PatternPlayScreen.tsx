@@ -283,7 +283,12 @@ export default function PatternPlayScreen() {
           earnedStars={earnedStars}
           isLastLevel={testLevel === PATTERN_LEVELS.length}
           gameType={gameType}
-          onHome={() => navigation.navigate("Home")}
+          onHome={() => {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "Home" }],
+            });
+          }}
           onRestart={() => handleChangeLevel(testLevel)}
           onNextLevel={() => handleNextAfterResult()}
           onGoRoadmap={() =>

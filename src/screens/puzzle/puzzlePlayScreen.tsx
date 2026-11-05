@@ -302,6 +302,7 @@ export default function PuzzlePlayScreen() {
             onComplete={handleComplete}
             onWrongDropCountChange={handleWrongDropCountChange}
             hideArtwork={hideArtwork}
+            showTutorial={level === 1} // ← 첫 레벨에서만
           />
         </GameContainer>
         {/* 퍼즐에 맞게 라운드를 뺀 레벨 전용 컨트롤러 */}
@@ -320,7 +321,12 @@ export default function PuzzlePlayScreen() {
           earnedStars={earnedStars}
           isLastLevel={level >= TOTAL_PUZZLE_LEVELS}
           gameType={gameType}
-          onHome={() => navigation.navigate("Home")}
+          onHome={() => {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "Home" }],
+            });
+          }}
           onRestart={handleRestart}
           onNextLevel={handleNextLevel}
           onGoRoadmap={handleGoRoadmap}
@@ -343,7 +349,6 @@ const GameContainer = styled.View`
   flex: 1;
   align-self: stretch;
 `;
-
 //직선 퍼즐
 // import React, { useCallback, useEffect, useState } from "react";
 // import { StyleSheet } from "react-native";

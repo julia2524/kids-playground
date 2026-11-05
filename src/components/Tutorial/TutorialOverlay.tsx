@@ -309,17 +309,6 @@ export default function TutorialOverlay({
                 size={objectSize}
               />
             ) : null}
-            {/* {isCategoryObject(object) ? (
-              <ObjectArtwork object={object} size={objectSize} />
-            ) : (
-              <RenderClassificationObjectSvg
-                object={object}
-                primary={primaryColor!}
-                secondary={variant?.secondary}
-                accent={variant?.accent}
-                size={objectSize}
-              />
-            )} */}
           </ObjectContainer>
 
           <HandContainer
