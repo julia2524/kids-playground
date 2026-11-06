@@ -567,6 +567,26 @@ export default function StageMapScreen() {
         subtitle: i18n.t("flag_france_desc"),
       },
 
+      egypt: {
+        title: i18n.t("flag_egypt_title"),
+        subtitle: i18n.t("flag_egypt_desc"),
+      },
+
+      saudiarabia: {
+        title: i18n.t("flag_saudiarabia_title"),
+        subtitle: i18n.t("flag_saudiarabia_desc"),
+      },
+
+      iraq: {
+        title: i18n.t("flag_iraq_title"),
+        subtitle: i18n.t("flag_iraq_desc"),
+      },
+
+      algeria: {
+        title: i18n.t("flag_algeria_title"),
+        subtitle: i18n.t("flag_algeria_desc"),
+      },
+
       bigben: {
         title: i18n.t("landmark_bigben_title"),
         subtitle: i18n.t("landmark_bigben_desc"),

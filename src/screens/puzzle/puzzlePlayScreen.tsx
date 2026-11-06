@@ -48,6 +48,32 @@ import { TajMahalPuzzleScene } from "../../components/Puzzle/assets/landmark/Taj
 import ClassificationTestControls from "../../components/common/ClassificationTestControls";
 import PuzzleTestControls from "../../components/Puzzle/PuzzleTestControls";
 import { EgyptFlagPuzzleScene } from "../../components/Puzzle/assets/flag/EgyptFlagPuzzleScene";
+import { SaudiArabiaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/SaudiArabiaFlagPuzzleScene";
+import { IraqFlagPuzzleScene } from "../../components/Puzzle/assets/flag/IraqFlagPuzzleScene";
+import { AlgeriaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/AlgeriaFlagPuzzleScene";
+import { BangladeshFlagPuzzleScene } from "../../components/Puzzle/assets/flag/BangladeshFlagPuzzleScene";
+import { NetherlandsFlagPuzzleScene } from "../../components/Puzzle/assets/flag/NetherlandsFlagPuzzleScene";
+import { GermanyFlagPuzzleScene } from "../../components/Puzzle/assets/flag/GermanyFlagPuzzleScene";
+import { GreeceFlagPuzzleScene } from "../../components/Puzzle/assets/flag/GreeceFlagPuzzleScene";
+import { IndiaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/IndiaFlagPuzzleScene";
+import { IndonesiaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/IndonesiaFlagPuzzleScene";
+import { SpainFlagPuzzleScene } from "../../components/Puzzle/assets/flag/SpainFlagPuzzleScene";
+import { ItalyFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ItalyFlagPuzzleScene";
+import { BrazilFlagPuzzleScene } from "../../components/Puzzle/assets/flag/BrazilFlagPuzzleScene";
+import { SwedenFlagPuzzleScene } from "../../components/Puzzle/assets/flag/SwedenFlagPuzzleScene";
+import { ThailandFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ThailandFlagPuzzleScene";
+import { VietnamFlagPuzzleScene } from "../../components/Puzzle/assets/flag/VietnamFlagPuzzleScene";
+import { CanadaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/CanadaFlagPuzzleScene";
+import { SwitzerlandFlagPuzzleScene } from "../../components/Puzzle/assets/flag/SwitzerlandFlagPuzzleScene";
+import { TurkeyFlagPuzzleScene } from "../../components/Puzzle/assets/flag/TurkeyFlagPuzzleScene";
+import { ArgentinaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ArgentinaFlagPuzzleScene";
+import { PolandFlagPuzzleScene } from "../../components/Puzzle/assets/flag/PolandFlagPuzzleScene";
+import { RomaniaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/RomaniaFlagPuzzleScene";
+import { RussiaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/RussiaFlagPuzzleScene";
+import { PhilippinesFlagPuzzleScene } from "../../components/Puzzle/assets/flag/PhilippinesFlagPuzzleScene";
+import { MalaysiaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/MalaysiaFlagPuzzleScene";
+import { PakistanFlagPuzzleScene } from "../../components/Puzzle/assets/flag/PakistanFlagPuzzleScene";
+import { MexicoFlagPuzzleScene } from "../../components/Puzzle/assets/flag/MexicoFlagPuzzleScene";
 
 type RouteProps = RouteProp<RootStackParamList, "PuzzlePlayScreen">;
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
@@ -121,6 +147,110 @@ const FLAG_PUZZLE_DATA: Record<
   egypt: {
     title: "🇪🇬 이집트 국기 퍼즐",
     Artwork: EgyptFlagPuzzleScene,
+  },
+  saudiarabia: {
+    title: "🇸🇦 사우디아라비아 국기 퍼즐",
+    Artwork: SaudiArabiaFlagPuzzleScene,
+  },
+  iraq: {
+    title: "🇮🇶 이라크 국기 퍼즐",
+    Artwork: IraqFlagPuzzleScene,
+  },
+  algeria: {
+    title: "🇩🇿 알제리 국기 퍼즐",
+    Artwork: AlgeriaFlagPuzzleScene,
+  },
+  bangladesh: {
+    title: "🇧🇩 방글라데시 국기 퍼즐",
+    Artwork: BangladeshFlagPuzzleScene,
+  },
+  netherlands: {
+    title: "🇳🇱 네덜란드 국기 퍼즐",
+    Artwork: NetherlandsFlagPuzzleScene,
+  },
+  germany: {
+    title: "🇩🇪 독일 국기 퍼즐",
+    Artwork: GermanyFlagPuzzleScene,
+  },
+  greece: {
+    title: "🇬🇷 그리스 국기 퍼즐",
+    Artwork: GreeceFlagPuzzleScene,
+  },
+  india: {
+    title: "🇮🇳 인도 국기 퍼즐",
+    Artwork: IndiaFlagPuzzleScene,
+  },
+  indonesia: {
+    title: "🇮🇩 인도네시아 국기 퍼즐",
+    Artwork: IndonesiaFlagPuzzleScene,
+  },
+  spain: {
+    title: "🇪🇸 스페인 국기 퍼즐",
+    Artwork: SpainFlagPuzzleScene,
+  },
+  italy: {
+    title: "🇮🇹 이탈리아 국기 퍼즐",
+    Artwork: ItalyFlagPuzzleScene,
+  },
+  brazil: {
+    title: "🇧🇷 브라질 국기 퍼즐",
+    Artwork: BrazilFlagPuzzleScene,
+  },
+  sweden: {
+    title: "🇸🇪 스웨덴 국기 퍼즐",
+    Artwork: SwedenFlagPuzzleScene,
+  },
+  thailand: {
+    title: "🇹🇭 태국 국기 퍼즐",
+    Artwork: ThailandFlagPuzzleScene,
+  },
+  vietnam: {
+    title: "🇻🇳 베트남 국기 퍼즐",
+    Artwork: VietnamFlagPuzzleScene,
+  },
+  canada: {
+    title: "🇨🇦 캐나다 국기 퍼즐",
+    Artwork: CanadaFlagPuzzleScene,
+  },
+  switzerland: {
+    title: "🇨🇭 스위스 국기 퍼즐",
+    Artwork: SwitzerlandFlagPuzzleScene,
+  },
+  turkey: {
+    title: "🇹🇷 튀르키예 국기 퍼즐",
+    Artwork: TurkeyFlagPuzzleScene,
+  },
+  argentina: {
+    title: "🇦🇷 아르헨티나 국기 퍼즐",
+    Artwork: ArgentinaFlagPuzzleScene,
+  },
+  poland: {
+    title: "🇵🇱 폴란드 국기 퍼즐",
+    Artwork: PolandFlagPuzzleScene,
+  },
+  romania: {
+    title: "🇷🇴 루마니아 국기 퍼즐",
+    Artwork: RomaniaFlagPuzzleScene,
+  },
+  russia: {
+    title: "🇷🇺 러시아 국기 퍼즐",
+    Artwork: RussiaFlagPuzzleScene,
+  },
+  philippines: {
+    title: "🇵🇭 필리핀 국기 퍼즐",
+    Artwork: PhilippinesFlagPuzzleScene,
+  },
+  malaysia: {
+    title: "🇲🇾 말레이시아 국기 퍼즐",
+    Artwork: MalaysiaFlagPuzzleScene,
+  },
+  pakistan: {
+    title: "🇵🇰 파키스탄 국기 퍼즐",
+    Artwork: PakistanFlagPuzzleScene,
+  },
+  mexico: {
+    title: "🇲🇽 멕시코 국기 퍼즐",
+    Artwork: MexicoFlagPuzzleScene,
   },
 };
 
