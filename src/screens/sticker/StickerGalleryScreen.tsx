@@ -1076,6 +1076,7 @@ const ProgressCount = styled(AppText)`
   font-size: 13px;
   font-weight: 800;
   color: #7c5cff;
+  direction: ltr;
 `;
 
 const ProgressBarBackground = styled.View`

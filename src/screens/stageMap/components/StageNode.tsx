@@ -112,7 +112,14 @@ export default function StageNode({
             <Ionicons name="lock-closed" size={26} color="#7D7A8C" />
           </LockOverlay>
         ) : (
-          <StageNumber>{level}</StageNumber>
+          <StageNumber
+            style={{
+              position: "absolute",
+              direction: "ltr", // 💡 숫자 표기 방향 LTR 고정
+            }}
+          >
+            {level}
+          </StageNumber>
         )}
       </TouchableOpacity>
     </NodeWrapper>
@@ -125,6 +132,7 @@ const NodeWrapper = styled.View`
   height: 120px;
   align-items: center;
   justify-content: center;
+  direction: ltr;
 `;
 
 const GlowRing = styled(Animated.View)`

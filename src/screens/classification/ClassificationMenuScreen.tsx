@@ -58,8 +58,10 @@
 // } as const;
 
 // const { width: SCREEN_WIDTH } = Dimensions.get("window");
-// const CARD_WIDTH = SCREEN_WIDTH * 0.76;
-// const ITEM_SPACING = 16;
+
+// // ⭐ 퍼즐 메뉴와 동일하게 카드 너비 0.8, 간격 12, 좌우 여백 공식 적용 (왼쪽 치우침 방지)
+// const CARD_WIDTH = SCREEN_WIDTH * 0.8;
+// const ITEM_SPACING = 12;
 // const SNAP_INTERVAL = CARD_WIDTH + ITEM_SPACING;
 // const SIDE_SPACE = (SCREEN_WIDTH - CARD_WIDTH) / 2;
 
@@ -220,24 +222,28 @@
 //                       }}
 //                     >
 //                       <PlanetArea>
-//                         <ShootingStarArea style={{ top: 10, left: 12 }}>
-//                           <ShootingStar color={item.accentColor} size={38} />
+//                         <ShootingStarArea style={{ top: 4, left: 8 }}>
+//                           <ShootingStar color={item.accentColor} size={32} />
 //                         </ShootingStarArea>
 
 //                         <PlanetScene>
-//                           <ClassificationPlanet type={item.id} size={145} />
+//                           <ClassificationPlanet type={item.id} size={120} />
 //                           <Orbit>
 //                             <OrbitLine />
 //                             <UFO>
-//                               <SpaceUFO size={46} />
+//                               <SpaceUFO size={38} />
 //                             </UFO>
 //                           </Orbit>
 //                         </PlanetScene>
 //                       </PlanetArea>
 
 //                       <GameInfo>
-//                         <GameTitle>{item.title}</GameTitle>
-//                         <GameDescription>{item.description}</GameDescription>
+//                         <GameTitle numberOfLines={1} adjustsFontSizeToFit>
+//                           {item.title}
+//                         </GameTitle>
+//                         <GameDescription numberOfLines={2}>
+//                           {item.description}
+//                         </GameDescription>
 //                       </GameInfo>
 
 //                       <StartButton
@@ -375,7 +381,7 @@
 //   align-items: center;
 //   padding-right: 24px;
 //   padding-left: 24px;
-//   margin-bottom: 35px;
+//   margin-bottom: 20px;
 // `;
 
 // export const Title = styled(AppText)`
@@ -397,9 +403,11 @@
 //   justify-content: center;
 // `;
 
+// // ⭐ 퍼즐 메뉴와 동일하게 justify-content: center를 추가하여 카드가 왼쪽으로 치우치지 않고 정중앙에 오도록 수정
 // export const GameCardWrapper = styled.View`
 //   width: ${CARD_WIDTH}px;
 //   margin-right: ${ITEM_SPACING}px;
+//   justify-content: center;
 // `;
 
 // export const GameCard = styled.TouchableOpacity<{
@@ -408,7 +416,7 @@
 // }>`
 //   background-color: ${({ bgColor }) => bgColor};
 //   border-radius: 32px;
-//   padding: 16px;
+//   padding: 20px;
 //   border-width: 3px;
 //   border-color: #ffffff;
 
@@ -422,15 +430,16 @@
 // `;
 
 // export const PlanetArea = styled.View`
-//   height: 180px;
+//   height: 140px;
 //   align-items: center;
 //   justify-content: center;
 //   position: relative;
+//   margin-bottom: 8px;
 // `;
 
 // export const PlanetScene = styled.View`
-//   width: 180px;
-//   height: 150px;
+//   width: 140px;
+//   height: 120px;
 //   align-items: center;
 //   justify-content: center;
 //   position: relative;
@@ -438,9 +447,9 @@
 
 // export const Orbit = styled.View`
 //   position: absolute;
-//   width: 180px;
-//   height: 80px;
-//   border-radius: 90px;
+//   width: 140px;
+//   height: 64px;
+//   border-radius: 32px;
 //   transform: rotate(-15deg);
 //   align-items: center;
 //   justify-content: center;
@@ -448,9 +457,9 @@
 
 // export const OrbitLine = styled.View`
 //   position: absolute;
-//   width: 180px;
-//   height: 80px;
-//   border-radius: 90px;
+//   width: 140px;
+//   height: 64px;
+//   border-radius: 32px;
 //   border-width: 2px;
 //   border-color: rgba(255, 255, 255, 0.6);
 //   border-style: dashed;
@@ -458,8 +467,8 @@
 
 // export const UFO = styled.View`
 //   position: absolute;
-//   right: -10px;
-//   bottom: -10px;
+//   right: -8px;
+//   bottom: -8px;
 // `;
 
 // export const ShootingStarArea = styled.View`
@@ -470,18 +479,21 @@
 // export const GameInfo = styled.View`
 //   align-items: center;
 //   margin-bottom: 12px;
+//   margin-top: 2px;
 // `;
 
 // export const GameTitle = styled(AppText)`
 //   color: #29263d;
 //   font-size: ${(props) => props.theme.typography.h3.fontSize}px;
 //   font-family: ${(props) => props.theme.fontFamily};
+//   text-align: center;
 // `;
 
 // export const GameDescription = styled(AppText)`
 //   color: ${colors.secondaryText};
 //   font-size: ${(props) => props.theme.typography.caption.fontSize}px;
 //   margin-top: 2px;
+//   text-align: center;
 // `;
 
 // export const StartButton = styled.View`
@@ -541,11 +553,14 @@
 //   border-radius: 4px;
 //   background-color: ${({ active }) => (active ? "#7C5CFF" : "#DCD7EE")};
 // `;
+
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Dimensions,
   FlatList,
+  I18nManager,
   ImageBackground,
+  Platform,
   NativeScrollEvent,
   NativeSyntheticEvent,
 } from "react-native";
@@ -656,6 +671,12 @@ export default function ClassificationMenuScreen() {
   const insets = useSafeAreaInsets();
   const { locale } = useLanguage();
 
+  // ⭐ 앱이 forceRTL 로 네이티브 레이아웃 방향을 이미 뒤집어 둔 상태이므로,
+  //    그 값(I18nManager.isRTL)을 기준으로 삼는다.
+  //    네이티브 RTL 에서는 FlatList / flex-row 가 알아서 오른쪽부터 시작하므로
+  //    데이터 순서는 절대 뒤집지 않는다. (Color=0, Shape=1, Category=2, Size=3 유지)
+  const isRTL = I18nManager.isRTL;
+
   const GAMES = useMemo(() => {
     return MENU_GAME_CONFIGS.map((item) => ({
       ...item,
@@ -690,12 +711,54 @@ export default function ClassificationMenuScreen() {
     loadLastGamePosition();
   }, []);
 
+  // LTR(영어권): 원본 그대로
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const offsetX = event.nativeEvent.contentOffset.x;
     const index = Math.round(offsetX / SNAP_INTERVAL);
     if (index !== currentIndex && index >= 0 && index < GAMES.length) {
       setCurrentIndex(index);
     }
+  };
+
+  // ------------------------------------------------------------
+  // RTL 전용: 스크롤이 멈춘 뒤에만 인덱스를 계산한다.
+  //
+  // scrollToOffset(x) 은 "시작점(오른쪽) 기준"으로 동작하지만,
+  // 플랫폼에 따라 onMomentumScrollEnd 의 contentOffset.x 는
+  //   (A) 시작점 기준  : Color = 0,  Size = 최대값
+  //   (B) 물리적 왼쪽 기준 : Color = 최대값, Size = 0   (Android 에서 흔함)
+  // 중 하나로 보고된다. (B)를 (A)처럼 읽으면 카드/Dot 인덱스가 뒤집힌다.
+  // -> 기본값은 플랫폼으로 정하고, 화살표로 이동한 "목표 인덱스"와 비교해서
+  //    어느 쪽 방식인지 스스로 보정한다.
+  // ------------------------------------------------------------
+  const offsetIsFromLeftRef = useRef<boolean>(Platform.OS === "android");
+  const pendingTargetRef = useRef<number | null>(null);
+
+  const handleScrollEndRTL = (
+    event: NativeSyntheticEvent<NativeScrollEvent>,
+  ) => {
+    const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
+    const rawX = Math.abs(contentOffset.x);
+    const maxOffset = Math.max(0, contentSize.width - layoutMeasurement.width);
+
+    const lastIndex = GAMES.length - 1;
+    const clamp = (n: number) => Math.min(lastIndex, Math.max(0, n));
+
+    const directIndex = clamp(Math.round(rawX / SNAP_INTERVAL)); // (A)
+    const reversedIndex = clamp(Math.round((maxOffset - rawX) / SNAP_INTERVAL)); // (B)
+
+    // 화살표로 이동한 직후라면 목표 인덱스와 맞는 쪽으로 방식을 학습
+    const target = pendingTargetRef.current;
+    if (target !== null) {
+      if (directIndex === target && reversedIndex !== target) {
+        offsetIsFromLeftRef.current = false;
+      } else if (reversedIndex === target && directIndex !== target) {
+        offsetIsFromLeftRef.current = true;
+      }
+      pendingTargetRef.current = null;
+    }
+
+    setCurrentIndex(offsetIsFromLeftRef.current ? reversedIndex : directIndex);
   };
 
   const handleSelectGame = (game: ClassificationGame) => {
@@ -705,6 +768,11 @@ export default function ClassificationMenuScreen() {
 
   const scrollToIndex = (index: number) => {
     if (index < 0 || index >= GAMES.length) return;
+    // RTL 에서는 카드/Dot/버튼 상태가 항상 같은 인덱스를 보도록 즉시 반영
+    if (isRTL) {
+      setCurrentIndex(index);
+      pendingTargetRef.current = index;
+    }
     flatListRef.current?.scrollToOffset({
       offset: index * SNAP_INTERVAL,
       animated: true,
@@ -739,6 +807,7 @@ export default function ClassificationMenuScreen() {
             <FlatList
               ref={flatListRef}
               data={GAMES}
+              extraData={currentIndex}
               keyExtractor={(item, index) => `${item.id}-${index}`}
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -749,7 +818,8 @@ export default function ClassificationMenuScreen() {
                 alignItems: "center",
               }}
               style={{ flexGrow: 0 }}
-              onScroll={handleScroll}
+              onScroll={isRTL ? undefined : handleScroll}
+              onMomentumScrollEnd={isRTL ? handleScrollEndRTL : undefined}
               scrollEventThrottle={16}
               renderItem={({ item, index }) => {
                 const isActive = index === currentIndex;
@@ -803,6 +873,14 @@ export default function ClassificationMenuScreen() {
             />
           </CarouselArea>
 
+          {/*
+            BottomArea 는 flex-row 라서 RTL 에서 첫 번째 자식이 화면 "오른쪽"에 놓인다.
+            - 첫 번째 버튼 = 이전 카드 (LTR: 왼쪽 "<" / RTL: 오른쪽 ">")
+            - 마지막 버튼 = 다음 카드 (LTR: 오른쪽 ">" / RTL: 왼쪽 "<")
+            => RTL 에서 "왼쪽 < = 다음, 오른쪽 > = 이전", Color 에서는 오른쪽 버튼만 비활성화,
+               Size 에서는 왼쪽 버튼만 비활성화.
+            Dot 도 같은 이유로 첫 번째(Color) Dot 가 맨 오른쪽에 놓인다.
+          */}
           <BottomArea>
             <ArrowButton
               onPress={() => {
@@ -813,7 +891,7 @@ export default function ClassificationMenuScreen() {
               activeOpacity={0.8}
             >
               <Ionicons
-                name="chevron-back"
+                name={isRTL ? "chevron-forward" : "chevron-back"}
                 size={22}
                 color={currentIndex === 0 ? "#D0CCE4" : "#7C5CFF"}
               />
@@ -834,7 +912,7 @@ export default function ClassificationMenuScreen() {
               activeOpacity={0.8}
             >
               <Ionicons
-                name="chevron-forward"
+                name={isRTL ? "chevron-back" : "chevron-forward"}
                 size={22}
                 color={
                   currentIndex === GAMES.length - 1 ? "#D0CCE4" : "#7C5CFF"

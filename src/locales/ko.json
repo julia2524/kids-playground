@@ -1,4 +1,6 @@
 {
+  "select_language": "언어 선택",
+
   "result_title": "정말 잘했어요!",
 
   "sticker_workshop_title": "나만의 스티커 공방",
@@ -28,7 +30,7 @@
   "nav_book": "도감",
   "nav_settings": "설정",
   "alert_locked_title": "알림",
-  "alert_locked_message": "{{gameName}}{{particle}} 곧 열릴 예정이에요!",
+  "alert_locked_message": "{{gameName}} 곧 열릴 예정이에요!",
 
   "guardian_notice_title": "보호자 안내",
   "guardian_notice_p1": "이 앱은 만 3~6세 유아를 위한\n간단한 분류·인지 놀이입니다.",
@@ -194,7 +196,7 @@
   "setting_game_category_desc_full": "종류 분류 게임의 진행 기록을 초기화합니다.",
   "setting_game_category_sticker_desc_full": "획득한 종류 스티커를 초기화합니다.",
 
-  "sticker_book_title": "스티커도감 (%{unlockedCount}/%{totalCount})",
+  "sticker_book_title": "스티커도감",
   "stikcer_collection_subtitle": "스티커 수집률",
 
   "item_medal": "메달",
