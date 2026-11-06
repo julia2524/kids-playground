@@ -36,49 +36,88 @@ export default function PuzzleTutorialOverlay({
   const progress = useRef(new Animated.Value(0)).current;
   const opacity = useRef(new Animated.Value(0)).current;
 
+  //무한 재생
+  // useEffect(() => {
+  //   progress.setValue(0);
+  //   opacity.setValue(0);
+  //   if (!visible) return;
+
+  //   const loop = Animated.loop(
+  //     Animated.sequence([
+  //       Animated.timing(opacity, {
+  //         toValue: 1,
+  //         duration: 250,
+  //         useNativeDriver: true,
+  //       }),
+  //       Animated.delay(350),
+  //       Animated.timing(progress, {
+  //         toValue: 1,
+  //         duration: 1300,
+  //         easing: Easing.inOut(Easing.ease),
+  //         useNativeDriver: true,
+  //       }),
+  //       Animated.delay(300),
+  //       Animated.timing(opacity, {
+  //         toValue: 0,
+  //         duration: 250,
+  //         useNativeDriver: true,
+  //       }),
+  //       Animated.delay(600),
+  //       // 다음 반복을 위해 처음 위치로 되돌림
+  //       Animated.timing(progress, {
+  //         toValue: 0,
+  //         duration: 0,
+  //         useNativeDriver: true,
+  //       }),
+  //     ]),
+  //   );
+
+  //   loop.start();
+  //   return () => {
+  //     loop.stop();
+  //     progress.setValue(0);
+  //     opacity.setValue(0);
+  //   };
+  // }, [visible, from.x, from.y, to.x, to.y, progress, opacity]);
+
   useEffect(() => {
     progress.setValue(0);
     opacity.setValue(0);
     if (!visible) return;
 
-    const loop = Animated.loop(
-      Animated.sequence([
-        Animated.timing(opacity, {
-          toValue: 1,
-          duration: 250,
-          useNativeDriver: true,
-        }),
-        Animated.delay(350),
-        Animated.timing(progress, {
-          toValue: 1,
-          duration: 1300,
-          easing: Easing.inOut(Easing.ease),
-          useNativeDriver: true,
-        }),
-        Animated.delay(300),
-        Animated.timing(opacity, {
-          toValue: 0,
-          duration: 250,
-          useNativeDriver: true,
-        }),
-        Animated.delay(600),
-        // 다음 반복을 위해 처음 위치로 되돌림
-        Animated.timing(progress, {
-          toValue: 0,
-          duration: 0,
-          useNativeDriver: true,
-        }),
-      ]),
-    );
+    // 한 번만 실행되는 애니메이션 시퀀스
+    const tutorialAnimation = Animated.sequence([
+      // 1. 페이드 인
+      Animated.timing(opacity, {
+        toValue: 1,
+        duration: 250,
+        useNativeDriver: true,
+      }),
+      Animated.delay(350),
+      // 2. 출발지 -> 목적지로 이동
+      Animated.timing(progress, {
+        toValue: 1,
+        duration: 1300,
+        easing: Easing.inOut(Easing.ease),
+        useNativeDriver: true,
+      }),
+      Animated.delay(300),
+      // 3. 페이드 아웃
+      Animated.timing(opacity, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }),
+    ]);
 
-    loop.start();
+    tutorialAnimation.start();
+
     return () => {
-      loop.stop();
+      tutorialAnimation.stop();
       progress.setValue(0);
       opacity.setValue(0);
     };
   }, [visible, from.x, from.y, to.x, to.y, progress, opacity]);
-
   if (!visible || width <= 0 || height <= 0) return null;
 
   // PuzzlePiece 와 동일한 방식으로 돌기 여유 공간 계산
