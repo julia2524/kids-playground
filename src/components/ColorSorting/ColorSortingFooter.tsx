@@ -75,4 +75,5 @@ const RoundBadgeText = styled(AppText)`
   font-size: 11px;
   font-weight: 800;
   color: #64748b;
+  direction: ltr;
 `;

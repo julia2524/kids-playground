@@ -205,36 +205,38 @@ export default function PatternPlayScreen() {
           text="다음에는 무엇이 올까?"
         />
 
-        {/* 가운데: 패턴 시퀀스 + 빈칸 (문제가 바뀌면 새로 마운트) */}
-        <PatternTargetArea
-          key={problemKey}
-          sequence={problem.sequence}
-          blankIndex={problem.blankIndex}
-          rule={problem.rule}
-          placedElement={placedElement}
-          blankSlotRef={blankSlotRef}
-        />
+        <GameArea>
+          {/* 가운데: 패턴 시퀀스 + 빈칸 (문제가 바뀌면 새로 마운트) */}
+          <PatternTargetArea
+            key={problemKey}
+            sequence={problem.sequence}
+            blankIndex={problem.blankIndex}
+            rule={problem.rule}
+            placedElement={placedElement}
+            blankSlotRef={blankSlotRef}
+          />
 
-        {/* 아래: 드래그할 선택지들 */}
-        <PatternObjectBoard
-          roundKey={problemKey}
-          choices={problem.choices}
-          answer={problem.answer}
-          selectedObjectId={selectedObjectId}
-          wrongObjectIds={wrongObjectIds}
-          onObjectPress={handleSelectObject}
-          footerRef={footerRef}
-          getTargetRects={getTargetRects}
-          onCorrectDrop={handleDropObject}
-          onWrongDrop={handleWrongDrop}
-          registerChoiceRef={(id, ref) => {
-            tutorialObjectRefs.current[id] = ref;
-          }}
-          onObjectGrab={() => {
-            tutorialVisibleRef.current = false;
-            setTutorialVisible(false);
-          }}
-        />
+          {/* 아래: 드래그할 선택지들 */}
+          <PatternObjectBoard
+            roundKey={problemKey}
+            choices={problem.choices}
+            answer={problem.answer}
+            selectedObjectId={selectedObjectId}
+            wrongObjectIds={wrongObjectIds}
+            onObjectPress={handleSelectObject}
+            footerRef={footerRef}
+            getTargetRects={getTargetRects}
+            onCorrectDrop={handleDropObject}
+            onWrongDrop={handleWrongDrop}
+            registerChoiceRef={(id, ref) => {
+              tutorialObjectRefs.current[id] = ref;
+            }}
+            onObjectGrab={() => {
+              tutorialVisibleRef.current = false;
+              setTutorialVisible(false);
+            }}
+          />
+        </GameArea>
 
         <FooterWrapper ref={footerRef} collapsable={false}>
           <ColorSortingFooter
@@ -324,4 +326,9 @@ const FooterWrapper = styled.View`
   justify-content: center;
   margin-top: 4px;
   margin-bottom: 4px;
+`;
+
+const GameArea = styled.View`
+  flex: 1;
+  direction: ltr;
 `;

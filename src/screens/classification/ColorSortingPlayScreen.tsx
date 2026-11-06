@@ -276,6 +276,7 @@ export default function ColorSortingPlayScreen() {
           onTargetPress={handleTargetPress}
           onRemoveObject={handleRemoveFromTarget}
         />
+
         <View ref={footerRef} collapsable={false}>
           <ColorSortingFooter
             totalRounds={TOTAL_ROUNDS}
@@ -378,4 +379,9 @@ const ErrorText = styled(AppText)`
   font-weight: 800;
 
   color: #29263d;
+`;
+
+const GameArea = styled.View`
+  flex: 1;
+  direction: ltr;
 `;

@@ -529,6 +529,7 @@ import BabyLionPuzzleArtwork from "../../components/Puzzle/assets/animal/BabyLio
 import BabyElephantPuzzleArtwork from "../../components/Puzzle/assets/animal/BabyElephant/BabyElephantPuzzleArtwork";
 import PochiPenguinPuzzleArtwork from "../../components/Puzzle/assets/animal/PochiPenguin/PochiPenguinPuzzleArtwork";
 import PinkPigPuzzleArtwork from "../../components/Puzzle/assets/animal/PinkyPig/PinkPigPuzzleArtwork";
+import { EgyptFlagPuzzleScene } from "../../components/Puzzle/assets/flag/EgyptFlagPuzzleScene";
 
 export type AnimalCharacterType =
   | "rabbit"
@@ -661,6 +662,13 @@ export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
     accentColor: "#4D8DFF",
     cardBg: "#F4F7FF",
   },
+  {
+    id: "egypt",
+    titleKey: "flag_egypt_title",
+    descKey: "flag_egypt_desc",
+    accentColor: "#D4A017",
+    cardBg: "#FFF9EC",
+  },
 ] as const;
 
 export const LANDMARK_CONFIGS: readonly PuzzleItemConfig[] = [
@@ -749,6 +757,8 @@ export function renderPuzzleIllustration(id: string) {
       return <ChinaFlagPuzzleScene />;
     case "france":
       return <FranceFlagPuzzleScene />;
+    case "egypt":
+      return <EgyptFlagPuzzleScene />;
 
     // 랜드마크
     case "bigben":

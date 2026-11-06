@@ -335,6 +335,7 @@ const Overlay = styled.View`
   left: 0;
   z-index: 9999;
   elevation: 9999;
+  direction: ltr;
 `;
 
 const MovingGroup = styled(AnimatedView)`
