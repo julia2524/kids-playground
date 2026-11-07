@@ -1,7 +1,7 @@
 import React from "react";
 import { Rect } from "react-native-svg";
 
-export function PeruFlagArtwork() {
+export function PeruFlagPuzzleScene() {
   return (
     <>
       {/* 전체 배경 흰색 (중앙 바 역할 겸용) */}

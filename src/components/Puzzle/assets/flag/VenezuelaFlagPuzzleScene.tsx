@@ -1,7 +1,7 @@
 import React from "react";
 import { Rect, Polygon } from "react-native-svg";
 
-export function VenezuelaFlagArtwork() {
+export function VenezuelaFlagPuzzleScene() {
   const starPoints =
     "5,1 6.3,3.8 9.5,3.8 6.9,5.5 7.9,8.5 5,6.8 2.1,8.5 3.1,5.5 0.5,3.8 3.7,3.8";
 

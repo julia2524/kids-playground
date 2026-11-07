@@ -1,7 +1,7 @@
 import React from "react";
 import { Rect } from "react-native-svg";
 
-export function ColombiaFlagArtwork() {
+export function ColombiaFlagPuzzleScene() {
   return (
     <>
       {/* 상단 넓은 노랑 (전체의 절반) */}

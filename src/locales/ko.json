@@ -880,5 +880,18 @@
   "update_modal_loading": "업데이트 준비 중...",
   "update_modal_update_button": "업데이트하기",
   "update_modal_later_button": "나중에 할게요",
-  "update_modal_footer": "더 좋은 놀이 시간을 위해 준비했어요 💜"
+  "update_modal_footer": "더 좋은 놀이 시간을 위해 준비했어요 💜",
+
+  "puzzle_group_asia": "아시아",
+  "puzzle_group_europe": "유럽",
+  "puzzle_group_africa": "아프리카",
+  "puzzle_group_north_america": "북아메리카",
+  "puzzle_group_south_america": "남아메리카",
+  "puzzle_group_oceania": "오세아니아",
+  "puzzle_group_item_count": "개",
+  "puzzle_group_explore": "탐험하기",
+  "puzzle_flag_group_title": "어느 대륙을 탐험할까요?",
+  "puzzle_flag_group_desc": "가고 싶은 대륙을 골라 신나는 깃발 여행을 떠나요!",
+  "puzzle_landmark_group_title": "어느 대륙의 명소를 만나볼까요?",
+  "puzzle_landmark_group_desc": "가고 싶은 대륙을 골라 신나는 명소 탐험을 떠나요!"
 }

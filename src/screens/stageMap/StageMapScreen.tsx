@@ -576,15 +576,45 @@ export default function StageMapScreen() {
         title: i18n.t("flag_saudiarabia_title"),
         subtitle: i18n.t("flag_saudiarabia_desc"),
       },
-
+      venezuela: {
+        title: i18n.t("flag_venezuela_title"),
+        subtitle: i18n.t("flag_venezuela_desc"),
+      },
+      colombia: {
+        title: i18n.t("flag_colombia_title"),
+        subtitle: i18n.t("flag_colombia_desc"),
+      },
+      peru: {
+        title: i18n.t("flag_peru_title"),
+        subtitle: i18n.t("flag_peru_desc"),
+      },
       iraq: {
         title: i18n.t("flag_iraq_title"),
         subtitle: i18n.t("flag_iraq_desc"),
       },
-
       algeria: {
         title: i18n.t("flag_algeria_title"),
         subtitle: i18n.t("flag_algeria_desc"),
+      },
+      chile: {
+        title: i18n.t("flag_chile_title"),
+        subtitle: i18n.t("flag_chile_desc"),
+      },
+      cuba: {
+        title: i18n.t("flag_cuba_title"),
+        subtitle: i18n.t("flag_cuba_desc"),
+      },
+      ukraine: {
+        title: i18n.t("flag_ukraine_title"),
+        subtitle: i18n.t("flag_ukraine_desc"),
+      },
+      uruguay: {
+        title: i18n.t("flag_uruguay_title"),
+        subtitle: i18n.t("flag_uruguay_desc"),
+      },
+      paraguay: {
+        title: i18n.t("flag_paraguay_title"),
+        subtitle: i18n.t("flag_paraguay_desc"),
       },
 
       bigben: {

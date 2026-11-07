@@ -1,7 +1,7 @@
 import React from "react";
-import { Rect, Polygon } from "react-native-svg";
+import { Rect, Polygon, G } from "react-native-svg";
 
-export function ChileFlagArtwork() {
+export function ChileFlagPuzzleScene() {
   const starPoints =
     "5,1 6.3,3.8 9.5,3.8 6.9,5.5 7.9,8.5 5,6.8 2.1,8.5 3.1,5.5 0.5,3.8 3.7,3.8";
 
@@ -15,11 +15,13 @@ export function ChileFlagArtwork() {
       <Rect x="-2" y="-2" width="96" height="94" fill="#0039A6" />
 
       {/* 파란 캔톤 중앙의 하얀색 5각별 */}
-      <Polygon
-        points={starPoints}
-        fill="#FFFFFF"
-        transform="translate(48, 45) scale(2.2)"
-      />
+      <G transform="scale(3) translate(-42, -40)">
+        <Polygon
+          points={starPoints}
+          fill="#FFFFFF"
+          transform="translate(48, 45) scale(2.2)"
+        />
+      </G>
     </>
   );
 }

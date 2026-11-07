@@ -2,9 +2,11 @@
 // import {
 //   Dimensions,
 //   FlatList,
+//   I18nManager,
 //   ImageBackground,
 //   NativeScrollEvent,
 //   NativeSyntheticEvent,
+//   Platform,
 // } from "react-native";
 // import styled from "styled-components/native";
 // import Ionicons from "@expo/vector-icons/Ionicons";
@@ -135,6 +137,12 @@
 //   const [currentIndex, setCurrentIndex] = useState(0);
 //   const flatListRef = useRef<FlatList<any>>(null);
 
+//   // ⭐ 앱이 forceRTL 로 네이티브 레이아웃 방향을 이미 뒤집어 둔 상태이므로
+//   //    그 값(I18nManager.isRTL)을 기준으로 삼는다.
+//   //    네이티브 RTL 에서는 FlatList / flex-row 가 알아서 오른쪽부터 시작하므로
+//   //    데이터 순서는 절대 뒤집지 않는다. (animal=0, flag=1, landmark=2 유지)
+//   const isRTL = I18nManager.isRTL;
+
 //   const PUZZLES = useMemo(() => {
 //     return MENU_PUZZLE_CONFIGS.map((item) => ({
 //       ...item,
@@ -167,12 +175,54 @@
 //     loadLastPuzzlePosition();
 //   }, [PUZZLES]);
 
+//   // LTR(영어권): 원본 그대로
 //   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
 //     const offsetX = event.nativeEvent.contentOffset.x;
 //     const index = Math.round(offsetX / SNAP_INTERVAL);
 //     if (index !== currentIndex && index >= 0 && index < PUZZLES.length) {
 //       setCurrentIndex(index);
 //     }
+//   };
+
+//   // ------------------------------------------------------------
+//   // RTL 전용: 스크롤이 멈춘 뒤에만 인덱스를 계산한다.
+//   //
+//   // scrollToOffset(x) 은 "시작점(오른쪽) 기준"으로 동작하지만,
+//   // 플랫폼에 따라 onMomentumScrollEnd 의 contentOffset.x 는
+//   //   (A) 시작점 기준       : 첫 카드 = 0,  마지막 카드 = 최대값
+//   //   (B) 물리적 왼쪽 기준  : 첫 카드 = 최대값, 마지막 카드 = 0   (Android 에서 흔함)
+//   // 중 하나로 보고된다. (B)를 (A)처럼 읽으면 카드/Dot 인덱스가 뒤집힌다.
+//   // -> 기본값은 플랫폼으로 정하고, 화살표로 이동한 "목표 인덱스"와 비교해서
+//   //    어느 쪽 방식인지 스스로 보정한다.
+//   // ------------------------------------------------------------
+//   const offsetIsFromLeftRef = useRef<boolean>(Platform.OS === "android");
+//   const pendingTargetRef = useRef<number | null>(null);
+
+//   const handleScrollEndRTL = (
+//     event: NativeSyntheticEvent<NativeScrollEvent>,
+//   ) => {
+//     const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
+//     const rawX = Math.abs(contentOffset.x);
+//     const maxOffset = Math.max(0, contentSize.width - layoutMeasurement.width);
+
+//     const lastIndex = PUZZLES.length - 1;
+//     const clamp = (n: number) => Math.min(lastIndex, Math.max(0, n));
+
+//     const directIndex = clamp(Math.round(rawX / SNAP_INTERVAL)); // (A)
+//     const reversedIndex = clamp(Math.round((maxOffset - rawX) / SNAP_INTERVAL)); // (B)
+
+//     // 화살표로 이동한 직후라면 목표 인덱스와 맞는 쪽으로 방식을 학습
+//     const target = pendingTargetRef.current;
+//     if (target !== null) {
+//       if (directIndex === target && reversedIndex !== target) {
+//         offsetIsFromLeftRef.current = false;
+//       } else if (reversedIndex === target && directIndex !== target) {
+//         offsetIsFromLeftRef.current = true;
+//       }
+//       pendingTargetRef.current = null;
+//     }
+
+//     setCurrentIndex(offsetIsFromLeftRef.current ? reversedIndex : directIndex);
 //   };
 
 //   const handleSelectPuzzle = async (puzzle: (typeof PUZZLES)[number]) => {
@@ -200,6 +250,11 @@
 
 //   const scrollToIndex = (index: number) => {
 //     if (index < 0 || index >= PUZZLES.length) return;
+//     // RTL 에서는 카드/Dot/버튼 상태가 항상 같은 인덱스를 보도록 즉시 반영
+//     if (isRTL) {
+//       setCurrentIndex(index);
+//       pendingTargetRef.current = index;
+//     }
 //     flatListRef.current?.scrollToOffset({
 //       offset: index * SNAP_INTERVAL,
 //       animated: true,
@@ -234,6 +289,7 @@
 //             <FlatList
 //               ref={flatListRef}
 //               data={PUZZLES}
+//               extraData={currentIndex}
 //               keyExtractor={(item, index) => `${item.id}-${index}`}
 //               horizontal
 //               showsHorizontalScrollIndicator={false}
@@ -244,7 +300,8 @@
 //                 alignItems: "center",
 //               }}
 //               style={{ flexGrow: 0 }}
-//               onScroll={handleScroll}
+//               onScroll={isRTL ? undefined : handleScroll}
+//               onMomentumScrollEnd={isRTL ? handleScrollEndRTL : undefined}
 //               scrollEventThrottle={16}
 //               renderItem={({ item, index }) => {
 //                 const isActive = index === currentIndex;
@@ -299,6 +356,12 @@
 //             />
 //           </CarouselArea>
 
+//           {/*
+//             BottomArea 는 flex-row 라서 RTL 에서 첫 번째 자식이 화면 "오른쪽"에 놓인다.
+//             - 첫 번째 버튼 = 이전 카드 (LTR: 왼쪽 "<" / RTL: 오른쪽 ">")
+//             - 마지막 버튼 = 다음 카드 (LTR: 오른쪽 ">" / RTL: 왼쪽 "<")
+//             Dot 도 같은 이유로 첫 번째 Dot 가 맨 오른쪽에 놓인다.
+//           */}
 //           <BottomArea>
 //             <ArrowButton
 //               onPress={() => {
@@ -309,7 +372,7 @@
 //               activeOpacity={0.8}
 //             >
 //               <Ionicons
-//                 name="chevron-back"
+//                 name={isRTL ? "chevron-forward" : "chevron-back"}
 //                 size={22}
 //                 color={currentIndex === 0 ? "#D0CCE4" : "#7C5CFF"}
 //               />
@@ -330,7 +393,7 @@
 //               activeOpacity={0.8}
 //             >
 //               <Ionicons
-//                 name="chevron-forward"
+//                 name={isRTL ? "chevron-back" : "chevron-forward"}
 //                 size={22}
 //                 color={
 //                   currentIndex === PUZZLES.length - 1 ? "#D0CCE4" : "#7C5CFF"
@@ -768,6 +831,14 @@ export default function PuzzleMenuScreen() {
   const handleSelectPuzzle = async (puzzle: (typeof PUZZLES)[number]) => {
     triggerHaptic("light");
     await saveLastPuzzleCategory(puzzle.id);
+
+    if (puzzle.id === "flag" || puzzle.id === "landmark") {
+      navigation.navigate("PuzzleGroupSelectScreen", {
+        puzzleCategory: puzzle.id,
+      });
+      return;
+    }
+
     navigation.navigate("PuzzleThemeSelectScreen", {
       puzzleCategory: puzzle.id,
     });

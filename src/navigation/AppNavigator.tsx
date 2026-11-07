@@ -29,6 +29,7 @@ import PuzzlePlayScreen from "../screens/puzzle/puzzlePlayScreen";
 import PuzzleMenuScreen from "../screens/puzzle/puzzleMenuScreen";
 import PuzzleThemeSelectScreen from "../screens/puzzle/PuzzleThemeSelectScreen";
 import ProgressManagementScreen from "../screens/settings/ProgressManagementScreen";
+import PuzzleGroupSelectScreen from "../screens/puzzle/PuzzleGroupSelectScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +55,10 @@ export default function AppNavigator() {
         options={{
           animation: "fade",
         }}
+      />
+      <Stack.Screen
+        name="PuzzleGroupSelectScreen"
+        component={PuzzleGroupSelectScreen}
       />
       <Stack.Screen
         name="PuzzleThemeSelectScreen"

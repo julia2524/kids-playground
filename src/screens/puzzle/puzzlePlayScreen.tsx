@@ -74,6 +74,15 @@ import { PhilippinesFlagPuzzleScene } from "../../components/Puzzle/assets/flag/
 import { MalaysiaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/MalaysiaFlagPuzzleScene";
 import { PakistanFlagPuzzleScene } from "../../components/Puzzle/assets/flag/PakistanFlagPuzzleScene";
 import { MexicoFlagPuzzleScene } from "../../components/Puzzle/assets/flag/MexicoFlagPuzzleScene";
+import { PortugalFlagPuzzleScene } from "../../components/Puzzle/assets/flag/PortugalFlagPuzzleScene";
+import { VenezuelaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/VenezuelaFlagPuzzleScene";
+import { ColombiaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ColombiaFlagPuzzleScene";
+import { PeruFlagPuzzleScene } from "../../components/Puzzle/assets/flag/PeruFlagPuzzleScene";
+import { ChileFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ChileFlagPuzzleScene";
+import { UkraineFlagPuzzleScene } from "../../components/Puzzle/assets/flag/UkraineFlagPuzzleScene";
+import { CubaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/CubaFlagPuzzleScene";
+import { UruguayFlagPuzzleScene } from "../../components/Puzzle/assets/flag/UruguayFlagPuzzleScene";
+import { ParaguayFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ParaguayFlagPuzzleScene";
 
 type RouteProps = RouteProp<RootStackParamList, "PuzzlePlayScreen">;
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
@@ -251,6 +260,42 @@ const FLAG_PUZZLE_DATA: Record<
   mexico: {
     title: "🇲🇽 멕시코 국기 퍼즐",
     Artwork: MexicoFlagPuzzleScene,
+  },
+  portugal: {
+    title: "🇵🇹 포르투갈 국기 퍼즐",
+    Artwork: PortugalFlagPuzzleScene,
+  },
+  venezuela: {
+    title: "🇻🇪 베네수엘라 국기 퍼즐",
+    Artwork: VenezuelaFlagPuzzleScene,
+  },
+  colombia: {
+    title: "🇨🇴 콜롬비아 국기 퍼즐",
+    Artwork: ColombiaFlagPuzzleScene,
+  },
+  peru: {
+    title: "🇵🇪 페루 국기 퍼즐",
+    Artwork: PeruFlagPuzzleScene,
+  },
+  chile: {
+    title: "🇨🇱 칠레 국기 퍼즐",
+    Artwork: ChileFlagPuzzleScene,
+  },
+  ukraine: {
+    title: "🇺🇦 우크라이나 국기 퍼즐",
+    Artwork: UkraineFlagPuzzleScene,
+  },
+  cuba: {
+    title: "🇨🇺 쿠바 국기 퍼즐",
+    Artwork: CubaFlagPuzzleScene,
+  },
+  uruguay: {
+    title: "🇺🇾 우루과이 국기 퍼즐",
+    Artwork: UruguayFlagPuzzleScene,
+  },
+  paraguay: {
+    title: "🇵🇾 파라과이 국기 퍼즐",
+    Artwork: ParaguayFlagPuzzleScene,
   },
 };
 
