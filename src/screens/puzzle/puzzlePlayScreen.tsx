@@ -83,6 +83,20 @@ import { UkraineFlagPuzzleScene } from "../../components/Puzzle/assets/flag/Ukra
 import { CubaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/CubaFlagPuzzleScene";
 import { UruguayFlagPuzzleScene } from "../../components/Puzzle/assets/flag/UruguayFlagPuzzleScene";
 import { ParaguayFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ParaguayFlagPuzzleScene";
+import { HondurasFlagPuzzleScene } from "../../components/Puzzle/assets/flag/HondurasFlagPuzzleScene";
+import { ElSalvadorFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ElSalvadorFlagPuzzleScene";
+import { NicaraguaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/NicaraguaFlagPuzzleScene";
+import { GuatemalaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/GuatemalaFlagPuzzleScene";
+import { CostaRicaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/CostaRicaFlagPuzzleScene";
+import { PanamaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/PanamaFlagPuzzleScene";
+import { BoliviaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/BoliviaFlagPuzzleScene";
+import { EcuadorFlagPuzzleScene } from "../../components/Puzzle/assets/flag/EcuadorFlagPuzzleScene";
+import { BelgiumFlagPuzzleScene } from "../../components/Puzzle/assets/flag/BelgiumFlagPuzzleScene";
+import { DRCongoFlagPuzzleScene } from "../../components/Puzzle/assets/flag/DRCongoFlagPuzzleScene";
+import { NigeriaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/NigeriaFlagPuzzleScene";
+import { NepalFlagPuzzleScene } from "../../components/Puzzle/assets/flag/NepalFlagPuzzleScene";
+import { IranFlagPuzzleScene } from "../../components/Puzzle/assets/flag/IranFlagPuzzleScene";
+import { TanzaniaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/TanzaniaFlagPuzzleScene";
 
 type RouteProps = RouteProp<RootStackParamList, "PuzzlePlayScreen">;
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
@@ -129,7 +143,7 @@ const FLAG_PUZZLE_DATA: Record<
     title: "🇰🇷 태극기 퍼즐",
     Artwork: KoreaFlagPuzzleScene,
   },
-  austrailia: {
+  australia: {
     title: "🇦🇺 호주 국기 퍼즐",
     Artwork: AustraliaPuzzleScene,
   },
@@ -296,6 +310,62 @@ const FLAG_PUZZLE_DATA: Record<
   paraguay: {
     title: "🇵🇾 파라과이 국기 퍼즐",
     Artwork: ParaguayFlagPuzzleScene,
+  },
+  honduras: {
+    title: "🇭🇳 온두라스 국기 퍼즐",
+    Artwork: HondurasFlagPuzzleScene,
+  },
+  elsalvador: {
+    title: "🇸🇻 엘살바도르 국기 퍼즐",
+    Artwork: ElSalvadorFlagPuzzleScene,
+  },
+  nicaragua: {
+    title: "🇳🇮 니카라과 국기 퍼즐",
+    Artwork: NicaraguaFlagPuzzleScene,
+  },
+  guatemala: {
+    title: "🇬🇹 과테말라 국기 퍼즐",
+    Artwork: GuatemalaFlagPuzzleScene,
+  },
+  costarica: {
+    title: "🇨🇷 코스타리카 국기 퍼즐",
+    Artwork: CostaRicaFlagPuzzleScene,
+  },
+  panama: {
+    title: "🇵🇦 파나마 국기 퍼즐",
+    Artwork: PanamaFlagPuzzleScene,
+  },
+  bolivia: {
+    title: "🇧🇴 볼리비아 국기 퍼즐",
+    Artwork: BoliviaFlagPuzzleScene,
+  },
+  ecuador: {
+    title: "🇪🇨 에콰도르 국기 퍼즐",
+    Artwork: EcuadorFlagPuzzleScene,
+  },
+  belgium: {
+    title: "🇧🇪 벨기에 국기 퍼즐",
+    Artwork: BelgiumFlagPuzzleScene,
+  },
+  drcongo: {
+    title: "🇨🇩 콩고민주공화국 국기 퍼즐",
+    Artwork: DRCongoFlagPuzzleScene,
+  },
+  nigeria: {
+    title: "🇳🇬 나이지리아 국기 퍼즐",
+    Artwork: NigeriaFlagPuzzleScene,
+  },
+  nepal: {
+    title: "🇳🇵 네팔 국기 퍼즐",
+    Artwork: NepalFlagPuzzleScene,
+  },
+  iran: {
+    title: "🇮🇷 이란 국기 퍼즐",
+    Artwork: IranFlagPuzzleScene,
+  },
+  tanzania: {
+    title: "🇹🇿 탄자니아 국기 퍼즐",
+    Artwork: TanzaniaFlagPuzzleScene,
   },
 };
 

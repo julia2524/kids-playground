@@ -79,6 +79,20 @@ import { CubaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/CubaFla
 import { UruguayFlagPuzzleScene } from "../../components/Puzzle/assets/flag/UruguayFlagPuzzleScene";
 import { ParaguayFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ParaguayFlagPuzzleScene";
 import { getPuzzleGroupId } from "./puzzleGroupConfig";
+import { HondurasFlagPuzzleScene } from "../../components/Puzzle/assets/flag/HondurasFlagPuzzleScene";
+import { ElSalvadorFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ElSalvadorFlagPuzzleScene";
+import { NicaraguaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/NicaraguaFlagPuzzleScene";
+import { GuatemalaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/GuatemalaFlagPuzzleScene";
+import { CostaRicaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/CostaRicaFlagPuzzleScene";
+import { PanamaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/PanamaFlagPuzzleScene";
+import { BoliviaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/BoliviaFlagPuzzleScene";
+import { EcuadorFlagPuzzleScene } from "../../components/Puzzle/assets/flag/EcuadorFlagPuzzleScene";
+import { BelgiumFlagPuzzleScene } from "../../components/Puzzle/assets/flag/BelgiumFlagPuzzleScene";
+import { DRCongoFlagPuzzleScene } from "../../components/Puzzle/assets/flag/DRCongoFlagPuzzleScene";
+import { NigeriaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/NigeriaFlagPuzzleScene";
+import { NepalFlagPuzzleScene } from "../../components/Puzzle/assets/flag/NepalFlagPuzzleScene";
+import { IranFlagPuzzleScene } from "../../components/Puzzle/assets/flag/IranFlagPuzzleScene";
+import { TanzaniaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/TanzaniaFlagPuzzleScene";
 
 export type AnimalCharacterType =
   | "rabbit"
@@ -463,6 +477,104 @@ export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
     accentColor: "#D62839",
     cardBg: "#FFF0F0",
   },
+  {
+    id: "honduras",
+    titleKey: "flag_honduras_title",
+    descKey: "flag_honduras_desc",
+    accentColor: "#3B82F6",
+    cardBg: "#EEF5FF",
+  },
+  {
+    id: "elsalvador",
+    titleKey: "flag_elsalvador_title",
+    descKey: "flag_elsalvador_desc",
+    accentColor: "#3B82F6",
+    cardBg: "#EEF5FF",
+  },
+  {
+    id: "nicaragua",
+    titleKey: "flag_nicaragua_title",
+    descKey: "flag_nicaragua_desc",
+    accentColor: "#3B82F6",
+    cardBg: "#EEF5FF",
+  },
+  {
+    id: "guatemala",
+    titleKey: "flag_guatemala_title",
+    descKey: "flag_guatemala_desc",
+    accentColor: "#5BC0EB",
+    cardBg: "#F0FAFF",
+  },
+  {
+    id: "costarica",
+    titleKey: "flag_costarica_title",
+    descKey: "flag_costarica_desc",
+    accentColor: "#D62839",
+    cardBg: "#FFF0F0",
+  },
+  {
+    id: "panama",
+    titleKey: "flag_panama_title",
+    descKey: "flag_panama_desc",
+    accentColor: "#2563EB",
+    cardBg: "#EFF5FF",
+  },
+  {
+    id: "bolivia",
+    titleKey: "flag_bolivia_title",
+    descKey: "flag_bolivia_desc",
+    accentColor: "#2EAE60",
+    cardBg: "#EFFBF3",
+  },
+  {
+    id: "ecuador",
+    titleKey: "flag_ecuador_title",
+    descKey: "flag_ecuador_desc",
+    accentColor: "#F4B400",
+    cardBg: "#FFF9E8",
+  },
+  {
+    id: "belgium",
+    titleKey: "flag_belgium_title",
+    descKey: "flag_belgium_desc",
+    accentColor: "#FFD43B",
+    cardBg: "#FFFBEA",
+  },
+  {
+    id: "drcongo",
+    titleKey: "flag_drcongo_title",
+    descKey: "flag_drcongo_desc",
+    accentColor: "#4D8DFF",
+    cardBg: "#EEF5FF",
+  },
+  {
+    id: "nigeria",
+    titleKey: "flag_nigeria_title",
+    descKey: "flag_nigeria_desc",
+    accentColor: "#1FA971",
+    cardBg: "#EEF9F5",
+  },
+  {
+    id: "nepal",
+    titleKey: "flag_nepal_title",
+    descKey: "flag_nepal_desc",
+    accentColor: "#D62839",
+    cardBg: "#FFF0F0",
+  },
+  {
+    id: "iran",
+    titleKey: "flag_iran_title",
+    descKey: "flag_iran_desc",
+    accentColor: "#138A4A",
+    cardBg: "#EEF9F3",
+  },
+  {
+    id: "tanzania",
+    titleKey: "flag_tanzania_title",
+    descKey: "flag_tanzania_desc",
+    accentColor: "#1A936F",
+    cardBg: "#EDF9F5",
+  },
 ] as const;
 
 export const LANDMARK_CONFIGS: readonly PuzzleItemConfig[] = [
@@ -623,6 +735,34 @@ export function renderPuzzleIllustration(id: string) {
       return <UruguayFlagPuzzleScene />;
     case "paraguay":
       return <ParaguayFlagPuzzleScene />;
+    case "honduras":
+      return <HondurasFlagPuzzleScene />;
+    case "elsalvador":
+      return <ElSalvadorFlagPuzzleScene />;
+    case "nicaragua":
+      return <NicaraguaFlagPuzzleScene />;
+    case "guatemala":
+      return <GuatemalaFlagPuzzleScene />;
+    case "costarica":
+      return <CostaRicaFlagPuzzleScene />;
+    case "panama":
+      return <PanamaFlagPuzzleScene />;
+    case "bolivia":
+      return <BoliviaFlagPuzzleScene />;
+    case "ecuador":
+      return <EcuadorFlagPuzzleScene />;
+    case "belgium":
+      return <BelgiumFlagPuzzleScene />;
+    case "drcongo":
+      return <DRCongoFlagPuzzleScene />;
+    case "nigeria":
+      return <NigeriaFlagPuzzleScene />;
+    case "nepal":
+      return <NepalFlagPuzzleScene />;
+    case "iran":
+      return <IranFlagPuzzleScene />;
+    case "tanzania":
+      return <TanzaniaFlagPuzzleScene />;
 
     // 랜드마크
     case "bigben":
@@ -709,6 +849,7 @@ export default function PuzzleThemeSelectScreen() {
       gameType: "puzzle",
       puzzleCategory,
       character: item.id,
+      groupId,
     });
   };
 

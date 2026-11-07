@@ -19,6 +19,7 @@ export type PuzzleGroupConfig = {
 };
 
 // 국기 ID → 대륙
+
 const FLAG_GROUPS: Record<string, PuzzleGroupId> = {
   // 아시아
   korea: "asia",
@@ -35,6 +36,8 @@ const FLAG_GROUPS: Record<string, PuzzleGroupId> = {
   malaysia: "asia",
   pakistan: "asia",
   turkey: "asia",
+  nepal: "asia",
+  iran: "asia",
 
   // 유럽
   uk: "europe",
@@ -51,16 +54,26 @@ const FLAG_GROUPS: Record<string, PuzzleGroupId> = {
   russia: "europe",
   portugal: "europe",
   ukraine: "europe",
+  belgium: "europe",
 
   // 아프리카
   egypt: "africa",
   algeria: "africa",
+  nigeria: "africa",
+  drcongo: "africa",
+  tanzania: "africa",
 
   // 북아메리카
   usa: "northAmerica",
   canada: "northAmerica",
   mexico: "northAmerica",
   cuba: "northAmerica",
+  honduras: "northAmerica",
+  elsalvador: "northAmerica",
+  nicaragua: "northAmerica",
+  guatemala: "northAmerica",
+  costarica: "northAmerica",
+  panama: "northAmerica",
 
   // 남아메리카
   brazil: "southAmerica",
@@ -71,6 +84,8 @@ const FLAG_GROUPS: Record<string, PuzzleGroupId> = {
   chile: "southAmerica",
   uruguay: "southAmerica",
   paraguay: "southAmerica",
+  bolivia: "southAmerica",
+  ecuador: "southAmerica",
 
   // 오세아니아
   australia: "oceania",

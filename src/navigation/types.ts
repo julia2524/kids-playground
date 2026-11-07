@@ -29,6 +29,7 @@ export type RootStackParamList = {
       | "flag"
       | "landmark";
     character?: string;
+    groupId?: string;
   };
 
   SettingScreen: undefined;

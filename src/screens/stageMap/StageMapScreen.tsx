@@ -117,6 +117,7 @@ export default function StageMapScreen() {
     gameType,
     character = "polarbear",
     puzzleCategory = "animal",
+    groupId,
   } = route.params;
 
   const isPuzzle = gameType === "puzzle";
@@ -616,6 +617,180 @@ export default function StageMapScreen() {
         title: i18n.t("flag_paraguay_title"),
         subtitle: i18n.t("flag_paraguay_desc"),
       },
+      honduras: {
+        title: i18n.t("flag_honduras_title"),
+        subtitle: i18n.t("flag_honduras_desc"),
+      },
+      elsalvador: {
+        title: i18n.t("flag_elsalvador_title"),
+        subtitle: i18n.t("flag_elsalvador_desc"),
+      },
+      nicaragua: {
+        title: i18n.t("flag_nicaragua_title"),
+        subtitle: i18n.t("flag_nicaragua_desc"),
+      },
+      guatemala: {
+        title: i18n.t("flag_guatemala_title"),
+        subtitle: i18n.t("flag_guatemala_desc"),
+      },
+      costarica: {
+        title: i18n.t("flag_costarica_title"),
+        subtitle: i18n.t("flag_costarica_desc"),
+      },
+      panama: {
+        title: i18n.t("flag_panama_title"),
+        subtitle: i18n.t("flag_panama_desc"),
+      },
+      bolivia: {
+        title: i18n.t("flag_bolivia_title"),
+        subtitle: i18n.t("flag_bolivia_desc"),
+      },
+      ecuador: {
+        title: i18n.t("flag_ecuador_title"),
+        subtitle: i18n.t("flag_ecuador_desc"),
+      },
+      bangladesh: {
+        title: i18n.t("flag_bangladesh_title"),
+        subtitle: i18n.t("flag_bangladesh_desc"),
+      },
+
+      netherlands: {
+        title: i18n.t("flag_netherlands_title"),
+        subtitle: i18n.t("flag_netherlands_desc"),
+      },
+
+      germany: {
+        title: i18n.t("flag_germany_title"),
+        subtitle: i18n.t("flag_germany_desc"),
+      },
+
+      greece: {
+        title: i18n.t("flag_greece_title"),
+        subtitle: i18n.t("flag_greece_desc"),
+      },
+
+      india: {
+        title: i18n.t("flag_india_title"),
+        subtitle: i18n.t("flag_india_desc"),
+      },
+
+      indonesia: {
+        title: i18n.t("flag_indonesia_title"),
+        subtitle: i18n.t("flag_indonesia_desc"),
+      },
+
+      spain: {
+        title: i18n.t("flag_spain_title"),
+        subtitle: i18n.t("flag_spain_desc"),
+      },
+
+      italy: {
+        title: i18n.t("flag_italy_title"),
+        subtitle: i18n.t("flag_italy_desc"),
+      },
+
+      brazil: {
+        title: i18n.t("flag_brazil_title"),
+        subtitle: i18n.t("flag_brazil_desc"),
+      },
+
+      sweden: {
+        title: i18n.t("flag_sweden_title"),
+        subtitle: i18n.t("flag_sweden_desc"),
+      },
+
+      thailand: {
+        title: i18n.t("flag_thailand_title"),
+        subtitle: i18n.t("flag_thailand_desc"),
+      },
+
+      vietnam: {
+        title: i18n.t("flag_vietnam_title"),
+        subtitle: i18n.t("flag_vietnam_desc"),
+      },
+
+      canada: {
+        title: i18n.t("flag_canada_title"),
+        subtitle: i18n.t("flag_canada_desc"),
+      },
+
+      switzerland: {
+        title: i18n.t("flag_switzerland_title"),
+        subtitle: i18n.t("flag_switzerland_desc"),
+      },
+
+      turkey: {
+        title: i18n.t("flag_turkey_title"),
+        subtitle: i18n.t("flag_turkey_desc"),
+      },
+
+      argentina: {
+        title: i18n.t("flag_argentina_title"),
+        subtitle: i18n.t("flag_argentina_desc"),
+      },
+
+      poland: {
+        title: i18n.t("flag_poland_title"),
+        subtitle: i18n.t("flag_poland_desc"),
+      },
+
+      romania: {
+        title: i18n.t("flag_romania_title"),
+        subtitle: i18n.t("flag_romania_desc"),
+      },
+
+      russia: {
+        title: i18n.t("flag_russia_title"),
+        subtitle: i18n.t("flag_russia_desc"),
+      },
+
+      philippines: {
+        title: i18n.t("flag_philippines_title"),
+        subtitle: i18n.t("flag_philippines_desc"),
+      },
+
+      malaysia: {
+        title: i18n.t("flag_malaysia_title"),
+        subtitle: i18n.t("flag_malaysia_desc"),
+      },
+
+      pakistan: {
+        title: i18n.t("flag_pakistan_title"),
+        subtitle: i18n.t("flag_pakistan_desc"),
+      },
+
+      mexico: {
+        title: i18n.t("flag_mexico_title"),
+        subtitle: i18n.t("flag_mexico_desc"),
+      },
+      portugal: {
+        title: i18n.t("flag_portugal_title"),
+        subtitle: i18n.t("flag_portugal_desc"),
+      },
+      belgium: {
+        title: i18n.t("flag_belgium_title"),
+        subtitle: i18n.t("flag_belgium_desc"),
+      },
+      drcongo: {
+        title: i18n.t("flag_drcongo_title"),
+        subtitle: i18n.t("flag_drcongo_desc"),
+      },
+      nigeria: {
+        title: i18n.t("flag_nigeria_title"),
+        subtitle: i18n.t("flag_nigeria_desc"),
+      },
+      nepal: {
+        title: i18n.t("flag_nepal_title"),
+        subtitle: i18n.t("flag_nepal_desc"),
+      },
+      iran: {
+        title: i18n.t("flag_iran_title"),
+        subtitle: i18n.t("flag_iran_desc"),
+      },
+      tanzania: {
+        title: i18n.t("flag_tanzania_title"),
+        subtitle: i18n.t("flag_tanzania_desc"),
+      },
 
       bigben: {
         title: i18n.t("landmark_bigben_title"),
@@ -772,13 +947,31 @@ export default function StageMapScreen() {
             <AppHeader
               title={title}
               subtitle={subtitle}
+              // onBackPress={() => {
+              //   // 화면 전환 시작 전에 스크롤 기반 렌더링 갱신 중단
+              //   isLeavingRef.current = true;
+
+              //   if (isPuzzle) {
+              //     navigation.navigate("PuzzleThemeSelectScreen", {
+              //       puzzleCategory,
+              //     });
+
+              //     return;
+              //   }
+
+              //   if (isClassificationGame) {
+              //     navigation.navigate("ClassificationMenuScreen");
+              //   } else {
+              //     navigation.navigate("Home");
+              //   }
+              // }}
               onBackPress={() => {
-                // 화면 전환 시작 전에 스크롤 기반 렌더링 갱신 중단
                 isLeavingRef.current = true;
 
                 if (isPuzzle) {
                   navigation.navigate("PuzzleThemeSelectScreen", {
                     puzzleCategory,
+                    groupId,
                   });
 
                   return;
