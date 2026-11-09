@@ -383,7 +383,7 @@ export default function StickerGalleryScreen() {
         <ProgressCard>
           <ProgressInfoRow>
             <ProgressTitle>
-              {i18n.t("stikcer_collection_subtitle")}
+              {i18n.t("sticker_collection_subtitle")}
             </ProgressTitle>
             <ProgressCount>
               {unlockedCount} / {totalCount} ({progressPercent}%)

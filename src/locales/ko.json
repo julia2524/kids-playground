@@ -197,7 +197,7 @@
   "setting_game_category_sticker_desc_full": "획득한 종류 스티커를 초기화합니다.",
 
   "sticker_book_title": "스티커도감",
-  "stikcer_collection_subtitle": "스티커 수집률",
+  "sticker_collection_subtitle": "스티커 수집률",
 
   "item_medal": "메달",
   "item_starNecklace": "별 목걸이",
@@ -841,9 +841,9 @@
   "flag_china_desc": "중국의 국기",
   "flag_france_title": "프랑스 국기",
   "flag_france_desc": "프랑스의 국기",
+
   "flag_egypt_title": "이집트 국기",
   "flag_egypt_desc": "이집트의 국기",
-
   "flag_algeria_title": "알제리 국기",
   "flag_algeria_desc": "알제리의 국기",
   "flag_bangladesh_title": "방글라데시 국기",
@@ -854,7 +854,6 @@
   "flag_germany_desc": "독일의 국기",
   "flag_greece_title": "그리스 국기",
   "flag_greece_desc": "그리스의 국기",
-
   "flag_indonesia_title": "인도네시아 국기",
   "flag_indonesia_desc": "인도네시아의 국기",
   "flag_spain_title": "스페인 국기",
@@ -885,7 +884,6 @@
   "flag_russia_desc": "러시아의 국기",
   "flag_philippines_title": "필리핀 국기",
   "flag_philippines_desc": "필리핀의 국기",
-
   "flag_portugal_title": "포르투갈 국기",
   "flag_portugal_desc": "포르투갈의 국기",
   "flag_venezuela_title": "베네수엘라 국기",
@@ -928,7 +926,6 @@
   "flag_nigeria_desc": "나이지리아의 국기",
   "flag_nepal_title": "네팔 국기",
   "flag_nepal_desc": "네팔의 국기",
-
   "flag_tanzania_title": "탄자니아 국기",
   "flag_tanzania_desc": "탄자니아의 국기",
   "flag_taiwan_title": "대만 국기",
