@@ -25,19 +25,13 @@ const FLAG_GROUPS: Record<string, PuzzleGroupId> = {
   korea: "asia",
   japan: "asia",
   china: "asia",
-  india: "asia",
   indonesia: "asia",
   thailand: "asia",
   vietnam: "asia",
-  saudiarabia: "asia",
-  iraq: "asia",
   bangladesh: "asia",
   philippines: "asia",
-  malaysia: "asia",
-  pakistan: "asia",
   turkey: "asia",
   nepal: "asia",
-  iran: "asia",
   taiwan: "asia",
 
   // 유럽
@@ -67,7 +61,7 @@ const FLAG_GROUPS: Record<string, PuzzleGroupId> = {
   // 북아메리카
   usa: "northAmerica",
   canada: "northAmerica",
-  mexico: "northAmerica",
+
   cuba: "northAmerica",
   honduras: "northAmerica",
   elsalvador: "northAmerica",

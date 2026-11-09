@@ -1,5 +1,6 @@
-import { PuzzleCategoryType } from "../screens/puzzle/puzzleMenuScreen";
-import { GameType, StageMapGameType } from "../types/game";
+import { PuzzleGroupId } from "../screens/puzzle/puzzleGroupConfig";
+import type { PuzzleCategoryType } from "../screens/puzzle/puzzleMenuScreen";
+import { StageMapGameType } from "../types/game";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -16,7 +17,7 @@ export type RootStackParamList = {
 
   PuzzleThemeSelectScreen: {
     puzzleCategory: PuzzleCategoryType;
-    groupId?: string;
+    groupId?: PuzzleGroupId;
   };
 
   StageMapScreen: {
@@ -29,7 +30,7 @@ export type RootStackParamList = {
       | "flag"
       | "landmark";
     character?: string;
-    groupId?: string;
+    groupId?: PuzzleGroupId;
   };
 
   SettingScreen: undefined;
@@ -72,6 +73,7 @@ export type RootStackParamList = {
       | "landmark"; // 👈 추가!
     character?: string;
     level?: number;
+    groupId?: PuzzleGroupId;
   };
 
   LanguageScreen: undefined;

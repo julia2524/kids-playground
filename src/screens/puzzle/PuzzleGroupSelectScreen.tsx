@@ -17,7 +17,7 @@ import { useLanguage } from "../../context/LangaugeContext";
 import { triggerHaptic } from "../../utils/haptic";
 import BannerAd from "../../services/BannerAd";
 
-import { getPuzzleGroupsForCategory } from "./puzzleGroupConfig";
+import { getPuzzleGroupsForCategory, PuzzleGroupId } from "./puzzleGroupConfig";
 
 function translate(key: string, fallback: string) {
   const value = i18n.t(key);
@@ -67,7 +67,7 @@ export default function PuzzleGroupSelectScreen() {
     [puzzleCategory],
   );
 
-  const handleSelectGroup = (groupId: string) => {
+  const handleSelectGroup = (groupId: PuzzleGroupId) => {
     triggerHaptic("light");
 
     navigation.navigate("PuzzleThemeSelectScreen", {

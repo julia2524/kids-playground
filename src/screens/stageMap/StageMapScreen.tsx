@@ -439,6 +439,7 @@ export default function StageMapScreen() {
           gameType: "puzzle",
           puzzleCategory,
           character,
+          groupId,
           level,
         });
 
@@ -589,10 +590,7 @@ export default function StageMapScreen() {
         title: i18n.t("flag_peru_title"),
         subtitle: i18n.t("flag_peru_desc"),
       },
-      iraq: {
-        title: i18n.t("flag_iraq_title"),
-        subtitle: i18n.t("flag_iraq_desc"),
-      },
+
       algeria: {
         title: i18n.t("flag_algeria_title"),
         subtitle: i18n.t("flag_algeria_desc"),
@@ -667,11 +665,6 @@ export default function StageMapScreen() {
       greece: {
         title: i18n.t("flag_greece_title"),
         subtitle: i18n.t("flag_greece_desc"),
-      },
-
-      india: {
-        title: i18n.t("flag_india_title"),
-        subtitle: i18n.t("flag_india_desc"),
       },
 
       indonesia: {
@@ -749,20 +742,6 @@ export default function StageMapScreen() {
         subtitle: i18n.t("flag_philippines_desc"),
       },
 
-      malaysia: {
-        title: i18n.t("flag_malaysia_title"),
-        subtitle: i18n.t("flag_malaysia_desc"),
-      },
-
-      pakistan: {
-        title: i18n.t("flag_pakistan_title"),
-        subtitle: i18n.t("flag_pakistan_desc"),
-      },
-
-      mexico: {
-        title: i18n.t("flag_mexico_title"),
-        subtitle: i18n.t("flag_mexico_desc"),
-      },
       portugal: {
         title: i18n.t("flag_portugal_title"),
         subtitle: i18n.t("flag_portugal_desc"),
@@ -783,10 +762,7 @@ export default function StageMapScreen() {
         title: i18n.t("flag_nepal_title"),
         subtitle: i18n.t("flag_nepal_desc"),
       },
-      iran: {
-        title: i18n.t("flag_iran_title"),
-        subtitle: i18n.t("flag_iran_desc"),
-      },
+
       tanzania: {
         title: i18n.t("flag_tanzania_title"),
         subtitle: i18n.t("flag_tanzania_desc"),

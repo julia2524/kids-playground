@@ -42,19 +42,15 @@ import BabyElephantPuzzleArtwork from "../../components/Puzzle/assets/animal/Bab
 import PochiPenguinPuzzleArtwork from "../../components/Puzzle/assets/animal/PochiPenguin/PochiPenguinPuzzleArtwork";
 import PinkPigPuzzleArtwork from "../../components/Puzzle/assets/animal/PinkyPig/PinkPigPuzzleArtwork";
 import { EgyptFlagPuzzleScene } from "../../components/Puzzle/assets/flag/EgyptFlagPuzzleScene";
-import { SaudiArabiaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/SaudiArabiaFlagPuzzleScene";
-import { IraqFlagPuzzleScene } from "../../components/Puzzle/assets/flag/IraqFlagPuzzleScene";
 import { AlgeriaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/AlgeriaFlagPuzzleScene";
 import { BangladeshFlagPuzzleScene } from "../../components/Puzzle/assets/flag/BangladeshFlagPuzzleScene";
 import { NetherlandsFlagPuzzleScene } from "../../components/Puzzle/assets/flag/NetherlandsFlagPuzzleScene";
 import { GermanyFlagPuzzleScene } from "../../components/Puzzle/assets/flag/GermanyFlagPuzzleScene";
 import { GreeceFlagPuzzleScene } from "../../components/Puzzle/assets/flag/GreeceFlagPuzzleScene";
-import { IndiaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/IndiaFlagPuzzleScene";
 import { IndonesiaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/IndonesiaFlagPuzzleScene";
 import { SpainFlagPuzzleScene } from "../../components/Puzzle/assets/flag/SpainFlagPuzzleScene";
 import { ItalyFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ItalyFlagPuzzleScene";
 import { BrazilFlagPuzzleScene } from "../../components/Puzzle/assets/flag/BrazilFlagPuzzleScene";
-import { SwedenFlagPuzzleScene } from "../../components/Puzzle/assets/flag/SwedenFlagPuzzleScene";
 import { ThailandFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ThailandFlagPuzzleScene";
 import { VietnamFlagPuzzleScene } from "../../components/Puzzle/assets/flag/VietnamFlagPuzzleScene";
 import { CanadaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/CanadaFlagPuzzleScene";
@@ -66,8 +62,6 @@ import { RomaniaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/Roma
 import { RussiaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/RussiaFlagPuzzleScene";
 import { PhilippinesFlagPuzzleScene } from "../../components/Puzzle/assets/flag/PhilippinesFlagPuzzleScene";
 import { MalaysiaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/MalaysiaFlagPuzzleScene";
-import { PakistanFlagPuzzleScene } from "../../components/Puzzle/assets/flag/PakistanFlagPuzzleScene";
-import { MexicoFlagPuzzleScene } from "../../components/Puzzle/assets/flag/MexicoFlagPuzzleScene";
 import { PortugalFlagPuzzleScene } from "../../components/Puzzle/assets/flag/PortugalFlagPuzzleScene";
 import { VenezuelaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/VenezuelaFlagPuzzleScene";
 import { ColombiaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ColombiaFlagPuzzleScene";
@@ -90,10 +84,10 @@ import { BelgiumFlagPuzzleScene } from "../../components/Puzzle/assets/flag/Belg
 import { DRCongoFlagPuzzleScene } from "../../components/Puzzle/assets/flag/DRCongoFlagPuzzleScene";
 import { NigeriaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/NigeriaFlagPuzzleScene";
 import { NepalFlagPuzzleScene } from "../../components/Puzzle/assets/flag/NepalFlagPuzzleScene";
-import { IranFlagPuzzleScene } from "../../components/Puzzle/assets/flag/IranFlagPuzzleScene";
 import { TanzaniaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/TanzaniaFlagPuzzleScene";
 import { KoreaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/KoreaFlagPuzzleScene";
 import { TaiwanFlagPuzzleScene } from "../../components/Puzzle/assets/flag/TaiwanFlagPuzzleScene";
+import { SwedenFlagPuzzleScene } from "../../components/Puzzle/assets/flag/SwedenFlagPuzzleScene";
 
 export type AnimalCharacterType =
   | "rabbit"
@@ -126,25 +120,18 @@ export type PuzzleItemConfig = {
 
 export const ANIMAL_CONFIGS: readonly PuzzleItemConfig[] = [
   {
-    id: "rabbit",
-    titleKey: "animal_rabbit_title",
-    descKey: "animal_rabbit_desc",
-    accentColor: "#FF6FAE",
-    cardBg: "#FFF0F5",
-  },
-  {
-    id: "polarbear",
-    titleKey: "animal_polarbear_title",
-    descKey: "animal_polarbear_desc",
-    accentColor: "#4D8DFF",
-    cardBg: "#F0F5FF",
-  },
-  {
     id: "bear",
     titleKey: "animal_bear_title",
     descKey: "animal_bear_desc",
     accentColor: "#9B7653",
     cardBg: "#FDF5EE",
+  },
+  {
+    id: "elephant",
+    titleKey: "animal_elephant_title",
+    descKey: "animal_elephant_desc",
+    accentColor: "#7C5CFF",
+    cardBg: "#F2F5FF",
   },
   {
     id: "lion",
@@ -154,13 +141,6 @@ export const ANIMAL_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#FFF9E6",
   },
   {
-    id: "pig",
-    titleKey: "animal_pig_title",
-    descKey: "animal_pig_desc",
-    accentColor: "#FF94B8",
-    cardBg: "#FFF0F3",
-  },
-  {
     id: "penguin",
     titleKey: "animal_penguin_title",
     descKey: "animal_penguin_desc",
@@ -168,42 +148,42 @@ export const ANIMAL_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#EDFAF6",
   },
   {
-    id: "elephant",
-    titleKey: "animal_elephant_title",
-    descKey: "animal_elephant_desc",
-    accentColor: "#7C5CFF",
-    cardBg: "#F2F5FF",
+    id: "pig",
+    titleKey: "animal_pig_title",
+    descKey: "animal_pig_desc",
+    accentColor: "#FF94B8",
+    cardBg: "#FFF0F3",
+  },
+  {
+    id: "polarbear",
+    titleKey: "animal_polarbear_title",
+    descKey: "animal_polarbear_desc",
+    accentColor: "#4D8DFF",
+    cardBg: "#F0F5FF",
+  },
+  {
+    id: "rabbit",
+    titleKey: "animal_rabbit_title",
+    descKey: "animal_rabbit_desc",
+    accentColor: "#FF6FAE",
+    cardBg: "#FFF0F5",
   },
 ] as const;
 
 export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
   {
-    id: "korea",
-    titleKey: "flag_korea_title",
-    descKey: "flag_korea_desc",
-    accentColor: "#E84A5F",
-    cardBg: "#FFF2F2",
+    id: "algeria",
+    titleKey: "flag_algeria_title",
+    descKey: "flag_algeria_desc",
+    accentColor: "#0F8A43",
+    cardBg: "#EEF8F2",
   },
   {
-    id: "usa",
-    titleKey: "flag_usa_title",
-    descKey: "flag_usa_desc",
-    accentColor: "#4D8DFF",
-    cardBg: "#F0F5FF",
-  },
-  {
-    id: "japan",
-    titleKey: "flag_japan_title",
-    descKey: "flag_japan_desc",
-    accentColor: "#FF6FAE",
-    cardBg: "#FFF0F5",
-  },
-  {
-    id: "uk",
-    titleKey: "flag_uk_title",
-    descKey: "flag_uk_desc",
-    accentColor: "#5B6CFF",
-    cardBg: "#F2F5FF",
+    id: "argentina",
+    titleKey: "flag_argentina_title",
+    descKey: "flag_argentina_desc",
+    accentColor: "#5BC0EB",
+    cardBg: "#F0FAFF",
   },
   {
     id: "australia",
@@ -213,6 +193,48 @@ export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#EEF3FF",
   },
   {
+    id: "bangladesh",
+    titleKey: "flag_bangladesh_title",
+    descKey: "flag_bangladesh_desc",
+    accentColor: "#0E8F55",
+    cardBg: "#EEF9F4",
+  },
+  {
+    id: "belgium",
+    titleKey: "flag_belgium_title",
+    descKey: "flag_belgium_desc",
+    accentColor: "#FFD43B",
+    cardBg: "#FFFBEA",
+  },
+  {
+    id: "bolivia",
+    titleKey: "flag_bolivia_title",
+    descKey: "flag_bolivia_desc",
+    accentColor: "#2EAE60",
+    cardBg: "#EFFBF3",
+  },
+  {
+    id: "brazil",
+    titleKey: "flag_brazil_title",
+    descKey: "flag_brazil_desc",
+    accentColor: "#1E9E61",
+    cardBg: "#EEF9F3",
+  },
+  {
+    id: "canada",
+    titleKey: "flag_canada_title",
+    descKey: "flag_canada_desc",
+    accentColor: "#D62839",
+    cardBg: "#FFF0F0",
+  },
+  {
+    id: "chile",
+    titleKey: "flag_chile_title",
+    descKey: "flag_chile_desc",
+    accentColor: "#2563EB",
+    cardBg: "#EFF5FF",
+  },
+  {
     id: "china",
     titleKey: "flag_china_title",
     descKey: "flag_china_desc",
@@ -220,11 +242,39 @@ export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#FFF7E8",
   },
   {
-    id: "france",
-    titleKey: "flag_france_title",
-    descKey: "flag_france_desc",
+    id: "colombia",
+    titleKey: "flag_colombia_title",
+    descKey: "flag_colombia_desc",
+    accentColor: "#F4B400",
+    cardBg: "#FFF9E8",
+  },
+  {
+    id: "costarica",
+    titleKey: "flag_costarica_title",
+    descKey: "flag_costarica_desc",
+    accentColor: "#D62839",
+    cardBg: "#FFF0F0",
+  },
+  {
+    id: "cuba",
+    titleKey: "flag_cuba_title",
+    descKey: "flag_cuba_desc",
+    accentColor: "#D62839",
+    cardBg: "#FFF0F0",
+  },
+  {
+    id: "drcongo",
+    titleKey: "flag_drcongo_title",
+    descKey: "flag_drcongo_desc",
     accentColor: "#4D8DFF",
-    cardBg: "#F4F7FF",
+    cardBg: "#EEF5FF",
+  },
+  {
+    id: "ecuador",
+    titleKey: "flag_ecuador_title",
+    descKey: "flag_ecuador_desc",
+    accentColor: "#F4B400",
+    cardBg: "#FFF9E8",
   },
   {
     id: "egypt",
@@ -234,39 +284,18 @@ export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#FFF9EC",
   },
   {
-    id: "saudiarabia",
-    titleKey: "flag_saudiarabia_title",
-    descKey: "flag_saudiarabia_desc",
-    accentColor: "#0F8A43",
-    cardBg: "#EEF8F2",
+    id: "elsalvador",
+    titleKey: "flag_elsalvador_title",
+    descKey: "flag_elsalvador_desc",
+    accentColor: "#3B82F6",
+    cardBg: "#EEF5FF",
   },
   {
-    id: "iraq",
-    titleKey: "flag_iraq_title",
-    descKey: "flag_iraq_desc",
-    accentColor: "#1FA971",
-    cardBg: "#EEF9F5",
-  },
-  {
-    id: "algeria",
-    titleKey: "flag_algeria_title",
-    descKey: "flag_algeria_desc",
-    accentColor: "#0F8A43",
-    cardBg: "#EEF8F2",
-  },
-  {
-    id: "bangladesh",
-    titleKey: "flag_bangladesh_title",
-    descKey: "flag_bangladesh_desc",
-    accentColor: "#0E8F55",
-    cardBg: "#EEF9F4",
-  },
-  {
-    id: "netherlands",
-    titleKey: "flag_netherlands_title",
-    descKey: "flag_netherlands_desc",
+    id: "france",
+    titleKey: "flag_france_title",
+    descKey: "flag_france_desc",
     accentColor: "#4D8DFF",
-    cardBg: "#F2F6FF",
+    cardBg: "#F4F7FF",
   },
   {
     id: "germany",
@@ -283,11 +312,18 @@ export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#F3F7FF",
   },
   {
-    id: "india",
-    titleKey: "flag_india_title",
-    descKey: "flag_india_desc",
-    accentColor: "#FF8A00",
-    cardBg: "#FFF6E8",
+    id: "guatemala",
+    titleKey: "flag_guatemala_title",
+    descKey: "flag_guatemala_desc",
+    accentColor: "#5BC0EB",
+    cardBg: "#F0FAFF",
+  },
+  {
+    id: "honduras",
+    titleKey: "flag_honduras_title",
+    descKey: "flag_honduras_desc",
+    accentColor: "#3B82F6",
+    cardBg: "#EEF5FF",
   },
   {
     id: "indonesia",
@@ -297,13 +333,6 @@ export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#FFF2F2",
   },
   {
-    id: "spain",
-    titleKey: "flag_spain_title",
-    descKey: "flag_spain_desc",
-    accentColor: "#FFB020",
-    cardBg: "#FFF8EC",
-  },
-  {
     id: "italy",
     titleKey: "flag_italy_title",
     descKey: "flag_italy_desc",
@@ -311,60 +340,74 @@ export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#EFFBF3",
   },
   {
-    id: "brazil",
-    titleKey: "flag_brazil_title",
-    descKey: "flag_brazil_desc",
-    accentColor: "#1E9E61",
-    cardBg: "#EEF9F3",
+    id: "japan",
+    titleKey: "flag_japan_title",
+    descKey: "flag_japan_desc",
+    accentColor: "#FF6FAE",
+    cardBg: "#FFF0F5",
   },
   {
-    id: "sweden",
-    titleKey: "flag_sweden_title",
-    descKey: "flag_sweden_desc",
-    accentColor: "#2F80ED",
+    id: "korea",
+    titleKey: "flag_korea_title",
+    descKey: "flag_korea_desc",
+    accentColor: "#E84A5F",
+    cardBg: "#FFF2F2",
+  },
+  {
+    id: "nepal",
+    titleKey: "flag_nepal_title",
+    descKey: "flag_nepal_desc",
+    accentColor: "#D62839",
+    cardBg: "#FFF0F0",
+  },
+  {
+    id: "netherlands",
+    titleKey: "flag_netherlands_title",
+    descKey: "flag_netherlands_desc",
+    accentColor: "#4D8DFF",
+    cardBg: "#F2F6FF",
+  },
+  {
+    id: "nicaragua",
+    titleKey: "flag_nicaragua_title",
+    descKey: "flag_nicaragua_desc",
+    accentColor: "#3B82F6",
     cardBg: "#EEF5FF",
   },
   {
-    id: "thailand",
-    titleKey: "flag_thailand_title",
-    descKey: "flag_thailand_desc",
-    accentColor: "#4154D8",
-    cardBg: "#F1F3FF",
+    id: "nigeria",
+    titleKey: "flag_nigeria_title",
+    descKey: "flag_nigeria_desc",
+    accentColor: "#1FA971",
+    cardBg: "#EEF9F5",
   },
   {
-    id: "vietnam",
-    titleKey: "flag_vietnam_title",
-    descKey: "flag_vietnam_desc",
-    accentColor: "#D92D20",
-    cardBg: "#FFF3F1",
+    id: "panama",
+    titleKey: "flag_panama_title",
+    descKey: "flag_panama_desc",
+    accentColor: "#2563EB",
+    cardBg: "#EFF5FF",
   },
   {
-    id: "canada",
-    titleKey: "flag_canada_title",
-    descKey: "flag_canada_desc",
+    id: "paraguay",
+    titleKey: "flag_paraguay_title",
+    descKey: "flag_paraguay_desc",
     accentColor: "#D62839",
     cardBg: "#FFF0F0",
   },
   {
-    id: "switzerland",
-    titleKey: "flag_switzerland_title",
-    descKey: "flag_switzerland_desc",
+    id: "peru",
+    titleKey: "flag_peru_title",
+    descKey: "flag_peru_desc",
     accentColor: "#D62839",
     cardBg: "#FFF0F0",
   },
   {
-    id: "turkey",
-    titleKey: "flag_turkey_title",
-    descKey: "flag_turkey_desc",
-    accentColor: "#E53935",
-    cardBg: "#FFF1F1",
-  },
-  {
-    id: "argentina",
-    titleKey: "flag_argentina_title",
-    descKey: "flag_argentina_desc",
-    accentColor: "#5BC0EB",
-    cardBg: "#F0FAFF",
+    id: "philippines",
+    titleKey: "flag_philippines_title",
+    descKey: "flag_philippines_desc",
+    accentColor: "#2563EB",
+    cardBg: "#EFF5FF",
   },
   {
     id: "poland",
@@ -372,6 +415,13 @@ export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
     descKey: "flag_poland_desc",
     accentColor: "#E84A5F",
     cardBg: "#FFF0F3",
+  },
+  {
+    id: "portugal",
+    titleKey: "flag_portugal_title",
+    descKey: "flag_portugal_desc",
+    accentColor: "#1E9E61",
+    cardBg: "#EEF9F3",
   },
   {
     id: "romania",
@@ -388,186 +438,32 @@ export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#F2F6FF",
   },
   {
-    id: "philippines",
-    titleKey: "flag_philippines_title",
-    descKey: "flag_philippines_desc",
-    accentColor: "#2563EB",
-    cardBg: "#EFF5FF",
+    id: "spain",
+    titleKey: "flag_spain_title",
+    descKey: "flag_spain_desc",
+    accentColor: "#FFB020",
+    cardBg: "#FFF8EC",
   },
   {
-    id: "malaysia",
-    titleKey: "flag_malaysia_title",
-    descKey: "flag_malaysia_desc",
-    accentColor: "#3B82F6",
-    cardBg: "#EEF5FF",
-  },
-  {
-    id: "pakistan",
-    titleKey: "flag_pakistan_title",
-    descKey: "flag_pakistan_desc",
-    accentColor: "#138A4A",
-    cardBg: "#EEF9F3",
-  },
-  {
-    id: "mexico",
-    titleKey: "flag_mexico_title",
-    descKey: "flag_mexico_desc",
-    accentColor: "#0F9D58",
-    cardBg: "#EEF9F3",
-  },
-  {
-    id: "portugal",
-    titleKey: "flag_portugal_title",
-    descKey: "flag_portugal_desc",
-    accentColor: "#1E9E61",
-    cardBg: "#EEF9F3",
-  },
-  {
-    id: "venezuela",
-    titleKey: "flag_venezuela_title",
-    descKey: "flag_venezuela_desc",
-    accentColor: "#F4B400",
-    cardBg: "#FFF9E8",
-  },
-  {
-    id: "colombia",
-    titleKey: "flag_colombia_title",
-    descKey: "flag_colombia_desc",
-    accentColor: "#F4B400",
-    cardBg: "#FFF9E8",
-  },
-  {
-    id: "peru",
-    titleKey: "flag_peru_title",
-    descKey: "flag_peru_desc",
-    accentColor: "#D62839",
-    cardBg: "#FFF0F0",
-  },
-  {
-    id: "chile",
-    titleKey: "flag_chile_title",
-    descKey: "flag_chile_desc",
-    accentColor: "#2563EB",
-    cardBg: "#EFF5FF",
-  },
-  {
-    id: "ukraine",
-    titleKey: "flag_ukraine_title",
-    descKey: "flag_ukraine_desc",
+    id: "sweden",
+    titleKey: "flag_sweden_title",
+    descKey: "flag_sweden_desc",
     accentColor: "#2F80ED",
     cardBg: "#EEF5FF",
   },
   {
-    id: "cuba",
-    titleKey: "flag_cuba_title",
-    descKey: "flag_cuba_desc",
+    id: "switzerland",
+    titleKey: "flag_switzerland_title",
+    descKey: "flag_switzerland_desc",
     accentColor: "#D62839",
     cardBg: "#FFF0F0",
   },
   {
-    id: "uruguay",
-    titleKey: "flag_uruguay_title",
-    descKey: "flag_uruguay_desc",
-    accentColor: "#5BC0EB",
-    cardBg: "#F0FAFF",
-  },
-  {
-    id: "paraguay",
-    titleKey: "flag_paraguay_title",
-    descKey: "flag_paraguay_desc",
-    accentColor: "#D62839",
-    cardBg: "#FFF0F0",
-  },
-  {
-    id: "honduras",
-    titleKey: "flag_honduras_title",
-    descKey: "flag_honduras_desc",
-    accentColor: "#3B82F6",
-    cardBg: "#EEF5FF",
-  },
-  {
-    id: "elsalvador",
-    titleKey: "flag_elsalvador_title",
-    descKey: "flag_elsalvador_desc",
-    accentColor: "#3B82F6",
-    cardBg: "#EEF5FF",
-  },
-  {
-    id: "nicaragua",
-    titleKey: "flag_nicaragua_title",
-    descKey: "flag_nicaragua_desc",
-    accentColor: "#3B82F6",
-    cardBg: "#EEF5FF",
-  },
-  {
-    id: "guatemala",
-    titleKey: "flag_guatemala_title",
-    descKey: "flag_guatemala_desc",
-    accentColor: "#5BC0EB",
-    cardBg: "#F0FAFF",
-  },
-  {
-    id: "costarica",
-    titleKey: "flag_costarica_title",
-    descKey: "flag_costarica_desc",
-    accentColor: "#D62839",
-    cardBg: "#FFF0F0",
-  },
-  {
-    id: "panama",
-    titleKey: "flag_panama_title",
-    descKey: "flag_panama_desc",
+    id: "taiwan",
+    titleKey: "flag_taiwan_title",
+    descKey: "flag_taiwan_desc",
     accentColor: "#2563EB",
     cardBg: "#EFF5FF",
-  },
-  {
-    id: "bolivia",
-    titleKey: "flag_bolivia_title",
-    descKey: "flag_bolivia_desc",
-    accentColor: "#2EAE60",
-    cardBg: "#EFFBF3",
-  },
-  {
-    id: "ecuador",
-    titleKey: "flag_ecuador_title",
-    descKey: "flag_ecuador_desc",
-    accentColor: "#F4B400",
-    cardBg: "#FFF9E8",
-  },
-  {
-    id: "belgium",
-    titleKey: "flag_belgium_title",
-    descKey: "flag_belgium_desc",
-    accentColor: "#FFD43B",
-    cardBg: "#FFFBEA",
-  },
-  {
-    id: "drcongo",
-    titleKey: "flag_drcongo_title",
-    descKey: "flag_drcongo_desc",
-    accentColor: "#4D8DFF",
-    cardBg: "#EEF5FF",
-  },
-  {
-    id: "nigeria",
-    titleKey: "flag_nigeria_title",
-    descKey: "flag_nigeria_desc",
-    accentColor: "#1FA971",
-    cardBg: "#EEF9F5",
-  },
-  {
-    id: "nepal",
-    titleKey: "flag_nepal_title",
-    descKey: "flag_nepal_desc",
-    accentColor: "#D62839",
-    cardBg: "#FFF0F0",
-  },
-  {
-    id: "iran",
-    titleKey: "flag_iran_title",
-    descKey: "flag_iran_desc",
-    accentColor: "#138A4A",
-    cardBg: "#EEF9F3",
   },
   {
     id: "tanzania",
@@ -577,11 +473,60 @@ export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#EDF9F5",
   },
   {
-    id: "taiwan",
-    titleKey: "flag_taiwan_title",
-    descKey: "flag_taiwan_desc",
-    accentColor: "#2563EB",
-    cardBg: "#EFF5FF",
+    id: "thailand",
+    titleKey: "flag_thailand_title",
+    descKey: "flag_thailand_desc",
+    accentColor: "#4154D8",
+    cardBg: "#F1F3FF",
+  },
+  {
+    id: "turkey",
+    titleKey: "flag_turkey_title",
+    descKey: "flag_turkey_desc",
+    accentColor: "#E53935",
+    cardBg: "#FFF1F1",
+  },
+  {
+    id: "uk",
+    titleKey: "flag_uk_title",
+    descKey: "flag_uk_desc",
+    accentColor: "#5B6CFF",
+    cardBg: "#F2F5FF",
+  },
+  {
+    id: "ukraine",
+    titleKey: "flag_ukraine_title",
+    descKey: "flag_ukraine_desc",
+    accentColor: "#2F80ED",
+    cardBg: "#EEF5FF",
+  },
+  {
+    id: "uruguay",
+    titleKey: "flag_uruguay_title",
+    descKey: "flag_uruguay_desc",
+    accentColor: "#5BC0EB",
+    cardBg: "#F0FAFF",
+  },
+  {
+    id: "usa",
+    titleKey: "flag_usa_title",
+    descKey: "flag_usa_desc",
+    accentColor: "#4D8DFF",
+    cardBg: "#F0F5FF",
+  },
+  {
+    id: "venezuela",
+    titleKey: "flag_venezuela_title",
+    descKey: "flag_venezuela_desc",
+    accentColor: "#F4B400",
+    cardBg: "#FFF9E8",
+  },
+  {
+    id: "vietnam",
+    titleKey: "flag_vietnam_title",
+    descKey: "flag_vietnam_desc",
+    accentColor: "#D92D20",
+    cardBg: "#FFF3F1",
   },
 ] as const;
 
@@ -594,13 +539,6 @@ export const LANDMARK_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#F2F5FF",
   },
   {
-    id: "pyramid",
-    titleKey: "landmark_pyramid_title",
-    descKey: "landmark_pyramid_desc",
-    accentColor: "#FFB020",
-    cardBg: "#FFF7E8",
-  },
-  {
     id: "eiffel",
     titleKey: "landmark_eiffel_title",
     descKey: "landmark_eiffel_desc",
@@ -608,11 +546,11 @@ export const LANDMARK_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#F0F5FF",
   },
   {
-    id: "pisa",
-    titleKey: "landmark_pisa_title",
-    descKey: "landmark_pisa_desc",
-    accentColor: "#7C5CFF",
-    cardBg: "#F2F5FF",
+    id: "liberty",
+    titleKey: "landmark_liberty_title",
+    descKey: "landmark_liberty_desc",
+    accentColor: "#34CDB2",
+    cardBg: "#EDFDF8",
   },
   {
     id: "operahouse",
@@ -622,11 +560,18 @@ export const LANDMARK_CONFIGS: readonly PuzzleItemConfig[] = [
     cardBg: "#EDFAF6",
   },
   {
-    id: "liberty",
-    titleKey: "landmark_liberty_title",
-    descKey: "landmark_liberty_desc",
-    accentColor: "#34CDB2",
-    cardBg: "#EDFDF8",
+    id: "pisa",
+    titleKey: "landmark_pisa_title",
+    descKey: "landmark_pisa_desc",
+    accentColor: "#7C5CFF",
+    cardBg: "#F2F5FF",
+  },
+  {
+    id: "pyramid",
+    titleKey: "landmark_pyramid_title",
+    descKey: "landmark_pyramid_desc",
+    accentColor: "#FFB020",
+    cardBg: "#FFF7E8",
   },
   {
     id: "tajmahal",
@@ -673,10 +618,7 @@ export function renderPuzzleIllustration(id: string) {
       return <FranceFlagPuzzleScene />;
     case "egypt":
       return <EgyptFlagPuzzleScene />;
-    case "saudiarabia":
-      return <SaudiArabiaFlagPuzzleScene />;
-    case "iraq":
-      return <IraqFlagPuzzleScene />;
+
     case "algeria":
       return <AlgeriaFlagPuzzleScene />;
     case "bangladesh":
@@ -687,8 +629,7 @@ export function renderPuzzleIllustration(id: string) {
       return <GermanyFlagPuzzleScene />;
     case "greece":
       return <GreeceFlagPuzzleScene />;
-    case "india":
-      return <IndiaFlagPuzzleScene />;
+
     case "indonesia":
       return <IndonesiaFlagPuzzleScene />;
     case "spain":
@@ -719,12 +660,7 @@ export function renderPuzzleIllustration(id: string) {
       return <RussiaFlagPuzzleScene />;
     case "philippines":
       return <PhilippinesFlagPuzzleScene />;
-    case "malaysia":
-      return <MalaysiaFlagPuzzleScene />;
-    case "pakistan":
-      return <PakistanFlagPuzzleScene />;
-    case "mexico":
-      return <MexicoFlagPuzzleScene />;
+
     case "portugal":
       return <PortugalFlagPuzzleScene />;
     case "venezuela":
@@ -767,8 +703,7 @@ export function renderPuzzleIllustration(id: string) {
       return <NigeriaFlagPuzzleScene />;
     case "nepal":
       return <NepalFlagPuzzleScene />;
-    case "iran":
-      return <IranFlagPuzzleScene />;
+
     case "tanzania":
       return <TanzaniaFlagPuzzleScene />;
     case "taiwan":
