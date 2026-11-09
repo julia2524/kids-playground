@@ -1,7 +1,7 @@
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import styled from "styled-components/native";
-import { TouchableOpacity } from "react-native";
+import { I18nManager, TouchableOpacity } from "react-native";
 
 import { AppText } from "../utils/AppText";
 import UfoLevelBadge from "./UfoLevelBadge";
@@ -43,6 +43,9 @@ export default function ResultOverlay({
 }: ResultOverlayProps) {
   useLanguage();
   const { playThemeBGM } = useBackgroundMusic();
+
+  // 아랍권(RTL) 여부 확인
+  const isRTL = I18nManager.isRTL;
   const handleGoRoadPress = () => {
     triggerHaptic("light");
     stopEarnedNotes();
@@ -150,7 +153,11 @@ export default function ResultOverlay({
                 onPress={handleNextLevelPress}
                 activeOpacity={0.85}
               >
-                <Ionicons name="arrow-forward" size={26} color={colors.white} />
+                <Ionicons
+                  name={isRTL ? "arrow-back" : "arrow-forward"}
+                  size={26}
+                  color={colors.white}
+                />
               </ActionButton>
             )}
           </ButtonRow>

@@ -1,4 +1,31 @@
+// import styled from "styled-components/native";
+// import CandyStar from "./CandyStar";
+
+// interface StarBadgeProps {
+//   type?: "full" | "half" | "empty";
+//   size?: number;
+// }
+
+// export default function StarBadge({
+//   type = "empty",
+//   size = 30,
+// }: StarBadgeProps) {
+//   return (
+//     <Badge>
+//       <CandyStar size={size} type={type} />
+//     </Badge>
+//   );
+// }
+
+// const Badge = styled.View`
+//   flex-direction: row;
+//   align-items: center;
+// `;
+
+import React from "react";
+import { I18nManager } from "react-native";
 import styled from "styled-components/native";
+
 import CandyStar from "./CandyStar";
 
 interface StarBadgeProps {
@@ -12,7 +39,7 @@ export default function StarBadge({
 }: StarBadgeProps) {
   return (
     <Badge>
-      <CandyStar size={size} type={type} />
+      <CandyStar size={size} type={type} isRTL={I18nManager.isRTL} />
     </Badge>
   );
 }
