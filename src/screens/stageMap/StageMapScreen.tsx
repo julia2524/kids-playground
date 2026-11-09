@@ -791,6 +791,10 @@ export default function StageMapScreen() {
         title: i18n.t("flag_tanzania_title"),
         subtitle: i18n.t("flag_tanzania_desc"),
       },
+      taiwan: {
+        title: i18n.t("flag_taiwan_title"),
+        subtitle: i18n.t("flag_taiwan_desc"),
+      },
 
       bigben: {
         title: i18n.t("landmark_bigben_title"),

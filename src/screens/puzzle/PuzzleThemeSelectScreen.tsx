@@ -21,7 +21,6 @@ import BannerAd from "../../services/BannerAd";
 // 일러스트 컴포넌트 임포트 (경로 확인)
 // ==========================================
 import { AustraliaPuzzleScene } from "../../components/Puzzle/assets/flag/AustraliaPuzzleScene";
-import KoreaFlagPuzzleScene from "../../components/Puzzle/assets/flag/KoreaFlagPuzzleScene";
 import UsaFlagPuzzleScene from "../../components/Puzzle/assets/flag/UsaFlagPuzzleScene";
 import { JapanFlagPuzzleScene } from "../../components/Puzzle/assets/flag/JapanFlagPuzzleScene";
 import { ChinaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ChinaFlagPuzzleScene";
@@ -93,6 +92,8 @@ import { NigeriaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/Nige
 import { NepalFlagPuzzleScene } from "../../components/Puzzle/assets/flag/NepalFlagPuzzleScene";
 import { IranFlagPuzzleScene } from "../../components/Puzzle/assets/flag/IranFlagPuzzleScene";
 import { TanzaniaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/TanzaniaFlagPuzzleScene";
+import { KoreaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/KoreaFlagPuzzleScene";
+import { TaiwanFlagPuzzleScene } from "../../components/Puzzle/assets/flag/TaiwanFlagPuzzleScene";
 
 export type AnimalCharacterType =
   | "rabbit"
@@ -575,6 +576,13 @@ export const FLAG_CONFIGS: readonly PuzzleItemConfig[] = [
     accentColor: "#1A936F",
     cardBg: "#EDF9F5",
   },
+  {
+    id: "taiwan",
+    titleKey: "flag_taiwan_title",
+    descKey: "flag_taiwan_desc",
+    accentColor: "#2563EB",
+    cardBg: "#EFF5FF",
+  },
 ] as const;
 
 export const LANDMARK_CONFIGS: readonly PuzzleItemConfig[] = [
@@ -763,6 +771,8 @@ export function renderPuzzleIllustration(id: string) {
       return <IranFlagPuzzleScene />;
     case "tanzania":
       return <TanzaniaFlagPuzzleScene />;
+    case "taiwan":
+      return <TaiwanFlagPuzzleScene />;
 
     // 랜드마크
     case "bigben":

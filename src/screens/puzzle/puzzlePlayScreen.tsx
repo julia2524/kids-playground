@@ -31,7 +31,6 @@ import {
   getPuzzleStars,
   TOTAL_PUZZLE_LEVELS,
 } from "../../types/Puzzle/puzzleLevels";
-import KoreaFlagPuzzleScene from "../../components/Puzzle/assets/flag/KoreaFlagPuzzleScene";
 import { AustraliaPuzzleScene } from "../../components/Puzzle/assets/flag/AustraliaPuzzleScene";
 import { ChinaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/ChinaFlagPuzzleScene";
 import { FranceFlagPuzzleScene } from "../../components/Puzzle/assets/flag/FranceFlagPuzzleScene";
@@ -97,6 +96,8 @@ import { NigeriaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/Nige
 import { NepalFlagPuzzleScene } from "../../components/Puzzle/assets/flag/NepalFlagPuzzleScene";
 import { IranFlagPuzzleScene } from "../../components/Puzzle/assets/flag/IranFlagPuzzleScene";
 import { TanzaniaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/TanzaniaFlagPuzzleScene";
+import { KoreaFlagPuzzleScene } from "../../components/Puzzle/assets/flag/KoreaFlagPuzzleScene";
+import { TaiwanFlagPuzzleScene } from "../../components/Puzzle/assets/flag/TaiwanFlagPuzzleScene";
 
 type RouteProps = RouteProp<RootStackParamList, "PuzzlePlayScreen">;
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
@@ -366,6 +367,10 @@ const FLAG_PUZZLE_DATA: Record<
   tanzania: {
     title: "🇹🇿 탄자니아 국기 퍼즐",
     Artwork: TanzaniaFlagPuzzleScene,
+  },
+  taiwan: {
+    title: "🇹🇼 대만 국기 퍼즐",
+    Artwork: TaiwanFlagPuzzleScene,
   },
 };
 

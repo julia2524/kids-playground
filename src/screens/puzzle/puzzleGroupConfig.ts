@@ -38,6 +38,7 @@ const FLAG_GROUPS: Record<string, PuzzleGroupId> = {
   turkey: "asia",
   nepal: "asia",
   iran: "asia",
+  taiwan: "asia",
 
   // 유럽
   uk: "europe",
