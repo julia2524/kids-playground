@@ -2,6 +2,7 @@
   "select_language": "Pumili ng Wika",
 
   "result_title": "Ang galing!",
+  "result_level_format": "ANTAS {{level}}",
 
   "sticker_workshop_title": "Aking Pagawaan ng Sticker",
   "sticker_clear_title": "Burahin ang lahat?",

@@ -2,6 +2,7 @@
   "select_language": "భాషను ఎంచుకోండి",
 
   "result_title": "చాలా బాగా చేశావు!",
+  "result_level_format": "స్థాయి {{level}}",
 
   "sticker_workshop_title": "నా స్టిక్కర్ వర్క్‌షాప్",
   "sticker_clear_title": "అన్నీ చెరిపేద్దామా?",

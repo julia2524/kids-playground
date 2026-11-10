@@ -2,6 +2,7 @@
   "select_language": "زبان منتخب کریں",
 
   "result_title": "بہت خوب!",
+  "result_level_format": "لیول {{level}}",
 
   "sticker_workshop_title": "میری اسٹیکر ورکشاپ",
   "sticker_clear_title": "سب مٹا دیں؟",

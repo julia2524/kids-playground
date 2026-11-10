@@ -2,6 +2,7 @@
   "select_language": "Chọn ngôn ngữ",
 
   "result_title": "Bé làm giỏi lắm!",
+  "result_level_format": "MỨC {{level}}",
 
   "sticker_workshop_title": "Xưởng nhãn dán của bé",
   "sticker_clear_title": "Xóa hết nhé?",

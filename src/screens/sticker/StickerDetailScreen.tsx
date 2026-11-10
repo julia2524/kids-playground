@@ -1311,6 +1311,7 @@ const NameTagText = styled(AppText)`
   font-weight: bold;
 
   color: #3b4d43;
+  font-family: ${(props) => props.theme.fontFamily};
 `;
 
 const SaveDot = styled.View<{ saved: boolean }>`
@@ -1339,6 +1340,7 @@ const SaveDotText = styled(AppText)`
   font-weight: bold;
 
   color: #4a7c59;
+  font-family: ${(props) => props.theme.fontFamily};
 `;
 
 const PanelWrap = styled.View``;

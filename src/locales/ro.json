@@ -2,6 +2,7 @@
   "select_language": "Selectează limba",
 
   "result_title": "Foarte bine!",
+  "result_level_format": "NIVELUL {{level}}",
 
   "sticker_workshop_title": "Atelierul meu de abțibilduri",
   "sticker_clear_title": "Ștergem tot?",

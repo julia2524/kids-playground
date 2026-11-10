@@ -2,6 +2,7 @@
   "select_language": "Taal selecteren",
 
   "result_title": "Goed gedaan!",
+  "result_level_format": "LEVEL {{level}}",
 
   "sticker_workshop_title": "Mijn stickerwerkplaats",
   "sticker_clear_title": "Alles uitgummen?",

@@ -2,6 +2,7 @@
   "select_language": "भाषा चुनें",
 
   "result_title": "बहुत बढ़िया!",
+  "result_level_format": "लेवल {{level}}",
 
   "sticker_workshop_title": "मेरी स्टिकर कार्यशाला",
   "sticker_clear_title": "सब मिटा दें?",

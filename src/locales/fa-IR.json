@@ -2,6 +2,7 @@
   "select_language": "انتخاب زبان",
 
   "result_title": "آفرین!",
+  "result_level_format": "مرحله {{level}}",
 
   "sticker_workshop_title": "کارگاه برچسب من",
   "sticker_clear_title": "همه را پاک کنیم؟",

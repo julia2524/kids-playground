@@ -2,6 +2,7 @@
   "select_language": "Selectează limba",
 
   "result_title": "Молодец!",
+  "result_level_format": "УРОВЕНЬ {{level}}",
 
   "sticker_workshop_title": "Моя мастерская наклеек",
   "sticker_clear_title": "Всё стереть?",

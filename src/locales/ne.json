@@ -2,6 +2,7 @@
   "select_language": "भाषा छान्नुहोस्",
 
   "result_title": "धेरै राम्रो!",
+  "result_level_format": "लेभल {{level}}",
 
   "sticker_workshop_title": "मेरो स्टिकर कार्यशाला",
   "sticker_clear_title": "सबै मेट्ने हो?",

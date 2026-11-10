@@ -2,6 +2,7 @@
   "select_language": "Selecionar idioma",
 
   "result_title": "Muito bem!",
+  "result_level_format": "NÍVEL {{level}}",
 
   "sticker_workshop_title": "Minha oficina de adesivos",
   "sticker_clear_title": "Apagar tudo?",

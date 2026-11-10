@@ -2,6 +2,7 @@
   "select_language": "انتخاب زبان",
 
   "result_title": "Bravo !",
+  "result_level_format": "NIVEAU {{level}}",
 
   "sticker_workshop_title": "Mon atelier d'autocollants",
   "sticker_clear_title": "Tout effacer ?",

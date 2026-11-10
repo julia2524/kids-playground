@@ -2,6 +2,7 @@
   "select_language": "ভাষা নির্বাচন করুন",
 
   "result_title": "খুব ভালো করেছ!",
+  "result_level_format": "লেভেল {{level}}",
 
   "sticker_workshop_title": "আমার স্টিকার কর্মশালা",
   "sticker_clear_title": "সব মুছে ফেলব?",

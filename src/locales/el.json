@@ -2,6 +2,7 @@
   "select_language": "Επιλογή γλώσσας",
 
   "result_title": "Μπράβο!",
+  "result_level_format": "ΕΠΙΠΕΔΟ {{level}}",
 
   "sticker_workshop_title": "Το εργαστήρι αυτοκόλλητών μου",
   "sticker_clear_title": "Να τα σβήσουμε όλα;",

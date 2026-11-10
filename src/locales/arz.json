@@ -2,6 +2,7 @@
   "select_language": "اختار اللغة",
 
   "result_title": "شاطر جدًا!",
+  "result_level_format": "المستوى {{level}}",
 
   "sticker_workshop_title": "ورشة الاستيكرات بتاعتي",
   "sticker_clear_title": "نمسح كله؟",

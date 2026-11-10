@@ -2,6 +2,7 @@
   "select_language": "Chagua Lugha",
 
   "result_title": "Umefanya vizuri!",
+  "result_level_format": "KIWANGO {{level}}",
 
   "sticker_workshop_title": "Warsha Yangu ya Vibandiko",
   "sticker_clear_title": "Tufute yote?",

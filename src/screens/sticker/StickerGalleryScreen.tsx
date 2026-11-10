@@ -501,6 +501,7 @@ const ProgressTitle = styled(AppText)`
   font-size: 13px;
   font-weight: 700;
   color: #475569;
+  font-family: ${(props) => props.theme.fontFamily};
 `;
 
 const ProgressCount = styled(AppText)`
@@ -508,6 +509,7 @@ const ProgressCount = styled(AppText)`
   font-weight: 800;
   color: #7c5cff;
   direction: ltr;
+  font-family: ${(props) => props.theme.fontFamily};
 `;
 
 const ProgressBarBackground = styled.View`
@@ -565,6 +567,7 @@ const StickerName = styled(AppText)`
   margin-top: 4px;
   font-weight: 700;
   text-align: center;
+  font-family: ${(props) => props.theme.fontFamily};
 `;
 
 const LockedName = styled(AppText)`
@@ -572,6 +575,7 @@ const LockedName = styled(AppText)`
   color: #94a3b8;
   margin-top: 4px;
   font-weight: 700;
+  font-family: ${(props) => props.theme.fontFamily};
 `;
 
 const BannerAdContainer = styled.View<{ bottomInset: number }>`

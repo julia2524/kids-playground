@@ -2,6 +2,7 @@
   "select_language": "Sprache auswählen",
 
   "result_title": "Gut gemacht!",
+  "result_level_format": "LEVEL {{level}}",
 
   "sticker_workshop_title": "Meine Stickerwerkstatt",
   "sticker_clear_title": "Alles wegradieren?",

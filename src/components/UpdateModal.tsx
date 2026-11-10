@@ -3,6 +3,7 @@
 // import styled from "styled-components/native";
 // import i18n from "../i18n";
 // import { ASSETS } from "../assets/assets";
+// import { AppText } from "../utils/AppText";
 
 // interface UpdateModalProps {
 //   visible: boolean;
@@ -40,32 +41,15 @@
 //           </UpdateMascot>
 
 //           {/* 안내 문구 */}
-//           <Eyebrow>
-//             {i18n.t("update_modal_eyebrow", {
-//               defaultValue: "KIDS PLAYGROUND",
-//             })}
-//           </Eyebrow>
+//           <Eyebrow>{i18n.t("update_modal_eyebrow")}</Eyebrow>
 
-//           <Title>
-//             {i18n.t("update_modal_title", {
-//               defaultValue: "새로운 업데이트가 있어요!",
-//             })}
-//           </Title>
+//           <Title>{i18n.t("update_modal_title")}</Title>
 
-//           <Description>
-//             {i18n.t("update_modal_description", {
-//               defaultValue:
-//                 "더 즐겁고 재미있는 놀이를 위해\nKids Playground를 최신 버전으로\n업데이트해 주세요.",
-//             })}
-//           </Description>
+//           <Description>{i18n.t("update_modal_description")}</Description>
 
 //           {/* 업데이트 안내 */}
 //           <InfoBox>
-//             <InfoText>
-//               {i18n.t("update_modal_info_text", {
-//                 defaultValue: "새로운 기능과 개선 사항을 만나보세요!",
-//               })}
-//             </InfoText>
+//             <InfoText>{i18n.t("update_modal_info_text")}</InfoText>
 //           </InfoBox>
 
 //           {/* 업데이트 버튼 */}
@@ -79,16 +63,12 @@
 //                 <LoadingRow>
 //                   <ActivityIndicator color="#FFFFFF" size="small" />
 //                   <UpdateButtonText>
-//                     {i18n.t("update_modal_loading", {
-//                       defaultValue: "업데이트 준비 중...",
-//                     })}
+//                     {i18n.t("update_modal_loading")}
 //                   </UpdateButtonText>
 //                 </LoadingRow>
 //               ) : (
 //                 <UpdateButtonText style={{ opacity: pressed ? 0.86 : 1 }}>
-//                   {i18n.t("update_modal_update_button", {
-//                     defaultValue: "업데이트하기",
-//                   })}
+//                   {i18n.t("update_modal_update_button")}
 //                 </UpdateButtonText>
 //               )
 //             }
@@ -97,17 +77,11 @@
 //           {/* 나중에 버튼 */}
 //           <LaterButton onPress={onLater} disabled={isUpdating}>
 //             <LaterButtonText isUpdating={isUpdating}>
-//               {i18n.t("update_modal_later_button", {
-//                 defaultValue: "나중에 할게요",
-//               })}
+//               {i18n.t("update_modal_later_button")}
 //             </LaterButtonText>
 //           </LaterButton>
 
-//           <Footer>
-//             {i18n.t("update_modal_footer", {
-//               defaultValue: "더 좋은 놀이 시간을 위해 준비했어요 💜",
-//             })}
-//           </Footer>
+//           <Footer>{i18n.t("update_modal_footer")}</Footer>
 //         </ModalContainer>
 //       </Overlay>
 //     </Modal>
@@ -161,6 +135,7 @@
 // `;
 
 // const Eyebrow = styled.Text`
+//   font-family: ${(props) => props.theme.fontFamily};
 //   color: #8b72d9;
 //   font-size: 11px;
 //   font-weight: 850;
@@ -197,6 +172,7 @@
 //   margin-top: 22px;
 //   margin-bottom: 22px;
 // `;
+
 // const UpdateMascot = styled.View`
 //   width: 124px;
 //   height: 124px;
@@ -205,12 +181,12 @@
 //   margin-bottom: 12px;
 // `;
 
-// const InfoIcon = styled.Text`
+// const InfoIcon = styled(AppText)`
 //   font-size: 16px;
 //   margin-right: 7px;
 // `;
 
-// const InfoText = styled.Text`
+// const InfoText = styled(AppText)`
 //   color: #68549c;
 //   font-size: 12px;
 //   font-weight: 700;
@@ -231,7 +207,7 @@
 //   opacity: ${({ isUpdating }) => (isUpdating ? 0.75 : 1)};
 // `;
 
-// const UpdateButtonText = styled.Text`
+// const UpdateButtonText = styled(AppText)`
 //   color: #ffffff;
 //   font-size: 16px;
 //   font-weight: 850;
@@ -252,14 +228,14 @@
 //   isUpdating: boolean;
 // }
 
-// const LaterButtonText = styled.Text<LaterButtonTextProps>`
+// const LaterButtonText = styled(AppText)<LaterButtonTextProps>`
 //   color: #8c879b;
 //   font-size: 13px;
 //   font-weight: 600;
 //   opacity: ${({ isUpdating }) => (isUpdating ? 0.4 : 1)};
 // `;
 
-// const Footer = styled.Text`
+// const Footer = styled(AppText)`
 //   color: #b2acbf;
 //   font-size: 10px;
 //   font-weight: 500;
@@ -267,10 +243,11 @@
 // `;
 
 import React from "react";
-import { ActivityIndicator, Image, Modal, Platform, Text } from "react-native";
+import { ActivityIndicator, Image, Modal, Platform } from "react-native";
 import styled from "styled-components/native";
 import i18n from "../i18n";
 import { ASSETS } from "../assets/assets";
+import { AppText } from "../utils/AppText";
 
 interface UpdateModalProps {
   visible: boolean;
@@ -387,21 +364,16 @@ const ModalContainer = styled.View`
   })}
 `;
 
-const IconCircle = styled.View`
-  width: 82px;
-  height: 82px;
-  border-radius: 41px;
-  background-color: #f0ebff;
+const UpdateMascot = styled.View`
+  width: 124px;
+  height: 124px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 `;
 
-const IconText = styled.Text`
-  font-size: 42px;
-`;
-
-const Eyebrow = styled.Text`
+const Eyebrow = styled(AppText)`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   color: #8b72d9;
   font-size: 11px;
   font-weight: 850;
@@ -409,20 +381,32 @@ const Eyebrow = styled.Text`
   margin-bottom: 10px;
 `;
 
-const Title = styled.Text`
+const Title = styled(AppText)`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   color: #30234d;
-  font-size: 22px;
-  font-weight: 850;
+  ${({ theme }) => {
+    const t = theme.typography.h2;
+    return `
+      font-size: ${t.fontSize}px;
+      line-height: ${t.lineHeight}px;
+      font-weight: ${t.fontWeight};
+    `;
+  }}
   text-align: center;
-  line-height: 30px;
   margin-bottom: 12px;
 `;
 
-const Description = styled.Text`
+const Description = styled(AppText)`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   color: #77718a;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 23px;
+  ${({ theme }) => {
+    const t = theme.typography.bodySmall;
+    return `
+      font-size: ${t.fontSize}px;
+      line-height: ${t.lineHeight}px;
+      font-weight: ${t.fontWeight};
+    `;
+  }}
   text-align: center;
 `;
 
@@ -439,23 +423,17 @@ const InfoBox = styled.View`
   margin-bottom: 22px;
 `;
 
-const UpdateMascot = styled.View`
-  width: 124px;
-  height: 124px;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 12px;
-`;
-
-const InfoIcon = styled.Text`
-  font-size: 16px;
-  margin-right: 7px;
-`;
-
-const InfoText = styled.Text`
+const InfoText = styled(AppText)`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   color: #68549c;
-  font-size: 12px;
-  font-weight: 700;
+  ${({ theme }) => {
+    const t = theme.typography.caption;
+    return `
+      font-size: ${t.fontSize}px;
+      line-height: ${t.lineHeight}px;
+      font-weight: ${t.fontWeight};
+    `;
+  }}
   flex-shrink: 1;
 `;
 
@@ -473,10 +451,17 @@ const UpdateButton = styled.Pressable<UpdateButtonProps>`
   opacity: ${({ isUpdating }) => (isUpdating ? 0.75 : 1)};
 `;
 
-const UpdateButtonText = styled.Text`
+const UpdateButtonText = styled(AppText)`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   color: #ffffff;
-  font-size: 16px;
-  font-weight: 850;
+  ${({ theme }) => {
+    const t = theme.typography.button;
+    return `
+      font-size: ${t.fontSize}px;
+      line-height: ${t.lineHeight}px;
+      font-weight: ${t.fontWeight};
+    `;
+  }}
 `;
 
 const LoadingRow = styled.View`
@@ -494,14 +479,22 @@ interface LaterButtonTextProps {
   isUpdating: boolean;
 }
 
-const LaterButtonText = styled.Text<LaterButtonTextProps>`
+const LaterButtonText = styled(AppText)<LaterButtonTextProps>`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   color: #8c879b;
-  font-size: 13px;
+  ${({ theme }) => {
+    const t = theme.typography.bodySmall;
+    return `
+      font-size: ${t.fontSize}px;
+      line-height: ${t.lineHeight}px;
+    `;
+  }}
   font-weight: 600;
   opacity: ${({ isUpdating }) => (isUpdating ? 0.4 : 1)};
 `;
 
-const Footer = styled.Text`
+const Footer = styled(AppText)`
+  font-family: ${({ theme }) => theme.typography.fontFamily};
   color: #b2acbf;
   font-size: 10px;
   font-weight: 500;

@@ -27,6 +27,7 @@ import i18n from "../../../i18n";
 import { useLanguage } from "../../../context/LangaugeContext";
 import { colors } from "../../../design-system/tokens/colors";
 import PuzzleTutorialOverlay from "../../Tutorial/PuzzleTutorialOverlay";
+import { AppText } from "../../../utils/AppText";
 
 const DEFAULT_VIEWBOX_WIDTH = 240;
 
@@ -620,8 +621,9 @@ const PieceLayer = styled.View`
   bottom: 0px;
 `;
 
-const TrayTitle = styled.Text`
+const TrayTitle = styled(AppText)`
   color: #39465d;
   font-size: 14px;
   font-weight: 800;
+  font-family: ${(props) => props.theme.fontFamily};
 `;

@@ -2,6 +2,7 @@
   "select_language": "Seleccionar idioma",
 
   "result_title": "¡Muy bien!",
+  "result_level_format": "NIVEL {{level}}",
 
   "sticker_workshop_title": "Mi taller de pegatinas",
   "sticker_clear_title": "¿Borrar todo?",

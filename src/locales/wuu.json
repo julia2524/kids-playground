@@ -2,6 +2,7 @@
   "select_language": "选择语言",
 
   "result_title": "做得老好呀！",
+  "result_level_format": "第 {{level}} 关",
 
   "sticker_workshop_title": "我个贴纸工坊",
   "sticker_clear_title": "侪擦脱好伐？",

@@ -2,6 +2,7 @@
   "select_language": "เลือกภาษา",
 
   "result_title": "เก่งมากเลย!",
+  "result_level_format": "ระดับที่ {{level}}",
 
   "sticker_workshop_title": "เวิร์กช็อปสติกเกอร์ของฉัน",
   "sticker_clear_title": "ลบทั้งหมดไหม?",

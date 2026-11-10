@@ -2,6 +2,7 @@
   "select_language": "Dil Seçin",
 
   "result_title": "Çok güzel yaptın!",
+  "result_level_format": "SEVİYE {{level}}",
 
   "sticker_workshop_title": "Benim Çıkartma Atölyem",
   "sticker_clear_title": "Hepsini silelim mi?",

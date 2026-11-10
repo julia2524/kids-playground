@@ -2,6 +2,7 @@
   "select_language": "Välj språk",
 
   "result_title": "Bra jobbat!",
+  "result_level_format": "NIVÅ {{level}}",
 
   "sticker_workshop_title": "Min klistermärkesverkstad",
   "sticker_clear_title": "Sudda bort allt?",

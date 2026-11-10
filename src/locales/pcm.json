@@ -2,6 +2,7 @@
   "select_language": "Select Language",
 
   "result_title": "You do well!",
+  "result_level_format": "LEVEL {{level}}",
 
   "sticker_workshop_title": "My Sticker Workshop",
   "sticker_clear_title": "Make we wipe everything?",

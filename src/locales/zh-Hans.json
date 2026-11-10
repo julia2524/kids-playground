@@ -2,6 +2,7 @@
   "select_language": "选择语言",
 
   "result_title": "做得真棒！",
+  "result_level_format": "第 {{level}} 关",
 
   "sticker_workshop_title": "我的贴纸工坊",
   "sticker_clear_title": "全部擦掉吗？",

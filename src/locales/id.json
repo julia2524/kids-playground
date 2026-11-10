@@ -2,6 +2,7 @@
   "select_language": "Pilih Bahasa",
 
   "result_title": "Hebat sekali!",
+  "result_level_format": "LEVEL {{level}}",
 
   "sticker_workshop_title": "Bengkel Stikerku",
   "sticker_clear_title": "Hapus semuanya?",

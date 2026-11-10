@@ -2,6 +2,7 @@
   "select_language": "Seleziona lingua",
 
   "result_title": "Ben fatto!",
+  "result_level_format": "LIVELLO {{level}}",
 
   "sticker_workshop_title": "Il mio laboratorio di adesivi",
   "sticker_clear_title": "Cancellare tutto?",

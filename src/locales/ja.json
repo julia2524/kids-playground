@@ -2,6 +2,7 @@
   "select_language": "言語を選択",
 
   "result_title": "よくできました！",
+  "result_level_format": "レベル {{level}}",
 
   "sticker_workshop_title": "じぶんのシール工房",
   "sticker_clear_title": "ぜんぶ消す？",

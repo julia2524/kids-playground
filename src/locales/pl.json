@@ -2,6 +2,7 @@
   "select_language": "Wybierz język",
 
   "result_title": "Świetnie!",
+  "result_level_format": "POZIOM {{level}}",
 
   "sticker_workshop_title": "Moja pracownia naklejek",
   "sticker_clear_title": "Wymazać wszystko?",
