@@ -24,7 +24,7 @@ import PatternGeneratorTestScreen from "../screens/test/PatternGeneratorTestScre
 import PatternTestScreen from "../screens/test/PatternTestScreen";
 import PatternPlayScreen from "../screens/pattern/PatternPlayScreen";
 import AstroCatPreviewScreen from "../screens/test/AstroCatPreviewScreen";
-import PuzzleTestScreen from "../screens/test/PuzzleTestScreen";
+// import PuzzleTestScreen from "../screens/test/PuzzleTestScreen";
 import PuzzlePlayScreen from "../screens/puzzle/puzzlePlayScreen";
 import PuzzleMenuScreen from "../screens/puzzle/puzzleMenuScreen";
 import PuzzleThemeSelectScreen from "../screens/puzzle/PuzzleThemeSelectScreen";
@@ -185,7 +185,7 @@ export default function AppNavigator() {
         name="AstroCatPreviewScreen"
         component={AstroCatPreviewScreen}
       />
-      <Stack.Screen name="PuzzleTestScreen" component={PuzzleTestScreen} />
+      {/* <Stack.Screen name="PuzzleTestScreen" component={PuzzleTestScreen} /> */}
     </Stack.Navigator>
   );
 }

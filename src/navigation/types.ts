@@ -90,5 +90,5 @@ export type RootStackParamList = {
   PatternTestScreen: undefined;
   PatternGeneratorTestScreen: undefined;
   AstroCatPreviewScreen: undefined;
-  PuzzleTestScreen: undefined;
+  // PuzzleTestScreen: undefined;
 };
