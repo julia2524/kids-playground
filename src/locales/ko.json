@@ -2,6 +2,7 @@
   "select_language": "언어 선택",
 
   "result_title": "정말 잘했어요!",
+  "result_level_format": "LEVEL {{level}}",
 
   "sticker_workshop_title": "나만의 스티커 공방",
   "sticker_clear_title": "모두 지울까요?",
