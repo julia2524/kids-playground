@@ -2,7 +2,7 @@
   "select_language": "اختر اللغة",
 
   "result_title": "أحسنت!",
-  "result_level_format": "المستوى {{level}}",
+  "result_level_format": "\u200Fالمستوى {{level}}",
 
   "sticker_workshop_title": "ورشة ملصقاتي",
   "sticker_clear_title": "هل نمسح كل شيء؟",
