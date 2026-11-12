@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   ImageBackground,
   ScrollView,
+  TouchableOpacity,
   useWindowDimensions,
   View,
 } from "react-native";
@@ -186,6 +187,11 @@ export default function HomeScreen() {
               );
             })}
           </GameGrid>
+          <ComingSoon
+            onPress={() => {
+              navigation.navigate("MagnetMazePlayScreen");
+            }}
+          ></ComingSoon>
         </ScrollView>
 
         {/* Bottom Navigation */}

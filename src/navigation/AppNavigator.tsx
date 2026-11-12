@@ -30,6 +30,7 @@ import PuzzleMenuScreen from "../screens/puzzle/puzzleMenuScreen";
 import PuzzleThemeSelectScreen from "../screens/puzzle/PuzzleThemeSelectScreen";
 import ProgressManagementScreen from "../screens/settings/ProgressManagementScreen";
 import PuzzleGroupSelectScreen from "../screens/puzzle/PuzzleGroupSelectScreen";
+import MagnetMazePlayScreen from "../screens/magnetMaze/MagnetMazePlayScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -117,6 +118,14 @@ export default function AppNavigator() {
           animation: "fade",
         }}
       />
+      <Stack.Screen
+        name="MagnetMazePlayScreen"
+        component={MagnetMazePlayScreen}
+        options={{
+          animation: "fade",
+        }}
+      />
+
       <Stack.Screen
         name="SettingScreen"
         component={SettingScreen}

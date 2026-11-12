@@ -76,6 +76,8 @@ export type RootStackParamList = {
     groupId?: PuzzleGroupId;
   };
 
+  MagnetMazePlayScreen: undefined;
+
   LanguageScreen: undefined;
   ShapeSortingTestScreen: undefined;
   ShapeStickerScreen: undefined;
