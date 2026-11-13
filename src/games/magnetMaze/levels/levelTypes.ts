@@ -14,7 +14,8 @@ export const LevelType = {
   STRAIGHT: "STRAIGHT", // 직선
   L_SHAPE: "L_SHAPE", // ㄱ자 · ㄴ자
   CIRCLE: "CIRCLE", // 원형 · 원호
-  SPIRAL: "SPIRAL", // 달팽이형 나선
+  SPIRAL: "SPIRAL", // 둥근 달팽이형 나선
+  SQUARE_SPIRAL: "SQUARE_SPIRAL", // 네모난 달팽이 (직선 + 90도 회전)
   WAVE: "WAVE", // 파도형
   ZIGZAG: "ZIGZAG", // 지그재그
 } as const;
@@ -37,18 +38,57 @@ export interface FreeVariant {
   distance: number;
 }
 
+/** 직선 진행 방향 (시작 → 끝). 대각선은 화면에서 항상 45도 */
+export type StraightDirection =
+  | "LEFT_TO_RIGHT"
+  | "RIGHT_TO_LEFT"
+  | "TOP_TO_BOTTOM"
+  | "BOTTOM_TO_TOP"
+  | "TOP_LEFT_TO_BOTTOM_RIGHT"
+  | "BOTTOM_RIGHT_TO_TOP_LEFT"
+  | "TOP_RIGHT_TO_BOTTOM_LEFT"
+  | "BOTTOM_LEFT_TO_TOP_RIGHT";
+
+/**
+ * 직선 경로.
+ *  - 새 방식: direction 으로 8방향을 명시한다. (권장)
+ *  - 기존 방식: orientation + reversed (direction 이 없을 때만 사용 → 하위 호환)
+ * length 는 경로의 실제 길이(보드 너비 = 1). 대각선도 대각선 방향 길이다.
+ */
 export interface StraightVariant {
-  orientation: Orientation;
+  direction?: StraightDirection;
+  /** @deprecated direction 을 사용하세요 (기존 설정 호환용) */
+  orientation?: Orientation;
   length: number;
-  /** true 면 시작/목적지 방향을 반대로 (오른쪽→왼쪽, 아래→위) */
+  /** @deprecated direction 을 사용하세요 (기존 설정 호환용) */
   reversed?: boolean;
 }
 
+export type Rotation = 0 | 90 | 180 | 270;
+
+/**
+ * ㄱ자 / ㄴ자 경로. 기본 모양을 만든 뒤 아래 순서로 변환한다:
+ *   기본 모양 → 좌우반전(mirrorX) → 상하반전(mirrorY) → 회전(rotationDeg, 시계 방향) → 진행 방향 반전(reversed)
+ * points / start / goal 이 함께 변환되므로 시작·목적지는 항상 경로의 양 끝점이다.
+ */
 export interface LShapeVariant {
-  /** GIYEOK = ㄱ (가로로 갔다가 아래로), NIEUN = ㄴ (아래로 갔다가 가로로) */
+  /**
+   * GIYEOK = ㄱ (오른쪽으로 갔다가 아래로), NIEUN = ㄴ (아래로 갔다가 오른쪽으로)
+   * — 회전/반전을 적용하기 전 기본 모양
+   */
   shape: "GIYEOK" | "NIEUN";
+  /** 기본 모양에서 가로 구간 길이 */
   horizontalLength: number;
+  /** 기본 모양에서 세로 구간 길이 */
   verticalLength: number;
+  /** 시계 방향 회전. 기본 0 */
+  rotationDeg?: Rotation;
+  /** 좌우 반전 */
+  mirrorX?: boolean;
+  /** 상하 반전 */
+  mirrorY?: boolean;
+  /** true 면 진행 방향(시작↔목적지)을 반대로 */
+  reversed?: boolean;
 }
 
 export interface CircleVariant {
@@ -68,6 +108,29 @@ export interface SpiralVariant {
   clockwise: boolean;
   /** true = 바깥에서 안쪽으로, false = 안쪽에서 바깥으로 */
   startOutside: boolean;
+  /**
+   * 경로의 "출발점" 위치 각도. 0 = 오른쪽, 90 = 아래, 180 = 왼쪽, 270 = 위.
+   * 생략하면 기존 동작(바깥 시작은 180 = 왼쪽, 안 → 밖은 그 경로를 뒤집은 모양)을 그대로 쓴다.
+   */
+  startAngleDeg?: number;
+}
+
+export type CompassDirection = "RIGHT" | "DOWN" | "LEFT" | "UP";
+
+/** 네모난 달팽이. 직선 + 90도 회전만으로 이루어진 직각 나선 */
+export interface SquareSpiralVariant {
+  /** 회전 수. 한 바퀴 = 직선 구간 4개. 0.5 단위 허용 (2.5 = 10개 구간) */
+  turns: number;
+  /** 가장 바깥 한 변의 길이 (보드 너비 = 1) */
+  outerSize: number;
+  /** 가장 안쪽 마지막 구간의 길이 */
+  innerSize: number;
+  /** 진행하면서 도는 방향. true = 시계 방향 */
+  clockwise: boolean;
+  /** true = 바깥에서 안쪽으로, false = 안쪽에서 바깥으로 */
+  startOutside: boolean;
+  /** 바깥 → 안 모양을 만들 때 첫 구간의 방향 (안 → 바깥은 그 모양을 반대로 달린다) */
+  startDirection: CompassDirection;
 }
 
 export interface WaveVariant {
@@ -188,6 +251,10 @@ export type LevelConfig = LevelConfigBase &
     | {
         levelType: typeof LevelType.SPIRAL;
         pathConstraints: PathConstraints<SpiralVariant>;
+      }
+    | {
+        levelType: typeof LevelType.SQUARE_SPIRAL;
+        pathConstraints: PathConstraints<SquareSpiralVariant>;
       }
     | {
         levelType: typeof LevelType.WAVE;

@@ -28,6 +28,7 @@ export type GameAction =
   | { type: "FAIL" }
   | { type: "NEXT" }
   | { type: "RESTART_ROUND" }
+  | { type: "GOTO_ROUND"; roundIndex: number } // 테스트 컨트롤 전용
   | { type: "START_LEVEL"; levelId: number; roundCount: number };
 
 export function createGame(
@@ -72,6 +73,19 @@ export function gameReducer(s: GameState, a: GameAction): GameState {
     case "RESTART_ROUND": {
       if (s.phase !== "PLAYING") return s;
       return { ...s, serial: s.serial + 1 };
+    }
+    case "GOTO_ROUND": {
+      const idx = Math.max(0, Math.min(s.roundCount - 1, a.roundIndex));
+      const results = s.results.slice();
+      results[idx] = null;
+      return {
+        ...s,
+        roundIndex: idx,
+        results,
+        phase: "PLAYING",
+        lastResult: null,
+        serial: s.serial + 1,
+      };
     }
     case "START_LEVEL":
       return createGame(a.levelId, a.roundCount, s.serial + 1);

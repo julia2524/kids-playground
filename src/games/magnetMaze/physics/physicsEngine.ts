@@ -13,7 +13,7 @@ export function getTip(penX: number, penY: number) {
   };
 }
 
-/** 손가락(보드 기준 좌표)이 움직였을 때 펜 위치 갱신. 펜은 보드 안으로 제한. */
+/** 손가락(미로 사각형 기준 좌표)이 움직였을 때 펜 위치 갱신. 자석 끝은 미로 + 투명 여유 공간 안으로 제한. */
 export function movePen(
   s: PhysicsShared,
   x: number,
@@ -24,11 +24,13 @@ export function movePen(
   if (s.locked.value === 1) return; // 성공/실패 확정 후에는 조작 차단
   // 자석 "끝"이 보드 안에 머물도록 제한한다. (끝은 손가락보다 위쪽이라, 손가락 기준으로 제한하면
   // 보드 아래쪽 TIP_OFFSET 만큼은 자석 끝이 닿지 못해 그곳의 목적지에 갈 수 없다)
+  // 좌표 기준은 "미로 사각형"이다. 투명 여유 공간(penMargin)만큼은 미로 바깥으로도 나갈 수 있다.
+  const m = s.penMargin.value;
   const px =
-    clamp(x + GAME_CONFIG.TIP_OFFSET_X, 0, s.boardW.value) -
+    clamp(x + GAME_CONFIG.TIP_OFFSET_X, -m, s.boardW.value + m) -
     GAME_CONFIG.TIP_OFFSET_X;
   const py =
-    clamp(y + GAME_CONFIG.TIP_OFFSET_Y, 0, s.boardH.value) -
+    clamp(y + GAME_CONFIG.TIP_OFFSET_Y, -m, s.boardH.value + m) -
     GAME_CONFIG.TIP_OFFSET_Y;
   s.penX.value = px;
   s.penY.value = py;

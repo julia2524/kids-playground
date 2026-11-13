@@ -1,482 +1,3 @@
-// import {
-//   useCallback,
-//   useEffect,
-//   useMemo,
-//   useReducer,
-//   useRef,
-//   useState,
-// } from "react";
-// import { type LayoutChangeEvent } from "react-native";
-// import {
-//   runOnJS,
-//   useFrameCallback,
-//   useSharedValue,
-// } from "react-native-reanimated";
-// import { SafeAreaView } from "react-native-safe-area-context";
-// import styled from "styled-components/native";
-
-// import { resolveWalls } from "../../games/magnetMaze/physics/wallCollision";
-// import { GameBoard } from "../../components/MagnetMaze/GameBoard";
-// import { MagnetPen } from "../../components/MagnetMaze/MagnetPen";
-// import { IronBall } from "../../components/MagnetMaze/IronBall";
-// import { PathGuide } from "../../components/MagnetMaze/PathGuide";
-// import { PathWall } from "../../components/MagnetMaze/PathWall";
-// import { TimeBar } from "../../components/MagnetMaze/TimeBar";
-// import { GAME_CONFIG } from "../../constants/magnetMaze/gameConfig";
-// import { goalRadiusFor, isArrived } from "../../games/magnetMaze/game/arrival";
-// import {
-//   AUTO_ADVANCE_MS,
-//   createGame,
-//   gameReducer,
-//   isLevelPassed,
-//   remainingMs,
-//   starsOf,
-// } from "../../games/magnetMaze/game/gameState";
-// import {
-//   LEVEL_CONFIGS,
-//   fitConfigToBoard,
-//   getLevelConfig,
-// } from "../../games/magnetMaze/levels/levelConfigs";
-// import { generateRound } from "../../games/magnetMaze/levels/levelGenerator";
-// import { buildWallGeometry } from "../../games/magnetMaze/physics/collisionGeometry";
-// import { stepPhysics } from "../../games/magnetMaze/physics/physicsEngine";
-// import { BallMode, type PhysicsShared } from "../../games/magnetMaze/physics/physicsTypes";
-// import { RoundProgress } from "../../components/MagnetMaze/RoundProgress";
-// import ResultOverlay from "../../components/ResultOverlay";
-
-// const PEN_START = { x: 0.5, y: 0.85 }; // 보드 비율
-
-// type Props = {
-//   /** 뒤로가기 (Kids Playground 이전 시 AppHeader 의 뒤로가기에 연결). 없으면 버튼 숨김 */
-//   onBack?: () => void;
-//   /** 연구용 레벨 선택 칩 표시 */
-//   showLevelPicker?: boolean;
-// };
-
-// export default function MagnetMazeScreen({
-//   onBack,
-//   showLevelPicker = true,
-// }: Props) {
-//   const s: PhysicsShared = {
-//     boardW: useSharedValue(0),
-//     boardH: useSharedValue(0),
-//     ballX: useSharedValue(-100),
-//     ballY: useSharedValue(-100),
-//     ballVX: useSharedValue(0),
-//     ballVY: useSharedValue(0),
-//     ballMode: useSharedValue<number>(BallMode.FREE),
-//     attachOffX: useSharedValue(0),
-//     attachOffY: useSharedValue(0),
-//     penX: useSharedValue(-100),
-//     penY: useSharedValue(-100),
-//     penActive: useSharedValue(0),
-//     penVX: useSharedValue(0),
-//     penVY: useSharedValue(0),
-//     prevTipX: useSharedValue(0),
-//     prevTipY: useSharedValue(0),
-//     ballRadius: useSharedValue<number>(GAME_CONFIG.BALL_RADIUS),
-//     wallSegs: useSharedValue<number[]>([]),
-//     wallCount: useSharedValue(0),
-//     wallReach: useSharedValue(0),
-//     locked: useSharedValue(1), // 라운드 준비 전까지는 잠금
-//     goalX: useSharedValue(0),
-//     goalY: useSharedValue(0),
-//     goalR: useSharedValue(0),
-//   };
-
-//   // ── 게임 진행 상태 (라운드/별/결과) ────────────────────────────
-//   const [game, dispatch] = useReducer(gameReducer, undefined, () =>
-//     createGame(1, LEVEL_CONFIGS[0].roundCount),
-//   );
-//   const { levelId, roundIndex } = game;
-//   const [size, setSize] = useState<{ w: number; h: number } | null>(null);
-//   const baseConfig = getLevelConfig(levelId);
-
-//   // 정사각형 보드 한 변(px): 보드 영역의 가로/세로 중 짧은 쪽
-//   const [side, setSide] = useState(0);
-//   const onWrapLayout = (ev: LayoutChangeEvent) => {
-//     const { width, height } = ev.nativeEvent.layout;
-//     const next = Math.floor(Math.min(width, height));
-//     if (next > 0) setSide((prev) => (prev === next ? prev : next));
-//   };
-
-//   // 작은 화면에서는 통로 폭·벽 두께·구슬 반지름을 같은 비율로 줄여 보드 대비 비율을 유지
-//   const config = useMemo(
-//     () => (size ? fitConfigToBoard(baseConfig, size.w) : baseConfig),
-//     [baseConfig, size],
-//   );
-
-//   const { round, error } = useMemo(() => {
-//     if (!size) return { round: null, error: null };
-//     try {
-//       return {
-//         round: generateRound(config, roundIndex, {
-//           boardAspect: size.w / size.h,
-//           boardWidthPx: size.w,
-//         }),
-//         error: null,
-//       };
-//     } catch (e) {
-//       return { round: null, error: e instanceof Error ? e.message : String(e) };
-//     }
-//   }, [config, roundIndex, size]);
-
-//   const onBoardLayout = (w: number, h: number) => {
-//     if (w < 1 || h < 1) return;
-//     s.boardW.value = w;
-//     s.boardH.value = h;
-//     if (s.ballX.value < 0 || s.ballY.value < 0) {
-//       const r =
-//         s.ballRadius.value > 1 ? s.ballRadius.value : GAME_CONFIG.BALL_RADIUS;
-//       s.ballX.value = w * 0.5;
-//       s.ballY.value = h * 0.5;
-//       s.ballRadius.value = r;
-//     }
-//     setSize((prev) =>
-//       prev && Math.abs(prev.w - w) < 0.5 && Math.abs(prev.h - h) < 0.5
-//         ? prev
-//         : { w, h },
-//     );
-//   };
-
-//   // 벽 데이터는 라운드가 시작될 때 한 번만 계산 (렌더링과 충돌이 같은 데이터를 쓴다)
-//   const walls = useMemo(
-//     () =>
-//       round && size
-//         ? buildWallGeometry(
-//             round,
-//             config.walls,
-//             config.ballRadius,
-//             size.w,
-//             size.h,
-//           )
-//         : null,
-//     [round, size, config],
-//   );
-
-//   // ── 성공/실패 확정 (한 라운드에서 한 번만) ─────────────────────
-//   const resolvedSerial = useRef(-1);
-//   const resolve = useCallback(
-//     (kind: "SUCCESS" | "FAIL") => {
-//       if (resolvedSerial.current === game.serial) return; // 이미 확정됨
-//       resolvedSerial.current = game.serial;
-//       s.locked.value = 1; // 조작 차단 + 물리 정지
-//       s.penActive.value = 0;
-//       dispatch({ type: kind });
-//     },
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//     [game.serial],
-//   );
-//   const resolveRef = useRef(resolve);
-//   resolveRef.current = resolve;
-//   const onArriveJS = useCallback(() => resolveRef.current("SUCCESS"), []);
-
-//   // ── 물리 + 도착 판정 (UI 스레드, 매 프레임) ────────────────────
-//   useFrameCallback((frame) => {
-//     "worklet";
-//     const ms = frame.timeSincePreviousFrame;
-//     if (ms == null || s.boardW.value === 0 || s.locked.value === 1) return;
-//     stepPhysics(s, ms / 1000);
-//     if (
-//       isArrived(
-//         s.ballX.value,
-//         s.ballY.value,
-//         s.goalX.value,
-//         s.goalY.value,
-//         s.goalR.value,
-//       )
-//     ) {
-//       s.locked.value = 1;
-//       s.penActive.value = 0;
-//       runOnJS(onArriveJS)();
-//     }
-//   });
-
-//   // ── 라운드 배치 / 초기화 ───────────────────────────────────────
-//   const playing = game.phase === "PLAYING";
-//   const placeStart = useCallback(() => {
-//     if (!round || !size) return;
-//     const r =
-//       config.ballRadius > 1 ? config.ballRadius : GAME_CONFIG.BALL_RADIUS;
-//     s.ballRadius.value = r;
-//     if (walls) {
-//       s.wallSegs.value = walls.segs;
-//       s.wallCount.value = walls.segCount;
-//       s.wallReach.value = walls.reach;
-//     } else {
-//       s.wallSegs.value = [];
-//       s.wallCount.value = 0;
-//       s.wallReach.value = 0;
-//     }
-//     let sx = round.startPosition.x * size.w;
-//     let sy = round.startPosition.y * size.h;
-//     if (walls && walls.segCount > 0 && walls.reach > 0) {
-//       const snapped = resolveWalls(
-//         walls.segs,
-//         walls.segCount,
-//         walls.reach,
-//         sx,
-//         sy,
-//       );
-//       sx = snapped.x;
-//       sy = snapped.y;
-//     }
-//     sx = Math.max(r, Math.min(size.w - r, sx));
-//     sy = Math.max(r, Math.min(size.h - r, sy));
-//     s.ballX.value = sx;
-//     s.ballY.value = sy;
-//     s.ballVX.value = 0;
-//     s.ballVY.value = 0;
-//     s.ballMode.value = BallMode.FREE;
-//     s.attachOffX.value = 0;
-//     s.attachOffY.value = 0;
-//     s.penX.value = size.w * PEN_START.x;
-//     s.penY.value = size.h * PEN_START.y;
-//     s.penActive.value = 0;
-//     // 목적지 판정 영역 (화면에 그리는 표시와 같은 반지름)
-//     s.goalX.value = round.goalPosition.x * size.w;
-//     s.goalY.value = round.goalPosition.y * size.h;
-//     s.goalR.value = goalRadiusFor(
-//       config.walls.hasWalls ? config.walls.corridorWidth : undefined,
-//     );
-//     s.locked.value = 0; // 새 라운드: 조작 가능
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, [round, size, walls, config]);
-
-//   // 라운드가 (재)시작될 때마다 배치. serial 이 바뀌면 같은 라운드라도 다시 배치한다.
-//   useEffect(() => {
-//     if (playing) placeStart();
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, [placeStart, game.serial, playing]);
-
-//   // ── 타이머: 실제 경과 시간(Date.now) 기준. 물리/프레임과 독립 ──────
-//   const totalMs = config.timeLimitSeconds * 1000;
-//   const [timeLeft, setTimeLeft] = useState(totalMs);
-//   const timerActive = playing && !!round;
-//   useEffect(() => {
-//     if (!timerActive) return; // 확정되면 멈춘 채로 남는다 (정지)
-//     const start = Date.now();
-//     setTimeLeft(totalMs);
-//     const id = setInterval(() => {
-//       const left = remainingMs(start, Date.now(), totalMs);
-//       setTimeLeft(left);
-//       if (left <= 0) {
-//         clearInterval(id);
-//         resolveRef.current("FAIL");
-//       }
-//     }, 50);
-//     return () => clearInterval(id);
-//   }, [timerActive, game.serial, totalMs]);
-
-//   // ── 라운드 결과 → 잠시 후 자동으로 다음 라운드 ────────────────
-//   useEffect(() => {
-//     if (game.phase !== "ROUND_RESULT") return;
-//     const id = setTimeout(() => dispatch({ type: "NEXT" }), AUTO_ADVANCE_MS);
-//     return () => clearTimeout(id);
-//   }, [game.phase, game.serial, game.roundIndex]);
-
-//   const stars = starsOf(game.results);
-//   const startLevel = (id: number) =>
-//     dispatch({
-//       type: "START_LEVEL",
-//       levelId: id,
-//       roundCount: getLevelConfig(id).roundCount,
-//     });
-//   const nextLevelId = LEVEL_CONFIGS.find((c) => c.levelId > levelId)?.levelId;
-
-//   return (
-//     <Safe>
-//       {/* 1. 헤더: 뒤로가기 + 별 */}
-//       <Header>
-//         {onBack ? (
-//           <BackBtn onPress={onBack}>
-//             <BackText>←</BackText>
-//           </BackBtn>
-//         ) : (
-//           <BackBtn />
-//         )}
-//         <StarRow>
-//           {Array.from({ length: game.roundCount }, (_, i) => (
-//             <Star key={`star-${i}`}>
-//               {game.results[i] === "success" ? "★" : "☆"}
-//             </Star>
-//           ))}
-//         </StarRow>
-//         <ResetBtn onPress={() => dispatch({ type: "RESTART_ROUND" })}>
-//           <ResetText>다시</ResetText>
-//         </ResetBtn>
-//       </Header>
-
-//       {showLevelPicker && (
-//         <Chips>
-//           {LEVEL_CONFIGS.map((c) => (
-//             <Chip
-//               key={c.levelId}
-//               label={`L${c.levelId}`}
-//               selected={c.levelId === levelId}
-//               onPress={() => startLevel(c.levelId)}
-//             />
-//           ))}
-//         </Chips>
-//       )}
-
-//       {/* 2. 시간 막대 */}
-//       <TimeBar remainingMs={timeLeft} totalMs={totalMs} />
-//       {error && <ErrorText>{error}</ErrorText>}
-
-//       {/* 3. 게임판 (정사각형) */}
-//       <BoardWrap onLayout={onWrapLayout}>
-//         <SquareBoard side={side}>
-//           <GameBoard s={s} onBoardLayout={onBoardLayout}>
-//             {walls && size && (
-//               <PathWall geometry={walls} width={size.w} height={size.h} />
-//             )}
-//             {round && size && (
-//               <PathGuide
-//                 round={round}
-//                 width={size.w}
-//                 height={size.h}
-//                 corridorWidth={
-//                   config.walls.hasWalls ? config.walls.corridorWidth : undefined
-//                 }
-//                 ballRadius={config.ballRadius}
-//               />
-//             )}
-//             <MagnetPen s={s} />
-//             <IronBall s={s} />
-//           </GameBoard>
-//         </SquareBoard>
-//       </BoardWrap>
-
-//       {/* 4. 라운드 진행 */}
-//       <RoundProgress
-//         currentRound={roundIndex}
-//         totalRounds={game.roundCount}
-//         results={game.results}
-//       />
-
-//       {/* 5. 결과 */}
-//       {game.phase === "ROUND_RESULT" && (
-//         <ResultOverlay
-//           kind="round"
-//           success={game.lastResult === "success"}
-//           onNext={() => dispatch({ type: "NEXT" })}
-//         />
-//       )}
-//       {game.phase === "LEVEL_RESULT" && (
-//         <ResultOverlay
-//           kind="level"
-//           levelId={levelId}
-//           stars={stars}
-//           total={game.roundCount}
-//           passed={isLevelPassed(game.results)}
-//           hasNextLevel={nextLevelId !== undefined}
-//           onRetry={() => startLevel(levelId)}
-//           onNextLevel={() => nextLevelId && startLevel(nextLevelId)}
-//         />
-//       )}
-//     </Safe>
-//   );
-// }
-
-// function Chip({
-//   label,
-//   selected,
-//   onPress,
-// }: {
-//   label: string;
-//   selected: boolean;
-//   onPress: () => void;
-// }) {
-//   return (
-//     <ChipButton onPress={onPress} selected={selected}>
-//       <ChipText selected={selected}>{label}</ChipText>
-//     </ChipButton>
-//   );
-// }
-// const Safe = styled(SafeAreaView)`
-//   flex: 1;
-//   background-color: #ffe9b8;
-// `;
-
-// const Header = styled.View`
-//   flex-direction: row;
-//   align-items: center;
-//   justify-content: space-between;
-//   padding: 8px 16px;
-// `;
-
-// const BackBtn = styled.Pressable`
-//   width: 44px;
-//   height: 36px;
-//   align-items: center;
-//   justify-content: center;
-// `;
-
-// const BackText = styled.Text`
-//   font-size: 24px;
-//   font-weight: 800;
-//   color: #8a4b08;
-// `;
-
-// const StarRow = styled.View`
-//   flex-direction: row;
-// `;
-
-// const Star = styled.Text`
-//   font-size: 28px;
-//   color: #f59e0b;
-// `;
-
-// const ResetBtn = styled.Pressable`
-//   background-color: #ff8a3d;
-//   padding: 8px 14px;
-//   border-radius: 16px;
-// `;
-
-// const ResetText = styled.Text`
-//   color: white;
-//   font-size: 15px;
-//   font-weight: 700;
-// `;
-
-// const Chips = styled.View`
-//   flex-direction: row;
-//   padding: 0 16px 4px;
-// `;
-
-// const ChipButton = styled.Pressable<{ selected: boolean }>`
-//   padding: 4px 10px;
-//   border-radius: 14px;
-//   border-width: 2px;
-//   background-color: ${({ selected }) => (selected ? "#FF8A3D" : "#FFF3D6")};
-//   border-color: ${({ selected }) => (selected ? "#FF8A3D" : "#F5C26B")};
-// `;
-
-// const ChipText = styled.Text<{ selected: boolean }>`
-//   font-size: 13px;
-//   font-weight: 700;
-//   color: ${({ selected }) => (selected ? "#FFFFFF" : "#8A4B08")};
-// `;
-
-// const ErrorText = styled.Text`
-//   color: #b91c1c;
-//   padding: 0 20px 4px;
-//   font-size: 12px;
-// `;
-
-// const BoardWrap = styled.View`
-//   flex: 1;
-//   padding: 8px 16px;
-//   align-items: center;
-//   justify-content: center;
-// `;
-
-// const SquareBoard = styled.View<{ side: number }>`
-//   width: ${({ side }) => side}px;
-//   height: ${({ side }) => side}px;
-// `;
-
 import {
   useCallback,
   useEffect,
@@ -486,7 +7,10 @@ import {
   useState,
 } from "react";
 
-import { type LayoutChangeEvent } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import {
   runOnJS,
@@ -494,7 +18,7 @@ import {
   useSharedValue,
 } from "react-native-reanimated";
 
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
 // ============================================================
@@ -502,6 +26,10 @@ import styled from "styled-components/native";
 // ============================================================
 
 import AppHeader from "../../components/AppHeader";
+import ColorSortingFooter from "../../components/ColorSorting/ColorSortingFooter";
+import ClassificationTestControls from "../../components/common/ClassificationTestControls";
+import { RootStackParamList } from "../../navigation/types";
+import { computeBoardLayout } from "../../utils/magnetMaze/boardLayout";
 import ResultOverlay from "../../components/ResultOverlay";
 
 // ============================================================
@@ -514,7 +42,6 @@ import { IronBall } from "../../components/MagnetMaze/IronBall";
 import { PathGuide } from "../../components/MagnetMaze/PathGuide";
 import { PathWall } from "../../components/MagnetMaze/PathWall";
 import { TimeBar } from "../../components/MagnetMaze/TimeBar";
-import { RoundProgress } from "../../components/MagnetMaze/RoundProgress";
 
 // ============================================================
 // Magnet Maze 게임 로직
@@ -556,6 +83,11 @@ import StarRow from "../../design-system/components/StarRow";
 // Constants
 // ============================================================
 
+/** 개발/테스트용 레벨·라운드 컨트롤 (다른 게임과 동일하게 기본 숨김) */
+const SHOW_TEST_CONTROLS = true;
+
+type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
+
 const PEN_START = {
   x: 0.5,
   y: 0.85,
@@ -574,9 +106,6 @@ type Props = {
 
   /** 로드맵으로 이동 */
   onGoRoadmap?: () => void;
-
-  /** 개발용 레벨 선택 칩 */
-  showLevelPicker?: boolean;
 };
 
 // ============================================================
@@ -587,8 +116,10 @@ export default function MagnetMazePlayScreen({
   onBack,
   onHome,
   onGoRoadmap,
-  showLevelPicker = false,
 }: Props) {
+  const insets = useSafeAreaInsets();
+  const navigation = useNavigation<NavigationProps>();
+
   // ==========================================================
   // Physics Shared Values
   // ==========================================================
@@ -612,6 +143,7 @@ export default function MagnetMazePlayScreen({
     penY: useSharedValue(-100),
 
     penActive: useSharedValue(0),
+    penMargin: useSharedValue(0),
 
     penVX: useSharedValue(0),
     penVY: useSharedValue(0),
@@ -642,12 +174,14 @@ export default function MagnetMazePlayScreen({
 
   const { levelId, roundIndex } = game;
 
+  /** size = 실제 미로 크기. 물리/벽/구슬 좌표의 기준 */
   const [size, setSize] = useState<{
     w: number;
     h: number;
   } | null>(null);
 
-  const [side, setSide] = useState(0);
+  /** 투명 여유 공간 두께 (눈에 보이는 게임판 - 실제 미로) */
+  const [margin, setMargin] = useState(0);
 
   const baseConfig = getLevelConfig(levelId);
 
@@ -657,22 +191,18 @@ export default function MagnetMazePlayScreen({
   // Board Layout
   // ==========================================================
 
-  const onWrapLayout = useCallback((ev: LayoutChangeEvent) => {
-    const { width, height } = ev.nativeEvent.layout;
-
-    const next = Math.floor(Math.min(width, height));
-
-    if (next > 0) {
-      setSide((prev) => (prev === next ? prev : next));
-    }
-  }, []);
-
+  // 눈에 보이는 게임판 크기가 측정되면 → 실제 미로 크기 + 투명 여유 공간을 계산한다.
   const onBoardLayout = useCallback(
-    (w: number, h: number) => {
-      if (w < 1 || h < 1) return;
+    (boardW: number, boardH: number) => {
+      if (boardW < 1 || boardH < 1) return;
+
+      const layout = computeBoardLayout(boardW, boardH);
+      const w = layout.mazeW;
+      const h = layout.mazeH;
 
       s.boardW.value = w;
       s.boardH.value = h;
+      s.penMargin.value = layout.margin;
 
       if (s.ballX.value < 0 || s.ballY.value < 0) {
         const r =
@@ -683,6 +213,7 @@ export default function MagnetMazePlayScreen({
         s.ballRadius.value = r;
       }
 
+      setMargin((prev) => (prev === layout.margin ? prev : layout.margin));
       setSize((prev) =>
         prev && Math.abs(prev.w - w) < 0.5 && Math.abs(prev.h - h) < 0.5
           ? prev
@@ -968,19 +499,25 @@ export default function MagnetMazePlayScreen({
   // Navigation Actions
   // ==========================================================
 
+  const handleBack = useCallback(() => {
+    if (onBack) onBack();
+    else navigation.goBack();
+  }, [onBack, navigation]);
+
   const handleHome = useCallback(() => {
-    onHome?.();
-    if (!onHome) {
-      onBack?.();
-    }
-  }, [onHome, onBack]);
+    if (onHome) onHome();
+    else navigation.reset({ index: 0, routes: [{ name: "Home" }] });
+  }, [onHome, navigation]);
 
   const handleGoRoadmap = useCallback(() => {
-    onGoRoadmap?.();
-    if (!onGoRoadmap) {
-      onBack?.();
-    }
-  }, [onGoRoadmap, onBack]);
+    if (onGoRoadmap) onGoRoadmap();
+    else navigation.goBack();
+  }, [onGoRoadmap, navigation]);
+
+  // 테스트 컨트롤: 이전/다음 라운드 이동
+  const gotoRound = useCallback((index: number) => {
+    dispatch({ type: "GOTO_ROUND", roundIndex: index });
+  }, []);
 
   const handleNextLevel = useCallback(() => {
     if (nextLevelId !== undefined) {
@@ -993,13 +530,23 @@ export default function MagnetMazePlayScreen({
   // ==========================================================
 
   return (
-    <Safe>
-      {/* ==================================================== */}
-      {/* 1. 공통 헤더 */}
-      {/* ==================================================== */}
+    <View
+      style={{
+        flex: 1,
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+        backgroundColor: "#eef0fe",
+      }}
+    >
+      {/* 배경: 분류게임/패턴게임과 동일한 Kids Playground 보라 계열 */}
+      <LinearGradient
+        colors={["#D9EAFF", "#EEE8FF", "#F8F5FF"]}
+        style={StyleSheet.absoluteFill}
+      />
 
+      {/* 1. 공통 헤더 */}
       <AppHeader
-        onBackPress={onBack}
+        onBackPress={handleBack}
         title={
           <StarRow
             earnedStars={earnedStars}
@@ -1010,38 +557,21 @@ export default function MagnetMazePlayScreen({
         }
       />
 
-      {/* ==================================================== */}
-      {/* 개발용 레벨 선택 */}
-      {/* ==================================================== */}
+      <Container>
+        {/* 2. 타이머 */}
+        <TimeBar remainingMs={timeLeft} totalMs={totalMs} />
 
-      {showLevelPicker && (
-        <Chips>
-          {LEVEL_CONFIGS.map((c) => (
-            <Chip
-              key={c.levelId}
-              label={`L${c.levelId}`}
-              selected={c.levelId === levelId}
-              onPress={() => startLevel(c.levelId)}
-            />
-          ))}
-        </Chips>
-      )}
+        {error && <ErrorText>{error}</ErrorText>}
 
-      {/* ==================================================== */}
-      {/* 2. 타이머 */}
-      {/* ==================================================== */}
-
-      <TimeBar remainingMs={timeLeft} totalMs={totalMs} />
-
-      {error && <ErrorText>{error}</ErrorText>}
-
-      {/* ==================================================== */}
-      {/* 3. 게임판 */}
-      {/* ==================================================== */}
-
-      <BoardWrap onLayout={onWrapLayout}>
-        <SquareBoard side={side}>
-          <GameBoard s={s} onBoardLayout={onBoardLayout}>
+        {/* 3. 게임판: 남는 공간 전체. 안쪽에 투명 여유 공간 + 실제 미로 */}
+        <GameArea>
+          <GameBoard
+            s={s}
+            margin={margin}
+            mazeW={size?.w ?? 0}
+            mazeH={size?.h ?? 0}
+            onBoardLayout={onBoardLayout}
+          >
             {walls && size && (
               <PathWall geometry={walls} width={size.w} height={size.h} />
             )}
@@ -1062,23 +592,30 @@ export default function MagnetMazePlayScreen({
 
             <IronBall s={s} />
           </GameBoard>
-        </SquareBoard>
-      </BoardWrap>
+        </GameArea>
 
-      {/* ==================================================== */}
-      {/* 4. 라운드 진행 */}
-      {/* ==================================================== */}
+        {/* 4. 라운드 진행: 분류/패턴게임과 같은 Footer */}
+        <FooterWrapper collapsable={false}>
+          <ColorSortingFooter
+            totalRounds={game.roundCount}
+            roundIndex={roundIndex}
+          />
+        </FooterWrapper>
 
-      <RoundProgress
-        currentRound={roundIndex}
-        totalRounds={game.roundCount}
-        results={game.results}
-      />
+        {SHOW_TEST_CONTROLS && (
+          <ClassificationTestControls
+            level={levelId}
+            totalLevels={LEVEL_CONFIGS.length}
+            roundIndex={roundIndex}
+            totalRounds={game.roundCount}
+            onChangeLevel={startLevel}
+            onPreviousRound={() => gotoRound(roundIndex - 1)}
+            onNextRound={() => gotoRound(roundIndex + 1)}
+          />
+        )}
+      </Container>
 
-      {/* ==================================================== */}
       {/* 5. 레벨 완료 결과 화면 */}
-      {/* ==================================================== */}
-
       {game.phase === "LEVEL_RESULT" && (
         <ResultOverlay
           level={levelId}
@@ -1091,27 +628,7 @@ export default function MagnetMazePlayScreen({
           onGoRoadmap={handleGoRoadmap}
         />
       )}
-    </Safe>
-  );
-}
-
-// ============================================================
-// Developer Level Picker
-// ============================================================
-
-function Chip({
-  label,
-  selected,
-  onPress,
-}: {
-  label: string;
-  selected: boolean;
-  onPress: () => void;
-}) {
-  return (
-    <ChipButton onPress={onPress} selected={selected}>
-      <ChipText selected={selected}>{label}</ChipText>
-    </ChipButton>
+    </View>
   );
 }
 
@@ -1119,50 +636,28 @@ function Chip({
 // Styles
 // ============================================================
 
-const Safe = styled(SafeAreaView)`
+const Container = styled.View`
   flex: 1;
-  background-color: #ffe9b8;
-`;
-
-const Chips = styled.View`
-  flex-direction: row;
-  padding: 0 16px 4px;
-`;
-
-const ChipButton = styled.Pressable<{
-  selected: boolean;
-}>`
-  padding: 4px 10px;
-  border-radius: 14px;
-  border-width: 2px;
-  background-color: ${({ selected }) => (selected ? "#FF8A3D" : "#FFF3D6")};
-  border-color: ${({ selected }) => (selected ? "#FF8A3D" : "#F5C26B")};
-`;
-
-const ChipText = styled.Text<{
-  selected: boolean;
-}>`
-  font-size: 13px;
-  font-weight: 700;
-  color: ${({ selected }) => (selected ? "#FFFFFF" : "#8A4B08")};
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 8px;
 `;
 
 const ErrorText = styled.Text`
   color: #b91c1c;
-  padding: 0 20px 4px;
+  padding: 0 4px 4px;
   font-size: 12px;
 `;
 
-const BoardWrap = styled.View`
+const GameArea = styled.View`
   flex: 1;
-  padding: 8px 16px;
-  align-items: center;
-  justify-content: center;
+  direction: ltr;
 `;
 
-const SquareBoard = styled.View<{
-  side: number;
-}>`
-  width: ${({ side }) => side}px;
-  height: ${({ side }) => side}px;
+const FooterWrapper = styled.View`
+  width: 100%;
+  height: 44px;
+  justify-content: center;
+  margin-top: 4px;
+  margin-bottom: 4px;
 `;

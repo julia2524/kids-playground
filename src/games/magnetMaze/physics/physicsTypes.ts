@@ -28,6 +28,8 @@ export interface PhysicsShared {
   penX: SharedValue<number>;
   penY: SharedValue<number>;
   penActive: SharedValue<number>; // 1 = 터치 중
+  /** 미로 바깥 투명 여유 공간 두께(px). 자석 끝은 미로 사각형 바깥 이만큼까지 나갈 수 있다 (구슬은 못 나감) */
+  penMargin: SharedValue<number>;
   penVX: SharedValue<number>; // 자석 끝의 부드러운 속도 (손 뗄 때 관성에 사용)
   penVY: SharedValue<number>;
   prevTipX: SharedValue<number>;

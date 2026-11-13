@@ -3,6 +3,7 @@ import {
   buildFree,
   buildLShape,
   buildSpiral,
+  buildSquareSpiral,
   buildStraight,
   buildWave,
   buildZigzag,
@@ -110,6 +111,10 @@ function buildRaw(config: LevelConfig, roundIndex: number): WorldPath {
       return buildCircle(pick(config.pathConstraints.variants, roundIndex));
     case LevelType.SPIRAL:
       return buildSpiral(pick(config.pathConstraints.variants, roundIndex));
+    case LevelType.SQUARE_SPIRAL:
+      return buildSquareSpiral(
+        pick(config.pathConstraints.variants, roundIndex),
+      );
     case LevelType.WAVE:
       return buildWave(pick(config.pathConstraints.variants, roundIndex));
     case LevelType.ZIGZAG:

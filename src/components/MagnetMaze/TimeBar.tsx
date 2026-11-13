@@ -26,22 +26,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
-    paddingHorizontal: 16,
+    paddingHorizontal: 0,
     paddingVertical: 6,
   },
   track: {
     flex: 1,
     height: 16,
     borderRadius: 8,
-    backgroundColor: "#FFD9DE", // 연한 분홍 바탕
+    backgroundColor: "#E6E1F4", // 연한 보라 바탕 (border.default)
     overflow: "hidden",
   },
-  fill: { height: "100%", backgroundColor: "#E53935", borderRadius: 8 },
+  fill: { height: "100%", backgroundColor: "#FF7A7A", borderRadius: 8 },
   label: {
     width: 44,
     textAlign: "right",
     fontSize: 15,
     fontWeight: "800",
-    color: "#B71C1C",
+    color: "#29263D",
   },
 });
