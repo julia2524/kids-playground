@@ -1,13 +1,3 @@
-// // ─────────────────────────────────────────────────────────────
-// // LevelType / LevelConfig / GeneratedRound 타입 정의
-// //
-// // 좌표 규칙
-// //  - GeneratedRound 의 모든 좌표는 정규화 좌표(x: 0~1, y: 0~1).
-// //  - 화면 좌표 = (x * 보드너비, y * 보드높이)  →  toBoardPoint() 사용
-// //  - 길이(length, radius, distance …)는 "보드 너비 = 1" 기준의 단위.
-// //    (원이 타원으로 찌그러지지 않도록, 생성기는 보드 가로세로비를 보고 계산한다)
-// // ─────────────────────────────────────────────────────────────
-
 // /** 경로의 유형. 레벨 번호와 분리해서 관리 → 같은 유형을 여러 레벨에서 재사용 가능 */
 // export const LevelType = {
 //   FREE: "FREE", // 자유 이동 (경로 없음)
@@ -18,6 +8,8 @@
 //   SQUARE_SPIRAL: "SQUARE_SPIRAL", // 네모난 달팽이 (직선 + 90도 회전)
 //   WAVE: "WAVE", // 파도형
 //   ZIGZAG: "ZIGZAG", // 지그재그
+//   /** Level 8+: 갈림길 + 막다른 길이 있는 복합 미로 (단일 정답 경로 + 탐색 분기) */
+//   BRANCHED: "BRANCHED",
 // } as const;
 // export type LevelType = (typeof LevelType)[keyof typeof LevelType];
 
@@ -154,6 +146,19 @@
 //   reversed?: boolean;
 // }
 
+// /**
+//  * Level 8 갈림길 미로.
+//  * mainPoints: 출발지 → (갈림길) → 목적지 정답 경로 (월드 좌표, 원점 근처)
+//  * branchPoints: 갈림길에서 시작하는 막다른 길. 첫 점이 갈림길(main 위의 한 점)과 일치해야 함.
+//  * 일자·ㄱ·ㄴ 조합으로 손으로 설계한 경로를 넣는다.
+//  */
+// export interface BranchedVariant {
+//   /** 정답 경로 점열 (시작 → 갈림 → 목적지). 최소 3점 권장 */
+//   mainPoints: Point[];
+//   /** 막다른 길 점열. 첫 점은 갈림길(main 상의 점)과 같아야 함 */
+//   branchPoints: Point[];
+// }
+
 // export interface PathConstraints<V> {
 //   variants: readonly V[];
 // }
@@ -264,6 +269,10 @@
 //         levelType: typeof LevelType.ZIGZAG;
 //         pathConstraints: PathConstraints<ZigzagVariant>;
 //       }
+//     | {
+//         levelType: typeof LevelType.BRANCHED;
+//         pathConstraints: PathConstraints<BranchedVariant>;
+//       }
 //   );
 
 // // ── GeneratedRound ─────────────────────────────────────────
@@ -275,11 +284,17 @@
 //   levelType: LevelType;
 //   startPosition: Point; // 쇠구슬 시작점 (정규화 좌표)
 //   goalPosition: Point; // 목적지 (정규화 좌표)
-//   /** 시각적 가이드 경로. FREE 레벨은 빈 배열(경로 없음) */
+//   /** 시각적 가이드 경로(정답 메인). FREE 레벨은 빈 배열(경로 없음) */
 //   pathPoints: Point[];
+//   /**
+//    * BRANCHED 전용: 막다른 길 등 추가 통로 중심선들.
+//    * 각 배열은 하나의 폴리라인(정규화 좌표). 갈림길에서 main 과 연결된다.
+//    * 렌더링·충돌은 pathPoints + extraPathPoints 의 합집합 통로를 사용한다.
+//    */
+//   extraPathPoints?: Point[][];
 //   difficulty: number;
 //   seed: number;
-//   /** 경로 길이 (보드 너비 = 1). FREE 는 시작-목적지 직선거리 */
+//   /** 경로 길이 (보드 너비 = 1). FREE 는 시작-목적지 직선거리. BRANCHED 는 정답 경로 길이 */
 //   pathLength: number;
 //   /** 생성에 사용한 보드 가로/세로 비. 보드 크기가 바뀌면(회전 등) 다시 생성해야 함 */
 //   boardAspect: number;
@@ -532,6 +547,12 @@ export interface LevelConfigBase {
   magnetSettings: MagnetSettings;
   rules?: Partial<ValidationRules>;
   variation?: Partial<LevelVariation>;
+  /**
+   * true 면 라운드마다 variants 목록에서 고르지 않고, 레벨의 학습 목표를 지키는 범위 안에서
+   * 새 variant 를 랜덤 생성한다 (randomVariants.ts). 이때 variants 는 "생성 범위를 정한 기준 자료"일 뿐이다.
+   * 생략/false 면 기존처럼 roundIndex 로 variants 를 고른다 (Level 1~5).
+   */
+  randomVariants?: boolean;
 }
 
 /** levelType 에 따라 pathConstraints 의 모양이 달라지는 합집합 타입 */

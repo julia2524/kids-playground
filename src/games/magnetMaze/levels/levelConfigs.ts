@@ -329,6 +329,111 @@
 //   },
 // };
 
+// // ── Level 8. 첫 갈림길 미로 (일자 + ㄱ/ㄴ 조합) ──────────────
+// // 학습 목표: 갈림길 1개 · 막다른 길 1개 경험, 잘못 들어간 뒤 되돌아오기
+// // 구조: START ─→ JUNCTION ─→ GOAL (정답) + JUNCTION ─→ DEAD_END
+// // Round 1~5는 같은 복잡도, 방향·배치만 다르게 한다.
+
+// const level8: LevelConfig = {
+//   ...COMMON,
+//   levelId: 8,
+//   levelType: LevelType.BRANCHED,
+//   timeLimitSeconds: 70,
+//   ballRadius: MAZE_BALL_RADIUS,
+//   walls: {
+//     hasWalls: true,
+//     corridorWidth: 84,
+//     wallThickness: 14,
+//     cornerRadius: 36,
+//     minCorridorWidth: 52,
+//   },
+//   pathConstraints: {
+//     variants: [
+//       // R1: 가로 일자 메인, 중간에서 위로 막다른 길 (T자)
+//       //     START ─── JUNCTION ─── GOAL
+//       //                   │
+//       //                DEAD_END
+//       {
+//         mainPoints: [
+//           { x: -0.38, y: 0 },
+//           { x: 0, y: 0 },
+//           { x: 0.38, y: 0 },
+//         ],
+//         branchPoints: [
+//           { x: 0, y: 0 },
+//           { x: 0, y: -0.32 },
+//         ],
+//       },
+//       // R2: 세로 일자 메인, 중간에서 오른쪽으로 막다른 길
+//       //     START
+//       //       │
+//       //    JUNCTION ── DEAD_END
+//       //       │
+//       //      GOAL
+//       {
+//         mainPoints: [
+//           { x: 0, y: -0.4 },
+//           { x: 0, y: 0 },
+//           { x: 0, y: 0.4 },
+//         ],
+//         branchPoints: [
+//           { x: 0, y: 0 },
+//           { x: 0.32, y: 0 },
+//         ],
+//       },
+//       // R3: ㄱ자 메인 (오른쪽→아래) + 갈림에서 위쪽으로 막다른 길
+//       //              DEAD
+//       //               ↑
+//       //     START ─── JUNCTION
+//       //                   │
+//       //                   ↓
+//       //                  GOAL
+//       {
+//         mainPoints: [
+//           { x: -0.32, y: -0.12 },
+//           { x: 0.2, y: -0.12 },
+//           { x: 0.2, y: 0.36 },
+//         ],
+//         branchPoints: [
+//           { x: 0.2, y: -0.12 },
+//           { x: 0.2, y: -0.38 },
+//         ],
+//       },
+//       // R4: ㄴ자 메인 (아래→오른쪽) + 갈림에서 왼쪽으로 막다른 길
+//       //     START
+//       //       │
+//       //  DEAD ← JUNCTION ─── GOAL
+//       {
+//         mainPoints: [
+//           { x: -0.1, y: -0.36 },
+//           { x: -0.1, y: 0.18 },
+//           { x: 0.36, y: 0.18 },
+//         ],
+//         branchPoints: [
+//           { x: -0.1, y: 0.18 },
+//           { x: -0.38, y: 0.18 },
+//         ],
+//       },
+//       // R5: 가로→아래→오른쪽 (ㄱ 후 일자) 메인, 첫 코너에서 위쪽 막다른 길
+//       //     DEAD
+//       //       ↑
+//       //     START ─── J ─── (아래) ─── GOAL (오른쪽)
+//       {
+//         mainPoints: [
+//           { x: -0.36, y: -0.12 },
+//           { x: 0.12, y: -0.12 },
+//           { x: 0.12, y: 0.32 },
+//           { x: 0.38, y: 0.32 },
+//         ],
+//         branchPoints: [
+//           { x: 0.12, y: -0.12 },
+//           { x: 0.12, y: -0.38 },
+//         ],
+//       },
+//     ],
+//   },
+// };
+
 // export const LEVEL_CONFIGS: readonly LevelConfig[] = [
 //   level1,
 //   level2,
@@ -337,6 +442,7 @@
 //   level5,
 //   level6,
 //   level7,
+//   level8,
 // ];
 
 // /**
@@ -591,13 +697,15 @@ const level5: LevelConfig = {
 };
 
 // ── Level 6. 둥근 달팽이 미로 ──────────────────────────────
-// 기존 Level 5 설정을 그대로 이동한다.
+// randomVariants: 라운드마다 randomVariants.ts 의 generateSpiralVariant 가 새 나선을 만든다.
+// 아래 variants 는 생성 범위를 정한 기준 자료이며, 모든 라운드의 회전 수는 1.25 로 같다.
 
 const level6: LevelConfig = {
   ...COMMON,
   levelId: 6,
   levelType: LevelType.SPIRAL,
   timeLimitSeconds: 75,
+  randomVariants: true,
   ballRadius: GAME_CONFIG.BALL_RADIUS,
   walls: {
     hasWalls: true,
@@ -641,7 +749,7 @@ const level6: LevelConfig = {
         startAngleDeg: 90,
       },
       {
-        turns: 1.75,
+        turns: 1.25, // 라운드 5 만 난이도가 튀지 않도록 다른 라운드와 같게 (기존 1.75)
         outerRadius: 0.38,
         innerRadius: 0.085,
         clockwise: true,
@@ -653,13 +761,15 @@ const level6: LevelConfig = {
 };
 
 // ── Level 7. 네모난 달팽이 미로 ────────────────────────────
-// 기존 Level 6 설정을 그대로 이동한다.
+// randomVariants: 라운드마다 randomVariants.ts 의 generateSquareSpiralVariant 가 새 네모 나선을 만든다.
+// 아래 variants 는 생성 범위를 정한 기준 자료이며, 모든 라운드의 회전 수는 2 로 같다.
 
 const level7: LevelConfig = {
   ...COMMON,
   levelId: 7,
   levelType: LevelType.SQUARE_SPIRAL,
   timeLimitSeconds: 90,
+  randomVariants: true,
   ballRadius: MAZE_BALL_RADIUS,
   walls: {
     hasWalls: true,
@@ -703,9 +813,9 @@ const level7: LevelConfig = {
         startDirection: "UP",
       },
       {
-        turns: 2.5,
+        turns: 2, // 라운드 5 만 난이도가 튀지 않도록 다른 라운드와 같게 (기존 2.5 / 0.2)
         outerSize: 0.8,
-        innerSize: 0.2,
+        innerSize: 0.23,
         clockwise: true,
         startOutside: true,
         startDirection: "DOWN",
@@ -718,12 +828,15 @@ const level7: LevelConfig = {
 // 학습 목표: 갈림길 1개 · 막다른 길 1개 경험, 잘못 들어간 뒤 되돌아오기
 // 구조: START ─→ JUNCTION ─→ GOAL (정답) + JUNCTION ─→ DEAD_END
 // Round 1~5는 같은 복잡도, 방향·배치만 다르게 한다.
+// randomVariants: 라운드마다 randomVariants.ts 의 generateBranchedVariant 가 새 갈림길 미로를 만든다.
+// 아래 variants 5개는 생성 범위(구간 길이, 막다른 길 길이, 갈림길 구조)를 정한 기준 자료다.
 
 const level8: LevelConfig = {
   ...COMMON,
   levelId: 8,
   levelType: LevelType.BRANCHED,
   timeLimitSeconds: 70,
+  randomVariants: true,
   ballRadius: MAZE_BALL_RADIUS,
   walls: {
     hasWalls: true,
