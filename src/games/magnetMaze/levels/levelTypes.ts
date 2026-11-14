@@ -1,3 +1,13 @@
+// // ─────────────────────────────────────────────────────────────
+// // LevelType / LevelConfig / GeneratedRound 타입 정의
+// //
+// // 좌표 규칙
+// //  - GeneratedRound 의 모든 좌표는 정규화 좌표(x: 0~1, y: 0~1).
+// //  - 화면 좌표 = (x * 보드너비, y * 보드높이)  →  toBoardPoint() 사용
+// //  - 길이(length, radius, distance …)는 "보드 너비 = 1" 기준의 단위.
+// //    (원이 타원으로 찌그러지지 않도록, 생성기는 보드 가로세로비를 보고 계산한다)
+// // ─────────────────────────────────────────────────────────────
+
 // /** 경로의 유형. 레벨 번호와 분리해서 관리 → 같은 유형을 여러 레벨에서 재사용 가능 */
 // export const LevelType = {
 //   FREE: "FREE", // 자유 이동 (경로 없음)
@@ -232,6 +242,12 @@
 //   magnetSettings: MagnetSettings;
 //   rules?: Partial<ValidationRules>;
 //   variation?: Partial<LevelVariation>;
+//   /**
+//    * true 면 라운드마다 variants 목록에서 고르지 않고, 레벨의 학습 목표를 지키는 범위 안에서
+//    * 새 variant 를 랜덤 생성한다 (randomVariants.ts). 이때 variants 는 "생성 범위를 정한 기준 자료"일 뿐이다.
+//    * 생략/false 면 기존처럼 roundIndex 로 variants 를 고른다 (Level 1~5).
+//    */
+//   randomVariants?: boolean;
 // }
 
 // /** levelType 에 따라 pathConstraints 의 모양이 달라지는 합집합 타입 */
@@ -325,6 +341,8 @@ export const LevelType = {
   ZIGZAG: "ZIGZAG", // 지그재그
   /** Level 8+: 갈림길 + 막다른 길이 있는 복합 미로 (단일 정답 경로 + 탐색 분기) */
   BRANCHED: "BRANCHED",
+  /** Level 9+: 갈림길이 여러 번(junctionCount) 연속으로 나오는 미로. 갈림길마다 막다른 길 1개 */
+  MULTI_BRANCHED: "MULTI_BRANCHED",
 } as const;
 export type LevelType = (typeof LevelType)[keyof typeof LevelType];
 
@@ -474,6 +492,17 @@ export interface BranchedVariant {
   branchPoints: Point[];
 }
 
+/**
+ * Level 9+ 연속 갈림길 미로.
+ * mainPoints: 출발지 → (갈림길 1) → … → (갈림길 N) → 목적지 정답 경로
+ * branches: 갈림길마다 하나씩, 그 갈림길에서 시작하는 막다른 길 (각 첫 점 = main 위의 갈림길 꼭짓점)
+ * 갈림길 수 = branches.length = config 의 junctionCount
+ */
+export interface MultiBranchedVariant {
+  mainPoints: Point[];
+  branches: Point[][];
+}
+
 export interface PathConstraints<V> {
   variants: readonly V[];
 }
@@ -593,6 +622,12 @@ export type LevelConfig = LevelConfigBase &
     | {
         levelType: typeof LevelType.BRANCHED;
         pathConstraints: PathConstraints<BranchedVariant>;
+      }
+    | {
+        levelType: typeof LevelType.MULTI_BRANCHED;
+        /** 정답 경로에서 만나는 갈림길 수 (Level 9 = 2, Level 10 = 3 …) */
+        junctionCount: number;
+        pathConstraints: PathConstraints<MultiBranchedVariant>;
       }
   );
 

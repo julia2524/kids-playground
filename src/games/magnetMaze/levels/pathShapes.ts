@@ -1,4 +1,5 @@
 // import type {
+//   BranchedVariant,
 //   CircleVariant,
 //   CompassDirection,
 //   SquareSpiralVariant,
@@ -18,12 +19,14 @@
 //  * 보드 중앙 배치 · 크기 맞춤 · 정규화는 levelGenerator 가 담당한다.
 //  */
 // export interface WorldPath {
-//   /** 가이드 경로. FREE 는 빈 배열 */
+//   /** 가이드 경로(정답 메인). FREE 는 빈 배열 */
 //   points: Point[];
 //   start: Point;
 //   goal: Point;
 //   /** 나선의 고리 사이 간격(검증용) */
 //   ringSpacing?: number;
+//   /** BRANCHED: 갈림길에서 뻗어 나가는 추가 통로들 (각 폴리라인의 첫 점이 갈림길) */
+//   branches?: Point[][];
 // }
 
 // const DEG = Math.PI / 180;
@@ -232,8 +235,35 @@
 //   return fromPoints(v.reversed ? pts.reverse() : pts);
 // }
 
+// /**
+//  * Level 8 갈림길 미로.
+//  * mainPoints 를 정답 경로로, branchPoints 를 막다른 길로 사용한다.
+//  * 좌표는 월드(보드 너비=1) 기준이며, generator 가 중앙 배치·스케일한다.
+//  */
+// export function buildBranched(v: BranchedVariant): WorldPath {
+//   const main = v.mainPoints.slice();
+//   if (main.length < 2) {
+//     throw new Error(
+//       "[pathShapes] BranchedVariant.mainPoints 는 2점 이상이어야 합니다",
+//     );
+//   }
+//   const branch = v.branchPoints.slice();
+//   if (branch.length < 2) {
+//     throw new Error(
+//       "[pathShapes] BranchedVariant.branchPoints 는 2점 이상이어야 합니다",
+//     );
+//   }
+//   return {
+//     points: main,
+//     start: main[0],
+//     goal: main[main.length - 1],
+//     branches: [branch],
+//   };
+// }
+
 import type {
   BranchedVariant,
+  MultiBranchedVariant,
   CircleVariant,
   CompassDirection,
   SquareSpiralVariant,
@@ -492,5 +522,30 @@ export function buildBranched(v: BranchedVariant): WorldPath {
     start: main[0],
     goal: main[main.length - 1],
     branches: [branch],
+  };
+}
+
+/**
+ * Level 9+ 연속 갈림길 미로.
+ * 정답 경로(mainPoints)에 막다른 길(branches)을 여러 개 붙인다. 좌표 규약은 buildBranched 와 같다.
+ * 갈림길-통로 연결 검증은 levelGenerator 의 analyzeMaze 가 실제 연결 그래프로 한다.
+ */
+export function buildMultiBranched(v: MultiBranchedVariant): WorldPath {
+  const main = v.mainPoints.slice();
+  if (main.length < 2) {
+    throw new Error(
+      "[pathShapes] MultiBranchedVariant.mainPoints 는 2점 이상이어야 합니다",
+    );
+  }
+  if (v.branches.length < 1 || v.branches.some((b) => b.length < 2)) {
+    throw new Error(
+      "[pathShapes] MultiBranchedVariant.branches 는 1개 이상이고 각 2점 이상이어야 합니다",
+    );
+  }
+  return {
+    points: main,
+    start: main[0],
+    goal: main[main.length - 1],
+    branches: v.branches.map((b) => b.slice()),
   };
 }

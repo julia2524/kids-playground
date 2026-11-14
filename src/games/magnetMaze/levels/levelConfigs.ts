@@ -206,13 +206,15 @@
 // };
 
 // // ── Level 6. 둥근 달팽이 미로 ──────────────────────────────
-// // 기존 Level 5 설정을 그대로 이동한다.
+// // randomVariants: 라운드마다 randomVariants.ts 의 generateSpiralVariant 가 새 나선을 만든다.
+// // 아래 variants 는 생성 범위를 정한 기준 자료이며, 모든 라운드의 회전 수는 1.25 로 같다.
 
 // const level6: LevelConfig = {
 //   ...COMMON,
 //   levelId: 6,
 //   levelType: LevelType.SPIRAL,
 //   timeLimitSeconds: 75,
+//   randomVariants: true,
 //   ballRadius: GAME_CONFIG.BALL_RADIUS,
 //   walls: {
 //     hasWalls: true,
@@ -256,7 +258,7 @@
 //         startAngleDeg: 90,
 //       },
 //       {
-//         turns: 1.75,
+//         turns: 1.25, // 라운드 5 만 난이도가 튀지 않도록 다른 라운드와 같게 (기존 1.75)
 //         outerRadius: 0.38,
 //         innerRadius: 0.085,
 //         clockwise: true,
@@ -268,13 +270,15 @@
 // };
 
 // // ── Level 7. 네모난 달팽이 미로 ────────────────────────────
-// // 기존 Level 6 설정을 그대로 이동한다.
+// // randomVariants: 라운드마다 randomVariants.ts 의 generateSquareSpiralVariant 가 새 네모 나선을 만든다.
+// // 아래 variants 는 생성 범위를 정한 기준 자료이며, 모든 라운드의 회전 수는 2 로 같다.
 
 // const level7: LevelConfig = {
 //   ...COMMON,
 //   levelId: 7,
 //   levelType: LevelType.SQUARE_SPIRAL,
 //   timeLimitSeconds: 90,
+//   randomVariants: true,
 //   ballRadius: MAZE_BALL_RADIUS,
 //   walls: {
 //     hasWalls: true,
@@ -318,9 +322,9 @@
 //         startDirection: "UP",
 //       },
 //       {
-//         turns: 2.5,
+//         turns: 2, // 라운드 5 만 난이도가 튀지 않도록 다른 라운드와 같게 (기존 2.5 / 0.2)
 //         outerSize: 0.8,
-//         innerSize: 0.2,
+//         innerSize: 0.23,
 //         clockwise: true,
 //         startOutside: true,
 //         startDirection: "DOWN",
@@ -333,12 +337,15 @@
 // // 학습 목표: 갈림길 1개 · 막다른 길 1개 경험, 잘못 들어간 뒤 되돌아오기
 // // 구조: START ─→ JUNCTION ─→ GOAL (정답) + JUNCTION ─→ DEAD_END
 // // Round 1~5는 같은 복잡도, 방향·배치만 다르게 한다.
+// // randomVariants: 라운드마다 randomVariants.ts 의 generateBranchedVariant 가 새 갈림길 미로를 만든다.
+// // 아래 variants 5개는 생성 범위(구간 길이, 막다른 길 길이, 갈림길 구조)를 정한 기준 자료다.
 
 // const level8: LevelConfig = {
 //   ...COMMON,
 //   levelId: 8,
 //   levelType: LevelType.BRANCHED,
 //   timeLimitSeconds: 70,
+//   randomVariants: true,
 //   ballRadius: MAZE_BALL_RADIUS,
 //   walls: {
 //     hasWalls: true,
@@ -434,6 +441,55 @@
 //   },
 // };
 
+// // ── Level 9. 갈림길이 두 번 나오는 미로 ─────────────────────
+// // 학습 목표: 연속된 두 번의 선택 (START → 갈림길 A → 갈림길 B → GOAL), 갈림길마다 막다른 길 1개
+// // 보드를 넓게 쓰도록 통로를 Level 8(폭 84 / 벽 14)보다 좁게 잡는다. 구슬(반지름 16)이 지나기에 충분하다.
+// // randomVariants: 라운드마다 generateMultiBranchedVariant 가 4×4 격자 위에서 새 미로를 만든다.
+// // variants 는 기준 자료용 예시 1개다(랜덤 생성이 꺼졌을 때만 사용).
+
+// const level9: LevelConfig = {
+//   ...COMMON,
+//   levelId: 9,
+//   levelType: LevelType.MULTI_BRANCHED,
+//   junctionCount: 2,
+//   timeLimitSeconds: 90,
+//   randomVariants: true,
+//   ballRadius: MAZE_BALL_RADIUS,
+//   walls: {
+//     hasWalls: true,
+//     corridorWidth: 66,
+//     wallThickness: 10,
+//     cornerRadius: 28,
+//     minCorridorWidth: 48,
+//   },
+//   pathConstraints: {
+//     variants: [
+//       {
+//         mainPoints: [
+//           { x: -0.33, y: -0.33 },
+//           { x: -0.33, y: -0.11 },
+//           { x: 0.11, y: -0.11 },
+//           { x: 0.11, y: 0.11 },
+//           { x: 0.11, y: 0.33 },
+//           { x: 0.33, y: 0.33 },
+//         ],
+//         branches: [
+//           [
+//             { x: -0.33, y: -0.11 },
+//             { x: -0.11, y: -0.11 },
+//             { x: -0.11, y: 0.33 },
+//           ],
+//           [
+//             { x: 0.11, y: 0.11 },
+//             { x: 0.33, y: 0.11 },
+//             { x: 0.33, y: -0.11 },
+//           ],
+//         ],
+//       },
+//     ],
+//   },
+// };
+
 // export const LEVEL_CONFIGS: readonly LevelConfig[] = [
 //   level1,
 //   level2,
@@ -443,6 +499,7 @@
 //   level6,
 //   level7,
 //   level8,
+//   level9,
 // ];
 
 // /**
@@ -932,6 +989,109 @@ const level8: LevelConfig = {
   },
 };
 
+// ── Level 9. 갈림길이 두 번 나오는 미로 ─────────────────────
+// 학습 목표: 연속된 두 번의 선택 (START → 갈림길 A → 갈림길 B → GOAL), 갈림길마다 막다른 길 1개
+// 보드를 넓게 쓰도록 통로를 Level 8(폭 84 / 벽 14)보다 좁게 잡는다. 구슬(반지름 16)이 지나기에 충분하다.
+// randomVariants: 라운드마다 generateMultiBranchedVariant 가 4×4 격자 위에서 새 미로를 만든다.
+// variants 는 기준 자료용 예시 1개다(랜덤 생성이 꺼졌을 때만 사용).
+
+const level9: LevelConfig = {
+  ...COMMON,
+  levelId: 9,
+  levelType: LevelType.MULTI_BRANCHED,
+  junctionCount: 2,
+  timeLimitSeconds: 90,
+  randomVariants: true,
+  ballRadius: MAZE_BALL_RADIUS,
+  walls: {
+    hasWalls: true,
+    corridorWidth: 66,
+    wallThickness: 10,
+    cornerRadius: 28,
+    minCorridorWidth: 48,
+  },
+  pathConstraints: {
+    variants: [
+      {
+        mainPoints: [
+          { x: -0.33, y: -0.33 },
+          { x: -0.33, y: -0.11 },
+          { x: 0.11, y: -0.11 },
+          { x: 0.11, y: 0.11 },
+          { x: 0.11, y: 0.33 },
+          { x: 0.33, y: 0.33 },
+        ],
+        branches: [
+          [
+            { x: -0.33, y: -0.11 },
+            { x: -0.11, y: -0.11 },
+            { x: -0.11, y: 0.33 },
+          ],
+          [
+            { x: 0.11, y: 0.11 },
+            { x: 0.33, y: 0.11 },
+            { x: 0.33, y: -0.11 },
+          ],
+        ],
+      },
+    ],
+  },
+};
+
+// ── Level 10. 갈림길이 세 번 나오는 미로 ─────────────────────
+// 학습 목표: 연속된 세 번의 선택 (START → A → B → C → GOAL), 갈림길마다 막다른 길 1개
+// Level 9 와 같은 생성기(MULTI_BRANCHED)를 junctionCount 만 3 으로 바꿔 재사용한다.
+// 통로 폭 / 벽 두께 / 구슬 크기는 Level 9 와 동일하고, 갈림길이 늘어난 만큼 5×5 격자를 쓴다.
+// variants 는 랜덤 생성이 꺼졌을 때만 쓰는 기준 예시 1개다.
+
+const level10: LevelConfig = {
+  ...COMMON,
+  levelId: 10,
+  levelType: LevelType.MULTI_BRANCHED,
+  junctionCount: 3,
+  timeLimitSeconds: 100,
+  randomVariants: true,
+  ballRadius: MAZE_BALL_RADIUS,
+  walls: {
+    hasWalls: true,
+    corridorWidth: 66,
+    wallThickness: 10,
+    cornerRadius: 28,
+    minCorridorWidth: 48,
+  },
+  pathConstraints: {
+    variants: [
+      {
+        mainPoints: [
+          { x: -0.36, y: -0.36 },
+          { x: -0.36, y: -0.18 },
+          { x: 0, y: -0.18 },
+          { x: 0, y: 0.18 },
+          { x: 0.36, y: 0.18 },
+          { x: 0.36, y: 0.36 },
+        ],
+        branches: [
+          [
+            { x: -0.36, y: -0.18 },
+            { x: -0.18, y: -0.18 },
+            { x: -0.18, y: 0.18 },
+          ],
+          [
+            { x: 0, y: -0.18 },
+            { x: 0.36, y: -0.18 },
+            { x: 0.36, y: -0.36 },
+          ],
+          [
+            { x: 0, y: 0.18 },
+            { x: 0, y: 0.36 },
+            { x: -0.36, y: 0.36 },
+          ],
+        ],
+      },
+    ],
+  },
+};
+
 export const LEVEL_CONFIGS: readonly LevelConfig[] = [
   level1,
   level2,
@@ -941,6 +1101,8 @@ export const LEVEL_CONFIGS: readonly LevelConfig[] = [
   level6,
   level7,
   level8,
+  level9,
+  level10,
 ];
 
 /**

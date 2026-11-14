@@ -1,5 +1,6 @@
 // import {
 //   buildBranched,
+//   buildMultiBranched,
 //   buildCircle,
 //   buildFree,
 //   buildLShape,
@@ -26,17 +27,24 @@
 //   minShortcutGap,
 //   minTurnRadius,
 // } from "../physics/collisionGeometry";
+// import { RANDOM_VARIANT_GENERATORS } from "./randomVariants";
 
 // export interface GenerateOptions {
 //   /** 게임 보드의 가로/세로 비 (width / height). 원이 찌그러지지 않게 하는 데 필요 */
 //   boardAspect: number;
 //   /** 보드 가로 길이(px). 벽이 있는 레벨은 통로 폭(px)을 정규화 좌표와 맞추는 데 필요하다 */
 //   boardWidthPx?: number;
-//   /** 시드 기준값. 같은 값이면 항상 같은 라운드가 나온다 */
+//   /**
+//    * 시드 기준값. 같은 값이면 항상 같은 라운드가 나온다.
+//    * 레벨(세션)을 시작할 때 한 번 정해서 그 레벨이 끝날 때까지 같은 값을 넘겨야
+//    * 리렌더링/라운드 재시작에도 미로가 바뀌지 않는다.
+//    */
 //   baseSeed?: number;
 // }
 
 // const MAX_ATTEMPTS = 8;
+// /** 랜덤 variant 생성 시 검증에 실패하면 새 매개변수로 다시 뽑는 최대 횟수 */
+// const MAX_RANDOM_ATTEMPTS = 60;
 // const EPS = 1e-6;
 
 // // ── 유틸 ───────────────────────────────────────────────────
@@ -111,7 +119,38 @@
 
 // // ── 1) 레벨 유형별 원본 형태 ───────────────────────────────────
 
-// function buildRaw(config: LevelConfig, roundIndex: number): WorldPath {
+// function buildRaw(
+//   config: LevelConfig,
+//   roundIndex: number,
+//   rng: () => number,
+// ): WorldPath {
+//   // 랜덤 생성 레벨: 기존 variants 에서 고르지 않고, 레벨 규칙에 맞는 새 매개변수를 뽑아
+//   // 기존 build 함수(buildSpiral / buildSquareSpiral / buildBranched)에 그대로 넘긴다.
+//   if (config.randomVariants) {
+//     switch (config.levelType) {
+//       case LevelType.SPIRAL:
+//         return buildSpiral(RANDOM_VARIANT_GENERATORS[LevelType.SPIRAL](rng));
+//       case LevelType.SQUARE_SPIRAL:
+//         return buildSquareSpiral(
+//           RANDOM_VARIANT_GENERATORS[LevelType.SQUARE_SPIRAL](rng),
+//         );
+//       case LevelType.BRANCHED:
+//         return buildBranched(
+//           RANDOM_VARIANT_GENERATORS[LevelType.BRANCHED](rng),
+//         );
+//       case LevelType.MULTI_BRANCHED:
+//         return buildMultiBranched(
+//           RANDOM_VARIANT_GENERATORS[LevelType.MULTI_BRANCHED](
+//             rng,
+//             config.junctionCount,
+//           ),
+//         );
+//       default:
+//         throw new Error(
+//           `[LevelGenerator] ${config.levelType} 은(는) 랜덤 생성을 지원하지 않습니다 (Level ${config.levelId})`,
+//         );
+//     }
+//   }
 //   switch (config.levelType) {
 //     case LevelType.FREE:
 //       return buildFree(pick(config.pathConstraints.variants, roundIndex));
@@ -133,6 +172,10 @@
 //       return buildZigzag(pick(config.pathConstraints.variants, roundIndex));
 //     case LevelType.BRANCHED:
 //       return buildBranched(pick(config.pathConstraints.variants, roundIndex));
+//     case LevelType.MULTI_BRANCHED:
+//       return buildMultiBranched(
+//         pick(config.pathConstraints.variants, roundIndex),
+//       );
 //   }
 // }
 
@@ -244,6 +287,212 @@
 //   return issues;
 // }
 
+// /** 점 → 선분까지의 거리 */
+// function distToSegment(q: Point, a: Point, b: Point): number {
+//   const dx = b.x - a.x;
+//   const dy = b.y - a.y;
+//   const len2 = dx * dx + dy * dy;
+//   const u =
+//     len2 < EPS
+//       ? 0
+//       : Math.max(0, Math.min(1, ((q.x - a.x) * dx + (q.y - a.y) * dy) / len2));
+//   return Math.hypot(q.x - (a.x + dx * u), q.y - (a.y + dy * u));
+// }
+
+// function distToPolyline(q: Point, pts: Point[]): number {
+//   let best = Infinity;
+//   for (let i = 0; i < pts.length - 1; i++) {
+//     best = Math.min(best, distToSegment(q, pts[i], pts[i + 1]));
+//   }
+//   return best;
+// }
+
+// /** 막다른 길 최소 길이 (보드 너비 = 1). 너무 짧으면 "막다른 길"을 경험하지 못한다 */
+// const MIN_DEAD_END_LENGTH = 0.2;
+
+// const SAME = 1e-4;
+
+// /**
+//  * 실제 통로 연결 그래프로 미로 구조를 분석한다 (화면에 보이는 선의 개수가 아니라 연결 관계 기준).
+//  *  - 정답 경로와 막다른 길의 모든 선분을 노드(꼭짓점)/간선으로 만들고, 같은 위치의 꼭짓점은 하나로 합친다
+//  *  - 교차: 서로 다른 두 선분이 꼭짓점이 아닌 곳에서 만나거나, 꼭짓점이 다른 선분 위에 놓이면 새 연결이 생긴 것
+//  *  - 갈림길 = 차수(연결된 통로 수) 3, 막다른 길 끝 = 차수 1, 4 이상은 금지
+//  *  - 시작→목적지 경로(트리라서 유일)를 따라가며 만나는 갈림길 수 = 선택 횟수
+//  */
+// export interface MazeAnalysis {
+//   junctions: number;
+//   deadEnds: number;
+//   maxDegree: number;
+//   isTree: boolean;
+//   connected: boolean;
+//   /** 시작 → 목적지 정답 경로에서 만난 갈림길 수 */
+//   choicesOnAnswerPath: number;
+//   /** 새 연결을 만드는 교차/접촉 수 */
+//   strayContacts: number;
+// }
+
+// export function analyzeMaze(p: WorldPath): MazeAnalysis {
+//   const lines: Point[][] = [p.points, ...(p.branches ?? [])];
+//   const nodes: Point[] = [];
+//   const nodeOf = (q: Point) => {
+//     for (let i = 0; i < nodes.length; i++)
+//       if (dist(nodes[i], q) < SAME) return i;
+//     nodes.push(q);
+//     return nodes.length - 1;
+//   };
+//   const segs: { a: number; b: number }[] = [];
+//   for (const line of lines) {
+//     for (let i = 1; i < line.length; i++) {
+//       const a = nodeOf(line[i - 1]);
+//       const b = nodeOf(line[i]);
+//       if (a !== b) segs.push({ a, b });
+//     }
+//   }
+//   const adj: number[][] = nodes.map(() => []);
+//   for (const s of segs) {
+//     adj[s.a].push(s.b);
+//     adj[s.b].push(s.a);
+//   }
+
+//   // 의도하지 않은 접촉/교차
+//   let stray = 0;
+//   for (let i = 0; i < segs.length; i++) {
+//     for (let j = i + 1; j < segs.length; j++) {
+//       const s = segs[i];
+//       const t = segs[j];
+//       if (segmentsCross(nodes[s.a], nodes[s.b], nodes[t.a], nodes[t.b]))
+//         stray++;
+//     }
+//   }
+//   for (let n = 0; n < nodes.length; n++) {
+//     for (const s of segs) {
+//       if (s.a === n || s.b === n) continue;
+//       if (distToSegment(nodes[n], nodes[s.a], nodes[s.b]) < SAME) stray++;
+//     }
+//   }
+
+//   const deg = adj.map((a) => a.length);
+//   const junctions = deg.filter((d) => d === 3).length;
+//   const deadEnds = deg.filter((d) => d === 1).length;
+//   const maxDegree = Math.max(0, ...deg);
+
+//   // 연결성 + 시작→목적지 경로(BFS)
+//   const s0 = nodeOf(p.start);
+//   const g0 = nodeOf(p.goal);
+//   const prev = new Array<number>(nodes.length).fill(-2);
+//   prev[s0] = -1;
+//   const queue = [s0];
+//   for (let qi = 0; qi < queue.length; qi++) {
+//     for (const m of adj[queue[qi]]) {
+//       if (prev[m] === -2) {
+//         prev[m] = queue[qi];
+//         queue.push(m);
+//       }
+//     }
+//   }
+//   const connected = queue.length === nodes.length;
+//   let choices = 0;
+//   if (prev[g0] !== -2) {
+//     for (let n = g0; n !== -1; n = prev[n]) if (deg[n] === 3) choices++;
+//   }
+//   return {
+//     junctions,
+//     deadEnds,
+//     maxDegree,
+//     isTree: connected && segs.length === nodes.length - 1,
+//     connected,
+//     choicesOnAnswerPath: choices,
+//     strayContacts: stray,
+//   };
+// }
+
+// /**
+//  * 갈림길 미로(Level 8, 9, …) 전용 검증. expected = 갈림길(= 막다른 길) 수.
+//  *  - 갈림길은 정확히 expected 개, 막다른 길도 expected 개, 정답 경로 위에서 expected 번 선택한다
+//  *  - 갈림길마다 선택지는 2개(차수 3), 서로 다른 곳에 있고 시작/목적지가 아니다
+//  *  - 막다른 길은 갈림길 근처를 빼면 다른 통로와 만나거나 너무 가까워지지 않는다
+//  *    (가까우면 통로끼리 붙어 지름길·추가 갈림길이 생긴다)
+//  *  - 잘못 들어가도 같은 갈림길로 되돌아올 수 있다 (막다른 길의 한쪽 끝이 갈림길)
+//  */
+// function validateBranchedMaze(
+//   p: WorldPath,
+//   config: LevelConfig,
+//   W: number,
+//   expected: number,
+// ): string[] {
+//   const issues: string[] = [];
+//   const branches = p.branches ?? [];
+//   if (branches.length !== expected) {
+//     return [`막다른 길이 정확히 ${expected}개가 아님`];
+//   }
+//   if (branches.some((b) => b.length < 2)) return ["막다른 길 점열이 부족함"];
+
+//   // 각 갈림길 = 막다른 길의 첫 점. 정답 경로의 서로 다른 중간 꼭짓점이어야 한다
+//   const jIdxs: number[] = [];
+//   for (const branch of branches) {
+//     const jIdx = p.points.findIndex((q) => dist(q, branch[0]) < SAME);
+//     if (jIdx < 0) return ["갈림길이 정답 경로 위에 있지 않음"];
+//     if (jIdx === 0 || jIdx === p.points.length - 1) {
+//       issues.push("갈림길이 시작점이나 목적지에 있음");
+//     }
+//     if (jIdxs.includes(jIdx)) issues.push("한 곳에서 갈림길이 겹침");
+//     jIdxs.push(jIdx);
+//   }
+
+//   // 실제 연결 구조 (기획: 선의 개수가 아니라 통로 연결 관계로 판단)
+//   const a = analyzeMaze(p);
+//   if (a.junctions !== expected) issues.push("갈림길 수가 규칙과 다름");
+//   if (a.deadEnds !== expected + 2)
+//     issues.push("막다른 길/출발/도착 끝점 수가 규칙과 다름");
+//   if (a.maxDegree > 3) issues.push("한 곳에서 선택지가 3개 이상");
+//   if (!a.isTree) issues.push("통로가 끊겼거나 순환/교차가 있음");
+//   if (a.strayContacts > 0) issues.push("의도하지 않은 통로 접촉/교차");
+//   if (a.choicesOnAnswerPath !== expected)
+//     issues.push("정답 경로의 선택 횟수가 규칙과 다름");
+
+//   const w = config.walls;
+//   const gapWorld =
+//     w.hasWalls && W > 0 ? (w.corridorWidth + w.wallThickness - 0.5) / W : 0;
+//   const skip = gapWorld * 1.5; // 갈림길 주변(T자 합류부)은 가까운 게 정상
+//   const STEP = 0.01;
+
+//   for (let bi = 0; bi < branches.length; bi++) {
+//     const branch = branches[bi];
+//     const junction = branch[0];
+
+//     // 막다른 길 길이
+//     let deadLen = 0;
+//     for (let i = 1; i < branch.length; i++)
+//       deadLen += dist(branch[i - 1], branch[i]);
+//     if (deadLen < MIN_DEAD_END_LENGTH) issues.push("막다른 길이 너무 짧음");
+
+//     // 막다른 길의 모든 점은 갈림길에서 멀어질수록 정답 경로·다른 막다른 길에서도 멀어져야 한다
+//     for (let i = 1; i < branch.length; i++) {
+//       const s = branch[i - 1];
+//       const e = branch[i];
+//       const n = Math.max(1, Math.ceil(dist(s, e) / STEP));
+//       for (let k = 0; k <= n; k++) {
+//         const q = {
+//           x: s.x + ((e.x - s.x) * k) / n,
+//           y: s.y + ((e.y - s.y) * k) / n,
+//         };
+//         if (dist(q, junction) <= skip) continue;
+//         let near = distToPolyline(q, p.points);
+//         for (let bj = 0; bj < branches.length; bj++) {
+//           if (bj !== bi) near = Math.min(near, distToPolyline(q, branches[bj]));
+//         }
+//         if (near < gapWorld) {
+//           issues.push(
+//             "막다른 길이 다른 통로에 너무 가까움(추가 갈림길/지름길)",
+//           );
+//           return issues;
+//         }
+//       }
+//     }
+//   }
+//   return issues;
+// }
+
 // function validate(
 //   p: WorldPath,
 //   config: LevelConfig,
@@ -294,6 +543,11 @@
 //     issues.push("나선 간격이 너무 좁음");
 //   }
 //   issues.push(...validateWalls(p, config, W));
+//   if (config.levelType === LevelType.BRANCHED) {
+//     issues.push(...validateBranchedMaze(p, config, W, 1));
+//   } else if (config.levelType === LevelType.MULTI_BRANCHED) {
+//     issues.push(...validateBranchedMaze(p, config, W, config.junctionCount));
+//   }
 //   return issues;
 // }
 
@@ -342,14 +596,19 @@
 //   const seed = hashSeed(options.baseSeed ?? 0, config.levelId, roundIndex);
 
 //   // 랜덤 요소가 꺼져 있으면 몇 번을 다시 만들어도 결과가 같으므로 1회만 시도한다
+//   // 랜덤 variant 레벨은 검증에 실패하면 다른 매개변수로 다시 뽑는다 (상한 MAX_RANDOM_ATTEMPTS)
 //   const randomized = variation.allowMirror || variation.sizeJitter > 0;
-//   const attempts = randomized ? MAX_ATTEMPTS : 1;
+//   const attempts = config.randomVariants
+//     ? MAX_RANDOM_ATTEMPTS
+//     : randomized
+//       ? MAX_ATTEMPTS
+//       : 1;
 
 //   let issues: string[] = [];
 //   for (let attempt = 0; attempt < attempts; attempt++) {
 //     const rng = makeRng(seed + Math.imul(attempt, 0x9e3779b9));
 //     const placed = layout(
-//       buildRaw(config, roundIndex),
+//       buildRaw(config, roundIndex, rng),
 //       H,
 //       rules,
 //       variation,
@@ -390,7 +649,7 @@
 //     }
 //   }
 //   throw new Error(
-//     `[LevelGenerator] Level ${config.levelId}(${config.levelType}) Round ${roundIndex + 1} 생성 실패: ${issues.join(", ")}`,
+//     `[LevelGenerator] Level ${config.levelId}(${config.levelType}) Round ${roundIndex + 1} 생성 실패 (${attempts}회 시도): ${issues.join(", ")}`,
 //   );
 // }
 
@@ -415,6 +674,7 @@
 
 import {
   buildBranched,
+  buildMultiBranched,
   buildCircle,
   buildFree,
   buildLShape,
@@ -552,6 +812,13 @@ function buildRaw(
         return buildBranched(
           RANDOM_VARIANT_GENERATORS[LevelType.BRANCHED](rng),
         );
+      case LevelType.MULTI_BRANCHED:
+        return buildMultiBranched(
+          RANDOM_VARIANT_GENERATORS[LevelType.MULTI_BRANCHED](
+            rng,
+            config.junctionCount,
+          ),
+        );
       default:
         throw new Error(
           `[LevelGenerator] ${config.levelType} 은(는) 랜덤 생성을 지원하지 않습니다 (Level ${config.levelId})`,
@@ -579,6 +846,10 @@ function buildRaw(
       return buildZigzag(pick(config.pathConstraints.variants, roundIndex));
     case LevelType.BRANCHED:
       return buildBranched(pick(config.pathConstraints.variants, roundIndex));
+    case LevelType.MULTI_BRANCHED:
+      return buildMultiBranched(
+        pick(config.pathConstraints.variants, roundIndex),
+      );
   }
 }
 
@@ -713,62 +984,183 @@ function distToPolyline(q: Point, pts: Point[]): number {
 /** 막다른 길 최소 길이 (보드 너비 = 1). 너무 짧으면 "막다른 길"을 경험하지 못한다 */
 const MIN_DEAD_END_LENGTH = 0.2;
 
+const SAME = 1e-4;
+
 /**
- * 갈림길 미로(Level 8) 전용 검증.
- *  - 갈림길은 정확히 1개 (막다른 길 1개, 정답 경로 위의 한 점에서만 갈라진다)
- *  - 갈림길은 시작/목적지가 아니라 정답 경로 중간에 있다
- *  - 막다른 길은 갈림길 근처를 빼면 정답 경로와 만나거나 너무 가까워지지 않는다
- *    (가까우면 통로끼리 붙어 지름길·두 번째 갈림길이 생긴다)
+ * 실제 통로 연결 그래프로 미로 구조를 분석한다 (화면에 보이는 선의 개수가 아니라 연결 관계 기준).
+ *  - 정답 경로와 막다른 길의 모든 선분을 노드(꼭짓점)/간선으로 만들고, 같은 위치의 꼭짓점은 하나로 합친다
+ *  - 교차: 서로 다른 두 선분이 꼭짓점이 아닌 곳에서 만나거나, 꼭짓점이 다른 선분 위에 놓이면 새 연결이 생긴 것
+ *  - 갈림길 = 차수(연결된 통로 수) 3, 막다른 길 끝 = 차수 1, 4 이상은 금지
+ *  - 시작→목적지 경로(트리라서 유일)를 따라가며 만나는 갈림길 수 = 선택 횟수
+ */
+export interface MazeAnalysis {
+  junctions: number;
+  deadEnds: number;
+  maxDegree: number;
+  isTree: boolean;
+  connected: boolean;
+  /** 시작 → 목적지 정답 경로에서 만난 갈림길 수 */
+  choicesOnAnswerPath: number;
+  /** 새 연결을 만드는 교차/접촉 수 */
+  strayContacts: number;
+}
+
+export function analyzeMaze(p: WorldPath): MazeAnalysis {
+  const lines: Point[][] = [p.points, ...(p.branches ?? [])];
+  const nodes: Point[] = [];
+  const nodeOf = (q: Point) => {
+    for (let i = 0; i < nodes.length; i++)
+      if (dist(nodes[i], q) < SAME) return i;
+    nodes.push(q);
+    return nodes.length - 1;
+  };
+  const segs: { a: number; b: number }[] = [];
+  for (const line of lines) {
+    for (let i = 1; i < line.length; i++) {
+      const a = nodeOf(line[i - 1]);
+      const b = nodeOf(line[i]);
+      if (a !== b) segs.push({ a, b });
+    }
+  }
+  const adj: number[][] = nodes.map(() => []);
+  for (const s of segs) {
+    adj[s.a].push(s.b);
+    adj[s.b].push(s.a);
+  }
+
+  // 의도하지 않은 접촉/교차
+  let stray = 0;
+  for (let i = 0; i < segs.length; i++) {
+    for (let j = i + 1; j < segs.length; j++) {
+      const s = segs[i];
+      const t = segs[j];
+      if (segmentsCross(nodes[s.a], nodes[s.b], nodes[t.a], nodes[t.b]))
+        stray++;
+    }
+  }
+  for (let n = 0; n < nodes.length; n++) {
+    for (const s of segs) {
+      if (s.a === n || s.b === n) continue;
+      if (distToSegment(nodes[n], nodes[s.a], nodes[s.b]) < SAME) stray++;
+    }
+  }
+
+  const deg = adj.map((a) => a.length);
+  const junctions = deg.filter((d) => d === 3).length;
+  const deadEnds = deg.filter((d) => d === 1).length;
+  const maxDegree = Math.max(0, ...deg);
+
+  // 연결성 + 시작→목적지 경로(BFS)
+  const s0 = nodeOf(p.start);
+  const g0 = nodeOf(p.goal);
+  const prev = new Array<number>(nodes.length).fill(-2);
+  prev[s0] = -1;
+  const queue = [s0];
+  for (let qi = 0; qi < queue.length; qi++) {
+    for (const m of adj[queue[qi]]) {
+      if (prev[m] === -2) {
+        prev[m] = queue[qi];
+        queue.push(m);
+      }
+    }
+  }
+  const connected = queue.length === nodes.length;
+  let choices = 0;
+  if (prev[g0] !== -2) {
+    for (let n = g0; n !== -1; n = prev[n]) if (deg[n] === 3) choices++;
+  }
+  return {
+    junctions,
+    deadEnds,
+    maxDegree,
+    isTree: connected && segs.length === nodes.length - 1,
+    connected,
+    choicesOnAnswerPath: choices,
+    strayContacts: stray,
+  };
+}
+
+/**
+ * 갈림길 미로(Level 8, 9, …) 전용 검증. expected = 갈림길(= 막다른 길) 수.
+ *  - 갈림길은 정확히 expected 개, 막다른 길도 expected 개, 정답 경로 위에서 expected 번 선택한다
+ *  - 갈림길마다 선택지는 2개(차수 3), 서로 다른 곳에 있고 시작/목적지가 아니다
+ *  - 막다른 길은 갈림길 근처를 빼면 다른 통로와 만나거나 너무 가까워지지 않는다
+ *    (가까우면 통로끼리 붙어 지름길·추가 갈림길이 생긴다)
  *  - 잘못 들어가도 같은 갈림길로 되돌아올 수 있다 (막다른 길의 한쪽 끝이 갈림길)
  */
 function validateBranchedMaze(
   p: WorldPath,
   config: LevelConfig,
   W: number,
+  expected: number,
 ): string[] {
   const issues: string[] = [];
   const branches = p.branches ?? [];
-  if (branches.length !== 1) {
-    return ["막다른 길이 정확히 1개가 아님"];
+  if (branches.length !== expected) {
+    return [`막다른 길이 정확히 ${expected}개가 아님`];
   }
-  const branch = branches[0];
-  if (branch.length < 2) return ["막다른 길 점열이 부족함"];
+  if (branches.some((b) => b.length < 2)) return ["막다른 길 점열이 부족함"];
 
-  // 갈림길 = 막다른 길의 첫 점. 정답 경로의 꼭짓점 중 하나여야 하고 양 끝(시작/목적지)은 안 된다
-  const junction = branch[0];
-  const jIdx = p.points.findIndex((q) => dist(q, junction) < 1e-4);
-  if (jIdx < 0) return ["갈림길이 정답 경로 위에 있지 않음"];
-  if (jIdx === 0 || jIdx === p.points.length - 1) {
-    issues.push("갈림길이 시작점이나 목적지에 있음");
+  // 각 갈림길 = 막다른 길의 첫 점. 정답 경로의 서로 다른 중간 꼭짓점이어야 한다
+  const jIdxs: number[] = [];
+  for (const branch of branches) {
+    const jIdx = p.points.findIndex((q) => dist(q, branch[0]) < SAME);
+    if (jIdx < 0) return ["갈림길이 정답 경로 위에 있지 않음"];
+    if (jIdx === 0 || jIdx === p.points.length - 1) {
+      issues.push("갈림길이 시작점이나 목적지에 있음");
+    }
+    if (jIdxs.includes(jIdx)) issues.push("한 곳에서 갈림길이 겹침");
+    jIdxs.push(jIdx);
   }
 
-  // 막다른 길 길이
-  let deadLen = 0;
-  for (let i = 1; i < branch.length; i++)
-    deadLen += dist(branch[i - 1], branch[i]);
-  if (deadLen < MIN_DEAD_END_LENGTH) issues.push("막다른 길이 너무 짧음");
+  // 실제 연결 구조 (기획: 선의 개수가 아니라 통로 연결 관계로 판단)
+  const a = analyzeMaze(p);
+  if (a.junctions !== expected) issues.push("갈림길 수가 규칙과 다름");
+  if (a.deadEnds !== expected + 2)
+    issues.push("막다른 길/출발/도착 끝점 수가 규칙과 다름");
+  if (a.maxDegree > 3) issues.push("한 곳에서 선택지가 3개 이상");
+  if (!a.isTree) issues.push("통로가 끊겼거나 순환/교차가 있음");
+  if (a.strayContacts > 0) issues.push("의도하지 않은 통로 접촉/교차");
+  if (a.choicesOnAnswerPath !== expected)
+    issues.push("정답 경로의 선택 횟수가 규칙과 다름");
 
-  // 막다른 길의 모든 점은 갈림길에서 멀어질수록 정답 경로에서도 멀어져야 한다
   const w = config.walls;
   const gapWorld =
     w.hasWalls && W > 0 ? (w.corridorWidth + w.wallThickness - 0.5) / W : 0;
   const skip = gapWorld * 1.5; // 갈림길 주변(T자 합류부)은 가까운 게 정상
   const STEP = 0.01;
-  for (let i = 1; i < branch.length; i++) {
-    const a = branch[i - 1];
-    const b = branch[i];
-    const n = Math.max(1, Math.ceil(dist(a, b) / STEP));
-    for (let k = 0; k <= n; k++) {
-      const q = {
-        x: a.x + ((b.x - a.x) * k) / n,
-        y: a.y + ((b.y - a.y) * k) / n,
-      };
-      if (dist(q, junction) <= skip) continue;
-      if (distToPolyline(q, p.points) < gapWorld) {
-        issues.push(
-          "막다른 길이 정답 경로에 너무 가까움(두 번째 갈림길/지름길)",
-        );
-        return issues;
+
+  for (let bi = 0; bi < branches.length; bi++) {
+    const branch = branches[bi];
+    const junction = branch[0];
+
+    // 막다른 길 길이
+    let deadLen = 0;
+    for (let i = 1; i < branch.length; i++)
+      deadLen += dist(branch[i - 1], branch[i]);
+    if (deadLen < MIN_DEAD_END_LENGTH) issues.push("막다른 길이 너무 짧음");
+
+    // 막다른 길의 모든 점은 갈림길에서 멀어질수록 정답 경로·다른 막다른 길에서도 멀어져야 한다
+    for (let i = 1; i < branch.length; i++) {
+      const s = branch[i - 1];
+      const e = branch[i];
+      const n = Math.max(1, Math.ceil(dist(s, e) / STEP));
+      for (let k = 0; k <= n; k++) {
+        const q = {
+          x: s.x + ((e.x - s.x) * k) / n,
+          y: s.y + ((e.y - s.y) * k) / n,
+        };
+        if (dist(q, junction) <= skip) continue;
+        let near = distToPolyline(q, p.points);
+        for (let bj = 0; bj < branches.length; bj++) {
+          if (bj !== bi) near = Math.min(near, distToPolyline(q, branches[bj]));
+        }
+        if (near < gapWorld) {
+          issues.push(
+            "막다른 길이 다른 통로에 너무 가까움(추가 갈림길/지름길)",
+          );
+          return issues;
+        }
       }
     }
   }
@@ -826,7 +1218,9 @@ function validate(
   }
   issues.push(...validateWalls(p, config, W));
   if (config.levelType === LevelType.BRANCHED) {
-    issues.push(...validateBranchedMaze(p, config, W));
+    issues.push(...validateBranchedMaze(p, config, W, 1));
+  } else if (config.levelType === LevelType.MULTI_BRANCHED) {
+    issues.push(...validateBranchedMaze(p, config, W, config.junctionCount));
   }
   return issues;
 }
@@ -887,13 +1281,16 @@ export function generateRound(
   let issues: string[] = [];
   for (let attempt = 0; attempt < attempts; attempt++) {
     const rng = makeRng(seed + Math.imul(attempt, 0x9e3779b9));
-    const placed = layout(
-      buildRaw(config, roundIndex, rng),
-      H,
-      rules,
-      variation,
-      rng,
-    );
+    // 랜덤 variant 생성기가 (드물게) 조건에 맞는 매개변수를 못 찾으면 이번 시도만 버리고 다시 뽑는다
+    let raw: WorldPath;
+    try {
+      raw = buildRaw(config, roundIndex, rng);
+    } catch (e) {
+      if (!config.randomVariants) throw e;
+      issues = [e instanceof Error ? e.message : String(e)];
+      continue;
+    }
+    const placed = layout(raw, H, rules, variation, rng);
     issues = validate(placed, config, rules, H, W);
     if (issues.length === 0) {
       const t =
