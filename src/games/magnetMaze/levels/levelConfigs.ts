@@ -490,6 +490,60 @@
 //   },
 // };
 
+// // ── Level 10. 갈림길이 세 번 나오는 미로 ─────────────────────
+// // 학습 목표: 연속된 세 번의 선택 (START → A → B → C → GOAL), 갈림길마다 막다른 길 1개
+// // Level 9 와 같은 생성기(MULTI_BRANCHED)를 junctionCount 만 3 으로 바꿔 재사용한다.
+// // 통로 폭 / 벽 두께 / 구슬 크기는 Level 9 와 동일하고, 갈림길이 늘어난 만큼 5×5 격자를 쓴다.
+// // variants 는 랜덤 생성이 꺼졌을 때만 쓰는 기준 예시 1개다.
+
+// const level10: LevelConfig = {
+//   ...COMMON,
+//   levelId: 10,
+//   levelType: LevelType.MULTI_BRANCHED,
+//   junctionCount: 3,
+//   timeLimitSeconds: 100,
+//   randomVariants: true,
+//   ballRadius: MAZE_BALL_RADIUS,
+//   walls: {
+//     hasWalls: true,
+//     corridorWidth: 66,
+//     wallThickness: 10,
+//     cornerRadius: 28,
+//     minCorridorWidth: 48,
+//   },
+//   pathConstraints: {
+//     variants: [
+//       {
+//         mainPoints: [
+//           { x: -0.36, y: -0.36 },
+//           { x: -0.36, y: -0.18 },
+//           { x: 0, y: -0.18 },
+//           { x: 0, y: 0.18 },
+//           { x: 0.36, y: 0.18 },
+//           { x: 0.36, y: 0.36 },
+//         ],
+//         branches: [
+//           [
+//             { x: -0.36, y: -0.18 },
+//             { x: -0.18, y: -0.18 },
+//             { x: -0.18, y: 0.18 },
+//           ],
+//           [
+//             { x: 0, y: -0.18 },
+//             { x: 0.36, y: -0.18 },
+//             { x: 0.36, y: -0.36 },
+//           ],
+//           [
+//             { x: 0, y: 0.18 },
+//             { x: 0, y: 0.36 },
+//             { x: -0.36, y: 0.36 },
+//           ],
+//         ],
+//       },
+//     ],
+//   },
+// };
+
 // export const LEVEL_CONFIGS: readonly LevelConfig[] = [
 //   level1,
 //   level2,
@@ -500,6 +554,7 @@
 //   level7,
 //   level8,
 //   level9,
+//   level10,
 // ];
 
 // /**
@@ -1092,6 +1147,61 @@ const level10: LevelConfig = {
   },
 };
 
+// ── Level 11. 직사각형 보드를 꽉 채우는 갈림길 3개 미로 ──────────
+// 난이도는 Level 10 과 같다: 갈림길 3개, 갈림길마다 선택지 2개, 막다른 길 3개.
+// 달라지는 것은 미로판의 쓰임새다. 정사각형 격자(4×4, 5×5)가 아니라 실제 게임판의 가로세로 비율에서
+// 열/행 수와 칸 간격을 계산한다 (rectBranched.ts). 통로 폭 / 벽 두께 / 구슬 크기는 Level 9~10 과 같다.
+// 보드가 세로로 길어 경로가 길어지므로 제한 시간만 늘렸다.
+// variants 는 랜덤 생성이 꺼졌을 때만 쓰는 기준 예시 1개다.
+
+const level11: LevelConfig = {
+  ...COMMON,
+  levelId: 11,
+  levelType: LevelType.RECT_BRANCHED,
+  junctionCount: 3,
+  timeLimitSeconds: 120,
+  randomVariants: true,
+  ballRadius: MAZE_BALL_RADIUS,
+  walls: {
+    hasWalls: true,
+    corridorWidth: 66,
+    wallThickness: 10,
+    cornerRadius: 28,
+    minCorridorWidth: 48,
+  },
+  pathConstraints: {
+    variants: [
+      {
+        mainPoints: [
+          { x: -0.3, y: -0.8 },
+          { x: -0.3, y: -0.4 },
+          { x: 0.1, y: -0.4 },
+          { x: 0.1, y: 0 },
+          { x: -0.3, y: 0 },
+          { x: -0.3, y: 0.4 },
+          { x: 0.3, y: 0.4 },
+          { x: 0.3, y: 0.8 },
+        ],
+        branches: [
+          [
+            { x: -0.3, y: -0.4 },
+            { x: -0.3, y: -0.2 },
+          ],
+          [
+            { x: 0.1, y: 0 },
+            { x: 0.3, y: 0 },
+            { x: 0.3, y: -0.4 },
+          ],
+          [
+            { x: -0.3, y: 0.4 },
+            { x: -0.3, y: 0.8 },
+          ],
+        ],
+      },
+    ],
+  },
+};
+
 export const LEVEL_CONFIGS: readonly LevelConfig[] = [
   level1,
   level2,
@@ -1103,6 +1213,7 @@ export const LEVEL_CONFIGS: readonly LevelConfig[] = [
   level8,
   level9,
   level10,
+  level11,
 ];
 
 /**

@@ -20,6 +20,8 @@
 //   ZIGZAG: "ZIGZAG", // 지그재그
 //   /** Level 8+: 갈림길 + 막다른 길이 있는 복합 미로 (단일 정답 경로 + 탐색 분기) */
 //   BRANCHED: "BRANCHED",
+//   /** Level 9+: 갈림길이 여러 번(junctionCount) 연속으로 나오는 미로. 갈림길마다 막다른 길 1개 */
+//   MULTI_BRANCHED: "MULTI_BRANCHED",
 // } as const;
 // export type LevelType = (typeof LevelType)[keyof typeof LevelType];
 
@@ -169,6 +171,17 @@
 //   branchPoints: Point[];
 // }
 
+// /**
+//  * Level 9+ 연속 갈림길 미로.
+//  * mainPoints: 출발지 → (갈림길 1) → … → (갈림길 N) → 목적지 정답 경로
+//  * branches: 갈림길마다 하나씩, 그 갈림길에서 시작하는 막다른 길 (각 첫 점 = main 위의 갈림길 꼭짓점)
+//  * 갈림길 수 = branches.length = config 의 junctionCount
+//  */
+// export interface MultiBranchedVariant {
+//   mainPoints: Point[];
+//   branches: Point[][];
+// }
+
 // export interface PathConstraints<V> {
 //   variants: readonly V[];
 // }
@@ -289,6 +302,12 @@
 //         levelType: typeof LevelType.BRANCHED;
 //         pathConstraints: PathConstraints<BranchedVariant>;
 //       }
+//     | {
+//         levelType: typeof LevelType.MULTI_BRANCHED;
+//         /** 정답 경로에서 만나는 갈림길 수 (Level 9 = 2, Level 10 = 3 …) */
+//         junctionCount: number;
+//         pathConstraints: PathConstraints<MultiBranchedVariant>;
+//       }
 //   );
 
 // // ── GeneratedRound ─────────────────────────────────────────
@@ -343,6 +362,11 @@ export const LevelType = {
   BRANCHED: "BRANCHED",
   /** Level 9+: 갈림길이 여러 번(junctionCount) 연속으로 나오는 미로. 갈림길마다 막다른 길 1개 */
   MULTI_BRANCHED: "MULTI_BRANCHED",
+  /**
+   * Level 11+: MULTI_BRANCHED 와 같은 연결 구조(START → 갈림길 N개 → GOAL)이지만,
+   * 정사각형 격자 대신 실제 게임판 비율에서 열/행 수와 칸 간격을 계산한다 (rectBranched.ts).
+   */
+  RECT_BRANCHED: "RECT_BRANCHED",
 } as const;
 export type LevelType = (typeof LevelType)[keyof typeof LevelType];
 
@@ -626,6 +650,11 @@ export type LevelConfig = LevelConfigBase &
     | {
         levelType: typeof LevelType.MULTI_BRANCHED;
         /** 정답 경로에서 만나는 갈림길 수 (Level 9 = 2, Level 10 = 3 …) */
+        junctionCount: number;
+        pathConstraints: PathConstraints<MultiBranchedVariant>;
+      }
+    | {
+        levelType: typeof LevelType.RECT_BRANCHED;
         junctionCount: number;
         pathConstraints: PathConstraints<MultiBranchedVariant>;
       }

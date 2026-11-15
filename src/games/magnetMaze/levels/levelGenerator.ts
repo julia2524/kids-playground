@@ -607,13 +607,16 @@
 //   let issues: string[] = [];
 //   for (let attempt = 0; attempt < attempts; attempt++) {
 //     const rng = makeRng(seed + Math.imul(attempt, 0x9e3779b9));
-//     const placed = layout(
-//       buildRaw(config, roundIndex, rng),
-//       H,
-//       rules,
-//       variation,
-//       rng,
-//     );
+//     // 랜덤 variant 생성기가 (드물게) 조건에 맞는 매개변수를 못 찾으면 이번 시도만 버리고 다시 뽑는다
+//     let raw: WorldPath;
+//     try {
+//       raw = buildRaw(config, roundIndex, rng);
+//     } catch (e) {
+//       if (!config.randomVariants) throw e;
+//       issues = [e instanceof Error ? e.message : String(e)];
+//       continue;
+//     }
+//     const placed = layout(raw, H, rules, variation, rng);
 //     issues = validate(placed, config, rules, H, W);
 //     if (issues.length === 0) {
 //       const t =
@@ -702,6 +705,7 @@ import {
   minTurnRadius,
 } from "../physics/collisionGeometry";
 import { RANDOM_VARIANT_GENERATORS } from "./randomVariants";
+import { generateRectBranchedVariant } from "./rectBranched";
 
 export interface GenerateOptions {
   /** 게임 보드의 가로/세로 비 (width / height). 원이 찌그러지지 않게 하는 데 필요 */
@@ -793,10 +797,19 @@ function scaleAbout(
 
 // ── 1) 레벨 유형별 원본 형태 ───────────────────────────────────
 
+/** buildRaw 가 보드에 맞춰 만들어야 하는 레벨(Level 11+)에서 쓰는 보드 정보 */
+interface BoardContext {
+  /** 보드 너비를 1로 봤을 때의 높이 */
+  H: number;
+  W: number;
+  boardMargin: number;
+}
+
 function buildRaw(
   config: LevelConfig,
   roundIndex: number,
   rng: () => number,
+  board: BoardContext,
 ): WorldPath {
   // 랜덤 생성 레벨: 기존 variants 에서 고르지 않고, 레벨 규칙에 맞는 새 매개변수를 뽑아
   // 기존 build 함수(buildSpiral / buildSquareSpiral / buildBranched)에 그대로 넘긴다.
@@ -818,6 +831,17 @@ function buildRaw(
             rng,
             config.junctionCount,
           ),
+        );
+      case LevelType.RECT_BRANCHED:
+        // 실제 게임판 비율/통로 규격으로 격자를 정하는 Level 11+ 전용 생성기
+        return buildMultiBranched(
+          generateRectBranchedVariant(rng, config.junctionCount, {
+            H: board.H,
+            W: board.W,
+            boardMargin: board.boardMargin,
+            corridorWidth: config.walls.corridorWidth,
+            wallThickness: config.walls.wallThickness,
+          }),
         );
       default:
         throw new Error(
@@ -847,6 +871,7 @@ function buildRaw(
     case LevelType.BRANCHED:
       return buildBranched(pick(config.pathConstraints.variants, roundIndex));
     case LevelType.MULTI_BRANCHED:
+    case LevelType.RECT_BRANCHED:
       return buildMultiBranched(
         pick(config.pathConstraints.variants, roundIndex),
       );
@@ -1219,7 +1244,10 @@ function validate(
   issues.push(...validateWalls(p, config, W));
   if (config.levelType === LevelType.BRANCHED) {
     issues.push(...validateBranchedMaze(p, config, W, 1));
-  } else if (config.levelType === LevelType.MULTI_BRANCHED) {
+  } else if (
+    config.levelType === LevelType.MULTI_BRANCHED ||
+    config.levelType === LevelType.RECT_BRANCHED
+  ) {
     issues.push(...validateBranchedMaze(p, config, W, config.junctionCount));
   }
   return issues;
@@ -1284,7 +1312,11 @@ export function generateRound(
     // 랜덤 variant 생성기가 (드물게) 조건에 맞는 매개변수를 못 찾으면 이번 시도만 버리고 다시 뽑는다
     let raw: WorldPath;
     try {
-      raw = buildRaw(config, roundIndex, rng);
+      raw = buildRaw(config, roundIndex, rng, {
+        H,
+        W,
+        boardMargin: rules.boardMargin,
+      });
     } catch (e) {
       if (!config.randomVariants) throw e;
       issues = [e instanceof Error ? e.message : String(e)];
