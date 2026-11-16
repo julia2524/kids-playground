@@ -4,7 +4,6 @@ import GameRewardBadge, {
   GameType,
   RewardBadgeType,
 } from "../../components/common/GameRewardBadge";
-// import GameRewardBadge, { RewardBadgeType, GameType } from "./GameRewardBadge";
 
 interface StarRowProps {
   earnedStars: number;

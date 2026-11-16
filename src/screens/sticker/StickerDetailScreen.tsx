@@ -195,28 +195,6 @@ export default function StickerDetailScreen() {
 
   const [measuredPanelHeight, setMeasuredPanelHeight] = useState(200);
 
-  // const canvasSize = useMemo(() => {
-
-  //   if (isLandscape) {
-
-  //     const availableHeight = height - 40 - insets.top;
-
-  //     return clamp(Math.floor(availableHeight - 16), 160, MAX_CANVAS_SIZE);
-
-  //   } else {
-
-  //     // ⭐ 팔레트가 자리를 딱 지키는 것처럼,
-
-  //     // 캔버스 크기도 화면 가로 폭 기준의 '딱 정해진 고정 크기'로 못박습니다.
-
-  //     // (줌이 되든 글자가 커지든 이 크기는 변하지 않고 팔레트처럼 의연하게 유지됩니다)
-
-  //     return Math.min(Math.round(width * 0.65), 320); // 원하는 고정 크기 숫자로 조절 가능합니다!
-
-  //   }
-
-  // }, [width, height, isLandscape, insets]);
-
   const PANEL_MARGIN = 10;
 
   const PANEL_PADDING = Math.round(8 * scale);

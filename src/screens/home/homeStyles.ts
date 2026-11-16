@@ -18,9 +18,6 @@ export const BackgroundImage = styled.Image`
   width: 100%;
   height: 100%;
 `;
-// export const Container = styled(SafeAreaView)`
-//   flex: 1;
-// `;
 
 // 1. styled 컴포넌트 쪽에서 Container를 일반 View로 변경
 export const Container = styled.View`
@@ -332,28 +329,6 @@ export const DecorationPlanet = styled.View<{
       `
       : ""}
 `;
-
-// export const BottomTab = styled.View<{ bottomInset: number }>`
-//   position: absolute;
-//   bottom: ${(props) => Math.max(props.bottomInset, 12) + 8}px;
-//   left: 16px;
-//   right: 16px;
-
-//   height: 64px;
-//   background-color: ${COLORS.white};
-
-//   flex-direction: row;
-//   justify-content: space-around;
-//   align-items: center;
-
-//   border-radius: 32px;
-
-//   shadow-color: #5d5193;
-//   shadow-opacity: 0.12;
-//   shadow-radius: 12px;
-//   shadow-offset: 0px 4px;
-//   elevation: 6;
-// `;
 
 export const BottomTab = styled.View<{ bottomInset: number }>`
   position: absolute;

@@ -7,9 +7,6 @@ export type RootStackParamList = {
 
   ClassificationMenuScreen: undefined;
   PuzzleMenuScreen: undefined;
-  // PuzzleThemeSelectScreen: {
-  //   puzzleCategory: PuzzleCategoryType;
-  // };
 
   PuzzleGroupSelectScreen: {
     puzzleCategory: PuzzleCategoryType;
