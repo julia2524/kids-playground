@@ -2,11 +2,12 @@
 export const GAME_CONFIG = {
   // 자석펜 (손가락 = 펜 중심, 자석 끝은 중심에서 위쪽으로 떨어져 있음)
   // 손가락 위치 = 펜 그림의 중심. 자석 끝(구슬이 붙는 점)은 손가락 위쪽에 있어서 손에 가려지지 않음
+
   // 자석펜
-  PEN_WIDTH: 56,
-  PEN_HEIGHT: 175,
+  PEN_WIDTH: 48,
+  PEN_HEIGHT: 145,
   TIP_OFFSET_X: 0,
-  TIP_OFFSET_Y: -98, // 펜 중심 → 자석 끝 상대 좌표 (펜 그림을 바꾸면 이 값만 조정)
+  TIP_OFFSET_Y: -68, // 펜 중심 → 자석 끝 상대 좌표 (펜 그림을 바꾸면 이 값만 조정)
 
   // 쇠구슬
   BALL_RADIUS: 22,

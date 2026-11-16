@@ -25,17 +25,18 @@ const W = GAME_CONFIG.PEN_WIDTH;
 const H = GAME_CONFIG.PEN_HEIGHT;
 
 // 아이가 실제로 펜을 잡는 위치
+// 기존 110 → 80으로 변경
 const FINGER_X = 28;
-const FINGER_Y = 110;
+const FINGER_Y = 80;
 
 /**
  * SVG 기준 좌표
  *
  * 전체 크기: 56 x 175
  * 자석 팁 중심: (28, 12)
- * 손가락 기준점: (28, 110)
+ * 손가락 기준점: (28, 80)
  *
- * TIP_OFFSET = (0, -98)
+ * TIP_OFFSET = (0, -68)
  */
 
 export function MagnetPen({ s }: { s: PhysicsShared }) {
@@ -53,7 +54,12 @@ export function MagnetPen({ s }: { s: PhysicsShared }) {
       pointerEvents="none"
       style={[style, { width: W, height: H }]}
     >
-      <Svg width={W} height={H} viewBox="0 0 56 175">
+      <Svg
+        width={W}
+        height={H}
+        viewBox="0 0 56 175"
+        preserveAspectRatio="xMidYMid meet"
+      >
         <Defs>
           {/* 플라스틱 몸통 */}
           <LinearGradient id="wandBody" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -90,8 +96,7 @@ export function MagnetPen({ s }: { s: PhysicsShared }) {
           opacity="0.16"
         />
 
-        {/* ── 작은 금속 자석 팁 ── */}
-
+        {/* 작은 금속 자석 팁 */}
         <Circle
           cx="28"
           cy="12"
@@ -110,7 +115,7 @@ export function MagnetPen({ s }: { s: PhysicsShared }) {
           opacity="0.9"
         />
 
-        {/* 팁과 몸통 사이의 짧은 금속 연결부 */}
+        {/* 팁과 몸통 사이의 금속 연결부 */}
         <Path
           d="M24 17 Q28 20 32 17 L32 25 H24 Z"
           fill="url(#wandMetal)"
@@ -118,8 +123,7 @@ export function MagnetPen({ s }: { s: PhysicsShared }) {
           strokeWidth="0.7"
         />
 
-        {/* ── 짧은 펜 몸통 ── */}
-
+        {/* 펜 몸통 */}
         <Path
           d="
             M23 23
@@ -150,7 +154,7 @@ export function MagnetPen({ s }: { s: PhysicsShared }) {
         {/* 몸통과 그립 사이의 연결 링 */}
         <Rect x="22.5" y="91" width="11" height="5" rx="2.5" fill="#7966B3" />
 
-        {/* ── 손으로 잡는 작은 그립 ── */}
+        {/* 손으로 잡는 그립 그림자 */}
         <Rect
           x="21.5"
           y="94"
@@ -162,6 +166,7 @@ export function MagnetPen({ s }: { s: PhysicsShared }) {
           transform="translate(1 1)"
         />
 
+        {/* 손잡이 그립 */}
         <Rect
           x="21.5"
           y="94"
@@ -203,15 +208,15 @@ export function MagnetPen({ s }: { s: PhysicsShared }) {
           opacity="0.3"
         />
 
-        {/* ── 둥근 하단 마감 ── */}
+        {/* 둥근 하단 마감 */}
         <Path
           d="
-    M21.5 124
-    Q21.5 130 25 133
-    Q28 135 31 133
-    Q34.5 130 34.5 124
-    Z
-  "
+            M21.5 124
+            Q21.5 130 25 133
+            Q28 135 31 133
+            Q34.5 130 34.5 124
+            Z
+          "
           fill="url(#wandBody)"
           stroke="#7966B5"
           strokeWidth="1"

@@ -20,7 +20,15 @@ const COMMON = {
 };
 
 // 벽이 있는 레벨은 통로 안을 지나야 하므로 쇠구슬을 조금 작게 쓴다.
-const MAZE_BALL_RADIUS = 16;
+// const MAZE_BALL_RADIUS = 16;
+
+/**
+ * 쇠구슬 지름을 통로 너비의 75%로 통일한다.
+ * 물리엔진과 렌더링에서 동일한 반지름을 사용한다.
+ */
+const BALL_CORRIDOR_RATIO = 0.375;
+const getBallRadius = (corridorWidth: number) =>
+  corridorWidth * BALL_CORRIDOR_RATIO;
 
 const NO_WALLS: WallSettings = {
   hasWalls: false,
@@ -57,7 +65,9 @@ const level2: LevelConfig = {
   levelId: 2,
   levelType: LevelType.STRAIGHT,
   timeLimitSeconds: 50,
-  ballRadius: GAME_CONFIG.BALL_RADIUS,
+  // ballRadius: GAME_CONFIG.BALL_RADIUS,
+  // Level 2
+  ballRadius: getBallRadius(88),
   walls: {
     hasWalls: true,
     corridorWidth: 88,
@@ -83,7 +93,8 @@ const level3: LevelConfig = {
   levelId: 3,
   levelType: LevelType.L_SHAPE,
   timeLimitSeconds: 60,
-  ballRadius: GAME_CONFIG.BALL_RADIUS,
+  // ballRadius: GAME_CONFIG.BALL_RADIUS,
+  ballRadius: getBallRadius(84),
   walls: {
     hasWalls: true,
     corridorWidth: 84,
@@ -132,7 +143,8 @@ const level4: LevelConfig = {
   levelId: 4,
   levelType: LevelType.CIRCLE,
   timeLimitSeconds: 65,
-  ballRadius: GAME_CONFIG.BALL_RADIUS,
+  // ballRadius: GAME_CONFIG.BALL_RADIUS,
+  ballRadius: getBallRadius(80),
   walls: {
     hasWalls: true,
     corridorWidth: 80,
@@ -159,7 +171,8 @@ const level5: LevelConfig = {
   levelId: 5,
   levelType: LevelType.ZIGZAG,
   timeLimitSeconds: 90,
-  ballRadius: GAME_CONFIG.BALL_RADIUS,
+  // ballRadius: GAME_CONFIG.BALL_RADIUS,
+  ballRadius: getBallRadius(72),
   walls: {
     hasWalls: true,
     corridorWidth: 72,
@@ -215,7 +228,8 @@ const level6: LevelConfig = {
   levelType: LevelType.SPIRAL,
   timeLimitSeconds: 75,
   randomVariants: true,
-  ballRadius: GAME_CONFIG.BALL_RADIUS,
+  // ballRadius: GAME_CONFIG.BALL_RADIUS,
+  ballRadius: getBallRadius(58),
   walls: {
     hasWalls: true,
     corridorWidth: 58,
@@ -279,7 +293,9 @@ const level7: LevelConfig = {
   levelType: LevelType.SQUARE_SPIRAL,
   timeLimitSeconds: 90,
   randomVariants: true,
-  ballRadius: MAZE_BALL_RADIUS,
+  // ballRadius: MAZE_BALL_RADIUS,
+  ballRadius: getBallRadius(50),
+
   walls: {
     hasWalls: true,
     corridorWidth: 50,
@@ -346,7 +362,8 @@ const level8: LevelConfig = {
   levelType: LevelType.BRANCHED,
   timeLimitSeconds: 70,
   randomVariants: true,
-  ballRadius: MAZE_BALL_RADIUS,
+  // ballRadius: MAZE_BALL_RADIUS,
+  ballRadius: getBallRadius(84),
   walls: {
     hasWalls: true,
     corridorWidth: 84,
@@ -454,7 +471,8 @@ const level9: LevelConfig = {
   junctionCount: 2,
   timeLimitSeconds: 90,
   randomVariants: true,
-  ballRadius: MAZE_BALL_RADIUS,
+  // ballRadius: MAZE_BALL_RADIUS,
+  ballRadius: getBallRadius(66),
   walls: {
     hasWalls: true,
     corridorWidth: 66,
@@ -503,7 +521,9 @@ const level10: LevelConfig = {
   junctionCount: 3,
   timeLimitSeconds: 100,
   randomVariants: true,
-  ballRadius: MAZE_BALL_RADIUS,
+  // ballRadius: MAZE_BALL_RADIUS,
+  ballRadius: getBallRadius(66),
+
   walls: {
     hasWalls: true,
     corridorWidth: 66,
@@ -558,7 +578,8 @@ const level11: LevelConfig = {
   junctionCount: 3,
   timeLimitSeconds: 120,
   randomVariants: true,
-  ballRadius: MAZE_BALL_RADIUS,
+  // ballRadius: MAZE_BALL_RADIUS,
+  ballRadius: getBallRadius(66),
   walls: {
     hasWalls: true,
     corridorWidth: 66,
@@ -612,7 +633,8 @@ const level12: LevelConfig = {
   levelType: LevelType.GRID_MAZE,
   timeLimitSeconds: 120,
   randomVariants: true,
-  ballRadius: MAZE_BALL_RADIUS,
+  // ballRadius: MAZE_BALL_RADIUS,
+  ballRadius: getBallRadius(56),
   walls: {
     hasWalls: true,
     corridorWidth: 56,
