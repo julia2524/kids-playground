@@ -62,6 +62,7 @@ import {
 } from "../../utils/asyncStorage/puzzleProgressStorage";
 
 import BannerAd from "../../services/BannerAd";
+import { LEVEL_CONFIGS } from "../../games/magnetMaze/levels/levelConfigs";
 
 // ============================================================
 // Types
@@ -235,6 +236,8 @@ export default function StageMapScreen() {
 
       case "puzzle":
         return PUZZLE_LEVELS;
+      case "maze":
+        return LEVEL_CONFIGS;
 
       default:
         return [];
@@ -245,11 +248,21 @@ export default function StageMapScreen() {
   // 실제 레벨이 존재하는 스테이지만 사용
   // ============================================================
 
+  // const availableStages = useMemo(
+  //   () =>
+  //     STAGE_CONFIGS.filter((stage) =>
+  //       Object.values(levelConfigs).some(
+  //         (level) => level.level === stage.level,
+  //       ),
+  //     ),
+  //   [levelConfigs],
+  // );
+
   const availableStages = useMemo(
     () =>
       STAGE_CONFIGS.filter((stage) =>
         Object.values(levelConfigs).some(
-          (level) => level.level === stage.level,
+          (level: any) => (level.level ?? level.levelId) === stage.level,
         ),
       ),
     [levelConfigs],
@@ -477,6 +490,12 @@ export default function StageMapScreen() {
 
         case "pattern":
           navigation.navigate("PatternPlayScreen", {
+            gameType,
+            level,
+          });
+          break;
+        case "maze":
+          navigation.navigate("MagnetMazePlayScreen", {
             gameType,
             level,
           });
@@ -885,6 +904,8 @@ export default function StageMapScreen() {
 
   const bg4Opacity = Animated.multiply(fadeIn(BG_SECTION * 3), fadeAnim);
 
+  console.log("현재 gameType:", gameType);
+  console.log("생성된 availableStages:", availableStages);
   // ============================================================
   // 렌더링
   // ============================================================
@@ -927,24 +948,6 @@ export default function StageMapScreen() {
             <AppHeader
               title={title}
               subtitle={subtitle}
-              // onBackPress={() => {
-              //   // 화면 전환 시작 전에 스크롤 기반 렌더링 갱신 중단
-              //   isLeavingRef.current = true;
-
-              //   if (isPuzzle) {
-              //     navigation.navigate("PuzzleThemeSelectScreen", {
-              //       puzzleCategory,
-              //     });
-
-              //     return;
-              //   }
-
-              //   if (isClassificationGame) {
-              //     navigation.navigate("ClassificationMenuScreen");
-              //   } else {
-              //     navigation.navigate("Home");
-              //   }
-              // }}
               onBackPress={() => {
                 isLeavingRef.current = true;
 
@@ -1057,7 +1060,8 @@ export default function StageMapScreen() {
                     gameType === "puzzle" ||
                     gameType === "pattern" ||
                     gameType === "category" ||
-                    gameType === "size";
+                    gameType === "size" ||
+                    gameType === "maze"; // 미로 게임도 5개 별을 쓴다면 추가
 
                   return (
                     <StageNode

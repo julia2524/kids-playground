@@ -49,7 +49,7 @@ import {
   TabLabel,
 } from "./homeStyles";
 import { COLORS } from "../../design-system/tokens/colors";
-import { CATEGORY_FILTERS, GAME_CARDS } from "../../constants/game";
+import { GAME_CARDS } from "../../constants/game";
 import { triggerHaptic } from "../../utils/haptic";
 import { getKoreanSubjectParticle } from "../../utils/korean";
 
@@ -106,7 +106,11 @@ export default function HomeScreen() {
       navigation.navigate("PuzzleMenuScreen");
       return;
     }
-    navigation.navigate("StageMapScreen", { gameType });
+    // ⭐ maze 게임일 경우 StageMapScreen으로 이동하면서 올바른 gameType 전달
+    if (gameType === "maze") {
+      navigation.navigate("StageMapScreen", { gameType: "maze" });
+      return;
+    }
   };
 
   const showLockedAlert = (gameName: string) => {
@@ -187,11 +191,11 @@ export default function HomeScreen() {
               );
             })}
           </GameGrid>
-          <ComingSoon
+          {/* <ComingSoon
             onPress={() => {
               navigation.navigate("MagnetMazePlayScreen");
             }}
-          ></ComingSoon>
+          ></ComingSoon> */}
         </ScrollView>
 
         {/* Bottom Navigation */}

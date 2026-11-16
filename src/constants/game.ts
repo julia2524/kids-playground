@@ -96,7 +96,7 @@ export const GAME_CARDS = [
     descKey: "game_maze_desc",
     bgColor: COLORS.softMint,
     image: ASSETS.cardMaze,
-    isUnlocked: false,
+    isUnlocked: true,
   },
 ] as const;
 
