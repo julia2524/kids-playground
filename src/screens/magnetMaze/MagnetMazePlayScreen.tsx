@@ -114,7 +114,7 @@ import { triggerHaptic } from "../../utils/haptic";
 // ============================================================
 
 /** 개발/테스트용 레벨·라운드 컨트롤 (다른 게임과 동일하게 기본 숨김) */
-const SHOW_TEST_CONTROLS = true;
+const SHOW_TEST_CONTROLS = false;
 
 type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
@@ -808,7 +808,7 @@ export default function MagnetMazePlayScreen({
 
   const totalMs = config.timeLimitSeconds * 1000;
 
-  const [timeLeft, setTimeLeft] = useState(totalMs);
+  // const [timeLeft, setTimeLeft] = useState(totalMs);
 
   // 시연이 끝나야(또는 시연 대상이 아니어야) 타이머 가동
   const timerActive = playing && !!round && tutorialDone;
@@ -849,7 +849,7 @@ export default function MagnetMazePlayScreen({
     const start = Date.now();
 
     ballTimeProgress.value = 0;
-    setTimeLeft(totalMs);
+    // setTimeLeft(totalMs);
 
     const id = setInterval(() => {
       // 성공 애니메이션 또는 라운드 종료 시 타이머 정지
@@ -861,7 +861,7 @@ export default function MagnetMazePlayScreen({
       const left = remainingMs(start, Date.now(), totalMs);
 
       // 화면의 타이머 표시 갱신
-      setTimeLeft(left);
+      // setTimeLeft(left);
 
       // 0 → 1
       // 시간이 흐를수록 구슬 축소 진행률 증가
@@ -1025,7 +1025,7 @@ export default function MagnetMazePlayScreen({
 
       <Container>
         {/* 2. 타이머 */}
-        <TimeBar remainingMs={timeLeft} totalMs={totalMs} />
+        {/* <TimeBar remainingMs={timeLeft} totalMs={totalMs} /> */}
 
         {error && <ErrorText>{error}</ErrorText>}
 
