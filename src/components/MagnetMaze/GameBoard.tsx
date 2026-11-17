@@ -15,6 +15,8 @@ import Svg, {
 
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
+import { runOnJS, type SharedValue } from "react-native-reanimated";
+
 import styled from "styled-components/native";
 
 import type { PhysicsShared } from "../../games/magnetMaze/physics/physicsTypes";
@@ -28,6 +30,10 @@ type Props = {
   mazeH: number;
   onBoardLayout: (width: number, height: number) => void;
   children: React.ReactNode;
+  /** 1 = Level 1 자동 시연 중. 터치 시 즉시 0 으로 내리고 실제 조작으로 전환 */
+  tutorialActive?: SharedValue<number>;
+  /** 시연이 사용자 터치로 끊겼을 때 JS 쪽 타이머 등 동기화 */
+  onTutorialInterrupted?: () => void;
 };
 
 function CosmicBackground() {
@@ -127,25 +133,6 @@ function CosmicBackground() {
           />
         ))}
 
-        {/* 크게 반짝이는 별 */}
-        {/* <Path
-          d="M 740 140 Q 745 170 770 175 Q 745 180 740 210 Q 735 180 710 175 Q 735 170 740 140 Z"
-          fill="#FFFFFF"
-          opacity="0.9"
-        />
-
-        <Path
-          d="M 250 760 Q 254 780 270 784 Q 254 788 250 808 Q 246 788 230 784 Q 246 780 250 760 Z"
-          fill="#DCCBFF"
-          opacity="0.85"
-        />
-
-        <Path
-          d="M 880 760 Q 883 774 895 777 Q 883 780 880 794 Q 877 780 865 777 Q 877 774 880 760 Z"
-          fill="#FFFFFF"
-          opacity="0.8"
-        /> */}
-
         {/* 작은 빛 점 */}
         <Circle cx="740" cy="175" r="2.5" fill="#FFFFFF" />
         <Circle cx="250" cy="784" r="2" fill="#FFFFFF" />
@@ -162,6 +149,8 @@ export function GameBoard({
   mazeH,
   onBoardLayout,
   children,
+  tutorialActive,
+  onTutorialInterrupted,
 }: Props) {
   const pan = Gesture.Pan()
     .minDistance(0)
@@ -169,10 +158,26 @@ export function GameBoard({
       "worklet";
       const touch = e.changedTouches[0];
       if (!touch) return;
+
+      // 아이의 터치가 자동 시연보다 항상 우선
+      if (tutorialActive && tutorialActive.value === 1) {
+        tutorialActive.value = 0;
+        if (onTutorialInterrupted) {
+          runOnJS(onTutorialInterrupted)();
+        }
+      }
+
       movePen(s, touch.x - margin, touch.y - margin, true);
     })
     .onUpdate((e) => {
       "worklet";
+      // 시연이 이미 끊긴 뒤에도 드래그는 그대로 실제 조작
+      if (tutorialActive && tutorialActive.value === 1) {
+        tutorialActive.value = 0;
+        if (onTutorialInterrupted) {
+          runOnJS(onTutorialInterrupted)();
+        }
+      }
       movePen(s, e.x - margin, e.y - margin, false);
     })
     .onFinalize(() => {

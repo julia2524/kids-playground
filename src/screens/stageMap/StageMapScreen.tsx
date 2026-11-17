@@ -904,8 +904,8 @@ export default function StageMapScreen() {
 
   const bg4Opacity = Animated.multiply(fadeIn(BG_SECTION * 3), fadeAnim);
 
-  console.log("현재 gameType:", gameType);
-  console.log("생성된 availableStages:", availableStages);
+  // console.log("현재 gameType:", gameType);
+  // console.log("생성된 availableStages:", availableStages);
   // ============================================================
   // 렌더링
   // ============================================================

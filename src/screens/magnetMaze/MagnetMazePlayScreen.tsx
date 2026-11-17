@@ -51,7 +51,6 @@ import { GAME_CONFIG } from "../../constants/magnetMaze/gameConfig";
 
 import {
   goalArrivalRadiusFor,
-  goalRadiusFor,
   isArrived,
 } from "../../games/magnetMaze/game/arrival";
 
@@ -76,13 +75,28 @@ import { buildWallGeometry } from "../../games/magnetMaze/physics/collisionGeome
 
 import { resolveWalls } from "../../games/magnetMaze/physics/wallCollision";
 
-import { stepPhysics } from "../../games/magnetMaze/physics/physicsEngine";
+import {
+  getTip,
+  movePen,
+  stepPhysics,
+} from "../../games/magnetMaze/physics/physicsEngine";
 
 import {
   BallMode,
   type PhysicsShared,
 } from "../../games/magnetMaze/physics/physicsTypes";
 import StarRow from "../../design-system/components/StarRow";
+
+import { TutorialGhostBall } from "../../components/Tutorial/MagnetMaze/TutorialGoastBall";
+import {
+  TutPhase,
+  TUTORIAL_PEN_SPEED,
+  TUTORIAL_ATTACH_DISTANCE,
+  TUTORIAL_GOAL_ARRIVE,
+  TUTORIAL_FINISH_HOLD,
+  TUTORIAL_FADE_OUT,
+  shouldRunMazeTutorial,
+} from "../../components/Tutorial/MagnetMaze/MazeTutorialController";
 
 // ============================================================
 // Constants
@@ -168,6 +182,29 @@ export default function MagnetMazePlayScreen({
     goalY: useSharedValue(0),
     goalR: useSharedValue(0),
   };
+
+  // ==========================================================
+  // Tutorial Shared Values (UI thread 즉시 취소용)
+  // ==========================================================
+
+  /** 1 = Level 1 자동 시연 중. 터치 시 GameBoard 에서 즉시 0 */
+  const tutorialActive = useSharedValue<number>(0);
+  /** TutPhase 값 (0~4). 리터럴 0 추론을 막기 위해 number 로 명시 */
+  const tutorialPhase = useSharedValue<number>(TutPhase.IDLE);
+  /** 현재 단계에서 경과한 시간 (초) */
+  const tutorialElapsed = useSharedValue<number>(0);
+  /** 시연용 가짜 구슬 (물리와 분리, 별 중심까지 이동) */
+  const tutBallX = useSharedValue<number>(-100);
+  const tutBallY = useSharedValue<number>(-100);
+  const tutBallOpacity = useSharedValue<number>(0);
+  const tutBallRadius = useSharedValue<number>(GAME_CONFIG.BALL_RADIUS);
+  /** 시연 중 실제 구슬 숨김 (1=보임, 0=숨김) */
+  const realBallVisibility = useSharedValue<number>(1);
+  /**
+   * 시연이 끝난 뒤 타이머를 켜야 하는지 JS 와 동기화.
+   * false = 아직 시연 중, true = 플레이 가능(타이머 가동)
+   */
+  const [tutorialDone, setTutorialDone] = useState(true);
 
   // ==========================================================
   // Game State
@@ -303,6 +340,11 @@ export default function MagnetMazePlayScreen({
       // 라운드 종료 시 조작과 물리 정지
       s.locked.value = 1;
       s.penActive.value = 0;
+      // 시연 중이면 강제 종료
+      tutorialActive.value = 0;
+      tutorialPhase.value = TutPhase.IDLE;
+      tutBallOpacity.value = 0;
+      realBallVisibility.value = 1;
 
       dispatch({
         type: kind,
@@ -321,7 +363,30 @@ export default function MagnetMazePlayScreen({
   }, []);
 
   // ==========================================================
-  // Physics + Arrival Detection
+  // Tutorial end / interrupt → JS 타이머 동기화
+  // ==========================================================
+
+  const endTutorialJS = useCallback(() => {
+    setTutorialDone(true);
+  }, []);
+
+  const endTutorialJSRef = useRef(endTutorialJS);
+  endTutorialJSRef.current = endTutorialJS;
+
+  const onEndTutorialFromWorklet = useCallback(() => {
+    endTutorialJSRef.current();
+  }, []);
+
+  const onTutorialInterrupted = useCallback(() => {
+    // GameBoard worklet 에서 tutorialActive 를 이미 0 으로 내림
+    tutorialPhase.value = TutPhase.IDLE;
+    tutBallOpacity.value = 0;
+    realBallVisibility.value = 1;
+    endTutorialJSRef.current();
+  }, []);
+
+  // ==========================================================
+  // Physics + Arrival Detection + Tutorial
   // ==========================================================
 
   useFrameCallback((frame) => {
@@ -333,7 +398,109 @@ export default function MagnetMazePlayScreen({
       return;
     }
 
-    stepPhysics(s, ms / 1000);
+    const dt = Math.min(ms / 1000, GAME_CONFIG.MAX_DT);
+
+    // ── 자동 시연: 실제 펜 + 가짜 구슬로 별 중심까지 ──
+    if (tutorialActive.value === 1) {
+      tutorialElapsed.value += dt;
+      const phase = tutorialPhase.value;
+
+      if (phase === TutPhase.APPROACH) {
+        // 자석 팁이 시연 구슬 쪽으로 천천히 접근
+        const tip = getTip(s.penX.value, s.penY.value);
+        const bx = tutBallX.value;
+        const by = tutBallY.value;
+        const dx = bx - tip.x;
+        const dy = by - tip.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        s.penActive.value = 1;
+
+        if (dist <= TUTORIAL_ATTACH_DISTANCE) {
+          tutorialPhase.value = TutPhase.ATTACH;
+          tutorialElapsed.value = 0;
+          // 팁에 스냅
+          tutBallX.value = tip.x;
+          tutBallY.value = tip.y;
+        } else if (dist > 0.5) {
+          const step = Math.min(TUTORIAL_PEN_SPEED * dt, dist);
+          const nx = tip.x + (dx / dist) * step;
+          const ny = tip.y + (dy / dist) * step;
+          const fingerX = nx - GAME_CONFIG.TIP_OFFSET_X;
+          const fingerY = ny - GAME_CONFIG.TIP_OFFSET_Y;
+          movePen(s, fingerX, fingerY, false);
+        }
+      } else if (phase === TutPhase.ATTACH) {
+        // 짧게 붙인 느낌을 보여 준 뒤 이동
+        s.penActive.value = 1;
+        const tip = getTip(s.penX.value, s.penY.value);
+        tutBallX.value = tip.x;
+        tutBallY.value = tip.y;
+        if (tutorialElapsed.value > 0.2) {
+          tutorialPhase.value = TutPhase.MOVE_TO_GOAL;
+          tutorialElapsed.value = 0;
+        }
+      } else if (phase === TutPhase.MOVE_TO_GOAL) {
+        s.penActive.value = 1;
+
+        const tip = getTip(s.penX.value, s.penY.value);
+        // 별(목적지) 한가운데
+        const gx = s.goalX.value;
+        const gy = s.goalY.value;
+
+        const dx = gx - tip.x;
+        const dy = gy - tip.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist <= TUTORIAL_GOAL_ARRIVE) {
+          // 팁·시연구슬을 별 중심에 고정
+          const fingerX = gx - GAME_CONFIG.TIP_OFFSET_X;
+          const fingerY = gy - GAME_CONFIG.TIP_OFFSET_Y;
+          movePen(s, fingerX, fingerY, false);
+          const tip2 = getTip(s.penX.value, s.penY.value);
+          tutBallX.value = tip2.x;
+          tutBallY.value = tip2.y;
+          tutorialPhase.value = TutPhase.FINISHING;
+          tutorialElapsed.value = 0;
+        } else if (dist > 0.5) {
+          const step = Math.min(TUTORIAL_PEN_SPEED * dt, dist);
+          const nx = tip.x + (dx / dist) * step;
+          const ny = tip.y + (dy / dist) * step;
+          const fingerX = nx - GAME_CONFIG.TIP_OFFSET_X;
+          const fingerY = ny - GAME_CONFIG.TIP_OFFSET_Y;
+          movePen(s, fingerX, fingerY, false);
+          const tip2 = getTip(s.penX.value, s.penY.value);
+          tutBallX.value = tip2.x;
+          tutBallY.value = tip2.y;
+        }
+      } else if (phase === TutPhase.FINISHING) {
+        // 별 위에서 잠깐 보여 준 뒤 페이드아웃
+        const tip = getTip(s.penX.value, s.penY.value);
+        tutBallX.value = tip.x;
+        tutBallY.value = tip.y;
+
+        if (tutorialElapsed.value > TUTORIAL_FINISH_HOLD) {
+          const fadeT = tutorialElapsed.value - TUTORIAL_FINISH_HOLD;
+          const fade = Math.max(0, 1 - fadeT / TUTORIAL_FADE_OUT);
+          tutBallOpacity.value = fade;
+
+          if (fadeT >= TUTORIAL_FADE_OUT) {
+            s.penActive.value = 0;
+            tutorialActive.value = 0;
+            tutorialPhase.value = TutPhase.IDLE;
+            tutBallOpacity.value = 0;
+            realBallVisibility.value = 1;
+            runOnJS(onEndTutorialFromWorklet)();
+          }
+        }
+      }
+
+      // 시연 중에는 물리 구슬을 움직이지 않음 (시작 위치 유지)
+      return;
+    }
+
+    // 기존 물리 한 스텝
+    stepPhysics(s, dt);
 
     if (
       isArrived(
@@ -409,6 +576,13 @@ export default function MagnetMazePlayScreen({
 
     s.penActive.value = 0;
 
+    // 펜 속도 기준점 초기화 (시연 시작 시 튀지 않게)
+    const tip0 = getTip(s.penX.value, s.penY.value);
+    s.prevTipX.value = tip0.x;
+    s.prevTipY.value = tip0.y;
+    s.penVX.value = 0;
+    s.penVY.value = 0;
+
     s.goalX.value = round.goalPosition.x * size.w;
 
     s.goalY.value = round.goalPosition.y * size.h;
@@ -418,23 +592,60 @@ export default function MagnetMazePlayScreen({
     );
 
     s.locked.value = 0;
-  }, [round, size, walls, config]);
+
+    // Level 1 전 라운드(1~5) 진입 시 자동 시연
+    // Level 2 이상에서는 실행하지 않음
+    if (shouldRunMazeTutorial(levelId)) {
+      // 시연 구슬을 실제 시작 위치에 두고, 실제 구슬은 잠시 숨김
+      tutBallX.value = sx;
+      tutBallY.value = sy;
+      tutBallRadius.value = r;
+      tutBallOpacity.value = 1;
+      realBallVisibility.value = 0;
+
+      tutorialActive.value = 1;
+      tutorialPhase.value = TutPhase.APPROACH;
+      tutorialElapsed.value = 0;
+      // 타이머는 시연이 끝나거나 아이가 터치할 때까지 대기
+      setTutorialDone(false);
+      // 시연 시작: 펜 활성화 (시각적으로 잡는 느낌)
+      s.penActive.value = 1;
+      const tip = getTip(s.penX.value, s.penY.value);
+      s.prevTipX.value = tip.x;
+      s.prevTipY.value = tip.y;
+    } else {
+      tutorialActive.value = 0;
+      tutorialPhase.value = TutPhase.IDLE;
+      tutorialElapsed.value = 0;
+      tutBallOpacity.value = 0;
+      realBallVisibility.value = 1;
+      setTutorialDone(true);
+    }
+  }, [round, size, walls, config, levelId, roundIndex]);
 
   useEffect(() => {
     if (playing) {
       placeStart();
+    } else {
+      // 결과 화면 등에서는 시연 정리
+      tutorialActive.value = 0;
+      tutorialPhase.value = TutPhase.IDLE;
+      tutBallOpacity.value = 0;
+      realBallVisibility.value = 1;
+      setTutorialDone(true);
     }
-  }, [placeStart, game.serial, playing]);
+  }, [placeStart, game.serial, playing, levelId, roundIndex]);
 
   // ==========================================================
-  // Timer
+  // Timer (시연 중에는 정지)
   // ==========================================================
 
   const totalMs = config.timeLimitSeconds * 1000;
 
   const [timeLeft, setTimeLeft] = useState(totalMs);
 
-  const timerActive = playing && !!round;
+  // 시연이 끝나야(또는 시연 대상이 아니어야) 타이머 가동
+  const timerActive = playing && !!round && tutorialDone;
 
   useEffect(() => {
     if (!timerActive) return;
@@ -579,6 +790,8 @@ export default function MagnetMazePlayScreen({
             mazeW={size?.w ?? 0}
             mazeH={size?.h ?? 0}
             onBoardLayout={onBoardLayout}
+            tutorialActive={tutorialActive}
+            onTutorialInterrupted={onTutorialInterrupted}
           >
             {walls && size && (
               <PathWall geometry={walls} width={size.w} height={size.h} />
@@ -598,7 +811,14 @@ export default function MagnetMazePlayScreen({
 
             <MagnetPen s={s} />
 
-            <IronBall s={s} />
+            <IronBall s={s} visibility={realBallVisibility} />
+
+            <TutorialGhostBall
+              x={tutBallX}
+              y={tutBallY}
+              opacity={tutBallOpacity}
+              radius={tutBallRadius}
+            />
           </GameBoard>
         </GameArea>
 
