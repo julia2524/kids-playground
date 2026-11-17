@@ -44,7 +44,7 @@ const level1: LevelConfig = {
   ...COMMON,
   levelId: 1,
   levelType: LevelType.FREE,
-  timeLimitSeconds: 10,
+  timeLimitSeconds: 40,
   ballRadius: GAME_CONFIG.BALL_RADIUS,
   walls: NO_WALLS,
   pathConstraints: {
