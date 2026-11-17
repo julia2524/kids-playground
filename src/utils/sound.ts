@@ -19,8 +19,8 @@ const players = {
 
   // 자석미로 전용 효과음
   magnetWall: [] as AudioPlayer[],
-
   magnetGoal: [] as AudioPlayer[],
+  magnetTimeout: [] as AudioPlayer[],
 };
 
 // ⭐ 마지막으로 성공한 음계 인덱스를 기억
@@ -158,6 +158,18 @@ export async function preloadSounds() {
 
     players.magnetGoal[0].volume = 0.65;
 
+    // 자석미로 시간 초과 효과음
+    players.magnetTimeout = [
+      createAudioPlayer(require("../../assets/sounds/magnet_Timeout_1.wav")),
+      createAudioPlayer(require("../../assets/sounds/magnet_Timeout_2.wav")),
+      createAudioPlayer(require("../../assets/sounds/magnet_Timeout_3.wav")),
+    ];
+
+    // 각각 개별 볼륨 설정
+    players.magnetTimeout[0].volume = 0.55;
+    players.magnetTimeout[1].volume = 0.5;
+    players.magnetTimeout[2].volume = 0.5;
+
     isPreloaded = true;
     isNotesReady = true; // ⭐⭐⭐ 이 줄 반드시 추가!
 
@@ -277,34 +289,6 @@ export async function playLastSuccessNote() {
   }
 }
 
-// ⭐ earnedStars 개수만큼 도 → 레 → 미 ... 순차 연주!
-// ⭐ earnedStars 개수만큼 도 → 레 → 미 ... 깨끗하게 순차 연주
-// export async function playEarnedNotes(earnedStars: number) {
-//   // if (!successSoundEnabled) return; // ⭐ 가장 중요!
-//   const enabled = await getCorrectEffectEnabled();
-//   if (!enabled) return;
-
-//   if (!players.notes || players.notes.length === 0) {
-//     console.log("음계 플레이어가 아직 준비되지 않음");
-//     return;
-//   }
-
-//   const count = Math.min(Math.max(earnedStars, 0), players.notes.length);
-//   if (count <= 0) return;
-
-//   // 이전 연주 중인 음들을 일단 전부 정지
-//   await stopAllNotes();
-
-//   // 순차 재생 (간격을 충분히 줌)
-//   for (let i = 0; i < count; i++) {
-//     setTimeout(async () => {
-//       const player = players.notes[i];
-//       if (player) {
-//         await playPlayerSafely(player);
-//       }
-//     }, i * 220);
-//   }
-// }
 export async function playEarnedNotes(earnedStars: number) {
   await stopEarnedNotes();
 
@@ -432,5 +416,29 @@ export async function playMagnetGoalSound(): Promise<void> {
     await playPlayerSafely(player);
   } catch (error) {
     console.log("자석미로 목적지 효과음 재생 실패:", error);
+  }
+}
+
+/**
+ * 시간 초과 효과음
+ *
+ * 쇠구슬이 사라지는 타임아웃 애니메이션이 시작될 때 한 번 재생한다.
+ */
+
+export async function playMagnetTimeoutSound(): Promise<void> {
+  try {
+    const enabled = await getSoundEnabled();
+    if (!enabled) return;
+
+    const list = players.magnetTimeout;
+    if (!list.length) return;
+
+    // 랜덤 효과음 선택
+    const randomIndex = Math.floor(Math.random() * list.length);
+    const player = list[randomIndex];
+
+    await playPlayerSafely(player);
+  } catch (error) {
+    console.log("자석미로 시간 초과 효과음 재생 실패:", error);
   }
 }

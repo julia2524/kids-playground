@@ -5,7 +5,8 @@
  */
 
 export const PASS_STARS = 3; // 레벨 통과에 필요한 별 수 (5개 중). 기획에 맞게 조정
-export const AUTO_ADVANCE_MS = 1800; // 라운드 결과 표시 후 자동으로 다음 라운드로 넘어가는 시간
+export const AUTO_ADVANCE_MS = 150; // 라운드 결과 표시 후 자동으로 다음 라운드로 넘어가는 시간
+export const TIMEOUT_AUTO_ADVANCE_MS = 400; // 시간 초과 후 다음 라운드까지
 
 export type RoundResult = "success" | "fail" | null;
 export type Phase = "PLAYING" | "ROUND_RESULT" | "LEVEL_RESULT";
