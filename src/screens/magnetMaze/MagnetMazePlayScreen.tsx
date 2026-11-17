@@ -99,6 +99,7 @@ import {
 } from "../../components/Tutorial/MagnetMaze/MazeTutorialController";
 import { GoalBurst } from "../../components/MagnetMaze/GoalBurst";
 import { useBackgroundMusic } from "../../utils/BackgroundMusicContext";
+import { playMagnetGoalSound, playSound } from "../../utils/sound";
 
 // ============================================================
 // Constants
@@ -233,6 +234,9 @@ export default function MagnetMazePlayScreen({
 
   // 전체 애니메이션 길이
   const SUCCESS_ANIMATION_SECONDS = 0.9;
+
+  // 파티클 폭발 효과음 중복 재생 방지
+  const successBurstSoundTriggered = useSharedValue<number>(0);
 
   // ==========================================================
   // Game State
@@ -390,6 +394,13 @@ export default function MagnetMazePlayScreen({
     resolveRef.current("SUCCESS");
   }, []);
 
+  const onGoalAnimationStartJS = useCallback(() => {
+    playMagnetGoalSound();
+  }, []);
+
+  const onSuccessBurstJS = useCallback(() => {
+    playSound("correct_sound");
+  }, []);
   // ==========================================================
   // Tutorial end / interrupt → JS 타이머 동기화
   // ==========================================================
@@ -430,6 +441,27 @@ export default function MagnetMazePlayScreen({
 
     // ── 정답 흡수 애니메이션 ──
     // 물리엔진이 잠겨 있어도 이 애니메이션은 계속 실행한다.
+    // if (successAnimationActive.value === 1) {
+    //   successAnimationElapsed.value += dt;
+
+    //   const progress = Math.min(
+    //     1,
+    //     successAnimationElapsed.value / SUCCESS_ANIMATION_SECONDS,
+    //   );
+
+    //   successProgress.value = progress;
+
+    //   if (progress >= 1) {
+    //     successAnimationActive.value = 0;
+
+    //     // 애니메이션이 완전히 끝난 후 기존 성공 처리
+    //     runOnJS(onArriveJS)();
+    //   }
+
+    //   return;
+    // }
+
+    // ── 정답 흡수 애니메이션 ──
     if (successAnimationActive.value === 1) {
       successAnimationElapsed.value += dt;
 
@@ -440,10 +472,14 @@ export default function MagnetMazePlayScreen({
 
       successProgress.value = progress;
 
+      // 파티클이 터지는 시점에 정답 효과음 한 번 재생
+      if (progress >= 0.58 && successBurstSoundTriggered.value === 0) {
+        successBurstSoundTriggered.value = 1;
+        runOnJS(onSuccessBurstJS)();
+      }
+
       if (progress >= 1) {
         successAnimationActive.value = 0;
-
-        // 애니메이션이 완전히 끝난 후 기존 성공 처리
         runOnJS(onArriveJS)();
       }
 
@@ -566,14 +602,17 @@ export default function MagnetMazePlayScreen({
         s.goalR.value,
       )
     ) {
-      // 물리엔진과 자석펜 조작 정지
       s.locked.value = 1;
       s.penActive.value = 0;
 
-      // 성공 애니메이션 시작
       successAnimationElapsed.value = 0;
       successProgress.value = 0;
+      successBurstSoundTriggered.value = 0;
+
       successAnimationActive.value = 1;
+
+      // 흡수 애니메이션 시작과 동시에 블랙홀 효과음
+      runOnJS(onGoalAnimationStartJS)();
     }
   });
 
@@ -593,6 +632,7 @@ export default function MagnetMazePlayScreen({
     successAnimationActive.value = 0;
     successAnimationElapsed.value = 0;
     successProgress.value = 0;
+    successBurstSoundTriggered.value = 0;
 
     if (walls) {
       s.wallSegs.value = walls.segs;
