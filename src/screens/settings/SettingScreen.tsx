@@ -12,12 +12,9 @@ import { AppText } from "../../utils/AppText";
 
 import AppHeader from "../../components/AppHeader";
 import CustomAlert from "../../components/CustomAlert";
-import ResetProgressButton from "../../components/Setting/ResetProgresButton";
 import GradientBackground from "../../design-system/components/GradientBackground";
 import { colors } from "../../design-system/tokens/colors";
 
-import { SETTING_LEVEL_CLEAR_INFO } from "../../constants/game";
-import { resetProgress } from "../../utils/asyncStorage/progressStorage";
 import {
   getGuardianNoticeEnabled,
   setGuardianNoticeEnabled,
@@ -83,27 +80,6 @@ export default function SettingScreen() {
 
   const handleAlertCancel = () => {
     setAlertVisible(false);
-  };
-
-  // =========================
-  // 진행 상황 초기화
-  // =========================
-  const handleResetGame = (mode: keyof typeof SETTING_LEVEL_CLEAR_INFO) => {
-    const info = SETTING_LEVEL_CLEAR_INFO[mode] ?? { title: "색상 분류" };
-    const gameTitle = info.title;
-
-    showAlert(
-      i18n.t("alert_reset_progress_title"),
-      i18n.t("alert_reset_progress_msg", { gameTitle }),
-      async () => {
-        await resetProgress(mode);
-        showAlert(
-          i18n.t("alert_reset_success_title"),
-          i18n.t("alert_reset_success_msg", { gameTitle }),
-        );
-      },
-      { showCancel: true, confirmText: i18n.t("btn_reset") },
-    );
   };
 
   // =========================
