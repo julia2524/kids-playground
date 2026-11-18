@@ -291,7 +291,7 @@ export default function PuzzleBoard({
 
       const pieceCenterX = x + pieceWidth / 2;
       const pieceCenterY = y + pieceHeight / 2;
-
+      //퍼즐드롭되는 마진 늘리기
       const snapDistanceX = Math.max(26, cellWidth * 0.45);
       const snapDistanceY = Math.max(26, cellHeight * 0.45);
 
