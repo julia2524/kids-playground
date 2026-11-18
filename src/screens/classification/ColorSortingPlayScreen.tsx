@@ -120,6 +120,32 @@ export default function ColorSortingPlayScreen() {
   const basketRefs = useRef<Record<string, any>>({});
 
   // 💡 [수정 포인트 3] node를 안전하게 캐스팅하고 measureInWindow 안전 검사 및 인자 타입 추가
+  // const getTargetRects = useCallback(
+  //   (callback: (rects: TargetRects) => void) => {
+  //     const entries = Object.entries(basketRefs.current).filter(
+  //       ([, node]) => node !== null && node !== undefined,
+  //     );
+
+  //     const rects: TargetRects = {};
+  //     if (entries.length === 0) return callback(rects);
+
+  //     let remaining = entries.length;
+  //     entries.forEach(([colorId, node]) => {
+  //       const targetNode = node as any;
+  //       if (targetNode && typeof targetNode.measureInWindow === "function") {
+  //         targetNode.measureInWindow(
+  //           (x: number, y: number, width: number, height: number) => {
+  //             rects[colorId] = { x, y, width, height };
+  //             if (--remaining === 0) callback(rects);
+  //           },
+  //         );
+  //       } else {
+  //         if (--remaining === 0) callback(rects);
+  //       }
+  //     });
+  //   },
+  //   [],
+  // );
   const getTargetRects = useCallback(
     (callback: (rects: TargetRects) => void) => {
       const entries = Object.entries(basketRefs.current).filter(
@@ -136,11 +162,18 @@ export default function ColorSortingPlayScreen() {
           targetNode.measureInWindow(
             (x: number, y: number, width: number, height: number) => {
               rects[colorId] = { x, y, width, height };
-              if (--remaining === 0) callback(rects);
+              if (--remaining === 0) {
+                // 🔍 [DIAG] 바구니들 window 좌표
+                console.log("[DIAG][TARGET_RECTS]", rects);
+                callback(rects);
+              }
             },
           );
         } else {
-          if (--remaining === 0) callback(rects);
+          if (--remaining === 0) {
+            console.log("[DIAG][TARGET_RECTS]", rects);
+            callback(rects);
+          }
         }
       });
     },

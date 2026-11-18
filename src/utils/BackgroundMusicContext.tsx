@@ -147,9 +147,9 @@ export function BackgroundMusicProvider({
 
     if (bgmEnabledRef.current) {
       player.play();
-      console.log(
-        `🎵 [BGM Switch] 테마 변경 -> ${theme.name} (Vol: ${theme.volume})`,
-      );
+      // console.log(
+      //   `🎵 [BGM Switch] 테마 변경 -> ${theme.name} (Vol: ${theme.volume})`,
+      // );
     }
   };
 
