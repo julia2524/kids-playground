@@ -149,7 +149,8 @@ export default function SizeSortingObjectComponent({
   const entranceOpacity = useRef(new Animated.Value(0)).current;
 
   const posRef = useRef({ x: 0, y: 0 });
-  const bubbleRef = useRef<any>(null);
+  const outerRef = useRef<any>(null); // pan이 걸리는 바깥 뷰 측정용
+  const bubbleRef = useRef<any>(null); // 튜토리얼 등 기존 용도 유지
   const busyRef = useRef(false);
   const originRectRef = useRef<Rect | null>(null);
 
@@ -486,10 +487,10 @@ export default function SizeSortingObjectComponent({
         };
 
         if (
-          bubbleRef.current &&
-          typeof bubbleRef.current.measureInWindow === "function"
+          outerRef.current &&
+          typeof outerRef.current.measureInWindow === "function"
         ) {
-          bubbleRef.current?.measureInWindow(
+          outerRef.current.measureInWindow(
             (x: number, y: number, width: number, height: number) => {
               const originX = x - posRef.current.x;
               const originY = y - posRef.current.y;
@@ -590,6 +591,8 @@ export default function SizeSortingObjectComponent({
 
   return (
     <Animated.View
+      ref={outerRef}
+      collapsable={false}
       {...panResponder.panHandlers}
       pointerEvents="auto"
       style={{
