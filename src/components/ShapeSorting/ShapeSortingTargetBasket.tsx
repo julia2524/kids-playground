@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LayoutChangeEvent } from "react-native";
+import { I18nManager, LayoutChangeEvent } from "react-native";
 import Svg, { Circle, Path, Polygon, Rect } from "react-native-svg";
 import styled from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
@@ -368,12 +368,16 @@ export default function ShapeSortingTargetBasket({
               activeOpacity={0.7}
               onPress={() => onRemoveObject(objectId)}
               accessibilityRole="button"
-              style={{
-                left: placement.x,
-                top: placement.y,
-                width: placement.size,
-                height: placement.size,
-              }}
+              style={[
+                {
+                  top: placement.y,
+                  width: placement.size,
+                  height: placement.size,
+                },
+                I18nManager.isRTL && I18nManager.doLeftAndRightSwapInRTL
+                  ? { right: placement.x }
+                  : { left: placement.x },
+              ]}
             >
               <ObjectArtwork object={object} size={placement.artSize} />
             </StickerButton>
