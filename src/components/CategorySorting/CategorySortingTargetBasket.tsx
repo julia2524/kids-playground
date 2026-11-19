@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LayoutChangeEvent } from "react-native";
+import { I18nManager, LayoutChangeEvent } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 
@@ -163,12 +163,16 @@ export default function CategorySortingTargetBasket({
               onPress={() => onRemoveObject(objectId)}
               accessibilityRole="button"
               accessibilityLabel={`${object.itemName} 제거`}
-              style={{
-                left: placement.x,
-                top: placement.y,
-                width: placement.size,
-                height: placement.size,
-              }}
+              style={[
+                {
+                  top: placement.y,
+                  width: placement.size,
+                  height: placement.size,
+                },
+                I18nManager.isRTL && I18nManager.doLeftAndRightSwapInRTL
+                  ? { right: placement.x }
+                  : { left: placement.x },
+              ]}
             >
               <ObjectArtwork object={object} size={placement.artSize} />
             </StickerButton>
