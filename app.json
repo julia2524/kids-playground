@@ -3,7 +3,6 @@
     "name": "Kids Playground",
     "slug": "KidsPlayground",
     "version": "1.0.2",
-
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -64,7 +63,8 @@
           "iosAppId": "ca-app-pub-3381041851241163~3333333333"
         }
       ],
-      "expo-sqlite"
+      "expo-sqlite",
+      "./plugins/withOptionalPortrait"
     ],
     "extra": {
       "eas": {
